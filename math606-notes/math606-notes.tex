@@ -1301,9 +1301,7 @@ $$H^1(\mc U,\mc O):=Z^1(\mc U,\mc O)/B^1 (\mc U,\mc O)$$
 is the obstruction to solving the problem in general. The Mittag-Leffler theorem says that this group is zero, for all $\Omega \subset \C$ open, and for all open covers $\mc U$ of $\Omega$.
 
 \section{Sheaves of Abelian Groups}
-
 ''Sheaves are friends"
-
 \begin{defn}
     Let $X$ be a topological space. A \textbf{presheaf} $\mc F$ of abelian groups of $X$ is an assignment $U \mapsto \mc F(U)$ of abelian groups $\mc F(U)$ to each open set $U \subset X$, with $F(\emptyset)=0$, and for every pair $V \subset U$ of open sets, there are homomorphisms $r_{U,V}: \mc F(U) \to \mc F(V)$ called \textbf{restriction maps}, satisfying
     \begin{enumerate}[(i)]
@@ -1342,7 +1340,7 @@ is the obstruction to solving the problem in general. The Mittag-Leffler theorem
 \begin{notethm*}
     We in fact have
     \[
-    F_a := \coprod _{U \ni a} (F(U)/\sim) =: \lim_{\substack{\to \\ U \ni a}} \mc F(U) 
+    F_a := \coprod _{U \ni a} (F(U)/\sim) =: \varinjlim_{U \ni a} \mc F(U) 
     \]
 \end{notethm*}
 We can associate a sheaf to any presheaf $\mc F$ as follows: Let $|\mc F|=\coprod_{a \in X}\mc F_a$ and $p:|F| \to X$, $f_a \mapsto a$ be the natural projection. Define a topology on $|\mc F|$ as follows: for any $U \subset X$ and $f \in \mc F(U)$, let $N(U,f):=\brax{f_a \setbar a \in U}$, where $f_a$ is the equivalence class inf $\mc F_a$ defined by $(U, f)$. The system of sets $\brax{N(U,f)}_{U \subset X}$ is a basis for a topology on $|\mc F|$ such that $p$ is a local homeomorphism (exercise).
