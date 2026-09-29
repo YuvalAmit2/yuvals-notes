@@ -1,0 +1,654 @@
+\documentclass[11pt]{article}
+\usepackage[notes]{yalatex}
+% \addbibresource{references.bib}   % uncomment for citations
+
+\title{MATH730: Algebraic Topology}
+\author{Yuval Amit}
+\date{}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Motivation and Review}
+
+\begin{notebox}[Motivation]
+    Distinguish topological objects, and ultimately classify them.
+\end{notebox}
+
+Let's see some examples where the power of algebraic topology helps us prove important topological properties.
+
+\begin{thm}
+    The unit ball $\bar{\mb D}^{n+1}$ is not homeomorphic to $S^n$
+\end{thm}
+
+\begin{proof}
+    The $n^{\text{th}}$ homology group $H_n$ distinguishes them. Namely, $H_n\paren{\bar{\mb D}^{n+1}} = \{0\}$, while $H_n(S^n) = \Z$.
+\end{proof}
+
+\begin{thm}[][label=thm:boundaryfixedthm]
+    There does not exist a continuous map $f:\bar{\mb D}^{n+1} \to S^n$ such that $f(x)=x$ for every $x \in S^n$ (note that $S^n$ is the boundary of $\bar{\mb D}^{n+1}$).
+\end{thm}
+
+\begin{proof}
+    Suppose such an $f$ exists. Consider the inclusion map $i: S^n \to \bar \D^{n+1}$. Then, the map $f \circ i : S^n \to S^n $ is the identity map. Moreover, $i$ and $f$ induce maps on the homology groups 
+    $$H_n(S^n) \arr[H_n(i)] H_n(\D^{n+1}) \arr[H_n(f)] H_n(S^n).$$
+    By functoriality,
+    $$H_n(f) \circ H_n(i) = H_n(f \circ i) = H_n(\id) = \id.$$
+    Hence, we have 
+    \begin{align*}
+        \Z \to0 \to \Z
+    \end{align*}
+    induces the identity map $\Z \to \Z$, which is impossible.
+\end{proof}
+
+\begin{thm}[Brauer's Fixed Point Theorem]
+    Every continuous function $f:\bar{\D}^n \to \bar{\D}^n$ has a point $x$ such that $f(x) = x$.
+\end{thm}
+
+\begin{proof}
+    Suppose $f$ does not have a fixed point. Then, for every $x \in \bar{\D}^n$, we may consider the unique straight line from $f(x)$ to $x$. Let $g(x)$ be the point where the line $f(x) \to x$ hits $S^n$. Observe that $g(x) = x$ for every $x \in S^n$, and $g$ is continuous. Thus, we have a contradiction by \Cref{thm:boundaryfixedthm}.
+\end{proof}
+
+\subsection{Topology Review}
+
+\begin{defn}
+    In $\R^n$, we have the usual metric $d(x,y)$. We denote $B(x,r)$ to be the open ball around $x$ with radius $r$.
+\end{defn}
+
+\begin{defn}
+    A topological space $X$ is called \textbf{compact} if every open cover has a finite subcover.
+\end{defn}
+
+\begin{thm}
+   A subset $X \subset \R^n$ is compact if and only if $X$ is closed and bounded. 
+\end{thm}
+
+\begin{proof}
+    Suppose $X$ is compact. The set $\{B(0,n)\}_{n=1}^\infty$ of open balls is necessarily an open cover of $X$, hence has a finite subcover, thus $X$ is bounded. Moreover, if $\R^n-X$ is not open, let $p \in \R^n\setminus X$ be such that $B(p,\veps) \cap X \neq \emptyset$. Then, take the cover of $X$ by 
+    $$\brax{B(x,\frac{d(p,x)}{2})}_{x \in X}.$$
+    One sees that this does not have a finite subcover, a contradiction.
+
+    For the other direction, note that closed+bounded implies sequential compactness. Let $\{U_\alpha\}_{\alpha \in I}$ be an open cover of $X$. 
+\begin{claim}
+    There exists $\delta>0$ such that for every $x \in X$, $B(x,\delta) \subset U_\alpha$ for some $\alpha \in I$.
+\end{claim}
+
+\begin{proof}
+    Contrarily, if this were not the case, there exists a sequence $\{x_i\} \subset X$ such that $B(x,1/n) \not \subset U_\alpha$ for all $\alpha \in I$. Then, $\{x_i\}$ has a subsequence converging to some $p$. This $p$ must be contained in some $U$ in the open cover, and it follows that there exists a $\delta$ and $N$ with $B(x_N,\delta) \subset U$.
+\end{proof}
+
+Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint balls of radius $\delta$ around points in $X$ is bounded. Let $m$ be this upper bound. Take a point $p_1 \in X$. The ball $B(p,\delta)$ is contained in some cover element $U_1$. If $U_1$ covers $X$, we're done, but otherwise repeat with some $p_2$ and $U_2$. Continue to repeat until we have $p_{m+1}$ and $U_{m+1}$. We claim that $U_1,\dots,U_{m+1}$ must cover $X$: indeed, if it doesn't, then the balls $\{B(p_i,\delta/2)\}_{i=1}^{m+1}$ must all be disjoint, and this is a contradiciton.
+\end{proof}
+
+\begin{defn}
+    A topological space $X$ is called \textbf{connected} if $X = U_1 \sqcup U_2$ with $U_1,U_2$ open implies $U_1 = \emptyset$ or $U_2 =\emptyset$.
+\end{defn}
+
+\begin{defn}
+    $X$ is called \textbf{path connected} if for every $p,q \in U$, there exists a continuous map $\delta:[0,1] \to X$ such that $\delta(0)=p$ and $\delta(1) = q$.
+\end{defn}
+
+\begin{prop}
+    Path connected $\implies$ connected.
+\end{prop}
+
+\begin{defn}
+    A topological space $X$ is called \textbf{Hausdorff} if for every distinct $p,q \in X$, there exists $p \in U$ and $q \in V$ open such that $U \cap V = \emptyset$.
+\end{defn}
+
+\begin{thm}
+    Let $f: X \to Y$ be bijective and continuous, with $X$ compact, $Y$ Hausdorff. Then, $f$ is a homeomorphism.
+\end{thm}
+
+\begin{proof}
+    It suffices to show $f$ is an closed map. Let $C \subset X$ be closed. Since $X$ is compact, one can see that $C$ is compact (theorem). Therefore, $f(C)$ is compact (theorem), hence closed (theorem).
+\end{proof}
+
+\begin{prop}
+    If $X$ is Hausdorff and $A \subset X$ is compact, then $A$ is closed.
+\end{prop}
+
+\begin{exercise}
+    Give an example of a space $X$ such that $A \subset X$ is compact but not closed. This space cannot be Hausdorff.
+\end{exercise}
+
+\begin{defn}
+    Let $X$ be a topological space, and $\sim$ be an equivalence relation on $X$. The \textbf{quotient-topology} is defined as follows: let $\pi: X \to X/\!\!\sim$ be the projection map. Then, $U \subset X/\!\!\sim$ is open whenever $\pi^{-1}(U)$ is open.
+\end{defn}
+
+\begin{prop}
+    A map $f:(X/\!\!\sim) \to Y$ is continuous if and only if $f \circ \pi$ is continuous.
+\end{prop}
+
+\begin{ex}
+    Let $\R\P^{n}$ be the space of lines through the origin in $\R^{n+1}$: this is the quotient space of $\R^{n+1}\setminus \{0\}$ by the equivalence $x \sim y \iff$ there exists $\lambda \in \R$ with $\lambda x=y$. This is homeomorphic to the quotient space of $S^n$ by the relation $x \sim -x$.
+\end{ex}
+
+\begin{defn}
+    Let $(X_\alpha,\mc U_\alpha)_{\alpha \in I}$ be topological spaces. The \textbf{product topology} on $\prod_{I}X_\alpha$ has a basis of sets of the form
+    $$\prod_{\alpha \in U}U_\alpha,  \quad U_\alpha \in \mc U_\alpha,$$
+    and $U_\alpha =X_\alpha$ for all but finitely many $\alpha \in I$.
+\end{defn}
+
+\begin{thm}[Tychonoff's Theorem][label=thm:tychonoff]
+    The product of compact spaces is compact.
+\end{thm}
+
+\section{CW Complexes}
+
+\begin{defn}
+    A \textbf{CW complex} is a topological space $X$, together with a sequence of subspaces $X_0 \subset X_1 \subset \cdots $ such that
+    \begin{enumerate}
+        \item $X = \bigcup X_n$
+        \item $U\subset X$ is open if and only if $U \cap X_n$ is open for all $n \geq 0$
+        \item $X_0$ is a discrete set of points
+        \item For every $n \geq 1$, there exists an indexing set $I(n)$, disks $\{D^n_\alpha\}_{\alpha \in I(n)}$, and continuous maps
+        $\varphi^n_\alpha : \partial D^n_\alpha 
+         \to X_{n-1}$ such that 
+         $$X_n = \bigsqcup_{\alpha \in I(n)}\bar D_\alpha^n\sqcup X_n  /\sim$$
+         where $x \sim \varphi_\alpha^n(x)$ for all $\alpha \in I(n)$, $x \in \partial D_\alpha^n$.
+    \end{enumerate}
+    We call $X_n$ the $n^{\text{th}}$ \textbf{skeleton} of $X$, and $\varphi_\alpha^n$ is called an \textbf{attaching map}. For a CW complex $X$, the sets $\{X_n\}$ and $\{ \varphi_\alpha^n\}$ are called a \textbf{CW structure} on $X$. The quotient maps $\Phi_\alpha^n:\bar D_\alpha^n \to X_n$ are called the \textbf{characteristic maps}. If $X_{n-1} \subsetneq X_n$, but $X_i=X_j$ for all $i, j\geq n$, we say that $X$ is $\bm n$\textbf{-dimensional}.
+\end{defn}
+
+
+\begin{ex}
+    A discrete set of points is a $0$-dimensional CW complex.
+\end{ex}
+
+\begin{ex}
+    A graph is a $1$-dimensional CW complex.
+% https://q.uiver.app/#q=WzAsNyxbMCwxLCJYXzAiXSxbMiwxLCJcXGJ1bGxldCJdLFs0LDEsIlxcYnVsbGV0Il0sWzMsMCwiWF8wIl0sWzMsMywiXFxidWxsZXQiXSxbMiwyLCJcXGJ1bGxldCJdLFsxLDMsIlxcYnVsbGV0Il0sWzAsMCwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxLDIsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMywxLCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMywyLCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNSw0LCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsNiwiIiwyLHsiYW5nbGUiOi0xMzUsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNSw2LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsNCwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\&\&\& {X_0} \& \\
+	{X_0} \&\& \bullet \&\& \bullet \\
+	\&\& \bullet \\
+	\& \bullet \&\& \bullet
+	\arrow[dashed, from=1-4, to=2-3]
+	\arrow[dashed, from=1-4, to=2-5]
+	\arrow[no head, from=2-1, to=2-1, loop, in=55, out=125, distance=10mm]
+	\arrow[no head, from=2-3, to=2-5]
+	\arrow[no head, from=3-3, to=4-2]
+	\arrow[no head, from=3-3, to=4-4]
+	\arrow[no head, from=4-2, to=4-2, loop, in=190, out=260, distance=10mm]
+	\arrow[no head, from=4-2, to=4-4]
+\end{tikzcd}\] 
+\end{ex}
+
+\begin{ex}
+    $\R^n$ is a CW complex. For example, $\R^2$ has the $0$-cell $\Z^2$, the $1$-cell a $\Z^2$-grid, and the $2$-cell induced by attaching each disk to the square of the grid.
+\end{ex}
+
+\begin{ex}
+    A torus is a CW complex.
+\end{ex}
+
+\begin{ex}
+    $S^n$ is a CW complex. Namely, $X_0$ is a single point, $X_1=\cdots = X_{n-1}=X_0$, and the (only possible) attaching map $\varphi_1^n : D_1^n \to X_{n-1}$.
+\end{ex}
+
+\begin{ex}
+    $\R\P^n=S^n/(x \sim -x)$ is a CW complex. When $n=0$, $\R\P^n$ is just a point, hence as a CW structure. Suppose $\R\P^{n-1}$ has a CW structure. Let $\bar D_\alpha^n$ be the upper hemisphere. We obtain the CW structure on $\R \P^n$ by attaching one $n$-cell to $\R\P^{n-1}$ via the attaching map 
+    $$\varphi_\alpha^n(x_1,\dots,x_n,0) = [(x_1,\dots,x_n)] \subset \R\P^{n-1}.$$
+\end{ex}
+
+\begin{exercise}
+    Find a CW structure on $\C \P^n = (\C^{n+1}\setminus \{0\})/(x \sim \lambda x,\lambda \in \C^*)$
+\end{exercise}
+
+\begin{lem}
+    Let $X$ be a CW-complex. Then, $U \subset X$ is open $\iff$ for every $n$ and $\alpha \in I(n)$, $(\Phi^n_\alpha)^{-1}(U)$ is open.
+\end{lem}
+
+\begin{proof}
+    Recall that $U$ is open in $X$ if and only if $U \cap X^n$ is open for all $n$, if and only if for the projection map
+    $$P^n: X^n \sqcup \bigsqcup _{\alpha \in I(n)}D^\alpha_n \to X^n,$$
+    we have
+    $$(P^n)^{-1}(U \cap X^n)$$
+    is open. This is the case if and only if for each $\alpha \in I(n)$,
+    $$(\Phi_\alpha^n)^{-1}(U \cap X)$$
+    and $U \cap X^{n-1}$ are open. So, $(\implies)$ is verified, and $(\impliedby)$ follows by induction on $n$.
+\end{proof}
+
+\begin{lem}
+    Let $K\subset X$ be compact. Then, $K$ intersects only finitely many cells in $X$. 
+\end{lem}
+
+\begin{proof}
+    Suppose not. Then, we can choose an infinite set $S \subset K$ such that no two points in $S$ belong to the same cell. We claim $S$ is closed. Indeed, note that $S \cap X^0$ is closed since $X^0$ is discrete. By induction, suppose $S \cap X^{n-1}$ is closed. Then, $S \cap X^n$ is closed $\iff$ $(\Phi_\alpha^n)^{-1}(S)$ is closed, and by induction $(\Phi_\alpha^n)^{-1}(S) \cap \partial D_\alpha^n$ is closed, so indeed $(\Phi_\alpha^n)^{-1}(S)$ is closed as the union of closed sets. Thus, $S \cap X^n$ is closed for every $n$, hence $S$ is closed. 
+    
+    In fact, we've shown that every subset of $S$ is closed, so $S$ is discrete. Moreover, $S$ is compact as a closed subset of a compact set. Thus, $S$ is compact and discrete, hence finite.
+\end{proof}
+
+\begin{defn}
+    Let $A \subset X$ be a set, and fix $\veps :=\{\veps_\alpha^n \in \R^+\}$ for every $n$ and $\alpha \in I(n)$. Then, an $\bm \veps$\textbf{-neighborhood} of $A$ is the open set $N_\veps(A) \subset X$ defined as follows: let
+    \begin{align*}
+        N_\veps^0(A) := A \cap X^0
+    \end{align*}
+    and then for every $\alpha \in I(n)$, set
+    $$(\Phi_\alpha^n)^{-1}(N_\veps^n(A)) := \braks{B(A \cap \Int(D_\alpha^n),\veps_\alpha^n) \cap \Int(D_\alpha ^n)} \cup \braks{ (1-\veps _\alpha^n,1](\Phi_\alpha^n)^{-1}\paren{N_\veps^{n-1}(A)}},$$
+    and
+    $$N_\veps(A) = \bigcup N_\veps^n(A).$$
+\end{defn}
+
+\begin{prop}
+    $$N_\veps(A) \cap X^n = N_\veps^n(A)$$
+\end{prop}
+
+\begin{thm}
+    Let $X$ be a CW complex. Then, $X$ is Hausdorff.
+\end{thm}
+
+\begin{proof}
+    Let $p \neq q \in X$, and suppose that $p,q \in X^n$ but $q \not \in X^{n-1}$. So, $q$ is in some disk $e_\alpha^n$. If $p \in X^{n-1}$, we may choose $\veps$ sufficiently small so that $N_\veps(X^{n-1})$ and $N_\veps(q)$ are disjoint. If $p \not \in X^{n-1}$, then $p,q$ are distinct points in $e_\alpha^n$ which is Hausdorff, hence separable in $\veps$-neighborhoods. These $\veps$-neighborhoods lift to the global structure of $X$ so that $N_\veps(p) \cap N_\veps(q) = \emptyset$.
+\end{proof}
+
+\begin{defn}
+    Let $X,Y$ be topological spaces. Two (continuous) maps $f,g:X \to Y$ are \textbf{homotopic} if there exists $H:X \times [0,1] \to Y$ continuous such that $H(x,0)=f(x)$ and $H(x,1)=g(x)$ for every $x \in X$.
+
+    For a subset $A \subset X$, two maps $f,g:X \to Y$ are called \textbf{homotopic relative to} $\bm A$ if $f|_A=g|_A$, and there exists a homotopy $H:X \times [0,1]\to Y$ between $f,g$ such that $H(x,t)=f(x)=g(x)$ for all $x \in A$, $t \in [0,1]$.
+\end{defn}
+Homotopy is denoted $f \sim g$ or $f \overset{H}{\sim} g$.
+
+\begin{defn}
+    Two maps $f:X \to Y$ and $g:Y \to X$ are called \textbf{homotopy equivalent} if $g \circ f \sim \id_X$ and $f \circ g = \id_Y$. In this case, $X$ and $Y$ are said to be \textbf{homotopically equivalent.}
+
+    A subset $A \subset X$ is called a \textbf{retract} of $X$ if there exists $r:X \to A$ continuous such that $r(x)=x$ for every $x \in A$. Moreover, $A$ is called a \textbf{deformation retract} if $r \sim \id_X$ relative to $A$. $X$ is called \textbf{contractible} if $\id_X \sim $ constant
+\end{defn}
+
+\begin{ex}
+    Show that $\R^{n+1}\setminus \{0\}$ deformation retracts to $S^n \subset \R^{n+1}$.
+\end{ex}
+
+\begin{ex}
+    Show that $i:\R^n \to \R^{n+k}$ and $\pi:\R^{n+k}\to \R^n$ are homotopy equivalent.
+\end{ex}
+
+\begin{ex}
+    Let $X$ be a topological space. Define $C(X) = X \times [0,1] / [(x,1) \sim (y,1)]$. Show that $C(X)$ is contractible.
+\end{ex}
+
+\begin{defn}
+    $X$ is called \textbf{locally contractible} if for every $p \in X$ and $U \ni p$ open, there exists $V \subset U$ with $p \in V$ such that $p$ is contractible.
+\end{defn}
+
+\begin{prop}
+    Every CW complex is locally contractible.
+\end{prop}
+
+\begin{proof}
+    Exercise. Inductively push the additional part of the neighborhood to the boundary.
+\end{proof}
+
+\begin{cor}
+    If $X$ is a CW complex, then $X$ is connected $\iff$ it's path connected.
+\end{cor}
+
+\begin{proof}
+    Exercise. Local contractibility allows you to understand path connectivity because of the path induced by a retract.
+\end{proof}
+
+\section{Fundamental Group}
+
+\begin{defn}
+    Let $X$ be a topological space $p \in X$. The \textbf{fundamental group} of $X$ at $p$, is
+    $$\pi_1(X,p):=\brax{ \gamma:[0,1]\to X \mid \gamma(0)=\gamma(1) } / \braks{ \gamma \overset{\text{rel}(\{0,1\})}{\sim}\mu }.$$
+    Equivalently, let $q$ be a fixed point in $S^1$, and we have
+    $$\pi_1(X,p) = \brax{\gamma :S^1 \to X}/\braks{\gamma \overset{\text{rel(q)}}{\sim} \mu}$$
+    This definition is in some ways better, since changing $S^1$ to $S^n$ gives a more generalized definition of the $\bm n$\textbf{-th fundamental group} $\pi_n(X,p)$.
+\end{defn}
+
+\begin{defn}
+    A connected space $X$ is called \textbf{simply connected} if there exists $p \in X$ such that $\pi_1(X,p)=\{ [p]\}$.
+\end{defn}
+
+\begin{prop}
+    If $X$ is contractible, then
+    $$\pi_1(X,p) =\{[p]\}$$
+    for the $p$ such that $X$ deformation retracts to $p$.
+\end{prop}
+
+\begin{proof}
+    Let $\gamma \in \pi_1(X,p)$. Let $H$ be a homotopy between $\id_X$ and $p$. Take
+    $$\widetilde{H}(s,t) := H(\gamma(s),t).$$
+    Then, $\gamma \overset{\widetilde H}{\sim}p$.
+\end{proof}
+
+\begin{defn}
+    For $\gamma,\mu \in \pi_1(X,p)$, define
+    $$\gamma \star \mu(t) = \case{\mu(2t) & 0 \leq t \leq 1/2 \\ \gamma (2t-1) & 1/2 \leq t \leq 1}.$$
+    Then, $\star$ induces a well-defined group structure on $\pi_1(X,p)$.
+\end{defn}
+
+Indeed, in order to show that this concatenation of curves defines a group structure on $\pi_1(X,p)$, one must prove the following claim:
+
+\begin{claim}
+    If $[\gamma] = [\gamma']$ and $[\mu] = [\mu ']$, then $[\gamma \star \mu] = [\gamma ' \star \mu ']$. Thus, $[\gamma] \star [\mu]$ is a well-defined binary operation on $\pi_1(X,p)$. Moreover, $\pi_1(X,p)$ is a group, with identity the constant map $[p]$, and $[\gamma(t)]^{-1}=[\gamma(1-t)]$.
+\end{claim}
+
+\begin{exercise}
+    Show that if $\varphi :[0,1] \to [0,1]$ is a continuous map with $\varphi(0)=0$ and $\varphi(1)=1$, then $\gamma \circ \varphi \sim \gamma$.
+\end{exercise}
+
+\begin{thm}[][label=thm:pathconnectedisom]
+    Let $X$ be path connected, $p,q\in X$. Then, $\pi_1(X,p) \cong \pi_1(X,q)$.
+\end{thm}
+
+\begin{proof}
+Since $X$ is path connected, we have a continuous curve $\mu:[0,1] \to X$ with $\mu(0)=p$ and $\mu(1)=q$.
+    \begin{claim}
+        Let $\Omega_p$ denote the space of curves starting and ending at $p$. Then, the map
+    $$T_\mu :\Omega_p \to \Omega_q$$
+    defined by $T_\mu := \mu \star \gamma \star \mu^{-1}$
+    induces an isomorphism $\pi_1 (X,p) \arr[\sim] \pi_1(X,q)$.
+    \end{claim}
+    Indeed, suppose $[\gamma] = [\gamma ']$. Then, $[T_\mu (\gamma)] = [T_\mu(\gamma')]$. Moreover,
+    $$\mu \star (\gamma _1 \star \gamma_2)\star \mu^{-1}=\mu \star \gamma _1 \star \mu^{-1}\star \mu \star \gamma_2 \star \mu^{-1},$$
+    hence $T_\mu$ is a homomorphism. Moreover, the map $\psi =\mu(1-t)$ induces a clear inverse homomorphism $T_{\psi}:\pi_1(X,q) \to \pi_1(X,p)$, so it follows that $T_\mu$ is an isomorphism.
+\end{proof}
+
+\begin{prop}
+    Let $(X,p)$ and $(Y,q)$ be (pointed) topological spaces, and $f: (X,p) \to (Y,q)$ be continuous (i.e. a continuous map $f:X \to Y$ with $f(p)=q$). Then, the map $f_*:=\pi_1(f):\pi_1(X,p) \to \pi_1(Y,q)$ defined by
+    $$f_*([\gamma]) = [f \circ \gamma]$$
+    is a well-defined group homomorphism. Moreover, if
+    $$(X,p) \arr[f] (Y,q) \arr[g] (Z,r)$$
+    is a chain of continuous maps, then $(g\circ f)_* = g_* \circ f_*$.
+\end{prop}
+
+\begin{proof}
+    Let $[\gamma] = [\gamma ']$. Then, $f\circ \gamma \sim f\circ \gamma'$ on $f \circ H$, relative to $\{0,1\}$, so this is well-defined, and
+    $$(f \circ \gamma ) \star (f \circ \mu) = f(\gamma \star \mu)$$
+    at the curves level, which induces the homomorphism
+    $(g \circ f)_* =g_* \circ f_*$
+    at the level of fundamental groups.
+\end{proof}
+
+\begin{thm}[Functoriality of the Fundamental Group]
+The map $\pi_1$ on spaces and the continuous maps between them is a functor from the category of pointed spaces to the category of groups. That is,
+$$\pi_1 : \w{Top_\bullet} \to \w{Grp}$$
+is a covariant functor.
+\end{thm}
+
+\begin{defn}
+    $X$ is called \textbf{strongly contractable} if there exists $p \in X$ such that $X$ deformation retracts to $p$.
+\end{defn}
+
+\begin{prop}
+    If $X$ is strongly contractable, then $\pi_1(X,q) = \{e\}$ for all $q \in X$.
+\end{prop}
+
+\begin{proof}
+When $q=p$, we know $\id _X \overset{\w{rel} p}{\sim}(x \mapsto p)$, and it follows that $\pi_1(X,p)$ is trivial. Then, the theorem follows for arbitrary $q$ by \Cref{thm:pathconnectedisom}, since strongly contractable implies path connected.
+\end{proof}
+
+\begin{notebox*}[Recall]
+    $X$ is called contractible if $X \sim \{q\}$, i.e. $\id_X \sim (x \maps q)$.
+\end{notebox*}
+
+\begin{thm}
+    If $X$ is contractible, then $\pi_1(X,q) = \{e\}$ for all $q \in X$.
+\end{thm}
+
+\section{\texorpdfstring{The Fundamental Group of $S^1$}{The Fundamental Group of S1}}
+
+\begin{thm}[][label=thm:circlelift]
+    Let $\gamma:[0,1] \to S^1$ be continuous with $\gamma(0)=1$. Then, there exists a unique $\theta:[0,1] \to \R$ such that $\theta (0)=0$, and
+    $$e^{i\theta(t)}=\gamma(t).$$
+    Moreover, we can do this continuously along homotopies. That is, if $H:[0,1]\times [0,1] \to S^1$ has $H(0,s)=1$, there there exists a unique $\theta: [0,1] \times [0,1] \to \R$ such that $\theta(0,s)=0$ for all $s$, and $e^{i\theta}=H$ for all $t,s$.
+\end{thm}
+
+
+\begin{cor}
+    Let $\gamma_1,\gamma_2:[0,1] \to S^1$ be such that $\gamma_i(0)=\gamma_i(1)=1$, $i=1,2$. Let $\theta_1,\theta_2$ be their lifts as in \Cref{thm:circlelift}. Then,
+    $$\gamma_1 \overset{\w{rel}\{0,1\}}{\sim}\gamma_2 \iff \theta_1(1)=\theta_2(1)$$
+\end{cor}
+
+\begin{proof}
+($\implies$) Suppose $\gamma_1 \sim \gamma_2$ relative to $\{0,1\}$, via a homotopy $H$. Let $\theta:[0,1]\times [0,1] \to \R$ be the lift of $H$ as in \Cref{thm:circlelift}. Then, $\theta_1(x)=\theta(x,0)$ and $\theta_2(x)=\theta(x,1)$. Consider the path $s \mapsto \theta(1,s)$. Then, since $H(1,s)=1$, and $e^{i\theta}=H$, we have $\theta(1,s) \in 2 \pi \Z$. So, as $\theta(1,s)$ is continuous with a discrete image, it must be constant, hence $\theta_1(1)=\theta_2(1)$.
+
+$(\impliedby)$ Take $\theta(t,s)= (1-s)\theta_1(t) + s\theta_2(t)$. Then, $\theta(t,s)$ is a homotopy between $\theta_1$ and $\theta_2$, with $\theta(1,s)=\theta_1(1)$, and $\theta(0,s)=0$. Now, we may take $H(t,s):= e^{i\theta(t,s)}$, and $H$ is the desired homotopy from $\gamma_1$ to $\gamma_2$ relative to $\{0,1\}$. Note that relative to $1$ comes from the fact $\theta_1(1)=\theta_2(1)$.
+\end{proof}
+
+\begin{cor}
+For any $p \in S^1$,
+    $$\pi_1(S^1,p) \cong \Z,$$
+    with $t \mapsto e^{2\pi i t}:[0,1]\to S^1$ being the generator.
+\end{cor}
+
+\begin{proof}
+    Clearly, $(e^{2\pi i t})^k \overset{\w{rel}\{0,1\}}{\sim} e^{2\pi i kt}$, where the LHS denotes concatenation $k$ times. On the other hand, each element in $\pi_1(S^1,1)$ is in bijective correspondence with $t \mapsto e^{2\pi i kt}$ for some $k \in \Z$. Indeed, if $\theta$ is the lift of an element in $\pi_1(S^1,1)$, then $\theta_1(1) \in 2\pi \Z$, and the bijective correspondence is induced by $\gamma \leftrightarrow \frac{\theta_1(1)}{2\pi}$.
+\end{proof}
+
+\begin{exercise}
+    Let $\{ (X_i,p_i)\}_{i=1}^N$ be a set of pointed spaces. Show that
+    $$\pi_1\paren{\prod_{k=1}^N X_i, (p_1,\dots,p_n)} \cong \prod_{k=1}^N \pi_1(X_i,p_i).$$
+\end{exercise}
+
+\begin{exercise}
+    Show that a continuous map $f:\bar D^2 \to S^1$ satisfying $f(x)=x$ for all $x \in S^1$ does not exist.
+\end{exercise}
+
+\begin{prop}
+    For all $k \geq 2$, $\pi_1(S^k,p)$ is trivial.
+\end{prop}
+
+\begin{proof}
+    Let $\gamma:[0,1] \to S^k$ be continuous. We claim $\gamma$ is homotopic, relative to $\{0,1\}$, to a curve $\tilde \gamma$ that misses a point $q$. The proposition follows from the claim: indeed, we have $\psi:S^k \setminus \{q\} \arr[\sim] \D^k $, so consider $\mu:=\pi \circ \tilde \gamma$, which is homotopic to the constant map, and we may push it back to $S^k$ via $\psi^{-1}$ to show $[\gamma]=[\tilde \gamma]=[\id]$.
+
+    To prove the claim, we approximate $\gamma$ via smooth maps, and smooth maps always miss points by \href{https://en.wikipedia.org/wiki/Sard%27s_theorem}{Sard's theorem}.
+\end{proof}
+
+
+\section{Amalgamated Products and Free Products}
+\begin{defn}
+    Let $H$, $G_1$, $G_2$ be groups, and let $\varphi_i:H \to G_i$ be homomorphisms. The \textbf{amalgamated product} of $G_1$ and $G_2$ along $H$, denoted $G_1*_HG_2$, is a group together with homomorphisms $\psi_i:G_i \to G_1 *_HG_2$ satisfying $\psi_1 \circ \varphi_1=\psi_2 \circ \varphi_2$. Moreover, it has the universal property that for every group $K$ and homomorphisms $f_i:G_i\to K$ with $f_1 \circ \varphi_1 = f_2 \circ \varphi_2$, there exists a unique homomorphism $T:G_1*_HG_2 \to k$ such that $T \circ \psi_i=f_i$. That is, the following diagram commutes:
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCJIIl0sWzIsMCwiR18xIl0sWzAsMiwiR18yIl0sWzIsMiwiR18xKl9IR18yIl0sWzMsMywiSyJdLFswLDEsIlxcdmFycGhpXzEiXSxbMCwyLCJcXHZhcnBoaV8yIiwyXSxbMSwzLCJcXHBzaV8xIiwyXSxbMiwzLCJcXHBzaV8yIl0sWzEsNCwiZl8xIl0sWzIsNCwiZl8yIiwyXSxbMyw0LCJcXGV4aXN0cyAhVCIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	H \&\& {G_1} \& \\
+	\\
+	{G_2} \&\& {G_1*_HG_2} \\
+	\&\&\& K
+	\arrow["{\varphi_1}", from=1-1, to=1-3]
+	\arrow["{\varphi_2}"', from=1-1, to=3-1]
+	\arrow["{\psi_1}"', from=1-3, to=3-3]
+	\arrow["{f_1}", from=1-3, to=4-4]
+	\arrow["{\psi_2}", from=3-1, to=3-3]
+	\arrow["{f_2}"', from=3-1, to=4-4]
+	\arrow["{\exists !T}"{description}, dashed, from=3-3, to=4-4]
+\end{tikzcd}\]
+\end{defn}
+
+A good way to think about this is gluing $G_1$ and $G_2$ along $H$.
+
+\begin{ex}
+    Consider a similar definition but with sets $A \arr[\varphi_1]B$ and $A \arr[\varphi_2] B_2$. If we have $f_1:B_1 \to K$ and $f_2:B_2 \to K$, then one can see $B_1 \sqcup B_2$ with the natural embeddings $i_1:B_1 \to B_1 \sqcup B_2$, $i_2:B_2\to B_1 \sqcup B_2$, has the desired unique $\tilde T:B_1 \sqcup B_2 \to K$. However, we do not have the desired commutativity $i_1 \circ \varphi_1 = i_2 \circ \varphi_2$. In order to have this, we need to quotient $B_1 \sqcup B_2$ by the relation $i_1\varphi_1(x) \sim i_2\varphi_2(x)$. Then,
+    $(B_1 \sqcup B_2)/\sim$ is the amalgamated product of these sets.
+\end{ex}
+
+\begin{prop}[Existence and Uniqueness of the Amalgamated Product]
+    Let $H,G_1,G_2$ be groups with homomorphisms $\varphi_i:H \to G_i$. Then, the amalgamated product $(G_1*_HG_2, \psi_1,\psi_2)$ exists, and if $(\tilde{G_1*_HG_2},\tilde\psi_1,\tilde\psi_2)$ is another amalgamated product, then there exists a unique isomorphism
+    $$T:G_1 *_HG_2 \arr \tilde{G_1 *_HG_2}$$
+    such that $T \circ \psi_i = \tilde \psi_i$.
+\end{prop}
+
+\begin{proof}
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCJIIl0sWzIsMCwiR18xIl0sWzAsMiwiR18yIl0sWzIsMiwiR18xKl9IR18yIl0sWzQsNCwiXFx0aWxkZXtHXzEqX0hHXzJ9Il0sWzAsMiwiXFx2YXJwaGlfMiJdLFswLDEsIlxcdmFycGhpXzEiLDJdLFsxLDMsIlxccHNpXzEiLDJdLFsyLDMsIlxccHNpXzIiXSxbMSw0LCJcXHRpbGRle1xccHNpXzF9Il0sWzIsNCwiXFx0aWxkZXtcXHBzaV8yfSIsMl0sWzMsNCwiXFxleGlzdHMgIVQiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJhcnJvd2hlYWQifSwiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	H \&\& {G_1} \&\& \\
+	\\
+	{G_2} \&\& {G_1*_HG_2} \\
+	\\
+	\&\&\&\& {\tilde{G_1*_HG_2}}
+	\arrow["{\varphi_1}"', from=1-1, to=1-3]
+	\arrow["{\varphi_2}", from=1-1, to=3-1]
+	\arrow["{\psi_1}"', from=1-3, to=3-3]
+	\arrow["{\tilde{\psi_1}}", from=1-3, to=5-5]
+	\arrow["{\psi_2}", from=3-1, to=3-3]
+	\arrow["{\tilde{\psi_2}}"', from=3-1, to=5-5]
+	\arrow["{\exists !T}"{description}, dashed, tail reversed, from=3-3, to=5-5]
+\end{tikzcd}\]
+\end{proof}
+
+\begin{defn}
+    Let $G_1,G_2$ be two groups. The \textbf{free product} $G_1*G_2$ is the group of words in $G_1\setminus \{e_1\}$, $G_2\setminus \{e_2\}$, and a new identity $\{e\}$, where elements from the same group multiply as expected, the product of elements is concatenation, and multiplying an element $g$ from $G_1$ or $G_2$ by its inverse in that group yields $e$.
+\end{defn}
+
+\begin{thm}
+    Let $G_1,G_2$ be groups. Then,
+    $$G_1*G_2 \cong G_1*_{\{e\}}G_2$$
+\end{thm}
+
+\begin{proof}
+The claim follows immediately from the following lemma.
+\begin{lem}
+    The free product $G_1*G_2$ satisfies the following universal property:
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXHtlXFx9Il0sWzIsMCwiR18xIl0sWzAsMiwiR18yIl0sWzIsMiwiR18xKkdfMiJdLFs0LDQsIksiXSxbMCwyLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDEsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsMywiXFxwc2lfMSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMywiXFxwc2lfMiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsNCwiZl8xIl0sWzIsNCwiZl8yIiwyXSxbMyw0LCJcXGV4aXN0cyAhVCIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{\{e\}} \&\& {G_1} \&\& \\
+	\\
+	{G_2} \&\& {G_1*G_2} \\
+	\\
+	\&\&\&\& K
+	\arrow[hook, from=1-1, to=1-3]
+	\arrow[hook, from=1-1, to=3-1]
+	\arrow["{\psi_1}"', hook, from=1-3, to=3-3]
+	\arrow["{f_1}", from=1-3, to=5-5]
+	\arrow["{\psi_2}", hook, from=3-1, to=3-3]
+	\arrow["{f_2}"', from=3-1, to=5-5]
+	\arrow["{\exists !T}"{description}, dashed, from=3-3, to=5-5]
+\end{tikzcd}\]
+\end{lem}
+\end{proof}
+
+\begin{exercise}
+    Show that
+    $$G_1*_HG_2 \cong {(G_1*G_2)}/{\angles{\varphi_1(h) \varphi_2(h)^{-1}}}$$
+\end{exercise}
+
+
+\begin{rmk}
+    We can similarly define free products $*_\alpha G_\alpha$ of arbitrarily many groups $\{G_\alpha\}_{\alpha \in I}$.
+\end{rmk}
+
+\section{Van Kampen's Theorem}
+
+\begin{thm}[Van Kampen's Theorem]
+    Let $(X,p)$ be a connected pointed space, and suppose
+    $$X = \bigcup_{\alpha \in I}(U_\alpha,p)$$
+    where $U_\alpha \subset X$ is open and $p \in U_\alpha$. Suppose that for every $\alpha,\beta \in I$, $U_\alpha \cap U_\beta$ is path connected. Then, the map 
+    \begin{align*}
+        \Phi: &*_{\alpha}\pi_1(U_\alpha,p) \to \pi_1(X,p)
+        \\ &*_{\alpha}[\gamma_\alpha]\mapsto \star_\alpha[\gamma _\alpha]
+    \end{align*}
+    is surjective. Moreover, if $\alpha,\beta, \delta \in I$ and $U_\alpha \cap U_\beta \cap U_\delta$ is path-connected, then
+    $$\pi_1(X,p) \cong *_\alpha\pi_1(U_\alpha, p)/\angles{\angles{ i_{\alpha ,\beta}(\gamma) i_{\beta,\alpha}(\gamma^{-1})}},$$
+    where
+    $$i_{\alpha,\beta}:\pi_1(U_\alpha \cap U_\beta, p) \to \pi_1(U_\alpha, p)$$
+    is the expected embedding, and $\angles{\angles{-}}$ is the normal closure. In particular, if $(X,p) = U_1 \cup U_2$ with $U_1 \cap U_2$ path connected, then
+    $$\pi_1(X,p) = \pi_1(U_1,p) \underset{\pi_1(U_1\cap U_2,p)}{*} \pi_1(U_2,p)$$
+\end{thm}
+
+\begin{ex}
+    Take $X= \bigvee_{\alpha \in I}(S^1,p)$, which is the space defined by attaching $I$ copies of $S^1$ at one shared point $p$. For each $\alpha$, take $U_\alpha = S^1_\alpha \cup N_\veps (p)$. Then,
+    $$U_\alpha \cap U_\beta \cap U_\delta = N_\veps(p)$$
+    for every $\alpha,\beta,\delta \in I$ is connected (and contractible). Thus, by van Kampen's theorem,
+    $$\pi_1(X,p) \cong *_\alpha \pi_1(S^1_\alpha,p)\cong *_\alpha \Z$$
+    Indeed, the normal subgroup is trivial because $N_\veps(p)$ is contractible.
+\end{ex}
+
+\begin{ex}
+    Let $G=(V,E)$ be an undirected connected graph, viewed as a CW-complex. Let $T$ be a spanning tree. Then, deforming the tree to a point, we get a bouquet as in the previous example:
+    
+    % https://q.uiver.app/#q=WzAsOCxbMSwwLCJcXGJ1bGxldCJdLFswLDEsIlxcYnVsbGV0Il0sWzEsMiwiXFxidWxsZXQiXSxbMiwxLCJcXGJ1bGxldCJdLFszLDIsIlxcYnVsbGV0Il0sWzIsMywiXFxidWxsZXQiXSxbNCwzLCJcXGJ1bGxldCJdLFs2LDEsIlxcYnVsbGV0IixbMTIwLDYwLDYwLDFdXSxbMCwxLCIiLDAseyJjb2xvdXIiOlsxMjAsNjAsNjBdLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMiwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDMsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMywwLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMSwiIiwwLHsiYW5nbGUiOi05MCwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDQsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMyw0LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsNSwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs1LDYsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNiw0LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsMywiIiwwLHsib2Zmc2V0IjotMywiY29sb3VyIjpbMTIwLDYwLDYwXSwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFswLDEsIiIsMCx7Im9mZnNldCI6LTMsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMywyLCIiLDAseyJvZmZzZXQiOi0zLCJjb2xvdXIiOlsxMjAsNjAsNjBdLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsNCwiIiwwLHsib2Zmc2V0IjotMywiY29sb3VyIjpbMTIwLDYwLDYwXSwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDUsIiIsMCx7Im9mZnNldCI6LTMsImNvbG91ciI6WzEyMCw2MCw2MF0sInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNCw2LCIiLDAseyJvZmZzZXQiOi0zLCJjb2xvdXIiOlsxMjAsNjAsNjBdLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzcsNywiIiwwLHsib2Zmc2V0IjozLCJyYWRpdXMiOi01LCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzcsNywiIiwwLHsib2Zmc2V0IjozLCJyYWRpdXMiOi01LCJhbmdsZSI6LTkwLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzcsNywiIiwwLHsib2Zmc2V0IjozLCJyYWRpdXMiOi01LCJhbmdsZSI6LTE4MCwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs3LDcsIiIsMCx7Im9mZnNldCI6MywicmFkaXVzIjotNSwiYW5nbGUiOjkwLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\& \bullet \&\&\&\&\& \\
+	\bullet \&\& \bullet \&\&\&\& \textcolor{rgb,255:red,92;green,214;blue,92}{\bullet} \\
+	\& \bullet \&\& \bullet \\
+	\&\& \bullet \&\& \bullet
+	\arrow[color={rgb,255:red,92;green,214;blue,92}, no head, from=1-2, to=2-1]
+	\arrow[shift left=3, no head, from=1-2, to=2-1]
+	\arrow[shift left=3, color={rgb,255:red,92;green,214;blue,92}, no head, from=1-2, to=2-3]
+	\arrow[no head, from=2-1, to=2-1, loop, in=145, out=215, distance=10mm]
+	\arrow[no head, from=2-1, to=3-2]
+	\arrow[no head, from=2-3, to=1-2]
+	\arrow[shift left=3, color={rgb,255:red,92;green,214;blue,92}, no head, from=2-3, to=3-2]
+	\arrow[no head, from=2-3, to=3-4]
+	\arrow[shift left=3, color={rgb,255:red,92;green,214;blue,92}, no head, from=2-3, to=3-4]
+	\arrow[shift right=3, no head, from=2-7, to=2-7, loop, in=310, out=230, distance=15mm]
+	\arrow[shift right=3, no head, from=2-7, to=2-7, loop, in=40, out=320, distance=15mm]
+	\arrow[shift right=3, no head, from=2-7, to=2-7, loop, in=130, out=50, distance=15mm]
+	\arrow[shift right=3, no head, from=2-7, to=2-7, loop, in=220, out=140, distance=15mm]
+	\arrow[no head, from=3-2, to=2-3]
+	\arrow[no head, from=3-2, to=3-4]
+	\arrow[no head, from=3-4, to=4-3]
+	\arrow[shift left=3, color={rgb,255:red,92;green,214;blue,92}, no head, from=3-4, to=4-3]
+	\arrow[shift left=3, color={rgb,255:red,92;green,214;blue,92}, no head, from=3-4, to=4-5]
+	\arrow[no head, from=4-3, to=4-5]
+	\arrow[no head, from=4-5, to=3-4]
+\end{tikzcd}\]
+\end{ex}
+
+\begin{rmk}
+    Recall that we required $U_\alpha \cap U_\beta$ to be connected for surjectivity to hold. If they are not connected, then we get examples of maps which aren't surjective: for instance, taking two arclengths of $S^1$, their intersection has two connected components, and $\{e\} *\{e\} \not \surj \Z$.
+
+    The triple intersection condition is also necessary. Consider the graph:
+    % https://q.uiver.app/#q=WzAsNSxbMSwwLCJwIl0sWzAsMSwiQSJdLFsxLDEsIkIiXSxbMiwxLCJDIl0sWzEsMiwicSJdLFsxLDQsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwxLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsMiwiIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDQsIiIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwzLCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsNCwiIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	\& p \& \\
+	A \& B \& C \\
+	\& q
+	\arrow[no head, from=1-2, to=2-1]
+	\arrow[no head, from=1-2, to=2-2]
+	\arrow[no head, from=1-2, to=2-3]
+	\arrow[no head, from=2-1, to=3-2]
+	\arrow[no head, from=2-2, to=3-2]
+	\arrow[no head, from=2-3, to=3-2]
+\end{tikzcd}\]
+Let $U_x = X \setminus \{x\}$. Then, $U_x \cap U_y$ is always contractible, but $U_A \cap U_B \cap U_C$ is disconnected. Notice further that $\pi_1(U_x,p)=\Z$, and $\pi_1(X,p)=\Z*\Z$. Then, van Kampen would say $\Z*\Z*\Z \surj \Z*\Z$, and $\Z*\Z*\Z/\angles e \cong \Z*\Z$, but this is absurd.
+\end{rmk}
+
+We now prove van Kampen's theorem.
+
+\begin{proof}[Proof of van Kampen]
+Let $(X,p)$ be a pointed space, $X = \bigcup _{\alpha \in I}(U_\alpha,p)$, suppose $U_\alpha \cap U_\beta$ is path connected for all $\alpha, \beta$, and let $\Phi$ be the map
+$$\Phi:*\pi_1(U_\alpha,p) \to \pi_1(X).$$
+We claim $\Phi$ is surjective. Let $\gamma:[0,1] \to X$ be a loop at $p$, and we want to decompose it into loops in $(U_\alpha,p)$. Since $\gamma$ is continuous, the set
+$$\{ \gamma^{-1}(U_\alpha)\} _{\alpha \in I}$$
+is an open cover of $[0,1]$. Thus, there exists $\delta>0$ called the \href{https://en.wikipedia.org/wiki/Lebesgue%27s_number_lemma}{Lebesgue number}, such that any open subset of $[0,1]$ with diameter $<\delta$ is contained in $\gamma^{-1}(U_\alpha)$ for some $\alpha\in I$. Assume $\delta = 1/k$ for $k \in \N$, and partition the interval $[0,1]$ into $2k$ sub-intervals of length $1/2k$. Thus, each sub-interval $[\frac{i-1}{2k},\frac{i}{k}]$ is mapped via $\gamma$ into $U_\alpha$. Let $t_i = i/2k$ and $p_i = \gamma (t_i) \in U_{\alpha_i }$. Since $U_{\alpha_i}\cap U_{\alpha_{i+1}}$ is connected, there exists a curve $\mu_i$ from $p_i$ to $p$. Let $\gamma_i = \gamma|_{[t_{i-1},t_i]}$. Then,
+$$\gamma = \gamma_{2k}*\cdots *\gamma_1 \sim \gamma_{2k}\cdots \gamma_{3}\mu_2^{-1}\mu_2 \gamma_2 \mu_{1}^{-1}\mu _1 \gamma_1,$$
+proving surjectivity.
+
+Now, in order to prove the desired isomorphism, it suffices to show $$\ker (\Phi) \cong  \angles{\angles{i_{\alpha \beta}(\gamma) \cdot i_{\beta\alpha}(\gamma^{-1})}}=:N.$$
+Indeed, first observe that 
+$$\Phi(i_{\alpha \beta}(\gamma) \cdot i_{\beta\alpha}(\gamma^{-1})) = [\gamma] [\gamma^{-1}]=e,$$
+so clearly $N \subset \ker \Phi$.
+
+For the other direction, we want to show that if $\gamma_1 *\cdots * \gamma_{k}$ is homotopic to $[e]$ as loops in $X$, then $\gamma_1 *\cdots * \gamma_k \in N$. This is provable, but the proof was confusing in lecture... I didn't feel like finishing it.
+\end{proof}
+
+\begin{exercise}
+    Show that $\R^2 \setminus \{p\}$ deformation retracts to $S^1$, and conclude that $\R^2 \not \cong \R^k$ for $k>2$.
+\end{exercise}
+
+\begin{exercise}
+    Compute $\pi_1(\R^2 \setminus \{p_1,\dots,p_k\})$ using van Kampen's theorem.
+\end{exercise}
+
+\begin{exercise}
+    How do you hang a picture using $1$ rope and $k$ nails such that removing any nail will make it fall.
+\end{exercise}
+
+\begin{ex}[The Fundamental Group of $\R^3 \setminus S^1$]
+    We can imagine the sphere of which $S^1$ is a cross section ($S_2$), and deformation retract everything outside that sphere down to it (that is, we can ignore everything fair outside our circle). We claim that $\bar B \setminus S^1$ deformation retracts to $S^2\cup L$, where $B$ is the closed ball corresponding to our sphere $S_2$, and $L$ is a line passing from one end of $S^1$ to another.
+
+    Then, $L$ can be homotoped within the interior of $S^2$ to a closed loop touching a point of $S^2$. That is, our space retracts to $S^2 \lor S^1$, and by van Kampen's theorem
+    $$\pi_1(\R \setminus \{0\}) = \pi_1(S^2 \lor S^1) = \pi_1(S^1)=\Z.$$
+\end{ex}
+
+
+
+
+\end{document}
