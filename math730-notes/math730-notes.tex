@@ -648,6 +648,45 @@ For the other direction, we want to show that if $\gamma_1 *\cdots * \gamma_{k}$
     $$\pi_1(\R \setminus \{0\}) = \pi_1(S^2 \lor S^1) = \pi_1(S^1)=\Z.$$
 \end{ex}
 
+\begin{ex}
+    Now, consider $\R^3$, with multiple separate circles removed. By shrinking $\R^3$ to the balls surrounding each circle, and using the same strategy as the previous exmaple, we see that this space is homotopy equivalent to $S^2 \lor S^1 \lor S^2 \lor S^1 \lor \cdots \lor S^2 \lor S^1$, and so the fundamental group is $\Z *\Z *\cdots * \Z$.
+\end{ex}
+
+\begin{ex}
+    Now, consider $\R^3$, with two linked circles removed. We claim this is homotopy equivalent to $T^2 \lor S^2$, so the fundamental group is 
+    $$\pi_1(T^2)*\pi_1(S^2)=\Z^2 *\{e\}=\Z^2.$$
+The idea is as follows: we thicken one of our circles so that it becomes a torus, and we surround our torus and circle by a sphere so that the torus touches the boundary of the sphere. Then, the second circle is ``jump-roped'' around the torus so that it reaches the boundary of the sphere at that same of the intersection point.
+\end{ex}
+
+\begin{ex}
+    Consider the space $S^n \setminus \{p\}$, for $n \geq 0$. We claim the fundamental group is trivial. Indeed, we may pass $S^{n-1}$ through our point, which splits $S^n$ into an ``upper-hemisphere'' $U$ and ``lower-hemisphere'' $L$. We widen $U$ and $L$ mildly so that they have non-trivial interseciton, and $U \cap L \sim S^1$. Then,
+    \[
+    \pi_1(S^n,p)=\pi_1(U) *_{\pi_1(S^{n-1},p)}\pi_1(L),
+    \]
+    which by induction is trivial (since $\pi_1(S^1\setminus \{p\})=\{0\}$).
+\end{ex}
+
+\begin{prop}
+Suppose $Y$ is obtained from a path-connected pointed space $(X,x_0)$ by attatching a $2$-cell, i.e.
+\[
+Y= X\sqcup \bar D^2/ (\varphi(x) \sim x),
+\]
+where $X \in \partial \bar D^2$ and $\varphi:\partial D^2 \to X$.  Let $p \in Y\cap X$ be a point such that there exists $\tilde p \in D^2$ with $\varphi(\tilde p)=p$. Let $\mu_p$ be a path in $X$ between $x_0$ and $p$. Then,
+\[
+\pi_1(Y,x_0) = \pi_1(X,x_0)/ \aangles{\mu_p^{-1}*\varphi * \mu_p}.
+\]
+\end{prop}
+\begin{proof}
+    Let $p'$ be a point in the interior of $D$ obtained by moving radially inward from $\tilde p$. Let $\tilde \varphi$ be a loop at $p'$, let $\varphi_1$ be a loop in $D^2$ with $\tilde \varphi$ in the interior, and $\varphi_2$ be a loop with $\tilde \varphi$ in the exterior. Let $G$ be the region within the loop $\varphi_1$, and $P$ the regioun outside the loop $\varphi_2$. Then, $p'$ is contained in $G \cap P$, and we may write $Y=G \cup P$. Moreover, $G \cap P$ is an annulus which is homotopy equivalent to $S^1$. It follows that
+    \[
+    \pi_1(Y,p') = \pi_1(G,p')*_{\pi_1(S^1,p')}\pi_1(P,p').
+    \]
+    Moreover, $\tilde \varphi$ is homotopic to $\bar{p'p^{-1}}\varphi \bar{p'p}$, so
+    \[
+    \pi_1(Y,p')\cong \pi_1(P,p')/\angles{\bar{p'p^{-1}}\varphi \bar{p'p}}.
+    \]
+    But, note that $P$ deformation retracts via $\mu_p\bar{p'p^{-1}}$ to give the desired result.
+\end{proof}
 
 
 
