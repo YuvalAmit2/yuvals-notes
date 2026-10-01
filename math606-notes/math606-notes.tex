@@ -1553,7 +1553,7 @@ H^1(X,\mc F) \cong H^1(\mc U,\mc F).
     We conclude that $\tau^*$ is surjective, proving the theorem.
 \end{proof}
 
-\begin{cor}[Reformulated Mittag-Leffler]
+\begin{cor}[Reformulated Mittag-Leffler][label=cor:mittag-leffler]
     For any open set $\Omega \subset \C$, we have
     \[
     H^1(\Omega, \mc O) = 0.
@@ -1624,7 +1624,7 @@ The previous example can be generalized with the following result:
         is exact for any $U \subset X$ open.
     \end{exercise}
 
-\begin{thm}
+\begin{thm}[][label=thm:longexact]
 Consider a short exact sequence
 \begin{align} \label{eq:shortexactseq}
     0 \to \mc F \arr[\alpha]\mc G \arr[\beta]\mc H \to 0
@@ -1661,7 +1661,39 @@ of sheaves on $X$. Then, the sequence naturally induces a long exact sequence of
     \alpha_{U_i \cap U_j}(f_i - f_j)=\alpha_{U_i \cap U_j}(f'_{ij}-f_{ij}) \implies f_i -f_j = f_{ij}' -f_{ij}.
     \]
     Hence, $\{f_{ij}\}$ and $\{f_{ij}'\}$ define the same element of $H^1(X ,\mc F)$, so $\delta$ is well-defined.
+
+    Proving exactness of the long exact sequence at $H^0(X ,\mc H), H^1(X,\mc F),$ and $H^1(X,\mc G)$ is left as an exercise.
 \end{proof}
+
+\begin{que}
+When is the differentiation map $\frac{d}{dz}:\mc O(\Omega) \to \mc O(\Omega)$ surjective, for $\Omega \subset \C$ open?
+\end{que}
+
+\begin{ex}[The Cohomology Form of Cauchy's Theorem]
+    Let $\Omega \subset \C$ be connected and open. Then, we have an exact sequence of sheaves on $\Omega$:
+    \[
+    0 \to \C \to \mc O \arr[d/dz] \mc O \to 0.
+    \]
+Then, since $H^1(\Omega,\mc O)=0$ by Mittag-Leffler (\Cref{cor:mittag-leffler}), we get an induced long exact sequence
+\[
+0 \to \C \to \mc O(\Omega)\to \mc O(\Omega) \to H^1(\Omega,\C)\to 0
+\]
+by \Cref{thm:longexact}. Thus, $H^1(\Omega,\C)$ measures the obstruction to solving the equation $f'=g$ for $g \in \mc O(\Omega)$. If $\Omega$ is simply connected, then $d/dz$ is onto and $H^1(\Omega, \C)=0$. 
+
+In fact, one can show
+\[
+H^1(\Omega,\C) \cong H^1_{\w{sing}}(\Omega,\C),
+\]
+where the RHS is singular cohomology.
+\end{ex}
+
+\begin{rmk}
+    See the textbook for a definition of higher cohomology groups $H^k(X,\mc F)$ for any $k \geq 0$. One can show that the long exact sequence of cohomology groups extends further:
+\begin{align*}
+    0 \to \mc F(X) \to \mc G(X) \to \mc H(X) \to H^1(X, \mc F) \to H^1 (X,\mc G) \to H^1(X, \mc H)
+    \\ \to H^2(X,\mc F) \to H^2(X,\mc G) \to H^2(X,\mc H) \to H^3(X,\mc F)\to \cdots
+\end{align*}
+\end{rmk}
 
 
 
