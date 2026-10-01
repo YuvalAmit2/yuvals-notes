@@ -1531,5 +1531,29 @@ H^1(X,\mc F) \cong H^1(\mc U,\mc F).
 \]
 \end{thm}
 
+\begin{proof}
+    It suffices to show that for any refinement $\mc V:= \{V_\alpha\}_{\alpha \in A}$ of $\mc U$, the induced map $\tau^*: H^1(\mc U,\mc F)\to H^1(\mc V,\mc F)$ is surjective. Here, $\tau:A \to I$ is a refinement map such that $V_\alpha \subset U_{\tau(\alpha)}$ for all $\alpha \in A$.
+
+    Let $\{c_{\alpha \beta}\}_{\alpha,\beta \in A} \in Z^1(\mc V, \mc F)$. Then, 
+    \[
+    \brax{c_{\alpha \beta}|_{U_i}} \in Z^1(U_i \cap \mc V,\mc F).
+    \]
+    Since $H^1(U_i,\mc F)=0$, there exists a function $g_{i\alpha} \in \mc F(U_i \cap V_\alpha)$ such that $c_{\alpha \beta}=g_{i\alpha}-g_{i\beta}$ on $U_i \cap V_\alpha \cap V_\beta$. Then, on $U_i \cap U_j \cap V_\alpha \cap V_\beta$, we have
+    \[
+    g_{i\alpha}-g_{i\beta}=c_{\alpha \beta}=g_{j\alpha}-g_{j\beta} \implies g_{i\alpha}-g_{j\alpha}=g_{i\beta}-g_{j\beta}.
+    \]
+    Now, since $\mc F$ is a sheaf, there exists $\gamma_{ij} \in \mc F(U_i \cap U_j)$ such that $\gamma_{ij} = g_{i\alpha}-g_{i\beta}$ on $U_i \cap U_j \cap V_\alpha$ for all $\alpha \in A$. Clearly $\gamma_{ij}+\gamma_{jk}=\gamma_{ik}$ on $U_i \cap U_j \cap U_k$, and moreover 
+    \[
+    \gamma_{\tau(\alpha)\tau(\beta)}+c_{\alpha \beta}=\paren{g_{\tau(\alpha)\alpha}-g_{\tau(\beta)\beta}}+\paren{g_{\tau(b)\alpha }-g_{\tau (\beta)\beta}}= -g_{\tau(\beta)\beta} + g_{\tau(\alpha \alpha)}
+    \]
+    on $V_\alpha \cap V_\beta$, which is a subject of $U_{\tau(\beta)}$. Then, since $g_{\tau(\beta)\beta} \in \mc F(U_{\tau (\beta)}\cap V_\beta)=\mc F(V _\beta)$, this proves $(c_{\alpha \beta})$ and $(-\gamma_{\tau(\alpha)\tau(\beta)})$ induce the same element in $H^1(\mc V, \mc F)$. But, by definition,
+    \[
+    \paren{-\gamma _{\tau(\alpha)\tau(\beta)}}=\tau^*(-\gamma_{ij}).
+    \]
+    We conclude that $\tau^*$ is surjective, proving the theorem.
+\end{proof}
+
+
+
 
 \end{document}
