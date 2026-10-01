@@ -314,7 +314,7 @@ The function $F_X:\R \to \R$ satisfies the following properties:
     \]
     Note that we then have
     \[
-    F_X(a) = \int_{-\infty}^\infty f_X(x)dx
+    F_X(a) = \int_{-\infty}^a f_X(x)dx
     \]
 \end{defn}
 
@@ -351,5 +351,108 @@ Moreover, let $W=1-X$, i.e. $W=1$ on tails and $W=0$ on heads. Then, $X$ and $W$
     \end{enumerate}
 \end{rmk}
 
+\begin{ex}
+Suppose $X$ is a continuous random variable with pdf $f_X(x)=1/2$ for $x \in [-1,1]$.
+\begin{enumerate}
+    \item[(i)] Compute $P(X>0)$ 
+\end{enumerate}
+We know
+\[
+P(X>0)=\int_0^\infty f_X(x)dx = \int_0^1 \frac{1}{2}dx=1/2
+\]
+\begin{enumerate}
+    \item[(ii)] Compute $P(X>1/2 | X>0)$.
+\end{enumerate}
+Using conditional probability, we see that
+\[
+P(X>1/2 | X>0)=\frac{P(X>1/2 \cap X>0)}{P(X>0)}=\frac{1/4}{1/2}=\frac{1}{2}.
+\]
+\begin{enumerate}
+    \item[(iii)] Compute the pdf of $X^2$.
+\end{enumerate}
+Observe that
+\[
+P(X^2\leq a)=P(-\sqrt a \leq X \leq \sqrt a)=\int_{-\sqrt a}^{\sqrt a}f_X(x)dx.
+\]
+When $0 \leq a < 1$, this evaluates to $\sqrt a$. Thus, we see
+\[
+F_{X^2}(a) = \case{0 & a<0 \\ \sqrt a & 0 \leq a < 1 \\ 1 & a \geq 1.}
+\]
+Note that this is the cdf of $X^2$. Differentiating, we get
+\[
+f_{X^2}(a) = \case{0 & a<0 \\ \frac{1}{2 \sqrt a} & 0 \leq a <1 \\ 0 & a \geq 1.}
+\]
+\end{ex}
+
+\begin{defn}
+    We say that a random variable $X$ has a \textbf{uniform distribution} on $[a,b]$, denoted $X \sim u[a,b]$, if \[
+    f_X(x)=\frac{1}{b-a}
+    \]
+    for $x \in a,b$.
+\end{defn}
+
+\begin{ex}
+Suppose $X \sim u[0,1]$. Find the pdf of $Y:=e^X$.
+\end{ex}
+
+\begin{solution}
+    If $a<1$, then $e^X$ doesn't attain $a$ on $[0,1]$, so $F_Y(a)=0$ for $a<1$. Similarly, when $a>e$, we know with certainty that $e^X<a$, so $F_Y(a)=1$. Finally, if $a \in [1,e]$, then
+    \[
+    F_Y(a)=P(Y \leq a)=P(e^X \leq a) = P(X \leq \log  a)=P(0 \leq X \leq \log a) =\log a.
+    \]
+    Thus,
+    \[
+    F_Y(a) = \case{0 & a < 1 \\ \log (a) & 1 \leq a \leq e \\ 1 & a>e,}
+    \]
+    and differentiating yields
+    \[
+    f_Y(a)= \case{0 & a \leq 1 \\ \frac{1}{a} & 1 < a < e \\ 0  & a \geq e.}
+    \]
+\end{solution}
+
+\section{Expected Values}
+
+
+\begin{defn}[Expected Value (Discrete)]
+    Let $X$ be a discrete random variable with support $A$. Then, the \textbf{expected value} of $X$, denoted $E[X]$, is
+        \[
+    E[X] = \sum_{x \in A} xp_X(x)=\sum_{x \in A} xP(X=x)
+    \]
+\end{defn}
+
+
+\begin{defn}[Expected Value (Continuous)]
+    Let $X$ be a continuous random variable. Then, the \textbf{expected value} of $X$, denoted $E[X]$, is
+    \[
+    E[X] = \int_{-\infty}^\infty xf_X(x) dx
+    \]
+\end{defn}
+
+\begin{defn}
+    We say that the expected value $E[X]$ \textbf{exists} if $E[|X|]< \infty$.
+\end{defn}
+
+\begin{ex}
+Suppose $X \sim u[0,1]$. Compute $E[X]$ and $E[e^X]$.
+\end{ex}
+
+\begin{solution}
+    By definition,
+    \[
+    E[X] = \int_{-\infty}^\infty xf_X(x)dx = \int_0^1xdx = \frac{1}{2}.
+    \]
+    For $E[e^X]$, one method involves using the pdf we computed earlier, which gives
+    \[
+    E[e^X]=\int_{-\infty}^\infty yf_{Y}(y)dy = \int_1^e \frac{y}{y}dy=e-1.
+    \]
+    However, we may use the following general result:
+    \[
+    E[g(x)]=\int_{-\infty}^\infty g(x)f_X(x)dx,
+    \]
+    which gives
+    \[
+    E[e^X]=\int_{0}^1 e^{x}dx=e-1.
+    \]
+\end{solution}
 
 \end{document}

@@ -1480,4 +1480,56 @@ sending $(f_{ij})\in Z^1(\mc U,\mc F)$ to $(g_{\alpha\beta})_{\alpha,\beta \in J
     $\tau^*$ depends only on the covering $\mc U$ and $\mc V$, and not the refinement map $\tau$.
 \end{notethm*}
 
+\begin{lem}
+    If $\sigma,\tau : J \to I$ are two refinement maps, so $V_\beta \subset U_{\sigma(\beta)} \cap U_{\tau (\beta)}$ for all $\beta \in J$, then the induced maps
+    \[
+    \sigma^*,\tau^* : H^1(\mc U,\mc F) \to H^1(\mc V, \mc F)
+    \]
+    are equal. Moreover, if $\mc V$ is a refinement of $\mc U$, the (now natural) morphism
+    \[
+    H^1(\mc U,\mc F) \to H^1(\mc V ,\mc F)
+    \]
+    is injective.
+\end{lem}
+
+\begin{proof}
+    Fix $(f_{ij}) \in Z^1(\mc U, \mc F)$. Then, on $V_{\beta _1}\cap V_{\beta_2}$, we have
+    \[
+    f_{\tau(\beta_1)\tau(\beta_2)}-f_{\sigma(\beta_1)\sigma(\beta_2)}= g_{\beta_1}-g_{\beta_2},
+    \]
+    where
+    \[
+    g_{\beta}=f_{\tau(\beta)\sigma(\beta)}|_{V_\beta}.
+    \]
+    Hence, we see that
+    \[
+    \brax{ f_{\tau(\beta _1)\tau(\beta_2)} - f_{\sigma(\beta _1)\sigma(\beta _2)}} \in B^1(\mc V, \mc F).
+    \]
+    This proves $\sigma^* = \tau^*$. Injectivity is left as an exercise.
+\end{proof}
+
+Suppose we have three coverings $\mc U,\mc V, \mc W$, with $\mc W < \mc V < \mc U$, where $<$ means refinement. Write, in general, $\tau_{\mc U,\mc V}$ for the induced map $\tau ^*$. Then,
+\[
+\tau_{\mc V,\mc W} \circ \tau_{\mc U, \mc V} = \tau_{\mc U, \mc W}.
+\]
+We can therefore define an equivalence relation $\sigma$ on the disjoint union $\coprod_{\mc U} H^1(\mc U,\mc F)$ over all open coverings by saying $\alpha \in H^1(\mc U,\mc F)$ is equivalent to $\beta \in H^1(\mc V, \mc F)$ if there exists a further refinement $\mc W < \mc U$ and $\mc W < \mc V$ such that
+\[
+\tau_{\mc U,\mc W}(\alpha)= \tau_{\mc V,\mc W}(\beta).
+\]
+The set of equivalence classes is in fact a group, and is the direct limit of the $H^1(\mc U,\mc F)$. We write this as
+\[
+H^1(X, \mc F):= \varinjlim_{\mc U} H^1(\mc U,\mc F)= \coprod_{\mc U}H^{1}(\mc U, \mc F)/\sim.
+\]
+Then, for any open covering $\mc U$ of $X$, the canonical map $H^1(\mc U,\mc F)\to H^1(X,\mc F)$ is injective. Thus, $H^1(X,\mc F)=0 \iff H^1(\mc U,\mc F)=0$ for all open coverings $\mc U$ of $X$.
+
+There is a useful criterion for when an open cover $\mc U$ of $X$ is sufficient to compute $H^1(X,\mc F)$.
+
+\begin{thm}[Leray's Theorem]
+Let $\mc F$ be a sheaf of abelian groups on $X$, and $\mc U:= \{U_i\}_{i \in I}$ be an open cover of $X$ such that $H^{1}(U_i, \mc F)=0$ for all $i \in I$. Then,
+\[
+H^1(X,\mc F) \cong H^1(\mc U,\mc F).
+\]
+\end{thm}
+
+
 \end{document}
