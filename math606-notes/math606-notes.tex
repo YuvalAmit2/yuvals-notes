@@ -1553,6 +1553,101 @@ H^1(X,\mc F) \cong H^1(\mc U,\mc F).
     We conclude that $\tau^*$ is surjective, proving the theorem.
 \end{proof}
 
+\begin{cor}[Reformulated Mittag-Leffler]
+    For any open set $\Omega \subset \C$, we have
+    \[
+    H^1(\Omega, \mc O) = 0.
+    \]
+\end{cor}
+
+\subsection{Morphisms on Presheaves}
+
+\begin{defn}
+    A \textbf{morphism} of presheaves $\varphi:\mc F \to \mc G$ on $X$ is an assignment, to each open set $U \subset X$, of a map $\varphi_U :\mc F(U)\to \mc G(U)$ such that for any open sets $V \subset U$, the diagram
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1jIEYoVSkiXSxbMiwwLCJcXG1jIEcoVSkiXSxbMCwyLCJcXG1jIEYoVikiXSxbMiwyLCJcXG1jIEcoVikiXSxbMCwxLCJcXHZhcnBoaV9VIl0sWzAsMiwicl97VSxWfSIsMl0sWzEsMywicl97VSxWfSJdLFsyLDMsIlxcdmFycGhpX1YiXV0=
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{\mc F(U)} \&\& {\mc G(U)} \\
+	\\
+	{\mc F(V)} \&\& {\mc G(V)}
+	\arrow["{\varphi_U}", from=1-1, to=1-3]
+	\arrow["{r_{U,V}}"', from=1-1, to=3-1]
+	\arrow["{r_{U,V}}", from=1-3, to=3-3]
+	\arrow["{\varphi_V}", from=3-1, to=3-3]
+\end{tikzcd}\]
+commutes.
+\end{defn}
+
+Any morphism $\varphi$ of sheaves induces a map $\varphi:\mc F_a \to \mc G_a$ of stalks, for all $a \in X$.
+
+\begin{defn}
+    A sequence
+    \[
+    \mc F \arr[\alpha] \mc G \arr[\beta] \mc H
+    \]
+    of sheaves on $X$ is \textbf{exact} if, for all $a \in X$, the induced sequence
+    \[
+    \mc F_a \arr[\alpha]\mc G_a \arr[\beta]\mc H_a
+    \]
+    is exact.
+\end{defn}
+
+\begin{ex}
+Let $X = \C^*$, and for $U \subset X$ open, let $\Z_U$ be the set of locally constant integer valued functions on $U$, let $\mc O(U)$ be the set of holomorphic functions on $U$, and $\mc O^*(U)$ be the set of nowhere zero holomorphic functions on $U$.
+
+We claim that the exponential sequence
+\[
+0 \to \Z \to \mc O \arr[\exp(2 \pi iz)] \mc O^* \to 0
+\]
+is exact.
+\end{ex}
+
+\begin{proof}
+    For any open set $U \subset X$, the sequence
+    \[
+    0 \to \Z(U) \inj \mc O(U) \arr[\exp(2\pi i z)] \mc O^*(U)
+    \]
+    is exact. However, note that $\mc O(U) \to \mc O^*(U)$ need not be surjectitve: for instance, let $U = X = \C^*$, and take $z \in \mc O^*(U)$, but we know that an entire logarithm does not exist.
+
+    However, for all $z \in \C^*$, $\exp:\mc O_z \to \mc O^*_z$ is surjective: indeed, for $z \neq 0$, the germ of functions near $z$ are holomorphic functions in a small connected domain away from the origin, where we can define a complect logarithm.
+\end{proof}
+
+The previous example can be generalized with the following result:
+    \begin{exercise}
+        Use the sheaf axioms to show that for any short exact sequence
+        \[
+        0 \to \mc F \arr[\alpha]\mc G \arr[\beta]\mc H \to 0
+        \]
+        of sheaves on $X$, the induced sequence
+        \[
+        0 \to \mc F(U) \arr[\alpha _U]G(U) \arr[\beta_U]\mc H(U)
+        \]
+        is exact for any $U \subset X$ open.
+    \end{exercise}
+
+\begin{thm}
+Consider a short exact sequence
+\begin{align} \label{eq:shortexactseq}
+    0 \to \mc F \arr[\alpha]\mc G \arr[\beta]\mc H \to 0
+\end{align}
+of sheaves on $X$. Then, the sequence naturally induces a long exact sequence of cohomology groups:
+\[
+0 \to H^0(X,\mc F) \arr[\alpha_X] H^0(X,\mc G)\arr[\beta_X]H^0(X,\mc H) \arr[\delta] H^1(X,\mc F) \arr[\alpha_X^1] H^1(X,\mc G)\arr[\beta_X^1]H^1(X,\mc H).
+\]
+\end{thm}
+
+\begin{proof}
+    Since $H^0(X,\mc F)=\mc F(X)$, and similar for $\mc G,\mc H$, the maps $\alpha_X$ and $\beta_X$ are already defined. To define $\alpha^1_X$, note that $\alpha :\mc F \to \mc G$ induces, for any open cover $\mc U$ of $X$, a map
+    \[
+    \alpha_\mc U : C^1(\mc U, \mc F) \to C^1(\mc U,\mc G)
+    \]
+    which sends cocycles to cocycles, and coboundaries to coboundaries. Hence, we obtain a map
+    \[
+    \alpha_{\mc U}^{1}:H^1(\mc U,\mc F) \to H^1(\mc U,\mc G).
+    \]
+    This in turn induces a map $\alpha^1_X$, and $\beta^1_X$ is defined similarly. 
+
+    Next, we define the connecting homomorphism $\delta : \mc H(X) \to H^1(X, \mc F)$ as follows: let $h \in \mc H(X)$
+\end{proof}
 
 
 
