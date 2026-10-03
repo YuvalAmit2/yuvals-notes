@@ -1,6 +1,6 @@
 # Yuval's Notes
 
-Lecture notes from my courses. Click a title to read the PDF.
+Below are the lecture notes from some courses I've taken over the years. Feel free to reach out if you find a typo (big or small).
 
 ## Fall 2026
 - [MATH730: Algebraic Topology I](math730-notes/math730-notes.pdf)
