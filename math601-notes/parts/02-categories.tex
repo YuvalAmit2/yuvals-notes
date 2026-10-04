@@ -1,0 +1,605 @@
+% !TEX root = ../math601-notes.tex
+
+\section{Categories, Morphisms, and Functors}
+
+\begin{defn}
+    A \textbf{category} $\mc C$ consists of a class $\Ob \mc C$ of \textbf{objects}, and for every pairs $(A,B)$ of objects, a set $\Hom _\mc C(A,B)$ (or $\Hom(A,B)$) whose elements are called \textbf{morphisms} with \textbf{domain} $A$ and \textbf{codomain} $B$ (or `from $A$ to $B$'). Moreover, for each triple $(A,B,C)$ of objects, we are given a map (\textbf{composition law}) $\Hom(A,B) \times \Hom(B,C) \to \Hom(A,C)$ sending $(f,g) \mapsto gf$ such that the following are true:
+    \begin{enumerate}[(i)]
+        \item If $(A,B) \neq (C,D)$, then $\Hom(A,B) \cap \Hom(C,D) = \emptyset$
+        \item If $f \in \Hom(A,B)$ (denoted $f:A \to B$), $g:B \to C$, and $h:C \to D$, then $(hg)f=h(gf)$.
+        \item For every $A \in \Ob \mc C$, there exists an element $1_A \in \Hom(A,A)$ such that $f1_A=f$ for all $f \in \Hom(A,B)$, and $1_Ag = g$ for all $g \in \Hom(B,A)$ [for all $B \in \Ob \mc C$].
+    \end{enumerate}
+    The morphisms in $\mc C$ are called \textbf{arrows}.
+
+    \textbf{Category theory} is the theory of the arrows.
+\end{defn}
+
+\begin{rmk}
+    Property (ii) is equivalent to saying that the diagram
+    % https://q.uiver.app/#q=WzAsNCxbMCwxLCJBIl0sWzEsMCwiQiJdLFszLDAsIkMiXSxbNCwxLCJEIl0sWzAsMSwiZiJdLFsxLDIsImciXSxbMiwzLCJoIl0sWzEsM10sWzAsMl1d
+    \[\begin{tikzcd}[ampersand replacement=\&]
+    	\& B \&\& C \& \\
+    	A \&\&\&\& D
+    	\arrow["g", from=1-2, to=1-4]
+    	\arrow[from=1-2, to=2-5]
+    	\arrow["h", from=1-4, to=2-5]
+    	\arrow["f", from=2-1, to=1-2]
+    	\arrow[from=2-1, to=1-4]
+    \end{tikzcd}\]
+    commutes. Property (iii) is equivalent to saying that the diagram
+    % https://q.uiver.app/#q=WzAsNCxbMSwwLCJCIl0sWzEsMSwiQSJdLFsxLDIsIkInIl0sWzAsMSwiQSJdLFswLDEsImciXSxbMSwyLCJmIl0sWzMsMSwiMV9BIl0sWzAsMywiZyIsMl0sWzMsMiwiZiIsMl1d
+    \[\begin{tikzcd}[ampersand replacement=\&]
+    	\& B \\
+    	A \& A \\
+    	\& {B'}
+    	\arrow["g"', from=1-2, to=2-1]
+    	\arrow["g", from=1-2, to=2-2]
+    	\arrow["{1_A}", from=2-1, to=2-2]
+    	\arrow["f"', from=2-1, to=3-2]
+    	\arrow["f", from=2-2, to=3-2]
+    \end{tikzcd}\]
+    commutes.
+\end{rmk}
+
+\begin{defn}
+    $\mc C$ is a \textbf{subcategory} of $\mc D$ if $\Ob \mc C \subset \Ob \mc D$, and for all $A,B \in \Ob \mc C$, we have $\Hom_\mc C(A,B) \subset \Hom _\mc D(A,B)$.
+\end{defn}
+
+\begin{ex}
+    \begin{enumerate}
+        \item \textbf{Sets}, the category of sets, with the usual notion $\Hom(A,B)=:B^A:=$ all functions $A \to B$.
+        \item The category \textbf{Grp} of groups, with group homomorphisms. It has a subcategory \textbf{Ab} of abelian groups.
+        \item The category \textbf{Ring} of rings and ring homomorphisms.
+        \item The category \textbf{Top} of topological spaces and continuous maps.
+        \item For any ring $R$, we have the category $R$\textbf{-mod} of (left) $R$-modules.
+        \item Given a category $\mc C$, the \textbf{opposite category} is defined by $\mc C^{\op}$ has $\Ob \mc {C}^{\op}  =\Ob \mc C$ and $\Hom_{\mc {C}^{\op}}(A,B):= \Hom_\mc C(B,A) $. So, $\mc C^{\op}$ is $\mc C$ with the arrows reversed.
+        \item Let $G$ be any group. Then, $G$ defines a category \textbf{G} with a single object $\cdot$, so $\Ob G = \{\cdot \}$, and $\Hom (\cdot,\cdot ):=G$, with $1 :=e \in G$ and $fg \in \Hom(\cdot,\cdot)$ the product in $G$.
+        \item We can define \textbf{isomorphisms} in a category in the obvious way. However, there are several ways to define monomorphisms (injective) and epimorphisms (surjective).
+    \end{enumerate}
+\end{ex}
+
+\begin{defn}
+    Let $\mc C$ and $\mc D$ be two categories. A \textbf{(covariant)} \textbf{functor} $\mc F : \mc C \to \mc D$ consists of
+    \begin{enumerate}[(i)]
+        \item A map $\Ob \mc C \to \Ob \mc D$ with $A \mapsto \mc F(A)$
+        \item For every pair $(A,B)$ of objects of $\mc C$, a map $\Hom_{\mc C}(A,B) \to \Hom_\mc D(\mc F(A), \mc F(B))$ with $f \mapsto \mc Ff$ such that $\mc F(gf) = \mc Fg \mc Ff$ and $\mc F1_A = 1_{\mc F(A)}$.
+    \end{enumerate}
+    A \textbf{contravariant functor} $\mc F : \mc C \to \mc D$ is a covariant functor from $\mc C^{\op} \to \mc D$. So, for each $f \in \Hom _{\mc C}(A,B)$, we have $\mc Ff \in \Hom _{\mc D}(\mc F(B), \mc F(A))$ and $\mc F(gf)=\mc Ff \mc Fg$. So, contravariant functors reverse arrows.
+\end{defn}
+
+\begin{ex}
+    \begin{enumerate}
+        \item $\mc F: \Grp \to \Sets$ maps any group $G$ to the underlying set $G$, and $\varphi :G_1 \to G_2$ to the underlying set map. The functor $\mc F$ is called the \textbf{forgetful functor}.
+        \item The abelianization functor $\Grp \to \w{\textbf{Ab}}$ sends $G$ to $G^{\ab}:= G/[G,G]$, where $[G,G]$ is the \textbf{commutator subgroup}. Each group homomorphism $f: G_1 \to G_2$ maps $[G_1,G_1]$ to $[G_2,G_2]$, so induces a map $f^{\ab}: G_1^{\ab} \to G_2^{\ab}$
+        \item The contravariant \textbf{power set functor} $\mc P: \Sets \to \Sets$ sends any set $A$ to its power set $\mc P(A)$. Given any set map $f:A \to B$, we have $\mc Pf: \mc P(B) \to \mc P(A)$ mapping $U \subset B$ to $f^{-1}(U) \subset A$.
+        \item For any $R$-module $M$, we get a covariant functor $\Hom _R(M,-): R\Mod \to \w{\textbf{Ab}}$ sending $N$ to $\Hom _R(M,N)$ and $\varphi :N \to N'$ to $\Hom(M,\varphi : \Hom(M,N) \to \Hom(M,N')$, sending $f \mapsto \varphi \circ f$. We also have a contravariant functor $\Hom_R(-,M) : R\Mod \to \w{\textbf{Ab}}$. These are the \textbf{Hom functors}.
+        \item For any $R$-module $N$, we get a covariant functor $- \otimes _RN : R\Mod \to R\Mod$ defined by $M \mapsto M \otimes _RN$, sending $f:M \to M'$ to $f \otimes 1:M \otimes N \to M' \otimes N$.
+    \end{enumerate}
+\end{ex}
+
+\begin{defn}
+    Let $\mc C$ and $\mc D$ be categories, and $\mc F,\mc G : \mc C \to \mc D$ be covariant functors. A \textbf{natural transformation} from $\mc F$ to $\mc G$ is a map $\eta$ that assigns to each $A \in \Ob \mc C$ a morphism $\eta _A: \mc F(A) \to \mc G(A)$, so that for all $A,B \in \Ob \mc C$, and for all $f \in \Hom _{\mc C}(A,B)$, we have $(\mc Gf)\eta _A = \eta _B(\mc Ff)$. That is, the following diagram commutes:
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCJcXG1hdGhjYWwgRihBKSJdLFsyLDAsIlxcbWF0aGNhbCBHKEEpIl0sWzAsMiwiXFxtYXRoY2FsIEYoQikiXSxbMiwyLCJcXG1hdGhjYWwgRyhCKSJdLFsxLDEsIlxcY2lyY2xlYXJyb3dsZWZ0Il0sWzAsMSwiXFxldGFfQSJdLFswLDIsIlxcbWF0aGNhbCBGIGYiLDJdLFsxLDMsIlxcbWF0aGNhbCBHZiJdLFsyLDMsIlxcZXRhIF9CIiwyXV0=
+    \[\begin{tikzcd}[ampersand replacement=\&]
+    	{\mathcal F(A)} \&\& {\mathcal G(A)} \\
+    	\& \circlearrowleft \\
+    	{\mathcal F(B)} \&\& {\mathcal G(B)}
+    	\arrow["{\eta_A}", from=1-1, to=1-3]
+    	\arrow["{\mathcal F f}"', from=1-1, to=3-1]
+    	\arrow["{\mathcal Gf}", from=1-3, to=3-3]
+    	\arrow["{\eta _B}"', from=3-1, to=3-3]
+    \end{tikzcd}\]
+\end{defn}
+
+\begin{ex}
+    Consider the functor $\GL_n:\text{CommRings} \to \Grp$ defined by $R \mapsto \GL_n(R)$, and $\mc G : \text{CommRings}\to \Grp$ defined by $R \mapsto R^\times$, the group of unit functors.
+
+    The determinant $\det$ is a natural transformation $\GL_n \to \mc G$ since it is defined by the same polynomial for all rings, so that for any ring homomorphisms $f : R \to S$, the following diagram commutes:
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHRleHR7R0x9X24oUikiXSxbMiwwLCJSXlxcdGltZXMiXSxbMiwyLCJTXlxcdGltZXMiXSxbMCwyLCJcXHRleHR7R0x9X24oUykiXSxbMCwxLCJcXGRldCJdLFsxLDIsImYiXSxbMCwzLCJcXHRleHR7R0x9X24oZikiLDJdLFszLDIsIlxcZGV0IiwyXV0=
+    \[\begin{tikzcd}[ampersand replacement=\&]
+    	{\text{GL}_n(R)} \&\& {R^\times} \\
+    	\\
+    	{\text{GL}_n(S)} \&\& {S^\times}
+    	\arrow["\det", from=1-1, to=1-3]
+    	\arrow["{\text{GL}_n(f)}"', from=1-1, to=3-1]
+    	\arrow["f", from=1-3, to=3-3]
+    	\arrow["\det"', from=3-1, to=3-3]
+    \end{tikzcd}\]
+\end{ex}
+
+\begin{defn}
+    If $\mc F, \mc G : \mc C \to \mc D$ are two functors, we say that a natural transformation $\eta : \mc F \to \mc G$ is an \textbf{isomorphism} if each $\eta_A : \mc F(A) \to \mc G(A)$ is an isomorphism, for all $A \in \Ob \mc C$.
+\end{defn}
+
+\begin{ex}
+    Consider the identity functor $1_{R\Mod}$ and the double dual functor $D^2$ on $R$-mod. For each $R$-module $M$, there is a natural map $\eta_M : M \to M^{**}$ sending $x \mapsto [ \hat x (f) := f(x)].$ Then, for any morphisms $f:M \to N$ in $R$-mod, the diagram
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJNIl0sWzAsMiwiTiJdLFsyLDAsIk1eeyoqfSJdLFsyLDIsIk5eeyoqfSJdLFswLDIsIlxcZXRhX00iXSxbMSwzLCJcXGV0YV9OIl0sWzAsMSwiZiIsMl0sWzIsMywiZl57Kip9Il1d
+    \[\begin{tikzcd}[ampersand replacement=\&]
+    	M \&\& {M^{**}} \\
+    	\\
+    	N \&\& {N^{**}}
+    	\arrow["{\eta_M}", from=1-1, to=1-3]
+    	\arrow["f"', from=1-1, to=3-1]
+    	\arrow["{f^{**}}", from=1-3, to=3-3]
+    	\arrow["{\eta_N}", from=3-1, to=3-3]
+    \end{tikzcd}\] commutes. Hence, $\eta : 1_{R\Mod} \to D^2$ is a natural transformation. $\eta$ becomes an isomorphism if we define it on the category of finite dimensional vector spaces over a fixed field.
+\end{ex}
+
+\begin{defn}
+    Two categories $\mc C$ and $\mc D$ are called \textbf{isomorphic} if there are functors $\mc F : \mc C \to \mc D$ and $\mc G: \mc D \to \mc C$ such that $\mc G\mc F=1_\mc C$ and $\mc F \mc G = 1 _\mc D$. This notion is often too strong, so we say that $\mc C$ and $\mc D$ are \textbf{equivalent categories} if there exist functors $\mc F : \mc C \to \mc D$ and $\mc G : \mc D \to \mc C$ such that $\mc G\mc F \cong 1_\mc C$ and $\mc F \mc G \cong 1_\mc D$, where $\cong$ denotes a natural isomorphism of functors. This defines an equivalence relation on categories.
+\end{defn}
+
+\begin{ex}[Known Theorem]
+    The categories $R$-mod and $M_n(R)$-mod are equivalent for all $n \geq 1$.
+\end{ex}
+
+\section{Yoneda's Lemma}
+
+In many categories whose objects are sets with structure, the underlying set $|X|$ of an object $X$ can be described as the set of morphisms from a \textbf{universal object} $\omega$ to $X$.
+
+\begin{ex}
+    For any $G \in \Ob (\Grp)$, we have $|G| = \Hom (\Z, G)$. For any $R \in \w{\textbf{Ring}}$, we have $|R| = \Hom (\Z[x],R)$. In general, such a universal $\omega$ may not exist.
+\end{ex}
+
+\textit{Enter Grothendieck}
+
+\begin{rmk}[Grothendieck's Idea]
+    Consider not one $\omega$, but \textit{all} objects $\omega$.
+
+    We attach to $X \in \Ob \mc C$ the whole set $\bigcup _\omega \Hom(\omega ,X)$. More precisely, we consider the Hom functor $\Hom_\mc C(-,X)$, the ``functor of points of $X$". The idea is that we can recover $X$ from the functor.
+\end{rmk}
+
+For any category $\mc C$, and for any $X \in \mc C$, we have the contravariant \textbf{hom functor} $h_X:\mc C^{\op} \to \Sets$ defined by $Z \mapsto \Hom(Z,X)$. Now, suppose $f:X \to Y$ is a morphism in $\mc C$. Then, for all $Z \in \Ob \mc C$, the composition $h_{f,Z}:h_X(Z) \to h_Y(Z)$ given by $g \mapsto fg$ defines a morphism (i.e. a natural transformation) $h_f:h_X \to h_Y$ of functors. We obtain a covariant functor $h:\mc C \to \hat{\mc C}:= \w{\textbf{Funct}}(\mc C^{\op}, \Sets)$. We claim $h$ is an embedding.
+
+Let $\mc F : \mc C^{\op} \to \Sets$ be a functor and $X \in \Ob \mc C$. Let $\alpha : h_X \to \mc F$ be a morphism of functors. Then, for all objects $Y$, we are given a map $\alpha _Y : h_X(Y) \to \mc F(Y)$. We can consider $\alpha_X(1_X) \in \mc F(X)$.
+
+\begin{lem}[Yoneda's Lemma]
+    The map $\Hom_{\hat{\mc C}}(h_X,\mc F) \to \mc F(X)$ sending $\alpha \mapsto \alpha_X(1_X)$ is a bijection, and functorial in $X$.
+\end{lem}
+
+\begin{proof}
+    For any $\omega \in \mc F(X)$, we define a map $(\alpha_\omega)_Y:h_X(Y) \to \mc F(Y)$ given by $f \mapsto F(f)(\omega)$, where $h_X(Y) = \Hom(Y,X)$. The rest is left as an exercise.
+\end{proof}
+
+We apply Yoneda's lemma to the special case when $\mc F=h_Y$ for an object $Y$ of $\mc C$. We therefore see that the functor $X \mapsto h_X$ induces a bijection $\Hom_{\mc C}(X,Y) \overset{\sim}{\to}\Hom_{\hat {\mc C}}(h_x,h_Y)$. This means that $X \mapsto h_X$ is a \textbf{fully faithful} functor $\mc C \to \hat {\mc C}$, so the category $\mc C$ embeds into a category of functors from $\mc C^{\op} \to \Sets$
+
+\section{The Category R-mod}
+
+In $R$-mod, the Hom sets have a natural abelian group structure, and the product of morphisms (i.e. composition) of morphisms in $R$-mod is distributive. That is,
+\begin{align*}
+    h(f+g) = hf+hg
+    \\ (f+g)h=fh+gh.
+\end{align*}
+When considering functors between categories of modules, we focus on the additive ones, i.e. such that $f \mapsto \mc Ff$ from $\Hom(M,N)$ to $\Hom(\mc FM, \mc FN)$ is a map of abelian of groups.
+
+In $R$-mod, we have notions of kernels, cokernels, short exact sequences, etc.
+
+\begin{defn}
+    A functor $\mc F: R$-mod $\to R'$-mod is called \textbf{exact} if it maps short exact sequences of modules to short exact sequence. $\mc F$ is called \textbf{left exact} whenever
+    $$0 \to M' \overset{f}{\to} M \overset{g}{\to}M''$$
+    being exact implies
+    $$0 \to \mc F(M') \overset{\mc Ff}{\to}\mc F(M) \overset{\mc Fg}{\to} \mc F(M'')$$
+    is exact. We similarly define \textbf{right exact} functors.
+
+    Analogous definition apply to contravariant functors: a \textbf{left exact contravariant functor} $\mc C \to \mc D$ is a left exact functor $\mc C^{\op} \to \mc D$.
+\end{defn}
+
+\begin{thm}
+    The hom functor $\Hom(M,-):R$-mod $\to \Z$-mod is left exact.
+\end{thm}
+
+\begin{proof}
+    We will show that if
+    $$0 \to N' \overset{f}{\to} N \overset{g}{\to} N''$$
+    is exact, then
+    $$0 \to \Hom(M,N') \overset{\alpha}{\to} \Hom(M,N) \overset{\beta}{\to} \Hom(M,N'')$$
+    is exact, where $\alpha(\varphi) = f\varphi$ and $\beta ( \psi ) = g\psi$.
+
+    We first claim that $\ker \beta = \Img \alpha$.
+\begin{proof}
+    Suppose $\psi \in \ker \beta$. Then,
+    $$g\psi =0 \iff \forall m \in M,g\psi (m)=0 \iff \psi (m) \in \ker g  =\Img f,$$
+    i.e. there exists a unique (by injectivity) $n' \in N'$ such that $\psi (m) = f(n')$. We thus obtain a well-defined map $\varphi :M \to N'$ sending $m$ to $n'$. One checks from the definition that $f \varphi = \psi$, and $\varphi \in \Hom(M,N')$. This proves that $\ker \beta \subset \Img \alpha$. For the reverse inclusion, if $\varphi \in \Hom(M,N')$, then
+    $$gf=0 \implies gf \varphi =0 \implies \forall m \in M, gf\varphi(m) \implies \beta \alpha = 0,$$
+    hence $\Img \alpha \subset \ker \beta$.
+\end{proof}
+
+    The rest of the proof is left as an exercise.
+\end{proof}
+
+\begin{notebox*}[Exercise]
+    Show that the contravariant functor $\Hom(-,M)$ is left exact.
+\end{notebox*}
+
+\section{Projective Modules}
+
+While free modules are nice, it's impossible to neatly describe them from a categorical perspective within the category of modules. Projective modules generalize free modules to fix this.
+
+\begin{defn}
+    A module $P$ is \textbf{projective} if given any surjective map $\pi :M \twoheadrightarrow N$, and any map $f : P \to N$, there exists a $\tilde f:P \to M$ such that $\pi \tilde f = f$. That is, the diagram
+    % https://q.uiver.app/#q=WzAsNCxbMiwyLCJOIl0sWzAsMiwiTSJdLFs0LDIsIjAiXSxbMiwwLCJQIl0sWzMsMCwiZiJdLFsxLDAsIlxccGkiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMCwyLCIwIiwyXSxbMywxLCJcXGV4aXN0cyBcXHRpbGRlIGYiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+    \[\begin{tikzcd}[ampersand replacement=\&]
+    	\&\& P \&\& \\
+    	\\
+    	M \&\& N \&\& 0
+    	\arrow["{\exists \tilde f}"', dashed, from=1-3, to=3-1]
+    	\arrow["f", from=1-3, to=3-3]
+    	\arrow["\pi"', two heads, from=3-1, to=3-3]
+    	\arrow[""', from=3-3, to=3-5]
+    \end{tikzcd}\]
+    commutes.
+\end{defn}
+
+\begin{ex}[Free modules are projective.]
+    Let $F$ be any free module, i.e. $F= \bigoplus_{i \in I}Re_i$. Then, $f:F \to N$ is defined by $f(e_i)$ for all $i \in I$. By surjectivity, there exists $m_i \in M$ such that $\pi (m_i) = f(e_i)$. So, we define $\tilde f:F \to M$ by $\tilde f(e_i) = m_i$ for all $i \in I$.
+\end{ex}
+
+The definition of projective modules directly implies:
+
+\begin{prop}
+    A module $P$ is projective $\iff$ $\Hom(P,-)$ is an exact functor.
+\end{prop}
+
+\begin{notebox*}[Question]
+    How close are projective modules to being free?
+\end{notebox*}
+
+\begin{defn}
+    A short exact sequence $0 \to M' \overset{f}{\to} M \overset{g}{\to} M'' \to 0$ \textbf{splits} if there exists $\veps : M'' \to M$ such that $g\veps =1_{M''}$.
+
+    Equivalently, the sequence splits if there exists an $\eta :M \to M'$ such that $\eta f = 1_{M'}$.
+
+    We then have a canonical isomorphism $M \cong M' \oplus M''$ sending $m \mapsto (f\eta(m),\veps g (m))$
+\end{defn}
+
+The details of these claims are left as an exercise.
+
+\begin{thm}
+    The following are equivalent:
+    \begin{enumerate}[(a)]
+        \item  $P$ is projective.
+        \item Any short exact sequence $0 \to M \to N \to P \to 0$ splits.
+        \item There exists a free module $F$ such that $F \cong P \oplus P'$, for some $P'$.
+    \end{enumerate}
+    Since (a) and (c) are equivalent, it follows that $P'$ is also projective.
+\end{thm}
+
+\begin{proof}
+    \hfill
+
+    (a) $\implies$ (b): Given $0 \to M \to N \overset{g}{\to} P \to 0$ exact, we may consider the identity map $1_P:P \to P$. Then, since $P$ is projective, there exists $\veps : P \to N$ such that $g\veps = 1_P$.
+
+    (b) $\implies$ (c): Since any module is a homomorphic image of a free module $F$, there is an exact sequence $0\to \ker g \to F \overset{g}{\twoheadrightarrow} P \to 0$. By (b), this sequence splits, so $F \cong P \oplus \ker g$.
+
+    (c) $\implies$ (a): We are given a split exact sequence $0 \to P' \to F \to P \to 0$, with $F$ free. Consider the diagram:
+    % https://q.uiver.app/#q=WzAsNCxbMiwwLCJQIl0sWzIsMiwiTiJdLFswLDIsIk0iXSxbNCwyLCIwIl0sWzAsMSwiZiJdLFsyLDEsIlxcYWxwaGEiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMSwzXV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+	\&\& P \&\& \\
+	\\
+	M \&\& N \&\& 0
+	\arrow["f", from=1-3, to=3-3]
+	\arrow["\alpha"', two heads, from=3-1, to=3-3]
+	\arrow[from=3-3, to=3-5]
+\end{tikzcd}\]
+Then, combining the diagrams, we get
+% https://q.uiver.app/#q=WzAsOCxbNiwwLCJQIl0sWzYsMiwiTiJdLFs0LDIsIk0iXSxbOCwyLCIwIl0sWzQsMCwiRiJdLFsyLDAsIlAnIl0sWzAsMCwiMCJdLFs4LDAsIjAiXSxbMCwxLCJmIl0sWzIsMSwiXFxhbHBoYSIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFsxLDNdLFs0LDAsIlxccGkiXSxbNSw0LCJpIl0sWzYsNV0sWzAsN10sWzQsMSwiZlxccGkiXSxbNCwyLCJnIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}[ampersand replacement=\&]
+	0 \&\& {P'} \&\& F \&\& P \&\& 0 \\
+	\\
+	\&\&\&\& M \&\& N \&\& 0
+	\arrow[from=1-1, to=1-3]
+	\arrow["i", from=1-3, to=1-5]
+	\arrow["\pi", from=1-5, to=1-7]
+	\arrow["g"', dashed, from=1-5, to=3-5]
+	\arrow["{f\pi}", from=1-5, to=3-7]
+	\arrow[from=1-7, to=1-9]
+	\arrow["f", from=1-7, to=3-7]
+	\arrow["\alpha"', two heads, from=3-5, to=3-7]
+	\arrow[from=3-7, to=3-9]
+\end{tikzcd}\]
+Since $F$ is free, hence projective, we get $g:F \to M$ such that $f\pi = \alpha g$. Moreover, we have a splitting map $\veps:P \to F$ such that $\pi \veps = 1_P$. Then,
+\begin{align*}
+    f=f1_P=f\pi \veps=\alpha g \veps,
+\end{align*}
+so $g\veps :P \to M$ satisfies the definition of projective.
+% https://q.uiver.app/#q=WzAsOCxbNiwwLCJQIl0sWzYsMiwiTiJdLFs0LDIsIk0iXSxbOCwyLCIwIl0sWzQsMCwiRiJdLFsyLDAsIlAnIl0sWzAsMCwiMCJdLFs4LDAsIjAiXSxbMCwxLCJmIl0sWzIsMSwiXFxhbHBoYSIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFsxLDNdLFs0LDAsIlxccGkiLDIseyJvZmZzZXQiOjF9XSxbNSw0LCJpIl0sWzYsNV0sWzAsN10sWzQsMSwiZlxccGkiLDEseyJsYWJlbF9wb3NpdGlvbiI6NzB9XSxbNCwyLCJnIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzAsNCwiXFx2YXJlcHNpbG9uIiwyLHsib2Zmc2V0IjoxfV0sWzAsMiwiZ1xcdmFyZXBzaWxvbiIsMSx7ImxhYmVsX3Bvc2l0aW9uIjo3MH1dXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	0 \&\& {P'} \&\& F \&\& P \&\& 0 \\
+	\\
+	\&\&\&\& M \&\& N \&\& 0
+	\arrow[from=1-1, to=1-3]
+	\arrow["i", from=1-3, to=1-5]
+	\arrow["\pi"', shift right, from=1-5, to=1-7]
+	\arrow["g"', dashed, from=1-5, to=3-5]
+	\arrow["{f\pi}"{description, pos=0.7}, from=1-5, to=3-7]
+	\arrow["\varepsilon"', shift right, from=1-7, to=1-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow["{g\varepsilon}"{description, pos=0.7}, from=1-7, to=3-5]
+	\arrow["f", from=1-7, to=3-7]
+	\arrow["\alpha"', two heads, from=3-5, to=3-7]
+	\arrow[from=3-7, to=3-9]
+\end{tikzcd}\]
+\end{proof}
+
+\begin{ex}
+    Let $R = \Z/6\Z$ and $M = \Z/6\Z$, so clearly $M$ is a free $R$-module of rank $1$. Moreover, $M \cong \Z/2\Z \oplus \Z/3\Z$, so $\Z/2\Z$ and $\Z/3\Z$ are projective $R$-modules, but not free.
+\end{ex}
+
+\section{Significance of Projective Modules}
+
+\begin{defn}
+    Let $F$ be $\R$ or $\C$, and $X$ be a compact Hausdorff space. Let $C(X)$ be the ring of continuous $F$-valued functions on $X$. An \textbf{$F$-vector bundle} over $X$ consists of a topological space $E$, and a continuous surjective map $\pi :E \to X$ which is \textbf{locally trivial} in the sense that for any $x \in X$, there exists a neigborhood $U$ of $x$ and a homeomorphism $\varphi :\pi^{-1}(U) \to U \times F^n$ for some fixed $n \geq0$ such that the diagram
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHBpXnstMX0oVSkiXSxbMiwwLCJVIFxcdGltZXMgRl5uIl0sWzAsMiwiVSJdLFsyLDIsIlUiXSxbMCwyXSxbMiwzLCIxX1UiXSxbMSwzLCJwcl8xIiwyXSxbMCwxLCJcXHZhcnBoaSIsMl1d
+    \[\begin{tikzcd}[ampersand replacement=\&]
+    	{\pi^{-1}(U)} \&\& {U \times F^n} \\
+    	\\
+    	U \&\& U
+    	\arrow["\varphi"', from=1-1, to=1-3]
+    	\arrow[from=1-1, to=3-1]
+    	\arrow["{pr_1}"', from=1-3, to=3-3]
+    	\arrow["{1_U}", from=3-1, to=3-3]
+    \end{tikzcd}\]
+    commutes. A \textbf{continuous section} of $E$ is a continuous map $s:X \to E$ such that $\pi \circ s = 1_X$. The space $\Gamma(X,E)$ of all continuous sections of $E$ is a $C(X)$-module in an obvious way: for $f\in C(X)$ and $s \in \Gamma(X,E)$, we have $(fs)(x):=f(x)s(x)$.
+\end{defn}
+
+\begin{thm}[Swan's Theorem]
+    The module $\Gamma(X,E)$ is finitely generated and projective over $C(X)$.
+
+    Conversely, every finitely generated projective $C(X)$-module arises in this way.
+\end{thm}
+
+\begin{rmk}
+    The projectivity of $\Gamma(X,E)$ is equivalent to the existence of a vector bundle $E'$ on $X$ such that $E \oplus E'\cong X\times F^n$, the trivial vector bundle for some $n$.
+\end{rmk}
+
+The category $\w{\textbf{Vect}}_X$ of (finite rank) vector bundles on $X$ admits direct sums $E \oplus E'$. We obtain a semigroup $\mc V$ of isomorphism classes of vector bundles in $\w{\textbf{Vect}}_X$. The abelian group associated to $\mc V$ is definition the \textbf{topological $K$-theory} of $X$, denoted $K^0(X)$.
+
+Similarly, for any commutative ring $R$, the semigroup $\mc S$ of isomorphism classes of finitely generated projective $R$-modules (with the operation of direct sums) has an associated abelian group $K_0(R)$.
+
+\begin{defn}
+    $K_0(R)$ is defined as equivalence classes of pairs $(M,N)$ with $M,N \in \mc S$, where $(M,N) \sim (M',N') \iff$ there exists $p \in \mc S$ with $M \oplus N' \oplus P \cong M' \oplus N \oplus P$. Addition is given by
+    $$[(M,N)] + [(M',N')] := [(M+M',N+N')]$$
+\end{defn}
+
+\begin{rmk}
+    If $R$ is a PID, then any finitely generated projective $R$-module is isomorphic to $R^n$ for some $n$, and the rank of modules induces an isomorphism $K_0(R) \cong \Z$.
+
+    If $R$ is a Dedekind domain (e.g. $R= \mf O_K$), then $K_0(R) \cong \Z \oplus C(R)$, where $C(R)$ is the class group of $R$.
+\end{rmk}
+
+\section{Injective Modules}
+
+\begin{defn}[Injective Modules]
+    A module $Q$ is \textbf{injective} if, for modules $N,M$ and injective $i:N \hookrightarrow M$, and any $f:N\to Q$, there exists $g:M \to Q$ such that $f = g \circ i$. That is, the diagram commutes:
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCIwIl0sWzIsMCwiTiJdLFs0LDAsIk0iXSxbMiwyLCJRIl0sWzEsMywiZiIsMl0sWzEsMiwiaSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsMywiZyIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDFdXQ==
+    \[\begin{tikzcd}[ampersand replacement=\&]
+    	0 \&\& N \&\& M \\
+    	\\
+    	\&\& Q
+    	\arrow[from=1-1, to=1-3]
+    	\arrow["i", hook, from=1-3, to=1-5]
+    	\arrow["f"', from=1-3, to=3-3]
+    	\arrow["g", dashed, from=1-5, to=3-3]
+    \end{tikzcd}\]
+\end{defn}
+
+\begin{prop}
+    The following are equivalent:
+    \begin{enumerate}
+        \item $Q$ is injective
+        \item If $N$ is a submodule of $M$, then any homomorphism $N \to Q$ can be extended to a homomorphism $M \to Q$
+        \item The contravariant functor $\Hom(*,Q)$ is exact. This just requires that for any exact sequence $0 \to N' \overset{i}{\to}N$, the sequence $\Hom(N,Q) \overset{\Hom(i,Q)}{\to}\Hom(N',Q) \to 0$ is also exact.
+        \item Any short exact sequence $0 \to Q \to M \to N \to 0$ splits.
+    \end{enumerate}
+\end{prop}
+
+Our goal is to prove 1$\iff$4. We begin by focusing on $\Z$-module.
+
+\begin{defn}
+    An abelian group $T$ is \textbf{divisible} if for any integer $m \neq 0$, the map $x \mapsto mx$ is surjective onto $T$.
+\end{defn}
+
+\begin{prop}
+    If $T$ is a divisible abelian group, then $T$ is injective as a $\Z$-module.
+\end{prop}
+
+\begin{proof}
+    Suppose $M' \subset M$ is a subgroup of the abelian group $M$, and $f:M' \to T$ is a group homomorphism. Pick $x \in M$, and we'll extend $f$ to the submodule $\angles{M',x}$.
+
+    If $x$ is free over $M'$ (i.e. $mx \not \in M'$ for all $m \in \Z\setminus\{0\}$), then we can select any $t \in T$, and extend $f$ to $\angles{M',x}$ by setting $f(x) :=t$. Suppose now that $dx\in M'$ for some minimal $d \in \Z^+$. Since $T$ is divisible, there exists $u \in T$ such that $du = f(dx)$. Hence, for any $m' \in M'$ and $k\in \Z$, define
+    \begin{align} \label{eq:f(m'+kx)}
+        f(m'+kx)=f(m') + ku.
+    \end{align}
+    Note that \eqref{eq:f(m'+kx)} is well defined: $m_1'+kx = m_2'+lx$ implies
+    $$(k-l)x=m_2'-m_1' \in M' \implies k-l = dr$$
+    for some $r$, hence
+    $$f(m'_2) - f(m'_1) = f(drx)=rdu=ku-lu$$
+
+    Consider the set $S$ of pairs $(N,g)$ where $N$ is a submodule with $M' \subset N \subset M$, and $g$ is an extension of $f$ to $N$. We say that $(N,g) \leq (N',g')$ if $N \subset N'$ and $g'|_N=g$. The hypotheses of Zorn's lemma hold for $(S,\leq)$, so let $(N,g)$ be a maximal element of $S$. Then, if $N \neq M$, there exists $x \in M,N$, and we can apply the first part to extend $g$ to $\angles{N,x}$, contradicting the maximality of $(N,g)$.
+\end{proof}
+
+\begin{cor}
+    Any $\Z$-module can be embedded in an injective $\Z$-module.
+\end{cor}
+
+\begin{proof}
+    If $F \cong \bigoplus_{i\in I}\Z e_i$ is any free abelian group, then $F':= \bigoplus_{i \in I}\Q e_i$ is divisible and $F \hookrightarrow F'$. More generally, if $M$ is any abelian group, then $M \cong F/K$ for some free $\Z$-module $F$. Then, $F'/K$ is divisible, hence injective, and $F/K \cong M$ is a subgroup of $F'/K$.
+\end{proof}
+
+Now, what about beyond $\Z$-modules?
+
+Let $A$ be a commutative ring, and $T$ be any abelian group. Then, $\Hom_\Z(A,T)$ becomes an $A$-module: for any $f \in \Hom_\Z(A,T)$, and $a \in A$, set $(af)(x) := f(ax)$.
+
+\begin{prop}
+    For any $A$-module $M$, there is a natural isomorphism of abelian groups
+    $$\Hom_\Z(M,T) \cong \Hom_A(M,\Hom_\Z(A,T))$$
+\end{prop}
+
+\begin{proof}
+    Suppose $\psi: M \to T$ is a $\Z$-homomorphism. We map $\psi$ to $f:M \to \Hom_\Z(A,T)$ with $f(m)(a):= \psi (am)$. Observe that $m \mapsto f(m)$ is an $A$-module homomorphism, giving a map
+    $$\Hom_\Z (M,T) \to \Hom_A(M,\Hom_\Z(A,T)).$$
+    Conversely, given an $A$-homomorphism $f : M \to \Hom_\Z(A,T)$, let $\psi:M \to T$ be given by $\psi(m):= f(m)(1)$. One checks that this $\psi$ is the inverse of the above map.
+\end{proof}
+
+\begin{lem}
+    If $T$ is a divisible abelian group, then $\Hom_\Z(A,T)$ is injective in the category of $A$-modules.
+\end{lem}
+
+\begin{proof}
+    Suppose $0 \to N \to M$ is exact in $A$-mod. Then, $\Hom_\Z(M,T) \to \Hom_\Z(N,T) \to 0$ is exact since $T$ is an injective $\Z$-module. Now, we have a commutative diagram
+    % https://q.uiver.app/#q=WzAsNyxbMCwwLCJcXEhvbV9cXFooTSxUKSJdLFsyLDAsIlxcSG9tX1xcWihOLFQpIl0sWzQsMCwiMCJdLFswLDIsIlxcSG9tX0EoTSxcXEhvbV9cXFooQSxUKSkiXSxbMiwyLCJcXEhvbV9BKE4sXFxIb21fXFxaKEEsVCkpIl0sWzQsMiwiMCJdLFsxLDEsIlxcY2lyY2xlYXJyb3dsZWZ0Il0sWzAsMV0sWzEsMl0sWzQsNV0sWzMsNF0sWzAsMywiXFxjb25nIiwxXSxbMSw0LCJcXGNvbmciLDFdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{\Hom_\Z(M,T)} \&\& {\Hom_\Z(N,T)} \&\& 0 \\
+	\& \circlearrowleft \\
+	{\Hom_A(M,\Hom_\Z(A,T))} \&\& {\Hom_A(N,\Hom_\Z(A,T))} \&\& 0
+	\arrow[from=1-1, to=1-3]
+	\arrow["\cong"{description}, from=1-1, to=3-1]
+	\arrow[from=1-3, to=1-5]
+	\arrow["\cong"{description}, from=1-3, to=3-3]
+	\arrow[from=3-1, to=3-3]
+	\arrow[from=3-3, to=3-5]
+\end{tikzcd}\]
+Thus, the bottom row is exact, proving the lemma.
+\end{proof}
+
+\begin{thm}
+    Every $A$-module embeds in an injective $A$-module.
+\end{thm}
+
+\begin{proof}
+    Let $M$ be any $A$-module. Embed $(M,+)$ into a divisible abelian group $T$. We then get an $A$-module homomorphism $\varphi:M \to \Hom_\Z(A,T)$, with $m \mapsto f_m$, where $f_m(a) := am$ for all $a \in A$. Since $f_m(1)=m$, $\varphi$ embeds $M$ into $\Hom_\Z(A,T)$, which is injective.
+\end{proof}
+
+We're now equipped to prove the earlier $1 \iff 4$ equivalence.
+
+\begin{prop}
+    A module $Q$ is injective if and only if every short exact sequence $0 \to Q \to M \to N \to 0$ splits (if and only if $Q$ is a direct summand of every module which contains it).
+\end{prop}
+
+\begin{proof}
+    Suppose $Q$ is injective, and $0 \to Q \overset{i}{\to} M \to N \to 0$ is exact. Then, with $1_Q : Q \to Q$, we induce a map $\eta :  M \to Q$ such that $\eta \circ i=1$, hence the sequence splits.
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCIwIl0sWzIsMCwiUSJdLFs0LDAsIk0iXSxbMiwyLCJRIl0sWzEsMiwiaSJdLFsyLDMsIlxcZXRhIl0sWzEsMywiMV9RIiwyXSxbMCwxXV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+	0 \&\& Q \&\& M \\
+	\\
+	\&\& Q
+	\arrow[from=1-1, to=1-3]
+	\arrow["i", from=1-3, to=1-5]
+	\arrow["{1_Q}"', from=1-3, to=3-3]
+	\arrow["\eta", from=1-5, to=3-3]
+\end{tikzcd}\]
+
+    Conversely, suppose $Q$ has the splitting property. By the previous theorem, we have an exact sequence $0 \to Q \overset{i}{\hookrightarrow} M$ where $M$ is injective. We can extend this to a short exact sequence
+    $$0 \to Q \overset{i}{\to} M \overset{\pi}{\to} M/Q \to 0,$$
+    and by our assumption there exists a map $\eta:M \to Q$ such that $\eta \circ i = 1_Q$. Now, suppose that we have a diagram:
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCIwIl0sWzIsMCwiTiciXSxbNCwwLCJOIl0sWzIsMiwiUSJdLFsxLDIsImoiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsxLDMsImYiLDJdLFswLDFdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	0 \&\& {N'} \&\& N \\
+	\\
+	\&\& Q
+	\arrow[from=1-1, to=1-3]
+	\arrow["j", hook, from=1-3, to=1-5]
+	\arrow["f"', from=1-3, to=3-3]
+\end{tikzcd}\]
+Since $M$ is injective, we can enlarge this to a commutative diagram
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCIwIl0sWzIsMCwiTiciXSxbNCwwLCJOIl0sWzIsMiwiUSJdLFsyLDQsIk0iXSxbMSwyLCJqIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwzLCJmIiwyXSxbMCwxXSxbMyw0LCJpIiwyLHsib2Zmc2V0IjoxfV0sWzQsMywiXFxldGEiLDIseyJvZmZzZXQiOjF9XSxbMiw0LCJnIl1d
+\[\begin{tikzcd}[ampersand replacement=\&]
+	0 \&\& {N'} \&\& N \\
+	\\
+	\&\& Q \\
+	\\
+	\&\& M
+	\arrow[from=1-1, to=1-3]
+	\arrow["j", hook, from=1-3, to=1-5]
+	\arrow["f"', from=1-3, to=3-3]
+	\arrow["g", from=1-5, to=5-3]
+	\arrow["i"', shift right, from=3-3, to=5-3]
+	\arrow["\eta"', shift right, from=5-3, to=3-3]
+\end{tikzcd}\]
+where there exists $g :N\to M$ such that $g\circ j=i\circ f$. Hence, we have $\eta \circ g : N \to Q$, and $f = (\eta \circ g) \circ j$
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCIwIl0sWzIsMCwiTiciXSxbNCwwLCJOIl0sWzIsMiwiUSJdLFsyLDQsIk0iXSxbMSwyLCJqIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwzLCJmIiwyXSxbMCwxXSxbMyw0LCJpIiwyLHsib2Zmc2V0IjoxfV0sWzQsMywiXFxldGEiLDIseyJvZmZzZXQiOjF9XSxbMiw0LCJnIl0sWzIsMywiXFxldGEgXFxjaXJjIGciLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+	0 \&\& {N'} \&\& N \\
+	\\
+	\&\& Q \\
+	\\
+	\&\& M
+	\arrow[from=1-1, to=1-3]
+	\arrow["j", hook, from=1-3, to=1-5]
+	\arrow["f"', from=1-3, to=3-3]
+	\arrow["{\eta \circ g}"', dashed, from=1-5, to=3-3]
+	\arrow["g", from=1-5, to=5-3]
+	\arrow["i"', shift right, from=3-3, to=5-3]
+	\arrow["\eta"', shift right, from=5-3, to=3-3]
+\end{tikzcd}\]
+\end{proof}
+
+\section{Flat Modules}
+
+\begin{defn}
+    Let $R$ be a commutative ring, and $M$ an $R$-module. We define a functor
+    $$M \otimes _R *:R\Mod \to R\Mod$$
+    sending any $R$-module $N$ to $M \otimes _RN$, and any morphism $f:N' \to N$ to
+    $$1 \otimes f : M \otimes_R N' \to M \otimes _RN.$$
+\end{defn}
+
+\begin{thm}
+    The functor $M \otimes _R*$ is right exact. That is, given any exact sequence of $R$-modules
+    $$N' \overset{f}{\to} N \overset{g}{\to} N'' \to 0,$$
+    the sequence
+    $$M \otimes N' \overset{1 \otimes f}{\to} M \otimes N \overset{1 \otimes g}{\to} M \otimes N'' \to 0$$
+    is exact.
+\end{thm}
+
+\begin{proof}
+Surjective of $1 \otimes g$ follows from surjectivity of $g$. We check that $\ker (1 \otimes g)  = \Img(1 \otimes f)$. Since $gf = 0$, we have
+\begin{align*}
+    (1 \otimes g) = \paren{\sum_i m_i \otimes f(n'_i)}= \sum_i m_i \otimes gf(n_i')=0
+\end{align*}
+hence $\Img ( 1 \otimes f) \subset \ker (1 \otimes g)$. In particular, we have a map
+$$\pi :(M\otimes _RN)/\Img(1 \otimes f) \to (M\otimes _RN)/\ker (1 \otimes g) \cong M \otimes N''.$$
+We claim that $\pi$ is an isomorphism. Indeed, define $\pi': M \times N'' \to (M \otimes N)/ \Img (1 \otimes f)$ with $(m,n'') \mapsto [m \otimes n]$ for any $n$ such that $g(n) = n''$. If $n_1,n_2$ are such that $g(n_1) = g(n_2)=n''$, then $n_1-n_2 \in \ker g=\Img f$,  so $n_1-n_2 = f(n')$, thus $m \otimes n_1 = m\otimes n_2$ modulo $\Img (1 \otimes f)$. Hence, $\pi'$ is well defined. Now, $\pi'$ is $R$-bilinear, inducing a map
+$$\pi': M \otimes _R N' \to (M \otimes _RN) / \Img (1 \otimes f).$$
+It follows that $\pi$ and $\pi'$ are inverses.
+\end{proof}
+
+\begin{ex}
+    The functor $M\otimes _R *$ is not always left exact: For example, the injection $i:\Z \hookrightarrow \Q$ of $\Z$-modules induces the zero map from $\Z/2\Z \otimes _\Z \Z \to \Z/2\Z \otimes_\Z \Q$
+\end{ex}
+
+We always know that the tensor functor $M \otimes_R *$ is right exact. When it's also left exact, we say $M$ is flat.
+
+\begin{defn}
+    We say that an $R$-module $M$ is \textbf{flat} if the functor $M \otimes _R *$ is exact. Concretely, $M$ is flat if for any injection $N' \overset{i}{\hookrightarrow} N$ of $R$-modules, the map $1 \otimes i : M\otimes_R N' \to M \otimes N$ is injective.
+\end{defn}
+
+\begin{lem}
+    $M:= \bigoplus_{i \in I}M_i$ is flat $\iff M_i$ is flat.
+\end{lem}
+
+\begin{proof}
+    Suppose $f:N' \hookrightarrow N$ is an injection of $R$-modules. We must show that
+    $$1_M \otimes f : M \otimes N' \to M \otimes N$$
+    is injective if and only if
+    $$1_{M_i}\otimes f :M_i \otimes N' \to M_i \otimes N$$
+    is injective. We have the commutative diagram
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCJNIFxcb3RpbWVzIE4nIl0sWzIsMCwiXFxiaWdvcGx1cyBfaSAoTV9pIFxcb3RpbWVzIE4nKSJdLFswLDIsIk0gXFxvdGltZXMgTiJdLFsyLDIsIlxcYmlnb3BsdXMgX2kgKE1faSBcXG90aW1lcyBOKSJdLFsxLDEsIlxcY2lyY2xlYXJyb3dsZWZ0Il0sWzAsMiwiMSBcXG90aW1lcyBmIiwyXSxbMCwxLCJcXHNpbSJdLFsyLDMsIlxcc2ltIl0sWzEsMywiXFxiaWdvcGx1cyBfaSgxIFxcb3RpbWVzIGYpIl1d
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{M \otimes N'} \&\& {\bigoplus _i (M_i \otimes N')} \\
+	\& \circlearrowleft \\
+	{M \otimes N} \&\& {\bigoplus _i (M_i \otimes N)}
+	\arrow["\sim", from=1-1, to=1-3]
+	\arrow["{1 \otimes f}"', from=1-1, to=3-1]
+	\arrow["{\bigoplus _i(1 \otimes f)}", from=1-3, to=3-3]
+	\arrow["\sim", from=3-1, to=3-3]
+\end{tikzcd}\]
+so the result is clear.
+\end{proof}
+
+\begin{cor}
+    Projective modules are flat.
+\end{cor}
+
+\begin{proof}
+    It's easy to see that $R$ is a flat $R$-module: $R \otimes _RN \cong N$ for any $R$-module $N$. So, an injection $N' \hookrightarrow N$ induces an injection $R \otimes _RN' \hookrightarrow R \otimes _RN$. The lemma we just proved implies that any free $R$-module $F$ is flat. Since projective modules are direct summands of free modules, another application of the lemma shows that they are flat.
+\end{proof}

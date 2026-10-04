@@ -1,0 +1,592 @@
+% !TEX root = ../math601-notes.tex
+
+\section{Cochain Complexes and Cohomology}
+
+\begin{defn}
+    Let $R$ be a commutative ring. A \textbf{cochain complex} $C^{\bullet}$ for $R$ is a sequence
+    $$0 \to C^0 \overset{d_1}{\to} C^1 \overset{d_2}{\to} C^2 \to \cdots \to C^{n-1}\overset{d_n}{\to} C^n \to \cdots $$
+    of $R$-modules and $R$-linear maps such that $d_{i+1}\circ d_i=0$, for all $i \geq 1$.
+
+    If $(C^\bullet, d)$ and $(\tilde{C}^\bullet, \tilde d)$ are two cochain complexes, a \textbf{homomorphism} $\alpha:C ^\bullet \to \tilde C^\bullet$ is a sequence of homomorphisms $\alpha_i : C^i \to \tilde C^i$ such that for every $n$, the diagram
+    % https://q.uiver.app/#q=WzAsOSxbMiwwLCJDXm4iXSxbNCwwLCJDXntuKzF9Il0sWzIsMiwiXFx0aWxkZSBDXm4iXSxbNCwyLCJcXHRpbGRlIENee24rMX0iXSxbMCwwLCJcXGNkb3RzIl0sWzAsMiwiXFxjZG90cyJdLFs2LDAsIlxcY2RvdHMiXSxbNiwyLCJcXGNkb3RzIl0sWzMsMSwiXFxjaXJjbGVhcnJvd2xlZnQiXSxbMCwyLCJcXGFscGhhX24iLDJdLFsxLDMsIlxcYWxwaGFfe24rMX0iLDJdLFsyLDNdLFswLDFdLFszLDddLFsxLDZdLFs0LDBdLFs1LDJdXQ==
+    \[\begin{tikzcd}[ampersand replacement=\&]
+    	\cdots \&\& {C^n} \&\& {C^{n+1}} \&\& \cdots \\
+    	\&\&\& \circlearrowleft \\
+    	\cdots \&\& {\tilde C^n} \&\& {\tilde C^{n+1}} \&\& \cdots
+    	\arrow[from=1-1, to=1-3]
+    	\arrow[from=1-3, to=1-5]
+    	\arrow["{\alpha_n}"', from=1-3, to=3-3]
+    	\arrow[from=1-5, to=1-7]
+    	\arrow["{\alpha_{n+1}}"', from=1-5, to=3-5]
+    	\arrow[from=3-1, to=3-3]
+    	\arrow[from=3-3, to=3-5]
+    	\arrow[from=3-5, to=3-7]
+    \end{tikzcd}\]
+    commutes.
+
+    We let $R\w{-\textbf{comp}}$ denote the category of cochain complexes for $R$.
+\end{defn}
+
+\begin{defn}
+    If $(C^\bullet, d)$ is a cochain complex, its $n$th \textbf{cohomology} group is the quotient group
+    $$H^n(C^\bullet) := \ker d_{n+1}/ \Img {d_n}.$$
+    We use the notation $Z^n := \ker d_{n+1}$ ($n$-\textbf{cocycles}) and $B^n:= \Img d_n$ ($n$-\textbf{coboundaries}), so
+    $$H_n := Z^n/B^n$$
+\end{defn}
+
+\begin{notebox*}[Check]
+    If $\alpha : C^\bullet \to \tilde C^\bullet$ is a morphism of cochain complexes, then $\alpha$ maps cocycles to cocycles and coboundaries to coboundaries. Hence, for each $n$, $\alpha$ induces a map on cohomology groups
+    $$\tilde \alpha_n :H^n(C^\bullet) \to H^n(\tilde C^\bullet)$$
+    sending $z+B^n$ to $\alpha_n(z) + \tilde B^n$. This gives an \textbf{$n$-th cohomology functor}
+    $$H^n:R\w{-\textbf{comp}} \to R\Mod$$
+\end{notebox*}
+
+\begin{rmk}
+    \begin{enumerate}
+        \item There is a dual notion of \textbf{chain complexes} $C_\bullet$, which has the arrows reversed:
+        $$\cdots \overset{d_{n+1}}{\to} C_n \overset{d_{n}}{\to} C_{n-1} \to \cdots \overset{d_{1}}{\to} C_0 \to 0$$
+        where $d_i \circ d_{i-1}=0$ for all $i \geq 2$. Then, the \textbf{homology groups} of $C_0$ are
+        $$H_n (C_\bullet):= Z_n/B_n := \ker d_n/\Img d_{n+1}$$
+        \item Observe that $H^n$ (resp. $H_n$) measures the failure of exactness of $C^\bullet$ (resp $C_\bullet)$ at position $n$.
+    \end{enumerate}
+\end{rmk}
+
+\begin{thm}[The Long Exact Cohomology Sequence]
+    Let
+    $$0 \to \mc A \overset{\alpha}{\to} \mc B \overset{\beta}{\to} \mc C \to 0$$
+    be a short exact sequence of cochain complexes. That is, the sequences
+    $$0 \to A^n \overset{\alpha_n}{\to} B^n \overset{\beta_n}{\to} C^n \to 0$$
+    are exact for all $n \geq 1$. Then, there is an induced long exact sequence of cohomology groups
+    $$0 \to  H^0( \mc A) \overset{}{\to} H^0(\mc B) \overset{}{\to} H^0(\mc C) \overset{\delta_0}{\to} H^1( \mc A) \overset{}{\to} H^1(\mc B) \overset{}{\to} H^1(\mc C) \overset{\delta_1}{\to} \cdots. $$
+    The maps $\delta_n$ are called \textbf{connecting homomorphisms}.
+\end{thm}
+
+\begin{proof}
+    We give the definition of $\delta_n : H^n(\mc C) \to H^{n+1}(\mc A)$.
+% https://q.uiver.app/#q=WzAsMTgsWzIsMiwiQV5uIl0sWzQsMiwiQl5uIl0sWzYsMiwiQ15uIl0sWzIsNCwiQV57bisxfSJdLFs0LDQsIkJee24rMX0iXSxbNiw0LCJDXntuKzF9Il0sWzIsNiwiQV57bisyfSJdLFs0LDYsIkJee24rMn0iXSxbNiw2LCJDXntuKzJ9Il0sWzQsMCwiQl57bi0xfSJdLFs2LDAsIkNee24tMX0iXSxbOCwwLCIwIl0sWzgsMiwiMCJdLFs4LDQsIjAiXSxbOCw2LCIwIl0sWzAsNiwiMCJdLFswLDQsIjAiXSxbMCwyLCIwIl0sWzAsMSwiXFxhbHBoYV9uIl0sWzEsMiwiXFxiZXRhX24iXSxbMCwzLCJkX3tuKzF9IiwyXSxbMSw0LCJkX3tuKzF9IiwyXSxbMiw1LCJkX3tuKzF9IiwyXSxbMyw2LCJkX3tuKzJ9IiwyXSxbNCw3LCJkX3tuKzJ9IiwyXSxbNSw4LCJkX3tuKzJ9IiwyXSxbMyw0LCJcXGFscGhhX3tuKzF9Il0sWzQsNSwiXFxiZXRhX3tuXysxfSJdLFs2LDcsIlxcYWxwaGFfe24rMn0iXSxbNyw4LCJcXGJldGFfe24rMn0iXSxbMTcsMF0sWzE2LDNdLFsxNSw2XSxbOCwxNF0sWzUsMTNdLFsyLDEyXSxbOSwxXSxbMTAsMl0sWzksMTAsIlxcYmV0YV97bi0xfSJdLFsxMCwxMV1d
+\[\begin{tikzcd}[ampersand replacement=\&,sep=scriptsize]
+	\&\&\&\& {B^{n-1}} \&\& {C^{n-1}} \&\& 0 \\
+	\\
+	0 \&\& {A^n} \&\& {B^n} \&\& {C^n} \&\& 0 \\
+	\\
+	0 \&\& {A^{n+1}} \&\& {B^{n+1}} \&\& {C^{n+1}} \&\& 0 \\
+	\\
+	0 \&\& {A^{n+2}} \&\& {B^{n+2}} \&\& {C^{n+2}} \&\& 0
+	\arrow["{\beta_{n-1}}", from=1-5, to=1-7]
+	\arrow[from=1-5, to=3-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow[from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow["{\alpha_n}", from=3-3, to=3-5]
+	\arrow["{d_{n+1}}"', from=3-3, to=5-3]
+	\arrow["{\beta_n}", from=3-5, to=3-7]
+	\arrow["{d_{n+1}}"', from=3-5, to=5-5]
+	\arrow[from=3-7, to=3-9]
+	\arrow["{d_{n+1}}"', from=3-7, to=5-7]
+	\arrow[from=5-1, to=5-3]
+	\arrow["{\alpha_{n+1}}", from=5-3, to=5-5]
+	\arrow["{d_{n+2}}"', from=5-3, to=7-3]
+	\arrow["{\beta_{n_+1}}", from=5-5, to=5-7]
+	\arrow["{d_{n+2}}"', from=5-5, to=7-5]
+	\arrow[from=5-7, to=5-9]
+	\arrow["{d_{n+2}}"', from=5-7, to=7-7]
+	\arrow[from=7-1, to=7-3]
+	\arrow["{\alpha_{n+2}}", from=7-3, to=7-5]
+	\arrow["{\beta_{n+2}}", from=7-5, to=7-7]
+	\arrow[from=7-7, to=7-9]
+\end{tikzcd}\]
+Pick $x \in H^n(\mc C)$ and let $c \in C^n$ represent the class of $x$ in $H^n(\mc C)$. Then, there exists $b \in B^n$ such that $\beta_n(b) = c$. Now,
+$$\beta_{n+1}d_{n+1}(b) = d_{n+1}\beta_n(b) = d_{n+1}(c) = 0$$
+since $c \in Z^n(\mc C)$. Since $\ker \beta_{n+1} = \Img  \alpha_{n+1}$, and $\alpha_{n+1}$ is injective, there exists a unique $a \in A^{n+1}$ such that $\alpha_{n+1}(a) = d_{n+1}(b)$. Note that,
+$$\alpha_{n+2}d_{n+2}(a)=d_{n+2}\alpha_{n+1}(a) = d_{n+2}d_{n+1}(b)=0$$
+hence $\alpha_{n+2}$ being injective implies that $d_{n+2}(a)=0$. So, $a$ is a cocycle, and so represents a class $[a] \in H^{n+1}(\mc A)$. Define
+\begin{align*}
+    \delta_n(x) := [a].
+\end{align*}
+
+To show that $\delta_n$ is well defined, we must show that $[a]$ is independent of the choices of $c$ and $b$. Then, we'll have that $\delta_n$ is a homomorphism $H^n(\mc C) \to H^{n+1}(\mc A)$.
+
+Independence of $c$: If $c = d_nc'$ for some $c' \in C^{n-1}$, there exists some $b' \in B^{n-1}$ such that $\beta_{n-1}(b')=c'$ by surjectivity. Then,
+\begin{align*}
+    \beta_n(d_nb')=d_n\beta_{n-1}b'=d_nc'=c,
+\end{align*}
+so we can take $b:= d_nb'$, and this leads to $a=0$.
+
+Independence of $b$: Exercise.
+
+The check of exactness of the long exact sequence is also routine. For example, we'll show that $\ker \tilde \alpha = \Img \delta_n$, where $\tilde \alpha : H^{n+1}(\mc A) \to H^{n+1}(\mc B)$. Indeed, for $[a] \in \Img \delta _n$, we have $\alpha_{n+1}(a) = d_{n+1}(b)$, so it is clear that $\Img \delta _n \subset \ker \tilde \alpha$, because $d_{n+1}(b)$ is zero in $H^{n+1}(\mc A)$. Conversely, if $a \in A^{n+1}$ is such that $\alpha_{n+1}(a) = d_{n+1}(b)$ (i.e. $a \in \ker \tilde \alpha$), then clearly $a = \delta_n(x)$, where $x$ denotes the class of $c:= \beta_{n+1}(b)$.
+\end{proof}
+
+\section{Homotopy}
+
+\begin{defn}
+    Let $f,g$ be homomorphisms of cochain complexes $(\mc A, d)$ into $(\mc B,d')$. Then, $f$ is said to be \textbf{homotopic} to $g$ if there exists module homomorphisms $\{s_n\}_{n \geq 1}$ with $s_n :A^n \to B^{n-1}$ for all $n \geq 1$ such that
+    $$f_n - g_n = d_n's_n + s_{n+1}d_{n+1}$$
+    for all $n \geq 1$.
+    % https://q.uiver.app/#q=WzAsMTAsWzIsMCwiQV57bi0xfSJdLFs0LDAsIkFebiJdLFs2LDAsIkFee24rMX0iXSxbMiwyLCJCXntuLTF9Il0sWzQsMiwiQl5uIl0sWzYsMiwiQl57bisxfSJdLFswLDAsIlxcY2RvdHMiXSxbMCwyLCJcXGNkb3RzIl0sWzgsMCwiXFxjZG90cyJdLFs4LDIsIlxcY2RvdHMiXSxbMCwzLCIiLDAseyJvZmZzZXQiOjF9XSxbMCwzLCIiLDIseyJvZmZzZXQiOi0xfV0sWzEsNCwiIiwyLHsib2Zmc2V0IjoxfV0sWzEsNCwiIiwwLHsib2Zmc2V0IjotMX1dLFsyLDUsIiIsMCx7Im9mZnNldCI6MX1dLFsyLDUsIiIsMix7Im9mZnNldCI6LTF9XSxbMCwxLCJkX3tufSIsMV0sWzEsMiwiZF97bisxfSIsMV0sWzEsMywic19uIiwxXSxbMiw0LCJzX3tuKzF9IiwxXSxbMyw0LCJkX24nIiwxXSxbNCw1LCJkX3tuKzF9JyIsMV0sWzcsM10sWzYsMF0sWzIsOF0sWzUsOV1d
+    \[\begin{tikzcd}[ampersand replacement=\&]
+    	\cdots \&\& {A^{n-1}} \&\& {A^n} \&\& {A^{n+1}} \&\& \cdots \\
+    	\\
+    	\cdots \&\& {B^{n-1}} \&\& {B^n} \&\& {B^{n+1}} \&\& \cdots
+    	\arrow[from=1-1, to=1-3]
+    	\arrow["{d_{n}}"{description}, from=1-3, to=1-5]
+    	\arrow[shift right, from=1-3, to=3-3]
+    	\arrow[shift left, from=1-3, to=3-3]
+    	\arrow["{d_{n+1}}"{description}, from=1-5, to=1-7]
+    	\arrow["{s_n}"{description}, from=1-5, to=3-3]
+    	\arrow[shift right, from=1-5, to=3-5]
+    	\arrow[shift left, from=1-5, to=3-5]
+    	\arrow[from=1-7, to=1-9]
+    	\arrow["{s_{n+1}}"{description}, from=1-7, to=3-5]
+    	\arrow[shift right, from=1-7, to=3-7]
+    	\arrow[shift left, from=1-7, to=3-7]
+    	\arrow[from=3-1, to=3-3]
+    	\arrow["{d_n'}"{description}, from=3-3, to=3-5]
+    	\arrow["{d_{n+1}'}"{description}, from=3-5, to=3-7]
+    	\arrow[from=3-7, to=3-9]
+    \end{tikzcd}\]
+    We write $f \sim g$.
+\end{defn}
+
+\begin{notebox*}[Check]
+    This is an equivalence relation on cochain complexes $\mc A \to \mc B$.
+\end{notebox*}
+
+\begin{prop}
+    If $f \sim g$, then $\tilde f_n = \tilde g_n$, where $\tilde f_n$ and $\tilde g_n$ are the corresponding maps of cohomomology modules $H^n(\mc A) \to H^n(\mc B)$.
+\end{prop}
+
+\begin{proof}
+    If $z_n \in Z^n(\mc A)$, then we have
+
+    \begin{align*}
+        \tilde f_n(z_n ) &= \braks{f_n(z_n)}=\braks{(g_n+d_n's_n+s_{n+1}d_{n+1})(z_n)} \overset{d_{n+1}z_n=0}{=} \braks{g_n(z_n)+d_n' s_n(z_n)}
+        \\ &= [g_n(z_n)] = \tilde g_n(z_n)
+    \end{align*}
+\end{proof}
+
+\section{The Ext Groups}
+
+\begin{defn}
+    Let $M$ be an $R$-module. A \textbf{projective resolution} of $M$ is an exact sequence
+    $$\cdots \to P_n \arr[d_n] P_{n-1} \to \cdots \arr[d_1] P_0 \arr[\veps]M \to 0$$
+    such that each $P_n$ is a projective $R$-module.
+\end{defn}
+
+\begin{rmk}
+    Every $M \in R\Mod$ admits a projective resolution by \textit{free} modules $P_n$.
+\end{rmk}
+
+\begin{proof}
+    Let $P_0$ be a free module surjecting onto $M$ via $\veps:P_0 \to M$. Let $P_1$ be any free module surjecting onto $\ker \veps$ by a map $d_1:P_1 \to P_0$, and continue in this way.
+\end{proof}
+
+\begin{ex}
+    Any projective module $P$ has a projective resolution
+    $$\cdots \to0\to  0 \to P \arr[\id] P \to 0.$$
+\end{ex}
+
+Given any $R$-module $N$, we can apply the contravariant functor $\Hom(*,N)$ to a projective resolution of $M$ to obtain a (not necessarily exact) sequence
+\begin{align} \label{eq:homres}
+    0 \to \Hom_R(M,N) \arr[\veps] \Hom_R(P_0,N) \arr[d_1] \Hom_R(P_1,N) \arr[d_2]\cdots
+\end{align}
+(we're denoting $\Hom_R(d_n,N)$ again by $d_n$ for simplicity).
+
+\begin{defn}
+    We define the \textbf{Ext groups} $\Ext_R^\bullet (M,N)$ by
+    \begin{align*}
+        &\Ext^0_R(M,N) := \ker d_1
+        \\ &\Ext _R^n(M,N) := \ker d_{n+1}/\Img d_n \:\:\:\: \forall n\geq 1.
+    \end{align*}
+    The module $\Ext _R^n(M,N)$ is the \textbf{$n$-th cohomology group derived from the functor} $\Hom_R(*,N)$. Ext stands for extension.
+\end{defn}
+
+\begin{rmk}
+    The groups $\Ext_R^n(M,N)$ are the cohomology groups of the cochain complex
+    $$0 \to \Hom_R(P_0,N) \to \Hom_R(P_1,N) \to \cdots$$
+    (where we replace $\Hom_R(M,N)$ in \eqref{eq:homres} with zero).
+\end{rmk}
+
+\begin{prop}
+    $\Ext^0_R(M,N) = \Hom_R(M,N)$.
+\end{prop}
+
+\begin{proof}
+    Since $P_1 \arr[d_1]P_0 \arr[\veps] M \to 0$ is exact, we deduce that
+    $$0 \to \Hom(M,N) \arr[\veps] \Hom(P_0,N) \arr[d_1]\Hom (P,N)$$
+    is exact. Then,
+    \begin{align*}
+        \Ext_R^0(M,N):= \ker d_1 = \Img \veps \cong \Hom(M,N)
+    \end{align*}
+\end{proof}
+
+\begin{ex}
+    Suppose $a \in R$ is a not a zero divisor, and take $M:= R/aR$. Then,
+    \begin{align*}
+        \Ext_R^0(R/aR,N) = \Hom(R/aR,N) = N[a]:= \{x \in N \mid ax=0\}.
+    \end{align*}
+    We call this is \textbf{$a$-torsion submodule of $N$}.
+
+    We have a projective resolution
+    $$0 \to R \arr[a]R \to R/aR \to 0$$
+    inducing the exact sequence
+    \begin{align*}
+        & \:0 \to \Hom_R(R/aR,N) \to \Hom(R,N) \arr[a]\Hom(R,N) \to \Hom(0,N)
+        \\ \cong & \: 0 \to \Hom_R(R/aR,N) \to N \to N \to 0.
+    \end{align*}
+    We deduce that
+    $$\Ext _R^n(R/aR,N) = \case{ N[a] & n=0 \\ N/aN & n=1 \\ 0 & n \geq 2 }$$
+\end{ex}
+
+Our goal is to prove that $\Ext$ is well defined independent of choice of projective resolution.
+
+\begin{prop}
+    Let $f:M \to M'$ be any $R$-linear map, and take projective resolutions $M$ and $M'$. Then, for each $n \geq 0$, there is a lift $f_n$ of $f$ such that the following diagram commutes:
+    % https://q.uiver.app/#q=WzAsMTAsWzIsMCwiUF8xIl0sWzQsMCwiUF8wIl0sWzYsMCwiTSJdLFs4LDAsIjAiXSxbNiwyLCJNJyJdLFs0LDIsIlBfMCciXSxbMiwyLCJQXzEnIl0sWzAsMCwiXFxjZG90cyJdLFswLDIsIlxcY2RvdHMiXSxbOCwyLCIwIl0sWzAsNiwiZl8xIl0sWzEsNSwiZl8wIl0sWzIsNCwiZiJdLFs3LDAsImRfMiJdLFswLDEsImRfMSJdLFsxLDIsIlxcdmVwcyJdLFsyLDNdLFs1LDQsIlxcdmVwcyciLDFdLFs2LDUsImRfMSciXSxbOCw2LCJkXzInIl0sWzQsOV1d
+    \[\begin{tikzcd}[ampersand replacement=\&]
+    	\cdots \&\& {P_1} \&\& {P_0} \&\& M \&\& 0 \\
+    	\\
+    	\cdots \&\& {P_1'} \&\& {P_0'} \&\& {M'} \&\& 0
+    	\arrow["{d_2}", from=1-1, to=1-3]
+    	\arrow["{d_1}", from=1-3, to=1-5]
+    	\arrow["{f_1}", from=1-3, to=3-3]
+    	\arrow["\veps", from=1-5, to=1-7]
+    	\arrow["{f_0}", from=1-5, to=3-5]
+    	\arrow[from=1-7, to=1-9]
+    	\arrow["{f}", from=1-7, to=3-7]
+    	\arrow["{d_2'}", from=3-1, to=3-3]
+    	\arrow["{d_1'}", from=3-3, to=3-5]
+    	\arrow["\veps", from=3-5, to=3-7]
+    	\arrow[from=3-7, to=3-9]
+    \end{tikzcd}\]
+\end{prop}
+
+\begin{proof}
+    Since $P_0$ is projective, there exists $f_0 : P_0 \to P_0'$ such that $f\veps = \veps' f_0$. Now, observe that $\veps' f_0d_1 = f\veps d_1=0$, hence $f_0d_1(P_1) \subset \ker \veps' = \Img d_1'$.
+    % https://q.uiver.app/#q=WzAsNSxbMCwwLCJQXzEiXSxbMiwwLCJQXzAiXSxbMiwyLCJkXzEnKFBfMScpIl0sWzAsMiwiUF8xJyJdLFs0LDIsIjAiXSxbMywyLCJkXzEnIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzAsMSwiZF8xIl0sWzEsMiwiZl8wIiwxXSxbMiw0XSxbMCwyLCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{P_1} \&\& {P_0} \&\& \\
+	\\
+	{P_1'} \&\& {d_1'(P_1')} \&\& 0
+	\arrow["{d_1}", from=1-1, to=1-3]
+	\arrow[dashed, from=1-1, to=3-3]
+	\arrow["{f_0}"{description}, from=1-3, to=3-3]
+	\arrow["{d_1'}", two heads, from=3-1, to=3-3]
+	\arrow[from=3-3, to=3-5]
+\end{tikzcd}\]
+So, as $P_1$ is projective, there exists $f_1:P_1 \to P_1'$ such that $d_1'f_1 = d_1f_0$. This process continues in general for $f_n...$
+\end{proof}
+
+If we apply $\Hom_R(*,N)$ to the previous diagram, we get
+% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiMCJdLFsyLDAsIlxcSG9tKE0nLE4pIl0sWzQsMCwiXFxIb20oUF8wJyxOKSJdLFs2LDAsIlxcSG9tKFBfMScsTikiXSxbOCwwLCJcXGNkb3RzIl0sWzIsMiwiXFxIb20oTSxOKSJdLFs0LDIsIlxcSG9tKFBfMCxOKSJdLFs2LDIsIlxcSG9tKFBfMSxOKSJdLFswLDIsIjAiXSxbOCwyLCJcXGNkb3RzIl0sWzAsMV0sWzEsNSwiZiJdLFsyLDYsImZfMCJdLFszLDcsImZfMSJdLFszLDRdLFs3LDldLFs2LDddLFsyLDNdLFsxLDJdLFs1LDZdLFs4LDVdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&,column sep=small,row sep=scriptsize]
+	0 \&\& {\Hom(M',N)} \&\& {\Hom(P_0',N)} \&\& {\Hom(P_1',N)} \&\& \cdots \\
+	\\
+	0 \&\& {\Hom(M,N)} \&\& {\Hom(P_0,N)} \&\& {\Hom(P_1,N)} \&\& \cdots
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=1-5]
+	\arrow["f", from=1-3, to=3-3]
+	\arrow[from=1-5, to=1-7]
+	\arrow["{f_0}", from=1-5, to=3-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow["{f_1}", from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow[from=3-3, to=3-5]
+	\arrow[from=3-5, to=3-7]
+	\arrow[from=3-7, to=3-9]
+\end{tikzcd}\]
+We then get induced maps on cohomology groups.
+\begin{thm}
+    For every $n$, the induced maps $\varphi_n:\Ext_R^n(M',N) \to \Ext_R^n(M,N)$ depend only on $f$, and not on the choice of lifts $f_n$.
+\end{thm}
+
+\begin{proof}
+    We may assume that $f=0$, and show that the induced maps on cohomology are also zero. Using the projectivity of the modules $P_n$, we recursively construct a homotopy as follows: There exists maps $s_n :P_n \to P_{n+1}'$ such that for all $n$, we have $f_n = d_{n+1}' s_n + s_{n-1}d_n$. That is, we're trying to make the following diagram:
+    % https://q.uiver.app/#q=WzAsMTIsWzIsMCwiUF8yIl0sWzQsMCwiUF8xIl0sWzYsMCwiUF8wIl0sWzgsMCwiTSJdLFsxMCwwLCIwIl0sWzIsMiwiUF8yJyJdLFs0LDIsIlBfMSciXSxbNiwyLCJQXzAnIl0sWzgsMiwiTSciXSxbMTAsMiwiMCJdLFswLDAsIlxcY2RvdHMiXSxbMCwyLCJcXGNkb3RzIl0sWzMsOCwiZj0wIl0sWzIsNywiZl8wIl0sWzEsNiwiZl8xIl0sWzAsNSwiZl8yIl0sWzEwLDBdLFsxMSw1XSxbMCwxLCJkXzIiXSxbMSwyLCJkXzEiXSxbMiwzLCJcXHZlcHMiXSxbNSw2LCJkXzInIl0sWzYsNywiZF8xJyJdLFs3LDgsIlxcdmVwcyciXSxbMyw0XSxbOCw5XSxbMiw2LCJzXzAiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMSw1LCJzXzEiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwxMSwic18yIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV1d
+\[\begin{tikzcd}[ampersand replacement=\&,column sep=scriptsize,row sep=scriptsize]
+	\cdots \&\& {P_2} \&\& {P_1} \&\& {P_0} \&\& M \&\& 0 \\
+	\\
+	\cdots \&\& {P_2'} \&\& {P_1'} \&\& {P_0'} \&\& {M'} \&\& 0
+	\arrow[from=1-1, to=1-3]
+	\arrow["{d_2}", from=1-3, to=1-5]
+	\arrow["{s_2}"{description}, dashed, from=1-3, to=3-1]
+	\arrow["{f_2}", from=1-3, to=3-3]
+	\arrow["{d_1}", from=1-5, to=1-7]
+	\arrow["{s_1}"{description}, dashed, from=1-5, to=3-3]
+	\arrow["{f_1}", from=1-5, to=3-5]
+	\arrow["\veps", from=1-7, to=1-9]
+	\arrow["{s_0}"{description}, dashed, from=1-7, to=3-5]
+	\arrow["{f_0}", from=1-7, to=3-7]
+	\arrow[from=1-9, to=1-11]
+	\arrow["{f=0}", from=1-9, to=3-9]
+	\arrow[from=3-1, to=3-3]
+	\arrow["{d_2'}", from=3-3, to=3-5]
+	\arrow["{d_1'}", from=3-5, to=3-7]
+	\arrow["{\veps'}", from=3-7, to=3-9]
+	\arrow[from=3-9, to=3-11]
+\end{tikzcd}\]
+Since $d_1':P_1' \to \ker \veps'$ is surjective and $f=0$ implies $f_0 P_0 \subset \ker \veps'$, we have a map $s_0: P_0 \to P_1'$ such that $d_1's_0 = f_0$.
+
+Next, to obtain $s_1:P_1 \to P_2'$ such that $f_1 = d_2's_1 + s_0d_1$, consider $f-s_0d_1$ and note that
+\begin{align*}
+    d_1'(f_1-s_0d_1) = f_0d_1 - (d_1's_0) d_1=0.
+\end{align*}
+As before, we can construct $s_1 : P_ 1 \to P_2'$, and so on.
+
+The above maps give a \textbf{chain homotopy} between the given resolution and $0$. Taking homomorphisms into $N$ gives a \textbf{cochain homotopy}, and the discussion from last time finishes the proof.
+\end{proof}
+
+\begin{thm}
+    The groups $\Ext_R^n(M,N)$ depend only on $M$ and $N$, i.e. are independent of the choice of projective resolution $P_\bullet$ of $M$.
+\end{thm}
+
+\begin{proof}
+    Consider $1_M :M \to M$, set $M':=M$, and take two projective resolutions
+    % https://q.uiver.app/#q=WzAsMTAsWzIsMCwiUF8xIl0sWzQsMCwiUF8wIl0sWzYsMCwiTSJdLFs4LDAsIjAiXSxbNiwyLCJNJyJdLFs4LDIsIjAiXSxbNCwyLCJQXzAnIl0sWzIsMiwiUF8xJyJdLFswLDAsIlxcY2RvdHMiXSxbMCwyLCJcXGNkb3RzIl0sWzAsNywiZl8xIl0sWzEsNiwiZl8wIl0sWzgsMF0sWzAsMV0sWzEsMl0sWzIsM10sWzQsNV0sWzYsNF0sWzcsNl0sWzksN10sWzIsNCwiIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\[\begin{tikzcd}[ampersand replacement=\&,sep=scriptsize]
+	\cdots \&\& {P_1} \&\& {P_0} \&\& M \&\& 0 \\
+	\\
+	\cdots \&\& {P_1'} \&\& {P_0'} \&\& {M'} \&\& 0
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=1-5]
+	\arrow["{f_1}", from=1-3, to=3-3]
+	\arrow[from=1-5, to=1-7]
+	\arrow["{f_0}", from=1-5, to=3-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow[no head, from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow[from=3-3, to=3-5]
+	\arrow[from=3-5, to=3-7]
+	\arrow[from=3-7, to=3-9]
+\end{tikzcd}\]
+where the $f_i$'s are the choice of lifts of $1_M$. Then, we can copy the top row to the bottom and provide lifts $g_n$ for that:
+% https://q.uiver.app/#q=WzAsMTUsWzIsMCwiUF8xIl0sWzQsMCwiUF8wIl0sWzYsMCwiTSJdLFs4LDAsIjAiXSxbNiwyLCJNJyJdLFs4LDIsIjAiXSxbNCwyLCJQXzAnIl0sWzIsMiwiUF8xJyJdLFswLDAsIlxcY2RvdHMiXSxbMCwyLCJcXGNkb3RzIl0sWzIsNCwiUF8xIl0sWzQsNCwiUF8wIl0sWzYsNCwiTSJdLFs4LDQsIjAiXSxbMCw0LCJcXGNkb3RzIl0sWzAsNywiZl8xIl0sWzEsNiwiZl8wIl0sWzgsMF0sWzAsMV0sWzEsMl0sWzIsM10sWzQsNV0sWzYsNF0sWzcsNl0sWzksN10sWzIsNCwiMV9NIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiYXJyb3doZWFkIn19fV0sWzQsMTIsIjFfTSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6ImFycm93aGVhZCJ9fX1dLFsxMSwxMl0sWzEwLDExXSxbMTIsMTNdLFsxNCwxMF0sWzcsMTAsImdfMSJdLFs2LDExLCJnXzAiXV0=
+\[\begin{tikzcd}[ampersand replacement=\&,sep=scriptsize]
+	\cdots \&\& {P_1} \&\& {P_0} \&\& M \&\& 0 \\
+	\\
+	\cdots \&\& {P_1'} \&\& {P_0'} \&\& {M'} \&\& 0 \\
+	\\
+	\cdots \&\& {P_1} \&\& {P_0} \&\& M \&\& 0
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=1-5]
+	\arrow["{f_1}", from=1-3, to=3-3]
+	\arrow[from=1-5, to=1-7]
+	\arrow["{f_0}", from=1-5, to=3-5]
+	\arrow[from=1-7, to=1-9]
+	\arrow["{1_M}", tail reversed, from=1-7, to=3-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow[from=3-3, to=3-5]
+	\arrow["{g_1}", from=3-3, to=5-3]
+	\arrow[from=3-5, to=3-7]
+	\arrow["{g_0}", from=3-5, to=5-5]
+	\arrow[from=3-7, to=3-9]
+	\arrow["{1_M}", tail reversed, from=3-7, to=5-7]
+	\arrow[from=5-1, to=5-3]
+	\arrow[from=5-3, to=5-5]
+	\arrow[from=5-5, to=5-7]
+	\arrow[from=5-7, to=5-9]
+\end{tikzcd}\]
+The top two rows induce maps $\varphi_n$ on $\Ext_R^n$, and similarly the bottom two rows induce $\psi _n$. Now, the composites $\{ g_n \circ f_n\} _{n \geq0 }$ are a lift of the identity map as well, and (by the previous theory) induce the same map on cohomology as the identity map on the top complex. Therefore, $\varphi _n \circ \psi _n$ is the identity map on $\Ext_R^n(M,N)$. By a symmetric argument, $\psi _n \circ \varphi_n$ is the identity map on $\Ext_R^n(M',N)$. Thus, both maps are isomorphisms.
+
+We deduce that $\Ext_R^n(*,N)$ is a contravariant functor from $R\Mod \to R\Mod$.
+\end{proof}
+The next result shows that $\Ext^1_R$ is the first measure of the failure of right exactness of the Hom functor $\Hom_R(*,N)$.
+
+\begin{thm}
+    Let $0 \to M' \to M \to M'' \to 0$ be a short exact sequence of $R$-modules. Then, there is an induced long exact sequence
+    \begin{align*}
+        0 \to \Hom_R(M'',N) \to \Hom_R(M,N) \to \Hom_R(M',N) &\arr[\delta_0] \Ext^1_R(M'',N)
+        \\ \to \Ext_R^1(M,N) \to \Ext_R^1(M',N) &\arr[\delta_1]\Ext_R^2(M'',N) \to \cdots
+    \end{align*}
+\end{thm}
+
+\begin{proof}
+    Given projective resolutions $P_\bullet '$ and $P_\bullet ''$ of $M'$ and $M''$, we construct another projective resolution $P_\bullet := P_\bullet ' \oplus P_\bullet ''$ of $M$ such that the following diagram commutes:
+% https://q.uiver.app/#q=WzAsMTgsWzAsMiwiMCJdLFsxLDIsIk0nIl0sWzIsMiwiTSJdLFszLDIsIk0nJyJdLFs0LDIsIjAiXSxbMywzLCIwIl0sWzIsMywiMCJdLFsxLDMsIjAiXSxbMSwxLCJQXzAnIl0sWzEsMCwiUF8xJyJdLFsyLDEsIlBfMCcgXFxvcGx1cyBQXzAnJyJdLFsyLDAsIlBfMScgXFxvcGx1cyBQXzEnJyJdLFszLDEsIlBfMCcnIl0sWzMsMCwiUF8xJyciXSxbNCwwLCIwIl0sWzQsMSwiMCJdLFswLDEsIjAiXSxbMCwwLCIwIl0sWzEsMiwiYSJdLFsyLDMsImIiXSxbMSw3XSxbMiw2XSxbMyw1XSxbOCwxLCJcXHZlcHMnIl0sWzEwLDIsIlxcdmVwcyJdLFsxMiwzLCJcXHZlcHMiXSxbMyw0XSxbMTIsMTVdLFsxMywxNF0sWzExLDEzXSxbOSwxMV0sWzE3LDldLFsxNiw4XSxbOCwxMF0sWzEwLDEyXSxbMCwxXSxbOSw4XSxbMTEsMTBdLFsxMywxMl1d
+\[\begin{tikzcd}[ampersand replacement=\&]
+	0 \& {P_1'} \& {P_1' \oplus P_1''} \& {P_1''} \& 0 \\
+	0 \& {P_0'} \& {P_0' \oplus P_0''} \& {P_0''} \& 0 \\
+	0 \& {M'} \& M \& {M''} \& 0 \\
+	\& 0 \& 0 \& 0
+	\arrow[from=1-1, to=1-2]
+	\arrow[from=1-2, to=1-3]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=1-4]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow["{\veps'}", from=2-2, to=3-2]
+	\arrow[from=2-3, to=2-4]
+	\arrow["\veps", from=2-3, to=3-3]
+	\arrow[from=2-4, to=2-5]
+	\arrow["\veps''", from=2-4, to=3-4]
+	\arrow[from=3-1, to=3-2]
+	\arrow["a", from=3-2, to=3-3]
+	\arrow[from=3-2, to=4-2]
+	\arrow["b", from=3-3, to=3-4]
+	\arrow[from=3-3, to=4-3]
+	\arrow[from=3-4, to=3-5]
+	\arrow[from=3-4, to=4-4]
+\end{tikzcd}\]
+where the rows are the obvious split exact sequence. To construct $\veps$ from $\veps'$ and $\veps''$, let $\eta :P_0'' \to M$ be a lifting of $\veps''$ so that $b\eta = \veps''$. Then, we set $\veps(x,y):= a\veps'(x) + \eta(y)$. The remaining vertical maps are constructed similarly.
+
+Now, take $\Hom(*,N)$ to get the commutative diagram
+% https://q.uiver.app/#q=WzAsMTYsWzEsMSwiXFxIb21fUihQXzAnJyxOKSJdLFsyLDEsIlxcSG9tX1IoUF8wJ1xcb3BsdXMgUF8wJycsTikiXSxbMywxLCJcXEhvbV9SKFBfMCcsTikiXSxbMSwyLCJcXEhvbV9SKFBfMScnLE4pIl0sWzIsMiwiXFxIb21fUihQXzEnXFxvcGx1cyBQXzEnJyxOKSJdLFszLDIsIlxcSG9tX1IoUF8xJyxOKSJdLFs0LDIsIjAiXSxbNCwxLCIwIl0sWzMsMCwiMCJdLFsyLDAsIjAiXSxbMSwwLCIwIl0sWzAsMSwiMCJdLFswLDIsIjAiXSxbMSwzLCJcXHZkb3RzIl0sWzIsMywiXFx2ZG90cyJdLFszLDMsIlxcdmRvdHMiXSxbMTAsMF0sWzMsMTNdLFswLDNdLFsxMSwwXSxbMTIsM10sWzAsMV0sWzMsNF0sWzQsMTRdLFsxLDRdLFs5LDFdLFs4LDJdLFsyLDVdLFs1LDE1XSxbNCw1XSxbMSwyXSxbMiw3XSxbNSw2XV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+	\& 0 \& 0 \& 0 \& \\
+	0 \& {\Hom_R(P_0'',N)} \& {\Hom_R(P_0'\oplus P_0'',N)} \& {\Hom_R(P_0',N)} \& 0 \\
+	0 \& {\Hom_R(P_1'',N)} \& {\Hom_R(P_1'\oplus P_1'',N)} \& {\Hom_R(P_1',N)} \& 0 \\
+	\& \vdots \& \vdots \& \vdots
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=1-3, to=2-3]
+	\arrow[from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow[from=2-2, to=2-3]
+	\arrow[from=2-2, to=3-2]
+	\arrow[from=2-3, to=2-4]
+	\arrow[from=2-3, to=3-3]
+	\arrow[from=2-4, to=2-5]
+	\arrow[from=2-4, to=3-4]
+	\arrow[from=3-1, to=3-2]
+	\arrow[from=3-2, to=3-3]
+	\arrow[from=3-2, to=4-2]
+	\arrow[from=3-3, to=3-4]
+	\arrow[from=3-3, to=4-3]
+	\arrow[from=3-4, to=3-5]
+	\arrow[from=3-4, to=4-4]
+\end{tikzcd}\]
+Then, the columns are cochain complexes and the rows are split exact, since
+\begin{align*}
+    \Hom_R(M \oplus N,D) \cong \Hom_R(M,D) \oplus \Hom_R(N,D)
+\end{align*}
+for any three modules $M,N,D$. Hence, we get a short exact sequence of complexes. The theorem now follows from the induced long exact sequence of cohomology groups.
+\end{proof}
+
+\begin{prop}
+    For an $R$-module $Q$, the following are equivalent:
+    \begin{enumerate}[(a)]
+        \item $Q$ is injective
+        \item $\Ext_R^1(M,Q) =0$ for all $R$-modules $M$
+        \item $\Ext _R^n(M,Q) =0$ for all $R$-modules $M$ and all $n \ge 1$.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+\hfill
+
+    (b) $\implies$ (a): Since $\Hom_R(*,Q)$ is exact if and only if $Q$ is injective, the result follows from the last theorem.
+
+    (c) $\implies$ (b): Obvious
+
+    (a) $\implies$ (c): Suppose $Q$ is injective, and take a projective resolution
+    $$\cdots \to P_n \to P_{n-1}\to \cdots \to P_0 \to M \to 0$$
+    for any $R$-module $M$. Since $Q$ is injective, the sequence
+    \begin{align*}
+        0 \to \Hom_R(M,Q) \to \Hom _R(P_0,Q) \to \Hom_R(P_1,Q) \to \cdots
+    \end{align*}
+    is still exact (check this). So, all its cohomology groups vanish, hence $\Ext_R^n(M,Q) = 0$ for all $n \geq 1$.
+\end{proof}
+
+\begin{defn}
+    The functors $\Ext_R^n(*,N)$ are called the \textbf{right derived functors} of the functor $\Hom_R(*,N)$ (which is left exact). We can similarly construct (covariant) right derived functors for $\Hom _R(M,*)$. These two constructions produce the same $\Ext$ groups.
+\end{defn}
+
+\begin{thm}
+    Let $0 \to N' \to N \to N'' \to 0$ be a short exact sequence of $R$-modules. Then, there is an induced long exact sequence
+    \begin{align*}
+        0  \to \Hom_R(M,N') \to \Hom_R(M,N) \to \Hom_R(M,N'') &\arr[\delta_0']\Ext^1_R(M,N')
+        \\ &\to \Ext_R^1(M,N) \to \cdots
+    \end{align*}
+\end{thm}
+
+\begin{proof}
+    Let $P_\bullet \twoheadrightarrow M \to 0$ be a projective resolution of $M$. Apply the Hom functors to get an exact sequence of complexes
+    $$0 \to \Hom(P_\bullet,N') \to \Hom(P_\bullet,N) \to \Hom(P_\bullet,N'') \to 0$$
+    which induces the result [omitted: a proof that the Ext groups in the theorem are the same as the ones defined earlier. Not obvious but true.]
+\end{proof}
+
+\begin{prop}
+    For any $R$-module $P$, the following are equivalent
+    \begin{enumerate}[(a)]
+        \item $P$ is projective
+        \item $\Ext_R^1(P,N) = 0$ for any $R$-module $N$
+        \item $\Ext^n_R(P,N)=0$ for any $R$-module $N$ and $n \ge 1$.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \hfill
+
+    (c) $\implies$ (b) $\implies$ (a): As before.
+
+    (a) $\implies$ (c): If $P$ is projective, then $0 \to P \arr[1_P]P \to 0$ is a projective resolution of $P$, which induces a cochain complex
+    $$0 \to \Hom_R(P,N) \arr[1] \Hom_R(P,N) \to 0 \to \cdots.$$
+    This implies that $\Ext_R^n(P,N) =0$ for all $R$-modules $N$, and $n \geq 1$.
+\end{proof}
+
+\begin{rmk}
+    \begin{enumerate}
+        \item One can dually define $\Ext_R^n(M,N)$ using an \textbf{injective resolution} of $N$, instead of a projective resolution of $M$:
+        \begin{align*}
+            0 \to N \to Q_0 \to Q_1 \to \cdots
+        \end{align*}
+        so that $\Ext_R(M,N)$ is the $n$-th cohomology group of the cochain complex obtained by applying $\Hom_R(M,*)$ to this resolution of $N$.
+        \item For any $M,N$, there is a bijection between $\Ext_R^1(M,N)$ and the set of equivalence classes of \textbf{extensions} $E$ of $M$ by $N$: i.e. short exact sequences
+        $$0 \to N \to E \to M \to0.$$
+        This explains the terminology ``Ext''.
+    \end{enumerate}
+\end{rmk}
+
+\section{The Tor Groups}
+
+Let $R$ be a commutative ring. We've seen that $* \otimes_R M$ is a right exact functor. The failure of left exactness is measured by the $\Tor$ group.
+
+\begin{defn}
+    Given an $R$-module $N$, we let $P_\bullet \to N \to 0$ be a projective resolution, and then tensor with $M$ to get a chain complex:
+    \begin{align} \label{eq:torchain}
+        \cdots \to M \otimes P_n \arr[1 \otimes d_n]M \otimes P_{n-1}\to \cdots \arr[1 \otimes d_1]M \otimes P_0 \arr[1 \otimes \veps] M \otimes N \to 0.
+    \end{align}
+    We thus define the \textbf{Tor group} to be
+    \begin{align*}
+     & \Tor _0^R(M,N) := \text{coker}(1 \otimes d_1):= M \otimes P_0/\Img (1 \otimes d_1),
+        \\ &\Tor _n^R(M,N) := \ker (1 \otimes d_n) / \Img (1 \otimes d_{n+1}).
+    \end{align*}
+    Equivalently, $\Tor_n^R(M,N)$ is the $n$-th homology group obtained from \eqref{eq:torchain} by removing the 1st term $M \otimes N$.
+\end{defn}
+
+We now have analogues of all the previous results for $\Ext$ groups, with basically identical proofs.
+
+\begin{ex}
+    $\Tor _0^R(M,N) = M \otimes _RN$.
+\end{ex}
+
+\begin{prop}
+    The homology groups $\Tor_n^R(M,N)$ are independent of choice of projective resolution $P_\bullet$. They are functorial in the sense that $N \to N'$ induces $\psi_n: \Tor_n^R(M,N) \to \Tor_n^R(M,N')$ for all $n \geq0 $.
+\end{prop}
+
+\begin{thm}
+    Suppose $0 \to N' \to N \to N'' \to 0$ is a short exact sequence of $R$-modules. Then, there is an induced long exact sequence of abelian groups
+    \begin{align*}
+        \cdots \to \Tor_1^R(M,N) \to \Tor_1^R(M,N'') \to M \otimes N' \to M \otimes N \to M \otimes N'' \to 0
+    \end{align*}
+\end{thm}
+
+\begin{prop}
+    For any module $M$, the following are equivalent.
+    \begin{enumerate}[(a)]
+        \item $M$ is a flat $R$-module
+        \item $\Tor_1^R(M,N)=0$ for any $R$-module $N$
+        \item $\Tor _n^R(M,N)=0$ for any $R$-module $N$, for all $n \geq 1$.
+    \end{enumerate}
+\end{prop}
+
+\begin{rmk}
+    Since $M \otimes _RN \cong N \otimes _RM$ for all $R$-modules $M,N$, it follows that
+    $$\Tor_n^R(M,N) \cong \Tor_n^R(N,M)$$
+\end{rmk}
+
+\begin{rmk}
+    One can show (see textbook) that if $A$ is an abelian group, then $\Tor_1(A,B) =0$ for every abelian group $B$ $\iff$ $A$ is torsion free $\iff$ $A$ is flat as a $\Z$-module. This explains the term ``Tor''.
+\end{rmk}

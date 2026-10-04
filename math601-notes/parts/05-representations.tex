@@ -1,0 +1,1082 @@
+% !TEX root = ../math601-notes.tex
+
+\section{Group Representations}
+
+We will work with representations of finite groups. These are very similar to (continuous) representations of compact groups like $S^1:= \{ z \in \C : |z|=1\},S^1\times \cdots\times S^1,\mc O(n),$ and $U(n)$.
+
+\begin{defn}
+    Let $G$ be a finite group. A \textbf{matrix representation} of $G$ is a group homomorphism $\rho : G \to GL_n(\C)$ for some $n$. The \textbf{degree} of $\rho$ is $n$. If $V$ is a complex vector space, a \textbf{(linear) representation of} $G$ on $V$ is a homomorphism $\rho :G \to \Aut (V)\equiv GL(V)$. The representation is \textbf{faithful} if $\rho$ is injective, so $G$ is realized as a subgroup of $GL(V)$. When $\rho$ is given, we say that $V$ is a \textbf{representation} of $G$ (by abusive language). Each $g \in G$ gives an element $\rho_g:=\rho(g) \in GL(V)$, which we may denote by $g:V\to V$. Another way to view this is that $V$ is a representation of $G \iff G$ acts on $V$ by linear transformations.
+\end{defn}
+
+We may use a field other than $\C$, but there's many reasons we like $\C$. Specifically, it needs to be an algebraically closed field of characteristic 0.
+
+\begin{rmk}
+    A linear representation of $G$ becomes a matrix representation once a basis of $V$ is chosen. More on this later.
+\end{rmk}
+
+\begin{defn}
+    A map of two representations $V$ and $W$ of $G$ is a linear map $T:V \to W$ such that the diagram
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJWIl0sWzIsMCwiVyJdLFswLDIsIlYiXSxbMiwyLCJXIl0sWzAsMiwiZyJdLFsxLDMsImciXSxbMCwxLCJUIl0sWzIsMywiVCJdXQ==
+    \[\begin{tikzcd}[ampersand replacement=\&,sep=small]
+    	V \&\& W \\
+    	\\
+    	V \&\& W
+    	\arrow["T", from=1-1, to=1-3]
+    	\arrow["g", from=1-1, to=3-1]
+    	\arrow["g", from=1-3, to=3-3]
+    	\arrow["T", from=3-1, to=3-3]
+    \end{tikzcd}\]
+    commutes for all $g \in G$. Precisely, $T(gv)=gT(v)$ for all $g \in G$. We say that $T$ is \textbf{$\bm G$-linear} or \textbf{$\bm G$-equivariant}. This allows us to define \textbf{isomorphisms} of two representations in the obvious way.
+\end{defn}
+
+\begin{ex}
+    \begin{enumerate}[(1)]
+        \item A representation of degree $1$ of $G$ is a group homomorphism $\rho :G \to GL_1(\C)=\C^*$. Since $G$ is a finite group, each element of $G$ has finite order, so $\rho (g)$ must be a root of unity for every $g \in G$. If we take $\rho (g)=1$ for all $g$, we get the \textbf{trivial representation} of $G$.
+        \item The cyclic and dihedral groups $C_n$ and $D_n$ act in the usual way on $\R^2$ by rotations and reflections of a regular $n$-gon centered around the origin. These are representations in $GL_2(\R)$, which extend to representations in $GL_2(\C)$.
+        \item Let $\C G:= \bigoplus _{g \in G}\C e_g$ be the free $\C$-module (vector space) with basis indexed by the elements of $G$. For each $h \in G$, let $\rho_h:\C G \to \C G$ be the linear map sending $e_g \mapsto e_{hg}$. This defines a $G$-representation on $\C G$ called the \textbf{regular representation} of $G$.
+        \item More generally that (3), suppose $X$ is a finite set on which $G$ acts, a inducing a permutation representation $G \to S(X)$. Let $V := \bigoplus_{x \in X}  \C e_x$ be the $\C$-vector space with basis $\{e_x \mid x \in X\}$. Then, the resulting linear representation of $G$ on $V$ is also called a \textbf{permutation representation} of $G$.
+        \item Recall that $\C G$ is a non-commutative $\C$-algebra under
+        $$(\sum a_he_h)(\sum b_ke_k)=\sum_{g \in G}\paren{\sum_{hk=g} a_hb_k}e_g.$$
+        So, a complex vector space $V$ is a (left) $\C G$-module in the usual sense, such that the scalars in $\C G$ ($c\cdot 1_G$) act on the usual way on $V$ [i.e. $\lambda e_g(v)=\lambda v$ when $g=1$]. So, a $\C G$-module by definition is a complex vector space $V$, together with a compatible system of actions $\rho _g \in GL(V)$, i.e. a homomorphism $\rho :G \to GL(V)$. That is, the concepts of \ul{a linear representation of $G$} and \ul{a $\C G$-module} are equivalent. We may transfer concepts from module theory to representation theory using this idea. For example, a homomorphism of representations is a just a homomorphism of $\C G$-modules. Note that this is somewhat similar to our discussion of $\C[x]$-modules, which were defined with respect to some linear map.
+    \end{enumerate}
+\end{ex}
+
+\begin{defn}
+    Let $\rho :G \to GL(V)$ be a representation of $G$. Suppose $W \leq V$ is a subspace. $W$ is said to be \textbf{stable} under the action of $G$, or \textbf{$\bm G$-invariant}, if $\rho (g)W \subset W$ for all $g \in G$. In this case, $\rho (g)$ restricts to an isomorphism $W \to W$ for all $g \in G$, and $\rho |_W : G \to GL(W)$ is a representation of $G$ on $W$. We say that $W$ is a \textbf{subrepresentation} of $V$. This is equivalent to $W$ being a $\C G$-submodule of $V$.
+\end{defn}
+
+\begin{ex}
+    Let $V:= \C G$ be the regular representation of $G$, let $x:= \sum_{ g\in G}e_g$, and let $W:= \angles {x}$, a $1$-dimensional subspace. Then, we have $\rho _g(x) = x$ for all $g \in G$, so $W$ is a subrepresentation spanned by $x$, isomorphic to the trivial representation of $G$.
+\end{ex}
+
+\begin{defn}
+    We can define the \textbf{direct sum} of representations $V,W$ of $G$ as the vector space $V \oplus W$ with the obvious action $\rho := \rho _V \oplus \rho_W$. In matrix form, this looks like
+    $$\matr{[\rho_V(g)] & [0] \\ [0] & [\rho _W(g)]}.$$
+\end{defn}
+
+\begin{defn}
+    A $G$-representation $V$ is \textbf{irreducible} if it has no $G$-invariant subspaces, besides $0$ and $V$.
+\end{defn}
+
+As usual, we want to decompose a representation as a direct sum of irreducible subrepresentations. The key to doing this is the following theorem. Note that this theorem fails in characteristic $p$.
+
+\begin{thm}[Maschke's Theorem]
+    Let $G$ be a finite group, and $V$ be (finite dimensional) $\C G$-module. If $W$ is any $\C G$-submodule of $V$, there exists a $\C G$-submodule $U$ of $V$ such that $V= U \oplus W$.
+\end{thm}
+
+\begin{proof}
+Let $\angles ,_1$ be any hermitian inner product on $V$ (this always exists, since $V \cong \C^n$, so we may identify any inner product on $\C^n$ with an inner product on $V$). We define a \textbf{$\bm {G}$-invariant} inner product $\angles ,:V \times V \to \C$ by
+$$\angles {v_1,v_2}:= \sum_{g \in G}\angles{gv_1,gv_2}_1.$$
+It's easy to check that this is indeed a hermitian inner product on $V$, and moreover $\angles{gx,gy}=\angles{x,y}$ for all $x,y \in V$. Our claim is that $W ^\perp$, defined under this inner product, is a $G$-invariant subspace.
+
+Indeed, if $y \in W^\perp$ and $g \in G$, we just need to show $gy \in W^\perp$. Well,
+$$\angles{gy,w}=\angles{gy,g(g^{-1}w)}=\angles {y,g^{-1}w},$$
+and $g^{-1}w \in W$ because $W$ is $G$-invariant. Hence, $\angles {y,g^{-1}w}=0$. This concludes the claim, and the theorem with $U:= W^\perp$.
+\end{proof}
+
+\begin{cor}
+    Every finite dimensional representation of $G$ is a direct sum of irreducible representations.
+\end{cor}
+
+\begin{proof}
+This follows immediately by induction on $\dim V$ using Maschke's theorem.
+\end{proof}
+
+\begin{notebox*}[Question]
+    Suppose $V = W_1 \oplus \cdots \oplus W_k$ is a decomposition of $V$ into a direct sum of irreducible representations. Is this decomposition unique?
+\end{notebox*}
+
+No. For example, $\rho :G \to GL_n(\C)$ given by $\rho (g)=I_n$ for all $g\in G$ shows that this is not true in general [every subspace is invariant, so any decomposition of $\C^n$ into a direct sum of lines is direct sum of irreducible representations]. We will see that the number of $W_i$ which are isomorphic to a given irreducible representation does not change. Also, the \textit{isotypical summands} are uniquely determined.
+
+Given a representation $V$ of $G$ via $\rho :G \to GL(V)$, we get a matrix representation of $G$ by choosing a basis $\mc B$ of $V$, and then $\rho _{\mc B}(g):= (\rho(g))_{\mc B}$. We use the shorthand $(g)_{\mc B}$.
+
+\begin{prop}
+    The $\C G$-modules $V$ and $W$ are isomorphic $\iff$ there are bases $\mc B$ of $V$ and $\mc C$ of $W$ such that $(g)_{\mc B}=(g)_{\mc C}$ for all $g \in G$. In other words, the matrix representations induced by $\mc B$ and $\mc C$ coincide.
+\end{prop}
+
+\begin{proof}
+Let $T:V \to W$ be a $G$-linear isomorphism, let $\mc B:= \{v_1,\dots,v_n\}$ be any basis of $V$, and let $\mc C := (T(v_1),\dots,T(v_n))$. From $T(gv_i)=g(T(v_i))$, it follows that $(g)_{\mc B}= (g)_{\mc C}$ for all $g \in G$. Conversely, suppose $\mc B = \{v_i\}$ and $\mc C =\{ w_i\}$ are ordered bases for $V$ and $W$ such that $(g)_{\mc B}=(g)_{\mc C}$ for all $g \in G$. Then, let $T:V \to W$ by the isomorphism sending $v_i$ to $w_i$. Since $T(gv_i)=gT(v_i)=gw_i$, we see that $T$ is $G$-linear and an isomorphism.
+\end{proof}
+
+\begin{cor}
+    Two matrix representations $\rho_1,\rho_2 : G \to GL_n(\C)$ are \textbf{equivalent} [i.e. they induce isomorphism representations of $\C^n$] $\iff$ there exists a matrix $P \in GL_n(\C)$ such that $\rho_2(g)=P\rho_1(g)P^{-1}$ for all $g \in G$. This $P$ is the change of basis matrix given by $T$ above.
+\end{cor}
+
+\section{Schur's Lemma}
+
+\begin{lem}[Schur's Lemma]
+    If $V,W$ are irreducible representations of $G$, and $\varphi :V \to W$ is a $G$-linear map, then
+    \begin{enumerate}[(1)]
+        \item Either $\varphi$ is an isomorphism, or $\varphi=0$.
+        \item If $V=W$, then $\varphi = \lambda I$ for some $\lambda \in \C$, where $I$ is the identity.
+    \end{enumerate}
+\end{lem}
+
+\begin{proof}
+For (1), observe that $\ker \varphi$ and $\Img \varphi$ are $G$-invariant subspaces of $V$ and $W$, respectively. But, $V$ and $W$ are irreducible, so $\ker \varphi =0$ and $\Img \varphi = V$, or vice-versa. For (2), since $\C$ is algebraically closed, $\varphi$ must have an eigenvalue $\lambda \in \C$. This is equivalent to $\varphi - \lambda I$ having a non-zero kernel, but $\varphi - \lambda I$ is $G$-invariant, hence $\varphi - \lambda I=0$ by the same reasoning.
+\end{proof}
+
+\begin{thm}
+    For any representation $V$ of (a finite group) $G$, there is a decomposition
+    $$V= V_1^{\oplus n_1}\oplus \cdots \oplus V_k^{\oplus n_k},$$
+    where the $V_i$ are distinct irreducible representations. Moreover, the decomposition of $V$ into a direct sums of the $k$ factors is unique (they are called the \textbf{isotypical components of $\bm V$}), as are the $V_i$ that occur, and their multiplicities $n_i$.
+\end{thm}
+
+\begin{proof}
+First, suppose $W$ is another representation of $G$ with decomposition $W=\bigoplus W_i^{\oplus m_j}$. Any $G$-linear map $\varphi :V \to W$ by its action on each summand $V_i$. If $\pi _j:W \to W_j$ is the projection onto any summand, the composition $\pi_j \circ \varphi|_{V_i}$ is a $G$-linear map $V_i \to W_j$, so it must be zero unless $W_j \cong V_i$ by Schur's Lemma. It follows that $\varphi$ must map the factor $V_i^{\oplus n_i}$ into that factor $W_j^{\oplus m_j}$ for which $V_i \cong W_j$. When we apply this to the identity map $\id :V \to V$, the uniqueness statement follows.
+\end{proof}
+
+\begin{notebox*}[Questions]
+    \begin{enumerate}
+        \item Describe all irreducible representations of  $G$.
+        \item Determine the direct sum decomposition for a representation of $G$ (more importantly, find the multiplicities of any irreducible summand $n_i$).
+    \end{enumerate}
+\end{notebox*}
+
+\begin{ex}[Representation Theory of Finite Abelian Groups]
+    Suppose $G$ is an abelian group, and $V$ a representation of $G$. Generally speaking, for $g \in G$, the map $g:V \to V$ won't be $G$-linear. But, when $G$ is abelian, it is, because $g\cdot (x \cdot v)=x\cdot (g\cdot v)$. If $V$ is irreducible, Schur's lemma says that for all $v \in V$, $g \cdot v = \lambda_g\cdot v$ for some $\lambda _g\in \C$. It follows that any subspace of $V$ is $G$-invariant, therefore $\dim V =1$.
+
+    Now, let $G \cong C_{n_1}\times \cdots \times C_{n_r}$, a product of cyclic groups. Let $C_{n_i}=\angles {c_i}$ and $g_i:= (1,\dots,1,c_i,1,\dots,1)$ with $c_i$ in the $i$'th slot, so
+    $$G=\angles{g_1,\dots,g_r \mid g_i^{n_i}=g_ig_jg_i^{-1}g_j^{-1}=1}.$$
+    Any irreducible representation $V$ of $G$ is $1$-dimensional, and each $g\in G$ acts by multiplication by a scalar. Therefore, $g_iv=\lambda _iv$, where $\lambda_i \in \C$ must be an $n_i$-th root of unity. Moreover, the values $\lambda_1,\dots,\lambda_r$ determine the representation completely, since for each $g\in G$,
+    $$gv=(g_1^{k_1}\cdots g_r^{k_r})v=(\lambda_1^{k_1}\cdots \lambda_r^{k_r})v.$$
+    Conversely, given any $n_i$-th root of unity $\lambda_1,\dots,\lambda_r$,
+    $$g_1^{k_1}\cdots g_r^{k_r}\mapsto \lambda_1^{k_1}\cdots \lambda _r^{k_r}$$
+    defines a map $G \to \GL_1(\C) =\C^\times,$ which is a $1$-dimensional representation of $G$.
+\end{ex}
+
+\begin{thm}
+    Let $G = C_{n_1}\times \cdots \times C_{n_r}$ be an abelian group. The representations $\rho_{\lambda_1,\dots,\lambda_r}$ constructed above are irreducible, and have degree $1$. There are $|G|$ such representations, and every irreducible representation is equivalent to one of them. A general representation $V$ of $G$ will be decomposed as a direct sum of such $1$-dimensional representations.
+\end{thm}
+
+Here's some motivation for what's coming: given an abelian group $G$, the action $g:V \to V$ is determined as soon as we know the eigenvalues $\lambda_1,\dots,\lambda_r$ for the action. The important thing is, we actually only need to know $\sum_{i}\lambda_i$ for all $g \in G$, because, then we'd know $\sum_{i}\lambda_i^k$ for all $k \geq 1$, using $g^k:V \to V$, and this is enough to know all the $\lambda_i$. But, $\sum \lambda_i = \Tr (g:V \to V)=: \chi_V(g)$. We'll see in general that $\chi _V:G \to \C$ determines $V$ (not just for abelian groups).
+
+\begin{ex}[More Important Examples of New Representations from Old Ones]
+    \begin{enumerate}
+        \item Given $V,W$ two representations of $G$, the tensor product $V \otimes W$ becomes a $G$-representation in a natural way: $\rho_1 \otimes \rho_2:G \to \GL(V\otimes W)$ satisfies $g \cdot (v \otimes w)=gv\otimes gw$.
+        \item $\Hom(V,W)$ is also a representation of $G$: For any $\varphi \in \Hom(V,W)$ and $g \in G$, we define $g \varphi :V \to W$ so that the diagram
+        % https://q.uiver.app/#q=WzAsNCxbMCwwLCJWIl0sWzIsMCwiVyJdLFswLDIsIlYiXSxbMiwyLCJXIl0sWzAsMSwiXFx2YXJwaGkiXSxbMCwyLCJnIiwyXSxbMSwzLCJnIiwyXSxbMiwzLCJnXFx2YXJwaGkiXV0=
+    \[\begin{tikzcd}[ampersand replacement=\&,sep=small]
+    	V \&\& W \\
+    	\\
+    	V \&\& W
+    	\arrow["\varphi", from=1-1, to=1-3]
+    	\arrow["g"', from=1-1, to=3-1]
+    	\arrow["g"', from=1-3, to=3-3]
+    	\arrow["{g\varphi}", from=3-1, to=3-3]
+    \end{tikzcd}\]
+    commutes. That is, $(g\varphi)(g\cdot v)=g\cdot \varphi(v)$, which is equivalent (replace $v$ with $g^{-1}v$) to $(g \varphi )(v):= v\cdot \varphi (g^{-1}v)$
+    \item If $W = \C$ and $\rho_W:G \to \C^*$ is the trivial representation, then we get the definition of $V^*:=\Hom(V,\C)$ as a $\C G$-module. So, for any $f \in V^*$, $(gf)(v)=f(g^{-1}v)$. In matrix notation, viewing things as column vectors,
+    $$f(g^{-1}v)=f^t\cdot ((g^{-1})^t)^t\cdot v=((g^{-1})^tf)^t\cdot v\implies gf=(g^{-1})^t\cdot f.$$
+    \item For $V$ a representation of $G$, set
+    $$\bm{V^G}:= \{v\in V\mid gv=v,\: \forall g \in G\} \leq V.$$
+    This is the sum of all trivial factors in the decomposition of $V$ into irreducible $G$-representations. Given any two representations $V,W$ of $G$, let $\textbf{Hom}_{\bm G}\bm{(V,W)}$ be the space of all $G$-linear maps $V \to W$. We claim $\Hom_G(V,W) = \Hom(V,W)^G$.
+    
+    Indeed, $\Hom(V,W)^G = \{ \varphi :V \to W \mid (g\varphi)(v)=\varphi (v),\: \forall v \in V, \: \forall g \in G \}$ $= \{ \varphi:V \to W \mid g\varphi (g^{-1}v)=\varphi (v),\: \forall v \in V,\: \forall g \in G\} = \Hom_G(V,W)$.
+    \end{enumerate}
+\end{ex}
+
+\begin{notebox*}[Exercise]
+    Show examples (1)-(3) are compatible with the isomorphism $V \otimes W \cong \Hom(V^*,W)$.
+\end{notebox*}
+
+\section{Characters}
+
+\begin{defn}
+    Let $\rho :G \to \GL(V)$ be a representation of $G$. The \textbf{character} of the representation is the function $\chi _V:G \to \C$ with $\chi _V(g):= \Tr(\rho (g))$ for all $g \in G$. The \textbf{degree} is the degree $\rho$ (i.e. $\dim V$). $\chi _V$ is said to be \textbf{irreducible} if $\rho$ is irreducible.
+\end{defn}
+
+The definitions in this section are somewhat scattered, so we state or restate them here:
+
+\begin{defn}
+    Given $V$ are representation of $G$, we set $V^G=\{ v \in V \mid gv=v,\forall g \in G\}$. A \textbf{class function} from $G \to \C$ is a function which is fixed under the conjugacy classes of $G$. Given two class functions $f_1,f_2:G \to \C$, we define their \textbf{inner product} to be
+    $$\angles{f_1,f_2}=\frac{1}{|G|}\sum_{g \in G}f_1(g)\bar{f_2(g)}$$
+    which turns the $\C$-vector space of all class functions on $G$ into a hermitian inner product space, with dimension equal to the number of conjugacy classes of $G$.
+\end{defn}
+
+\begin{prop}[][label=prop:prop1]
+    Suppose $\chi$ is a character of a degree $n$ representation. Then, for all $g,h \in G$
+    \begin{enumerate}[(i)]
+        \item $\chi(1)=n$
+        \item $\chi(g^{-1})=\bar{\chi (g)}$
+        \item $\chi (hgh^{-1})=\chi (g)$
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+For (i), $\rho(1) = I_n \in \GL(V)$, and $\Tr(I_n)=n$. For (ii), note that the eigenvalues $\lambda_1,\dots,\lambda_n$ of $\rho(g)$ are roots of unity, so satisfy $|\lambda_ i|^2=1 \iff \bar{\lambda _i}=\lambda_i^{-1}$ for all $i$. Hence,
+$$\bar{\chi (g)}=\sum_{i=1}^n\bar{\lambda_i}=\sum_{i=1}^n \lambda_i^{-1}=\Tr(\rho(g)^{-1})=\Tr (\rho(g^{-1}))=\chi (g^{-1}).$$
+Finally, (iii) follows for the property $\Tr (PAP^{-1})=\Tr(A)$.
+\end{proof}
+
+\begin{rmk}
+    Part (iii) from the above proposition says $\chi$ is a class function.
+\end{rmk}
+
+\begin{prop}[][label=prop:prop2]
+    Suppose $\rho _1:G \to \GL(V)$ and $\rho_2:G \to \GL(W)$ are two representations of $G$. Then,
+    \begin{enumerate}[(i)]
+        \item $\chi _{V \oplus W}=\chi_V + \chi _W$
+        \item $\chi _{V^*}=\bar{\chi _V}$
+        \item $\chi_{V \otimes W}=\chi_V\chi _W$.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    For (i), given $\rho_1,\rho _2$ in matrix form, we have $\rho_1 \oplus \rho_2(g)=\matr{\rho_1(g) & 0 \\ 0 & \rho_2(g)}$. For (ii),
+    $$\chi _{V^*}(g) =\Tr(\rho_1^*(g))=\Tr(\rho_1(g^{-1})^t)=\chi _V(g^{-1})=\bar{\chi _V(g)}.$$
+    Similarly, for (iii),
+    $\Tr(\rho_1(g) \otimes \rho_2(g))=\Tr(\rho_1(g))\Tr(\rho _2(g))$
+\end{proof}
+
+\begin{notebox*}[Question]
+    Given $V$, find $V^G$ explicitly.
+\end{notebox*}
+
+Well, for any $g \in G$, the map $g:V \to V$ is generally not $G$-linear. However, if we take the \textbf{average} $\varphi=\frac{1}{|G|} \sum_{g \in G}g:V \to V$, then $\varphi$ is $G$-linear, since
+$$\sum _{g \in G}g=\sum _{g \in G}hgh^{-1},\: \forall h \in G \implies \paren{\sum_{g \in G}g}h=h\paren{\sum_{g \in G}g}.$$
+
+\begin{prop}
+    $\varphi$ is a projection of $V$ onto $V^G$ [so $\varphi :V \twoheadrightarrow V^G$, $\varphi ^2=\varphi$].
+\end{prop}
+
+\begin{proof}
+    If $v = \varphi (w) = \frac{1}{|G|}\sum gw$, then for all $h \in G$,
+    $$hv = \frac{1}{|G|}\sum_{g \in G}hgw=\frac{1}{|G|}\sum_{g \in G}gw=v.$$
+    Thus, $\Img \varphi \subset V^G.$ Conversely, if $v \in V^G$, then $\varphi (v)=\frac{1}{|G|}\sum v =v$, so $V^G \subset \Img \varphi$. Also $\varphi \circ \varphi = \varphi$, so $\varphi$ is a projection.
+\end{proof}
+
+\begin{notebox*}[Question]
+    How do we find $\dim V^G$?
+\end{notebox*}
+
+This will be the \textbf{trace} of the projection $\varphi$. So,
+\begin{equation} \label{classeq}
+  \dim (V^G)=\Tr(\varphi)=\frac{1}{|G|}\sum_{g \in G}\Tr(g) = \frac{1}{|G|}\sum_{g \in G}\chi _V(g).
+\end{equation}
+
+If $V$ is irreducible and not the trivial representation, then by definition $V^G=0$. Therefore, we deduce that $\sum _{g \in G}\chi _V(g)=0$. Now, let $V,W$ be any two representations of $G$. Recall $\Hom(V,W)^G=\Hom_G(V,W)$, so if $V$ is irreducible, by Schur's lemma $\dim \Hom(V,W)^G =$ multiplicity of $V$ in $W$. Similarly, if $W$ is irreducible, then $\dim \Hom(V,W)^G$ is the multiplicity of $W$ in $V$. Hence, if both $V$ and $W$ are irreducible, then $\dim \Hom_G(V,W)=\case{1 & V \cong W \\ 0 & V \not \cong W}$. Moreover, the character $\chi _{\Hom(V,W)}(g) = \chi _{V ^* \otimes W}(g)=\bar{\chi_V(g)}\cdot \chi _W(g)$. So, applying \eqref{classeq}, we obtain
+$$\frac{1}{|G|}\sum_{g \in G}\bar{\chi_V(g)}\chi _W(g) = \case{1 & V \cong W \\ 0 & V \not \cong W}.$$
+
+Let $\mc C$ be the $\C$-vector space of class functions on $G$. Define a hermitian inner product on $\C$ by
+$$\angles {f_1,f_2}:=\frac{1}{|G|}\sum_{g \in G}f_1(g)\bar{f_2(g)} \:\: \text{``=''}\: \int _G f_1(g)\bar{f_2(g)}dg$$
+
+\begin{thm}[][label=thm:thm1]
+    The characters of the irreducible representations of $G$ are orthonormal.
+\end{thm}
+
+\begin{rmk}
+    \begin{enumerate}
+        \item The number of irreducible representations is $\leq$ the number of conjugacy classes in $G$ (we'll see later that they're in fact equal).
+        \item Suppose $\dim \mc C=k$, and $g_1,\dots,g_k$ are representatives of the conjugacy classes of $G$. If $C_{g_i}$ is the centralizer of $g_i$, then
+        $$\angles{\chi, \psi}=\frac{1}{|G|}\sum_{i=1}^k|C_{g_i}|\chi(g_i)\bar{\psi(g_i)}=\sum_{i=1}^k\frac{\chi (g_i) \bar{\psi (g_i)}}{|C_G(g_i)|}$$
+    \end{enumerate}
+\end{rmk}
+
+\begin{thm}[][label=thm:thm2]
+    Let $V$ be a representation of $G$ with character $\chi_V$, and suppose $V=V_1^{\oplus n_1}\oplus \cdots \oplus V_k^{\oplus n_k}$ is the decomposition of $V$ into a direct sum of distinct irreducible representations. If $W$ is an irreducible representation of $G$ with character $\chi _W$, then the number $n_j$ of $V_j$'s isomorphic to $W$ equals $\angles{\chi _V,\chi_W}.$
+\end{thm}
+
+\begin{proof}
+    We have $\chi _V = \sum_{i=1}^kn_i\chi _{V_i}$, hence
+    $$\angles{\chi_V,\chi _W}=\sum_{i=1}^kn_i\angles{\chi_{V_i},\chi_W}=n_j,$$
+    where $W \cong V_j$.
+\end{proof}
+
+\begin{cor}[][label=cor:cor1]
+    Two representations with the same character are isomorphic.
+\end{cor}
+
+\begin{cor}[][label=cor:cor2]
+    A representation $V$ is irreducible if and only if $\angles {\chi_V,\chi _V}=1$.
+\end{cor}
+
+\begin{proof}
+    If $V \cong V_1^{\oplus n_1}\oplus \cdots \oplus V_k^{\oplus n_k}$ as usual, then
+$\angles{\chi_V,\chi_V}=\sum_{i=1}^kn_i^2$, which is $1$ if and only if $V$ is irreducible (i.e. we have $n_i=1$ once and the rest of the $n_i$ are zero).
+\end{proof}
+
+\section[Decomposition of Regular Representation CG]{Decomposition of the Regular Representation $\C G$}
+
+From now on, the irreducible characters of $G$ will be denoted $\chi_1,\dots,\chi_k$, and their degrees are $d_1,\dots,d_k$. This means $d_i=\chi_i(1)$. Recall the regular representation
+$$R:= \C G = \bigoplus_{g \in G} \C e_g.$$
+Let $\chi_R$ be its character.
+
+If $g \in G$, $g \neq 1$, then $g \cdot e_g=e_{gh}\neq e_h$. So, the diagonal entries in the matrix $(g)_E$ representing the action of $g:R \to R$ are all zero, hence $\Tr (g)=0$. Thus,
+$$\chi_R(g) = \case{|G|& g=1 \\ 0 & g \neq 1}.$$
+We therefore see that $R$ is not irreducible by \Cref{cor:cor2} when $G \neq \{1\}$. In fact, if $R = \bigoplus _{i=1}^kV_i^{\oplus n_i}$, then
+$$n_i = \angles{\chi_R,\chi_i}=\frac{1}{|G|}\paren{\chi_{V_i}(1)\cdot |G|}=\chi_{V_i}(1)=d_i.$$
+This produces the following result:
+\begin{thm}[][label=thm:thm3]
+    The decomposition of $\C G$ into irreducible representations looks like
+    $$\C G \cong \bigoplus _{i=1}^kV_i^{\oplus \dim V_i}.$$
+    Moreover,
+    \begin{enumerate}[(i)]
+        \item Every irreducible representation $V$ of $G$ appears in the regular representation $\dim V$ times.
+        \item The degrees $d_1,\dots,d_k$ of the corresponding irreducible characters satisfy $\sum_{i=1}^kd_i^2 = |G|$
+        \item $\chi _R(g)=\sum_{i=1}^kd_i\chi_{V_i}(g)=0$ for all $g \neq 1$
+    \end{enumerate}
+\end{thm}
+
+\begin{ex}[Characters of $S_3$]
+    Some of the work in this example is skipped, motivated by facts we will soon prove connecting irreducible representations, characters, and conjugacy classes (\Cref{thm:conjchar}).
+
+    $S_3$ has two degree $1$ representations: $\chi _U$ the trivial representation, $\chi_{U'}$ the $\sgn$ representation. Moreover, $S_3$ acts on $\C^3$ be permuting $e_1,e_2,e_3$. This has an invariant subspace $U=\angles{(1,1,1)} \subset \C^3$, which is a copy of the trivial representation. The complement $V$ of $U$ is
+    $$V = U^\perp =\{ (z_1,z_2,z_3) \in \C^3\mid z_1+z_2+z_3=0\}.$$
+    Now, $\chi_{\C^3}=(3,1,0)$, so $\chi _V = \chi_{\C ^3}-\chi _U = (3,1,0)-(1,1,1)=(2,0,-1)$. $V$ is sometimes called the standard representation of $S_3$. This has the following character table (definition below):
+
+    \begin{tabular}{c|ccc}
+            $S_3$ & $1$  & $(12)$ & $(123)$ \\ \hline
+           $U$  & $1$ & $1$ & $1$ \\
+            $U'$ & $1$ & $-1$  & $1$ \\
+            $V$ & $2$ & $0$  & $-1$ \\
+        \end{tabular}
+\end{ex}
+
+\begin{notebox*}[Question]
+    Which linear combinations of the endomorphisms $g:V \to V$ are $G$-linear?
+\end{notebox*}
+
+\begin{prop}
+    Let $f:G \to \C$ be \textit{any function} on the group $G$. For $V$ a representation of $V$, set
+    $$\varphi_{f,V}:= \sum_{g \in G}f(g)g \in \Hom (V,V).$$
+    Then, $\varphi_{f,V}$ is $G$-linear for all representations $V$ if and only if $f$ is a class function
+\end{prop}
+
+\begin{proof}
+    Suppose $f$ is a class function. Then, for $h \in G$, $v \in V$,
+    $$\varphi(hv)=\sum_{g \in G}f(g)ghv=\sum_{g \in G}f(hgh^{-1})(hgh^{-1})\cdot hv=h\sum_{g \in G}f(g)g\cdot v=h\varphi(v),$$
+    so $\varphi$ is $G$-linear. The other direction is left as an exercise [show that if $f$ is not a class function, then $\varphi_{f,R}$ fails to be $G$-linear, where $R$ is the regular representation of $G$].
+\end{proof}
+
+\begin{thm}[][label=thm:conjchar]
+    The number of irreducible representations of $G$ is equal to the number of conjugacy classes of $G$. Equivalently, their characters $\{\chi_V\}$ form an orthonormal basis for the space of class functions $\mc C$.
+\end{thm}
+
+\begin{proof}
+Suppose $f :G \to \C$ is a class function and $\angles{f,\chi _V}=0$ for all irreducible representation $V$ of $G$. We must show that $f=0$ (this implies that the $\chi_V$ span $\mc C$)
+
+Let $V$ be any irreducible representation and consider
+$$\varphi_{f,V}:=\sum_{g \in G}f(g)\cdot g: V \to V,$$
+which by the previous proposition is $G$-linear. So, by Schur's Lemma, $\varphi = \lambda \id _V$, where
+$$\lambda = \frac{1}{\dim V}\Tr (\varphi_{f,V}) = \frac{1}{\dim V}\sum_{g \in G}f(g) \chi_V(g)=\frac{1}{\dim V}\angles{f,\chi_{V^*}}=0.$$
+Thus, $\varphi _{f,V}=0$ for every irreducible representation $V$. Therefore, $\varphi_{f,V}=0$ for \textit{every} representation of $V$. So, take $V=R$ to be the regular representation of $G$. In $R = \C G$, the elements $\{ g \mid g \in G\} \subset \Hom(R,R)$ are linearly independent since $\{g(1)=e_g\}_{g \in G}$ are linearly independent. Since $0=\varphi_{f,R}=\sum_{g \in G}f(g)g$, we deduce that $f=0$.
+\end{proof}
+
+\begin{thm}[][label=thm:algint]
+    If $\chi$ is an irreducible character of $G$, then $\chi(1) \big \vert |G|$
+\end{thm}
+
+\begin{proof}
+    Let $C_1,\dots,C_k$ be the conjugacy classes of $G$, $C_i=[g_i]$. Then, by the orthogonality relations,
+    $$\frac{1}{|G|}\sum_{i=1}^k|C_i|\chi (g_i)\bar{\chi (g_i)}=\angles{\chi,\chi}=1 \implies \frac{|G|}{\chi(1)}=\sum_{i=1}^k\frac{|C_i|}{\chi(1)}\chi(g_i)\bar{\chi (g_i)}.$$
+    We claim $\frac{|C_i|}{\chi(1)}\chi(g_i)$ is an algebraic integer. Note that this implies the theorem, since $\bar{\chi (g_i)}$ is also an algebraic integer for all $i$, hence $\frac{|G|}{\chi (1)}$ is both rational and an algebraic integer, thus an integer.
+
+    Let $C =[g]$ be a conjugacy class of $G$. Consider
+    $$\bar C:= \sum_{x \in C}e_x \in \C G.$$
+    Observe that $\bar C$ lies in the center of $\C G$, since for all $g \in G$,
+    $$\bar C = \sum_{x \in C}e_{gxg^{-1}}\implies  g \cdot \bar C=\bar C \cdot g.$$
+    Now, suppose $V$ is an irreducible $\C G$-submodule of $\C G$ (i.e. an irreducible representation of $G$) which character $\chi$. Then, for all $g \in G, v \in V$, we have
+    $\bar C \cdot (g v) = g ( \bar C \cdot v),$
+    hence the map $v \mapsto \bar C \cdot v$ is $g$-linear. By Schur's Lemma, we must therefore have $\bar Cv = \lambda v$ for all $v \in V$. Thus, taking traces, we get
+    $$\sum_{x \in C}x \cdot v = \lambda v \implies |C| \chi (g)=\sum_{x \in C}\chi (x)=\lambda \chi(1) \implies \lambda=\frac{\bar C}{\chi(1)}\chi(g)$$
+    where $C=[g]$. Let $g_1,\dots,g_n$ be the elements of $G$, so $\mc B:=\{ e_{g_i}\}$ is a basis of $\C G$. If $A:= (\bar C)_{\mc B}$, then $A$ is a matrix with integer entries. So, the statement that $\bar C \cdot v = \lambda v$ with $v \neq 0$ implies $\lambda$ is an eigenvalue of $A$, thus $\lambda$ is an algebraic integer (it's the root of the characteristic polynomial which has integer coefficients), and we're done.
+\end{proof}
+
+\section{Character Tables and Orthogonality Relations}
+
+\begin{defn}
+    Let $\chi_1,\dots,\chi_k$ be the irreducible characters of $G$, and $[g_i]=C_i$ be the distinct conjugacy classes of $G$. The $k \times k$ matrix $\{\chi_i(g_j)\}_{1 \leq i,j \leq k}$ is called the \textbf{character table} of $G$. We usually have $\chi_1 = 1_G$ and $g_1=1$. This is usually presented as follows:
+
+    \centering
+    \begin{tabular}{c|cccc}
+            $|C_i|$ & $n_1$ & $n_2$ & $\cdots$ & $n_k$ \\
+            $g_i$ & $1=g_1$ & $g_2$ & $\cdots$ & $g_k$ \\ \hline
+            $1_G=\chi _1$ & $d_1=1$ & 1 & $\cdots$ & $1$ \\
+            $\chi_2$ & $d_2$ & $\cdots$ &  & \\ $\vdots$ \\
+            $\chi _k$ & $d_k$ & $\cdots$ &  & \\
+        \end{tabular}
+\end{defn}
+
+\begin{thm}[Orthogonality Relations]
+    Let $\delta_{rs}$ be $1$ when $r=s$ and $0$ otherwise. Then, we have the following relations:
+
+    Rows:
+    $$\sum_{i=1}^k \frac{\chi_r(g_i) \bar{\chi_s(g_i)}}{|C_G(g_i)|}=\angles{\chi_r,\chi _s}=\delta_{rs}$$
+    Columns:
+    $$\sum_{i=1}^k\chi _i(g_r) \bar{\chi_i(g_s)}=\delta_{rs}|C_G(g_r)|$$
+\end{thm}
+
+\begin{proof}
+    We'll prove the column relation: For $1 \leq s \leq k$, let $\psi _s$ be the class function which satisfies
+    $\psi_s(g_r) = \delta _{rs}$. Since $\{\chi_i\}_{i=1}^k$ is an orthonormal basis of $\mc C$, we have $\psi _s = \sum_{i=1}^k\angles{\psi _s,\chi _i}\chi _i$. Now,
+    $$\angles{\psi_s,\chi_i}=\frac{1}{|G|}\sum_{g \in G}\psi_s(g) \bar{\chi_i(g)} = \frac{|C_s|}{|G|}\bar{\chi_i(g_s)}=\frac{\bar{\chi_i(g_s)}}{|C_g(g_s)|}.$$
+    Hence,
+    $$\delta_{rs}=\psi_s(g_r)=\sum_{i=1}^k\angles{\psi _s,\chi _i}\cdot \chi_i(g_r) = \sum_{i=1}^k\frac{\chi_i(g_r) \bar{\chi_i(g_s)}}{|C_G(g_s)|},$$
+    as desired.
+\end{proof}
+
+\begin{ex}
+    Suppose we are given the following part of a character table of a group $G$:
+
+    \begin{tabular}{c|cccc}
+            $|C_i|$ & $1$ & $3$ & $4$ & $4$ \\
+            $g_i$ & $1=g_1$ & $g_2$ & $g_3$ &$g_4$ \\ \hline
+           $\chi_1$  & $1$ & $1$ & $1$ & $1$\\
+            $\chi_2$ & $1$ & $1$ &$\omega$  & $\omega^2$ \\
+           $\chi_3$  & $1$ & $1$ & $\omega^2$ & $\omega$ \\
+           $\chi_4$  & ? & ? & ? & ? \\
+        \end{tabular}
+
+        where $\omega = e^{2\pi i /3}.$ Fill in the missing entries.
+
+        Well, $|G| = 1+3+4+4=12=1^2+1^2+1^2 +d_4^2$, so $d_4=3$. Now, from orthogonality between columns $1$ and $2$,
+        $$1 \cdot 1  + 1 \cdot 1 + 1 \cdot 1 + 3 \cdot \bar{\chi_4(g_2)}=0 \implies \chi_4(g_2)=-1.$$
+        Similarly, $\chi _4(g_3)=\chi_4(g_4)=0.$ So, we have
+
+    \begin{tabular}{c|cccc}
+            $|C_i|$ & $1$ & $3$ & $4$ & $4$ \\
+            $g_i$ & $1=g_1$ & $g_2$ & $g_3$ &$g_4$ \\ \hline
+           $\chi_1$  & $1$ & $1$ & $1$ & $1$\\
+            $\chi_2$ & $1$ & $1$ &$\omega$  & $\omega^2$ \\
+           $\chi_3$  & $1$ & $1$ & $\omega^2$ & $\omega$ \\
+           $\chi_4$  & $3$ & $-1$ & $0$ & $0$ \\
+        \end{tabular}
+
+        This is the character table for $A_4$ (not obvious)
+\end{ex}
+
+\begin{ex}
+    For the cyclic group $C_3$, we have the table
+
+    \begin{tabular}{c|ccc}
+           $|C_i|$  & $1$ & $1$ & $1$ \\
+            $g_i$ & $1$ & $a$ & $a_2$ \\ \hline
+             $\chi_1$ & $1$ & $1$ & $1$ \\
+            $\chi_2$ & $1$ & $\omega$  & $\omega^2$ \\
+            $\chi_3$ & $1$ & $\omega^2$  & $\omega$\\
+        \end{tabular}
+\end{ex}
+
+\section{Burnside's Theorem}
+
+\begin{thm}[Burnside's Theorem][label=thm:burnside]
+    Any group $G$ of order $p^aq^b$, with $p,q$ prime, is solvable.
+\end{thm}
+
+\begin{lem}[][label=lem:burnlem1]
+    Suppose $\zeta_1,\dots,\zeta_n \in \C$ are roots of unity such that $\frac{1}{n}(\zeta_1+\cdots + \zeta_n)$ is an algebraic integer. Then, either $\zeta_1=\cdots =\zeta_n$, or $\zeta_1+\cdots + \zeta_n=0$.
+\end{lem}
+
+\begin{proof}
+    Set $\alpha = \frac{1}{n}(\zeta_1+\cdots + \zeta_n)$ and assume not all $\zeta_i$ are equal. Then, the triangle inequality implies $|\zeta_1+\cdots + \zeta_n|<n$, or equivalently $|\alpha| < 1$. Let $p(x) \in \Z[x]$ be the minimal polynomial of $\alpha$ over $\Q$, and let $K$ be the splitting field of $p$, with $G:=\Gal(K/\Q)$. For any automorphism $\sigma \in G$, $\sigma(\alpha)$ is the average of a set of $n$ roots of unity, so $|\sigma (\alpha)| \leq 1$. Therefore,
+    $$\abs{\prod_{\sigma \in G}\sigma(\alpha)} <1.$$
+
+    However, we have (exercise)
+    $$\prod_{\sigma \in G}(x-\sigma(\alpha))=p(x)^m$$
+    where $m=[K:\Q(\alpha)]$. We therefore deduce that the constant term of of $\prod (x-\sigma(\alpha))$ is an integer, but it's $\prod \sigma(\alpha)$ which has absolute value $<1$. Hence, $\prod \sigma(\alpha)=0$, i.e. $\alpha=0$.
+\end{proof}
+
+\begin{lem}[][label=lem:burnlem2]
+    For any finite group $G$ and representation $\rho :G \to \GL_n(\C)$, the matrix $\rho(g)$ is diagonalizable.
+\end{lem}
+
+\begin{proof}
+If $m=|G|$, then $\rho(g)^m=I$ in $\GL_n(\C)$. Hence, the minimal polynomial $f(x)$ of $\rho(g)$ divides $x^m-1$, which is a polynomial with $m$ distinct roots. Hence, $f(x)$ has distinct roots, so $\rho(g)$ is diagonalizable.
+\end{proof}
+
+\begin{thm}[][label=thm:burnthm1]
+    Let $V$ be an irreducible representation of $G$, and suppose $C$ is a conjugacy class in $G$ with $\gcd(|C|,\dim V)=1$. Then, for any $g \in C$, either $\chi_V(g)=0$, or $g$ acts as a scalar on $V$.
+\end{thm}
+
+\begin{proof}
+    There exists $a,b \in \Z$ such that $a\cdot |C| + b\cdot n=1$, where $n = \dim V$. Hence,
+    $$\frac{\chi_V(g)}{n}=a\frac{|C|}{n}\chi_V(g)+b\chi_V(g),$$
+    but $\chi_V(g) = \lambda_1+\cdots + \lambda_n$ is an algebraic integer, when $\lambda_i$ are the eigenvalues of $g$. By the proof in \Cref{thm:algint}, we prove the first term is an algebraic integer as well, hence $\frac{\chi_V(g)}{n}$ is an algebraic integer. By \Cref{lem:burnlem2}, the eigenvalues $\lambda_1,\dots,\lambda_n$ are roots of unity, hence the result follows by \Cref{lem:burnlem1}.
+\end{proof}
+
+\begin{thm}[][label=thm:burnthm2]
+    Let $G$ be a finite group, and let $C$ be a conjugacy class in $G$ with $|C| = p^k$, where $p$ is prime and $k>0$. Then, $G$ is not simple.
+\end{thm}
+
+\begin{proof}
+Choose an element $g \in C$. We know $g \neq 1$ because $k>0$, and by the orthogonality of the columns of the character table of $G$, we have
+\begin{align} \label{dimcharzero}
+ \sum_{V \in \w{Irr}(G)}\dim V\cdot \chi_V(g)=0,
+\end{align}
+where $\w{Irr} (G)$ is the set of $k$ irreducible representations of $G$, up to isomorphism. We may divide $\w{Irr} G$ into three parts:
+\begin{enumerate}[(i)]
+    \item The trivial representation.
+    \item $S$, the set of irreducible representations whose dimensions are divisible by $p$.
+    \item $T$, the set of non-trivial irreducible representations whose dimension is not divisible by $p$.
+\end{enumerate}
+
+Now, we make the following claim:
+\begin{claim}
+    There exists a $V \in T$ such that $\chi_V(g) \neq 0$.
+\end{claim}
+
+\begin{proof}
+    Indeed, if $V \in S$, the number $\frac{\dim V}{p}\chi_V(g)$ is an algebraic integer, so $a:= \sum_{V \in S}\frac{\dim V}{p}\chi _V(g)$ is an algebraic integer. Now, by \eqref{dimcharzero},
+    \begin{align*}
+        0 = \chi_\C(g) + \sum_{V \in S}\dim(V)\chi _V(g)+\sum_{V \in T}\dim (V)\chi _V(G)=1 + pa+\sum_{V \in T}\dim(V) \chi_V(G),
+    \end{align*}
+    hence the last term is non-zero (because otherwise $a=-1/p$ is not an algberaic integer). The claim follows.
+\end{proof}
+Now, we have $g \in C$, where $|C|=p^k$, and $V \in T$ with $\chi_V(g) \neq 0$, and $p \nmid \dim V$. So, by \Cref{thm:burnthm1}, $g$ acts by a non-zero scalar on $V$. Let $H$ be the subgroup generated by all elements $ab^{-1}$, with $a,b \in C$:
+$$H:= \angles{ab^{-1}\mid a,b \in C}.$$
+Note that for any $x \in G$ $xab^{-1}x^{-1}=(xax^{-1})(xbx^{-1})^{-1} \in H$, so $H \unlhd G$. Clearly, $|H|>1$ since $|C|>1$. Moreover, the elements of $H$ act trivially on $V$, hence $H \neq G$ because $V$ is not the trivial representation of $G$. This proves $G$ is not simple.
+\end{proof}
+
+We are now ready to prove Burnside's Theorem.
+
+\begin{proof}
+Let $|G|=p^aq^b$. Assume for the sake of contradiction that $G$ is not solvable. Then, there exists a non-abelian simple group of order $p^aq^b$: otherwise, any such $G$ has a nontrivial normal subgroup $N$, and by induction on $|G|$ we may assume $N,G/N$ are both solvable. This implies $G$ is solvable.
+
+If $G$ is simple, we may consider the class equation
+$$p^aq^b=|G|=\sum_{|C_i|=1}|C_i|+\sum_{|C_i|>1}|C_i|,$$
+where the second term is $\cong 0 \pmod{pq}$. We deduce that there are at least $2$ conjugacy classes $C_i$ with $|C_i|=1$, i.e. $Z(G) \neq 1$. This contradicts the simplicity of $G$.
+\end{proof}
+
+\begin{thm}
+    Let $G$ be a finite group of order $n$, and $g \in G$. Then, TFAE:
+    \begin{enumerate}[(a)]
+        \item For every representation $V$ of $G$, $\chi_V(g) \in \Q$.
+        \item For every representation $V$ of $G$, $\chi_V(g) \in \Z$.
+        \item The element $g$ is conjugate to $g^k$ for all $k \in \Z$ with $\gcd (k,n)=1$.
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    Let $K = \Q(\zeta)$, with $\zeta=e^{2\pi i /n}$, i.e. $K$ is the splitting field of $x^n-1$ over $\Q$. Then, it's known that $\Gal(K/\Q) \cong (\Z/n\Z)^\times$, where $k \in (\Z/n\Z)^\times \mapsto (\sigma_k:\zeta \mapsto \zeta^k )$. For any $g \in G$ and for any representation $V$ of $G$, we know $\chi_V(g) \in K$, and $\chi_V(g^k) = \sigma_k(\chi_V(g))$ for all $k$ coprime to $n$.
+
+    Now, we know $\chi_V(g)$ is an algebraic integer, so clearly (a) $\iff$ (b). If $\chi_V(g) \in \Z$, we deduce that $\chi_V(g) = \chi_V(g^k)$, because if $g,g^k$ were in two different conjugacy classes, then there is a class function $f \in \mc C$ for which $f(g) \neq f(g^k)$, hence there exists a character $\chi_V$ with $\chi_V(g) \neq \chi_V(g^k)$. (???)
+
+    If (c) holds, then $\sigma_k(\chi_V(g))=\chi_V(g)$ for all $k$ coprime to $n$, so $\chi_V(g)$ lies in $K^G=\Q$, hence (a) holds.
+\end{proof}
+
+\begin{notebox*}[Exercise]
+    Check that (iii) holds for all $g$ in the symmetric group $S_n$. So, all character values for permutations in $S_n$ are integers. What can be said about $A_n$?
+\end{notebox*}
+
+\section{More on Group Characters}
+
+\begin{notebox*}[Question]
+    Does the character table of $G$ determine $G$?
+\end{notebox*}
+
+\begin{notebox*}[Answer]
+    No.
+\end{notebox*}
+
+For example, the groups $D_4$ (the dihedral group of order $8$) and $Q_8$ (the quaternion group) have the same character table: Indeed, both groups have the same commutator quotient $G/[G,G]\cong V_4$, the Klein $4$-group. It follows that they both have exactly four characters of degree $1$, which are easily computed, and then the orthogonality relations can be used to find the fifth irreducible character, which has dimension 2. So the complete character table for $Q_8$ is
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|rrrrr }
+        Sizes & 1 & 1 & 2 & 2 & 2 \\
+        $Q_8$ & 1 & $-1$ & $i$ & $j$ & $k$ \\ \hline
+        $\chi_1$ & 1 & 1 & 1 & 1 & 1 \\
+        $\chi_2$ & 1 & 1 & $-1$ & $1$ & $-1$ \\
+        $\chi_3$ & $1$ & $1$ & $1$ & $-1$ & $-1$ \\
+        $\chi_4$ & 1 & 1 & $-1$ & $-1$ & 1 \\
+       $\chi_5$ & $2$ & $-2$ & 0 & $0$ & 0 \\
+    \end{tabular}
+\end{table}
+which is identical to that of $D_4$.
+
+\begin{notebox*}[Question]
+    What information about a group can be deduced by its character table?
+\end{notebox*}
+
+\begin{lem}
+    Let $N \unlhd G$ and $W$ be a $\C(G/N)$-module. Then, $W$ admits a canonical $\C G$-module structure, with a subspace of $W$ being a $\C G$-submodule $\iff$ it's a $\C(G/N)$-submodule. If $\psi$ is the character of the $\C (G/N)$-module $W$, then the character of the $\C G$-module $W$ is $\psi \circ \pi$, where $\pi:G \to G/N$ is the projection map.
+\end{lem}
+
+\begin{proof}
+    Given $g \in G$, $w \in W$, we define $g\cdot w :=(gN)\cdot w$.
+\end{proof}
+
+\begin{defn}
+    Let $\rho:G \to \GL(V)$ be a representation with character $\chi$. Define $K_\chi:=\{ g \in G \mid \chi(g) = \chi (1)\}$, called the \textbf{kernel of $\bm \chi$}. We have $K_\chi =\ker \rho \unlhd G$ [indeed, $\chi (g)$ is a sum of $\dim V$ eigenvalues, each of which is a root of unity. If $\chi(g)=\chi(1)$, then all the eigenvalues must be $1$, so $\rho(g)=\id$.] We write $K_i$ instead of $K_{\chi_i}$ for $\chi_1,\dots, \chi_k$ the irreducible characters of $G$.
+\end{defn}
+
+\begin{prop}
+    All the normal subgroups of $G$ are exactly the sets $\bigcap _{i \in I}K_i$ for all subsets $I \subset \{1,\dots,k\}$.
+\end{prop}
+
+\begin{proof}
+    Since $K_i \unlhd G$ for $i \in \{1,\dots,k\}$, then we know $\bigcap _{i \in I}K_i$ are normal subgroups of $G$.
+
+    Conversely, let $N \unlhd G$ be a normal subgroup, let $W:= \C(G/N)$, and let $\psi$ be the character of $W$ as a $\C(G/N)$-module. Let $\chi$ be the character of $W$ as a $\C G$-module. As $\psi$ is the regular character of $G/N$, we have $\chi(g)=\chi(1) \iff g \in N$. Therefore, $N=K_\chi$. Then, we may write $\chi = \sum_{i=1}^k a_i\chi_i$, and
+    $$\abs{\chi(g)}\leq \sum_{i=1}^k\abs{\chi_i(g)}\leq \sum_{i=1}^ka_i\chi_i(1)=\chi(1).$$
+    So, since $|\chi_U(g)| \leq \chi_U(1)$ for any $\C G$-module $U$, we see that $g \in K_\chi \iff g \in K_i$ for all $i$ for which $a_i>0$. Therefore, $N = \bigcap_{i \in I} K_i,$ where $I = \{1 \leq i \leq k \mid a_i>0\}$.
+\end{proof}
+
+\begin{cor}
+    $G$ is simple if and only if the only irreducible character $\chi_i$ for which $\chi_i(g)=\chi_i(1)$ for some $g\neq 1$ is the principal character $\chi_1$.
+\end{cor}
+
+\begin{cor}
+    The character table of $G$ can be used to determine whether or not $G$ is solvable.
+\end{cor}
+
+\begin{proof}
+    The character table allows us to determine the normal subgroups of $G$, and all the inclusion relations between them, so we can determine whether or not $G$ has a normal series whose successive quotients are $p$-groups.
+\end{proof}
+
+\section{The Group Algebra}
+
+\begin{defn}
+    Recall that a complex vector space $A$ is a \textbf{$\C$-algebra} if there is a bilinear multiplication $A \times A \to A$ which is associative and has a multiplicative unit.
+\end{defn}
+
+\begin{ex}
+    \begin{enumerate}
+        \item $M_n(\C)$ is a $\C$-algebra. Generally, for $V$ a complex vector space, $\End(V):=\Hom(V,V)$ is a $\C$-algebra.
+        \item $\C G$, where $G$ is a finite group, is a $\C$-algebra.
+        \item If $R_1$ and $R_2$ are $\C$-algebras, then $R_1 \times R_2$ is a $\C$-algebra.
+    \end{enumerate}
+\end{ex}
+
+\begin{defn}
+    An algebra $A$ is \textbf{semisimple} if, given any two finite dimensional $A$-modules $N \subset M$, there exists an $A$-submodule $N' \subset M$ such that $M=N \oplus N'$.
+\end{defn}
+
+\begin{ex}
+    $\C G$ is a semisimple $\C$-algebra.
+\end{ex}
+
+ We've seen that if $V_1,\dots,V_k$ are the irreducible representations of $G$, then $\C G\cong \bigoplus_{i=1}^kV_i^{\oplus \dim V_i}$. Now, we can refine this statement in terms of the group algebra.
+
+\begin{thm}
+    There exists an isomorphism of $\C$-algebras
+    $$\C G \cong \bigoplus _{i=1}^k\End(V_i)\cong \bigoplus _{i=1}^k(V_i^*\otimes V_i)$$
+\end{thm}
+
+ \begin{proof}
+     For any representation $V$ of $G$, the group homomorphism $G \to \GL(V)$ extends by linearity to a map of $\C$-algebras $\C G \to \End(V)$, since $\C G =\bigoplus \C g_i$. If we apply this to each of the $k$ irreducible representations $V_i$ of $G$, we get a canonical map
+     $$\mc F: \C G \to \bigoplus_{i=1}^k \End (V_i) \cong \prod _{i=1}^kM_{d_i}(\C)$$
+where $d_i = \dim (V_i)$. We claim $\mc F$ is an isomorphism.
+
+Indeed, if $x = \sum_{g}f(g) \cdot g \in \C G$ for some function $f:G \to \C$ and $\mc F(x)=0$, then $\mc F(x)=0$ as an operator on each $V_i$. It follows (since $\C G = \bigoplus V_i^{\oplus d_i}$) that $x=0$ on $\C G$, hence $x=0$, because the representation of $G$ on $\C G$ is faithful. Therefore, $\mc F$ is injective, and since the dimensions are equivalent, we see that $\mc F$ is an isomorphism.
+ \end{proof}
+
+ Homework 11 (B1) interprets $\mc F$ as a Fourier transform, and discusses its inverse. The converse of the theorem holds, and the precise result is a part of Wedderburn Theory:
+
+\begin{thm}
+    \begin{enumerate}
+        \item Let $F$ be any field, and $A$ a finite dimensional $F$-algebra with a unit. Then, $A$ is semisimple if and only if $A$ is isomorphic to a direct sum of matrix algebras $M_r(D)$ over division algebras $D$ (fields that don't need commutativity).
+        \item If $F$ is algebraically closed, then any finite dimensional semisimple $F$-algebra is isomorphic to a direct sum of matrix algebras over $F$.
+    \end{enumerate}
+\end{thm}
+
+\section{Compact Groups}
+
+\begin{defn}
+    A \textbf{topological group} $G$ is a group with a topology such that multiplication by elements of $G$ is continuous. A \textbf{compact group} is a topological group that is compact. A \textbf{left-invariant measure} $dg$ on a group $G$ is such that
+    \begin{enumerate}
+        \item[(i)] For all $f : G \to \C$ continuous, $\int _{G}f(g)dg=\int _Gf(hg)dg$ for all $h \in G$
+        \item[(ii)] $\w{Vol} G:= \int _Gdg=1$
+    \end{enumerate}
+\end{defn}
+
+\begin{rmk}
+    The properties of $dg$ imply that its also invariant under right translation.
+\end{rmk}
+
+\begin{ex}
+    \begin{enumerate}
+        \item Suppose $|G|=n$ is finite. Then, $dg$ assigns to each $x \in G$ the measure $1/n$.
+        \item Let $G = S^1 :=\{z \in \C :|z|=1\} = \{e^{i\theta}\mid \theta \in \R\}$. Then, $dg =d\theta$, normalized so that $\int _{S^1}d\theta=1$. In other words, if $f(e^{i\theta})$ is a function on $S_1$ viewed as a $2\pi$-periodic function $\tilde f:\R \to \R$, then $\int_{\theta \in S^1} f(e^{i\theta})d\theta = \frac{1}{2\pi}\int _{0}^{2\pi} \tilde f(x)dx$.
+    \end{enumerate}
+\end{ex}
+
+\begin{defn}
+    A \textbf{linear representation} of $G$ on a complex vector space $V$ is a homomorphism $\rho: G \to \GL(V)$ which is continuous, where $\GL (V) \cong \GL _n(\C)$ is viewed with the natural topology. This is equivalent to saying that the multiplication map $G \times V \to V$ sending $(g,x)\mapsto \rho(g)(x)$ is a continuous function of the two variables $g\in G,x \in V$. \textbf{Irreducible representations, characters}, etc. are defined in the same manner as for finite groups.
+\end{defn}
+
+\begin{defn}
+    If $\varphi, \psi :G \to \C$ are any two functions (say continuous), their \textbf{scalar product} is defined by
+    $$\angles{\varphi, \psi}:=\int _G \varphi(g)\bar{\psi (g)}dg $$
+\end{defn}
+
+Most of the properties from the representation theory of finite groups carry over to complex groups replacing $\frac{1}{|G|}\sum_{g \in G}f(g)$ by $\int _Gf(g)dg$. More precisely:
+\begin{rmk}
+    The same:
+    \begin{enumerate}
+        \item Maschke's Theorem remains true, so every representation of a compact group is a sum of irreducible representations.
+        \item Schur's Lemma holds
+        \item The irreducible characters of $G$ are orthonormal elements of
+        $$C(G) :=\{\text{continuous functions }  f:G \to \C\}.$$
+    \end{enumerate}
+    Different:
+    \begin{enumerate}
+        \item There may be infinitely many irreducible representations
+        \item There may be infinitely many irreducible characters
+    \end{enumerate}
+\end{rmk}
+
+The ``naive'' analogue of $\C G$, namely $C(G)$, is no longer a finite dimensional $\C$-vector space. However, it is an inner product space, along with the space $\mc C$ of all class functions on $G$. But, importantly, $C(G)$ is not complex with respect to the norm $|| f ||_2=\sqrt{\int_G |f(g)|dg}$ coming from $\angles ,$ [but it is complete with respect fo the supremum norm $||\cdot ||_\infty$]. The completion of $(C(G),||\cdot ||_2)$ is the space $L^2(G)$ of \textbf{square integrable measurable functions} $G$: the functions $f$ such that $\int _G |f(g)|^2dg < \infty$.
+
+\begin{thm}[Peter-Weyl Theorem]
+    The characters of irreducible representations span a dense subspace of the space of continuous class functions on $G$. That is, if $f$ is a continuous class function, then for all $\veps>0$, there exists $\chi_1,\dots,\chi_n$ irreducible characters $\lambda_i \in \C$ such that
+    $$\abs{\abs{ f-\sum_{i=1}^n\lambda _i\chi _i }}_2<\veps.$$
+    Moreover, there exists a \textbf{Hilbert space decomposition}
+    $$L^2(G) = \bigoplus_{i=1}^\infty V_i^{\oplus \dim V_i}$$
+    where the $V_i$ are the irreducible representations of $G$, and this sum is an \textbf{orthogonal direct sum}.
+\end{thm}
+
+$C(G)$ is still a ``representation'' of $G$ with the group action $(gf)(t)=f(g^{-1}t)$ for all $f \in C(G),g \in G$. We're putting representation in quotes because it's infinite dimensional, so we can't speak of its character, but the Hilbert space decomposition makes sense of this.
+
+\begin{ex}
+    Consider the compact group $S^1$. Since $S^1$ is abelian, its characters are $1$-dimensional. If $f:S^1 \to \C^*$ is a continuous group homomorphism, then since $S^1$ is compact, $\Img f\subset S^1 \subset \C^*$. Exercise: Show that all characters are of the form $\chi_n:z \mapsto z^n$, $n \in \Z$. Then,
+    $$L^2(S^1)=\bigoplus_{n\in\Z}\C\cdot \chi_n.$$
+    So, for any square integrable $f:S ^1 \to \C$, $f \in L^2(S^1)$,
+    $$f = \sum_{n \in \Z}\angles {f_,\chi_n}\chi_n=\sum_{n \in \Z}a_n\chi _n $$
+    where
+    $$a_n=\frac{1}{2\pi} \int_0^{2\pi} f(x)e^{-inx}dx$$
+    is the \textbf{$\bm n$-th Fourier coefficient of $f$.}
+\end{ex}
+
+\section{Representation Theory of the Symmetric Group}
+
+Recall that the conjugacy classes in $S_n$ are indexed by partitions of $n$. For example, $S_4$ has the identity, two-cycles, three-cycles, four-cycles, and products of disjoint two-cycles.
+
+\begin{defn}
+    A \textbf{partition} of $n$ is a decreasing sequence of integers $\lambda=(\lambda_1>\lambda_2>\cdots>\lambda_k>0)$ such that
+    $$|\lambda| := \sum_{i=1}^k\lambda _i=n.$$
+    We write $\lambda \vdash n$ if $\lambda$ is a partition of $n$. The number $k$ of (non-zero) partitions $\lambda_i$ is the \textbf{length} of $\lambda$, denoted $l(\lambda)$. A partition $\lambda$ is identified with its \textbf{Young diagram} of boxes, with $\lambda_i$ boxes in each row. By a \textbf{numbering} of $\lambda \vdash n$ we mean a numbering of the boxes in the diagram of $\lambda$ using $1,\dots,n$. There are $n!$ possible numbering of $\lambda$.
+\end{defn}
+
+\begin{ex}
+The partition $(3,2,1,1)$ has the Young diagram
+\begin{align*}
+    \ydiagram[*(white)]{3,2,1,1}
+\end{align*}
+\end{ex}
+
+Consider $R:= \C[x_1,\dots,x_n]$. $S_n$ acts linearly on $R$ by permuting the variables. The irreducible representations of $S_n$ will be constructed as $S_n$ submodules of $R$, one for each $\lambda \vdash n$.
+
+Given $\lambda$ and a fixed numbering $T$ of $\lambda$, define the polynomial
+$$f_T:= \prod _{i\text{ north of } j}(x_i-x_j)$$
+where the product is over all pairs $(i,j)$ such that $i$ lies due north of $T$. Then, $f_T$ is the product of all Vandermonde determinants corresponding to the columns of $T$.
+
+For example, consider the partition, $\lambda=(3,2,1,1)$ with the following numbering:
+
+\begin{align*}
+\begin{ytableau}
+7 & 1 & 6 \\
+3 & 5  \\
+4 \\ 2
+\end{ytableau}
+\end{align*}
+
+Then,
+$$f_T =(x_7-x_3)(x_7-x_4)(x_7-x_2)(x_3-x_4)(x_3-x_2)(x_4-x_2)(x_1-x_5).$$
+
+\begin{defn}
+    Define $V_\lambda\subset \C[x_1,\dots,x_n]$ to be the $\C$-vector space spanned by all $n!$ polynomials $f_T$, for all numberings of the Young diagram of $\lambda$. $S_n$ acts on $V_\lambda$ by permuting the variables. Hence, $V_\lambda = \C [S_n]\cdot f_T$ is the $\C[S_n]$-submodule of $\C[x_1,\dots,x_n]$ spanned by $f_T$, for any numbering $T$ of $\lambda$. $V_\lambda$ is sometimes called the \textbf{Specht module}.
+\end{defn}
+
+\begin{thm}
+    For $\lambda \vdash n$, the $V_\lambda$ forms a complex set of the irreducible representations of $S_n$
+\end{thm}
+
+\begin{ex}
+\hfill
+\begin{enumerate}[(1)]
+    \item Let $n=2$. We have partitions $(2)$ and $(1,1)$. Then,
+    \begin{align*}
+       & V_{2}=\angles 1\subset \C[x_1,x_2] \text{ is the trivial representation}
+       \\ & V_{1,1}=\angles{x_1-x_2,x_2-x_1}=\angles{x_1-x_2} \text{ is the alternating representation of }S_2
+    \end{align*}
+    \item Let $n=3$. Then, we have the partitions $(3),(1,1,1),(2,1)$. Then,
+    \begin{align*}
+        & V_{3}=\angles 1
+        \\ & V_{1,1,1}=\angles{(x_1-x_2)(x_1-x_3)(x_2-x_3)} \text{ is the alternating representation}
+        \\ & V_{2,1}=\angles{x_i-x_j \mid 1\leq i<j\leq 3}=\angles{x_1-x_2,x_1-x_3} \text{ is the standard representation}
+    \end{align*}
+    \item For any $n$, $V_n$ is the trivial representation, and $V_{1,\dots,1}$ is the alternating representation.
+    \item Let $n=4$. Besides the above $2$, we have
+    \begin{align*}
+        & V_{3,1}=\angles{x_1-x_i \mid i=2,3,4} \text{ is three dimensional}
+        \\ & V_{2,1,1}=\angles{(x_1-x_i)(x_1-x_j)(x_i-x_j) \mid 1 <i<j\leq 4} \text{ is three dimensional}
+        \\ & V_{2,2}=\angles{(x_1-x_2)(x_3-x_4),(x_1-x_3)(x_2-x_4)} \text{ is two dimensional.}
+    \end{align*}
+    Note that our presentation for $V_{2,2}$ is not obvious. Namely, we have the numbering
+    \begin{center}
+        \begin{ytableau}
+            1 & 2 \\ 4 & 3
+        \end{ytableau}
+    \end{center}
+which induces the polynomial $(x_1-x_4)(x_2-x_3)$, but this polynomial in fact equals
+$$(x_1-x_3)(x_2-x_4)-(x_1-x_2)(x_3-x_4).$$
+This motivates us to think about whether or not the numbers are increasing along the rows.
+\end{enumerate}
+\end{ex}
+
+\begin{defn}
+    Any numbering $T$ of $\lambda$ is called a \textbf{standard tableau} if the numbers are increasing along each row and down each column.
+\end{defn}
+
+\begin{thm}
+    The polynomials $f_T$ where $T$ is a standard tableau of shape $\lambda$ form a basis for $V_\lambda$. Hence, $f^{\lambda}:=\dim_\C V_\lambda$ equals the number of standard tableau shapes of $\lambda$.
+\end{thm}
+
+\begin{proof}
+    We'll prove that the $f_T$ are linearly independent. The proof that they span is left as an exercise.
+
+    Consider the monomials $x^\alpha :=x_1^{\alpha_1}\cdots x_n^{\alpha_n}$, where $\alpha=(\alpha_1,\dots,\alpha_n)\in\Z^n$ with $\alpha_i \geq 0$. We order them as follows: $x^\alpha < x^\beta \iff \alpha<\beta$ is the lexicographic order on $\Z_{\geq0}^n$. For example,
+    \begin{align*}
+      & (0,1,2)<(0,2,1)<(1,0,2)<(1,2,0)<(2,0,1)<(2,1,0)
+       \\& \implies  x_2x_3^2<x_2^2x_3<x_1x_3^2<x_1x_2^2<x_1^2x_3<x_1^2x_2.
+    \end{align*}
+
+    For $T$ a standard tableau of $\lambda$, let $m_T$ be the monomial $x_1^{k_1}\cdots x_n^{k_n}$ where $k_i=r-1$ is $i$ lies in the $r$'th row of $T$. For example:
+    \begin{align*}
+        \begin{ytableau}
+1 & 3 \\ 2 & 5 \\ 4
+\end{ytableau},\quad m_T=x_2x_4^2x_5, \quad f_T=(x_1-x_2)(x_1-x_4)(x_2-x_4)(x_3-x_5)
+    \end{align*}
+It's left as an exercise to show that if $T$ is standard, then $f_T=\pm m_T +$ a later monomial.
+
+Let $T_1,\dots,T_s$ be the standard tableau of shape $\lambda$, so $s=f^\lambda$. The monomials $m_{T_1},\dots,m_{T_s}$ are all distinct, and we may assume that $m_{T_1}<\cdots <m_{T_s}$. We claim $f_{T_1},\dots,f_{T_s}$ are linearly independent. Indeed, if $\sum_{i=1}^sc_if_{T_i}=0$, the coefficient of $m_T$ on the LHS is $\pm c_1$. Hence $c_1=0$. Repeating the argument shows that $c_2=0$, and so on. It is ``much harder'' but ``completely trivial'' to show that $f_T$ for $T$ standard span $V_\lambda$.
+\end{proof}
+
+\begin{defn}
+    Given a box $x$ in $\lambda$, the \textbf{hook} $H_x$ at $x$ is the together with all boxes due east and south of $x$. The \textbf{hook length} $h_x$ is the number of boxes in $H_x$.
+\end{defn}
+
+\begin{ex}
+    The box labeled $x$ has the following hook:
+    \begin{center}
+        \begin{ytableau}
+            *(white) &&&
+            \\ *(white) & *(green) x & *(green) & *(green) \\ *(white) & *(green) & \\ *(white) & *(green) &
+        \end{ytableau}
+    \end{center}
+\end{ex}
+
+\begin{thm}[Frame-Robinson-Thrall Theorem]
+    $$f^\lambda = \frac{n!}{\prod_{x \in \lambda}h_x}.$$
+\end{thm}
+\begin{ex}
+    $$f^{(2,2)}=\frac{4!}{3\cdot 2 \cdot 2 \cdot 1}=2.$$
+    As a matter of fact,
+    $$f^{(n,n)}=\frac{1}{n+1}\binom{2n}{n}=C_n,$$
+    the $n$'th Catalan number.
+\end{ex}
+\begin{cor}
+    $\prod_{x \in \lambda}h_x$ divides $n!$ for $\lambda \vdash n$. Moreover,
+    $$\sum_{\lambda \vdash n}(f^\lambda)^2 = n!$$
+\end{cor}
+
+\section{\texorpdfstring{The Character $\chi_\lambda$ of $V_\lambda$}{The Character chi-lambda of V-lambda}}
+
+ We want to compute $\chi_\lambda(\mu)$ for $\lambda,\mu \vdash n$, where $\lambda$ corresponds to the irreducible representations of $V_\lambda$, and $\mu$ corresponds to the conjugacy classes of $S_n$. Let $k=l(\lambda)$, and introduce the variabels $x_1,\dots,x_k$. Moreover, let
+ $$\Delta(x):= \prod_{1 \leq i < j \leq k}(x_i-x_j).$$
+ Suppose $C=C[m]$ is a conjugacy class of $S_n$ consisting of permutations with $m_1$ $1$-cycles, $m_2$ $2$-cycles,$\dots$, $m_d$ $d$-cycles, so $\mu = (1^{m_1}2^{m_2}\cdots d^{m_d})$.
+
+\begin{prop}[Frobenius Formula]
+    $\chi_\lambda (C[m])$ is the coefficient of $x_1^{h_{11}}\cdots x_k^{h_{k1}}$ in $\Delta(x) \cdot \prod _{j=1}^dp_j(x)^{m_j}$, where $p_j(x) = x_1^j+\cdots + x_k^j$. Here, $h_{1 j}=\lambda_j+k-j$ are the hook lengths of $\lambda$ in the 1st column.
+\end{prop}
+
+\begin{defn}
+    The \textbf{Murnagham-Nakayama Rule} is a combinatorial algorithm for computing character values, described below.
+\end{defn}
+
+\begin{defn}
+    If $v \subset \lambda$ is a subset of the diagram of $\lambda$, write $\lambda \setminus v$ for the set-theoretic difference. For $x$ a box in $\lambda$, the \textbf{rim hook} $\alpha$ of $\lambda$ corresponding to $x$ is obtained by projecting the hook $H_x$ along diagonals to the southeast boundary of $\lambda$. The \textbf{height} $\text{ht}(\alpha)$ of $\alpha$ is one less than the number of rows it occupies.
+\end{defn}
+\begin{ex}
+    The rim hoox of $x$ is filled in green.
+    \begin{center}
+        \begin{ytableau}
+            \null &&&& \\  & x & & *(green) & *(green) \\ &&& *(green) \\ && *(green) & *(green) \\ & *(green) & *(green)
+        \end{ytableau}
+    \end{center}
+\end{ex}
+
+\begin{thm}
+    If $\lambda \vdash n$ and $\mu$ is another partition of $n$ corresponding to a conjugacy class in $S_n$, then
+    $$\chi _\lambda(\mu)=\sum_{|\alpha|=\mu_1}(-1)^{\text{ht}(\alpha)}\chi_{\lambda \setminus \alpha}(\mu \setminus \mu_1)$$
+    summed over all rim hooks $\alpha$ such that $|\alpha|= \mu_1$
+\end{thm}
+
+\begin{ex}
+    We may now compute the character recursively. For example,
+    \begin{align*}
+       &\chi_{(4,4,3)}((5,4,2))=-\chi_{(4,2)}(4,2)+\chi_{3,2,1}(4,2)\\ &= (-1)(-1)\chi_{(1,1)}(2)+0=-(-(-(\chi_0(0))))=(-1)^3=-1.
+    \end{align*} This corresponds to the following recursive tree of rim hooks:
+    \begin{center}
+    \begin{forest}
+        [\begin{ytableau}
+            {}&&& \\ {}&&& \\ {}&&
+        \end{ytableau}
+        [
+        \begin{ytableau}
+            {}&&& \\ {}&&*(green)&*(green) \\ *(green)&*(green)&*(green)
+        \end{ytableau}
+        [
+        \begin{ytableau}
+           {}& *(green)&*(green) &*(green) \\ {}&*(green)
+        \end{ytableau}
+        [
+        \begin{ytableau}
+            *(green) \\ *(green)
+        \end{ytableau}
+        [$(-1)^3$]
+        ]
+        ]
+        ]
+        [
+        \begin{ytableau}
+            {}&&&*(green) \\ {}&&*(green)&*(green) \\ &*(green)&*(green)
+        \end{ytableau}
+        [0]
+        ]
+        ]
+    \end{forest}
+    \end{center}
+\end{ex}
+
+\begin{ex}
+    We'll compute the character values for the standard two dimensional representation $V_{2,1}$ of $S_3$. We have three conjugacy classes: $(1,1,1),(2,1),(3)$.
+    \begin{align*}
+        & \chi((1,1,1))=1+1=2
+       \\ & \chi((2,1))=0 \text{ since no rim hook of length 2 can be subtracted}
+       \\ &\chi(3)=-1
+    \end{align*}
+\end{ex}
+
+\section{\texorpdfstring{Polynomial Representations of $\GL_n(\C)$}{Polynomial Representations of GLn(C)}}
+
+In this section, we use $G:= \GL_n(\C)$
+
+\begin{defn}
+    A matrix representation $\rho: G \to \GL_N(\C)$ is called \textbf{polynomial} if for any matrix $A \in \GL_n(\C)$, the entries of $\rho(A)$ are polynomials in the entries of $A$. If $V$ is a complex vector space with $\dim_\C V=N$, the isomorphism $V \cong \C^N$ may be used to define polynomial representations $\rho:G \to \GL(V)$.
+\end{defn}
+
+\begin{ex}
+    \begin{enumerate}
+        \item $V=\C^n$ with the usual action of $G$ on $V$ is the \textbf{standard representation} of $G$.
+        \item For any $k \geq 1$, $T^kV,S^kV,\Wedge^kV$ are all polynomial representations of $G$ (for example, if $g \in G$, then $g(v_1\otimes \cdots \otimes v_k)=gv_1\otimes \cdots \otimes gv_k$). Moreover, $S^kV$ and $\Wedge ^kV$ are irreducible, but $T^kV$ is not for $k \geq 2$.
+        \item $\det V = \Wedge^nV$ is a degree 1 representation of $G$. That is, $\rho:G \to \C^*$ given by $\rho(A) = \det A$.
+        \item $G$ has finite dimensional non-polynomial representations, which are instead rational or meromorphic. For example, $\rho (A)=(\det A)^{-1}$.
+        \item $U(n) \subset \GL_n(\C)$ is a maximal compact subgroup of $\GL_n(\C)$. Weyl's ``unitary trick'' ensures that the polynomial representations of $U(n)$ and $\GL_n(\C)$ actually coincide. Since $U(n)$ is compact, it has more manageable representation theory.
+    \end{enumerate}
+\end{ex}
+
+\section{Schur Modules}
+
+\begin{defn}
+    For any partition $\lambda$ and vector space $V$, we define the \textbf{Schur module} $s_\lambda (V)$ as follows:
+
+    Number the boxes in the Young diagram of $\lambda$ with the integers $1,2,\dots,p=|\lambda|$ in order going from left to right and top to bottom. This gives a standard tableau $T$ on $\lambda$. Let $R$ (resp. $C$) denote the subgroup of $S_p$ consisting of the elements which permute the entries in each row (resp. column) of $T$ with themselves. Now, consider the elements
+    $$a_\lambda :=\sum _{u \in C}\sgn(u) u, \quad b_\lambda :=\sum_{v \in R}v$$
+    in $\C[S_p]$. Define the \textbf{Young symmetrizer} $c_\lambda :=a_\lambda b_\lambda$. Now, given any complex vector space $V$, let $M=T^pV=V\otimes \overset{p}{\cdots}\otimes V$. Then, the group $S_p$ acts on the right on $M$ by permuting the factors:
+    $$(v_1\otimes \cdots \otimes v_p)\sigma := v_{\sigma(1)}\otimes \cdots \otimes v_{\sigma(p)}.$$
+    Moreover, the group $G:= \GL(V)$ acts on the left on $M$ by
+    $$g(v_1\otimes \cdots \otimes v_p)=(gv_1)\otimes \cdots \otimes (gv_p).$$
+    One can see that the two actions commute with each other. Finally, the \textbf{Schur module} $s_\lambda(V)$ is defined at the image of the map $M \to M$ which is right multiplication by $c_\lambda$. This construction is \textbf{functorial}: a linear map $f:V \to W$ of vector spaces induces a linear map $s_\lambda (f):s_\lambda(V)\to s_\lambda(W)$ with $s_\lambda ( f_1\circ f_2)=s_\lambda(f_1)\circ s_\lambda (f_2)$ and $s_\lambda (\id _V)= \id_{S_\lambda (v)}$.
+\end{defn}
+
+\begin{ex}
+    If $\lambda = (4,3,2)$, then $T$ is
+    \begin{ytableau}
+        1 & 2 & 3 & 4 \\ 5 & 6 & 7 \\ 8 & 9
+    \end{ytableau}
+\end{ex}
+
+\begin{ex}
+    \begin{enumerate}
+        \item Let $p=2$, and write $S_2 = \{1,\sigma\}$. The two partitions of $2$ are (2) and $(1,1)$, with Young symmetrizers $c_2=1+\sigma$ and $c_{1,1}=1-\sigma$. We have $s_2(V)=S^2V$ and $s_{1,1}=\Wedge^2V$, sitting inside $T^2V$. In fact, $V \otimes V = S^2V \oplus \Wedge^2V$.
+        \item Generalizing (1), for any $p \geq 1$, we have $c_p=\sum_{\sigma\in S_p}\sigma$, and $c_{1^p}=\sum_{\sigma \in S_p}\sgn (\sigma) \sigma$, so $s_p(V)=S^pV$ and $s_{1^p}(V)=\Wedge ^pV$.
+        \item Given any matrix $A=\{a_{ij}\}$ and partition $\lambda$, the \textbf{Schur matrix} is $s_\lambda(A)$, generalizing $S^pA$ and $\Wedge ^pA$. No general formula is known.
+    \end{enumerate}
+\end{ex}
+
+\begin{thm}
+    Let $V = \C^n$ be the standard representation of $G:=\GL_n(\C)$, and let $\lambda$ be any partition of length $l(\lambda) \leq n$. Then, $s_\lambda (V)$ is an irreducible polynomial representation of $G$. Moreover, $\{s_\lambda(V)\}\mid l(\lambda) \leq n\}$ is a complete set of irreducible polynomial $\C G$-modules.
+\end{thm}
+
+\begin{notebox*}[Question]
+    What is $\dim s_\lambda (V)$?
+\end{notebox*}
+
+\begin{defn}
+    A \textbf{semistandard tableau} $T$ on $\lambda$ is a filling of the boxes in $\lambda$ with positive integers so that the entries are weakly increasing along each row, and strictly increasing down each column.
+\end{defn}
+
+\begin{ex}
+    \begin{ytableau}
+        1 & 1 & 3 & 3 & 4 \\ 2 & 2 & 4 & 4 \\ 4 & 5 & 5
+    \end{ytableau}
+\end{ex}
+
+\begin{prop}
+    The dimension $\dim s_\lambda (V)$ is the number of semistandard tableaux of shape $\lambda$ with entries $\leq n$.
+\end{prop}
+
+\begin{ex}
+    The module $\Wedge^p\C^n$ is the Schur module for $1^p$, so its dimension is the number of ways to fill in the vertical line of boxes so that it's semistandard. This is $\binom{n}{p}$. The dimension $S^p\C^n$ corresponds to the semistandard fillings of the horizontal line of boxes, which is $\binom{n+p-1}{p}$.
+\end{ex}
+
+If $A$ is a diagonal matrix with eigenvalues $x_1,\dots,x_n$, then $\Tr (s_\lambda (A):s_\lambda (V) \to s_\lambda (V))$ is the \textbf{Schur polynomial} $s_\lambda (x_1,\dots,x_n)$. This is the character of $s_\lambda (V)$ in the following sense:
+
+The diagonalizable matrices form a dense open subset of $\GL_n(\C)$. So, any polynomial character $\chi:\GL _n(\C) \to \C$ is determined by its values on diagonalizable elements.
+
+\begin{ex}
+    $s_1=x_1+\cdots +x_n$. $s_{1^p}=e_p(x_1,\dots,x_n)$, the $p$-th elementary symmetric polynomial.
+    $$s_p=\sum_{|\alpha|=p}x^\alpha,$$
+    the sum of all monomials of degree $p$.
+\end{ex}
+
+\begin{thm}[D. Littlewood's Theorem (not that Littlewood)]
+    In general,
+    $$s_\lambda (x_1,\dots,x_n)=\sum_{T} x^{c(T)},$$
+    where the sum runs over all semistandard tableaux $T$ on $\lambda$ with entries $\leq n$, and $c(T)=(c_1,\dots,c_n)$ is the \textbf{content vector} of $T$, where $c_i:=$ the number of entries equal to $i$ in $T$.
+\end{thm}
+
+\begin{ex}
+    Let $\lambda = (2,1)$. A semistandard Young tableau of shape $\lambda$ is of the form
+    \begin{ytableau}
+        a & b \\ c
+    \end{ytableau}
+    where $1 \leq a \leq b$ and $a < c$. So, if $x=(x_1,\dots,x_n)$, then
+    $$s_{2,1}(x) =\sum_{\substack{a\leq b \\ a<c}}x_ax_bx_c=\sum_{a \neq b}x_a^2x_b + 2\sum_{a<b<c}x_ax_bx_c$$
+\end{ex}
+
+\begin{rmk}
+    $s_\lambda(x_1,\dots,x_n)$ is a symmetric, homogeneous polynomial in $x_1,\dots,x_n$ of degree $|\lambda|$.
+\end{rmk}
+
+Much else is known about Schur polynomials.
+
+\begin{prop}
+    \begin{align*}
+        s_\lambda(x_1,\dots,x_n) = \frac{\det (x_i^{\lambda _i +n -j})_{1 \leq i,j \leq n}}{\det (x_i^{n-j})_{1 \leq i,j \leq n}}
+    \end{align*}
+    This was Cauchy's original definition of Schur polynomials.
+\end{prop}
+
+Consider the ring of symmetric polynomials $\C[e_1,\dots,e_n]$. As it turns out, this is
+$$\bigoplus_{\lambda, l(\lambda)\leq n}\C s_\lambda (x) \cong \text{Polynomial representation ring of} \GL_n(\C)$$
+and also
+$$\C[s_1,\dots,s_n].$$
+The products correspond to
+$$s_\lambda (V) \otimes s_\mu(V) = \bigoplus_{l(\nu) \leq n}s_\nu (V)$$
+and
+$$s_\lambda (x) s_\mu(x)=\sum _{l(\nu)\leq n}c_{\lambda \mu}^\nu s_\nu (x).$$
+
+\begin{defn}
+    If $|\lambda|=m$, we have an irreducible character $\chi_\lambda$ of $S_m$. For any partition $\mu:= (\mu_1,\dots,\mu_r)$, let $p_\mu(x) := p_{\mu_1}(x) \cdots p_{\mu _r}(x)$ be the $\mu$-th \textbf{power sum}, where $p_k(x) = x_1^k+\cdots + x_n^k$, where $n \geq l(\lambda)$.
+\end{defn}
+
+\begin{thm}[Frobenius' Theorem]
+    The sets $\{s_\lambda (x)\}_{|\lambda|=m}$ and $\{ p_\lambda(x)\}_{|\lambda|=m}$ are two $\C$-bases of the vector space $\C[x_1,\dots,x_n]^{S_n}_{(m)}$ of symmetric polynomials in $x_1,\dots,x_n$ which are homogeneous of degree $m$. These are related by the following change of basis formula: for any $\mu \vdash m$,
+    $$p_\mu(x) = \sum_{\lambda \vdash m}\chi_\lambda (\mu) \cdot s_\lambda(x),$$
+    where $\chi_\lambda$ is the irreducible character of $S_m$ indexed by $\lambda$, and $\mu$ in $x_\lambda(\mu)$ corresponds to a conjugacy class in $S_m$. We also have
+    $$s_\lambda (x) = \frac{1}{m!}\sum_{\sigma \in S_m}\chi_\lambda ( \sigma) p_{\sigma}(x)$$
+\end{thm}

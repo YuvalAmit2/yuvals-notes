@@ -1,0 +1,1015 @@
+% !TEX root = ../math601-notes.tex
+
+\section{Field Extensions}
+
+\begin{defn}
+    An inclusion $E \supset F$ of fields is called a \textbf{field extension}. The \textbf{degree} $[E:F]$ is the dimension $\dim _FE$. If the degree is finite, we say that $E \supset F$ is a \textbf{finite extension}.
+\end{defn}
+
+\begin{ex}
+    Let $F$ be any field, and consider the characteristic homomorphism $i:\Z \to F$. We have two possibilities:
+    \begin{enumerate}[(a)]
+        \item $i$ is injective, so $\Z \hookrightarrow F$, hence $\Q \subset F$.
+        \item $\ker i = p\Z$ for some prime $p$, so $\F_p:=\Z/p\Z \subset F$.
+    \end{enumerate}
+    We call $\Q$ or $\F_p$ the \textbf{prime subfield} of $F$. This is the smallest field contained in $F$.
+\end{ex}
+
+\begin{thm}
+    Suppose $F \subset K \subset L$ is a tower of three fields. Then, $[L:F]$ is finite $\iff [K:F]$ and $[L:K]$ are both finite. If this is the case, then
+    $$[L:F] = [L:K] \cdot [K:F]$$
+\end{thm}
+
+\begin{proof}
+    First, assume $[L:F]<\infty$. Then, since $K$ is an $F$-subspace of $L$, we have $[K:F]<\infty$. Moreover, any finite set which spans $L$ over $F$ must also span $L$ over $K$, hence $[L:K]<\infty$.
+
+Conversely, suppose $[L:K]=n$ and $[K:F]=m$. In particular, let $u_1,\dots,u_m$ be a basis of $K$ over $F$, and $v_1,\dots,v_n$ is a basis of $L$ over $K$. We claim that $\{u_iv_j: i \in [1,m],j \in [1,j]\}$ is a basis of $L$ over $F$. Indeed, if $v \in L$, we have $v = \sum_{j=1}^n a_jv_j$ for some $a_j \in K$. Moreover, we may write $a_j = \sum_{i=1}^m a_{ij}u_j$ for some $a_{ij} \in F$. Hence, $v = \sum_{i,j}a_{ij}u_iv_j$. For linear independence,
+\begin{align*}
+    \sum_{i,j}a_{ij}u_i v_j =0 \implies \sum_{j=1}^n \paren{\sum_{i=1}^m a_{ij}u_i}v_j =0 \implies  \sum_{i=1}^m  a_{ij}u_i=0 \text{ for all }j \implies a_{ij}=0 \text{ for all } i.
+\end{align*}
+\end{proof}
+
+\begin{cor}
+    If $F \subset K \subset L$ and $[L:F]<\infty$, then $[K:F] \mid [L:F]$. So, if $[L:F]=p$ a prime, then there are no subfields $K$ with $F \subsetneq K \subsetneq L$.
+\end{cor}
+
+\begin{defn}
+    Let $K$ be a field, and $S \subset K$ be any subset. Then, there is a smallest subfield $\angles S$ of $K$ containing the set $S$. In particular,
+    $$\angles S := \bigcap_{\substack{S \subset F \subset K \\ F \text{ a field}}} F$$
+    We are particular interested in the case when $F \subset K$ is an extension, and for $\alpha \in K \setminus F$, we take $S := F \cup \{\alpha\}$. We denote $\angles S:= F(\alpha)$. In particular,
+    $$F(\alpha) = \brax{ \frac{p(\alpha)}{q(\alpha)} : p,q\in F[x],q(\alpha) \neq 0 }$$
+\end{defn}
+
+\begin{defn}
+    Consider the evaluation map $\varphi:F[x] \to F(\alpha)$ sending $f(x) \mapsto f(\alpha)$. We have two cases:
+    \begin{enumerate}
+        \item $\varphi$ is injective, so $f(\alpha) \neq 0$ for all non-zero polynomials $f \in F[x]$. In this case, we say $\alpha$ is \textbf{transcendental} over $F$. We also see that $F(\alpha) \cong F(x)$, the quotient field.
+        \item There exists a non-zero polynomial $f \in F[x]$ with $f(\alpha)=0$. In this case, we say that $\alpha$ is \textbf{algebraic} over $F$.
+    \end{enumerate}
+    If $F = \Q$ and $\alpha \in \C$, we just say $\alpha$ is transcendental or algebraic (i.e. we omit ``over $F$''). Otherwise, these notions are relative to the base field $F$
+\end{defn}
+
+\begin{ex}
+    Euler's number $e$ is transcendental over $\Q$, but algebraic over $\Q(e^2)$, since $e$ is a root of the polynomial $x^2 -e^2 \in \Q(e^2)[x]$.
+\end{ex}
+
+\begin{prop}
+    Let $F\subset K$ be an extension, and let $\alpha \in K$ be algebraic over $F$. Let $f(x) \in F[x]$ be a monic polynomial of least degree $n$ such that $f(\alpha)=0$. Then,
+    \begin{enumerate}[(a)]
+        \item $f$ is unique; we call it the minimal polynomial of $\alpha$ over $F$.
+        \item $f$ is irreducible in $F[x]$
+        \item A polynomial $g \in F[x]$ satisfies $g(\alpha)=0$ if and only if $f\mid g$.
+        \item $[F(\alpha):F]=n$, and $1,\alpha,\dots,\alpha^{n-1}$ form a basis of $F(\alpha)$ as an $F$-vector space.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    We have the evaluate map $\varphi : F[x] \to F(\alpha)$ sending $f \mapsto f(\alpha)$. The image of $\varphi$ is denoted $F[\alpha]=\{f(\alpha) \mid f \in F[x]\}$, a subring of $F(\alpha)$. Hence, $F[\alpha]$ is a domain. Now, $F[x] / \ker \varphi \cong F[\alpha]$. Since $F[x]$ is a PID, we have $\ker \varphi = \angles{f}$ for a unique $f \in F[x]$ up to units, which we can make completely unique by requiring that $f$ is monic. Now, $F[x]/\angles f$ is a domain, so $f(x)$ is irreducible. Hence, $\angles f$ is also a maximal ideal, so $F[\alpha]$ is a field. By definition, we therefore must have $F[\alpha] = F(\alpha)$. This proves (a)-(c).
+
+    Recall that $F[x]/\angles f$ has a basis $\overline{1}, \overline{x},\dots,\overline{x^{n-1}}$. Since $F[x] / \angles f \cong F(\alpha)$, we have the identification $\bar x \leftrightarrow \alpha$, proving (d).
+\end{proof}
+
+\begin{ex}
+    Consider $\Q \paren{\sqrt[3]{5}}$. The minimal polynomial of $\sqrt[3]{5}$ over $\Q$ is $x^3-5$ (irreducible by Eisenstein's criterion), so
+    $$\Q(\sqrt[3]5) = \Q[\sqrt[3]{5}] = \Q \oplus \Q\cdot \sqrt[3]5 \oplus \Q \cdot \sqrt[3]{25}$$
+\end{ex}
+
+\begin{prop}[All Degree 2 Extensions]
+    Assume $\Char F\neq 2$. Then, any extension $K \supset F$ of degree $2$ can be obtained by adjoining a square root to $F$, i.e. $K = F(\delta)$, where $\delta^2 \in F$.
+
+    Conversely, if $\delta \not \in F$, but $\delta ^2 \in F$, then $[F(\delta):F] = 2$.
+\end{prop}
+
+\begin{proof}
+    Assume $[K:F]=2$. Choose any $\alpha \in K \setminus F$. Then, $\{1,\alpha\}$ forms a basis of $K$ over $F$ (they are linearly independent), hence there exists $b,c \in F$ such that $\alpha ^2 + b\alpha +c=0$. By the quadratic formula, we want
+    $$\alpha = \frac{-b \pm \sqrt{b^2-4c}}{2}.$$
+    Let $\delta := 2\alpha +b$. Then, since $2 \neq 0$, we see that $F (\alpha) = F(\delta)$, and $\delta \in K \setminus F$. Moreover, $\delta ^2 = b^2-4c \in F$, so $\delta$ is a square root.
+
+    Conversely, if $\delta \not \in F$ and $\delta^2 \in F$, then $\delta$ has degree $2$ over $F$ (its minimal polynomial is $x^2-\delta ^2 \in F[x]$). Hence, $[F(\delta):F]=2$.
+\end{proof}
+
+\begin{cor}
+    Suppose that $\alpha,\beta$ are algebraic over the field $F$. Then, the following are equivalent
+    \begin{enumerate}
+        \item There exists an isomorphism of fields $\sigma :F [\alpha] \to F[\beta]$ which is the identity map on $F$ (i.e. $\sigma(x)=x$ for all $x \in F$) and $\sigma(\alpha ) =\beta$
+        \item $\alpha$ and $\beta$ have the same minimal polynomial over $F$.
+    \end{enumerate}
+\end{cor}
+\begin{proof}
+    Assume that $\alpha$ and $\beta$ have the same minimal polynomial $f(x)$. Then, we have isomorphisms $F[\alpha] \arr[\varphi] F[x]/\angles f \arr[\psi] F[\beta]$ defined by $\alpha \mapsto \bar x \mapsto \beta$. We thus define $\sigma = \psi \circ \varphi$, and it satisfies the desired properties.
+
+    Conversely, suppose $\sigma :F [\alpha] \to F[\beta]$ is an isomorphism such that $\sigma (x) =x$ for all $x \in F$, and $\sigma(\alpha ) =\beta$. Then, if $f(x) = c_0+c_1x+\cdots  +c_nx^n \in F[x]$ and $f(\alpha )=0$, we have
+    \begin{align*}
+        f(\beta) = f(\sigma(\alpha)) = c_0 + c_1\sigma (\alpha) + \cdots c_n\sigma(\alpha)^n&
+        =\sigma(c_0+c_1\alpha+\cdots + c_n\alpha^n)
+        \\ &=\sigma(f(\alpha))=\sigma(0)=0.
+    \end{align*}
+    Similarly, $f(\beta)=0 \implies f(\alpha)=0$, so $\alpha$ and $\beta$ are roots of the same set of polynomials in $F[x]$, so they must have the same minimal polynomial.
+\end{proof}
+
+\section{Algebraic Field Extensions}
+
+\begin{defn}
+    A field extension $K\supset F$ is \textbf{algebraic over $\bm F$} if each element of $K$ is algebraic over $F$. Otherwise, $K$ is \textbf{transcendental over $\bm F$}.
+
+    If $\alpha$ is algebraic over $F$, the \textbf{degree} of $\alpha$ over $F$ is $[F(\alpha):F]$.
+\end{defn}
+
+\begin{notebox*}
+    If $[K:F]=n$ is finite, then $K$ is algebraic over $F$.
+\end{notebox*}
+
+\begin{proof}
+    For any $\alpha \in K$, the elements $1,\alpha,\dots,\alpha^n$ are linearly dependent.
+\end{proof}
+
+\begin{prop}
+    If $K\supset F$ is a field extension, the elements of $K$ which are algebraic over $F$ form a subfield of $K$.
+\end{prop}
+
+\begin{proof}
+    Suppose $\alpha,\beta$ are algebraic over $F$, where $\alpha$ has degree $n$ and $\beta$ has degree $m$. Then,
+    \begin{align*}
+        [F(\alpha,\beta):F]=[F(\alpha)(\beta):F(\alpha)]\cdot[F(\alpha):F]<\infty.
+    \end{align*}
+    But, $\alpha \pm \beta,\alpha \cdot \beta,\frac{\alpha}{\beta} \in F(\alpha,\beta)$ which we've shown has finite degree, so they are all algebraic over $F$.
+\end{proof}
+
+\begin{defn}
+    A complex number $\alpha$ is \textbf{algebraic} if it's algebraic over $\Q$. Otherwise, $\alpha$ is \textbf{transcendental}. The subfield $\bar \Q \subset \C$ of all algebraic numbers is countable.
+\end{defn}
+
+\section{Construction with Straight Edge and Compass}
+
+\begin{defn}[Constructable Numbers]
+    Start with a point $(a,b) \in \Z^2$ as known. A point $(x,y) \in \R^2$ is \textbf{constructable} if you can construct it by straight edge and compass. A real number $x$ is \textbf{constructable} if $(x,0)$ is constructable.
+\end{defn}
+
+\begin{rmk}
+    Using analytic geometry, one sees that if $\alpha \in \R$ is constructable, then $\alpha$ lies in a field $K$ such that
+    $$\Q=K_0 \subset K_1 \subset K_2\subset \cdots \subset K_n=K$$
+    where $K_i = K_{i-1}(\sqrt{\alpha_i})$ for some $\alpha_i \in K_{i-1}$. Therefore $[K:\Q] = 2^n$. Therefore $\deg (\alpha) = 2^r$.
+\end{rmk}
+
+\begin{proof}
+    The intersection of two lines, the intersection of a line and a circle, and the intersection of two circles can always be described with square roots.
+\end{proof}
+
+\begin{prop}
+    $\sqrt[3]{2}$ is not constructable, since it has degree $3$ over $\Q$. Similarly, $\pi$ is transcendental, so it's not constructable.
+\end{prop}
+
+\section{Splitting Fields}
+
+\begin{ex}
+    Let $f(x)=x^2+1 \in \R[x]$. We can then define the field $\C:= \R[x]/\angles{x^2+1}$, which is a field where $f$ has a root (namely $\bar x$).
+\end{ex}
+
+\begin{prop}[][label=prop:splitfld]
+    Given a field $F$ and $f \in F[x]$, there exists a field $K$ in which $f$ has a root.
+\end{prop}
+
+\begin{proof}
+    If $f$ is irreducible over $F$, then set $K:= F[x]/\angles f$, a field. Then, $\bar x:= x + \angles f$ is a root of $f$ in $K$, since $f(\bar x)=\bar{f(x)}=0 \in K$.
+
+    In general, if $p$ is an irreducible factor of $f$, then set $K:= F[x]/\angles p$, so that $p$ has a root in $K$, and therefore $f$ does as well.
+\end{proof}
+
+\begin{cor}
+    Suppose $f\in F[x]$ has degree $n$. Then, there exists an extension $K$ of $F$ with $[K:F] \le n!$ in which $f$ has $n$ roots. In this case, we say $f$ \textbf{splits completely} in $K$.
+\end{cor}
+
+\begin{proof}
+    Follows from the proof of \Cref{prop:splitfld} by induction on $n$.
+\end{proof}
+
+\begin{defn}
+    The extension $K\supset F$ is a \textbf{slitting field} for $f\in F[x]$ if
+    \begin{enumerate}
+        \item $f$ splits completely in $K[x]$
+        \item $f$ does not split completely over any proper subfield of $K$ containing $F$.
+    \end{enumerate}
+    In this case, $K=F(\alpha_1,\dots,\alpha_n)$, where $\alpha_1,\dots,\alpha_n$ are the roots of $F$ in $K$.
+\end{defn}
+
+\begin{ex}
+    \begin{enumerate}
+        \item The splitting field of $x^3-5$ over $\Q$ is $K=\Q(\sqrt[3]{5},\omega \sqrt[3]{5},\omega^2\sqrt[3]{5})$ where $\omega = e^{2\pi i /3}=\frac{-1+i\sqrt 3}{2}$. It's easy to see that $K=\Q(\sqrt[3]{5},\omega)$. Observe that $1 + \omega + \omega ^2=0$, some $\omega$ has degree $2$. Therefore, $2,3 \mid [K:\Q] \leq 3!=6$, hence $[K:\Q] =6$.
+        \item $[\Q(\sqrt[4]{5}),\Q]=4$ since $x^4-5$ is irreducible over $\Q$, and $[\Q(i):\Q]=2$. Moreover
+        $$\Q \overset{4}{\subset}\Q(\sqrt[4]5)\overset{2}{\subset}\Q(\sqrt[4]{5})(i)=K,$$
+        which we know because $i \not \in \Q(\sqrt[4]{5})$ (it's totally real).
+    \end{enumerate}
+\end{ex}
+
+\begin{thm}[][label=thm:splitext]
+    Let $\sigma :F \to F'$ be an isomorphism of fields, let $f \in F[x]$ be irreducible, and let $f':=\sigma f \in F'[x]$ be the (irreducible) polynomial obtained by applying $\sigma$ to the coefficients of $f(x)$. Then,
+    \begin{enumerate}
+        \item Let $a$ be a root of $f$ in some extension of $F$, and $b$ a root of $\sigma f$ in some extension of $F'$. Then, there is an isomorphism $\tilde \sigma:F(a) \to F'(b)$ with $\tilde \sigma (a)=b$, and $\tilde \sigma|_F=\sigma$.
+        \item Let $K$ be a splitting field for $f$ over $F$ and $K'$ be a splitting field for $\sigma f$ over $F'$. Then, $\sigma$ extends to an isomorphism $\tilde \sigma:K \to K'$ such that $\tilde \sigma |_F=\sigma$.
+    \end{enumerate}
+\end{thm}
+
+\begin{proof} \hfill
+    \begin{enumerate}
+        \item $\tilde \sigma$ is defined as the composite map
+        $$F(\alpha) \arr[\sim] F[x]/\angles f \arr[\sigma] F'[x]/\angles{\sigma f} \arr[\sim] F'(b)$$
+        \item We induct on $n = \deg f$. Observe that if $f$ splits completely in $F[x]$, then $\sigma f$ splits completely in $F'[x]$, so $K=F,K'=F'$, hence $\tilde \sigma = \sigma$. This completes the base case.
+
+        Now, assume $n>1$, and suppose $p(x)$ is an irreducible factor of $f(x)$ of degree $\geq2$. Then, $\sigma p$ is an irreducible factor of $\sigma f$ with the same degree as $p$. So, let $\alpha \in K$ be a root of $p$ and $\beta\in K'$ a root of $\sigma p$. Then, by (1), $\sigma$ extends to an isomorphism $\sigma':F(\alpha) \to F'(\beta)$ such that $\sigma'(\alpha)=\beta$.
+
+        Let $F_1:=F(\alpha),F_1':=F'(\beta)$. Then, $f(x) = (x-\alpha)f_1(x)$, and $\sigma f(x)=(x-\beta)\sigma'f_1(x)$, so $\deg f_1 = \deg \sigma f_1=n-1$. Moreover, $K$ is a splitting field of $f_1$ over $F_1$, and similarly $K'$ is a splitting field of $\sigma 'f_1$ over $F_1'$. By induction, there exists an isomorphism $\tilde \sigma : K \to K'$ extending $\sigma'$, which induces an extension of $\sigma$.
+        % https://q.uiver.app/#q=WzAsNixbMCwyLCJGIl0sWzAsMSwiRihcXGFscGhhKSJdLFsxLDEsIkYnKGIpIl0sWzEsMiwiRiciXSxbMCwwLCJLIl0sWzEsMCwiSyciXSxbMCwzLCJcXHNpZ21hIl0sWzAsMSwiIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDIsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSwyLCJcXHNpZ21hJyJdLFs0LDUsIlxcdGlsZGUgXFxzaWdtYSJdLFsxLDQsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiw1LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+\[\begin{tikzcd}[ampersand replacement=\&]
+	K \& {K'} \\
+	{F(\alpha)} \& {F'(b)} \\
+	F \& {F'}
+	\arrow["{\tilde \sigma}", from=1-1, to=1-2]
+	\arrow[no head, from=2-1, to=1-1]
+	\arrow["{\sigma'}", from=2-1, to=2-2]
+	\arrow[no head, from=2-2, to=1-2]
+	\arrow[no head, from=3-1, to=2-1]
+	\arrow["\sigma", from=3-1, to=3-2]
+	\arrow[no head, from=3-2, to=2-2]
+\end{tikzcd}\]
+    \end{enumerate}
+\end{proof}
+
+\begin{defn}
+    Let $K,L\supset F$ be two field extensions. A homomorphism $\sigma :K \to L$ is said to be an $\bm F$-\textbf{homomorphism} if $\sigma(x)=x$ for all $x \in F$. If $\sigma$ is also an isomorphism, we say that $K$ and $L$ are $\bm F$\textbf{-isomorphic}.
+\end{defn}
+
+\begin{cor}
+    Any two splitting fields for a polynomial $f \in F[x]$ are $F$-isomorphic.
+\end{cor}
+
+\begin{proof}
+    Take $\sigma :F\to F$ to be the identity map $\id _F$ in \Cref{thm:splitext}.
+\end{proof}
+
+\begin{defn}
+    An extension $K \supset F$ is a \textbf{normal extension} if $K$ is algebraic over $F$, and if every irreducible polynomial $f \in F[x]$ with one root in $K$ splits completely in $K[x]$. In this case, we say \textbf{$\bm K$ is normal over $\bm F$}.
+\end{defn}
+
+\begin{thm}
+    Let $f\in F[x]$ and $K$ be a splitting field of $f$ over $F$. Then, $K$ is a normal extension of $F$.
+\end{thm}
+
+\begin{proof}
+    Let $a_1,\dots,a_n$ be the roots of $f$ in $K$, so $K=F(a_1,\dots, a_n)$. Let $g \in F[x]$ be irreducible with a root $b \in K$. Let $L$ be a splitting field of $g$ over $K$, and $b'$ be any root of $g$ in $L$.
+
+    \textbf{Claim}: $b' \in K$, so $g$ splits in $K[x]$.
+
+    Let $\sigma :F(b) \arr[\sim]F(b')$ be an isomorphism with $\sigma (b) = b'$. Note that $K$ is a splitting field for $f$ over $F(b)$, and $K(b') = F(a_1,\dots,a_n,b')$ is a splitting field of $\sigma f=f$ over $F(b')$. Therefore, by the previous theorem, we obtain an isomorphism $\tilde \sigma :K \to K(b')$ extending $\sigma$.
+    % https://q.uiver.app/#q=WzAsNixbMSwzLCJGIl0sWzAsMiwiRihiKSJdLFsyLDIsIkYoYicpIl0sWzAsMSwiSyJdLFsyLDEsIksoYicpIl0sWzIsMCwiTCJdLFsxLDIsIlxcc2lnbWEiXSxbMyw0LCJcXHRpbGRlIFxcc2lnbWEiXSxbMSwzLCIiLDEseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsNCwiIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDUsIiIsMSx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwyLCIiLDEseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsMSwiIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	\&\& L \\
+	K \&\& {K(b')} \\
+	{F(b)} \&\& {F(b')} \\
+	\& F
+	\arrow["{\tilde \sigma}", from=2-1, to=2-3]
+	\arrow[no head, from=2-3, to=1-3]
+	\arrow[no head, from=3-1, to=2-1]
+	\arrow["\sigma", from=3-1, to=3-3]
+	\arrow[no head, from=3-3, to=2-3]
+	\arrow[no head, from=4-2, to=3-1]
+	\arrow[no head, from=4-2, to=3-3]
+\end{tikzcd}\]
+In particular $\sigma(b)= b'$. Now, $b$ lies in $F(a_1,\dots,a_n)=F[a_1,\dots,a_n]$, so $b=h(a_1,\dots,a_n)$ for some polynomial $h\in F[x_1,\dots,x_n]$. Furthermore, since $\tilde \sigma f =f $, we know $\tilde \sigma(a_1),\dots, \tilde \sigma(a_n)$ are roots of $f$ in $K(b')$, so they are just $a_1,\dots,a_n$ again in some different order. Therefore,
+$$b'=\tilde \sigma (b)=\tilde \sigma (h(a_1,\dots,a_n))=h(\tilde \sigma (a_1),\dots, \tilde \sigma(a_n)) \in K,$$
+proving the claim.
+\end{proof}
+
+\begin{defn}
+    We say that two elements $a,b \in K$ are \textbf{conjugate} over $F$ if they have the same minimal polynomial over $F$.
+\end{defn}
+
+\begin{cor}
+    Let $K\supset F$ be a finite extension. Then, TFAE:
+    \begin{enumerate}[(i)]
+        \item $K$ is normal
+        \item $K$ is the splitting field of an $f \in F[x]$
+        \item Every conjugate of an element of $K$ lies in $K$.
+    \end{enumerate}
+\end{cor}
+
+\begin{proof}
+    Exercise.
+\end{proof}
+
+\begin{defn}
+    A field $\bar F$ is called an \textbf{algebraic closure} of $F$ if $\bar F$ is algebraic over $F$, and if every polynomial $f \in F[x]$ splits completely over $\bar F$. A field $K$ is \textbf{algebraically closed} if every non-constant polynomial $f \in K[x]$ has a root in $K$ (hence splits completely in $K$).
+\end{defn}
+
+\begin{rmk}
+    If $\bar F$ is an algebraic closure of $F$, then $\bar F$ is algebraically closed.
+\end{rmk}
+
+\begin{proof}
+If $f \in \bar F[x]$, and $\alpha$ is a root of $f$, then $\bar F(\alpha) \supset \bar F$ is an algebraic extension. Since $\bar F \supset F$ is algebraic, we deduce that $\bar F(\alpha) \supset F$ is algebraic, hence $\alpha$ is algebraic over $F$. Thus, $\alpha \in \bar F$.
+\end{proof}
+
+\begin{ex}
+    $\C$ is the algebraic closure of $\R$, and algebraically closed.
+\end{ex}
+
+\subsection{Construction of Algebraic Closure of a Field (E. Artin)}
+
+\begin{prop}
+    For any field $F$, there exists an algebraically closed field $K$ containing $F$.
+\end{prop}
+
+\begin{proof}
+To each polynomial $f \in F[x]$ of degree $\geq 1$, we associate a letter $x_f$. Let $S$ be the set of all such letters, and form the polynomial ring $F[S]$. Let $I$ be the ideal of $F[S]$ generated by all polynomials $f(x_f)$. We claim $I \neq F[S]$: Indeed, otherwise, we have a finite combination
+\begin{align} \label{eq:lincomb}
+ g_1f_1(x_{f_1})+\cdots + g_nf_n(x_{f_n})=1
+\end{align}
+with $g_i \in F[S]$. For simplicity, write $x_i := x_{f_i}$. The polynomials $g_i$ involve a finite number of variables, says $x_1,\dots,x_N$ with $N \geq n$. Then, the relation \eqref{eq:lincomb} now reads as
+\begin{align} \label{eq:lincomb2}
+\sum_{i=1}^ng_i(x_1,\dots,x_N)f_i(x_i)=1.
+\end{align}
+Now, let $F'\supset F$ be a finite extension in which each $f_i$ has a root $\alpha_i$. Let $\alpha_i:=0$ for $i>n$. Then, substituting into \eqref{eq:lincomb2} yields $0=1$.
+
+Now, knowing $I \neq F[S]$, we have $I \subset M$ for some maximal ideal $M$. Now, $K_1:= F[S]/M$ is a field containing (an isomorphic copy of) $F$. Moreover, each of the polynomials $f \in F[x]$ has a root in $K_1$ by construction, namely the image of $x_f$, since $f(x_f) \in I \subset M$.
+
+Now, performing the same construction with $K_1$ in place of $F$, we obtain a field $K_2\supset K_1$, where all non-constant polynomials in $K_1[x]$ have a root. Continuing this way, we obtain a sequence of fields $F:=K_0\subset K_1 \subset K_2 \subset \cdots$, where each non-constant polynomial in $K_n[x]$ has a root in $K_{n+1}$. Let $K = \bigcup_{n=0}^\infty K_n \supset F$, and we can guarantee $K$ is algebraically closed, since any polynomial $h \in K[x]$ lies in $K_{n}[x]$ for some sufficiently large $n$. Then, $h$ has a root in $K_{n+1}\subset K$. Therefore, $K$ is algebraically closed.
+\end{proof}
+
+\begin{thm}
+    Every field $F$ has an algebraic closure. Moreover, the algebraic closure is unique up to isomorphism.
+\end{thm}
+
+\begin{proof}
+By the previous proposition, there exists an algebraically closed field $K \supset F$. Let $\bar F$ be the collection of elements of $K$ which are algebraic over $F$. By definition, $\bar F$ is an algebraic extension of $F$. If $f \in F[x]$, then $f$ splits completely over $K$ into linear factors $x-\alpha$, but each $\alpha$ is a root of $f$, so algebraic over $F$, so $\alpha \in \bar F$. Thus, each $f \in F[x]$ splits completely in $\bar F[x]$.
+
+Uniqueness is proved along the same lines as the uniqueness of splitting fields, using Zorn's Lemma, but working with a family $\mc F$ of polynomials in $F[x]$ to be split, instead of a single $f(x)$.
+\end{proof}
+
+\section{Separable Extensions}
+
+\begin{defn}
+    Let $f \in F[x]$ with leading coefficient $a\in F\setminus \{0\}$. Over a splitting field for $f$, we can factor
+    $$f(x)=a(x-\alpha_1)^{n_1}\cdots (x-\alpha_k)^{n_k},$$
+    where the $\alpha_i$ are distinct, and $n_i \geq 1$. We say that $\alpha_i$ is a \textbf{simple root} if $n_i=1$, and a \textbf{multiple root} if $n_i >1$. This $n_i$ is called the \textbf{multiplicity} of $\alpha_i$.
+\end{defn}
+
+\begin{defn}
+    A polynomial $f \in F[x]$ is called \textbf{separable} if it has no multiple roots. Otherwise, $f$ is called \textbf{inseparable}.
+\end{defn}
+
+Notice that if $f(x)$ has distinct roots in one splitting field, then $f(x)$ has distinct roots in any splitting field, since we have an $F$-isomorphism between any two splitting fields for $f$ that is bijective on the set of roots.
+
+Our focus is on the separability of irreducible polynomials. We'll see that in fields of characteristic $>0$, there are many irreducible polynomials which are inseparable.
+
+\begin{ex}
+    Let $F:=\F_2(t)$, where $\F_2 =\Z/2\Z$. Consider $f(x) := x^2-t \in F[x]$. It's easy to check that $f$ has no roots in $F$, hence irreducible over $F$. However, if $\alpha$ is a root of $f$ in an extension field of $F$, then $\alpha^2=t$, and since $\Char F=2$, we have $(x-\alpha)^2 = x^2-\alpha^2=x^2-t$. Therefore, $f$ is inseparable over $F$.
+\end{ex}
+
+\begin{defn}
+    Given $f(x)  =a_nx^n+\cdots + a_1x+a_0 \in F[x]$, the \textbf{derivative} of $f$ is the polynomial $f'(x) = na_nx^{n-1}+\cdots +2a_2x+ a_1$.
+\end{defn}
+
+\begin{prop}
+    A polynomial $f(x)$ has a multiple root $\alpha \iff \alpha$ is also a root of $f'(x)$, i.e. $f$ and $f'(x)$ are both divisible by the minimal polynomial of $\alpha$ over $F$.
+
+    In particular, $f(x)$ is separable $\iff$ $\gcd (f,f')=1$.
+\end{prop}
+
+\begin{proof}
+If $f(x)=(x-\alpha)^ng(x)$ for some $n \geq 2$, then
+$$f'(x) = n(x-\alpha)^{n-1}g(x) + (x-\alpha)^ng'(x)$$
+has $\alpha$ as a root. Conversely, if $\alpha$ is a root of both $f$ and $f'$, then $f(x)=(x-\alpha)h(x)$ and $f'(x) = h(x)+(x-\alpha)h'(x)$, so $h(\alpha)=0$, hence $h(x)=(x-\alpha)h_1(x)$, so $f(x) = (x-\alpha)^2h_1(x)$.
+\end{proof}
+
+\begin{cor}
+    In characteristic $0$, every irreducible polynomial $f$ is separable.
+\end{cor}
+
+\begin{proof}
+Since $\deg f'(x) =\deg f(x)-1$ in characteristic $0$, we must have $\gcd (f,f')=1$ since $f$ is irreducible.
+\end{proof}
+
+\begin{cor}
+    In characteristic $p$, an irreducible polynomial $f$ is separable, unless it has the form $f(x) = b_0+b_1x^p+\cdots +b_mx^{mp}=g(x^p)$ for some $g \in F[x]$.
+\end{cor}
+
+\begin{defn}
+    Let $F$ be a field of characteristic $p>0$. The $p$-th power map $\varphi(x) :=x^p$ is the \textbf{Frobenius endomorphism} of $F$.
+\end{defn}
+
+\begin{rmk}
+    $\varphi$ is an injective field homomorphism $F\to F$. In particular, if $F$ is a finite field, then $\varphi$ is an isomorphism, so every element of $F$ is a $p$-th power.
+\end{rmk}
+
+\begin{proof}
+Follows from $(x+y)^p=x^p+y^p$ and $(xy)^p=x^py^p$ in characteristic $p$.
+\end{proof}
+
+\begin{defn}
+    A field $F$ of characteristic $p>0$ is called \textbf{perfect} if every element in $F$ is a $p$-th power, i.e. $F=F^p$, i.e. $\varphi$ is an isomorphism. Any field of characteristic $0$ is also called perfect.
+\end{defn}
+
+\begin{prop}
+    Every irreducible polynomial over a perfect field $F$ is separable. A polynomial in $F[x]$ is separable if and only if it is the product of distinct irreducible polynomials in $F[x]$.
+\end{prop}
+
+\begin{proof}
+Suppose $\Char F =p>0$, and $f(x) \in F[x]$ is irreducible. If $f$ is inseparable, then $f(x)= q(x^p)$ for some $q(x) = a_mx^m +\cdots  + a_1x+a_0 \in F[x]$. Since $F$ is perfect, let $a_i=b_i^p$ for $0 \leq i \leq m$. Then,
+\begin{align*}
+f(x) = b_m^px^{pm}+\cdots + b_1^px^p+b_0^p=(b_mx^m+\cdots  + b_1x+b_0)^p.
+\end{align*}
+This contradicts the irreducibility of $f(x)$.
+\end{proof}
+
+\begin{rmk}
+    One can show that if $F \neq F^p$, there exists irreducible inseparable polynomials in $F[x]$.
+\end{rmk}
+
+\begin{defn}
+    A field extension $K \supset F$ is \textbf{separable} if its algebraic, and if every element of $K$ is a root of a separable polynomial with coefficients over $F$. A field extension $K \supset F$ which is not separable is called \textbf{inseparable}.
+\end{defn}
+
+\begin{prop}
+    Any algebraic extension of a perfect field is separable.
+\end{prop}
+
+\section{Finite Fields}
+
+\begin{lem}
+    Let $F$ be a finite field containing a subfield $E$ with $|E|=q$. Then, $|F|=q^{[F:E]}$.
+\end{lem}
+
+\begin{proof}
+Let $m := [F:E]$. If $b_1,\dots,b_m$ is a basis for $F$ over $E$, then each element of $F$ has a unique expression $x_1b_1+\cdots + x_mb_m$ with $x_i$ in $E$. Since each $x_i$ can take on $q$ distinct values, we see that $|F| =q^m$.
+\end{proof}
+
+\begin{cor}
+    If $F$ is a finite field, then $|F| = p^n$, where $p=\Char F$ and $n =[F:\F _p]$.
+\end{cor}
+
+\begin{lem}[][label=lem:lem2]
+    Suppose $F$ is a finite field with $q$ elements, and $E \subset F$ is a subfield. Then,
+    \begin{enumerate}[(1)]
+        \item Every element $a \in F$ satisfies $a^q=a$.
+        \item The polynomial $x^q-x \in E[x]$ factors in $F[x]$ as
+        $$x^q-x = \prod_{a \in F}(x-a)$$
+    \end{enumerate}
+\end{lem}
+
+\begin{proof}
+    For (1), if $a=0$, then $a^q=0=a$. If $a \neq 0$, then $a \in F^* = F\setminus \{0\}$. The multiplicative group $(F^*,\cdot )$ has $q-1$ elements, hence $a^{q-1}=1$, so $a^q=a$.
+
+    For (2), we know that every element of $F$ is a root of $x^q-x$ by (1). Moreover, $x^q-x$ can have at most $q$ roots, hence it has exactly $q$ roots (all the elements of $F$).
+\end{proof}
+
+\begin{thm}[Existence and Uniqueness of Finite Fields (E. Galois)]
+    For every prime $p$ and $n \geq 1$, there exists a finite field with $p^n$. Moreover, any finite field with $q=p^n$ elements is isomorphic to the splitting field of $x^q-x$ over $\F_p$.
+\end{thm}
+
+\begin{proof}
+Consider the splitting field $F$ of $f(x) = x^q-x$ over $\F_p$. Note that $f$ has $q$ distinct roots in $F$, since $f'(x)=-1$, so $\gcd (f,f')=1$. Let $\mc S:=\{ a \in F\mid a^q-a=0\}$. Note that $0,1\in \mc S$, and if $a,b\in \mc S$, then
+$$(a+b)^q-(a+b)=a^q+b^q-a-b=0$$
+so $a+b \in \mc S$, and for $b \neq 0$, $ab^{-1}\in \mc S$ as well. Hence, $\mc S$ is a field. Moreover, $f(x)$ splits completely over $\mc S$ by definition, hence $F = \mc S$, and $|F| = |S|=q$.
+
+For uniqueness: Let $F$ be any finite field of order $q=p^n$. Then, $F\supset \F_p$, and by \Cref{lem:lem2}, $F$ is the splitting field of $x^q-x$ over $\F_p$. The result follows from the uniqueness of splitting fields.
+\end{proof}
+
+\begin{thm}
+    Let $F$ be any field, and $H \leq (F^\times ,\cdot)$ be a finite subgroup of $F^\times$. Then, $H$ is cyclic, and consists of roots of unity in $F$.
+    
+    In particular, if $F$ is finite, then $F^\times$ is cyclic.
+\end{thm}
+
+\begin{proof}
+Suppose $|H|=n$. Then, $\alpha^n=1$ for all $\alpha \in H$, hence all elements of $H$ are root of $x^n-1$, which is a polynomial of at most $n$ roots. Hence, $H$ consists exactly of the $n$-th roots of unity in $F$. By the classification of finite abelian groups,
+$$H \cong \Z/d_1\Z \oplus \cdots \oplus \Z/d_k$$
+as an additive group, where $d_1\mid d_2\mid \cdots \mid d_k$, and $n=d_1\cdots d_k$. So, each element in $H$ has order dividing $d_k$, so is a root of $x^{d_k}-1$. This polynomial has at most $d_k$ roots in $F$, so we conclude that $d_k=n,k=1,$ and $H \cong \Z/n\Z$ is cyclic.
+\end{proof}
+
+\begin{cor}
+    \begin{enumerate}[(1)]
+        \item Any finite field $\F_{q^m}$ is a simple extension of $\F_q$ (so generated by a single element).
+        \item For all $m\geq1$, there exists an irreducible polynomial in $\F_q[x]$ of degree $m$.
+    \end{enumerate}
+\end{cor}
+
+\begin{proof}
+    \hfill
+    \begin{enumerate}[(1)]
+        \item If $(\F_{q^m}^\times,\cdot)$ is generated by $\zeta \in \F_{q^m}^\times$, then clearly $\F_{q^m}=\F_q(\zeta)$.
+        \item Since $[\F_q(\zeta):\F_q]=m$, the minimal polynomial of $\zeta$ over $\F_q$ has degree $m$.
+    \end{enumerate}
+\end{proof}
+
+\section{Galois Theory}
+
+\begin{defn}
+    For any field $K$, the set of automorphisms of $K$ (isomorphisms $K \to K$) forms a group under composition, denoted $\textbf{Aut } \bm K$.
+
+    The set $\textbf{Gal}\bm{(K/F)}$ of all $F$-automorphisms of $K$ (i.e. elements in $\Aut K$ which are the identity on $F$) is called the \textbf{Galois group of $K$ over $F$}.
+\end{defn}
+
+\begin{prop}
+    Let $K\supset F$ be a field extension, and suppose $\alpha \in K$ is algebraic over $F$. Then, for any $\sigma \in \Gal(K/F)$, $\sigma(\alpha)$ is a root of the minimal polynomial of $\alpha$ over $F$. So, the elements of $\Gal(K/F)$ permute the roots of polynomials in $F[x]$.
+\end{prop}
+
+\begin{proof}
+If $f(x) = c_0 + c_1x+\cdots + c_nx^n \in F[x]$ is the minimal polynomial of $\alpha$ over $F$, then
+\begin{align*}
+ f(\alpha)=0 \implies &\sigma(f(\alpha))=0\implies 0=\sigma(c_0+c_1\alpha + \cdots + c_n\alpha^n)\\ &= \sigma(c_0) + \sigma(c_1)\sigma(\alpha)  +\cdots + \sigma(c_n)\sigma(\alpha)^n
+ \\ & = c_0+c_1\sigma(\alpha)+\cdots + \sigma(c_n)\sigma(\alpha)^n.
+\end{align*}
+\end{proof}
+
+\begin{ex}
+    \begin{enumerate}
+        \item $\Gal(F/F) = \{1\}$
+        \item $\Gal(\C/\R) = \{1,z \mapsto \bar z\} \cong \Z/2\Z$.
+       [Indeed, since $\C = \R\oplus \R i$, $\sigma \in \Gal(\C/\R)$ is determined by $\sigma(i)$. But, as $x^2+1$ is the minimal polynomial of $i$ over $\R$, $\sigma(i)=\pm i$.] More generally, if $K\supset F$ is a quadratic extension, and $\Char F\neq 2$, then $K = F(\sqrt \delta )$, so the same work shows $\Gal(K/F) \cong \Z/2\Z$.
+        \item $\Gal(\Q(\sqrt[3]{7})/\Q) \cong \{1\}$ [If $\sigma \in \Gal(\Q(\sqrt[3]7)/\Q)$, then $\sigma$ is determined by $\sigma(\sqrt[3]7)$. Now, $\sigma(\sqrt[3]7) \in \{\sqrt[3]7, \omega \sqrt[3]7,\omega^2\sqrt[3]7)\}$ where $\omega$ is a third root of unity. However $\Q(\sqrt[3]7) \subset \R$ and the other two options for $\sigma(\sqrt[3]7)$ are not in $\R$. Hence, $\sigma =1$.]
+    \end{enumerate}
+\end{ex}
+
+Now, given any field extension $F\subset K$, we've associated to it some group $\Gal(K/F)$. Let's go the other way.
+
+\begin{defn}
+    Given $G \leq \Aut K$, we say that the \textbf{fixed field} of $G$ is the subfield
+    $$K^G:=\{x \in K\mid \sigma(x)=x \: \forall \sigma \in G\},$$
+    which one checks is indeed a field.
+\end{defn}
+Now, suppose $K\supset F$ is a field extension, and $G= \Gal(K/F)$. Then, we have maps:
+% https://q.uiver.app/#q=WzAsMTIsWzAsMiwiRiJdLFswLDEsIkUiXSxbMCwwLCJLIl0sWzEsMCwiMSJdLFsxLDEsIlxcR2FsKEsvRSkiXSxbMSwyLCJHIl0sWzMsMCwiMSJdLFszLDEsIkgiXSxbMywyLCJHIl0sWzQsMiwiRiJdLFs0LDEsIkteSCJdLFs0LDAsIksiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsxLDIsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzEsNCwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoic3F1aWdnbHkifX19XSxbMyw0LCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFs0LDUsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzYsNywiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNyw4LCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFs5LDEwLCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsxMCwxMSwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbNywxMCwiIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoic3F1aWdnbHkifX19XV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+	K \& 1 \&\& 1 \& K \\
+	E \& {\Gal(K/E)} \&\& H \& {K^H} \\
+	F \& G \&\& G \& F
+	\arrow[hook, from=1-2, to=2-2]
+	\arrow[hook, from=1-4, to=2-4]
+	\arrow[hook, from=2-1, to=1-1]
+	\arrow[squiggly, from=2-1, to=2-2]
+	\arrow[hook, from=2-2, to=3-2]
+	\arrow[squiggly, from=2-4, to=2-5]
+	\arrow[hook, from=2-4, to=3-4]
+	\arrow[hook, from=2-5, to=1-5]
+	\arrow[hook, from=3-1, to=2-1]
+	\arrow[hook, from=3-5, to=2-5]
+\end{tikzcd}\]
+It's easy to see that $K \rightsquigarrow 1,F\rightsquigarrow G,1\rightsquigarrow K$ at the three corners. But, at the fourth corner, $G \rightsquigarrow F$ is not always true, i.e. $K^{\Gal(K/F)}$ may be different than $F$ (example 3 in the above example). This motivates the following definition:
+
+\begin{defn}
+    Let $K \supset F$ be a field extension. $K$ is said to be \textbf{Galois over $\bm F$} and $K\supset F$ is said to be a \textbf{Galois extension} if $K$ is algebraic over $F$, and $F$ is the fixed field of $\Gal(K/F)$, i.e. $F = K^{\Gal(K/F)}$. [We only consider finite Galois extensions, so algebraic is automatic]
+\end{defn}
+
+\begin{thm}[][label=thm:fld_thm1]
+    Let $K\supset F$ be a finite field extension. Then, $|\Gal(K/F)| \leq [K:F]$. Furthermore, TFAE:
+    \begin{enumerate}[(i)]
+        \item $K\supset F$ is Galois.
+        \item $|\Gal(K/F)| = [K:F]$
+        \item $K\supset F$ is normal and separable.
+        \item $K$ is the splitting field of a separable polynomial $f \in F[x]$.
+    \end{enumerate}
+\end{thm}
+
+\begin{rmk}
+    \begin{enumerate}[(1)]
+        \item Part (iv) tells us how to construct Galois extensions.
+        \item We've already shown (iii) $\iff$ (iv) without the separable condition.
+    \end{enumerate}
+\end{rmk}
+
+\begin{thm}[Fundamental Theorem of Galois Theory][label=thm:ftogt]
+    Let $K\supset F$ be a Galois extension. Then there is a bijection between subfields of $K$ containing $F$, and subgroups of $\Gal(K/F)$ given by
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJFIl0sWzEsMCwiXFxHYWwoSy9FKSJdLFsxLDEsIkgiXSxbMCwxLCJLXkgiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzIsMywiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dXQ==
+    \[\begin{tikzcd}[ampersand replacement=\&,row sep=tiny]
+    	E \& {\Gal(K/E)} \\
+    	{K^H} \& H
+    	\arrow[maps to, from=1-1, to=1-2]
+    	\arrow[maps to, from=2-2, to=2-1]
+    \end{tikzcd}\]
+    which are inverses to each other. Moreover:
+    \begin{enumerate}[(1)]
+        \item These correspondences are inclusion reversing, i.e. $H_1 \leq H_2 \iff K^{H_1}\supset K^{H_2}$
+        \item $[K:E]=|H|$ and $[E:F] =|\Gal(K/F):H|$ when $E \leftrightarrow H$.
+        \item $K\supset E$ is always Galois, with Galois group $H = \Gal (K/E)$.
+        \item $E$ is Galois over $F \iff$ $H \unlhd \Gal(K/F)$. In this case, $\Gal(E/F) \cong \Gal(K/F)/H$
+    \end{enumerate}
+\end{thm}
+
+\begin{rmk}
+    Given a finite extension $K\supset F$, and $f \in F[x]$, the Galois group $\Gal(K/F)$ permutes the roots of $f(x)$. If $K$ is the splitting field of $f$, then $K\cong F[\alpha_1,\dots,\alpha_n]$, where the $\alpha_i$ are the roots of $f(x)$. If $X:=\{\alpha_1,\dots,\alpha_n\}$, we get a permutation representation $\varphi:\Gal(K/F) \to S(X)$, where $\varphi (g)$ is the permutation of $X$ induced by $g$.
+
+    Moreover, the representation $\varphi$ is faithful, i.e. $\varphi$ is injective [an automorphism $g \in \Gal(K/F)$ acting trivially on $X$ must be the identity, since $X$ generates $K$ over $F$]. So, $\Gal(K/F)$ is realized as the set of permutations of $X$ which come from $F$-automorphisms of $K$.
+\end{rmk}
+
+\begin{rmk}
+    Since $\Gal(K/F)$ is finite, it has a finite number of subgroups. Hence, if $K/F$ is Galois, the fundamental theorem implies that there are only finitely many subfields $E$ with $F \subset E \subset K$.
+\end{rmk}
+
+\begin{prop}
+    Let $K\supset F$ be a finite extension of fields. Then, there exists an element $\alpha$ of $K$ such that $K = F(\alpha)$ (so $K/F$ is simple) $\iff$ there exist only a finite number of fields $E$ with $F\subset E\subset K$.
+\end{prop}
+
+\begin{proof}
+If $K$ is a finite field, then we know $K = F(\alpha)$ for some $\alpha \in K$, since $(K^\times, \cdot)$ is cyclic. Also, clearly there are only finitely many subfields of $K$. Now, we may assume that $F$ is an infinite field (otherwise $K$ would be finite since the extension is finite).
+
+Suppose there are only finitely many fields $E$ with $F \subset E \subsetneq K$, say $E_1,\dots,E_n$. Then, $\bigcup_{i=1}^mE_i \neq K$ (from HW \#1 of last semester, where we showed a vector space over an infinite field can't be written as the union of finitely many proper subspaces). Now, choose $\alpha \in K \setminus \bigcup _{i=1}^mE_i$. Then, clearly $F(\alpha)=K$, since $F(\alpha) \neq E_i$ for all $i=1,\dots,n$.
+
+Conversely, suppose $K = F(\alpha)$, and let $f \in F[x]$ be the minimal polynomial of $\alpha$ over $F$. Given $F \subset E \subset K$, let $g_E(x) \in E[x]$ be the minimal polynomial of $\alpha$ over $E$. Then, $g_E$ divides $f$. So, there can only be finitely many such polynomials $g_E$. We claim that the map $E \mapsto g_E$ is injective, which will conclude the proof.
+
+Indeed, let $E_0 \subset E$ be the subfield generated over $F$ by the coefficients of $g_E$. Then, $g_E$ has coefficients in $E_0$, and is irreducible over $E_0$ since it's irreducible over $E$. Hence, the degree of $\alpha$ over $E_0$ is the same as the degree of $\alpha$ over $E$. Therefore, $E_0 =E$, since $K = F(\alpha) \supset E \supset E_0$ and $F(\alpha)=E_0(\alpha)=E(\alpha)$. This finishes the proof.
+\end{proof}
+
+\begin{cor}[Theorem of the Primitive Element]
+    Given $K \supset F$ a finite Galois extension, there exists $\gamma \in K$ such that $K=F(\gamma)$.
+\end{cor}
+
+\begin{rmk}
+    More generally, this is true for any finite separable extension, since any such is contained in a Galois extension.
+\end{rmk}
+
+\begin{proof}
+If $K=F(\alpha_1,\dots,\alpha_n)$, $f_i$ is the minimal polynomial of $\alpha _i$, and $L$ is the splitting field of $f_1\cdots f_n$, then $F \subset K \subset L$, and $L/F$ is Galois by \Cref{thm:fld_thm1}.
+\end{proof}
+
+\begin{ex}
+    Any finite extension $K$ of $\Q$ can be written as $\Q(\gamma)$.
+\end{ex}
+
+\section{Examples of Galois Correspondence}
+
+Consider the following four examples.
+
+\begin{ex}
+Suppose $\Char F \neq 2$, and $K \supset F$ is a quadratic extension. Then, we know $K=F(\sqrt a)$ for some $a \in F$, and then $\Gal(K/F) = \{1,\sigma\}$, where $\sigma(x+y \sqrt a) = x-y\sqrt a$. This corresponds to the diagram:
+ % https://q.uiver.app/#q=WzAsNCxbMCwwLCIxIl0sWzAsMSwiRz1cXHsxLDBcXH0iXSxbMSwwLCJGKFxcc3FydCBhKSJdLFsxLDEsIkYiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsMiwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	1 \& {F(\sqrt a)} \\
+	{G=\{1,0\}} \& F
+	\arrow[no head, from=1-1, to=2-1]
+	\arrow[no head, from=2-2, to=1-2]
+\end{tikzcd}\]
+\end{ex}
+
+\begin{ex}
+An extension $K \supset F$ is \textbf{biquadratic} if $[K:F]=4$, and $K$ is generated by the roots of two quadratic polynomials in $F[x]$. Assume $\Char F \neq 2$. Then, we have $K=F(\sqrt a,\sqrt b)$ for some $a,b \in F$ such that $\sqrt a,\sqrt b \not \in F$. Then, the condition $[K:F]=4$ is equivalent to $\sqrt{ab} \not \in F$. [Indeed: if $K=F(\sqrt a)(\sqrt b)$ has degree $4$ over $F$, then $\sqrt b \not \in F[\sqrt a]$, so there does not exists $x,y \in F$ with $\sqrt b = x+y\sqrt a \iff x=\sqrt b-y\sqrt a$. By squaring, we see this equality holds if and only if $\sqrt{ab} \in F$.] Now, $K=F(\sqrt a,\sqrt b)$ is the splitting field of $(x^2-a)(x^2-b)$, a separable polynomial over $F$. Hence, $K \supset F$ is a Galois extension. By our first example, there exists a unique $F(\sqrt a)$-automorphism $\sigma$ of $K$ with $\sigma(\sqrt b) = -\sqrt b$. Similarly, we have a $F(\sqrt b)$-automorphism $\tau$ with $\tau(\sqrt a)=-\sqrt a$. We thus also have their composition $\sigma \tau$ as a $F$-automorphism, which maps $\sqrt a \mapsto -\sqrt a$ and $\sqrt b \mapsto - \sqrt b$. Since $|\Gal(K/F)|=[K:F]=4$, these must be all the automorphisms, i.e.
+$$\Gal(K/F)=\{1,\sigma,\tau,\sigma \tau \} \cong V_4 \cong \Z/2\Z \oplus \Z/2\Z.$$
+This has the correspondence diagram
+% https://q.uiver.app/#q=WzAsMTIsWzEsMSwiMSJdLFswLDIsIlxcezEsXFxzaWdtYVxcfSJdLFsxLDIsIlxcezEsXFxzaWdtYSBcXHRhdVxcfSJdLFsyLDIsIlxcezEsXFx0YXVcXH0iXSxbMSwzLCJWXzQiXSxbNCwxLCJGKFxcc3FydCBhLCBcXHNxcnQgYikiXSxbMywyLCJGKFxcc3FydCBhKSJdLFs1LDIsIkYoXFxzcXJ0IGIpIl0sWzQsMiwiRihcXHNxcnR7YWJ9KSJdLFs0LDMsIkYiXSxbMSwwLCJcXHRleHR7U3ViZ3JvdXBzfSJdLFs0LDAsIlxcdGV4dHtGaXhlZCBGaWVsZHN9Il0sWzUsNiwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs1LDgsIiIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNSw3LCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzcsOSwiIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs2LDksIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbOCw5LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsNCwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDQsIiIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSw0LCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsMywiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFswLDIsIiIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwxLCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+\[\begin{tikzcd}[ampersand replacement=\&,column sep=small,row sep=scriptsize]
+	\& {\text{Subgroups}} \&\&\& {\text{Fixed Fields}} \& \\
+	\& 1 \&\&\& {F(\sqrt a, \sqrt b)} \\
+	{\{1,\sigma\}} \& {\{1,\sigma \tau\}} \& {\{1,\tau\}} \& {F(\sqrt a)} \& {F(\sqrt{ab})} \& {F(\sqrt b)} \\
+	\& {V_4} \&\&\& F
+	\arrow[no head, from=2-2, to=3-1]
+	\arrow[no head, from=2-2, to=3-2]
+	\arrow[no head, from=2-2, to=3-3]
+	\arrow[no head, from=2-5, to=3-4]
+	\arrow[no head, from=2-5, to=3-5]
+	\arrow[no head, from=2-5, to=3-6]
+	\arrow[no head, from=3-1, to=4-2]
+	\arrow[no head, from=3-2, to=4-2]
+	\arrow[no head, from=3-3, to=4-2]
+	\arrow[no head, from=3-4, to=4-5]
+	\arrow[no head, from=3-5, to=4-5]
+	\arrow[no head, from=3-6, to=4-5]
+\end{tikzcd}\]
+\end{ex}
+
+\begin{ex}
+Consider the splitting field $K=\Q(\sqrt[3]{2},\omega)$ of $x^3-2$ over $\Q$, where $\omega$ is a primitive third root of unity. Note that $[\Q(\omega):\Q]=2$ since $\omega^2+\omega  +1=0$. Moreover, $[\Q(\sqrt[3]{2}), \Q]=3$, so $2,3 \mid [K:\Q] \leq 3!$, hence $[K:\Q]=6$ and $|\Gal(K/\Q)|=6$. Since $x^3-2$ has three roots, $\Gal(K/\Q)$ is a subgroup of $S_3=S(\{$roots$\})$, so by size considerations, $\Gal(K/\Q) \cong S_3$. By similar work to example 2, $\Gal(K/\Q)=\angles{\sigma, \tau}$, where $\sigma(\sqrt[3]{2}) = \omega \sqrt[3]{2}$ is a $\Q(\omega)$-automorphism, and $\tau(\omega)=\omega^2$ is a $\Q(\sqrt[3]{2})$-automorphism. This has the correspondence diagram
+% https://q.uiver.app/#q=WzAsMTQsWzIsMSwiMSJdLFswLDIsIlxcbGFuZyBcXHNpZ21hIFxccmFuZyJdLFsxLDIsIlxcbGFuZyBcXHRhdSBcXHJhbmciXSxbMywyLCJcXGxhbmcgXFx0YXUgXFxzaWdtYSBcXHJhbmciXSxbMiwzLCJTXzMiXSxbNSwxLCJcXFEoXFxzcXJ0WzNdezJ9LFxcb21lZ2EpIl0sWzQsMiwiXFxRKFxcb21lZ2EpIl0sWzcsMiwiXFxRKFxcb21lZ2EgXFxzcXJ0WzNdezJ9KSJdLFs1LDIsIlxcUShcXHNxcnRbM117Mn1cXG9tZWdhICkiXSxbNSwzLCJcXFEiXSxbMiwwLCJcXHRleHR7U3ViZ3JvdXBzfSJdLFs1LDAsIlxcdGV4dHtGaXhlZCBGaWVsZHN9Il0sWzIsMiwiXFxsYW5nbGUgXFxzaWdtYSBcXHRhdSBcXHJhbmciXSxbNiwyLCJcXFEoXFxvbWVnYSBeMiBcXHNxcnRbM117Mn0pIl0sWzUsNiwiMyIsMSx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNSw4LCIyIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs1LDcsIjIiLDEseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzcsOSwiIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs2LDksIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbOCw5LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsNCwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDQsIiIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSw0LCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsMywiMiIsMSx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwyLCIyIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFswLDEsIjMiLDEseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEyLDQsIiIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwxMiwiMiIsMSx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNSwxMywiMiIsMSx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMTMsOSwiIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+\[\begin{tikzcd}[ampersand replacement=\&,column sep=tiny,row sep=small]
+	\&\& {\text{Subgroups}} \&\&\& {\text{Fixed Fields}} \&\& \\
+	\&\& 1 \&\&\& {\Q(\sqrt[3]{2},\omega)} \\
+	{\langle \sigma \rangle} \& {\langle \tau \rangle} \& {\langle \sigma \tau \rangle} \& {\langle \tau \sigma \rangle} \& {\Q(\omega)} \& {\Q(\sqrt[3]{2}\omega )} \& {\Q(\omega ^2 \sqrt[3]{2})} \& {\Q(\omega \sqrt[3]{2})} \\
+	\&\& {S_3} \&\&\& \Q
+	\arrow["3"{description}, no head, from=2-3, to=3-1]
+	\arrow["2"{description}, no head, from=2-3, to=3-2]
+	\arrow["2"{description}, no head, from=2-3, to=3-3]
+	\arrow["2"{description}, no head, from=2-3, to=3-4]
+	\arrow["3"{description}, no head, from=2-6, to=3-5]
+	\arrow["2"{description}, no head, from=2-6, to=3-6]
+	\arrow["2"{description}, no head, from=2-6, to=3-7]
+	\arrow["2"{description}, no head, from=2-6, to=3-8]
+	\arrow[no head, from=3-1, to=4-3]
+	\arrow[no head, from=3-2, to=4-3]
+	\arrow[no head, from=3-3, to=4-3]
+	\arrow[no head, from=3-4, to=4-3]
+	\arrow[no head, from=3-5, to=4-6]
+	\arrow[no head, from=3-6, to=4-6]
+	\arrow[no head, from=3-7, to=4-6]
+	\arrow[no head, from=3-8, to=4-6]
+\end{tikzcd}\]
+Notice how $\Q(\omega)/\Q$ is Galois, corresponding to the normal subgroup $\angles \sigma$ of $S_3$. The other three extensions are not Galois over $\Q$, corresponding to the other three subgroups which are not normal.
+\end{ex}
+
+\begin{ex}[The generic Galois extension]
+Let $F$ be any field, $x_1,\dots,x_n$ indeterminants, and consider the field $K:= F(x_1,\dots,x_n)$ of rational functions in $x_1,\dots,x_n$. The symmetric group $S_n$ acts on $K$ by permuting the variables: $\sigma f(x_1,\dots,x_n)=f(x_{\sigma(1)},\dots,x_{\sigma(n)})$. Consider the fixed field $S:= K^{S_n}$, consisting of rational functions which are \textbf{symmetric} is $x_1,\dots,x_n$. In $S$, we have the elementary symmetric polynomials
+$$s_1:=x_1+\cdots + x_n \hspace{10mm} s_j:=\sum_{i_1<\cdots <i_j}x_{i_1}\cdots x_{i_j} \hspace{10mm}s_n:=x_1\cdots x_n.$$
+We claim $S=F(s_1,\dots,s_n),[K:S]=n!$, and $K \supset S$ is Galois with Galois group $S_n$.
+
+Indeed, note $S_n \subset \Gal(K/S)$ by definition, so $|\Gal(K/S)| \geq n!$, hence $|\Gal(K/S)|=n!$. Consider a variable $t$ and the polynomial
+$$f(t):=\prod_{i=1}^n(t-x_i)=\sum_{i=0}^n(-1)^is_it^{n-i}=t^n-s_1t^{n-1}+\cdots +(-1)^ns_n$$
+in $S[t]$. $K$ is clearly the splitting field of $f(t)$ over $F(s_1,\dots,s_n)$. Also $K\supset S \supset F(s_1,\dots,s_n)$, so $[K:S] \leq [K:F(s_1,\dots,s_n)]\leq n!$. On the other hand by \Cref{thm:fld_thm1}, we have $n! \leq |\Gal (K/S)| \leq [K:S] \leq n!$. This proves the claim.
+\end{ex}
+
+\begin{rmk}
+    In the fourth example, the roots of $f(t)$ are independent variables, and each permutation of these roots extends to an automorphism of $F(x_1,\dots,x_n)=K$
+\end{rmk}
+
+\begin{cor}
+    Any finite group $G$ is the Galois group of some field extension
+\end{cor}
+
+\begin{proof}
+We know that $G$ is a subgroup of $S_n$ for some $n$. Let $K \supset F$ be a Galois extension with $\Gal(K/F) = S_n$. Then, by the Galois correspondence (\Cref{thm:ftogt}), $K \supset K^G \supset F=K^{S_n}$ and $K \supset K^G$ is Galois with $\Gal(K/K^G) \cong G$.
+\end{proof}
+
+\begin{notebox*}[Open Question (Inverse Galois Problem)]
+    Is every finite group $G$ a Galois group over $\Q$? That is, does there exists a Galois extension $K \supset \Q$ with $\Gal(K/\Q) = G$.
+\end{notebox*}
+
+\begin{defn}
+    If $f \in F[x]$ is a separable polynomial, the \textbf{Galois group of $\bm f$} is $\Gal(K/F)$, where $K$ is a splitting field of $f$ over $F$.
+\end{defn}
+
+\begin{thm}
+    Let $f \in \Q[x]$ be irreducible with $\deg f =p$ a prime. If $f$ has precisely $2$ non-real roots in $\C$, then the Galois group of $f$ over $\Q$ is $S_p$.
+\end{thm}
+
+\begin{proof}
+Consider the following lemma:
+\begin{lem}
+    If $H$ is a subgroup of $S_p$ and $H$ contains both a $p$-cycle and a transposition $(ij)$, then $H=S_p$.
+\end{lem}
+\begin{proof}
+    Exercise.
+\end{proof}
+Now, let $K$ be the splitting field of $f$ over $\Q$, and $\alpha$ a root of $f$. Then, $[\Q(\alpha):\Q]=\deg f=p$ since $f$ is irreducible. Now, $K \supset \Q(\alpha) \supset \Q$, hence
+$$p=[\Q(\alpha):\Q] \Bigl \vert [K:\Q] = |\Gal (K/\Q)|.$$
+Also, we know $G:=\Gal(K/\Q)$ is a subgroup of $S_p$, since its elements permute the roots of $f(x)$. By Cauchy's theorem, $G$ has an element $\sigma$ is order $p$, and $\sigma$ maps to a $p$-cycle in $S_p$.
+
+Let $X=\{z,\bar z,\alpha_3,\dots,\alpha_p\}$ be the set of all roots of $f$, where $z,\bar z$ are the two compelx roots, and all other $\alpha_j \in \R$. Complex conjugation $\tau(x)= \bar x$ maps $z \mapsto \bar z$, $\bar z \mapsto z$, and fixes the $\alpha _j$, so restricts to an element of $\Gal(K/\Q)$, which is a transposition $(ij)$ when mapped to $S_p$. Thus, $\Gal(K/\Q)=S_p$ by the lemma.
+\end{proof}
+
+\begin{ex}
+    When $p=5$, let $f(x)=2x^5-10x+5$, which is irredicible over $\Q$. Using calculus, one can show that $f$ has three real roots, hence two complex roots, so its Galois group over $\Q$ is $S_5$.
+\end{ex}
+
+\begin{rmk}
+    One can show that $S_n$ is a Galois group over $\Q$ for all $n \geq 1$.
+\end{rmk}
+
+\begin{thm}
+    $x^n-x+1$ has Galois group $S_n$ over $\Q$ (might be $x^n-x-1$).
+\end{thm}
+
+\begin{thm}
+    Let $q=p^n$ for some prime $p$ and $G = \Gal (\F_{q^m}/\F_q)$. Then, the elements of $G$ are the automorphisms $\sigma_0=1$ and $\sigma_1,\dots,\sigma_{m-1}$ with $\sigma_j(x):=x^{q^j}$. Hence, $\F_{q^m}/\F_q$ is a Galois extension with cyclic Galois group of order $m$.
+\end{thm}
+
+\begin{proof}
+Observe that each $\sigma_j$ is an injective endomorphism of $\F_{q^m}$, hence an automorphism because $\F_{q^m}$ is finite. Since $\F_q$ consists of the roots of $x^q-x$, we see that $\sigma_j|_{\F_q}=\id _{\F_q}$, so $\sigma_j\in G$ for each $j$. Note that $\sigma_0,\dots,\sigma_{m-1}$ are distinct since they take distinct values on a primitive element $\zeta$ of $\F_{q^m}$. Therefore, $m=[\F_{q^m}:\F_q] \geq |G| \geq m$, so $G=\{\sigma_i :0 \leq i \leq m-1\}$ and $G \cong \Z/m\Z$ is cyclic.
+\end{proof}
+
+\section{Proofs of Theorems}
+
+We'll now attempt to prove \Cref{thm:fld_thm1} and \Cref{thm:ftogt}. We begin with the following fact.
+
+\begin{prop}[][label=prop:minpol]
+    Let $G$ be a finite group of automorphisms of a field $K$, and let $F:=K^G$ be its fixed field (so $K/F$ is a Galois extension). Choose $\beta := \beta_1\in K$, and let $\{\beta_1,\dots,\beta_r\}$ be its orbit under the action of $G$. Then, $\beta$ is algebraic over $F$ of degree $r$, and its minimal polynomial over $F$ is $g(x):= (x-\beta_1)\cdots (x-\beta_r)$.
+\end{prop}
+
+\begin{proof}
+The coefficients of $g(x)$ are elementary symmetric polynomials in $\beta_1,\dots,\beta_r$, hence they are fixed under the action of any $\sigma \in G$. Hence, $g(x) \in K^G[x]=F[x]$. Let $f(x)$ be the minimal polynomial of $\beta$ over $F$. Since $g(\beta)=0$, we have $f(x) \mid g(x)$. But, since $G$ permutes the roots of irreducible polynomials, each $\beta_i$ must also be a root of $f(x)$. Hence, $g(x) \mid f(x)$.
+\end{proof}
+
+\begin{ex}
+    Let $K=\Q(\sqrt 2,\sqrt 3),F=\Q$, and $G=\angles{\sigma,\tau}\cong V_4$ from an earlier example. Then, the minimal polynomial of $\beta:= 7\sqrt 2 + 5\sqrt 3$ over $\Q$ is
+    $$g(x)=(x-7 \sqrt 2 + 5\sqrt 3)(x-7\sqrt 2 -5 \sqrt 3)(x+7\sqrt 2 + 5\sqrt 3)(x+7\sqrt 2-5\sqrt 3)\in \Q[x]$$
+\end{ex}
+
+We can now prove \Cref{thm:fld_thm1}. Here it is again:
+
+\begin{notebox*}[Restating \Cref{thm:fld_thm1}]
+    Let $K\supset F$ be a finite field extension. Then, $|\Gal(K/F)| \leq [K:F]$. Furthermore, TFAE:
+    \begin{enumerate}[(i)]
+        \item $K\supset F$ is Galois.
+        \item $|\Gal(K/F)| = [K:F]$
+        \item $K\supset F$ is normal and separable.
+        \item $K$ is the splitting field of a separable polynomial $f \in F[x]$.
+    \end{enumerate}
+\end{notebox*}
+
+\begin{proof}
+
+\begin{prop}[][label=prop:fld_prop1]
+    If $K$ is a field, and $\sigma_1,\dots,\sigma_n \in \Aut K$ are distinct, then there do not exists elements $a_1,\dots,a_n \in K$ (not all zero) such that $\sum  a_i\sigma _i(u)=0$ for all $u \in K$.
+\end{prop}
+
+\begin{proof}
+Assume contrarily that we have a relation of this type with as few terms as possible. Upon renumbering, we may assume the minimal relation is $a_1\sigma_1(u) + \cdots + a_m\sigma_m(u)=0$ with $a_i \neq 0$ for all $1 \leq i \leq m$. Clearly, $m>1$, since $m=1 \implies \sigma_1=0$ or $a_1=0$. So, there exists $c \in K$ with $\sigma_1(c) \neq \sigma _m(c)$. Now,
+\begin{align*}
+  &\sum _{i=1}^ma_i\sigma_i(cu)=0 \implies \sum _{i=1}^na_i\sigma_i(c)\sigma _i(u)=0
+  \\ & \sigma_1(c) \sum_{i=1}^ma_i\sigma_i(u)=0 \implies \sum_{i=1}^na_i\sigma_1(c)\sigma_i(u)=0,
+\end{align*}
+so subtracting gives
+$$\sum_{i=1}^ma_i(\sigma_i(c) - \sigma_1(c))\sigma_i(u)=0,$$
+so we obtain a contradiction with $b_i = a_i(\sigma_i(c) -\sigma_1(c))$ for $2 \leq i \leq m$.
+\end{proof}
+
+Now, let $G:=\{ \sigma_1=1,\sigma_2,\dots,\sigma_n\}$ be a subgroup of $\Aut K$, and let $F:=K^G$. We claim $[K:F]=[K:K^G]=n=|G|$.
+\begin{proof}
+Indeed, suppose $n>[K:F]$. Let $w_1,\dots,w_m$ be a basis of $K$ over $F$ (so $m<n$). The system
+\begin{align} \label{eq:system}
+    \case{\sigma_1(w_1)x_1+\cdots + \sigma_n(w_1)x_n=0 \\ \vdots \\ \sigma_1(w_m)x_1+\cdots + \sigma_n(w_m)x_n=0}
+\end{align}
+of $m$ equations in $n$ unknowns has a non-zero solution $\beta_1,\dots,\beta_n$. Given any $u \in K$, write $u = \sum_{i=1}^m a_iw_i$ with $a_i \in F$. Multiplying the $i$'th equation in \eqref{eq:system} by $a_i$, and noticing that $\sigma_j(a_i)=a_i$ for all $i,j$, adding the resulting equation gives
+$$\sigma_1(u) \beta_1 +\cdots + \sigma_n(u)\beta_n=0$$
+for all $u \in K$. This contradicts \Cref{prop:fld_prop1}. On the other hand, if $n<[K:F]$, then there are more than $n$ $F$-linearly independent elements of $K$, say $\alpha_1,\dots,\alpha_{n+1}$. Then, they system
+\begin{align} \label{eq:system2}
+    \case{
+    \sigma_1(\alpha_1)x_1+\cdots + \sigma_1(\alpha_{n+1})x_{n+1}=0
+    \\ \vdots
+    \\ \sigma_n(\alpha_1)x_1+\cdots + \sigma_n(\alpha_{n+1}x_{n+1}=0
+    }
+\end{align}
+has a solution $\beta_1,\dots,\beta_{n+1}$ in $K$, where not all $\beta_i$ are zero. Moreover, at least one $\beta_i$ is not in $F$, as otherwise the $\{\alpha _i\}$ would be linearly dependent over $F$ by the first equation in \eqref{eq:system2}, since $\sigma_1=1$. Now, choose a solution $\beta_1,\dots,\beta_r$ with the minimal number of non-zero $\beta$'s. Dividing by $\beta_r$, we may assume $\beta_r=1$. After reordering the system now reads
+$$\sigma_i(\alpha_1)\beta_1+\cdots + \sigma_i(\alpha_{r-1})\beta_{r-1}+\sigma_i(\alpha_r)=0$$
+for $1 \leq i \leq n$. Assume $\beta_1\not \in F$. Then, there exists $\sigma _k$ such that $\sigma_k(\beta_1) \neq \beta _1$. Applying $\sigma_k$ to the equation above yields
+$$\sigma_k\sigma_i(\alpha_1)\sigma_k(\beta_i) + \dots + \sigma_k\sigma_i(\alpha_r)=0$$
+for $1 \leq i \leq n$. But, since $G$ is a group, we have $\{\sigma _k\sigma_1,\dots,\sigma_k\sigma_n\}=\{\sigma_1,\dots,\sigma_n\}$, so by reindexing, we write
+$$\sigma_j(\alpha_1)\sigma_k(\beta_1)+\cdots + \sigma_j(\alpha_{r-1})\sigma_k(\beta_{r-1})+\sigma_j(\alpha_r)=0.$$
+Then subtraction this system from the first of the three system, we obtain
+$$\sigma_j(\alpha_1)(\beta_1-\sigma_k(\beta_1))+\cdots + \sigma_j(\alpha_{r-1})(\beta_{r-1}-\sigma_k(\beta_{r-1}))=0$$
+for $1 \leq j \leq n$. This is a solution to \eqref{eq:system2}, and $\beta_1-\sigma_k(\beta_1) \neq 0$, contradicting minimality.
+\end{proof}
+
+Now, back to \Cref{thm:fld_thm1}. If $K \supset F$ is any field extension, then for $G= \Gal(K/F)$, we have $K \supset K^G \supset F$. Hence, $|G| = [K:K^G] \leq [K:F]$, with equality if and only if $F=K^G$. This proves (i) $\iff$ (ii).
+
+(i) $\implies$ (ii): Let $G \supset F$ be Galois, and take $\alpha \in K \setminus F$. \Cref{prop:minpol} implies that the minimal polynomial of $\alpha$ over $F$ is
+$\prod_{i=1}^r ( x - \sigma_i(\alpha))$, where $\sigma_1(\alpha),\dots,\sigma_r(\alpha)$ are the distinct elements of the $G$-orbit $G\cdot \alpha := \{ \sigma (\alpha):\sigma \in G\}$. Hence, $K/F$ is normal and separable.
+
+(iii) $\implies$ (iv): We've shown that $K \supset F$ being normal implies $K$ is the splitting field of a polynomial $f \in F[x]$. If $K \supset F$ is separable, we can take $f$ to be separable.
+
+(iv) $\implies$ (i),(ii): Suppose $K$ is the splitting field of a separable polynomial $f \in F[x]$. We use induction on $[K:F],$ so assume $[K:F]>1$. Let $p(x)$ be an irreducible factor of $f(x)$ with $\deg p(x) > 1$. Let $\alpha$ be a root of $p(x)$ and $E:=F(\alpha)$, so $F \subsetneq E \subset K$. Then, $K$ is the splitting field of $f$ over $E$, so by induction, $K/E$ is Galois. Let $H:= \Gal(K/E) \leq G =\Gal(K/F)$. Let $\alpha_1,\dots,\alpha_r$ be the distinct roots of $p(x)$, so $[E:F]=r$. By the isomorphism extension theorem, there exists $\tau _i \in G$ with $\tau _i(\alpha)=\alpha_i$ for $1 \leq i \leq r$. That is $\tau _i$ extends $F(\alpha ) \cong F(\alpha_i)$ to $K$.
+
+We claim that the cosets $\tau_iH$ are distinct for $1 \leq i \leq r$. Indeed, if $i \neq j$, and $\tau_i\tau_j^{-1} \in H$, then $\tau_i^{-1}\tau_j(\alpha)=\alpha$, hence $\alpha_i = \tau_i(\alpha)=\tau_j(\alpha)=\alpha_j$, a contradiction. So, we conclude that
+$$G=|G:H|\cdot |H| \geq r \cdot |H| =[E:F]\cdot [K:E]=[K:F].$$
+But, we always have $|G| \leq [K:F]$, hence $|G| = [K:F]$, proving (ii).
+\end{proof}
+
+Next, recall the statement of \Cref{thm:ftogt}.
+
+\begin{notebox*}[Restating \Cref{thm:ftogt}]
+    Let $K\supset F$ be a Galois extension. Then there is a bijection between subfields of $K$ containing $F$, and subgroups of $\Gal(K/F)$ given by
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJFIl0sWzEsMCwiXFxHYWwoSy9FKSJdLFsxLDEsIkgiXSxbMCwxLCJLXkgiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzIsMywiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dXQ==
+    \[\begin{tikzcd}[ampersand replacement=\&,row sep=tiny]
+    	E \& {\Gal(K/E)} \\
+    	{K^H} \& H
+    	\arrow[maps to, from=1-1, to=1-2]
+    	\arrow[maps to, from=2-2, to=2-1]
+    \end{tikzcd}\]
+    which are inverses to each other. Moreover:
+    \begin{enumerate}[(1)]
+        \item These correspondences are inclusion reversing.
+        \item $[K:E]=|H|$ and $[E:F] =|\Gal(K/F):H|$ when $E \leftrightarrow H$.
+        \item $K\supset E$ is always Galois, with Galois group $H = \Gal (K/E)$.
+        \item $E$ is Galois over $F \iff$ $H \unlhd \Gal(K/F)$. In this case, $\Gal(E/F) \cong \Gal(K/F)/H$
+    \end{enumerate}
+\end{notebox*}
+
+\begin{proof}
+Let $\varphi$ be the map $H \mapsto K^H$, and $\psi$ the map $E \mapsto \Gal(K/E)$. The definitions essentially imply that they are inclusion reversing.
+
+$\varphi$ is injective: Let $E_i := K^{H_i}$ for $i=1,2$, and $E_1= E_2=E$. Then, each $H_i$ is a subgroup of $\Gal(K/E)$, while $|\Gal(K/E)|=|\Gal(K/K^{H_i})| =|H_i|$ for both $i=1,2$, hence $H_1=H_2$.
+
+$\varphi$ is surjective: As $K/F$ is Galois, $K$ is the splitting field of a separable $f \in F[x]$ over $F$, so $K/E$ is a splitting field of $f$ over $E$, hence $K/E$ is Galois. So, $E=K^{\Gal(K/E)}$, so $\varphi (\Gal(K/E))=E$.
+
+Now, if $\varphi(H)=E$, then $|H|=|\Gal(K/E)|=[K:E]$. Also $|G| = [K:F]$. So, dividing gives $[G:H]=|G|/|H|=[E:F]$. We've therefore proved statements 1,2, and 3.
+
+Now for the last part. We first claim that $E \supset F$ is Galois $\iff$ for all $\sigma \in G,$ $\sigma(E) \subset E$. First, note that $E \supset F$ is separable because $K \supset F$ is separable. By the primitive element theorem, $E=F(\alpha)$ for some $\alpha \in E$.
+
+($\implies$) If $E \supset F$ is Galois, it is normal, so the minimal polynomial $p(x)$ of $\alpha$ over $F$ has all its roots in $E$. But, for any $\sigma \in G$, $\sigma(\alpha)$ is also a root of $p(x)$, so lies in $E$. Hence, $\sigma(E) \subset E$, since $E = F(\alpha)$
+
+($\impliedby$) Suppose $\sigma(\alpha) \in E$ for all $\sigma \in \Gal(K/F)$. Then, $E$ is the splitting field of $p(x) = \prod_{\sigma \in G}(x-\sigma(\alpha))\in F[x]$, and hence is a normal extension of $F$. Hence, $E \supset F$ is Galois.
+
+Now, let $H:=\Gal(K/E)$. Then, $E \supset F$ is normal $\iff$ for all $\sigma \in G,\tau \in H,\alpha \in E$, we have $\tau \sigma (\alpha) = \sigma (\alpha)$ $\iff$ $(\sigma^{-1}\tau \sigma)(\alpha)=\alpha \iff$ $\sigma^{-1}\tau \sigma \in H$, since $E = F(\alpha)$. Hence, $E/F$ is normal $\iff$ $H$ is a normal subgroup of $G$. Also, we have a homomorphism $\psi:\Gal(K/F) \to \Gal(E/F)$ mapping $\sigma \mapsto \sigma|_E$. Clearly, $\ker \psi = \Gal(K/E)=H$. Also, $\psi$ is surjective, since
+$$|\Img \psi| = |G/H|=[G:H|=[E:F]=|\Gal(E/F)|.$$
+\end{proof}
+
+\section{Vieta's Substitution on Cubic's}
+
+We want to solve $x^3+ax^2+bx+c=0$. Set $x:=y-\frac{a}{3}$ to get $y^3+py+q=0$. Next, set $y :=z-\frac{p}{3z}$ to get $z^3+q-\frac{p^3}{27z^3}=0$. Then $z^6+qz^3-\frac{p^{3}}{27}=0$, which is a quadratic equation in $z^3$, with solutions
+$W=-\frac{q}{2}\pm \sqrt{\frac{p^3}{27}+\frac{q^2}{4}}$. If $w_1,w_2,w_3$ are the three cube roots of $W$, then the roots of the original equation are $w_1- \frac{p}{3w_1},w_2 -\frac{p}{3w_2},$ and $w_3-\frac{p}{3w_2}$.
+
+\section{Solvability by Radicals}
+
+We want to make precise the notion of expressing a root by ``radicals''.
+
+One way to begin is by considering the extension $\Q(\sqrt[4]{2}) \supset \Q$, but the issue is that this extension is not Galois (the roots of the minimal polynomial $x^4-2$ are not all in $\Q(\sqrt[4]{2})$).
+
+We restrict our work to characteristic zero.
+
+\begin{defn}
+    A \textbf{simple radical extension} of a field $F$ is an extension of the form $F(\sqrt[n]{a})$ for some $n \geq 1$ and $a \in F$. A finite extension $K \supset F$ is \textbf{cyclic} if $K/F$ is Galois with a cyclic Galois group.
+\end{defn}
+
+\begin{thm}[][label=thm:rootsthm]
+    Let $F$ be a field which contain the $n$-th roots of unity.
+    \begin{enumerate}[(1)]
+        \item If $a \in F$, then the extension $F(\sqrt[n]{a}) \supset F$ is cyclic of degree dividing $n$.
+        \item Conversely, if $K\supset F$ is cyclic of degree $n$, then $K=F(\sqrt[n]{a})$ for some $a \in F$.
+    \end{enumerate}
+\end{thm}
+
+\begin{proof} For (1), since $F$ contains the $n$-th roots of unity $1,\zeta,\dots,\zeta^{n-1}$, and the roots of $x^n-a$ are
+    $$\sqrt[n]{a},\zeta \sqrt[n]{a},\dots ,\zeta^{n-1}\sqrt[n]{a},$$
+    we deduce that $F(\sqrt[n]{a})$ is the splitting field of $x^n-a$ over $F$, hence $F(\sqrt[n]{a})\supset F$ is Galois. Moreover, given $\sigma \in \Gal(F(\sqrt[n]{a})/F)$, $\sigma(\sqrt[n]{a})$ is again a root of $x^n-a$, so $\sigma (\sqrt[n]{a}) = \zeta_\sigma \sqrt[n]{a}$ for some $\zeta_\sigma \in \mu_n:= \{x \in F\mid x^n=1\}$. Moreover, one checks that $\zeta_{\sigma\tau}=\zeta_\sigma \zeta_\tau$, so the map $\varphi :\Gal(F(\sqrt[n]{a})/F) \to \mu _n \cong \Z/n\Z$ sending $\sigma \mapsto \zeta_\sigma$ is an injective homomorphism. Therefore, $\Gal (F(\sqrt[n]{a})/F)$ is a subgroup of $\Z/n\Z$.
+
+For (2), suppose $K \supset F$ is a cyclic with $G:=\Gal(K/F)=: \angles \sigma$. Given $\alpha \in K$, and $\zeta$ any $n$-th root of unity in $F$, we define
+    $$(\alpha,\zeta):= \sum_{k=0}^{n-1}\zeta^k\sigma^k(\alpha) \in K$$
+    Since $\sigma(\zeta)=\zeta$, we have
+    $$\sigma(\alpha,\zeta)=\sum_{k=0}^{n-1}\zeta^k\sigma^{k+1}(\alpha)=\zeta^{-1}\sum_{k=0}^{n-1}\zeta^{k+1}\sigma^{k+1}(\alpha)=\zeta^{-1}\cdot (\alpha, \zeta).$$
+    Therefore, $\sigma((\alpha,\zeta)^n)=\zeta^{-n}(\alpha,\zeta)^n=(\alpha,\zeta)^n$, hence $(\alpha,\zeta)^n$ is fixed by all $\sigma \in G$, so as the extension is Galois, we have $(\alpha,\zeta)^n \in F$.
+
+    Now, let $\zeta$ be a primitive $n$-th root of unity in $F$, so $\mu _n =\angles \zeta$. Since the automorphisms $1,\sigma,\dots,\sigma^{n-1}$ are linearly independent, there exists $\alpha \in K$ with $(\alpha,\zeta) \neq 0$. Moreover, iterating $\sigma(\alpha,\zeta)=\zeta^{-1}\cdot (\alpha,\zeta)$ yields
+    $$\sigma^{j}(\alpha,\zeta)=\zeta^{-j}(\alpha,\zeta)$$
+    for all $j \in [0,n-1]$. It follows that $(\alpha,\zeta)$ cannot lie in any proper subfield of $K$, and so $K = F((\alpha,\zeta))$. Finally, since $a:= (\alpha,\zeta)^n \in F$, we get $K = F(\sqrt[n]{a})$.
+\end{proof}
+
+\begin{defn}
+    An element $\alpha$ which is algebraic over $F$ can be \textbf{expressed by radicals} if $\alpha \in K$, where $K$ satisfies
+    \begin{align} \label{chainfields}
+        F=:K_0\subset K_1\subset \cdots \subset K_{s-1}\subset K_s:=K
+    \end{align}
+    such that $K_{i+1}=K(\sqrt[n_i]{a_i})$ with $a_i \in K_i$ for all $i \in [0,s-1]$. Such a field is called a \textbf{root extension of $\bm F$}. A polynomial $f(x) \in F[x]$ is said to be \textbf{solved by radicals} if the splitting field of $F$ is contained in a root extension of $F$.
+\end{defn}
+
+\begin{lem}[][label=lem:lem1]
+    If $K$ is a root extension of $F$ as in \eqref{chainfields}, then $K$ is contained in a root extension which is Galois over $F$, and such that each intermediate extension $K_{i+1}/K_i$ is cyclic.
+\end{lem}
+
+\begin{proof}
+There exists a finite extension $L \supset K\supset F$ such that $L \supset F$ is Galois, since $K\supset F$ is separable. Let $G = \Gal(L/F)$, and consider the composite field
+$$E:=\prod_{\sigma \in G}\sigma(K).$$
+Since $E$ is stable under the action of $G$ (i.e. $\tau E \subset E$ for all $\tau \in G$), we know $E \supset F$ is Galois ($E$ is called the \textbf{Galois closure} of $K$). Also, one checks that $E\supset F$ is a root extension, since each $\sigma(K) \supset F$ is a root extension, and the composite $KK'$ of two root extensions $K,K' \supset F$ is again a root extension. Hence, $E \supset F$ is a \ul{Galois} root extension of $F$. Next, we adjoin to $F$ the $n_i$-th roots of unity for all the roots $\sqrt[n_i]{a_i}$ which appear in \eqref{chainfields} for $K \supset F$, to obtain a field $F'$. So, $F'\supset F$ is Galois an a root extension, with cyclic intermediate extensions. Moreover, we have composites
+$$F \subset F' = F'K_0 \subset F'K_1\subset \cdots \subset F'K_s=F'K.$$
+Using splitting fields, one sees that the composite of two Galois extensions is itself a Galois extension, so $F'K \supset F$ is Galois, and each $F'K_{i+1}\supset F'K_i$ is a simple radical extension. Moreover, since $F'$ contains the appropriate roots of unity, we deduce from \Cref{thm:rootsthm} that all intermediate extensions of $K'F \supset F$ are cyclic.
+\end{proof}
+
+\begin{defn}[Solvable Groups (Recall)]
+    A group $G$ is \textbf{solvable} $\iff$ there exists subgroups $G:=G_0 \unrhd G_1 \unrhd \cdots \unrhd G_{s-1}\unrhd G_s = 1$ such that $G_i/G_{i+1}$ is cyclic for all $i$.
+\end{defn}
+
+\begin{thm}[Galois' Theorem]
+    The polynomial $f(x) \in F[x]$ can be solved by radicals if and only if the Galois group of $f(x)$ is a solvable group.
+\end{thm}
+
+\begin{proof}
+\hfill
+
+    ($\implies$) Let $E$ be the splitting field of $f(x)$ over $F$. By \Cref{lem:lem1}, $E \subset K$, where $K/F$ is Galois and each $K_{i+1}/K_i$ is cyclic. Let $G:= \Gal(K/F)$, and $G_i \leq G$ be the subgroup associated to the intermediate fields $K_i$. Since $\Gal(K_{i+1}/K_i)=G_i/G_{i+1}$ is cyclic, we see that $\Gal(K/F)$ is solvable. Now, $K \supset E \supset F$, and $\Gal(E/F)$ is a quotient group of $\Gal(K/F)$, hence $\Gal(E/F)$ is also solvable (a result from last semester).
+
+    ($\impliedby$) Let $K$ be the splitting field of $f \in F[x]$, and assume $G:=\Gal(K/F)$ is a solvable group. Then, there is a chain of subgroups $G=G_0 \unrhd G_1 \unrhd \cdots \unrhd G_s=1$ with $G_{i-1}/G_i$ cyclic. Taking the fixed fields of the $G_i$ produces a chain of subfields of $K$, namely
+    $$F=:K_0 \subset K_1 \subset \cdots \subset K_s :=K$$
+    with $K_{i+1}/K_i$ a cyclic extension with degree $n_i$. Let $F'$ be the field obtained from $F$ by adjoining all $n_i$-th roots of unity for $0 \leq i \leq s-1$, and we form the composite fields
+    $$F \subset F' = F'K_0\subset F'K_1\subset \cdots \subset F'K_s =F'K.$$
+    \textbf{Claim:} The extension $F'K_{i+1}/F'K_i$ is cyclic of degree dividing $n_i$.
+
+    Note that this claim proves the theorem: since we have all appropriate roots of unity in the base field, \Cref{thm:rootsthm} implies each of these cyclic extensions is a simple radical extension. All the roots of $f(x)$ are thus contained in the root extension $F'K$, so $f(x)$ can be solved by radicals.
+    \end{proof}
+    The claim is itself proved by the following lemma:
+\begin{lem}[][label=lem:Lem2]
+    Let $K \supset F$ be a Galois extension and $F' \supset F$ by any finite extension. Then, $KF' \supset F$ is Galois, and
+    $$\Gal(KF'/F') = \Gal(K/K \cap F'),$$
+    so $\Gal(KF'/F)$ is a subgroup of $\Gal(K/F)$.
+\end{lem}
+
+\begin{proof}
+$K$ is a splitting field of a (separable) polynomial $f \in F[x]$. Hence, $KF'$ is a splitting field of $f(x)$ over $F'$, so $KF' \supset F'$ is Galois. If $\alpha_1,\dots,\alpha_n$ are the roots of $f(x)$, then $K= F(\alpha_1,\dots,\alpha_n)$, so $KF' = F'(\alpha_1,\dots,\alpha_n)$. If $\sigma \in \Gal(KF'/F')$, then $\sigma(K) \subset K$, since $\sigma$ fixes $F$ and permutes the roots of $\alpha_1,\dots,\alpha_n$ of $f$. We therefore have a well defined map $\varphi:\Gal(KF'/F') \to \Gal(K/F)$ sending $\sigma \mapsto \sigma\vert _K$. Now, we compute
+$$\ker \varphi = \brax{\sigma \in \Gal(KF'/F') : \sigma \vert_K = \id_K}=1,$$
+since any $\sigma \in \Gal(KF'/F')$ satisfies $\sigma \vert _{F'}=\id_{F'}$. Therefore, $\varphi$ is an injection, so $\Gal(KF'/F')$ is realized as a subgroup of $\Gal(K/F)$. Finally, we need to show $\Img \varphi = \Gal(K/K \cap F')$.
+
+If $\sigma \in \Gal(KF'/F')$, then $\varphi (\sigma)\vert_{K \cap F'}=\id_{K \cap F'}$ since $\sigma \vert_{F'}=\id_{F'}$. Therefore, $K \cap F' \subset K^{\Img \varphi}$ (the fixed field). Conversely, if $x \in K \setminus F'$, then there exists $\rho \in \Gal(KF'/F')$ such that $\rho (x) \neq x$. Therefore, $\varphi(\rho)(x) \neq x$ as well, so $x \not \in K^{\Img \varphi}$. Hence, $K^{\Img \varphi} \subset K \cap F'$. So, we've shown $K^{\Img \varphi}=K \cap F'$, hence the Galois correspondence implies $\Img \varphi \cong \Gal(K/K \cap F')$.
+\end{proof}
+
+\begin{cor}[Corollary of \Cref{lem:Lem2}]
+    In the above situation,
+    $$[KF':F] = \frac{[K:F][F':F]}{[K\cap F':F]}$$
+\end{cor}
+
+\begin{proof}
+    Exercise.
+\end{proof}
+
+\begin{cor}[Corollary of Galois' Theorem]
+    The general equation of degree $n$ cannot be solved by radicals for $n \geq 5$.
+\end{cor}
+
+\begin{proof}
+The symmetric group $S_n$ is not solvable for $n\geq5$, since its composition series is $S_n \unrhd A_n \unrhd 1$ with $A_n$ simple.
+\end{proof}
+
+\begin{ex}[Osada, J. Number Theory 25 (1987), 230-238]
+    $x^n-x-1$ has Galois group $S_n$ over $\Q$.
+\end{ex}

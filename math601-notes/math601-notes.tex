@@ -2,6 +2,21 @@
 \usepackage[notes]{yalatex}
 % \addbibresource{references.bib}   % uncomment for citations
 
+\newlength{\chapterspaceabove}\setlength{\chapterspaceabove}{1em}
+\newlength{\chapterspacebelow}\setlength{\chapterspacebelow}{1em}
+\newcommand{\notechapter}[1]{%
+  \par
+  \phantomsection
+  \addcontentsline{toc}{part}{#1}%
+  {\centering\normalfont\Huge\bfseries
+    \rule{0pt}{\dimexpr\fontcharht\font`d+\chapterspaceabove\relax}#1\par}%
+  \vspace{0.4em}%
+  \noindent\rule{\textwidth}{0.8pt}\par
+  \nobreak\nointerlineskip
+  {\parskip=0pt \noindent\rule{0pt}{\chapterspacebelow}\par}%
+  \nobreak
+}
+
 \title{MATH601: Abstract Algebra II}
 \author{Notes by Yuval Amit}
 \date{Instructor: Harry Tamvakis \\ Spring 2026}
@@ -12,8 +27,23 @@
 \tableofcontents
 \newpage
 
+\notechapter{Modules}
+\input{parts/01-modules}
 
+\newpage
+\notechapter{Categories}
+\input{parts/02-categories}
 
+\newpage
+\notechapter{Homological Algebra}
+\input{parts/03-homological-algebra}
 
+\newpage
+\notechapter{Fields}
+\input{parts/04-fields}
+
+\newpage
+\notechapter{Representations}
+\input{parts/05-representations}
 
 \end{document}
