@@ -698,21 +698,28 @@ That is, ``attaching $k$-cells with $k>2$ does not change the fundamental group'
 \end{claim}
 
 \begin{proof}
-    Doing the same thing we did last time (see $\text{DG}1$) by VK we have that $\pi_{1}(Y)=\pi_{1}(X)*_{\pi_{1}(S^{k-1})} \pi_{1}(D^k)=\pi_{1}(X)$ as both $\pi_{1}(S^{k-1})$ and $\pi_{1}(D^k)$ are trivial.
+    Doing the same thing we did last time, by van Kampen's we have that 
+    $$\pi_{1}(Y)=\pi_{1}(X)*_{\pi_{1}(S^{k-1})} \pi_{1}(D^k)=\pi_{1}(X)$$ 
+    as both $\pi_{1}(S^{k-1})$ and $\pi_{1}(D^k)$ are trivial.
 \end{proof}
 
 Let $X$ be a finite path connected CW-complex. 
 
 $X^0$ is just points. $X^1$ is a connected graph which is homotopic to $\bigvee_{i=1}^j S_{i}^1$ for some $j$, hence $\pi_{1}(X^1)=\mathbb{Z}^{*j}$.
 
-$X^2$ is then obtained by attaching $2$-cells via $\displaystyle X^2=X_{1}\coprod \coprod_{k=1}^{j_{\alpha}}\overline{D}^2_{k}$ mod $x\sim \varphi^1_{j}(x)$. Choosing $x_{0}\in X^1,$ points $p_{1},\cdots, p_{j_{\alpha}}\in \partial D^2_{k}$ and curves $\mu_{j}$ connecting $x_{0}$ to $p_{j}$ then we have that $\pi_{1}(X^2,x_{0})=\pi_{1}(X^1,x_{0})/ \aangles{ \mu_{i}^{-1}\varphi^1_{j}\mu_{i}}$
+$X^2$ is then obtained by attaching $2$-cells via
+\[
+X^2=X_{1}\coprod \coprod_{k=1}^{j_{\alpha}}\overline{D}^2_{k} \pmod{x\sim \varphi^1_{j}(x)}.
+\]
+Choosing $x_{0}\in X^1,$ points $p_{1},\cdots, p_{j_{\alpha}}\in \partial D^2_{k}$ and curves $\mu_{j}$ connecting $x_{0}$ to $p_{j}$ we have that 
+$$\pi_{1}(X^2,x_{0})=\pi_{1}(X^1,x_{0})/ \aangles{ \mu_{i}^{-1}\varphi^1_{j}\mu_{i}}.$$
 Now $\pi_{1}(X)=\pi_{1}(X^{2})$.
 
 \begin{rmk}
     This is true without assuming finiteness. 
 \end{rmk}
 
-\begin{exercise}[Important Exercises (!)]
+\begin{exercise}[Important!]
     Use van Kampen's theorem to compute
     \begin{itemize}
         \item $\pi_{1}(\mathbb{T}^2)$,
@@ -729,7 +736,7 @@ Now $\pi_{1}(X)=\pi_{1}(X^{2})$.
 \end{defn}
 
 \begin{ex}
-    $X=S^1$, $\tilde{X} =\mathbb{R}$, $p(\theta)=e^{i\theta}$. See $\text{DG}2.\text{a}$
+    $X=S^1$, $\tilde{X} =\mathbb{R}$, $p(\theta)=e^{i\theta}$.
 \end{ex}
 
 \begin{ex}
@@ -738,20 +745,20 @@ Now $\pi_{1}(X)=\pi_{1}(X^{2})$.
 
 
 \begin{ex}
-    $\mathbb{R}^2\to \mathbb{R}^2/\mathbb{Z}^2\cong\mathbb{T}^2$ given by the natural projection. See $\text{DG}2.\text{b}$ (white)
+    $\mathbb{R}^2\to \mathbb{R}^2/\mathbb{Z}^2\cong\mathbb{T}^2$ given by the natural projection.
 \end{ex}
 
 \begin{ex}
-    $\mathbb{R}^2\to$ the Klein bottle given by the natural projection. See $\text{DG}2.b$ (white and orange). "Think about it."
+    $\mathbb{R}^2\to$ the Klein bottle given by the natural projection. "Think about it."
 \end{ex}
 
 \begin{ex}
-    See $\text{DG}3$. We get an open cover of $S^{1}\lor S^{2}$ by turning $S^1$ into a interval. 
+We get an open cover of $S^{1}\lor S^{2}$ by turning $S^1$ into a interval. 
    Then we find another covering by "going around $A$ at twice the speed."
    We of course want another covering, so we take the first covering and turn the remaining circles into intervals as well. This last covering is connected. 
 \end{ex}
 
-\begin{defn}[Homotopy Lifting Property]
+\begin{prop}[Homotopy Lifting Property]
     Suppose $\tilde{X}\to X$ is a covering map and $Y$ is a space, $f_{t}:Y\times [0,1]$ is a homotopy (which inputs like $f_{.5}(y)$), and $\tilde{f}_{0}:Y\to \tilde{X}$ is such that the following diagram commutes:
 % https://q.uiver.app/#q=WzAsMyxbMCwyLCJZIl0sWzIsMiwiWCJdLFsyLDAsIlxcdGlsZGV7WH0iXSxbMiwxLCJwIl0sWzAsMSwiZl8wIiwyXSxbMCwyLCJcXHRpbGRle2Z9XzAiXV0=
 \[\begin{tikzcd}[ampersand replacement=\&,cramped]
@@ -773,10 +780,10 @@ Then, there exists a unique homotopy $\tilde{f_{t}}$ such that
 	\arrow["{f_t}"', from=3-1, to=3-3]
 \end{tikzcd}\]
 commutes for all $t$. 
-\end{defn}
+\end{prop}
 
 \begin{proof}
-Fix a point $y\in Y$, then $\operatorname{Im} (\overbrace{ t\mapsto f_{t}(y) }^{ \gamma_{y}(t) })$ is compact and for each $t$ we can choose $U_{f_{t}(y)}\subset X$ as in the definition of the covering space. (a hood whose preimage under $p$ is a disjoint union of itself). Now $\left\{ \gamma_{y}^{-1}(U_{f_{t}(y)}) \right\}_{t\in [0,1]}$ is a open cover of $[0,1]$, which is compact so it has a Lebesgue number. Want to construct $\tilde{\gamma}_{y}(t):=\tilde{f_{t}}(y)$, to do this we can trace along the interval and watch where the path "must lift" see $\text{DG}4$. Will continue next class.     
+Fix a point $y\in Y$, then $\operatorname{Im} (\overbrace{ t\mapsto f_{t}(y) }^{ \gamma_{y}(t) })$ is compact and for each $t$ we can choose $U_{f_{t}(y)}\subset X$ as in the definition of the covering space. (a hood whose preimage under $p$ is a disjoint union of itself). Now $\left\{ \gamma_{y}^{-1}(U_{f_{t}(y)}) \right\}_{t\in [0,1]}$ is a open cover of $[0,1]$, which is compact so it has a Lebesgue number. Want to construct $\tilde{\gamma}_{y}(t):=\tilde{f_{t}}(y)$, to do this we can trace along the interval and watch where the path ``must lift''. Will continue next class.     
 \end{proof}
 
 
