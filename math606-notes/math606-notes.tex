@@ -1340,10 +1340,10 @@ is the obstruction to solving the problem in general. The Mittag-Leffler theorem
 \begin{notethm*}
     We in fact have
     \[
-    F_a := \coprod _{U \ni a} (F(U)/\sim) =: \varinjlim_{U \ni a} \mc F(U) 
+    \mc F_a := \coprod _{U \ni a} (\mc F(U)/\sim) =: \varinjlim_{U \ni a} \mc F(U) 
     \]
 \end{notethm*}
-We can associate a sheaf to any presheaf $\mc F$ as follows: Let $|\mc F|=\coprod_{a \in X}\mc F_a$ and $p:|F| \to X$, $f_a \mapsto a$ be the natural projection. Define a topology on $|\mc F|$ as follows: for any $U \subset X$ and $f \in \mc F(U)$, let $N(U,f):=\brax{f_a \setbar a \in U}$, where $f_a$ is the equivalence class inf $\mc F_a$ defined by $(U, f)$. The system of sets $\brax{N(U,f)}_{U \subset X}$ is a basis for a topology on $|\mc F|$ such that $p$ is a local homeomorphism (exercise).
+We can associate a sheaf to any presheaf $\mc F$ as follows: Let $|\mc F|=\coprod_{a \in X}\mc F_a$ and $p:|\mc F| \to X$, $f_a \mapsto a$ be the natural projection. Define a topology on $|\mc F|$ as follows: for any $U \subset X$ and $f \in \mc F(U)$, let $N(U,f):=\brax{f_a \setbar a \in U}$, where $f_a$ is the equivalence class in $\mc F_a$ defined by $(U, f)$. The system of sets $\brax{N(U,f)}_{U \subset X}$ is a basis for a topology on $|\mc F|$ such that $p$ is a local homeomorphism (exercise).
 
 A \textbf{section} of $|\mc F|$ over $U$ is a continuous map $s:U \to |\mc F|$ such that $p \circ s=\id_U$, i.e. $s(a) \in \mc F_a$, for all $a \in U$. Let $|\mc F|(U)$ denote the set of all sections of $|\mc F|$ over $U$.
 
