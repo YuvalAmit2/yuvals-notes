@@ -1294,7 +1294,7 @@ Now, define
 $$f_{ij}:=f_i|_{U_i \cap U_j} - f_j|_{U_i \cap U_j} \in \mc O(U_i \cap U_j).$$
 Then, on $U_i \cap U_j \cap U_k$, we have $f_{ij}+f_{jk}+f_{ki}=0$. Thus, solving the problem globally on $\Omega$ is equivalent to finding a family of functions $\{g_i \in \mc O(U_i)\}_{i \in I}$ such that $f_{ij}=g_j-g_i$ on $U_i \cap U_j$. for all $i,j \in I$. Indeed, given such a family $\{g_i\}$, we can define $f:= f_i+g_i$ on $U_i$, which is in fact a globally defined function on $\Omega$, because the definition agrees on overlaps. Then, $f$ satisfies the Mittag-Leffler conditions, and conversely a global solution induces such $\{g_i\}$.
 
-In the \v{C}ech cohomology theory, $\{f_{ij}\} : f_{ij}+ f_{jk}+f_{ki}=0$ is a cocylce in $Z^1(\mc U,\mc O)$, and
+In the \v{C}ech cohomology theory, $\{f_{ij}\} : f_{ij}+ f_{jk}+f_{ki}=0$ is a cocycle in $Z^1(\mc U,\mc O)$, and
 $$\brax{\{f_{ij}\} \setbar f_{ij}=g_j-g_i \text{ for some } \{g_i\}  }=B^1(\mc U,\mc O)$$
 is a coboundary group. The \textbf{first \v{C}ech cohomology group}
 $$H^1(\mc U,\mc O):=Z^1(\mc U,\mc O)/B^1 (\mc U,\mc O)$$
@@ -1757,10 +1757,48 @@ A vector bundle of rank $1$ is called a \textbf{line bundle}.
 
 \begin{defn}
     Let $X$ be a Riemann surface (or more generally a complex manifold), and $E\to X$ be a rank $n$ vector bundle over $X$. Two local trivializations $(U_i, \varphi_i)$ and $(U_j, \varphi_j)$ are said to be \textbf{compatible} if the associated transition function $g_{ij}:U_i \cap U_j \to \GL_n(\C)$ is holomorphic.
+\begin{notethm}[Remark]
+    If $\Omega \subset \C^m$ is open, then a map $f: \Omega \to \C^n$ is \textbf{holomorphic} if $f=(f_1,\dots,f_n)$, with each $f_i :\Omega \to \C$ holomorphic.
+\end{notethm}
+If $X$ has a covering by a compatible trivializations for $E$, in which case we say $E$ has a \textbf{holomorphic atlas}, then $E$ is called a \textbf{holomorphic vector bundle} over $X$.
 \end{defn}
 
 \begin{rmk}
-    If $\Omega \subset \C^m$ is open, then a map $f: \Omega \to \C^n$ is \textbf{holomorphic} if $f=(f_1,\dots,f_n)$, with each $f_i :\Omega \to \C$ holomorphic.
+    If $L \to X$ is a holomorphic line bundle with transition functions $\{g_{ij}\}$ with respect to an open cover $\cU := \{U_i\}_{i\in I}$, then we obtain an associated element of $H^1(X,\mc O^*)$. Indeed, $\GL_1\C \equiv \C^*$, and $g_{ij} \in \cO^*(U_i \cap U_j)$ satisfy the cocycle condition on $U_i \cap U_j \cap U_k$.
 \end{rmk}
+
+\begin{defn}
+    Let $E \arr[p]X$ and $E' \arr[p']X$ be two vector bundles over a Riemann surface $X$. A \textbf{morphism} $u:E \to E'$ is a map such that the diagram
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJFIl0sWzEsMSwiWCJdLFsyLDAsIkUnIl0sWzAsMiwidSJdLFswLDEsInAiLDJdLFsyLDEsInAnIl1d
+\[\begin{tikzcd}[ampersand replacement=\&]
+	E \&\& {E'} \\
+	\& X
+	\arrow["u", from=1-1, to=1-3]
+	\arrow["p"', from=1-1, to=2-2]
+	\arrow["{p'}", from=1-3, to=2-2]
+\end{tikzcd}\]
+commutes (i.e. $p'u =p$), and $u:p^{-1}(x) \to (p')^{-1}(x)$ is $\C$-linear for all $x \in X$.
+
+The morphism $u$ is called continuous/$C^\infty$/holomorphic if the function $u$ has this property. We use this notion to define \textbf{isomorphic vector bundles}. 
+\end{defn}
+
+\begin{ex}
+    $E$ is trivial if and only if $E$ is isomorphic to the trivial vector bundle $X \times \C^n$.
+\end{ex}
+
+\section{Sections of Vector Bundles}
+
+\begin{defn}
+    If $p:E \to X$ is a vector bundle, a \textbf{section} $E$ is a morphism $s:X \to E$ such that $s(x) \in E_x$ for all $x \in X$. Such sections can be continuous/$C^\infty$/holomorphic as before.
+\end{defn}
+
+If $\varphi_i: p^{-1}(U_i) \to U_i \times \C^n$ are local trivialization maps for $E$, then $\varphi_i \circ s(x)=(x,f_i(x))$ for all $x \in U_i$, where $f_i :U_i \to \C^n$ is a continuous/$C^\infty$/holomorphic map.
+
+On $U_i \cap U_j$, we have 
+\begin{align}
+    \varphi_i \circ s(x) = (x,f_i(x))=\varphi_i \circ \varphi_j^{-1}(x,f_j(x))=(x,g_{ij}(x)f_j(x)) \notag
+    \\ \implies f_i(x)=g_{ij}(x)f_j(x), \qquad \forall x \in U_i \cap U_j. \label{eq:sectioncondition}
+\end{align}
+Hence, a section $s$ of $E$ may be identified with a family $\{f_i\}_{i \in I}$ of functions $f_i:U_i \to \C^n$ such that \eqref{eq:sectioncondition} holds for all $i,j \in I$. The sections of $E$ over any open set $U \subset X$ are defined analogously.
 
 \end{document}
