@@ -1806,7 +1806,64 @@ Hence, a section $s$ of $E$ may be identified with a family $\{f_i\}_{i \in I}$ 
 \end{ex}
 
 \begin{defn}
-    Let $X$ be a Riemann surface and $\pi :E \to X$ be a holomorphic vector bundle on $X$. We define a \textbf{meromorphic section} of $E$ as follows: let $S \subset X$ be a discrete set, and $s:X\setminus S \to E$ be a holomorphic section of $E$ over $X \setminus S$.
+    Let $X$ be a Riemann surface and $\pi :E \to X$ be a holomorphic vector bundle on $X$. Let $S \subset X$ be a discrete set, and $s:X\setminus S \to E$ be a holomorphic section of $E$ over $X \setminus S$. Then, $s$ is called a \textbf{meromorphic section} if, for all $a \in S$, there exists a neighborhood $U$ of $a$ and a coordinate $z$ on $U$ with $z(a)=0$ such that $U \cap S = \{a\}$, and for some $N>0$, $z^Ns$ is the restriction to $U \setminus \{a\}$ of a holomorphic section of $E$ over $U$.
 \end{defn}
+
+\begin{defn}
+    The \textbf{sheaf of holomorphic sections} $\cE$ of $E$ is defined by the group 
+    \[
+    \cE(U)=\Gamma(U,E):=\{\text{holomorphic sections of } E \text{ over } U\}.
+    \] 
+\end{defn}
+
+\section{Divisors and Line Bundles}
+
+\begin{defn}
+    Let $X$ be a Riemann surface. A \textbf{divisor} on $X$ is a map $D: X \to \Z$ such that the support of $D$ is locally finite. That is, for every compact $K \subset X$,
+    \[
+    \{p \in X \mid D(p) \neq 0\} \cap K \text{ is finite.}
+    \]
+\end{defn}
+We assume now that $X$ is compact so the support of $D$ is finite. 
+\begin{defn}
+    The sum and difference $D_1+D_2$ and $D_1-D_2$ of two divisors are defined in the obvious way.
+
+    A divisor $D$ is said to be \textbf{effective} if $D(p) \geq 0$ for all $p \in X$. We write $D_1 \geq D_2$ if $D_1 -D_2$ is effective. The set $\{p \in X \mid D(p) \neq 0\}$ is called the \textbf{support} of $D$, denoted $|D|$ or $\supp (D)$.
+\end{defn}
+
+\begin{notethm}[Recall]
+If $f:U \to \P^1$ is a meromorphic function on a neighborhood $U$ of a point $a \in X$, and $z$ is a local coordinate on $U$ with $z(a)=0$, we set 
+\[
+\ord_a(f):=\case{ \infty & f \equiv 0 \text{ near }a, \\ k & f(z) = \sum_{n=k}^\infty a_nz^n, a_k \neq 0. }
+\]
+\end{notethm}
+Suppose now that $s$ is a meromorphic section of a holomorphic vector bundle $E$ on a Riemann surface $X$, with $s \not \equiv 0$. For $a \in X$, choose a coordinate neighborhood $(U,z)$ with $z(a)=0$, and a local trivialization $\varphi:E|_U \to U \times \C^n$. Then, $(\varphi\circ s)(x) = (x,f(x))$, $x \in U$, where $f=(f_1,\dots,f_n)$, is an $n$-tuple of meromorphic functions on $U$. There is a unique integer $k$ such that $f = z^kg$, where $g(a) \neq 0$, and $g=(g_1,\dots,g_n)$ with each $g_i$ holomorphic near $a$.
+
+\begin{defn}
+    We define $\ord_a(s):=k$, where $k$ is the constant above.
+\end{defn}
+
+\begin{exercise}
+    The definition of $\ord_a(s)$ is well-defined, i.e. independent of the choice of chart and local trivialization.
+\end{exercise}
+
+\begin{defn}
+    The \textbf{divisor} of $s$ is the function $a \mapsto \ord_a(s)$. That is, 
+    \[
+    \div(s) = \sum_{a \in X}\ord_a(s)[a]. 
+    \]
+    Note that this also defines the divisor $\div(f)$ of a meromorphic function $f$ on $X$, since any such $f$ is a meromorphic section of the trivial line bundle $X \times \C \to X$.
+\end{defn}
+
+\begin{lem}
+    Let $D:= \sum n_p[p]$ be a divisor on a compact Riemann surface $X$. Then, $D=\div(s)$ for a meromorphic section $s$ of a line bundle on $X$, denoted $L(D)$.
+\end{lem}
+
+\begin{proof}
+    To construct $L(D)$ and $s$ from $D$, let $S:= |D|$ and $(U_P,z_P)$ be a local coordinate chart at $P \in S$ with $z_p(P)=0$. Assume that $U_P \cap U_Q = \emptyset$ for $P \neq Q$ in $S$. Set $U_0 := X\setminus S$, $f_0 \equiv 1$ on $U_0$, and let $f_P:=z_P^{N_p}$ on $U_P$, for all $P \in S$. Define $I := \{0\} \sqcup S$, and let $g_{ij}:= f_i/f_j$ for all $i,j \in I$, with $g_{ij}$ defined on $U_i \cap U_j$. Then, for $i,j$ with $U_i \cap U_j \neq \emptyset$, $g_{ij} \in \cO^*(U_i \cap U_j)$, and $g_{ij}g_{jk}=g_{ik}$ on $U_i \cap U_j \cap U_k$. So, the $\{ g_{ij} \}$ are the transition functions for a line bundle $L(D)$ on $X$. Since $f_{i}=g_{ij}f_j$ on $U_i \cap U_j$, the $f_i$'s define the meromorphic section $s_D$ of $L(D)$.
+
+    We now have $\ord_a (s_D) = \ord_a (f_0)=0$ if $a \in X\setminus S$, and $\ord_a(s_D)=\ord_p(z_P^{n_P})=n_P$, if $a = P \in S$. Hence, $\div (s_D)=D$.
+\end{proof}
+
 
 \end{document}
