@@ -861,7 +861,7 @@ where $\alpha! = \alpha_1!\cdots \alpha_n!$, and $D^\alpha =\frac{\partial^{|\al
     Holomorphic functions on $\C^n$ satisfy the principle of analytic continuation, the open mapping theorem, Cauchy's formula for a polydisk, Cauchy's inequalities, and theorems of Weierstrass and Montel.
 \end{prop}
 
-There are also some properties from single complex analysis that fail in sevaral complex variables.
+There are also some properties from single complex analysis that fail in several complex variables.
 
 \begin{thm}[Hartogs' Theorem, 1905]
 If $n\geq 2$, then a holomorphic function $f:\C^n\to \C$ has no isolated singularities.
@@ -1250,7 +1250,7 @@ We have the following example:
     Let $\Omega \subset \C$ be open and $K \subset \Omega$ be compact. Then, any function $f \in \mc O(\hat K_\Omega)$ can be approximated uniformly on $\hat K_\Omega$, by functions holomorphic on $\Omega$.
 \end{thm}
 
-\begin{thm}
+\begin{thm}[][label=thm:grothmagic]
     Let $\Omega \subset \C$ be open, and $f \in C^\infty (\Omega)$. Then, there exits $u \in C^\infty (\Omega)$ such that $\partder{u}{\bar z}=f$.
 \end{thm}
 
@@ -1463,7 +1463,7 @@ A sheaf that admits of a partition of unity is called a \textbf{fine sheaf}. So,
 
 Begin with a $1$-cocycle $(f_{ij})\in Z^1(\mc U,\mc O)$. Let $\alpha _i \in C^\infty (U_i)$ be such that $\alpha_j - \alpha _i = f_{ij}$ on $U_i \cap U_j$ for all $i,j$. Let $u_i := \partial \alpha _i / \partial \bar z$ on $U_i$. Then, $u_i - u_j=0$ on $U_i \cap U_j$, so there exists $u \in C^\infty (\Omega)$ such that $u|_{U_i}=u_i$ for all $i \in I$.
 
-Now, by \Cref{thm:fisdoubleint}, we know there exists $A \in C^\infty (\Omega)$ such that $\partder{A}{\bar z}=u$ on $\Omega$. Define $(f_i)$ by $f_i := \alpha _i - A$ on $U_i$, for all $i \in I$. Then, on $U_i \cap U_j$, $f_j -f_i = \alpha _j -\alpha _i = f_{ij}$, and $\partder{f_i}{\bar z}=u_i-u=0$ on $U_i$ for all $i \in I$.
+Now, by \Cref{thm:grothmagic}, we know there exists $A \in C^\infty (\Omega)$ such that $\partder{A}{\bar z}=u$ on $\Omega$. Define $(f_i)$ by $f_i := \alpha _i - A$ on $U_i$, for all $i \in I$. Then, on $U_i \cap U_j$, $f_j -f_i = \alpha _j -\alpha _i = f_{ij}$, and $\partder{f_i}{\bar z}=u_i-u=0$ on $U_i$ for all $i \in I$.
 \end{proof}
 
 Now, we aim to remove our choice of open cover from the definition of the \v{C}ech cohomology groups. Namely, we want to define $H^1(X, \mc F)$.
@@ -1656,7 +1656,7 @@ of sheaves on $X$. Then, the sequence naturally induces a long exact sequence of
     \]
     Clearly, $f_{ij}+f_{jk}+f_{ki}$ maps to zero under $\alpha_{U_i \cap U_j \cap U_k}$. Thus, again by \Cref{exer:shortexacttoshortexact}, $f_{ij}+f_{jk}+f_{ki}=0$ on $U_i \cap U_j \cap U_k$, since the map is injective. Therefore, $\{f_{ij}\} \in Z^1(\mc U,\mc F)$, so it defines and elements $\delta(h)$ in $H^1(X,\mc F)$.
 
-    Now, we need to check that $\delta(h)$ is independent of the choices of $\mc U$ and $\{g_i\}$. Indeed, if $\mc V:= \{V_\alpha\}_{\alpha \in A}$ is a refinment of $\mc U$ given by the map $\tau:A \to I$, and we choose elements $g_\alpha'=g_{\tau(\alpha)}|_{V_\alpha}$, we clearly obtain the same element of $H^1(X,\mc F)$. This is just the restriction of the cocycle $\{f_{ij}\}$ defined earlier to $\mc V$. Hence, we may consider the same covering $\mc U$, and possibly different $g_i' \in \mc G(U_i)$ with $\beta_{u_i}(g_i')=h|_{U_i}$ for all $i \in I$, As above, there exists $f_i \in \mc F(U_i)$ such that $\alpha_{U_i}(f_i)=g_i'-g_i$. Now, if $f_{ij}' \in \mc F(U_i \cap U_j)$ maps to $g_i'-g_j'$ on $U_i \cap U_j$, then
+    Now, we need to check that $\delta(h)$ is independent of the choices of $\mc U$ and $\{g_i\}$. Indeed, if $\mc V:= \{V_\alpha\}_{\alpha \in A}$ is a refinement of $\mc U$ given by the map $\tau:A \to I$, and we choose elements $g_\alpha'=g_{\tau(\alpha)}|_{V_\alpha}$, we clearly obtain the same element of $H^1(X,\mc F)$. This is just the restriction of the cocycle $\{f_{ij}\}$ defined earlier to $\mc V$. Hence, we may consider the same covering $\mc U$, and possibly different $g_i' \in \mc G(U_i)$ with $\beta_{u_i}(g_i')=h|_{U_i}$ for all $i \in I$, As above, there exists $f_i \in \mc F(U_i)$ such that $\alpha_{U_i}(f_i)=g_i'-g_i$. Now, if $f_{ij}' \in \mc F(U_i \cap U_j)$ maps to $g_i'-g_j'$ on $U_i \cap U_j$, then
     \[
     \alpha_{U_i \cap U_j}(f_i - f_j)=\alpha_{U_i \cap U_j}(f'_{ij}-f_{ij}) \implies f_i -f_j = f_{ij}' -f_{ij}.
     \]
@@ -1695,6 +1695,72 @@ where the RHS is singular cohomology.
 \end{align*}
 \end{rmk}
 
+\section{Vector Bundles, Line Bundles, and Divisors}
 
+Let $X, E$ be topological spaces, and $p:E \to X$ a continuous map. We assume that for every $x \in X$, the fiber $E_x:=p^{-1}(x)$ has the structure of an $n$-dimensional complex vector space.
+
+\begin{defn}
+ The map $p:E \to X$ is called a \textbf{vector bundle} of rank $n$ over $X$ if every point $a \in X$ has a neighborhood $U \ni a$ such that there is a homeomorphism $\varphi:p^{-1}(U) \to U\times \C^n$, called a \textbf{local trivialization} of $E$ over $U$, which is
+ \begin{enumerate}[(i)]
+    \item \textbf{fiber preserving:} the diagram
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJwXnstMX0oVSkiXSxbMiwwLCJVIFxcdGltZXMgXFxDXm4iXSxbMSwyLCJVIl0sWzAsMiwicCIsMl0sWzAsMSwiXFx2YXJwaGkiXSxbMSwyLCJcXHd7cHJ9XzEiXV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{p^{-1}(U)} \&\& {U \times \C^n} \\
+	\\
+	\& U
+	\arrow["\varphi", from=1-1, to=1-3]
+	\arrow["p"', from=1-1, to=3-2]
+	\arrow["{\w{pr}_1}", from=1-3, to=3-2]
+\end{tikzcd}\]
+commutes, and
+\item for each $x \in U$ the map $\varphi|_{E_x}$ is a vector space isomorphism
+\[
+E_x \arr[\sim] \{x\} \times \C^n \equiv \C^n.
+\]
+ \end{enumerate}
+An \textbf{atlas} for $E$ is a family $\brax{(U_i,\varphi_i)}_{i \in I}$ of local trivializations such that $\bigcup_{i \in I}U_i = X$.
+
+A vector bundle of rank $1$ is called a \textbf{line bundle}.
+\end{defn}
+
+\begin{defn}
+    A vector bundle $E \to X$ is said to be \textbf{trivial} if it has a linear trivialization  $E \arr[\sim] X \times \C^n$. Hence, any vector vector bundle is locally trivial by definition.
+\end{defn}
+
+\begin{prop}[][label=prop:transition-funcs]
+    Suppose that $E \arr[p]X$ is a rank $n$ vector bundle over a topological space $X$, and suppose
+    \[
+    \varphi_i :p^{-1}(U_i) \equiv E_{U_i}\to U_i \times \C^n
+    \]
+    is an atlas on $E$. Then, there exists unique continuous maps
+    \[
+    g_{ij}:U_i \cap U_j \to \GL_n(\C) \subset \C^{n^2}\equiv M_n(\C).
+    \]
+    such that the morphisms $\varphi_{ij}:= \varphi_i \circ \varphi_j^{-1}:(U_i \cap U_j)\times \C^n \to (U_i \cap U_j)\times \C^n$ satisfy
+    \[
+    \varphi_{ij}(x,t) = (x,g_{ij}(x)t),\qquad \forall (x,t) \in U_i \cap U_j \times \C^n.
+    \]
+    On $U_i \cap U_j \cap U_k$, the equation $g_{ij}g_{jk}=g_{ik}$ holds. The $\{g_{ij}\}$ are called \textbf{transition functions} for the vector bundle.
+\end{prop}
+
+\begin{proof}
+    The map $\varphi_i \circ \varphi_j^{-1}$ is a fiber preserving homeomorphism which, when restricted to each fiber, is a vector space isomorphism. Hence, for all $x \in U_i \cap U_j$, there exists a matrix $g_{ij}(x) \in \GL_n(\C)$ with $\varphi_{ij}(x,t)=(x,g_{ij}(x)t)$. Since $\varphi_{ij}$ is a homeomorphism, the map $x \mapsto g_{ij}(x)$ is continuous on $U_i \cap U_j$.
+\end{proof}
+
+\begin{rmk}
+    The converse of \Cref{prop:transition-funcs} also holds. Namely, given a family $\{g_{ij}\}$ of continuous maps $U_i \cap U_j \to \GL_{n}\C$ such that $g_{ij}g_{jk}=g_{ik}$ on $U_i \cap U_j \cap U_k$, we can construct a vector bundle with these transition functions.
+\end{rmk}
+
+\begin{proof}
+    Set $E':= \coprod_{i \in I}U_i \times \C^n \times \{i\} \subset X \times \C^n \times I$, with the topology induced from $X \times \C^n \times I$, where $I$ has the discrete topology. Let $(x,t,i)\sim (x',t',j)$ if and only if $x=x'$, and $t=g_{ij}(x)t'$. Then, the cocycle condition $g_{ij}g_{jk}=g_{ik}$ implies that $\sim$ is an equivalence relation on $E'$. Define $E:=E'/\sim$, with the projection $p:E \to X$. If $h: E' \to E$ is the natural quotient map $h|_{U_i \times \C^n \times I}\to E_{U_i}$ is a homeomorphism, and we define $\varphi_i$ to be the inverse of $h|_{U_i\times \C^n \times \{i\}}$.
+\end{proof}
+
+\begin{defn}
+    Let $X$ be a Riemann surface (or more generally a complex manifold), and $E\to X$ be a rank $n$ vector bundle over $X$. Two local trivializations $(U_i, \varphi_i)$ and $(U_j, \varphi_j)$ are said to be \textbf{compatible} if the associated transition function $g_{ij}:U_i \cap U_j \to \GL_n(\C)$ is holomorphic.
+\end{defn}
+
+\begin{rmk}
+    If $\Omega \subset \C^m$ is open, then a map $f: \Omega \to \C^n$ is \textbf{holomorphic} if $f=(f_1,\dots,f_n)$, with each $f_i :\Omega \to \C$ holomorphic.
+\end{rmk}
 
 \end{document}
