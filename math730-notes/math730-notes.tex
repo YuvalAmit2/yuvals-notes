@@ -875,8 +875,15 @@ That is, when can me make the following diagram commute?:
     \[
     f_* =p_* \circ \tilde{f_*} \implies \Img(f_*) \subset \Img (p_*),
     \]
-    proving the first direction. For the other direction, fix $y \in Y$, and take a path $\gamma$ connecting $y_0$ to $y$. Then, $f \circ \gamma$ is a curve in $X$ starting at $x_0$, so by the homotopy lifting property there exists $\mu_\gamma(t)$ lifting $f(\gamma(t))$. Define $\tilde f(y):=\mu_\gamma(1)$. We now need to show that this $\tilde f$ is independent of the choice of $\gamma$. Continued next time.
+    proving the first direction. For the other direction, fix $y \in Y$, and take a path $\gamma$ connecting $y_0$ to $y$. Then, $f \circ \gamma$ is a curve in $X$ starting at $x_0$, so by the homotopy lifting property there exists $\tilde{\mu}(t)$ lifting $f(\gamma(t))$. Define $\tilde f_\gamma(y):=\tilde{\mu}(1)$. We now need to show that this $\tilde f$ is independent of the choice of $\gamma$. 
+
+    Let $\gamma_1,\gamma_2$ be two such paths from $y_0$ to $y$. Define $\mu_i(t)=f(\gamma_i(t))$, and let $\tilde{\mu_i}$ be the lifts. We want to show $\tilde{\mu_1}(1)=\tilde{\mu_2}(1)$. Note that $\mu_1^{-1}\circ \mu_2$ is a loop in $X$ at $x_0$, and 
+    \[
+    [\mu_1^{-1}*\mu_2] = f_*\paren{[ \gamma_1^{-1}*\gamma_2 ]}\in f_*(\pi_1 (Y,y_0)) \subset p_*(\pi_1 (\tilde X, \tilde{x_0})).
+    \]
+    Thus, $\mu_1^{-1}*\mu_2$ lifts to a loop in $\tilde X$, and by uniqueness of lifts $\tilde{\mu_1}(1)=\tilde{\mu_2}(1)$.
 \end{proof}
+
 
 
 \end{document}
