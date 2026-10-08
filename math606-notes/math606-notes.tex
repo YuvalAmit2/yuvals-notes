@@ -1880,6 +1880,38 @@ Suppose now that $s$ is a meromorphic section of a holomorphic vector bundle $E$
     \]
 \end{proof}
 
+\begin{defn}
+    The section $s_D$ is called the \textbf{standard section} of $L(D)$.
+\end{defn}
+
+\begin{notethm}[Remarks]
+    \begin{enumerate}
+        \item If $s$ is a meromorphic section of a vector bundle $E \to X$, $s \not \equiv 0$, then $s$ is holomorphic if and only if $\div(s)$ is effective (so $s$ may have zeros, but no poles).
+        \item If $D$ is a divisor on $X$, and $U \subset X$ is open, we obtain a sheaf structure on $X$ by defining \[
+        \mc O_D(U):=\brax{ f \text{ meromorphic on } U \setbar \div(f) \geq -D   }
+        \] Moreover, if $\Gamma(U,L(D))$ denotes the vector space of holomorphic sections of $L(D)$ over $U$, and $s_D$ is the standard section of $L(D)$ with $\div(s_D)=D$, then the map \begin{align*}
+            \mc O_D(U) &\to \Gamma(U,L(D)) \\ f &\mapsto fs_D
+        \end{align*}
+        is an isomorphism. Hence the sheaf of holomorphic sections of $L(D)$ can be canonically identified with $\mc O_D$.
+        \item If $L \to X$ is any holomorphic line bundle, and $s_0,s_1$ are two meromorphic sections of $L$, $s_0 \not \equiv 0$, then there exists a meromorphic function $f$ on $X$ with $s_1 =f s_0$. Indeed, $s_1/s_0$ is well-defined independent of any local trivialization, since $f_i^1 = g_{ij}f_j^1$ and $f_i^0=g_{ij}f_{j}^0$ on $U_i \cap U_j$, so $f_i^1/f_j^1 = f_i^0/f_j^0$.
+    \end{enumerate}
+\end{notethm}
+
+\section{Linear Equivalence of Divisors}
+
+\begin{defn}
+    Two divisors $D_1$ and $D_2$ are \textbf{linearly equivalent} if there exists a meromorphic function $f$ on $X$, not identically zero, such that $\div f= D_1 - D_2$. We write $D_1 \sim D_2$ when this is the case. 
+\end{defn}
+
+\begin{prop}
+    We have $D_1 \sim D_2$ if and only if the line bundles $L(D_1)$ and $L(D_2)$ are holomorphically isomorphic.
+\end{prop}
+
+\begin{proof}
+    Suppose $D_1 -D_2 = \div f$ for some $f \in \mc M(X)^*$. Let $s_{D_1}$ and $s_{D_2}$ be the standard sections of $L(D_1)$ and $L(D_2)$. We claim that the map $u:=s_{D_1}\mapsto s_{D_2}:L(D_1)\to L(D_2)$ is a unique isomorphism. Indeed first define $u$ outside $|\div f| \cup |D_1| \cup |D_2|$ by \[
+    \lambda s_{D_1}(x) \mapsto \lambda f(x)s_{D_2}(x), \quad \lambda \in \C.
+    \] 
+\end{proof}
 
 
 
