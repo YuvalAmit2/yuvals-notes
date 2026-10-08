@@ -1908,12 +1908,29 @@ Suppose now that $s$ is a meromorphic section of a holomorphic vector bundle $E$
 \end{prop}
 
 \begin{proof}
-    Suppose $D_1 -D_2 = \div f$ for some $f \in \mc M(X)^*$. Let $s_{D_1}$ and $s_{D_2}$ be the standard sections of $L(D_1)$ and $L(D_2)$. We claim that the map $u:=s_{D_1}\mapsto s_{D_2}:L(D_1)\to L(D_2)$ is a unique isomorphism. Indeed first define $u$ outside $|\div f| \cup |D_1| \cup |D_2|$ by \[
+    Suppose $D_1 -D_2 = \div f$ for some $f \in \mc M(X)^*$. Let $s_{D_1}$ and $s_{D_2}$ be the standard sections of $L(D_1)$ and $L(D_2)$. 
+    \begin{claim}
+        We claim that the map $u:=s_{D_1}\mapsto s_{D_2}:L(D_1)\to L(D_2)$ is a unique isomorphism.
+    \end{claim}
+    \begin{proof}
+     Indeed first define $u$ outside $|\div f| \cup |D_1| \cup |D_2|$ by \[
     \lambda s_{D_1}(x) \mapsto \lambda f(x)s_{D_2}(x), \quad \lambda \in \C.
     \] 
-    Then, $u$ extends holomorphically to all of $X$, because on any open set $U \subset X$, the section $x \mapsto \lambda (x)s_{D_1}(x)$ is holomorphic if and only if the section $x \mapsto \lambda (x)f(x)s_{2}(x)$ is holomorphic (since $\div(s_{D_1}) \cap U=\div (fs_{D_2})\cap U$). Conversely, if $u:L(D_1) \to L(D_2)$ is an isomorphism
+    Then, $u$ extends holomorphically to all of $X$, because on any open set $U \subset X$, the section $x \mapsto \lambda (x)s_{D_1}(x)$ is holomorphic if and only if the section $x \mapsto \lambda (x)f(x)s_{2}(x)$ is holomorphic (since $\div(s_{D_1}) \cap U=\div (fs_{D_2})\cap U$).
+    \end{proof}
+    Conversely, if $u:L(D_1) \to L(D_2)$ is an isomorphism, then $u \circ s_{D_1}$ is a meromorphic section of $L(D_2)$. If $f$ is defined by $u \circ s_{D_1}=fs_{D_2}$, then $\div f = D_1 - D_2$ since $\ord_a(s_{D_1})=\ord_a(u \circ s_{D_1})$ for all $a \in X$.
 \end{proof}
 
+\begin{rmk}
+    In terms of the sheaves $\mc O_{D_1}$ and $\mc O_{D_2}$, the above isomorphism is just the map $\mc O_{D_1}(U) \to \mc O_{D_2}(U)$ sending $\varphi \mapsto f _\varphi$.
+\end{rmk}
 
+\section{Linear Operations on Vector Bundles}
+
+Linear operations on vector spaces/matrices can by bundle-ized, provided that they are functorial. This means that they extend to give operations on vector bundles/transition functions.
+
+\begin{ex}
+    Suppose $E \to X$ and $E' \to X$ are two vector bundles over the same base $X$.
+\end{ex}
 
 \end{document}
