@@ -1981,5 +1981,35 @@ If $L \to X$ is any line bundle, then $L \otimes L^*$ is a trivial line bundle o
     Alternatively, note that the isomorphism $\lambda s(x) \mapsto \lambda s_D(x)$, which is defined outside $|D|$, extends to an isomorphism $L \to L(D)$.
 \end{proof}
 
+\begin{defn}
+    Let $\bm{Z^1(X)}$ denote the abelian group of all divisors on $X$ (sometimes denoted $\Div(X)$), and let $\bm{A^1(X)} := Z^1(X)/\sim$, where $\sim$ denotes linear equivalence. Let $\bw{Pic}\bm{(X)}$ be the group of isomorphism classes of line bundles on $X$, under the tensor product, called the \textbf{Picard group}.
+\end{defn}
+
+\begin{rmk}[Homework exercise]
+    There is a natural isomorphism
+    \begin{align*}
+        \Pic(X) &\arr[\sim] H^1(X, \cO^*) \\ [L] & \mapsto \{g_{ij}\}
+    \end{align*}
+    where $\{g_{ij}\}$ are the transition functions of $L$ with respect to a trivializing open cover of $X$.
+\end{rmk}
+
+\begin{rmk}
+    There is a morphism 
+    \begin{align*}
+        \varphi: Z^1(X) & \to \Pic(X) \\ D & \mapsto [L(D)].
+    \end{align*}
+    This passes to linear equivalence, so we get an induced map
+    \[
+    \tilde \varphi :A^1(X) \to \Pic(X).
+    \]
+\end{rmk}
+
+\begin{thm}
+    The map $\tilde \varphi$ above is surjective, so $\Pic(X) \simeq A^1(X)$ for $X$ a compact Riemann surface.
+\end{thm}
+
+\begin{proof}
+    The proof of the claim relies on proving that any holomorphic line bundle $L \to X$ has a not identically zero meromorphic section.
+\end{proof}
 
 \end{document}
