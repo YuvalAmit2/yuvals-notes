@@ -1866,11 +1866,21 @@ Suppose now that $s$ is a meromorphic section of a holomorphic vector bundle $E$
 \end{proof}
 
 \begin{notebox*}[Overview]
-    Let $L \to P$ be a line bundle on a Riemann surface, and $\{U_i\}_{i \in I}$ is a trivializing open cover of $X$. Then, we can identify $L$ with a family of transition functions $\{g_{ij}\}$, with $g_{ij} \in \cO^*(U_i \cap U_j)$. Moreover, if $s:X \to L$ is a section, we can identify $s$ with $\{f_{i}\}$ such that $f_i$ is a function on $U_i$, and $f_i = g_{ij}f_j$ on $U_i \cap U_j$.
+    Let $L \to P$ be a line bundle on a Riemann surface, and $\{U_i\}_{i \in I}$ is a trivializing open cover of $X$. Then, we can identify $L$ with a family of transition functions $\{g_{ij}\}$, with $g_{ij} \in \cO^*(U_i \cap U_j)$, and $g_{ij}g_{jk}=g_{ik}$ on $U_i \cap U_j \cap U_k$. Moreover, if $s:X \to L$ is a section, we can identify $s$ with $\{f_{i}\}$ such that $f_i$ is a function on $U_i$, and $f_i = g_{ij}f_j$ on $U_i \cap U_j$.
 \end{notebox*}
 
-\begin{ex}
-    Let $D = \sum n_p[p]$ be a divisor on $X$. This associates to $L(D),s_D$ such that $\div(s_D)=D$.
-\end{ex}
+\begin{rmk}
+    Let $D = \sum n_p[p]$ be a divisor on $X$. This associates to $L(D),s_D$ such that $\div(s_D)=D$. The line bundle $L(D)$ is unique up to isomorphism.
+\end{rmk}
+
+\begin{proof}
+    If $(\mc U_P,\zeta_P)$ are different local coordinate charts, then $h_P:=(\zeta_P/z_P)^{n_p}\in \mc O^*(U_P)$ and $h_0:=1$ implies
+    \[
+    g_{ij}^{\w{new}}=h_ig_{ij}^{\w{old}}h_j^{-1}.
+    \]
+\end{proof}
+
+
+
 
 \end{document}
