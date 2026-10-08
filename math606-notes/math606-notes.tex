@@ -72,7 +72,7 @@ Soon after, Serre proved comparison theorems for sheaves and sheaf cohomology on
 
 \begin{defn}
     A \textbf{Riemann surface} is a 1-dimensional complex manifold $X$. Underlying $X$ is a 2-dimensional orientable real manifold $X_\R$. If $X$ is compact, then $X_\R$ is diffeomorphic to a $g$-torus, which we represent as
-    $$H_1(X_\R, \Z) \cong \Z^{2g}$$
+    $$H_1(X_\R, \Z) \simeq \Z^{2g}$$
 \end{defn}
 
 Consider an irreducible polynomial $p \in \C[z,w]$, and the subset of $\C^2$ given by
@@ -80,11 +80,11 @@ $$V(p):= \brax{(z,w) \in \C^2 \setbar p(z,w) =0}.$$
 In general, $V(p) \subset \C^2$ is neither compact nor a smooth manifold. Riemann showed that $V(p)$ can be modified to obtain a compact complex manifold $X(p)$, which is the Riemann surface of the algebraic function $p(z,w)$. Moreover, $X(p)$ comes with two meromorphic functions $f,g$ which extend $z$ and $w$.
 
 Later, Riemann defined abstract manifolds. We obtain compact Riemann surfaces $X$, which do not obviously come from polynomials $p$, but it turns out that these are all algebraic varieties. This was shown by studying the \textit{function theory} on $X$. For every compact $X$,
-$$\mc O(X) := \{ f:X \to \C \text{ holomorphic}\} \cong \C$$
+$$\mc O(X) := \{ f:X \to \C \text{ holomorphic}\} \simeq \C$$
 is just the constant functions. Instead, we consider the field $m(X)$ of meromorphic functions on $X$ (these are just holomorphic functions $f:X \to \P^1$).
 
 \begin{ex}
-    For the projective line, $m(\P^1) \cong \C(z)$, where $z$ is the affine coordinate on $\C \subset \P^1$.
+    For the projective line, $m(\P^1) \simeq \C(z)$, where $z$ is the affine coordinate on $\C \subset \P^1$.
 \end{ex}
 
 Studying meromorphic functions instead of holomorphic functions makes things more interesting. For instance, we'll prove the following theorem later, which is rather difficult.
@@ -301,11 +301,11 @@ for all $z \in U$
     is holomorphic on $\P^1$, and is therefore a constant.
 \end{proof}
 
-We've shown that $\mc M(\P^1) \cong \C(z)$, the field of rational functions in $z$.
+We've shown that $\mc M(\P^1) \simeq \C(z)$, the field of rational functions in $z$.
 
 \begin{exercise}
     Deduce that 
-    $$\Aut(\P^1) := \{f:\P^1 \to \P^1 \text{ biholomorphic}\} \cong \PGL_2(\C) := \GL_2(\C) /Z(\GL_2(\C))$$
+    $$\Aut(\P^1) := \{f:\P^1 \to \P^1 \text{ biholomorphic}\} \simeq \PGL_2(\C) := \GL_2(\C) /Z(\GL_2(\C))$$
 \end{exercise}
 
 \section{Covering Maps}
@@ -403,7 +403,7 @@ $$m := \sum_{x \in f^{-1}(c)}v(f,x)$$
     $f$ is proper, so \Cref{thm:sheet_counting} applies.
 \end{proof}
 
-We want to study $\mc M(X)$ for any compact Riemann surface $X$, generalizing $\mc M(\P^1) \cong \C(z)$. The main difficulty is that if $X$ is a compact Riemann surface, we can construct any non-constant $f \in \mc M(X)$. We examine the case of $\mc M(\C\setminus \Lambda)$ where $\Lambda \subset \C$ is a lattice. These are elliptic functions.
+We want to study $\mc M(X)$ for any compact Riemann surface $X$, generalizing $\mc M(\P^1) \simeq \C(z)$. The main difficulty is that if $X$ is a compact Riemann surface, we can construct any non-constant $f \in \mc M(X)$. We examine the case of $\mc M(\C\setminus \Lambda)$ where $\Lambda \subset \C$ is a lattice. These are elliptic functions.
 
 \begin{defn}
     A meromorphic function $f$ on $\C$ is said to be \textbf{elliptic} if there exists a lattice $\Lambda =\Z\omega_1 \oplus  \Z\omega_2$ in $\C$ such that $f(z+\omega) = f(z)$ for all $z \in \C \setminus \Lambda$ and $\omega \in \Lambda$. These correspond to meromorphic functions on the torus $\C /\Lambda$.
@@ -1527,7 +1527,7 @@ There is a useful criterion for when an open cover $\mc U$ of $X$ is sufficient 
 \begin{thm}[Leray's Theorem]
 Let $\mc F$ be a sheaf of abelian groups on $X$, and $\mc U:= \{U_i\}_{i \in I}$ be an open cover of $X$ such that $H^{1}(U_i, \mc F)=0$ for all $i \in I$. Then,
 \[
-H^1(X,\mc F) \cong H^1(\mc U,\mc F).
+H^1(X,\mc F) \simeq H^1(\mc U,\mc F).
 \]
 \end{thm}
 
@@ -1682,7 +1682,7 @@ by \Cref{thm:longexact}. Thus, $H^1(\Omega,\C)$ measures the obstruction to solv
 
 In fact, one can show
 \[
-H^1(\Omega,\C) \cong H^1_{\w{sing}}(\Omega,\C),
+H^1(\Omega,\C) \simeq H^1_{\w{sing}}(\Omega,\C),
 \]
 where the RHS is singular cohomology.
 \end{ex}
@@ -1930,7 +1930,56 @@ Suppose now that $s$ is a meromorphic section of a holomorphic vector bundle $E$
 Linear operations on vector spaces/matrices can by bundle-ized, provided that they are functorial. This means that they extend to give operations on vector bundles/transition functions.
 
 \begin{ex}
-    Suppose $E \to X$ and $E' \to X$ are two vector bundles over the same base $X$.
+    Suppose $E \to X$ and $E' \to X$ are two vector bundles over the same base $X$, and $\{g_{ij}\}$ and $\{g'_{ij}\}$ are transition functions for $E$ and $E'$ with respect to the same trivializing open cover of $X$.
+    \begin{enumerate}
+        \item \textbf{Direct sum:} The direct sum $E \oplus E'$ of $E$ and $E'$ is a vector bundle on $X$ such that $(E \oplus E')_x = E_x \oplus E'_x$, and the transition functions $\{g_{ij}^{E \oplus E'} \}$ are given by \[
+        g_{ij}^{E \oplus E'} = g_{ij} \oplus g'_ij = \matr{g_{ij} & 0 \\ 0 & g_{ij}'}
+        \]
+        \item \textbf{Tensor product:} The tensor product $E \otimes E'$ has $(E \times E')_x = E_x\otimes E'_x$ and $g_{ij}^{E \times E'}=g_{ij} \otimes g_{ij}'$. In particular, if $L$ and $L'$ are two line bundles on $X$, then $L \otimes L'$ has transition functions $\{g_{ij}\cdot g'_{ij}\}$. Observe that this is the group operation on $H^1(X,\cO^*)$.
+        \item \textbf{Dual vector bundle $E^*$:} If $E \arr[p] X$ is a holomorphic vector bundle, and $E^*:= \coprod_{a \in X}E_a^*$, we make $E^*$ into a vector bundle as follows: for a trivialization $\varphi_U:p^{-1}(U) \to U \times \C^n$ of $E$ over $U \subset X$, define $\tilde \varphi_U :\coprod_{a \in U}E_a^* \to U \times \C^n$ by 
+        \[
+        \tilde \varphi_U(v) = \paren{ a, (\varphi_{U,a})^{-1}(v)}, \quad v \in E_a^*.
+        \] 
+        It follows that if $\{g_{ij}\}$ are the transition functions of $E$ with respect to an open cover, then the transition functions for $E^*$ are $\brax{ (g_{ij}^t)^{-1} }$.
+        \item \textbf{Exterior and symmetric powers:} We have the $k$'th symmetric power $S^kE$, and the $k$'th exterior power $\Wedge^kE$, with transition functions $\{S^kg_{ij}\},\brax{\Wedge ^kg_{ij}}$ respectively.
+        \item \textbf{Hom bundle:} We have the vector bundle $\Hom(E,E')\to X$, defined via the isomorphism $\Hom(E,E') \simeq E^* \otimes E'$.
+    \end{enumerate}
 \end{ex}
+
+\begin{exercise}
+    Using local trivializations, show how a global section of $\Hom(E,E')$ can be identified with a morphism $E \to E'$ of vector bundles.
+\end{exercise}
+
+\begin{rmk}
+For divisors $D,D'$, we have
+\begin{align*}
+    L(D)\otimes L(D') &\simeq L(D+D'), \\ L(D)^* &\equiv L(-D).
+\end{align*}
+\end{rmk}
+
+\begin{lem}
+    A line bundle $L \to X$ is trivial if and only if $L$ has a holomorphic section $s$ with $s(x) \neq 0$, for all $x \in X$.
+\end{lem}
+\begin{proof}
+    The map $X \times \C \to L$ sending $(x,\lambda)\mapsto \lambda s(x)$ is an isomorphism.
+\end{proof}
+
+\begin{cor}
+If $L \to X$ is any line bundle, then $L \otimes L^*$ is a trivial line bundle on $X$. 
+\end{cor}
+\begin{proof}
+    If $v \in L_x$, $v \neq 0$, then there exists a unique $\ell \in L_x^*$ such that $\ell(v) = 1$. Then, $x \mapsto v \otimes \ell$ is a nowhere vanishing section of $L \otimes L^*$ (indeed, the linear form corresponding to $cv$ is $\frac{1}{c}\ell$ for $c \in \C^*$).
+\end{proof}
+
+\begin{rmk}
+    Let $L$ be a holomorphic line bundle on $X$, and $s$ be a meromorphic section of $L$, $s \not \equiv 0$. Then $L \simeq L(D)$, where $D = \div(s)$.
+\end{rmk}
+
+\begin{proof}
+    If $s_{-D}$ is the standard section of $L(-D)$, then $s \otimes s_{-D}$ is a nowhere vanishing holomorphic section of $L \otimes L(-D)$. Hence, $L \otimes L(-D)\simeq \mc O$ (the trivial line bundle), so $L \simeq \mc O \otimes L(D) \simeq L(D)$.
+
+    Alternatively, note that the isomorphism $\lambda s(x) \mapsto \lambda s_D(x)$, which is defined outside $|D|$, extends to an isomorphism $L \to L(D)$.
+\end{proof}
+
 
 \end{document}
