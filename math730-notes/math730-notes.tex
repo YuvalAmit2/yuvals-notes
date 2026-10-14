@@ -926,7 +926,69 @@ Use \Cref{thm:uniq-lifting-prop} to lift $p:\tilde X \to X$ to the cover $\tilde
 \end{proof}
 
 
+\section{Universal Covers}
 
+\begin{defn}
+    A \textbf{universal cover} of $X$ is a simply connected cover of $X$.
+\end{defn}
+
+\begin{que}
+    Does there always exist a universal cover?
+\end{que}
+
+\begin{defn}
+A space $X$ is called \textbf{semi-locally simply connected} if for every point $x \in X$, there exists a neighborhood $U \ni x$ such that the image of the map $i_*:\pi_1(U,x)\to \pi_1(X,x)$ induced by the embedding $i:U \hookrightarrow X$ is trivial.
+\end{defn}
+
+\begin{rmk}
+    Simply connected implies semi-locally simply connected.
+\end{rmk}
+
+\begin{prop}
+If $X$ has a universal cover, then $X$ is semi-locally simply connected.
+\end{prop}
+
+\begin{proof}
+    Fix $x \in X$, and let $U \ni x$ be as in the definition of the covering space $\tilde X$, which is our universal covering. Let $\tilde x \in \tilde X$ be such that $p(\tilde x)=x$, and let $U_\alpha \ni \tilde x$ be such that $p: \tilde U_\alpha \to U$ is a homeomorphism. Then, any loop $\gamma$ at $x$ in $U$ lifts to a loop $\tilde \gamma$ at $\tilde x$ in $\tilde U_\alpha$. However, since $\tilde U_\alpha$ is simply connected by our assumption, we know $\tilde \gamma$ is homotopically trivial, and thus $\gamma$ is as well.
+\end{proof}
+
+\begin{thm}[Existence of the Universal Cover]
+    Suppose $X$ is path connect, locally path connected, and semi-locally simply connected. Then, $X$ has a universal cover.
+\end{thm}
+
+\begin{proof}
+    We want to construct the universal cover $\tilde X$. Suppose, for now, that such a universal cover existed, and $p:\tilde X \to X$ is the projection. Fix $x_0 \in X$, and $\tilde {x_0}\in X$. Given a curve $\gamma$ at $x_0$, we can lift it to $\tilde \gamma$ starting at $\tilde{x_0}$. Now, consider
+    \[
+    \Gamma:= \{\gamma:[0,1] \to X, \gamma(0)=x_0\}.
+    \]
+    Then, we have an induced map $F:\Gamma \to \tilde X$ given by $F(\gamma):=\tilde \gamma(1)$, where $\tilde \gamma$ is the correspond lift. Since $\tilde X$ is path connected, $F$ is surjective. Moreover, if $F(\gamma_1)=F(\gamma_2)$, we must have $\gamma_1(1)=\gamma_2(1)$, and $\tilde{\gamma_2}^{-1}\circ \tilde{\gamma_1}$ is a loop in $\tilde X$ and therefore homotopically trivial, which means $\gamma_2^{-1}\circ \gamma_1$ are as well. That is, $\gamma_1\overset{\w{rel\{0,1\}}}{\sim}  \gamma_2$. Conversely, if $\gamma_1 \sim \gamma_2$, then by the homotopy lifting property, $F(\gamma_1)=F(\gamma_2)$. Thus, $F$ induces a bijection $(\Gamma/\sim) \leftrightarrow \tilde X$, where $\sim$ is homotopy relative to $\{0,1\}$. This hints that, to find our universal cover $\tilde X$, we should use the collection $\Gamma \setminus \sim$.
+    
+    Indeed, define
+    \[
+    \tilde X:=\brax{ [\gamma]_{\w{rel}\{0,1\}} \setbar \gamma:[0,1]\to X,\gamma(0)=x_0 },
+    \]
+and let $p:\tilde X \to X$ be the projection $p([\gamma])=\gamma(1)$, which is well-defined. Define a basis $B$ for $X$ by
+\[
+B := \brax{U \text{ path connected and } i_*(\pi _1(U,x_0)) \subset \pi_1(X,x_0) \text{ is trivial}}.
+\]
+Note that if $V \subset U\in B$ is path-connected, then $V \in B$. Thus, if $U_0 \cap U_1$ is non-trivial for $U_0,U_1\in B$, then for any $x \in U_0 \cap U_1$, there exists a path connected $V \ni x_0$, $V \subset U_0 \cap U_1$, because $X$ is locally path connected, and then $V \in B$. Moreover, $B$ covers $X$, hence $B$ indeed defines a basis for $X$.
+
+Now, to obtain a topology for $\tilde X$: for every $[\gamma] \in \tilde X$ and $U \in B$ such that $\gamma(1) \in U$, take
+\[
+U_{[\gamma]}:= \brax{ [\mu\circ\gamma] \setbar \mu(0)=\gamma(1), \Img (\mu) \subset U }.
+\]
+Then, $p$ induces a bijection $U_{[\gamma]} \to U$ for similar reasons as before. Moreover, if $\gamma_2 \in U_{[\gamma]}$, then $U_{[\gamma_2]}=U_{[\gamma]}$. Thus
+\[
+\tilde B := \brax{ U_{[\gamma]} \setbar U \in B, \gamma(1) \in U}
+\]
+defines a basis for $\tilde X$: if $U^1_{[\gamma_1]} \cap U^2_{[\gamma_2]}\neq \emptyset$, then we may take $\gamma_3$ in the intersection so that $U^1_{[\gamma_1]}=U^1_{[\gamma_3]}$ and $U^2_{[\gamma_2]}=U^2_{[\gamma_3]}$. Thus, since $B$ is a basis for $U$, we may take $V$ with $\gamma_3(1) \in V \subset U_1 \cap U_2$, and then $V_{[\gamma_3]} \subset U^1_{[\gamma_3]} \cap U^2_{[\gamma_3]} \in \tilde B$, proving $\tilde B$ is a basis.
+
+One now checks that $\tilde X$, with the topology induces by $\tilde B$, indeed defines a covering. Finally, to prove that it's simply connected: fix $[\gamma]$ a curve on $X$, and define
+\[
+[\gamma]_t(s) := \case{ \gamma(s) & 0 \leq s \leq t \\ \gamma(t)  & t \leq s \leq 1},
+\]
+which demonstrates that $\tilde X$ is path-connected. Moreover, if $\gamma \in p_* \paren{\pi_1(X,x_0)}$, and $\tilde \gamma$ is the lift, then we know that $[\gamma] = [x_0]$, and so $\tilde \gamma$ is homotopically trivial, proving simply connectedness.
+\end{proof}
 
 
 
