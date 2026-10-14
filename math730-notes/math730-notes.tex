@@ -990,7 +990,56 @@ One now checks that $\tilde X$, with the topology induces by $\tilde B$, indeed 
 which demonstrates that $\tilde X$ is path-connected. Moreover, if $\gamma \in p_* \paren{\pi_1(X,x_0)}$, and $\tilde \gamma$ is the lift, then we know that $[\gamma] = [x_0]$, and so $\tilde \gamma$ is homotopically trivial, proving simply connectedness.
 \end{proof}
 
+\begin{ex}
+The universal cover of $S^1$ adjoined to $S^2$ is $\R$ with a copy of $S^2$ at every $2\pi h$, $h \in \Z$.
+\end{ex}
 
+\begin{exercise}
+    Compute the universal cover of $S^1 \lor T^2$.
+\end{exercise}
+
+\begin{prop}
+    If $\tilde X$ is a cover of $X$, and $x_0 \in X$, then $\pi_1(X,x_0)$ acts on $p^{-1}(x_0)$: given $\tilde x_0\in p^{-1}(x_0)$, and $\gamma \in \pi_1(X,x_0)$, we may lift $\gamma$ to a curve $\tilde \gamma$ in $\tilde X$ starting at $\tilde{x_0}$, and so we define the action of $\gamma$ on $\tilde{x_0}$ to be $\tilde \gamma(1)$.
+\end{prop}
+
+\begin{lem}
+    If $\tilde X$ is the universal cover of $X$, then $\pi_1(X,x_0)$ acts on $\tilde X$, extending the above action in a cover respecting manner: for all $g\in \pi_1(X,x_0)$, and $\tilde x \in \tilde X$, $p(g\cdot \tilde x)=p(\tilde x)$.
+\end{lem}
+
+\begin{proof}
+    Take $\tilde{x_0} \in p^{-1}(x_0)$. Given $g\in \pi_1(X,x_0)$. We have the induced projections
+    % https://q.uiver.app/#q=WzAsMyxbMCwyLCIoXFx0aWxkZXtYfSwgXFx0aWxkZXt4XzB9KSJdLFsyLDIsIihYLHhfMCkiXSxbMiwwLCIoXFx0aWxkZSBYLGdcXHRpbGRle3hfMH0pIl0sWzIsMSwicCJdLFswLDEsInAiLDJdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	\&\& {(\tilde X,g\tilde{x_0})} \\
+	\\
+	{(\tilde{X}, \tilde{x_0})} \&\& {(X,x_0)}
+	\arrow["p", from=1-3, to=3-3]
+	\arrow["p"', from=3-1, to=3-3]
+\end{tikzcd}\]
+and so we want to find a continuous map $T_g$ between $(\tilde X,\tilde{x_0})$ and $(\tilde X,g\tilde{x_0})$. 
+
+Given $\tilde x \in \tilde X$, take a curve $\tilde \mu$ from $\tilde{x_0}$ to $\tilde x$, and so consider $\mu:=p \circ \tilde \mu$, which we lift back up to $\tilde X$ starting at $g(\tilde{x_0})$. It's left as an exercise to show that this is a group action.
+\end{proof}
+
+\begin{prop}
+    Let $H \leq \pi_1(X,x_0)$ be a subgroup, and denote $X_H:= \tilde X/H$, the space modded out by induced action of $H$. Then $X_H$ is a covering space of $X$, with projection $p_H:X_H \to X$, and
+    \[
+    p_{H*}\paren{ \pi_1(X_H,[\tilde{x_0}]) }=H
+    \]
+\end{prop}
+
+\begin{proof}
+    We have $p:(\tilde X, \tilde{x_0}) \to (X,x_0)$, the quotient map $\tilde p:(\tilde X,\tilde{x_0}) \to (X_H,x_0^H)$, where $x_0^H:=\braks{\tilde{x_0}}$, and we have $p_H : (X_H,x_0^H)\to (X,x_0)$. We claim $p_H$ is a covering map.
+
+    Let $x \in X$, and let $U \ni x$ be path connected such that $p^{-1}(U)=\coprod U_\alpha$, with $p:U_\alpha \to U$ a homeomorphism.
+
+    \begin{claim}
+        For $g \in \pi_1(X,x_0)$, if $g(U_\alpha)\cap U_\beta \ne \emptyset$, then $g(U_\alpha)=U_\beta$.
+    \end{claim}
+    Indeed, let $\tilde{z_0} \in U_\alpha$ be such that $g\tilde{z_0} \in U_\beta$. Since $U_\alpha$ and $U$ are path connected, we may take $z_0:= p(\tilde{z_0})$, and then for all $\tilde z \in U_\alpha$, we take a path $\tilde \gamma$ in $U_\alpha$ connection $\tilde{z_0}$ and $\tilde z$. Take $\gamma:=p \circ\tilde \gamma$, and lift $\gamma$ to a path starting at $g\tilde{z_0}$. We claim that $g \cdot \tilde \gamma$ is such a lift. Thus, $g \tilde z \in U_\beta$. Show the reverse inclusion finishes the claim.
+
+    Continued next time.
+\end{proof}
 
 
 \end{document}
