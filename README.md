@@ -8,7 +8,8 @@ Below are the lecture notes from some courses I've taken over the years. Feel fr
 - [STAT410: Intro to Probability Theory](stat410-notes/STAT410-Notes.pdf)
 
 ## Spring 2026
-- [MATH601: Abstact Algebra II](math601-notes/math601-notes.pdf)
+- [MATH601: Abstract Algebra II](math601-notes/math601-notes.pdf)
 
 ## Fall 2025
-- [MATH600: Abstact Algebra II](math600-notes/math600-notes.pdf)
+- [MATH600: Abstract Algebra II](math600-notes/math600-notes.pdf)
+- [MATH407: Advanced Number Theory](math407-notes/math407-notes.pdf)
