@@ -1,0 +1,430 @@
+% !TEX root = ../math407-notes.tex
+
+Our goal for the rest of the semester is the following theorem:
+
+\begin{thm*}[Dirichlet's Theorem]
+Let $a,m \ge 1$ with $\gcd (a,m)=1$. Then, there are infinitely many primes $p$ such that $p \equiv a \pmod m$.
+\end{thm*}
+
+To prove this, we must use complex analysis to study $(\Z/m\Z)^\times$. We will define a function $L : \C \to \C$, which we write as $L(s, \chi)$, where $\chi$ is a character. Characters are our first target.
+
+\section{Characters on Finite Abelian Groups}
+
+\begin{defn}
+    Let $G$ be a finite abelian group. A \textbf{character} of $G$ is a homomorphism from $G$ to $(\C^\times, \times)$. We denote $\hat G :=\Hom (G, \C^\times)$, called the \textbf{dual group}.
+\end{defn}
+
+\begin{ex}
+    In $\hat G$, we have $\veps : G \to \C^\times, g\mapsto 1$. This is the \textbf{trivial character}. Note that for $\phi,\psi \in \hat G$, we have the group law $(\phi \star \psi)(g)  = \phi(g)\psi(g)$. Moreover, $\phi ^{-1}(g)=(\phi(g))^{-1}$, and $\phi \star \phi^{-1}=\veps$.
+\end{ex}
+
+\begin{ex}
+    Let $G = \angles{\sigma}$ be cyclic. Let $\chi \in \hat G$ be a character, and let $\chi ( \sigma)=w$. Observe how it must be the case that $w^{\ord (\sigma)}=1$, hence $w \in \mu _n$. Moreover, for any $w \in \mu _n$, there is a unique $\chi \in \hat G$ such that $\chi (g) =w$. In other words, $\hat G \cong \mu _n$, with the isomorphism $\chi \mapsto \chi (\sigma)$.
+\end{ex}
+
+\begin{ex}
+    Let $G = \angles{\sigma}$, and $\ord (\sigma)=4$. Write $\chi_1,\chi_{-1},\chi_i,\chi_{-i}$ to be the four expected elements of $\hat G$. We get the following table:
+    \begin{center}
+    \begin{tabular}{ccccc}
+         & $\chi_1$ & $\chi_{-1}$ & $\chi _i$ & $\chi _{-i}$ \\
+       $e$  & $1$ & $1$ & $1$ & $1$ \\
+       $\sigma$  & $1$ & $-1$ & $i$ & $-i$ \\
+       $\sigma^2$  & $1$ & $1$ & $-1$ & $-1$\\
+        $\sigma^3$ & $1$ & $-1$ & $-i$ & $i$ \\
+    \end{tabular}
+    \end{center}
+\end{ex}
+
+Consider the map $\C ^\times \to \C^\times, z \mapsto z^n$. Since $\C$ is algebraically closed, this map is surjective, and the kernel is the $n$'th roots of unity, which we denote $(\mu _n, \times)$. Note that $\mu_n$ is cyclic of order $n$. In general, if $G$ is a group for which $G \to G, g \mapsto g^n$ is surjective, we call $G$ \textbf{divisible}.
+
+\begin{prop}
+    Suppose $H \leq G$, where $G$ is finite abelian. Then there exists a surjective homomorphism $\hat G \to \hat H$. In particular, any character $\chi \in H$ can be extended to a character $\tilde \chi \in \hat G$.
+\end{prop}
+
+\begin{proof}
+    Given any $\chi \in \hat G$, we may map $\chi \mapsto \chi |_H$, which is $\chi$ restricted to $H$. We now need to show that for any $\chi \in \hat H$, there exists $\tilde \chi\in \hat G$ such that $\tilde \chi |_H = \chi$. We will prove this by induction on the index $|G:H|$. If $|G:H|$, the claim is trivial as $G=H$.
+
+    If $|G:H| \neq 1$, pick $x \in G,x \not \in H$, and set $H':= \angles{H,x}$. Note $H \lneq H'$. Let $n$ be the smallest integer such that $x^n \in H$, and set $\chi(x^n) = t \in \C^\times$. Now, because $\C^\times$ is divisible, there exists $w \in \C^\times$ such that $w^n=t$. So, define $\chi ':H' \to \C^\times$ by
+    $$\chi' (h')=\chi '(hx^a)=\chi(h)w^a.$$
+    One can check that this is a well-defined homomorphism, hence $\chi '$ is a character on $H'$. Furthermore $\chi ' |_H = \chi $. Moreover, $|G:H'|<|G:H|$, so by induction $\chi '$ extends to a character $\tilde \chi \in \hat G$ such that $\tilde \chi |_{H'}=\chi '$, hence $\tilde \chi |_H = \chi$.
+\end{proof}
+
+\begin{prop}
+    Given $G_1,G_2$ finite abelian, we have $\widehat{G_1 \times G_2} \cong \hat G_1 \times \hat G_2$.
+\end{prop}
+
+Now, we have a surjection $\hat G \to \hat H \to 0$, and the kernel of the map is
+$$\ker (\hat G \to \hat H) = \{ \chi \in G\mid \chi (h) =1 \: \forall h \in H\}$$
+Let $\chi$ be in the kernel. Now, for any $x \in G$, it's in some coset $xH$, and for any $xh \in xH$, $\chi(xh)=\chi(x)\chi(h)=\chi(x)$. Therefore, $\chi$ is constant on cosets of $H$. We may therefore see that the kernel is $\widehat{G/H}$.
+
+\begin{prop}
+    Given $H \leq G$ finite abelian, we have the following pair of exact sequences:
+    $$0 \to H \to G \to G/H \to 0$$
+    $$ 0 \to \widehat{G/H} \to \hat G \to \hat H \to 0$$
+\end{prop}
+
+\begin{prop}
+    For $G$ finite abelian, $G \cong \hat G$ non-canonically, and $G \cong \hat{\hat G}$ canonically.
+\end{prop}
+
+\begin{proof}
+    Previous homeworks.
+\end{proof}
+
+Let's think about Euler's proof on the infinitude of primes.
+
+\begin{proof}
+    Consider $\sum_{n=1}^\infty \frac 1n$, which we know diverges. By FTA, for $n>1$, we know $n = p_1^{e_1}\cdots p_r^{e_r}$ for $p_i$ distinct primes, $e_i >0$. Then, we observe
+    $$\sum _{n=1}^\infty \frac{1}{n}=\prod_{\text{primes}}\paren{1 +\frac{1}{p}+\frac{1}{p^2}+\cdots}=\prod_{\text{primes}}\frac{1}{1-\frac{1}{p}}.$$
+    Hence, if we had finitely many primes, the RHS would be finite, contradicting the LHS diverging.
+\end{proof}
+The process of converting the harmonic sum to a product over primes is super important. This also hints at how we'll prove Dirichlet's theorem. We want to prove
+$$\prod_{p \equiv a \text{ mod } m}\frac{1}{1- \frac{1}{p}}= \sum _{n=1}^\infty(?)$$
+and show the RHS diverges.
+
+\begin{thm}[Orthogonality Relations]
+    Let $G$ be finite abelian with $|G|=n$. Then,
+    \begin{enumerate}
+        \item For a fixed $\chi \in \hat G$, $\sum_{g \in G}\chi (g) = \case{n  & \chi =1 \\ 0 & \chi \neq 1}$.
+        \item For a fixed $g \in G$, $\sum _{\chi \in \hat G}\chi(g)=\case{n & g=1 \\ 0 & g \neq 1}$
+    \end{enumerate}
+\end{thm}
+
+\begin{ex}
+    Let $G = (\Z/m\Z)^\times$ (Serre calls this $G(m)$), and $m=4$. Then, $\widehat{G(4)}$ has a unique non-trivial element $\chi$, which maps $\chi(1)=1$ and $\chi (3)=-1$. This allows us to make a function on $\Z$: $0 \mapsto 0,1 \mapsto 1, 2 \mapsto 0, 3 \mapsto -1$ periodic. In particular, we see this is $\chi (a)$ when $(a,m)=1$, and $0$ otherwise. More on this later.
+\end{ex}
+
+\section{Quick Tour of Complex Analysis}
+
+\begin{defn}
+    If $z=re^{i \theta}$, for $\pi < \theta \leq \pi$, we say $\w{Arg}(z) = \theta$, and we set
+    $$\arg (z) = \{ \w{Arg}(z) + 2\pi k \mid k \in \Z\}$$
+\end{defn}
+
+\begin{defn}
+    $f:\C \to \C$ is \textbf{differentiable} at $z_0 \in \C$ if $\lim_{z \to z_0}\frac{f(z)-f(z_0)}{z-z_0}$ exists.
+\end{defn}
+
+\begin{ex}
+    Polynomials in $z$ are differentiable. $\bar z$ is not differentiable.
+\end{ex}
+
+\begin{defn}
+    For an open set $U \subset \C$, $f:\C \to \C$ is \textbf{analytic} or \textbf{holomorphic} on $U$ if
+    \begin{enumerate}
+        \item $f$ is differentiable at all points of $U$
+        \item $f'$ is continuous on $U$.
+    \end{enumerate}
+\end{defn}
+
+\begin{rmk}
+    Goursat showed condition $2$ is unnecessary, as it's implied by $1$.
+\end{rmk}
+
+\begin{thm}[Cauchy-Riemann Equations]
+    Let $f(z) = u(x,y)+iv(x,y)$. Then, $f$ is analytic $\iff \frac{\partial u}{\partial x}=\frac{\partial v}{\partial y}$ and $\frac{\partial u}{\partial y}=-\frac{\partial v}{\partial x}$
+\end{thm}
+
+\begin{cor}
+    If the 2nd order partial derivatives of $u,v$ are continuous, then $\Delta u=\Delta v=0$, where $\Delta =\frac{\partial ^2}{\partial x^2}+\frac{\partial ^2}{\partial y^2}$
+\end{cor}
+
+\begin{cor}
+    If $f:\C \to \C$ is real-values and analytics, then $f$ is constant.
+\end{cor}
+
+\begin{thm}[Green's Theorem]
+    Let $D \subset \R^2$ be a domain (open, simply connected), and let $C$ be a curve in $D$. Then,
+    $$\oint_{C=\partial R}Pdx+Qdy=\int\int_R (Q_x-P_y)dxdy$$
+\end{thm}
+
+\begin{thm}[Cauchy's Theorem]
+    If $f$ is analytic on $U$, then for any domain $D \subset U$, and $C = \partial D$,
+    $$\oint _C f(z)dz=0$$
+\end{thm}
+
+\begin{cor}[Cauchy's Integral Formula]
+    Let $f$ be analytic on $U$, and let $C \subset U$ be a closed curve encircling $z_0$. Then,
+    $$f(z_0) =\frac{1}{2\pi i} \oint_C \frac{f(w)}{w-z_0}dw$$
+    Moreover,
+    $$f^{(m)}(z_0)=\frac{m!}{2\pi i}\oint_C \frac{f(z)}{(w-z_0)^{m+1}}dw$$
+\end{cor}
+
+\begin{cor}
+    Suppose $f$ is analytic on a domain $D$, and suppose that $|f(z)| \leq M$ for all $z \in \partial D$. Then, for $z_0 \in D$ and a disk of radius $\rho$ centered at $z_0$ contained in $D$,
+    $$|f^{(m)}(z_0)| \leq \frac{m!}{\rho ^m}M$$
+\end{cor}
+
+\begin{cor}
+    Suppose $f: \C \to \C$ is analytic on all of $\C$ (i.e. it's \textbf{entire}). Moreover, suppose $f$ is bounded, i.e. there exists $M$ such that $|f(z)| \leq M$ for all $z \in \C$. Then, $f$ is constant.
+\end{cor}
+
+\begin{prop}
+    Suppose $f$ is analytic on a domain $D$, let $z_0 \in D$, and let $z_0 \in E=D_\rho(z_0) \subset D$. Then, $f$ on $E$ is given by a power series
+    $$f(z) = \sum _{n=0}^\infty a_n(z-z_0)^n,\:\: a_n=\frac{f^{(n)}(z_0)}{n!}$$
+    for all $|z-z_0| < \rho$.
+\end{prop}
+
+\begin{defn}
+    $f$ has a \textbf{pole} at $a$ of order $k$ if $(z-a)^kf(z)$ is analytic in $U$ containing $a$, and $(z-a)^{k-1}f(z)$ is not analytic. If $f$ has only finitely many poles in $\C$, we say $f$ is \textbf{meromorphic}.
+\end{defn}
+
+\begin{prop}
+    Let $h$ be harmonic. Then, integrating around a circle of radius $r$ around $a$, we have $h(a) = \int h(a+re^{i \theta})\frac{d \theta}{2 \pi}$
+\end{prop}
+
+\begin{proof}[Proof of Cauchy's Integral Formula]
+    Assume $C$ is a circle of radius $\veps$ centered at $z_0$. For some $w \in C$, we can parametrize $w = z_0+\veps e^{i\theta}$, $0 \leq \theta \leq 2\pi$. Moreover, $dw = i\veps e^{i\theta}d \theta$, and $w-z_0 = \veps e^{i\theta}$. So,
+    $$\frac{1}{2 \pi i}\oint \frac{f(w)}{w-z_0}dw=\frac{1}{2 \pi i}\int_0^{2\pi}\frac{f(z_0+\veps e^{i}\theta)i\veps e^{i\theta}}{\veps e^{i\theta}}d \theta= \frac{1}{2\pi i }\int _0^{2\pi}f(z_0+\veps e^{i\theta})d\theta = f(z_0)$$
+    since $f = u+iv$ with $u,v$ harmonic.
+\end{proof}
+
+\begin{lem}
+    Let $\{f_n\}_{n=1}^\infty$ be a sequence of $f_n :U \to \C$ holomorphic for $U$ open. Suppose $f_n \to f$ converges uniformly on any compact subset $K \subset U$. Then, there exists some $n>>0$ such that for all $x \in K$, $|f_n(x) - f(x)| <\veps$ for any $\veps$. Therefore, $f$ is holomorphic.
+\end{lem}
+
+\begin{lem}[Abel's Summation By Parts]
+    Let $\{a_n\}_{n=1}^\infty,\{b_n\}_{n=1}^\infty$ be sequences of real numbers. Then,
+    $$\sum_{n=1}^Na_nb_n=b_{n+1}A_N - \sum_{n=1}^N (b_{n+1}-b_n)A_n,\:\:\: A_n = \sum_{i=1}^ma_i$$
+    The name comes from the fact that if you view sums as integrals, this becomes integration by parts.
+\end{lem}
+
+\begin{lem}
+    Let $0 < \alpha < \beta$ be real, and $z=x+iy$ with $x>0$. Then,
+    $$|e^{-\alpha z}-e^{-\beta z}|\leq \abs{\frac{z}{x}}(e^{-\alpha x}-e^{-\beta x})$$
+\end{lem}
+
+\begin{defn}
+    We define the \textbf{Riemann Zeta Function}
+    $$\zeta (s) = \sum_{n=1}^\infty \frac{1}{n^s},$$
+    where $s \in \C$, and $n^s = e^{s \ln (n)}$. More generally, for some sequence $\{a_n\} \subset \C$, we define a \textbf{Dirichlet series}
+    $$f(s) = \sum_{n=1}^\infty \frac{a_n}{n^s}.$$
+\end{defn}
+
+\begin{prop}
+    Suppose $a_n = h(n)$ with $h(mn)=h(m)h(n)$. Then,
+    $$ \sum_{n=1}^\infty \frac{h(n)}{n^s}=\prod_{p\text{ prime}}\frac{1}{1-\frac{1}{h(p)^s}}$$
+\end{prop}
+
+\begin{thm}
+    Let $U\subset V$ be two open sets in $\C$. Suppose $f,g : V \to \C$ are analytic. If $f|_U = g|_U$, then $f=g$. This leads to a notion of analytic continuous.
+\end{thm}
+
+\begin{thm}
+    Plainly, $\zeta(s)$ is defined for all $s \in \C$ with $\Re (s) > 1$. But, $\zeta(s)$ has a \textbf{meromorphic continuation} to all of $\C$, with a simple pole at $s=1$. Moreover,
+    $$\psi (s) = \zeta (s) - \frac{1}{s-1}$$
+    extends to an analytic function on all of $\C$.
+\end{thm}
+
+\begin{defn}
+    The \textbf{Abscissa of Convergence} of a Dirichlet series $f(s)$ is the (minimal) value $\rho \in \R \cup \{ \infty, -\infty\}$ such that $f(s)$ converges for all $\Re(s) > \rho $. The Abscissa of convergence for $\zeta(s)$ is $\rho=1$. Recall that if we know $\sum_{n=1}^\infty \frac{a_n}{n^s}$ converges at some $s \in \C$, then we know it converges at all $\Re(z) > \Re(s)$.
+
+    The \textbf{Ascissa of Absolute Convergence} is the (minimal) $\rho^+ \in \R \cup \{\infty,-\infty\}$ such that $\sum_{n=1}^\infty \frac{|a_n|}{n^s}$ converges for all $\Re(s) > \rho^+$
+\end{defn}
+
+\begin{prop}
+    Let $f(s) = \sum \frac{a_n}{n^s}$ be a Dirichlet series, and suppose $a_n \in \R_{\geq 0}$ for all $n$. Suppose $f(s)$ converges for $\Re(s) > \rho \in \R$, and that $f$ can be extended analytically to a homomorphic function in an open set around $\rho$. Then, $f$ converges for all $\Re(s) > \rho - \veps$ for some $\veps>0$.
+\end{prop}
+
+\begin{notebox*}[Observation (Gauss - Early 1800s)]
+    Let $\pi(n)$ be the number of primes $\leq n$. Then,
+    $$\pi (n) \sim \frac{n}{\log (n)}.$$
+    That is, if you picked a number in the range $1,\dots ,n$ at random, the probability that it's prime is $\frac{1}{\log (n)}$
+\end{notebox*}
+
+\begin{prop}
+    $$\zeta (s) = \zeta (1-s)$$
+    Therefore, $\zeta$ has a line of symmetry at $x=\frac{1}{2}$
+\end{prop}
+
+\begin{notebox*}[Riemann Hypothesis]
+    All the non-trivial zeros of $\zeta(s)$ lie on $\Re (s) = 1/2$
+\end{notebox*}
+
+\begin{thm}[Hadamard-Poussin Theorem]
+    $\zeta(1+it) \neq 0$ for all $t \in \R$, and this implies Gauss's prime number theorem.
+\end{thm}
+
+\section{Dirichlet's Theorem}
+
+\begin{notebox*}[Fact]
+    Let
+    $$f(s) = \sum \frac{a_n}{n^s},g(s) = \sum\frac{b_n}{n^s}.$$
+    Then, if we have some $\rho$ such that $f(s) = g(s)$ for all $\Re(s) > \rho$, then $a_n=b_n$ for all $n$.
+\end{notebox*}
+
+We know that a Dirichlet series converges to the right of the Abscissa, and diverges to the left, but we don't know what it does on the line $\Re(s) = \rho$.
+
+\begin{thm}
+    If all $a_n \in \R$ with $a_n \geq 0$ for all $n$, and $\rho$ is the Abscissa of convergence of
+    $$f(s) = \sum_{n=1}^\infty \frac{a_n}{n^s},$$
+    then $f$ has a pole at $s=\rho$.
+\end{thm}
+
+\begin{thm}
+    If $|a_n| \leq M$, then the respective Dirichlet series has Abscissa $\rho \leq 1$. If $\abs{\sum_{n=1}^Na_n}$ is bounded, then $f(s)$ converges for $\Re(s) >0$.
+\end{thm}
+
+% \prop{
+% Let $\chi : (\Z/m\Z)^\times \to \C$ be a character, and $$L(s,\chi) = \sum_{n=1}^\infty \frac{\chi(n)}{n^s}$$ be the respective Dirichlet series. Recall that $|\chi (n)| \leq 1$
+% }
+\begin{rmk}
+    Let $G(m) = (\Z/m\Z)^\times$, and let $\chi : G(m) \to \C^\times$ be a character. We may consider the sequence $a_n = \chi(n)$, when defined, and $0$ otherwise. We can then consider the Dirichlet series
+    $$L(s,\chi) = \sum_{n=1}^\infty \frac{\chi (n)}{n^s}=\prod_{p \nmid m}\frac{1}{1-p^{-s}\chi(p)}.$$
+    This converges for $\Re (s) > 0$ provided $\chi$ is not the trivial character.
+\end{rmk}
+
+\begin{rmk}
+    Let $P$ be the set of primes. Let $\zeta(s) = \prod_{p \in P} (1-\frac{1}{p^s})^{-1}$. Then, observe
+    $$\log \zeta (s) = -\sum_{p \in P}\log \paren{1-\frac{1}{p^s}}.$$
+    Moreover, we know
+    $$-\log(1-x) = x + \frac{x^2}{2}+\frac{x^3}{3}+\cdots.$$
+    Therefore,
+    $$\log \zeta (s) = \sum_{p \in P}\frac{1}{p^s}+\sum _{p\in P}(\text{finite as } s \to 1)$$
+    hence
+    $$\sum_{p \in P}\frac{1}{p^s}\sim \log \paren{\frac{1}{s-1}}.$$
+    Similarly,
+    $$L(s,\chi) \sim \sum_{p \in P}\frac{\chi(p)}{p^s}=:f_x(s)$$
+\end{rmk}
+
+\begin{lem}
+    In $G(m)$, for $p \nmid m$, let $f(p)$ be the order of $p$. Define $g(p)$ so that $g(p)f(p)=\varphi (m)$. Then,
+    $$\prod _{\chi \in \hat G(m)}(1-\chi(p)T)=(1-T^{f(p)})^{g(p)}$$
+\end{lem}
+
+\begin{ex}
+    Let $m = 101,p = 37$, then $f=25$, so $g=4$. Then,
+    $$\chi (37) \in W = \angles{e^{2\pi i/25}} \leq \C^\times,$$
+    and $e^{2\pi i/25}$ occurs exactly $4$ times.
+\end{ex}
+
+\begin{defn}
+    Let
+    $$\zeta_m(s) := \prod_{\chi \in \hat G(m)}L(s,\chi)=\prod_{p \nmid m}\frac{1}{(1-\frac{1}{p^{f(p)s}})^{g(p)}.}$$
+    In particular, if we write $\zeta_m(s) = \sum_{n=1}^\infty \frac{a_n}{n^s},$ then $a_n \geq 0$ for all $n$. Therefore, we only need to understand $\zeta_m(s)$ on the real line.
+\end{defn}
+
+\begin{prop}
+    $$\zeta_m(s) = L(s, 1) \prod_{\chi \neq  1}L(s,\chi),$$
+    where $1$ denotes the trivial character. The first factor has a simple pole at $s=1$, and the rest converges for $\Re(s)>0$. So, $\zeta_m$ certainly converges for $\Re(s)>1$.
+\end{prop}
+
+\begin{thm}
+    \begin{enumerate}
+        \item $\zeta_m(s)$ has a simple pole at $s=1$
+        \item $L(1,\chi) \neq 0$ for all $\chi \neq  1$.
+    \end{enumerate}
+    (2) $\implies$ (1)
+\end{thm}
+
+\begin{proof}
+    Suppose (2) were not the case, so there exists some $\chi \neq 1$ such that $L(1,\chi)=0$. Since $L(s,1)$ has a \textit{simple} pole at $s=1$, it follows that $\zeta_m(s)$ is now holomorphic for $\Re(s)>0$. We claim this cannot be the case.
+
+    Observe
+    $$\zeta_m(s) =\prod_{p \nmid m}\paren{1 - \frac{1}{p^{f(p)s}}}^{-g(p)} > \prod_{p \nmid m}\paren{1-\frac{1}{p^{\phi(m)s}}}^{-1}=\zeta(\phi(m)s),$$
+    which has a pole at $\frac{1}{\phi(m)}>0$, a contradiction.
+\end{proof}
+
+\begin{defn}
+    We define the Dirichlet density $A\subset P$ to be
+    $$k=\lim_{s \to 1}\frac{\paren{ \sum_{p \in A} \frac{1}{p^s} }}{\log \paren{\frac{1}{s-1}}}$$
+    when the limit exists. If $A$ is finite, then $k=0$, and if $k\neq 0$, then $A$ is infinite.
+\end{defn}
+
+\begin{defn}
+    Let
+    $$P_a := \{ p \in P \mid p \equiv a \pmod m\}$$
+    for $(a,m)=1$. Our goal is to show $P_a$ is infinite. Moreover, define
+    $$g_a(s) = \sum_{p \in P_a}\frac{1}{p^s}$$
+\end{defn}
+
+\begin{lem}
+    $$g_a(s) = \frac{1}{\phi (m)}\sum_{\chi \in \hat G(m)}\chi (a)^{-1}f_\chi (s)$$
+\end{lem}
+
+\begin{proof}
+    $$ \frac{1 }{\phi (m)}\sum _{\chi \in \hat G(m)} = \frac{1}{\phi(m)}\sum_{\chi}\sum_{p \nmid m} \frac{\chi (p)\chi(a^{-1})}{p^s}= \frac{1}{\phi (m)}\sum_{p \nmid m}\sum_{\chi}\frac{\chi (pa^{-1})}{p^s}=\sum_{p \in P_a}\frac{1}{p^s}$$
+\end{proof}
+
+It follows that $\lim_{s \to 1}\frac{g_a(s)}{\log\frac{1}{s-1}}=\frac{1}{\phi (m)} \neq 0$, hence $P_a$ is infinite!
+
+\section{Results}
+
+\begin{notebox*}[Question]
+    Can we find an explicit list polynomials $f_1,f_2,\dots$ such that $\bar \Q = \Q($roots of $f_1,f_2,\dots)$?
+\end{notebox*}
+
+\begin{notebox*}[Answer]
+    No.
+\end{notebox*}
+
+\begin{notebox*}[Question]
+    Can we understand $G_\Q = \Gal(\bar \Q / \Q)$?
+
+    Can we show that every finite group is a quotient of $G_\Q$?
+\end{notebox*}
+
+\begin{notebox*}[Answer]
+    No.
+\end{notebox*}
+
+\begin{prop}[Values of $\zeta$]
+    $$\zeta ( 2) = 1 +\frac{1}{4}+\frac{1}{9}+\cdots = \frac{\pi^2}{6}$$
+    $$\zeta (12) = \frac{691\pi^{12}}{638512875}$$
+    $$1 - \frac{1}{3}+\frac{1}{5}-\frac{1}{7}+\cdots = \pi /4$$
+    $$1 - \frac{1}{3} - \frac{1}{5}+ \frac{1}{7}+\frac{1}{9}-\frac{1}{11}+\cdots = \frac{1}{\sqrt 2}\log ( 1 + \sqrt 2)$$
+    $$\zeta ( 0) = \text{``}1 + 1 + 1+\cdots\text{''} = -1/2$$
+    $$ \zeta (-1) = \text{``}1 + 2 + 3 +\cdots\text{''} = -1/12$$
+    $$\zeta(-2)=\text{``}1+4+9+\cdots\text{''} =0 $$
+\end{prop}
+
+\begin{thm}[Euler's Theorem]
+    $$\zeta (2k) = \pi^{2k}\cdot q$$
+    for some $q \in \Q$.
+\end{thm}
+
+Let
+$$h_1(t) = \frac{1+t}{2(1-t)}, h_2(t) = t \frac{d}{dt}h_1(t),\dots, h_{r+1}(t) =t\frac{d}{dt}h_r(t)$$
+
+$$h_1(t) = \frac{1+t}{2(1-t)}, h_2(t) = \frac{t}{(1-t)^2},h_3(t) = \frac{t+t^2}{(1+t)^3},\dots ,h_r(t) \in \Q[t,\frac{1}{1-t}]$$
+
+\begin{prop}
+    Let $x \in \C \setminus \Z$, and $t= e^{2\pi i x},t\neq 1$. Then,
+    \begin{equation}
+        h_1(t) = \frac{-1}{2}\cdot \frac{1}{2\pi i}\paren{\sum_{n \in \Z}\paren{\frac{1}{x+n}+\frac{1}{x-n}}}
+    \end{equation}
+    \begin{equation}
+        h_r(t) = (r-1)!\paren{-\frac{1}{2\pi i}}^r\sum_{n \in \Z}\frac{1}{(x+n)^r},\:\:r \geq 2
+    \end{equation}
+\end{prop}
+\begin{proof}
+    (Sketch) $\frac{\sin(\pi x)}{\pi x}=\prod_{n=1}^\infty (1-\frac{x^2}{n^2})=\cdots$
+\end{proof}
+\begin{cor}
+    For $m>1$ and $\chi:G(m) \to \C^\times$, let $r\geq1$ be such that $\chi(-1)  = (-1)^r$. Let $\zeta_m=e^{2\pi i/m}$ be a primitive $m$'th root. Then,
+    $$L(r,\chi)=\sum_{n=1}^\infty \frac{\chi(n)}{n^r}=\frac{1}{(r-1)!}\paren{\frac{-2\pi i}{m}}^r\frac{1}{2}\sum_{a \in G(m)}\chi (a)h_r(\zeta_m^a) $$
+\end{cor}
+
+\begin{defn}
+    Let $\frac{x}{e^x-1}=\sum_{n=0}^\infty \frac{B_n}{n!}x^n$. $B_n$ is called the $n$'th \textbf{Bernoulli number}. We know $B_n \in \Q$ for all $n$, and $B_n=0$ for all odd $n \geq 3$. Euler found
+    $$\zeta(1-2k) = -\frac{B_{2k}}{2k}$$
+    for $k\geq 1$.
+\end{defn}
+
+\begin{thm}[Kummer's Theorem]
+    Let $m,m' < 0$, with $m \equiv m' \not \equiv 1 \pmod {p-1}$. Then, $\zeta(m) \equiv \zeta(m') \pmod p$.
+\end{thm}
+
+\begin{defn}
+    Let
+    $$\mathbb I = \{ (x_\infty,x_2,x_3,\dots) \mid x_p \in \Z_p^\times,p>>0\} \subset \R^\times \times (\prod_p \Q_p^\times)$$
+    called the \textbf{idele group of $\Q$}. Call $C_\Q = \mathbb I / \Q^\times$ the \textbf{idele class group}. Define
+    $$\mathbb Nx = ||x|| = \prod_{p \leq \infty}|x_p|_p$$
+    Then, $\mathbb N : \mathbb I \to \C^\times$ is a character.
+\end{defn}
+
+\begin{thm}[Tate's Theorem]
+    All $L$-functions live in $\Hom(C_\Q, \C^\times)$
+\end{thm}
+
+``To study number theory, you have to study all of mathematics: analysis, algebra, geometry, etc. All of math was invented to solve problems in number theory. They don't know that though.'' --- Niranjan Ramachandran

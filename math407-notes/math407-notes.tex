@@ -1,0 +1,54 @@
+\documentclass[11pt]{article}
+\usepackage[notes]{yalatex}
+% \addbibresource{references.bib}   % uncomment for citations
+
+% Unnumbered chapter titles for the five parts of the course. Section numbers
+% keep running across chapters, and each chapter gets an unnumbered entry in
+% the table of contents (and a top-level PDF bookmark).
+% Spacing: change these two lengths. 0pt means "as tight as possible".
+\newlength{\chapterspaceabove}\setlength{\chapterspaceabove}{1em}
+\newlength{\chapterspacebelow}\setlength{\chapterspacebelow}{1em}
+\newcommand{\notechapter}[1]{%
+  \par
+  \phantomsection
+  \addcontentsline{toc}{part}{#1}%
+  % The space above is built into the title line (an invisible strut) instead
+  % of a \vspace, because \vspace at the top of a page is either thrown away
+  % or adds extra hidden space.
+  {\centering\normalfont\Huge\bfseries
+    \rule{0pt}{\dimexpr\fontcharht\font`d+\chapterspaceabove\relax}#1\par}%
+  \vspace{0.4em}%
+  \noindent\rule{\textwidth}{0.8pt}\par% underline
+  \nobreak\nointerlineskip
+  % An invisible strut of the requested height after the rule. (A \vspace here
+  % would be swallowed by the section heading's own space above.)
+  {\parskip=0pt \noindent\rule{0pt}{\chapterspacebelow}\par}%
+  \nobreak
+}
+
+\title{MATH407: Advanced Number Theory}
+\author{Notes by Yuval Amit}
+\date{Instructor: Niranjan Ramachandran \\ Fall 2025}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\notechapter{Finite Fields}
+\input{parts/01-finite-fields}
+
+\newpage
+\notechapter{\texorpdfstring{$p$-Adic Fields}{p-Adic Fields}}
+\input{parts/02-p-adic-fields}
+
+\newpage
+\notechapter{The Hilbert Symbol}
+\input{parts/03-hilbert-symbol}
+
+\newpage
+\notechapter{Dirichlet's Theorem}
+\input{parts/04-dirichlets-theorem}
+
+\end{document}

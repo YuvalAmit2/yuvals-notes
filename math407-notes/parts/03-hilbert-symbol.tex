@@ -1,0 +1,226 @@
+% !TEX root = ../math407-notes.tex
+
+\section{Quadratic Extensions/Squares}
+
+\begin{thm}
+    Let $p$ be odd. Then, $a=p^nu \in \Q_p^\times$ is a square if and only if $n$ is even and $\leg{u}{p}=1$
+\end{thm}
+
+\begin{proof}
+    $\Z_p = 2\Z_p$, $(\F _p^\times)^2$ is identified with the Legendre Symbol, and $2\Z$ is even integers.
+\end{proof}
+
+\begin{cor}
+    $\Q_p^\times / (\Q_p^\times)^2 \cong \Z/2\Z \times \Z/2\Z$, with the isomorphism $1 \mapsto (0,0)$, $p \mapsto (0,1)$, $u \mapsto (1,0)$, where $u$ is a non-square unit mod $p$, and $pu \mapsto (1,1).$
+\end{cor}
+
+Let $K$ be a field, $\Char K \neq 2$. Let $L$ be a quadratic extension of $K$. That is, $\dim _K(L) =2 =[L:K]$. Let $1, \alpha \in L$ be a basis for $L$ over $K$. This works with any $\alpha \in L \setminus K$. Now, we have $\alpha^2 \in L$, and we must have $\alpha^2 \in \Span \{1,\alpha\}$, so $\alpha^2=c + b\alpha$, $c,b \in K$. So, $\alpha^2 - b\alpha -c  =0$. If $\alpha \not \in K$, then this polynomial is irreducible.
+
+Let $f_\alpha(x) = x^2-bx-c$, which is irreducible in $K$. Its roots are $\frac{-b \pm \sqrt{b^2-4c}}{2}$, so we know $\sqrt{b^2-4c}\in L\setminus K$. This shows $L = K(\alpha) = K(\sqrt{b^2-4c})$, hence any quadratic extension can be given by attaching a square root.
+
+In particular, the only quadratic extensions of $\Q_p$ (for $p$ odd) are $\Q_p(\sqrt p),\Q_p(\sqrt u),\Q_p( \sqrt{pu})$.
+
+\section{Intro and Properties of the Hilbert Symbol}
+
+\begin{defn}
+    Let $K = \Q_p$ or $\R$. Let $a,b \in K^\times$. The Hilbert Symbol $(a,b)$ relative to $K$ is $1$ $z^2-ax^2-by^2$ has a non-trivial zero, and $-1$ otherwise.
+\end{defn}
+
+\begin{ex}
+    Consider $z^2-x^2-y^2$, which always has a solution $(1,1,0)$ in any field. Therefore, $(1,1)=1$ relative to any field. For similar reasons, $(1,3)=1$ and $(-1,1)=1$. On the other hand, over $\R$, $z^2+x^2+y^2$ has no non-trivial solutions, so $(-1,-1)=-1$ in $\R$.
+
+    $z^2-7x^2-3x^2$ has a solution $(\sqrt{10}, 1, 1)$, so $(7,3)=1$. Notice also how $z^2-7\cdot 4x^2 - 3\cdot 25x^2$ has a solution $(\sqrt{10}, \frac{1}{2},\frac{1}{5})$, hence $(7 \cdot 4, 3 \cdot 25)=1$.
+\end{ex}
+
+\begin{prop}
+    Over any field $K$,
+    \begin{enumerate}
+        \item $(a,b)=(b,a)$
+        \item $(c^2a,d^2b)=(a,b)$
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    If $z^2-ax_0^2-by_0^2=0$, then $z^2-c^2a(x_0/c)-d^2b(y_0/d)=0$
+\end{proof}
+
+\begin{cor}
+    The previous proposition demonstrates that scaling by a square doesn't matter. So, all we really care about is $a,b \in K^\times /(K^\times)^2$. That is $(,)$ is a function $K^\times /(K^\times)^2 \times K^\times / (K^\times)^2 \to \{\pm 1\}$
+
+    In particular, $\R^\times / (\R^\times)^2 \cong C_2$, so all we need to check is
+    $$(1,1)=1,(1,-1)=1,(-1,1)=1,(-1,-1)=-1$$
+    Thus, for $K=\R$,
+    $$(a,b) = \case{+1 & a\text{ or } b \text{ positive} \\ -1 & a,b<0}$$
+\end{cor}
+
+\begin{ex}
+    Let $K = \Q_5$, and we know $\Q_5^\times / (\Q_5 ^\times)^2=\{1,5,2,10\}$.
+\end{ex}
+
+\begin{prop}
+    Let $a,b \in K^\times$, and let $K_b = K(\sqrt b)$, which is $\neq K \iff b$ is not a square. Consider the norm homomorphism $N:K_b^\times \to K^\times$, and denote $NK_b^\times \leq K^\times$ the image of the norm. Then,
+    $$(a,b)=1 \iff a \in NK_b^\times$$
+    In particular, if $K_b = K$, then $NK_b^\times = K_b^\times$, hence $(a,b)=1$ for all $a \in K^\times$.
+\end{prop}
+
+\begin{proof}
+    Suppose $b$ is not a square in $K$, and let $\beta^2=b,\beta \in K_b$. So, any element in $w \in K_b$ can be written as $w=z+\beta y$ for $z,y \in K$. Then, $N(w) =(z+\beta y)(z-\beta y)=z^2-by^2$.
+
+    $(\impliedby)$ Suppose $a \in NK_b^\times$. Then, $a = z^2-b^2=N(w)$ for some $w$. That is, $z^2-a(1)^2-by^2=0$, giving a non-trivial solution to the desired equation, hence $(a,b)=1$.
+
+    $(\implies)$ Suppose $(a,b)=1$. That is, $z^2-ax^2-by^2$ has a non-trivial solution $(x_0,y_0,z_0)$. In particular, $ax_0^2=z_0^2+by_0^2 = N(z_0 + \beta y_0)$. If $x_0 \neq 1$, write $a = \frac{z_0^2-by_0^2}{x_0^2}=N(\frac{z_0+\beta y_0}{x_0})$ as desired. If $x_0 = 0$, we derive a contradiction as $b$ will be a square. Thus, $a \in NK_b^\times$.
+\end{proof}
+
+\begin{prop}[Properties of the Hilbert Symbol]
+    \begin{enumerate}
+        \item[(i)] $(a,b)=(b,a)$ and $(a,c^2)=1$.
+        \item[(ii)] $(a,-a)=1$ and $(a,1-a) = 1$ (assuming $a \neq 1$)
+        \item[(iii)] If $(a,b)=1$, then $(aa',b)=(a',b)$.
+        \item[(iv)] $(a,b)=(a,-ab)=(a,(1-a)b)$.
+        \item[(v)] $(aa',b)=(a,b)(a',b)$. That is, the Hilbert symbol is \textbf{bimultiplicative}.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \hfill
+
+    \begin{enumerate}[(i)]
+        \item Clear
+        \item $z^2-ax^2-(-a)y^2=0$ has solution $(0,1,1)$. $z^2-ax^2-(1-a)y^2$ has solution $(1,1,1)$.
+        \item If $(a,b)=1$, then $a \in NK_b^\times$. So, $(aa',b)=1 \iff aa' \in NK_b^\times \iff a' \in NK_b^\times \iff (a',b)=1$.
+        \item $(-ab,a)=(b,a)$ by (ii) and (iii). The other one is an exercise.
+        \item Proved soon.
+    \end{enumerate}
+\end{proof}
+
+\begin{thm}
+    \begin{enumerate}
+        \item[(i)] Let $K=\R$. Then,
+        $$(a,b) = \case{+1 & a\text{ or } b \text{ positive} \\ -1 & a,b<0}$$
+        \item[(ii)] Let $K=\Q_p$ for $p$ odd. Let $a = p^mu,b=p^nv$, $u$ and $v$ units. Let $\veps (p)=\frac{p-1}{2}$. Then,
+        $$(a,b)=(-1)^{mn \veps (p)}\leg{u}{p}^n\leg{v}{p}^m$$
+        (Note the exponent swap).
+    \end{enumerate}
+\end{thm}
+To prove this theorem, we first need the following lemma:
+
+\begin{lem}
+    Let $v \in \Z_p$ be a unit. If $z^2-px^2-vy^2=0$ has a non-trivial solution in $\Q_p$, then it has a solution $(x_0,y_0,z_0)$, where $y_0,z_0$ are units in $\Z_p$, and $x_0 \in \Z_p$.
+\end{lem}
+
+\begin{proof}
+    Let $(x_0,y_0,z_0) \in \Z_p^3$ be a primitive solution (obtained by multiplying denominators, and one of them is a unit). Suppose $y_0$ or $z_0$ is not a unit. Then, one of $y_0,z_0 \in p\Z_p$. But, $z_0^2-vy_0^2=0 \pmod p$ considering our original equations. So, if $y_0 \in p\Z_p$, then so is $z_0$, and vice-versa. So, $z_0,y_0$ are both in $p\Z_p$, so $z_0^2,y_0^2 \in p^2\Z_p$. Again, considering the original equation, $-px_0^2 \equiv 0 \pmod {p^2}$, so $x_0 \in p\Z_p$ as well. Hence, the solution is not primitive, a contradiction. Therefore, $y_0$ and $z_0$ must both be units, as desired.
+\end{proof}
+
+We can now prove (ii) from the theorem ((i) was proved earlier).
+
+\begin{proof}[Proof of (ii)]
+    Note that the formula in (ii) only depends on the parity of $m,n$. So, we only four cases to check:
+    \begin{enumerate}
+        \item $m=0,n=0$: We need to check $(u,v)=1$. Consider the equation $z^2-ux^2-vy^2=0$. By Chevalley-Warning (\Cref{thm:chevalley-warning}), this has a non-trivial solution $(x_1,y_1,z_1)$ mod $p$. Now $f_x = -2ux,f_y=-2vy,f_z=2z$. One of these must be non-zero when we plug in our non-trivial solution, so by Hensel we get a non-trivial solution in $\Z_p$. Thus, $(u,v)=1$.
+        \item $m=1,n=0$: We need to check $(pu,v)=\leg{v}{p}$. If $v$ is a square, then immediately $(pu,v)=1=\leg{v}{p}$. Now, suppose $v$ is not a square mod $p$. Recall by property (iii) in the proposition that $(pu,v)=(p,v)$. Now, if $z^2-px^2-vy^2=0$ had a non-trivial solution in $\Q_p$, then by the lemma there exists $x_0,y_0,z_0 \in \Z_p$ with $y_0,z_0$ units which are a solution. Modulo $p$, $v=(z_0/y_0)^2$, a contradiction. Finally, if $v$ is a square mod $p$, by Hensel's it must also be a square in $\Z_p$, so we've checked all the cases.
+        \item $m=0,n=1$: This is equivalent to (2) by symmetry.
+        \item $m=1,n=1$: We need to check $(pu,pv)=(-1)^{\veps(p)}\leg{u}{p}\leg{v}{p}$. Recall that we proved $(a,b)=(a,-ab)$. Thus, $(pu,pv)=(pu,-p^2uv)=(pu,-uv)$. Thus, by case (2), $(pu,-uv)=\leg{-uv}{p}=\leg{-1}{p}\leg{u}{p}\leg{v}{p}=(-1)^{\veps(p)}\leg{u}{p}\leg{v}{p}$.
+    \end{enumerate}
+
+    The last thing we need to prove, to actually know that these are all the cases, is that the Hilbert symbol is non-degenerate. That is, for a fixed $b \in K^\times$, if $(a,b)=1$ for all $a \in K^\times$, then $b$ is a square.
+
+    Taking the contrapositive, suppose $b$ is not a square. Considering $\Q_p^\times/(\Q_p^\times)^2$, we just need to consider $b=p,u,up$ where $\leg{u}{p}=-1$ is a unit. Indeed, if $b=p$, take $a=u$, if $b=u$, take $a=p$, and if $b=up$, take $a=u$, and we're done.
+\end{proof}
+
+\begin{cor}
+    This proves property (v) from before.
+\end{cor}
+
+\begin{cor}
+    For $u,v\in \Q_p^\times$, we have $(u,v)=1$. Also $(p,p)=(-1)^{\veps (p)}$
+\end{cor}
+
+Now we have to consider $p=2$ :(
+
+First question: What are the squares in $\Q_2^\times$? Recall $\Q_2^\times \cong \Z_2^\times \times \Z$. Observe $U_1 = 1 + 2\Z_2 = \Z_2^\times$. So,
+$$\Z_2^\times \cong \{\pm 1\} \times U_2.$$
+Moreover,
+$$(U_2,\times) \cong (4\Z_2, +)$$
+Thus,
+$$\Q_2^\times \cong \{\pm1 \} \times 4\Z_2 \times \Z.$$
+Thus,
+$$(\Q_2^\times)^2 \cong 8 \Z_2 \times 2\Z$$
+and
+$$\Q_2^\times /(\Q_2^\times)^2 \cong \{ \pm 1\} \times \{ \pm 1 \} \times \Z/2\Z$$
+which has order $8$. Moreover, for any arbitrary $a \in \Q_2^\times$, we may write $a = 2^mu$ for $u \in \Z_p$ a unit. Then $a$ is a square if and only if $m$ is even and $u = \cdots 001$. Thus, $a$ is a square if and only if $a \equiv 1 \pmod 8$. The representatives of $\Q_2^\times / (\Q_2^\times)^2$ are $\{ \pm1, \pm2 , \pm 5, \pm 10\}$.
+
+Recall the function $\omega  (n) = \frac{n^2-1}{8}$, and $\leg{2}{p}=(-1)^{\omega (p)}$ (\Cref{thm:legendre-special}).
+
+\begin{thm}
+    Let $K = \Q_2$. Let $a = 2^mu,b = 2^nv$ for $u,v \in \Z_2^\times$. Then,
+    $$(a,b)=(-1)^{\veps (u) \veps (v)+m\omega(v)+n \omega(u)}$$
+\end{thm}
+
+\begin{proof}
+    Skip.
+\end{proof}
+
+We now want to consider quadratic reciprocity in general number fields.
+
+\begin{thm}[Hilbert's Product Formula]
+    Let $a,b \in \Q^\times$. We'll use the notation $(a,b)_p$ to denote the Hilbert symbol of $a$ and $b$ in $\Q_p$ when $p$ is finite, or $\R$ when $p = \infty$. Then,
+    $$\prod _{p \leq \infty}(a,b)_p=1$$
+\end{thm}
+
+\begin{proof}
+    Given $a,b \in \Q^\times$. For $p$ sufficiently large, both $a$ and $b$ are units. So, $(a,b)_p=1$ in that case. Let $V$ be the set of all primes and infinity. Let $F(a,b) = \prod _{v \in V} (a,b)_v$. Recall that $(a,b)_v(a',b)_v=(aa',b)_v$. Therefore, $F(aa',b)=F(a,b)F(a',b)$. Since we can reduce integers to a product of primes, it therefore suffices to prove the claim for $a,b = -1$ or a prime.
+
+    Case: $F(-1,-1)=(-1,-1)_\infty(-1,-1)_2(-1,-1)_3\cdots$. For any odd prime, $-1$ is a unit, so we're only left with $(-1,-1)_\infty(-1,-1)_2$. In $\R$, $z^2+x^2+y^2$ doesn't have a non-trivial root, so $(-1,-1)_\infty =-1$. The same holds for $(-1,-1)_2$ based on the previous formula. Thus, $F(-1,-1)=1$.
+
+    Case: $F(-1,2)=(-1,2)_\infty(-1,2)_2(-1,2)_3\cdots $. In this case, everything is $1$, so $F(-1,2)=1$.
+
+    Case: $F(-1,p)=(-1,p)_\infty (-1,p)_2(-1,p)_p\prod_{l \neq p}(-1,p)_{l}$ for $p$ an odd prime. Since $p>0$, we know $(-1,p)_\infty =1$. Next, $(-1,p)_p = \leg{-1}{p}=(-1)^{\veps (p)}$. Furthermore, we can check $(-1,p)_2 = (-1)^{\veps (p)}$ as well. Thus, $F(-1,p)=1$.
+
+    Case: $F(p,l)=(p,l)_\infty(p,l)_2(p,l)_p(p,l)_l \prod_{j\neq p,l}(p,l)_j$ for $p$ and $l$ distinct odd primes. We know all the $(p,l)_j$ are all $1$. $p$ and $l$ are positive, so $(p,l)_\infty =1$. Also, $(p,l)_2=(-1)^{\veps (p) \veps (l)}$. Next, $(p,l)_p = \leg{l}{p}$ and $(p,l)_l = \leg{p}{l}$. So, $F(p,l) = (-1)^{\veps (p)\veps (l)}\leg{p}{l}\leg{l}{p}=1$ by QR.
+
+    Case: $F(2,p) = \cdots = \leg{2}{p}(-1)^{\omega (p)}=1$.
+\end{proof}
+
+Note that this theorem is more or less equivalent to quadratic reciprocity (\Cref{thm:qr}). Also, it can be formalized and proved for general number fields.
+
+\section{Systems of Hilbert Symbols}
+
+\begin{ex}
+    Let $v \in V=\{$primes, $\infty \}$. We consider the problem $(3,*)_v = 1$ or $-1$. That is, given any $v$, can we find $x$ such that $(3,x)_v=1$, and $y$ such that $(3,y)_v=-1$? What about for a system, like $(3,x)_\infty=1,(3,x)_3=-1,(3,x)_5=-1,(3,x)_7=-1,(3,x)_p=1,p>7$? In this system, we have an odd amount of negatives, so by Hilbert's theorem this isn't possible. We answer this problem with the following theorem.
+\end{ex}
+
+\begin{thm}[][label=thm:hilbert-system]
+    Pick $a_1,\dots,a_d \in \Q^\times$, $i \in I = \{1,2,\dots,d\}$. Pick $\{\veps_{i,v}\}_{i\in I,v\in V}$ with each $\veps_{i,v}=\pm1$. Then, there exists $x \in \Q^\times$ such that $(x,a_i)_{v}=\veps_{i,v}$ for all $i\in I,v\in V$ if and only if
+    \begin{enumerate}
+        \item There is a finite amount of $\veps_{i,v}=-1$
+        \item For each $i \in I$, $\prod _{v \in V}\veps_{i,v}=1$
+        \item For each $v \in V$, there exists $x_v \in \Q_v^\times$ such that $(x_v,a_i)_v=\veps_{i,v}$ (That is, there are local solutions in each case)
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    ($\implies$) This is clear by Hilbert's product formula
+
+    ($\impliedby$) We need three lemmas:
+
+    \begin{lem}
+        Let $a_1,\dots,a_n \geq 0$ and $m_1,\dots,m_n \geq 1$ be integers with $\gcd (m_i,m_j) = 1$ for $i \neq j$. Then, there exists $a \in \Z$ such that $a \equiv a_i \pmod{m_i}$ for all $i$.
+    \end{lem}
+
+    \begin{lem}
+        Let $S \subset V$ be finite. Then, $\Q \subset \prod_{v \in S}\Q_v$ is dense. That is, for fixed $a_v \in \Q_v,v\in S$ and $\veps_v >0,v\in S$, there exists $x \in \Q$ such that $|x-a_v| < \veps_v$ for all $v \in S$.
+    \end{lem}
+
+    \begin{lem}[Dirichlet's Theorem on Arithmetic Progressions]
+        Let $a>0,m>1$ with $\gcd(a,m)=1$. Then, there exists infinitely many primes $p$ such that $p \equiv a \pmod m$. In other words, the arithmetic progression $a,a+m,a+2m,\dots$ contains infinitely many primes.
+    \end{lem}
+    This lemma will be the main focus of the rest of the semester. We won't fully prove \Cref{thm:hilbert-system}, but look at an example of how the condition is sufficient.
+\end{proof}
+
+Let $a_1=5$ ($d=1$), and we want $(x,5)_3=-1,(x,5)_7=-1$, and all others $+1$. We first want local solutions $(x_3,5)_3=-1,(x_7,5)_7=-1$. Note
+$$(3,5)_3 =\leg{5}{3}=-1,\:\:\: (7,5)_7=\leg{5}{7}=-1.$$
+Observe how our local solutions don't work globally, so there's still more work to do. Let
+$$S:=\{2,5,\infty\},T:=\{3,7\}.$$
+$S$ was chosen to have $2,\infty$, and all primes dividing $a_1$. $T$ was chosen to have all $v$'s where we want negative Hilbert Symbols. Fix $m=40,a=21$. Since $\gcd(a,m)=1$, there exists a prime $p \equiv a \pmod m$ with $p \not \in S \cup T$, in particular it's $p=61$. We claim $x = a \cdot p = 3 \cdot 7 \cdot 61$ is a working global solution. Well
+$$(3\cdot 7 \cdot 61,5)_3=\leg{5}{3}=-1, (3 \cdot 7 \cdot 61,5)_7 = \leg{5}{7}=-1$$
+One can also verify that $(3 \cdot 7 \cdot 61,v)=1$ for all other $v$. To summarize we selected $T = \{ v\in V \mid$at least one $\veps_{i,v}=-1\}$, $S = \{2,\infty,$ all prime factors of $a_{i}$ for all $i\}$. If $S \cap T = \emptyset$, we take $a = \prod_{l\in T\setminus\{\infty\}}l$ and $m=8 \prod _{p \in S\setminus\{2,\infty\}}p$. We're skipping $S \cap T \neq \emptyset$.

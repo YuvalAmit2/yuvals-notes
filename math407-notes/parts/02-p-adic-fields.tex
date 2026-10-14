@@ -1,0 +1,622 @@
+% !TEX root = ../math407-notes.tex
+
+\section{\texorpdfstring{The Ring $\Z_p$ and the Field $\Q_p$}{The Ring Zp and the Field Qp}}
+
+\begin{defn}
+    An \textbf{inverse system} of sets/groups/rings/(category) is
+    \begin{enumerate}
+        \item[(i)] A sequence $A_n$ of sets/groups/rings and
+        \item[(ii)] A sequence of morphisms
+        $f_n:A_n\to {A_{n-1}}$
+    \end{enumerate}
+    $$\cdots \to A_3 \overset{f_3}{\to}A_2\overset{f_2}{\to}A_1$$
+\end{defn}
+
+\begin{defn}
+    The \textbf{inverse limit} of the system $(A_n,f_n)_{\geq 1}$ is $A =\underset{\leftarrow}{\lim}A_n$ defined as $A=\{ (\dots,a_2,a_1) \mid a_n\in A_n,f_n(a_n)=a_{n-1} \:\: \forall n \geq 2 \}$. Note then that $A \subset \prod_{n\geq1}A_n$
+\end{defn}
+
+\begin{ex}[Main example]
+    Let $p$ be a prime number, $A_n= \Z/p^n\Z$, $\phi_n:A_n \to A_{n-1}$, defined by $\bar a \mapsto a \pmod {p^{n-1}}$. Note that $\phi_n$ are all surjective. We then define $\Z_p = \underset{\leftarrow}{\lim}A_n$, called the \textbf{p-adic integers}, a ring. In particular, if $\vec{a}=(\dots,a_2,a_1)$ and $\vec b=(\dots,b_2,b_1)$, then $\vec a + \vec b = (\dots,a_2+b_2,a_1+b_1)$ and $\vec a \cdot \vec b=(\dots,a_2b_2,a_1b_1)$, and one can verify these remain in the p-adic integers
+\end{ex}
+
+\begin{ex}
+    In $\Z_p$, we have multiplicative identity $\vec 1 = (\dots,1,1,1)$ and the additive identity $\vec 0 =(\dots,0,0)$. For any $m\in \Z$, we can look at $\vec m=(\dots,m,m,m)$. Thus, we have a map $\Z \to \Z_p$ by $m \mapsto \vec m$, which is also a homomorphism. Suppose $m \in \Z$ satisfies $\vec m = \vec 0$. Then, we must have $m=0$, hence the kernel of the map is trivial. (We can sort of say $\Z_p$ is a characteristic $0$ ring, which will be more important later)
+\end{ex}
+
+\begin{ex}[What else is in $\Z_p$]
+    $1/2 \not \in \Z$, but we do have $1/2 \in \Z_7$. We also have $\sqrt 2 \in \Z_7,2^{1/5}\in \Z_7$, but $2^{1/3}\not \in \Z_7$
+\end{ex}
+
+\begin{defn}
+    We have a homomorphism $\veps_n :\Z_p \to A_n=\Z /p^n\Z$ by $\veps_n(\vec a)= a_n$
+\end{defn}
+
+\begin{thm}[][label=thm:zp-exact]
+    There exists an exact sequence $0 \to \Z_p \overset{\cdot p^n}{\to} \Z_p \overset{\veps_n}{\to}A_n\to0$, so $\veps_n$ is surjective, and we'll also show multiplication by $p^n$ is injective. This also says $\Z_p/p^n\Z_p \cong \Z / p^n\Z$.
+\end{thm}
+
+\begin{proof}
+    Consider the map $\Z_p \to \Z_p$ by $\vec a \mapsto p\vec a$. Observe that for $c \in \Z/p^n\Z$, we have that $pc=0 \implies p^{n-1} \mid c$. Now, suppose $\vec a \in \Z_p$ satisfies $p\vec a = \vec 0$, so $pa_1=0 \in A_1$, $pa_2=0\in A_2$, etc. This means that for all $n$, $pa_n = 0 \in A_n=\Z/p^n\Z$, thus $a_n=p^{n-1}b_n$ for some $b_n \in A_n$. By $\vec a \in \Z_p$, we know $\phi(a_n)=a_{n-1},\phi(n+1)=a_n$, etc. Furthermore,
+    $$a_{n}=\phi(a_{n+1})=\phi(p^{n}b_{n+1})=p^{n}\phi(b_{n+1})=0\in A_{n}.$$
+    Thus, $\vec a =0$, so multiplication by $p$ is injective, and it follows that multiplication by $p^n$ is injective.
+
+    Now, for any $\bar c \in \Z/p^n\Z$, we have that $\veps _n(\dots,c,c,c)=\bar c$, hence $\veps _n$ is surjective.
+
+    Finally, we'll show $\ker \veps _n = p^n \Z _p$. $p^n \Z_p \subset \ker \veps _n$ is clear. Let $\vec a \in \ker \veps _n$. We want to show $\vec a = p^n\vec b$ for $\vec b \in \Z^p$. As $\vec a \in \ker \veps_n$, we know $a_n=0\implies a_{n-1}=0=a_{n-2}+\cdots=a_1$. Now, consider $A_{n+1} \overset{\phi _{n+1}}{\to} A_n$ by $a_{n+1}\mapsto a_n=0$, hence $a_{n+1} \in \ker \phi_{n+1}$, so $a_{n+1}=p^nb_{n+1}$. A similar argument can be made for $a_{n+2}$ with composing maps, and inductively we have $a_{n+j}=p^nb_{n+j}$. So, it's left to us to check $(\dots,b_{n+2},b_{n+1},b_n,\dots,b_1)\in \Z_p$.
+\end{proof}
+
+\begin{ex}[Another inverse system]
+    Let $K$ be a field, $R=K[x]$, $B_n=K[x]/(x^n)=R/(x^n)$. What is $B= \underset{\leftarrow}{\lim}B_n$?
+\end{ex}
+
+\begin{notebox*}[Question]
+    What is $\Z_7^\times$?
+\end{notebox*}
+
+For $\vec a = (a_n ) \in \prod A_n$ to be a unit, we certainly need $a_n$ is a unit in $A_n$.
+
+\begin{thm}[Structure of Units][label=thm:zp-units]
+    Let $a \in \Z_p$, $a \neq 0$. Then
+    \begin{enumerate}
+        \item $\vec a$ unit in $\Z_p \iff a_1 \in \F_p^\times = (\Z/p\Z)^\times$
+        \item Let $U = \Z_p^\times$ in $\Z_p$.  Then, any $a \in \Z_p$ non-zero can be written as $p^n\vec b$ for $n \geq 0$ and $\vec b\in U$ uniquely.
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+    \begin{enumerate}
+        \item $( \implies)$ obvious.
+    \end{enumerate}
+
+    Now, let $a \in \Z_p$ with $a_1 \in \F_p^\times$. We want to show $a_n \in A_n^\times$ for all $n \geq 1$. Let $a_1^{-1}=b_1$, and as $A_2 \to A_1$ is surjective, for $a_2$ mapping to $a_1$, there exists some $b_2 \in A_2$ which is mapped to $A_1$. Then $\phi_2(a_2b_2)=1=\phi_2(1)$, so $a_2b_2-1 \in \ker \phi_2$. Hence, $a_2b_2 = 1-pz$ for some $z \in A_2$. Now, $a_2b_2(1+pz)=(1-pz)(1+pz)=1-p^2z=1$. In general, for $a_n \mapsto a_1$, there exists some $b_n \mapsto b_1$, and once again $a_nb_n-1 \in \ker(\Z/p^n\Z \to \Z/p\Z)$. Thus, $a_nb_n=1-pz$. Recall $(1-t)(1+t+\cdots +t^{n-1})=(1-t^n)$. Hence, $a_nb_n(1+pz+p^2z^2+\cdots +p^nz^n) = 1-p^nz^n=1$.
+\end{proof}
+
+\begin{cor}
+    $m \in \Z_p^\times$ if $p \nmid m$.
+\end{cor}
+
+\begin{proof}[Proof of (2) of \Cref{thm:zp-units}]
+    Suppose $\vec a \in \Z_p$ is nonzero. Then, $\veps_m(\vec a) \neq 0$ for some $m$. Let $n$ be the largest integer such that $\veps _n(\vec a)=0$, recalling that $\veps_{n-k}(\vec a)=0$ for all $k \geq 0$. In particular, $\vec a \in \ker \veps _n \implies \vec a = p^n\vec b$ for some $\vec b \in \Z_p$ by \Cref{thm:zp-exact}. Now, \textbf{show $b_1 \neq 0$}. Thus, $\vec b$ is a unit in $\Z_p$, proving (2).
+\end{proof}
+
+\begin{defn}
+    If $\vec a \in \Z_p$ is nonzero, then we know $\vec a = p^n\vec b$ for $\vec b$ a unit and $n \geq 0$. So, let the \textbf{$p$-adic valuation} of $\vec a$ by $\nu_p(\vec a)=n$. Note $\nu_p(\vec a) = 0 \iff a$ is a unit in $\Z_p$. We will also declare $\nu_p(0) = \infty$.
+\end{defn}
+
+\begin{rmk}
+    $\nu_p(\vec a \vec b)=\nu_p(\vec a)+\nu _p(\vec b)$, and $\nu_p(a+b) \geq \min \{\nu _p(a),\nu _p(b)\}$. We call this \textbf{non-Archimedean equality}.
+\end{rmk}
+
+\begin{cor}
+    $\Z_p$ is an integral domain.
+\end{cor}
+
+\begin{proof}
+    If $a,b$ are non-zero, then they have finite $p$-adic valuation, so the $p$-valuation of their product is also finite.
+\end{proof}
+
+\begin{defn}[$\Q_p$]
+    Let $\Q_p$ be the field of fractions of $\Z_p$, i.e. the smallest field containing $\Z_p$.
+\end{defn}
+
+\begin{rmk}
+    For any $a \neq 0$, let $a=p^nb$, where $b$ is a unit. Then, the inverse of $a$ in $\Q_p$ is $p^{-n}b^{-1}$. It's worth noting that $b^{-1} \in \Z_p$, so the only thing we have to 'add' is $p^{-n}$. Thus, $\Q_p = \Z_p[1/p]$.
+\end{rmk}
+
+Let's make $\Z_p$ more concrete. Recall $\Z_p = \underset{\leftarrow}{\lim}\Z/p^n\Z$.
+
+Let $\vec a = (a_n)$, and for the usual map $\Z/{p^{n+1}}\Z \to \Z/p^n\Z$, consider $a_{n+1}\mapsto a_n$, where $a_{n+1}\in \{0,\dots,p^{n+1}-1\}$ and $a_n \in \{0,\dots,p^n-1\}$. So, we can see that $a_{n+1}=a_n+p^nb_n$, with $0 \leq b_n \leq p-1$. This is like $31$ mod $100$ and $31,131,\dots,931$ mod $1000$. Now, consider the sequence $b_0=a_1,b_1=\frac{a_2-a_1}{p},b_2=\frac{a_3-a_2}{p},\dots,b_n=\frac{a_{n+1}-a_n}{p^n},\dots$. By definition,
+$$a_n=b_0+b_1p+\cdots+b_{n-1}p^{n-1}$$.
+
+\begin{defn}[$p$-adic Expansion]
+    The sequence $(b_0,b_1,\dots)$ described above is called the \textbf{$p$-adic expansion of $\vec a$}
+\end{defn}
+
+\begin{thm}
+    There is a bijection between $\Z_p \longleftrightarrow $ sequences $(b_n)$, with $b_i \in \{0,\dots,p-1\}$
+\end{thm}
+
+\begin{proof}
+    For $\vec a \in \Z_p$, we showed above how to obtain $(b_n)$ by $b_n=\frac{a_{n+1}-a_n}{p^n}$ Conversely, let $(b_n)$ be such a sequence. We can take the formula with which we constructed the $b_n$'s earlier to try $a_1=b_0,a_2=b_0+pb_1,a_3=b_0+pb_1+p^2b_2$, and generally $a_n=b_0+\cdots +b_{n-1}p^{n-1}$. Indeed, for the map $\Z/p^{n+1}\Z \to \Z/p^n\Z$, observe
+    $$b_0+\cdots+b_{n-1}p^{n-1}+b_np^n \mapsto b_0+\cdots +b_{n-1}p^{n-1},$$
+    so we indeed have a $p$-adic integer. Check that this relation is bijective.
+\end{proof}
+
+\begin{ex}
+    $1+1\cdot 3+1\cdot 3^2+\cdots$ is like the power series $\frac 1{1-x}$, so this  is the $p$-adic expansion of $\frac{1}{-2}$.
+
+    If $\vec a=b_0+b_1p+b_2p^2+\cdots \longleftrightarrow (b_0,b_1,\dots)$, then $p\vec a \longleftrightarrow (0,b_0,b_1,\dots,)$
+\end{ex}
+
+Let's revisit the sequence $0 \to \Z_p \overset{p^n}{\to}\Z_p \overset{\veps_n}{\to}\Z/p^n\Z\to 0$. Let's show $\ker \veps _n = p^n\Z_p$. $\vec a \in \ker \veps _n \iff a_n=0 \implies a_{n-1}=\cdots =a_1=0$, so the $p$-adic expansion of $\vec a$ is $(0,\overset{n}{\cdots},0,a_{n+1},\dots)$, which we see is in $p^n\Z_p$, like in the example above. This is the analog of saying "an integer with three zeroes at the end must be divisible by $1000$".
+
+\section{\texorpdfstring{The $p$-Adic Absolute Value}{The p-Adic Absolute Value}}
+\begin{defn}[The $p$-adic Absolute Value]
+    The \textbf{$p$-adic absolute value} of $\vec a$ is $|\vec a|_p=\frac{1}{p^{\nu_p(a)}}$. In particular, the higher the $p$-valuation of a number is, the 'smaller' it is. Note $|0|_p=\frac{1}{p^\infty}=0$
+\end{defn}
+
+\begin{rmk}
+    Before, we said $1+1\cdot 3 +1\cdot 3^2+\cdots$, is $\frac{1}{1-3}$ because it's a geometric series. We now see this is ok, because $|p|_p=\frac{1}{p}<1$.
+\end{rmk}
+
+\begin{ex}
+    Let $a \in \Z_5$, $a=\sum_{i=0}^\infty b_ip^i$. We can practice finding expansions
+
+    $-1=5-1-5=4+5(-1)=4+4\cdot 5-25=4+4\cdot5 +25(-1)=\cdots$
+
+    $-1=(\dots,4,4,4)$
+\end{ex}
+
+\begin{prop}[Properties of the $p$-adic Absolute Value]
+    $|a|_p\geq0$, and $|a|_p=0\iff a$ is a unit. $|ab|_p=|a|_p|b|_p$, and $|a+b|_p \leq \max\{|a|_p,|b|_p\}$. This is the \textbf{ultrametric inequality}
+\end{prop}
+
+\begin{defn}[Distance on $\Z_p$]
+    For $a,b \in \Z_p$, we define $d(a,b)=|a-b|_p$. Observe that $d(a,a)=0$, $d(a,b)=d(b,a)$, and $d(a,b)+d(b,c) \geq d(a,c)$. In fact, $|a-c|_p \leq \max\{|a-b|_p,|b-c|_p\}$, which is an even stronger version of the triangle inequality, called a \textbf{non-Archimedean inequality}.
+\end{defn}
+
+Note that $p$-adic valuation can be extended to $\Q_p$, and we have that $|a|_p \leq 1 \iff a \in \Z_p$.
+
+\begin{ex}
+    $|a|_p = 1/p \iff a \in p\Z_p\setminus p^2\Z_p$
+
+    $|a|_p=1/p^2 \iff a \in p^2\Z_p \setminus p^3\Z_p$
+
+    In general, we can think of $\Z_p$ as the closed unit disk with radius less than $1$, and it's a union of circles like that. We can also see
+    $$\Q_p \setminus \{ 0\} =\sqcup_{n\in \Z}p^n\Z_p^\times$$
+\end{ex}
+
+\begin{prop}
+    Any triangle in $\Q_p$ is isosceles.
+\end{prop}
+
+\begin{proof}
+    With one vertex of the triangle at $0$, let the edges be $x,y,y-x$, then $|x-y|_p \leq \max\{|x|_p,|y|_p\}$. Suppose $|x|_p <|y|_p$. Then, $|x-y|_p\leq |y|_p$. On the other hand, $|y|_p=|x-(x-y)|_p\leq \max\{|x|_p,|x-y|_p\}$. Since we assumed $|y|_p \not \leq |x|_p$, we must have $|y|_p \leq |x-y|_p$. Thus, $|y|_p=|x-y|_p$, proving the triangle is isosceles.
+\end{proof}
+
+\begin{prop}
+    We may define $B_r(a)$ to be the disk of radius $r$ centered at $a\in \Z_p$, $\{x \in \Q_p : |x-a|_p < r\}$. Then, if $b \in B_r(a)$, we have that $B_r(a)=B_r(b)$.
+\end{prop}
+
+\begin{proof}
+    Exercise.
+\end{proof}
+
+Let $K$ be a field, and let $A_n=K[t]/(t^n)$. Then, there is a ring homomorphism $\phi_n:A_n \to A_{n-1}$ by $\phi(a_0+a_1t+\cdots+a_nt^n)=\phi(a_0+a_1t+\cdots+a_{n-1}t^{n-1})$. We then get an inverse limit $\underset{\leftarrow}{\lim}K[t]/(t^n)$, which is the power series ring $K[[t]]$.
+
+\begin{defn}
+    Let $K$ be a field. An \textbf{absolute value} ok $K$ is a map $|\cdot|:K \to \R$ such that
+    \begin{enumerate}
+        \item $|x|>0$ unless $x=0$. $|0|=0$.
+        \item $|xy|=|x||y|$
+        \item $|x+y| \leq |x| + |y|$ (Triangle Inequality)
+    \end{enumerate}
+    We say that an absolute value is \textbf{non-Archimedean} if $|x+y| \leq \max\{|x|,|y|\}$.
+\end{defn}
+
+\begin{ex}
+    We have the usual absolute value over $\Q$: $|a|_\infty =\sqrt{a^2}$. We have also shown that $|\cdot |_p:\Q \to \R$ is an absolute value for any prime $p$.
+\end{ex}
+
+\begin{ex}
+    Let $c \in K$ be a root of unity. As $c^n=1$, we also have $|c|^n=1$, so $|c|=\pm1 \implies |c|=1$.
+\end{ex}
+
+\begin{defn}
+    For $K$ any field, we have the \textbf{trivial absolute value} $|a|=1,|0|=0$.
+\end{defn}
+
+\begin{prop}
+    When $K$ is a finite field, the trivial absolute value is the only absolute value.
+\end{prop}
+
+\begin{defn}
+    Let $|\cdot|_1,|\cdot|_2$ be absolute values on $K$. We say they are \textbf{equivalent} if $|\cdot |_1=|\cdot |_2^c$ for some $c \in \R_{>1}$
+\end{defn}
+
+\begin{ex}
+    Instead of $|a|_p=\frac{1}{p^{\nu_p(a)}}$, we can use $|a|_p=\frac{1}{e^{\nu_p(a)}}$, which is equivalent.
+\end{ex}
+
+\begin{prop}
+    $|\cdot |_1$ and $|\cdot |_2$ are equivalent if for any $a \in K$, $|a|_1 < 1 \iff |a|_2 < 1$. Furthermore, a sequence $\{a_n\}_{n \geq 1}$ is Cauchy with respect to $|\cdot |_1$ iff it's Cauchy with respect to $|\cdot |_2$.
+\end{prop}
+
+\begin{defn}
+    A sequence $\{a_n\}_{n\geq 1}$ on $K$ is \textbf{Cauchy} with respect to $|\cdot |$ if for any $\varepsilon>0$, there exists $N \in \N$ such that $n,m\geq N \implies |a_n-a_m| < \varepsilon$.
+
+    Furthermore, we say $K$ is \textbf{complete} with respect to $|\cdot |$ if every Cauchy sequence has a limit in $K$.
+\end{defn}
+
+For example, $\R$ is complete with respect to the usual absolute value, but $\Q$ is not complete with both the usual absolute value and $|\cdot |_p$.
+
+\begin{thm}
+    $\Q_p$ is the completion of $\Q$ with respect to $|\cdot |_p$.
+\end{thm}
+
+\begin{thm}[Ostrowski's Theorem]
+    Any non-trivial absolute value on $\Q$ is equivalent to $|\cdot |_\infty$ or $|\cdot |_p$ for some prime $p$. Furthermore, if $p \neq q$ are distinct primes, than $|\cdot |_p$ is not equivalent to $|\cdot |_q$.
+\end{thm}
+
+\begin{thm}[Product Formula]
+    Let $a \in \Q$ non-zero. Then,
+    $$\prod_{p \leq \infty}|a|_p=1$$
+    This product is well defined because only finitely many $|a|_p \neq 1$.
+\end{thm}
+
+\begin{ex}
+    Let $a=10$. Then, $|10|_2=\frac 12,|10|_3=1,|10|_5=\frac 15,|10|_7=1,|10|_n=1$ for $n \geq 11$, and $|10|_\infty =10$.
+\end{ex}
+
+\begin{proof}
+    If $a$ is some prime $p$, then $|p|_p=\frac 1p,|p|_q=1,|p|_\infty=p$, so the claim holds for primes.
+
+    Now, define $\phi:(\Q^\times,\times) \to (\R^\times,\times)$ by $\phi(a)=\prod_{p \leq \infty}|a|_p$. Then $\phi$ is a homomorphism, as $\phi(ab)=\phi(a)\phi(b)$. One can confirm that $\phi(-1)=1$, and we showed $\phi(p)=1$. Furthermore, $\phi(p)=1 \implies \phi(p^n)=1$ for any $n \in \Z$. Now, for any $a \in \Q^\times$, we have $a = \pm p_1^{e_1}\cdots p_n^{e_n}$, and the claim for $\phi(a)$ follows.
+\end{proof}
+
+\begin{rmk}
+    Suppose $\{a_n\}$ is a sequence in $\R$ such that for any $\varepsilon>0$, there exists $N >1$ with $|a_{n+1}-a_n|<\veps$ for any $n> N$. This is a weaker condition than being Cauchy in $\R$. However, in $\Q_p$, this condition is equivalent to being Cauchy, as $|\cdot |_p$ is non-Archimedean.
+
+    Thus, for a sequence $\{a_n\}$ in $\Q_p$ to converge, all that is needed is that for any $\veps >0$, there exists $N \in \N$, $n \geq N \implies |a_{n+1}-a_n|_p<\veps$. Consequently, any series $\sum_{n=1}^\infty x_n$ converges in $\Q_p$ so long as $\{x_n\}$ converges.
+
+    This is another reason why we can say $b_0+b_1p+b_2p^2+\cdots$ is well defined in $\Q_p$.
+\end{rmk}
+
+\begin{ex}
+    The sequence $1,1/2,1/3,\dots$ converges in $\R$, but diverges in $\Q_p$.
+\end{ex}
+
+\begin{prop}
+    The sequence $\{u_n\}_{n \geq 1}$ converges in $\Q_p$ if and only if $\lim_{n \to \infty}|u_n-u_{n-1}|_p=0$. Similarly, $\sum_{n=1}^\infty b_n$ converges if and only if $\lim_{n \to \infty}|b_n|_p=0$
+\end{prop}
+
+\section{The Exponential Function}
+
+\begin{notebox*}[Recall]
+    $$\exp(x)=\sum_{n=0}^\infty \frac{x^n}{n!}$$
+\end{notebox*}
+We are curious about the convergence of this series when $x \in \Z_p$.
+
+\begin{notebox*}[Question]
+    What is $|x^n/n!|_p$?
+\end{notebox*}
+
+Let $n=b_0+b_1p+b_2p^2+\cdots +b_rp^r$, where $0 \leq b_i \le p-1$. Then, $\nu_p(n!)=\lfloor n/p\rfloor + \lfloor n /p^2\rfloor + \cdots + \floor{n/p^r}$. Observe that
+$$\floor{n/p}=b_1+b_2p+b_3p^2+\cdots+b_rp^{r-1}$$
+$$\floor{n/p^2}=b_2+b_3p+b_4p^2+\cdots +b_rp^{r-2}$$
+$$\floor{n/p^r}=b_r$$
+Thus,
+\begin{prop}
+    $$\nu_p(n!)=b_0\frac{p^0-1}{p-1}+b_1\frac{p^1-1}{p-1}+b_2\frac{p^2-1}{p-1}+\cdots +b_r\frac{p^r-1}{p-1}=\frac{n-\sum b_i}{p-1}$$
+\end{prop}
+Now,
+$$\nu_p(x^n/n!)=\nu_p(x^n)-\nu_p(n!)=n(\nu_p(x) - \frac{1}{p-1})+\frac{\sum b_i}{p-1}$$
+From this, we see $\nu_p(x^n/n!) \to \infty$ if $\nu_p(x) \geq \frac{1}{p-1}$.
+\begin{prop}
+    If $|x|_p < \frac{1}{p^{1/(p-1)}}$, then, $\exp(x)$ converges.
+\end{prop}
+
+\section{Roots of Polynomials}
+
+Let $f(x) = x^2+1$, and we want to find roots in $\Z_5$. Note that if $f$ has a root like $f(a)=0$ is $\Z_p$, then $f$ has a root in $\Z/p^n\Z$ for every $n$.
+
+$f(x)$ has a root in $A_1=\Z/5\Z$, for example $x=2$. Suppose $a_n$ is a root of $f(x)$ in $A_n=\Z/5^n\Z$. That is, $a_n^2+1 \equiv 0 \pmod {5^n}$. We want to find a root $a_{n+1}$ in $A_{n+1}$. Note that we need $a_{n+1}=a_n+p^{n}b_n$ for $0 \leq b_n \leq p-1$. Observe
+$$a_{n+1}^2+1=(a_n+p^nb_n)^2+1=a_n^2+2\cdot 5^na_nb_n+5^{2n}b_n^2+1 \equiv a_n^2 + 2\cdot 5^na_nb_n+1 \pmod {5^{n+1}}$$
+So, $2\cdot 5^na_nb_n \equiv -(a_n^2+1) \pmod{5^{n+1}}$, but $a_n^2+1$ is $0$ in $A_n$, so $a_n^2+1=5^nd_n$, thus
+$$2\cdot 5^n a_nb_n\equiv 5^nd_n \pmod{5^{n+1}} \iff 2 a_nb_n \equiv d_n \pmod 5.$$
+Modulo $5$, we assumed $a_n \equiv 2 \pmod 5$, so $4b_n \equiv d_n\pmod 5$. As $4$ is a unit modulo $5$, we can indeed properly solve for a $b_n$.
+
+In this particular case there is a nice formula for the $5$-adic root of $x^2+1$: Newton's binomial formula says $(1-x)^{1/2}=\sum_{n=0}^\infty (-1)^n\binom{1/2}{n}x^n$. We are looking for $\sqrt{-1}$, and observe
+$$\sqrt{-1}=\frac{1}{2}\sqrt{1-5}=\sum_{n=0}^\infty (-1)^n\binom{1/2}{n}5^n,$$
+which converges in $\Z_5$.
+
+\begin{notebox*}[Question]
+    What is the algebraic closure of $\Q_p$? To close $\R$, we only need to add $i$. What are the irreducible polynomials in $\Q_p$? How do we check if a polynomial has roots.
+\end{notebox*}
+
+\begin{notebox*}[Observe]
+    Let $f(x) \in \Q_p[x]$. We can multiply (or divide) $f$ by an appropriate power of $p$ so that $f$ becomes a polynomial in $\Z_p[x]$, with not all coefficients divisible by $p$.
+\end{notebox*}
+
+\begin{rmk}
+    Let $f(x) \in \Z_p[x]$ with $f(a)=0$. Then, $f(\bar a) \equiv 0 \pmod {p^n}$ for all $n$. This follows from $\veps _n:\Z_p \to \Z/p^n\Z$ being a ring homomorphism.
+\end{rmk}
+
+\begin{notebox*}[Question]
+    If $f$ has a root in $\Z/p^n\Z$ for all $n$, does $f$ have a root in $\Z_p$? More generally, let $f(x_1,\dots,x_n) \in \Z_p[x_1,\dots,x_n]$. Then, we ask if $V_n(f)$ nonempty implies $V(f)$ is nonempty.
+\end{notebox*}
+
+\begin{defn}[General Inverse Limits]
+    Let $D_1,D_2,\dots$ be sets, with \textbf{transition maps} $D_{n+1}\to D_n$. Then, let $D$ be the \textbf{inverse limit} of $D_n$, i.e. $(d_n) \in D$ if $d_{n+1} \mapsto d_n$ for all $n$.
+\end{defn}
+
+\begin{lem}[][label=lem:nonemptylem]
+    If $D_n$'s are all finite and nonempty, then $D$ is nonempty.
+\end{lem}
+
+\begin{proof}
+    The conclusion is clear if all transition maps are surjective. Our idea to prove it in general is to reduce to this case.
+
+    Fix $n \geq 1$. Let $D_{n,1}= \Img (D_{n+1} \to D_n),D_{n,2}=\Img(D_{n+2} \to D_{n+1} \to D_n)$, and generally
+    $$D_{n,k}= \Img(D_{n+k} \to D_n).$$
+    Observe that $D_n \supset D_{n,1} \supset D_{n,2} \supset \cdots$. By our assumption, $D_{n,k}$ are all finite and nonempty. So, there exists a $K>>0$ such that $D_{n,k}=D_{n,k+1}$ for all $k \geq K$. Call $E_n$ the set which they stabilize to. In the homework, we will prove $E_{n+1}$ surjects onto $E_n$. It follows that $\lim E_n \hookrightarrow  \lim D_n$, and by surjectivity $\lim E_n$ is nonempty.
+\end{proof}
+\[\begin{tikzcd}
+	{E_{n+1}} && {E_n} \\
+	\\
+	{D_{n+1}} && {D_n}
+	\arrow[two heads, from=1-1, to=1-3]
+	\arrow[tail reversed, from=1-1, to=3-1]
+	\arrow[tail reversed, from=1-3, to=3-3]
+	\arrow[from=3-1, to=3-3]
+\end{tikzcd}\]
+
+$V_{n+1}(f) \to V_n(f)$ is a transition map, so if they're all nonempty, it follows from \Cref{lem:nonemptylem} that $V(f)$ is nonempty.
+
+\begin{thm}
+    Let $f \in \Z_p[x_1,\dots,x_n]$, $V(f)$ be the solution set of $f$, and $V_n(f)$ be the solution set of $f$ in $\Z/p^n\Z$. Then, $V(f) \neq \emptyset \iff V_n(f) \neq \emptyset$ for all $n \in \Z_+$.
+\end{thm}
+
+\begin{prop}[Special Case of Hensel's Lemma]
+    Let $f(x) \in \Z_p[x]$. Let $a_0\in \F_p$ be a simple root of $f$ mod $p$. That is, $f'(a_0) \not \equiv 0 \pmod p$. Then, there exists a unique root $a$ of $f(x)$ with $a \equiv a_0 \pmod p$.
+\end{prop}
+
+\begin{proof}
+    We will construct a Cauchy sequence $\{a_n\}$ in $\Z_p$, and show that $a = \lim_{n \to \infty}a_n$ satisfies $f(a)=0$. Suppose $a_n \in \Z_p$ with the property $f(a_n) \equiv 0 \pmod {p^{n+1}}$ and $a_n \equiv a_0 \pmod p$. Now, let $a_{n+1}=a_n + hp^{n+1}$ for $h \in \Z_p$, and we want to have $f(a_{n+1}) \equiv 0 \pmod {p^{n+2}}$. Well, $f(a_n+hp^{n+1})=f(a_n) + hp^{n+1}f'(a_n)+(0)$. Let $h = -f(a_n)/p^{n+1} \cdot f'(a_n)^{-1}=-c_n\cdot f'(a_n)^{-1}$, and we know $f'(a_n)$ is a unit in $\Z_p$ by assumption. Moreover, $a_{n+1}-a_n=h\cdot p^{n+1}$, so $|a_{n+1}-a_n|_p \leq \frac{1}{p^{n+1}}$, hence $a_n$ is a Cauchy sequence, and the claim follows.
+\end{proof}
+
+\begin{ex}
+    Let $f(x) = x^p-x \in \Z_p[x]$. In $\F_p[x]$, we have $f(x) = x(x-1)\cdots (x-p+1)$, and these are all simple roots. It follows that $x^p-x$ has $p$ distinct roots in $\Z_p$. Moreover, $x^p-x=x(x^{p-1}-1)$, so $\Q_p$ contains the $p-1$'th roots of unity.
+\end{ex}
+
+\begin{ex}
+    Let $f:\R\to \R$ be real analytic (or $f: \C \to \C$ holomorphic). Suppose $f(5) =0$. If we're looking for the multiplicity of $5$ as a root of $f$, we can look at $f'(5),f''(5),$ etc. until $f^{(n)}(5)\neq 0$. If $n$ is minimal, we can say $\nu_5(f)=n$. Moreover, $\nu_5(fg)=\nu_5(f) + \nu_5(g)$.
+\end{ex}
+
+\begin{ex}
+    Let $K$ be any field. Then $\nu: K^\times \to \Z$ is called the \textbf{discrete valuation} on $K$ satisfying
+    \begin{itemize}
+        \item $\nu(ab) = \nu(a) + \nu(b)$
+        \item $\nu(a+b) \geq \min \{\nu (a),\nu (b)\}$
+    \end{itemize}
+    The set $A = \{a \in K \mid \nu(a) \geq 0\}$ is a subring of $K$ called the \textbf{discrete valuation ring} (DVR).
+    The set $m = \{ a \in K \mid \nu(a) > 0\}$ is a maximal and a principal ideal.
+\end{ex}
+
+\begin{ex}
+    Let $K = \Q$, and we can write any element of $\Q$ as $\frac{a}{b}=\frac{r}{s}\cdot 5^n$, where $n \in \Z$ and $5 \nmid rs$. We can then define $\nu: \Q^\times \to \Z$ by $\frac{r}{s}\cdot 5^n \mapsto n$. Then, $A=\{\frac{a}{b} \in \Q \mid 5 \nmid b\}$, which we call $\Z_{(5)}$ (not to be confused with $\Z_5$).
+\end{ex}
+
+\begin{rmk}
+    We may complete a DVR as follows: there is an inverse limit by the maps $\cdots \to A/m^3 \to A/m^2 \to A/m$, and the inverse limit is what we call $\hat A$.
+\end{rmk}
+
+\begin{ex}
+    Suppose $\hookrightarrow A_3 \hookrightarrow A_2 \hookrightarrow A_1$. Then, $A = \lim_{\leftarrow}A_n = \cap A_n$
+\end{ex}
+
+\section{Hensel's Lemma}
+
+Recall our special case of Hensel's Lemma:
+\begin{notebox*}[Recall]
+    Let $f(x) \in \Z_p[x]$. Suppose $a_0 \in \Z_p$ is a simple root of $f(x)$ mod $p$. Then, there exists a unique $a \in \Z_p$ with $f(a) = 0$ and $a \equiv a_0 \pmod p$.
+\end{notebox*}
+
+In the homework, we showed $a \equiv b \pmod {p}$ implies $a^p \equiv b^p \pmod {p^2}$. Raising to the $p$'th power is therefore a contraction in $\Z_p$.
+
+\begin{lem}[][label=lem:taylor]
+    Let $f(x) \in \Z_p[x]$. Fix $x,y\in \Z_p$. Then, there exists $z \in \Z_p$ such that $f(x+y) = f(x) + f'(x)y+y^2z$
+\end{lem}
+
+\begin{lem}[One Variable Hensel's Lemma]
+    Let $f(x) \in \Z_p[x],f'(x) \in \Z_p[x]$. Suppose $a_0 \in \Z_p$ is such that $f(a_0) \equiv 0 \pmod {p^n}$, and $\nu_p(f'(a_0)) = k \geq 0$, where $n >2k$. Then, $f$ has a root $a \in \Z_p$ such that $f(a) = 0 \in \Z_p$, $a \equiv a_0 \pmod{p^{n-k}}$.
+\end{lem}
+
+\begin{proof}
+    We will prove by induction that for each integer $r \geq 0$, there exists $a_{r+1} \in \Z_p$ such that
+    \begin{enumerate}[(i)]
+        \item $f(a_{r+1}) \equiv 0 \pmod {p^{n+r+1}}$
+        \item $a_{r+1} \equiv a_r \pmod{p^{n-k+r}}$
+        \item $\nu_p(f'(a_{r+1}))=k$
+    \end{enumerate}
+    Inductively, we are assuming $f(a_r) \equiv 0 \pmod{p^{n+r}}$. We then want $a_{r+1}=a_r+p^{n-k+r}b$ satisfying the above conditions. By the identity in \Cref{lem:taylor},
+    $$f(a_{r+1})= f(a_r+p^{n-k+r}b)=f(a_r)+f'(a_r)p^{n-k+r}b +p^{2n-2k+2r}b^2z,\:\:\:z \in \Z_p$$
+    Now, let $f(a_r)=p^{n+r}c$, and we also have $\nu_p(f'(a_r))=k$, so $f'(a_r)=p^ku$, $u \in \Z_p^\times$. Moreover, by the assumption that $n>2k$, we know $n+n-2k>n$, and if $r \geq 1$, we know $2r \geq r+1$ as well. Thus,
+    $$f'(a_r)=p^{n+r}c+p^ku\cdot p^{n-k+r}b=p^{n+r}(c+ub),$$
+    so to get an extra $p$, we need $c+ub \equiv 0 \pmod p$. As $u$ is a unit, we can indeed solve for an appropriate $b$.
+\end{proof}
+
+\begin{thm}[Multivariable Hensel's Lemma]
+    Let $F(t_1,\dots,t_m) \in \Z_p[t_1,\dots,t_m]$, and suppose $\vec x = (x_1,\dots,x_m) \in \Z_p^m$ is such that $F(x_1,\dots,x_m) \equiv 0 \pmod{p^n}$, and $\nu_p(\frac{\partial F}{\partial t_j}(\vec x))=k$ for some $j$ in $1 \leq j \leq m$, and $0 \leq 2k < n$. Then, there exists $\vec y =(y_1,\dots,y_m) \in \Z_p^m$ with $F(y_1,\dots,y_m) = 0$, and $y \equiv x \pmod{p^{n-k}}$
+\end{thm}
+
+\begin{proof}
+    If $m=1$, we're done from Hensel's single variable lemma. We assume that $j$ has the least $p$-adic valuation for the partial derivative with respect to $t_j$. Then, set
+    $$f(t)= F(x_1,x_2,\dots ,x_{j-1},t,x_{j+1},\dots,x_m)$$
+    and $f'(t) = \frac{\partial F}{\partial t_j}$. We can thus apply single variable Hensel to $f$ and $x_j$, and we obtain $y_j = a \in \Z_p$. Thus, $\vec y=(x_1,x_2,\dots,x_{j-1},y_j,x_{j+1},\dots,x_n)$ is our desired root.
+\end{proof}
+
+\begin{ex}
+    Let $f(x) = x^2-8$. In $\F_7$, $f$ has a simple root $1$. Note that in $\F_7[x]$, the polynomial $f$ is $x^2-1$, and moreover any polynomial of the form $x^2-7k-1$ reduces to that polynomial. It follows that any number of the form $1+7k$ is a square root in $\Z_7$. More generally, $1+a$ has a square root in $\Z_7$ if $\nu _p(a)>0$.
+
+    Generally, if $b \in 1+p\Z_p$, then $b$ is a square in $\Z_p$.
+\end{ex}
+
+\begin{ex}
+    Let $n \in \Z$. When is $n$ a square in $\Z_p$? That is, we want to find out whether $f(x)=x^2-n$ has roots in $\Z_p$. In $\F_p[x]$, $f(x)=x^2-\bar n$. If $\leg{n}{p}=1$, then $n = a_0^2$ in $\F_p$. That is, $f(a_0) \equiv 0 \pmod p$, and $f'(x)=2x$, so assuming $p$ is odd any $n \not \equiv 0 \pmod p$, $f'(a_0) \not \equiv 0 \pmod p$.
+\end{ex}
+
+\begin{rmk}
+    $n \in \Z$ with $p \nmid n$ is a square in $\Z_p \iff \leg{n}{p}=1$.
+\end{rmk}
+
+\begin{ex}
+    Let $f(x) =x^p-x$ in $\Z_p[x]$. Does $f$ have roots in $\Z_p$? $\Q_p$?
+
+    In $\F_p[x]$, $x^p-x$ has $p$ simple roots (everything is a root). Thus, by Hensel's, all of these roots can be lifted to roots in $\Z_p$, i.e. $x^p-x$ has $p$ roots in $\Z_p$. Aside from $x=0$, all the other roots satisfy $x^{p-1}-1=0$, so the rest of the roots are $p-1$ roots of unity. (In fact, these are the only roots of unity in $\Z_p$)
+
+    From the homework, for $a \in \Z_p$, $\lim_{n \to \infty}a^{p^n}$ is a root of $x^p-x$.
+\end{ex}
+
+\begin{defn}
+    We say an $n$-tuple $(a_1,\dots,a_n) \in \Z_p^n$ is \textbf{primitive} if one of the $a_i$'s is a unit.
+\end{defn}
+
+\begin{rmk}
+    For an $n$-tuple in $\Q_p^n$, we can clear the denominators by multiplying by a power of $p$ to get a primitive tuple in $\Z_p^n$.
+\end{rmk}
+
+\begin{prop}[For Some Reason]
+    $\lim_{\leftarrow}\Z/n\Z = \prod_{p\text{ prime}}\Z_p=:\hat \Z$
+\end{prop}
+
+Here's what's going on:
+% https://q.uiver.app/#q=WzAsNCxbMiwyLCJcXFovMlxcWiJdLFsyLDAsIlxcWi80XFxaIl0sWzAsMCwiXFxaLzZcXFoiXSxbMCwyLCJcXFovM1xcWiJdLFsxLDBdLFsyLDBdLFsyLDNdXQ==
+\[\begin{tikzcd}
+	{\Z/6\Z} && {\Z/4\Z} \\
+	\\
+	{\Z/3\Z} && {\Z/2\Z}
+	\arrow[from=1-1, to=3-1]
+	\arrow[from=1-1, to=3-3]
+	\arrow[from=1-3, to=3-3]
+\end{tikzcd}\]
+The stuff you take an inverse limit of doesn't have to be a totally ordered set, it can be a partially ordered set.
+
+\section{\texorpdfstring{Structure of $\Q_p^\times$}{Structure of Qp*}}
+
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCIwIl0sWzIsMCwiXFxSX3s+MH0iXSxbNCwwLCJcXFJeXFx0aW1lcyJdLFs2LDAsIlxce1xccG0gMVxcfSJdLFs4LDAsIjAiXSxbMCwxXSxbMSwyXSxbMiwzLCJcXHBpIl0sWzMsNF0sWzMsMiwicyIsMSx7Im9mZnNldCI6LTN9XV0=
+\[\begin{tikzcd}
+	0 && {\R_{>0}} && {\R^\times} && {\{\pm 1\}} && 0
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=1-5]
+	\arrow["\pi", from=1-5, to=1-7]
+	\arrow["s"{description}, shift left=3, from=1-7, to=1-5]
+	\arrow[from=1-7, to=1-9]
+\end{tikzcd}\]
+
+where $s(1)=1,s(-1)=-1$. Since $\{\pm 1\}$ embeds in $\R^\times$, this exact sequence demonstrates $\R^\times \cong \R_{>0} \times \{ \pm 1\}$. Moreover, $\R_{>0} \cong (\R,+)$, so $\R^\times \cong (\R,+) \times \{ \pm 1\}$.
+
+Now, recall that for any $a \in \Q_p^\times$, $a = up^n$, with $n \in \Z$ and $u \in \Z_p^\times$. Hence,
+$$\Q_p^\times \cong \Z_p^\times \times \Z,$$
+so to understand $(\Q_p^\times,\times)$, we need to understand $(\Z_p^\times, \times)$.
+
+Let $\veps _1:\Z_p^\times \to \F_p^\times$ be the projection on to the first coordinate. The kernel of $\veps _1$ is $U_1 = \{ 1 +p\Z_p\} \leq \Z_p^\times$. Generally, we define $U_j = \{1 + p^j\Z_p\}$. Now, we have an exact sequence.
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCIwIl0sWzIsMCwiVV8xIl0sWzQsMCwiXFxaX3BeXFx0aW1lcyJdLFs2LDAsIlxcbWF0aGJiIEZfcF5cXHRpbWVzIl0sWzgsMCwiMCJdLFswLDFdLFsxLDJdLFsyLDMsIlxcdmFyZXBzaWxvbl8xIl0sWzMsNF1d
+\[\begin{tikzcd}
+	0 && {U_1} && {\Z_p^\times} && {\mathbb F_p^\times} && 0
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=1-5]
+	\arrow["{\varepsilon_1}", from=1-5, to=1-7]
+	\arrow[from=1-7, to=1-9]
+\end{tikzcd}\]
+Next, we know
+$$U_1 \geq U_2 \geq U_3 \geq \cdots$$
+and one can show
+$$\bigcap_{n=1}^\infty U_n = \{1\}$$
+Thinking about how $x \in \F_p^\times \iff x^{p-1}=1$, recall from a previous discussion that the limit of the Cauchy sequence $1,j,j^p,j^{p^2},\dots$ also satisfies $\tilde {j}^{p-1}=1$, where $j \in \{1,\dots,p-1\}$. Hence, we may define a homomorphism $s:\F_p^\times \to \Z_p^\times$ by $s(j)=\tilde j$.
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCIwIl0sWzIsMCwiVV8xIl0sWzQsMCwiXFxaX3BeXFx0aW1lcyJdLFs2LDAsIlxcbWF0aGJiIEZfcF5cXHRpbWVzIl0sWzgsMCwiMCJdLFswLDFdLFsxLDJdLFsyLDMsIlxcdmFyZXBzaWxvbl8xIl0sWzMsNF0sWzMsMiwicyIsMSx7Im9mZnNldCI6LTN9XV0=
+\[\begin{tikzcd}
+	0 && {U_1} && {\Z_p^\times} && {\mathbb F_p^\times} && 0
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=1-5]
+	\arrow["{\varepsilon_1}", from=1-5, to=1-7]
+	\arrow["s"{description}, shift left=3, from=1-7, to=1-5]
+	\arrow[from=1-7, to=1-9]
+\end{tikzcd}\]
+It follows by the sequence being exact that
+$$\Z_p^\times \cong U_1 \times \F_p^\times$$
+$$\Q_p^\times \cong U_1 \times \F_p^\times \times \Z$$
+We therefore now want to understand $U_1$.
+
+\begin{defn}
+    Consider the exact sequence below. A homomorphism $s$ (like in the previous sequences) is called a \textbf{section} if $f(s(c))=c$ for all $c \in C$. If such a section exists, we have that $B \cong A \times C$.
+\end{defn}
+
+% https://q.uiver.app/#q=WzAsNSxbMCwwLCIwIl0sWzIsMCwiQSJdLFs0LDAsIkIiXSxbNiwwLCJDIl0sWzgsMCwiMCJdLFswLDFdLFsxLDJdLFsyLDMsImYiXSxbMyw0XSxbMywyLCJzIiwxLHsib2Zmc2V0IjotM31dXQ==
+\[\begin{tikzcd}
+	0 && A && B && C && 0
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-3, to=1-5]
+	\arrow["f", from=1-5, to=1-7]
+	\arrow["s"{description}, shift left=3, from=1-7, to=1-5]
+	\arrow[from=1-7, to=1-9]
+\end{tikzcd}\]
+
+Let's talk about why we care about the structure of $\Q_p^\times$
+
+\begin{notebox*}[Recall]
+    $\Q^\times \cong \Z/2\Z \times \Z[\text{primes}]$, where $\Z[$primes$]$ denotes the abelian free group of primes.
+\end{notebox*}
+
+Let $K = \Q[x]/(f(x))$ be a quadratic extension, where $f(x)=ax^2+bx+c$. Then, we see that $K = \Q(\sqrt{b^2-4ac})$. In general a quadratic extension looks like $K=\Q(\sqrt d)$, and it can be shown that $d$ can always be an integer. Moreover, we want $d$ to be squarefree, and it follows that quadratic number fields are in bijection with $\Q^\times /(\Q^\times)^2$.
+
+\begin{defn}[Direct Products and Direct Sums]
+    Let $G_1,G_2,\dots$ be an infinite list of groups. We can make a group $G$ out of $G=\prod_{n=1}^\infty G_n$, where the operations are taken componenent-wise as expected. This is called the \textbf{direct product}
+
+    Moreover, there exists a subgroup $\oplus G_n \leq \prod G_n$ which is all sequence such that only finitely many are not the identity. This is called the \textbf{direct sum}.
+\end{defn}
+
+\begin{rmk}
+    $\Q^\times \cong \Z/2\Z \cong \Z[$primes$] \cong \Z/2\Z \times \oplus \Z$
+\end{rmk}
+
+\begin{cor}
+    $\Q^\times /(\Q^\times)^2 = \{ \pm 1\} \times \oplus (\Z/2\Z)$
+\end{cor}
+This is why understanding the structure is so helpful.
+
+Now, back to $\Q_p$.
+
+\begin{notebox*}[Recall]
+    $\Q_p^\times \cong \Z_p^\times \times \Z_p \cong U_1 \times \F_p^\times \times \Z$, where $U_1 = 1+p\Z_p \leq \Z_p^\times$.
+\end{notebox*}
+
+\begin{notebox*}[Claim]
+    We claim that for $p$ odd, $(U_1,\times) \cong (\Z_p,+)$. This means the squares in $U_1$ are isomorphic to $2\Z_p$, but since $2$ is a unit (for $p\geq3$), $2\Z_p=\Z_p$. That is, everything in $U_1$ is a square.
+
+    The result is that for $p\geq3$,
+    $$\Q_p^\times \cong \Z_p \times \F_p^\times \times \Z \:\:\:\: (\Q_p^\times)^2 \cong \Z_p \times (\F_p^\times)^2 \times 2\Z$$
+    $$(\Q_p^\times)/(\Q_p^\times)^2 \cong (\F_p^\times)/(\F_p^\times)^2 \times \Z/2\Z \cong \Z/2\Z \times \Z/ 2\Z \cong V_4$$
+    Before, we saw that $\Q$ has infinitely many quadratic extensions, since $\Q^\times/(\Q^\times)^2$ was infinite. However, $\Q_p$ only has $3$ non-trivial quadratic extensions.
+\end{notebox*}
+
+\begin{proof}
+    We assume $p$ is odd. Let $U_n$ be the set $1+p^n\Z_p$, and note $U_n \geq U_{n+1}$ for all $n\geq 1$. Consider the surjective homomorphism $\phi_n:U_n \to \Z/p\Z$ by
+    $$\phi_n(1+p^na)= a \pmod p = \veps_1(a).$$
+    This is a homomorphism as
+    $$(1+p^na)(1+p^nb)=1+p^n(a+b)+p^{2n}ab=1+p^n(a+b+p^nab)$$
+    and modulo $p$, $a+b+p^nab$ is just $a+b$. Moreover,
+    $$\ker \phi_n= \{ 1 +p^na \mid a \equiv 0 \pmod p\} = \{1+p^na\mid a \in p\Z_p\} = U_{n+1}.$$
+    Therefore, $U_n/U_{n+1} \cong \Z/p\Z$. By the third isomorphism theorem $(U_1/U_3)/(U_2/U_3) \cong U_1/U_2$, and it follows that $|U_1/U_3|=p^2$. Generally,
+    $$|U_1/U_{n+1}| = p^n.$$
+    ``Whenever you have a $p$-adic number and you don't know what to do with it, raise it to the $p$-th power.'' --- Rama
+    \begin{lem}
+        Let $u \in U_n \setminus U_{n+1}$. Then, $u^p \in U_{n+1}\setminus U_{n+2}$
+    \end{lem}
+    \begin{proof}
+        Let $u = 1+p^na,a \in \Z_p$. Then,
+        $$u^p=(1+p^na)^p=1+p\cdot p^{n}a+\frac{p(p-1)}{2}(p^na)^2+\cdots \in 1+p^{n+1}\Z_p$$
+        Furthermore, by the assumption that $u \not \in U_{n+1}$, we know that $a$ is a unit, and it follows from the above equality that $u^p \not \in 1+p^{n+2}\Z_p$, proving indeed that $u^p \in U_{n+1}\setminus U_{n+2.}$
+    \end{proof}
+
+    Now back to the original proof. Consider $\alpha = 1 + p \in U_1\setminus U_2$. Then, $\alpha^p \in U_2 \setminus U_3$, and generally $\alpha^{p^n}\in U_{n+1}\setminus U_{n+2}$. Now, define $\psi_n:\Z/p^n\Z \to U_1/U_{n+1}$ by
+    $$\psi_n(z)=\bar \alpha^z$$
+    Since $\psi_n(z+w)=\bar \alpha^{z+w}=\bar \alpha^z\bar \alpha^w=\psi_n(z)\psi_n(w)$, it's clear that $\psi_n$ is a homomorphism, and it's not hard to check that it's well defined. Moreover, note that $\alpha^{p^{n-1}}\in U_n \setminus U_{n+1}$, and therefore $\bar \alpha^{p^{n-1}} \neq 1$ in $U_1/U_{n+1}$. This tells us that $|\bar \alpha|=p^n=|U_1/U_{n+1}|$, hence $\bar \alpha$ is a generator of $U_1/U_{n+1}$, and therefore is a cyclic group of order $p^n$, i.e. isomorphism to $\Z/p^n\Z$. Let $h_j:U_1/U_{j+2}\to U_1/U_{j+1}$ be the canonical projection, and $f_j:\Z/p^{j+1}\Z \to \Z/p^j\Z$ be the canonical projection. Then observe the below diagram of inverse systems (below the proof): it's an exercise to check that $h_n \circ \psi_{n+1}(a) = \psi_n\circ f_n(a)$, and therefore the inverse limits will be the same. That is, $\Z_p =\lim_{\leftarrow}\Z/p^n\Z \cong \lim_{\leftarrow}U_1/U_{n+1}$. It's another exercise to check that $\lim_{\leftarrow}U_1 /U_{n+1} \cong U_1$, finishing the proof.
+\end{proof}
+
+% https://q.uiver.app/#q=WzAsOCxbNiwwLCJVXzEvVV8yIl0sWzQsMCwiVV8xL1VfMyJdLFsyLDAsIlVfMS9VXzQiXSxbNiwyLCJcXFovcFxcWiJdLFs0LDIsIlxcWi9wXjJcXFoiXSxbMiwyLCJcXFovcF5uXFxaIl0sWzAsMCwiXFxjZG90cyJdLFswLDIsIlxcY2RvdHMiXSxbMiwxLCJoXzIiLDFdLFsxLDAsImhfMSIsMV0sWzMsMCwiXFxwc2lfMSIsMV0sWzQsMSwiXFxwc2lfMiIsMV0sWzUsMiwiXFxwc2lfMyIsMV0sWzUsNCwiZl8yIiwxXSxbNCwzLCJmXzEiLDFdLFs2LDJdLFs3LDVdXQ==
+\[\begin{tikzcd}
+	\cdots && {U_1/U_4} && {U_1/U_3} && {U_1/U_2} \\
+	\\
+	\cdots && {\Z/p^n\Z} && {\Z/p^2\Z} && {\Z/p\Z}
+	\arrow[from=1-1, to=1-3]
+	\arrow["{h_2}"{description}, from=1-3, to=1-5]
+	\arrow["{h_1}"{description}, from=1-5, to=1-7]
+	\arrow[from=3-1, to=3-3]
+	\arrow["{\psi_3}"{description}, from=3-3, to=1-3]
+	\arrow["{f_2}"{description}, from=3-3, to=3-5]
+	\arrow["{\psi_2}"{description}, from=3-5, to=1-5]
+	\arrow["{f_1}"{description}, from=3-5, to=3-7]
+	\arrow["{\psi_1}"{description}, from=3-7, to=1-7]
+\end{tikzcd}\]
