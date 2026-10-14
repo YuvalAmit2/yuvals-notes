@@ -1,0 +1,760 @@
+% !TEX root = ../math600-notes.tex
+
+\section{Intro to Rings}
+
+\begin{defn}[Rings]
+    A \textbf{ring} $R$ is a set together with two binary operations $+,\cdot :R \times R \to R$ satisfiying
+    \begin{enumerate}
+        \item[(i)] $(R,+)$ is an additive abelian group
+        \item[(ii)] $(a\cdot b)\cdot c=a\cdot (b \cdot c)$ for all $a,b,c\in R$
+        \item[(iii)] There exists $1 \in R$ such that $a \cdot 1 = 1 \cdot a=a$ for all $a \in R$
+        \item[(iv)] $a\cdot (b+c)=a\cdot b+a\cdot c$ and $(a+b)\cdot c= a\cdot c + b \cdot c$ for all $a,b,c \in R$
+    \end{enumerate}
+\end{defn}
+
+\begin{rmk}
+    (ii) and (iii) say that $(R,\cdot )$ is an \textbf{associative monoid}.
+\end{rmk}
+
+\begin{defn}
+    A ring $R$ is \textbf{commutative} if multiplication is commutative, i.e. $a\cdot b = b \cdot a$ for all $a,b \in R$. We say $R$ is a \textbf{division ring} if $1 \neq 0$, and every $a \in R\setminus \{0\}$ has a multiplicative inverse. A commutative division ring is called a \textbf{field}.
+\end{defn}
+
+\begin{ex}
+    \begin{enumerate}
+        \item There is a unique ring with $1=0$, which is the $0$ ring $\{0\}$.
+        \item Any field is a ring
+        \item $(\Z,+,\cdot)$ is a ring
+        \item For any $n \in \N$, the coset space $(\Z/n\Z,+,\cdot)$ is a ring, which is a field if and only if $n$ is prime.
+        \item Let $A$ be any set, and $R$ be a ring. Then, the set $F(A) = \{f:A \to R\}$ is a ring under pointwise operations.
+        \item Let $i,j,k$ be symbols obeying the relations $i^2=j^2=k^2=-1,ij=k,jk=i,ki=j=-ik$ (the quaternions). Then, the \textbf{ring of quaternions} $\mathbb H$ is the $4$ dimensional real vector space
+        $$\mathbb H:= \{x+yi+zj+wk \mid x,y,z,w \in \R\}$$
+        with multiplication defined multilinearly. Every quaternion has a norm $||q||^2=x^2+y^2+z^2+w^2$. If $q \neq 0$, one checks that $q^{-1}=\frac{\bar q}{||q||^2}$
+        \item If $R$ is any ring, we get a \textbf{matrix ring} $M_n(R)$ for each $n \geq 1$, consisting of $n \times n$ matrices in $R$, with operations defined as usual.
+        \item Let $R$ be a ring. The \textbf{ring of polynomials} $R[x]$ in the variable $x$ with coefficients in $R$ is the set of all formal sums
+        $$a_0+a_1x+\cdots +a_nx^n$$
+        with only finitely many $a_i \neq 0$. The operations are defined as usual. That is,
+        $$(\sum_ia_ix^i)(\sum_jb_jx^j)=\sum_kc_kx^k\:\:\:\:\:\: c_k:=\sum_{i+j=k}a_ib_j$$.
+        \item For $R$ a ring, there is also the ring of polynomials in several variables, $R[x_1,x_2,\dots,x_n]$. We assume the $x_i$'s commute. Observe that $R[x,y] \equiv (R[x])[y]$
+    \end{enumerate}
+\end{ex}
+
+\begin{defn}
+    Let $R'$ be a ring. Then, a \textbf{subring} $R$ of $R'$ is a ring sharing the same operations and identity $1_R=1_{R'}$.
+\end{defn}
+
+\begin{ex}
+    $R$ is a subring of $R[x]$. Moreover, $R[x]$ is commutative if and only if $R$ is commutative.
+\end{ex}
+
+\begin{prop}
+    Let $R$ be a ring, and $a,b\in R$ be arbitrary. Then,
+    \begin{enumerate}
+        \item $0a =a0 = 0$.
+        \item $(-a)b=-ab=a(-b)$, and $(-a)(-b)=ab$.
+        \item The identity $1$ is unique, and $-a=(-1)a$.
+    \end{enumerate}
+\end{prop}
+
+\begin{rmk}
+    In a general ring, it is possible that $xy=0$ while $x$ and $y$ are both nonzero. For example, $(2+6\Z)(3+6\Z)=6\Z=0$.
+\end{rmk}
+
+\begin{defn}[Zero Divisors and Units]
+    Let $R$ be a ring. A non-zero element $x \in R$ is a \textbf{zero-divisor} in $R$ if there exists $y \in R$ non-zero such that $xy=0$ or $yx=0$. An element $u \in R$ is a \textbf{unit} in $R$ if there exists $v\in R$ such that $uv=vu=1$. The set of all units in $R$ is denoted $R^\times$, and forms a group under multiplication, called the \textbf{group of units} in $R$.
+\end{defn}
+
+\begin{ex}
+    \begin{enumerate}
+        \item $\Z^\times = \{\pm 1\}$
+        \item Every non-zero element of $\Z/n\Z$ is either a zero divisor or a unit. $|(\Z/n\Z)^\times|=\varphi(n)$.
+    \end{enumerate}
+\end{ex}
+\begin{defn}[Integral Domains]
+    A commutative ring $R$ with identity $1 \neq 0$ is called an \textbf{integral domain} if it has no zero-divisors. That is, $xy=0\implies x=0$ or $y=0$.
+\end{defn}
+
+\begin{prop}
+    If $R$ is a domain, then $R$ has the \textbf{cancellation property} $ax=ay \implies x=y$ or $a=0$.
+\end{prop}
+
+\begin{cor}
+    Every finite integral domain is a field.
+\end{cor}
+
+\begin{proof}
+    Let $R$ be a finite integral domain, and let $a \in R \setminus 0$. Then, define $i:R \to R$ defined by $x \mapsto ax$ is injective, by the cancellation property. Hence, as $R$ is finite, $i$ must also be surjective, so there exists $b \in R$ such that $i(b)=1$. That is, $ab=1$, hence $a$ is a unit.
+\end{proof}
+
+\section{Ring Homomorphisms}
+
+\begin{defn}[Ring Homomorphisms]
+    If $R,R'$ are rings, a map $\varphi :R \to R'$ is a \textbf{ring homomorphism} if
+    \begin{enumerate}[(i)]
+        \item $\varphi(x+y) = \varphi(x)+\varphi(y)$
+        \item $\varphi(xy)=\varphi(x)\varphi(y)$
+        \item $\varphi(1_R)=1_{R'}$
+    \end{enumerate}
+    A bijective ring homomorphism is an \textbf{isomorphism}. The kernel of $\varphi$ is
+    $$\ker \varphi = \{x \in R \mid \varphi (x)=0\}$$
+\end{defn}
+
+\begin{prop}
+    $\varphi$ is injective if and only if $\ker \varphi = \{0\}$, and $\varphi$ is surjective if and only if $\Img \varphi = R'$.
+\end{prop}
+
+\begin{ex}
+    \begin{enumerate}
+        \item There is a unique homomorphism $i:\Z \to R$ for any ring $R$. Namely, $i(1)=1$, and $i(n)= 1_R+\cdots +1_R$ for $n \geq 1$, and $i(-n)=-i(n)$. The kernel of $i$ is a subgroup of $\Z$, so it must be $n\Z$ for some $n \geq 0$. This $n$ is called the \textbf{characteristic} of $R$. For example, if $R$ is an integral domain, then the characteristic of $R$ is prime or $0$.
+        \item \textbf{(Substitution Principle)} Let $\varphi:R \to R'$ be a morphism of commutative rings (actually, only $R'$ needs to be commutative). Then, for any element $\alpha \in R'$, there exists a unique ring homomorphism $\tilde \varphi:R[x] \to R'$ which agrees with $\varphi$ on constant polynomials, i.e. $R$, and has $\tilde \varphi (x) := \alpha$. In fact, we must have $\tilde \varphi(\sum a_ix^i)=\sum\varphi(a_i) \alpha ^i$. This extends to polynomial rings in more than one variable as well.
+    \end{enumerate}
+\end{ex}
+
+\section{Ideals and Quotients}
+
+We want to define, for certain subgroups $I\subset R$, a quotient ring $R/I$. These additive subgroups should be exactly the kernels of ring homomorphisms $\varphi:R \to R'$.
+
+\begin{notebox*}
+    $\ker \varphi$ is not a subring of $R$ unless $1 \in \ker \varphi$, which is equivalent to saying that $\ker \varphi = R$. But, $\ker \varphi$ has all the other properties of a subring, including the special property that if $r \in R,a \in \ker \varphi$, then $a\cdot r=r\cdot a \in \ker \varphi$
+\end{notebox*}
+
+\begin{defn}[Ideals]
+    A subset $\emptyset \neq I \subset R$ is called a
+    \begin{enumerate}[(i)]
+        \item \textbf{left ideal} if $I$ is a subgroup of $(R,+)$ and $ra \in I$ for all $r \in R,a \in I$, i.e. $rI \subset I$ for all $r \in R$.
+        \item \textbf{right ideal} if $I$ is a subgroup of $(R,+)$ and $ar \in I$ for all $r\in R,a \in I$, i.e. $Ir \subset I$ for all $r \in R$.
+        \item \textbf{two-sided ideal} if its both a left and right ideal.
+    \end{enumerate}
+    An \textbf{ideal} will always mean a two-sided ideal. The notion of left and right ideals are the same in commutative rings.
+\end{defn}
+
+\begin{ex}
+    All kernels of homomorphisms $\varphi :R \to R'$ are two sided ideals.
+\end{ex}
+
+\begin{defn}[Quotient Rings]
+    Given $I \subset R$ a two sided ideal, we have a quotient group $(R/I,+)$. Moreover, the multiplication $(a+I)(b+I)=ab+I$ then defines a ring structure on $R/I$. We call $R/I$ a \textbf{quotient ring}.
+\end{defn}
+
+\begin{proof}
+    If $a+I=a'+I$ and $b+I=b'+I$, then $a'=a+u_1,b'=b+u_2$ with $u_1,u_2\in I$. It follows that $a'b' = ab+au_2+bu_1+u_1u_2=ab+u$, for $u \in I$. Hence, $ab+I = a'b'+I$.
+\end{proof}
+\begin{rmk}
+    The identity in $R/I$ is $1+I$, and we have a canonical \textbf{projection map} $\pi:R \to R/I$; the ring structure on $R/I$ is that which makes $\pi$ a ring homomorphism.
+\end{rmk}
+
+\begin{thm}
+    $(R/I,\pi)$ also satisfies the universal property as in the case of vector spaces and groups.
+\end{thm}
+
+\begin{thm}[First Ring Isomorphism Theorem]
+    Let $\varphi:R \to R'$ be homomorphism of rings. Then, $\Img \varphi$ is a subring of $R'$, $\ker \varphi$ is an ideal of $R$, and the induced map $\tilde \varphi :R/\ker \varphi \to \Img \varphi$ which maps $r+\ker \varphi \mapsto \varphi (r)$ is an isomorphism. That is, $R/\ker \varphi \cong \Img \varphi$.
+\end{thm}
+
+\begin{thm}[Second Ring Isomorphism Theorem]
+    Suppose $R$ is a ring, and $A,B$ are subsets of $R$ such that $A$ is a subring and $B$ is an ideal. Then, $(A+B)/B \cong A/A \cap B$
+\end{thm}
+
+\begin{defn}
+    Given a subset $A \subset R$, we denote by $(A)$ the \textbf{left ideal generated by $A$}, i.e. the smallest left ideal of $R$ containing $A$. We have that
+    $$(A) = \bigcap _{A\subset I\text{ left ideal}}I=R\cdot A:=\{r_1a_1+\cdots+r_ka_k \mid r_i\in R,a_i \in A, k \in \N\}$$
+    A left ideal $I$ is \textbf{finitely generated} if $I=(A)$ for some finite set $A\subset R$. We say that $I$ is \textbf{principal} if $I = (a)=Ra$ for some $a \in R$. We can work similarly with right or $2$-sided ideals.
+\end{defn}
+
+\begin{ex}
+    \begin{enumerate}
+        \item $(0),R$ are two sided ideals in any ring $R$.
+        \item An ideal of $\Z$ is a subgroup, so it must be principal $n\Z$. Similarly, if $F$ is a field, all ideals in $F[x]$ are principle. This fails in $\Z[x]$ or $\C[x,y]$.
+    \end{enumerate}
+\end{ex}
+
+\textbf{Exercise: Check that the ideal $(x,y)$ in $\C[x,y]$ is not principal.}
+
+\textbf{Hard exercise: Show that all ideals in $\C[x,y]$ are finitely generated.}
+
+\begin{ex}[Examples of Quotient Rings]
+    \begin{enumerate}
+        \item If $R$ is any ring, we have an \textbf{evaluation map} at $0$, which is $\varphi :R[x] \to R$, $f(x) \mapsto f(0)$. Note that $\Img \varphi = R,\ker \varphi = (x)$, so $R[x]/(x) \cong R$.
+        \item Consider the evaluation at $i = \sqrt{-1}$ in $\varphi :\R [x] \to \C$, $f(x) \mapsto f(i)$. Since $\varphi (ax+b)=ai+b$ for all $a,b \in R$, we know $\varphi$ is surjective. We claim $\ker \varphi = (x^2+1)$.
+    Indeed, if $f(x) = (x^2+1)g(x)$, then $f(i)=0$. Conversely, if $f(i)$, then since $f$ has real coefficients, $f(-i)=0$ as well by conjugation. So, $f(x)$ is divisible by $(x-i)(x+i)=x^2+1$. Therefore, $\R[x] / (x^2+1) \cong \C$.
+    \item Consider the ring $\C[x,y]/(y^2-x^2-x^3)$. This is unlike any ring we've seen before. Let's prove some results to help.
+    \end{enumerate}
+\end{ex}
+
+\begin{prop}
+    Let $I \subset R$ be a left ideal.
+    \begin{enumerate}
+        \item $I=R \iff I$ contains a unit
+        \item Suppose $R$ is commutative. Then, $R$ is a field if and only if the only ideals of $R$ are $(0)$ and $R$.
+    \end{enumerate}
+\end{prop}
+
+\begin{cor}
+    If $F$ is a field and $\varphi :F \to R$ is any ring homomorphism, $\varphi$ must be either injective or trivial.
+\end{cor}
+
+\begin{defn}
+    A left ideal $m$ in $R$ is \textbf{maximal} if it's maximal among all proper ideals of $R$.
+\end{defn}
+
+\begin{thm}
+    Any proper (left) ideal of a ring $R$ is contained in a maximal ideal.
+\end{thm}
+
+\begin{proof}
+    An ideal $I$ of $R$ is proper if and only if $1 \not \in I$. So, we can use Zorn's lemma: if $\mathcal I$ is the set of all proper left ideals of $R$, ordered by inclusion, then any chain $(I_j)_{j \in J}$ of ideals in $I$ has an upper bound. Namely, take $\cup I_j$, and since we're working with a chain, this is still a proper ideal, as $1 \not \in \cup I_j$. Thus, by Zorn's lemma, $\mathcal I$ has a maximal element $m$.
+\end{proof}
+
+\begin{ex}
+    \begin{enumerate}
+        \item The ideals of $(\Z,+,\cdot)$ are the subgroups $n\Z$ for $ n\geq 1$. The maximal ideals are $p\Z$, where $p$ is prime.
+        \item (Deeper) If $F$ is any field, the maximal ideals of $F[x]$ are of the form $(f(x))$ where $f(x)$ can't be factored (it's a principal ideal domain). In other words, $f$ is irreducible over $F$.
+        \item (Even deeper) Consider $\C[x,y]$. Recall that the maximal ideals in $\C$ are $x-a$ for $a \in \C$. Similarly, the maximal ideals in $\C[x,y]$ are $(x-a,y-b)$ for $a,b \in \C$ (not entirely easy to prove).
+    \end{enumerate}
+\end{ex}
+
+\begin{rmk}
+    Let $R$ be a ring, $I \subset R$ a left ideal. Then, there is a 1-1 correspondence between left ideals in $R/I$ and left ideals $J \subset R$ which contain $I$.
+\end{rmk}
+
+\begin{proof}
+    Exercise.
+\end{proof}
+
+\begin{thm}
+    Let $R$ be a commutative ring. An ideal $M \subset R$ is maximal if and only if $R/M$ is a field.
+\end{thm}
+
+\begin{proof}
+    If $R/M$ is a field, its only ideals are $(0)=M$ and $R/M$, so by the above remark, this implies that there are no ideals $J$ of $R$ with $M \subsetneq J \subsetneq R$, hence $M$ is maximal. (Note that this direction does not require the ring to be commutative)
+
+    Conversely, if $M$ is maximal, the only ideals of $R/M$ are $(0)$ and $M$. Hence, since $R$ is commutative, $R/M$ is  a field.
+\end{proof}
+
+\begin{defn}
+    And ideal $P \subset R$ is \textbf{prime} if whenever $ab \in P$, we have $a\in P$ or $b \in P$.
+\end{defn}
+
+\begin{prop}
+    An ideal $P$ of $R$ is prime if and only if $R/P$ is an integral domain.
+\end{prop}
+
+\begin{proof}
+    The defining condition for a prime ideal, in the quotient, translates to $(a+P)(b+P)=P$, then $a+P=P$ or $b+P=P$, exactly the condition for an integral domain.
+\end{proof}
+
+\begin{cor}
+    Let $R$ be a commutative ring. Then, all maximal ideals in $R$ are prime. The converse is not necessarily true.
+\end{cor}
+
+\begin{ex}
+    In $R = \C[x,y]$, the ideal $I:=(x)=x\C[x,y]$ satisfies $R/I \cong \C[y]$. This is a domain, but not a field.
+\end{ex}
+
+\section{The Field of Fractions of an Integral Domain}
+
+This generalizes the standard construction of the rational numbers from the integers.
+
+\begin{defn}
+    Let $R$ be a domain and $S:= R\setminus \{0\}$. We define an equivalence relation on $R\times S$ by $(a,b) \sim (c,d) \iff ad=bc$. We denote by $\frac{a}{b}$ the equivalence class of $(a,b)$. We may define addition and multiplication of these classes in the usual way:
+    $$\frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd},\:\:\:\frac{a}{b}\cdot \frac{c}{d}=\frac{ac}{bd}$$
+    The set $K$ of all equivalence classes becomes a ring with identities $\frac{0}{1}$ and $\frac{1}{1}$. Moreover, $K$ is a field, since $(\frac{a}{b})^{-1}=(\frac{b}{a})$ if $\frac{a}{b}\neq \frac{0}{1}$. There is an embedding $i:R \hookrightarrow K$ by $a \mapsto \frac{a}{1}$. $K$ is called the \textbf{field of fractions} or \textbf{quotient field} of $R$, often denoted $Q(R)$.
+\end{defn}
+
+\begin{prop}
+    The pair $(R,K)$ with the embedding $i:R \to K$ is characterized by a universal property: for any field $A$ and monomorphism $j : R \hookrightarrow A$, there exists a unique homomorphism $\tilde j:K \to A$ such that $j = \tilde j \circ i$. That is, the diagram below commute.
+\end{prop}
+
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJSIl0sWzIsMCwiSyJdLFsxLDIsIkEiXSxbMCwxLCJpIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyLCJqIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwyLCJcXHRpbGRlIGoiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+\[\begin{tikzcd}
+	R && K \\
+	\\
+	& A
+	\arrow["i", hook, from=1-1, to=1-3]
+	\arrow["j"', hook, from=1-1, to=3-2]
+	\arrow["{\tilde j}", dashed, from=1-3, to=3-2]
+\end{tikzcd}\]
+
+\begin{ex}
+    \begin{enumerate}
+        \item $\Q$ is the quotient field of $\Z$
+        \item If $R$ is an integral domain, we claim $R[x]$ is an integral domain. Indeed if $f(x) = a_nx^n+\cdots +a_1x+a_0$, and $g(x)=b_mx^m+\cdots +b_1x+b_0$, with $a_n,b_m \neq 0$, then $a_nb_m \neq 0$, hence $f(x) \cdot g(x)= a_nb_mx^{n+m}+\cdots \neq 0$. The quotient field of $R[x]$ is the field $R(x)$ of rational functions in $x$ over $R$.
+        $$R(x) = \brax{\frac{p(x)}{q(x)} \mid p,q \in R[x], q \neq 0}$$
+    \end{enumerate}
+\end{ex}
+
+\section{Euclidean Domains}
+
+Let's study nice rings.
+
+\begin{defn}
+    A ring $R$ is a \textbf{Euclidean Domain} if
+    \begin{enumerate}
+        \item[(i)] $R$ is an integral domain
+        \item[(ii)] There is a \textbf{norm map} $d:R\setminus \{0\} \to \Z_{\geq0 }$ such that the division algorithm holds: given $a,b \in R$ with $b \neq 0$, there exists $q,r \in R$ such that $a=bq+r$, and either $r=0$ or $d(r) < d(b)$.
+    \end{enumerate}
+\end{defn}
+
+\begin{ex}
+    \begin{enumerate}
+        \item The ring of integers $\Z$, with $d(k) = |k|$.
+        \item $\Z[i]:=\{ x+iy \mid x,y \in \Z\}=\Z[x]/(x^2+1)$ is the ring of \textbf{Gaussian integers}. It is Euclidean: Let $d : \Z[i]\setminus\{0\} \to \Z_{\geq 0}$ by $d(x+iy) = x^2+y^2$. Take $a,b \in \Z[i]$ with $b \neq 0$. We want to divide $a$ by $b$.
+
+        Case 1: Suppose $b=n \in \N$. Write $a = x+iy$, and let $x=w_1n+x',y=w_2n+y'$ such that $|x'|,|y'| \leq \frac{n}{2}$. Then, $a = n(w_1+w_2) +x'+iy'$, and $d(x'+iy') = (x')^2 +(y')^2 \leq \frac{n^2}{2}<n^2 = d(b)$.
+
+        Case 2: We use case $1$ to divide $a \bar b$ by $b \bar b$, yielding $a \bar b= q b \bar b + r'$, with $d(r') < d(b\bar b) = d(b)^2$. Now,
+        $$d(a-qb)d(b)= d((a-qb)\bar b)= d(r') < d(b)^2 \implies d(a-qb) < d(b)$$
+        so taking $r:= a-qb$ works.
+        \item Polynomial division algorithm: Here, $R$ is assumed to be commutative. We define the \textbf{degree} $\deg (f)$ of a non-zero $f(x) \in R[x]$ as usual, and set $\deg (0):=-\infty$. Suppose $g \in R[x]$ is a \textbf{monic}, that is $g(x) =x^n+a_{n-1}x^{n-1}+\cdots +a_1x+a_0$. Then, for any $f \in R[x]$, there exists $q, r \in R[x]$ such that $f = qg +r$, and $\deg r < \deg g$. Furthermore, $q(x)$ and $r(x)$ are unique.
+    \end{enumerate}
+    \begin{proof}
+        Suppose $\deg f(x) = m$. We use induction on $m$ to prove the existence of $q$ and $r$. If $m <n$, we're ok, since $f=0\cdot g +f$. Otherwise, if $m \geq n$, then write $f(x) =c_mx^m +\cdots +c_1x+c_0$ with $c_m\neq 0$, and note that
+        $$\deg (f(x))-c_mx^{n-m}g(x))<m.$$
+        By induction, $f-c_mx^{m-n}g=q'g+r'$, so $f = (c_mx^{m-n}+q')g + r'$, and $\deg r' < n$.
+
+        For uniqueness, suppose $f=qg+r=q'g+r'$, then subtracting yields $(q-q')g=r'-r$. But, $\deg (r-r') < \deg (g)$, and if $q-q' \neq 0$, then the degree of the LHS is $\geq \deg g$ (since $g$ is monic!). Therefore, we must have $q=q'$, and hence $r=r'$.
+    \end{proof}
+\end{ex}
+
+\begin{rmk}
+    The division algorithm above also works if we replace "$g$ monic" by "$g$ \textbf{unitary}", meaning that the leading coefficient of $g$ is a unit.
+\end{rmk}
+
+\begin{cor}
+    If $F$ is a field, then $F[x]$ is a Euclidean domain, with $d(f)=\deg f$.
+\end{cor}
+
+\section{Adjunction of Elements}
+
+Given a commutative ring $R$, we want to create a new ring $R'$ which contains $R$ and $\alpha$, where $\alpha$ is some element satisfying some polynomial relations $f_i(\alpha)=0$, $i \in I$.
+
+\begin{defn}
+    Let $R$ be a commutative ring, and let $\alpha$ be some value satisfying a set of polynomial relations $f_i(x) \in R[x]$, $i \in I$. We then define $R':= R[\alpha] = R[x]/\angles{f_i(x) \mid i \in I}$. This is called \textbf{adjoining} $\alpha$ to $R$
+\end{defn}
+
+\begin{notebox*}[Special Case]
+    Suppose $\alpha$ satisfies a single monic polynomial relation $f(\alpha ) =0$, where $f(x) = x^n + c_{n-1}x^{n-1}+\cdots + c_1x+c_0 \in R[x]$. Then, $R[\alpha]$ is in bijective correspondence with the elements of $R^n$.
+\end{notebox*}
+
+\begin{proof}
+    $(r_0,\dots,r_{n-1})$ corresponds to $r_0 + r_1\alpha +\cdots + r_{n-1}\alpha^{n-1}$. Indeed, since $f$ is monic, any $g(x) \in R[x] /(f)$ can be written as a polynomial in $x$ of degree $\leq n-1$, and this polynomial is unique.
+\end{proof}
+
+\begin{ex}
+    \begin{enumerate}
+        \item For any field $F$, we can define $F[x,x^{-1}]=F[x][x^{-1}]:=F[x,y]/\angles{xy-1}$, and we get the ring of Laurent polynomials in $x$.
+        \item $\Z[1/5]:= \Z[x]/\angles{5x-1}$
+    \end{enumerate}
+\end{ex}
+
+\section{Principal Ideal Domains}
+
+\begin{defn}
+    We say an integral domain $R$ is a \textbf{principal ideal domain} (or PID) if every ideal in $R$ is principal.
+\end{defn}
+
+\begin{prop}
+    Any Euclidean domain is principal.
+\end{prop}
+
+\begin{proof}
+    If $R$ is Euclidean, with norm $d$, and $I$ is a non-zero ideal of $R$, let $a$ be the element of $I$ with $d(a)$ minimal. Then, we claim $I = (a)$. Indeed, if $b \in I$, divide $b$ by $a$ to get $b=qa+r$, and $d(r) < d(a)$, but $r = b-qa \in I$, so we must have $d(r) = 0$ by minimality.
+\end{proof}
+
+\begin{cor}
+    If $F$ is a field, then $F[x]$ is a principal ideal domain.
+\end{cor}
+
+\begin{ex}
+    $\Z$ and $\Z[i]$ are both PIDs.
+\end{ex}
+
+\begin{defn}
+    Let $R$ be a commutative ring, and take $a,b \in R$ with $b \neq 0$. We say
+    \begin{enumerate}
+        \item[(i)] $a$ is a \textbf{multiple} of $b$, and $b$ \textbf{divides} $a$, written $b \mid a$, if there exists $x \in R$ with $a=xb$. This is equivalent to $Ra \subset Rb$.
+        \item[(ii)] A \textbf{greatest common divisor} $d$ of $a$ and $b$ is a non-zero element $d$ such that $d\mid a, d \mid b$, and if $c\mid a,c \mid b$, then $c \mid d$. We denote the gcd as $(a,b)$ or $\gcd (a,b)$.
+    \end{enumerate}
+\end{defn}
+
+\begin{prop}
+    Let $R$ be an integral domain. If two elements $a,b$ of $R$ generate the same principal ideal, i.e. $Ra=Rb$, then $a=ub$ for some unit $u \in R$. In particular, if $d$ and $d'$ are greatest common divisors of $a,b$, then $d'=ud$ for some unit $u\in R$.
+\end{prop}
+
+\begin{proof}
+    Suppose $Ra=Rb$. Then, $a=xb=xya$ for some $x,y \in R$. It follows that $a(1-xy)=0$, so $a=0$ or $xy=1$. If $d$ and $d'$ are greatest common divisors and $a$ and $b$, then $d \mid d'$ and $d' \mid d$, hence $Rd=Rd'$, thus $d'=ud$.
+\end{proof}
+
+\begin{defn}
+    We say that $a$ and $b$ are \textbf{associates} if $a=ub$ for some unit $u$ of $R$.
+\end{defn}
+
+\begin{thm}
+    Let $R$ be a PID, $a,b \in R\setminus \{0\}$. Then, $a$ and $b$ have a greatest common divisor in $R$. Furthermore, let $d=\gcd(a,b)$, then there exists $x,y \in R$ with $d=xa+yb$. If $R$ is Euclidean, there is an algorithm for computing $d$.
+\end{thm}
+
+\begin{proof}
+    Consider the ideal $Ra+Rb$, which must be $Rd$ for some $d \in R$. It's easy to see that $d= \gcd (a,b)$. We then see that $d=xa+yb$ for some $x,y \in R$.
+
+    If $R$ is Euclidean, then we have the Euclidean algorithm for computing $d:$
+
+    $a=q_0b+r_0$, $d(r_0) < d(b)$
+
+    $b=q_1r_0+r_1$, $d(r_1) < d(r_0)$
+
+    $\vdots$
+
+    Since $d(b)>d(r_0)>d(r_1)<\cdots$, this process terminates with $r_{n-1}=q_{n+1}r_n+0$. We claim $d = r_n=\gcd(a,b)$. Indeed,
+    $$r_n \mid r_{n-1}\implies r_n \mid r_{n-2}\implies \cdots \implies r_n \mid b,r_n \mid a.$$
+    Moreover, if $c \mid a$ and $c \mid b$, then $c \mid r_0,c\mid r_1,\dots,c \mid r_n$.
+\end{proof}
+
+\section{Chinese Remainder Theorem}
+
+\begin{defn}
+    If $\{R_i\}_{i \in I}$ is a family of rings, their \textbf{direct product} $\prod_{i \in I}R_i$ is defined as the direct product of the abelian groups, $(R_i,+)$, along with products defined component-wise.
+\end{defn}
+
+\begin{ex}
+    $R_1 \times R_2$ has $(x,y)+(x',y')=(x+x',y+y')$, and $(x,y)(x',y')=(xx',yy')$.
+\end{ex}
+
+\textbf{For the rest of this section, we assume all rings are commutative}
+
+\begin{defn}
+    Given two ideals $I,J$ of a commutative ring $R$, we say that $I$ and $J$ are \textbf{comaximal} if $I+J=R$.
+\end{defn}
+
+\begin{ex}
+    $m\Z + n\Z = \Z \iff (m,n)=1$.
+\end{ex}
+
+\begin{defn}
+    The \textbf{product ideal} $IJ$ is the ideal generated by all products $xy$, with $x\in I,y \in J$. That is,
+    $$IJ = \brax{\sum_{i=1}^nx_iy_i \mid x_i\in I,y_i \in J,n \geq 1}$$
+\end{defn}
+
+\begin{thm}[Chinese Remainder Theorem]
+    If $I+J=R$, then $IJ=I \cap J$, and the map $\varphi: R \to R/I \times R/J$ given by $r \mapsto (r+I,r+J)$ is surjective, and induces a ring isomorphism
+    $$R/IJ = R/I\cap J \cong R/I \times R/J$$
+\end{thm}
+
+\begin{proof}
+    It's clear that $\varphi$ is a ring homomorphism and has kernel $I \cap J$. Since $I+J =R$, in particular there are elements $x \in I,y \in J$ such that $x+y =1$. Given $(r+I,s+J) \in R/I \times R/J$, we claim $\varphi(xs+yr)=(r+I,s+J)$. Indeed,
+    $$\varphi(x) = (x+I,x+J)=(I,1-y+J)=(I,1+J) \equiv (0,1).$$
+    Similarly, $\varphi (y) = (1,0)$. Thus, $\varphi(xs+yr) =(0,s + J) + (r+I,0)=(r+I,s+J)$ as desired. This proves $\varphi$ is surjective.
+
+    Finally, we claim $I\cap J=IJ$. Note that $IJ \subset I \cap J$ always. If $I$ and $J$ are comaximal, with $x+y=1$ as before, and $z \in I \cap J$, then $z=z\cdot 1 = z(x+y) = zx+zy \in IJ$. Hence $I \cap J \subset IJ$.
+\end{proof}
+
+\begin{ex}
+    \begin{enumerate}
+        \item If $I_1,\dots,I_k$ are ideals of $R$ such that $I_i+I_j=R$ for all pairs $i\neq j$, using induction we can show
+        $$R/I_1\cdots I_k = R/(I_1\cap \cdots \cap I_k) \cong R/I_1 \times \cdots \times R/I_k$$
+        \item The theorem gets its name from the special case $\Z /mn \Z \cong \Z /m\Z \times \Z/n\Z$ if $\gcd(m,n)=1$. This comes from the ancient problem of finding a solution $x$ to a system $x\equiv a \pmod m,x \equiv b \pmod n$. The result implies there is a unique solution $x$ modulo $mn$.
+    \end{enumerate}
+\end{ex}
+
+\section{Unique Factorization Domains}
+
+\begin{notebox*}[Motivation]
+    Our favorite ring is $\Z$. How do we generalize the notion of a prime number in $\Z$? There are two properties we think about:
+    \begin{enumerate}
+        \item If $p=xy$, then $x=1$ or $y=1$
+        \item If $p \mid ab$, then $p \mid a$ or $p \mid b$.
+    \end{enumerate}
+    In $\Z$, these properties are equivalent, but in an arbitrary ring they may not be.
+\end{notebox*}
+
+\begin{defn}
+    Let $A$ be an integral domain. An element $a \in A \setminus (A^\times \cup \{0\})$ is \textbf{irreducible} if $a=bc \implies b \in A^\times$ or $c \in A^\times$. An element $p \in A\setminus \{0\}$ is \textbf{prime} if $Ap=(p)$ is a prime ideal (which is equivalent to $A/(p)$ being a domain).
+\end{defn}
+
+\begin{prop}
+    Suppose $A$ is an integral domain. Then, any prime element is irreducible.
+\end{prop}
+
+\begin{proof}
+    Let $p$ be a prime element and suppose $p=bc$. Set $\bar A:= A/Ap$. Then, $\bar b \cdot \bar c =0$, and therefore $\bar b = 0$ or $\bar c =0$, by the domain assumption. Assume $\bar c =0$. Then,
+    $$c = pa \implies p =bc=bpa \implies p(ba-1)=0 \implies ab=1,$$
+    thus $b$ is a unit. Therefore, $p$ is irreducible.
+\end{proof}
+
+\begin{cor}
+    Let $A$ be a PID, $p \in A$. TFAE:
+    \begin{enumerate}
+        \item $p$ is irreducible
+        \item $p$ is prime
+        \item $Ap$ is a maximal ideal.
+    \end{enumerate}
+\end{cor}
+
+\begin{proof}
+    Clearly (3) $\implies$ (2), and we showed (2) $\implies$ (1). Let's prove (1) $\implies$ (3).
+
+    Suppose $p$ is irreducible, and contrarily suppose $Ap$ is not maximal, so we have $Ap \subsetneq Ar \subsetneq A$ for some $r \in R$. Then, $p=rx$ for some $x$. Since $Ar \neq A$, $r$ is not a unit, so $x$ must be. Then, $r=x^{-1}p \in Ap$, hence $Ar \subset Ap$, a contradiction.
+\end{proof}
+\begin{cor}
+    We deduce that in a PID, all prime ideals are maximal.
+\end{cor}
+
+\begin{ex}
+    In $\Z$, the prime ideal $p\Z$ is maximal, so $\Z/p\Z$ is a field.
+\end{ex}
+
+\begin{defn}
+    A \textbf{unique factorization domain} is an integral domain $R$ in which every element $r \in R\setminus(R^\times \cup \{ 0 \})$ satisfies
+    \begin{enumerate}
+        \item[(i)] $r$ is a product of irreducible elements.
+        \item[(ii)] The decomposition in (i) is unique up to associates. Namely, if $r=p_1\cdots p_n=q_1\cdots q_m$, then $n=m$ and $\exists$ $\sigma \in S_n$ such that $p_i=\veps_iq_{\sigma (i)}$, with $\veps_i$ a unit.
+    \end{enumerate}
+    By convention, we say $1$ is equal to the empty product $\prod _{\emptyset}p_i$.
+\end{defn}
+
+\begin{ex}
+    \begin{enumerate}
+        \item We'll soon show that PIDs are UFDs. So, $\Z,F[x]$ for $F$ a field, and $\Z[i]$ are all UFDs. For example, any Gaussian integer has a unique factorization into Gaussian primes, up to units in $\Z[i]$, which are $\pm 1, \pm i$.
+        \item Consider $\Z[2i]=\{a + 2bi \mid a,b \in \Z\} \subset \Z[i]$. The units in $\Z[2i]$ are just $\pm 1$. Observe that $2,2i$ are irreducible in $\Z[2i]$ but are not associates. We thus have 2 distinct factorization of $4=2\cdot 2 = (2i)(-2i)$. Therefore, $\Z[2i]$ is not a UFD. Moreover, $\Z[2i]/(2i) \cong \Z/4\Z$ which is not a domain, hence $2i$ is not prime. It follows that $\Z[2i]$ is not even a PID.
+    \end{enumerate}
+\end{ex}
+
+\begin{prop}[][label=prop:ufd-criterion]
+    Let $R$ an integral domain. Then, TFAE:
+    \begin{enumerate}[(i)]
+        \item $R$ is a UFD
+        \item (a) Any $x \in R\setminus \{0\}$ is a product of irreducible elements and (b) Irreducible elements are prime.
+        \item (a) If $(r_1)\subset (r_2) \subset \cdots$ is an ascending chain of principal ideals, then there exists $N$ such that $(r_i) = (r_{i+1})$ for all $i \geq N$, and (b) Irreducible elements are prime.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    \hfill
+
+    (i) $\implies$ (ii): (a) holds by definition. For (b), suppose $x$ is irreducible, and suppose $x \mid ab$. Then, $x$ must appear in the unique factorization of $a$ or $b$ into irreducibles. Hence, $x \mid a$ or $x \mid b$. Thus, $x$ is prime.
+
+    (ii) $\implies$ (i): Suppose $x=p_1\cdots p_n=q_1\cdots q_s$ with $p_i,q_j$ primes (same as irreducibles). We use induction on $n$: Since $p_1$ divides $q_1\cdots q_s$ and $p_1$ is prime, we have $p_1$ divides some $q_i$, so $q_i = p_1\veps _i$ with $\veps_i \in R^\times$. Now, we set $\sigma(1)=i$, and cancel to get $p_2\cdots p_n=q_1\cdots \hat q_i\cdots q_s$ up to a unit. By induction, we have $n-1=s-1$, and $\sigma$ can be extended to a permutation in $S_n$.
+
+    (ii) $\implies$ (iii): Given $(r_1)\subset (r_2)\subset \cdots$, suppose $r_k$ is such that it has the least number of elements in its factorization into irreducibles (which are the same as primes). Suppose there exists $(r_j) \supsetneq (r_k)$. Then, $r_k=r_jx$ with $x$ not a unit. It follows that $r_j$ has less elements in its factorization than $r_k$, a contradiction. Thus, $(r_k) = (r_j)$ for all $j \geq k$.
+
+    (iii) $\implies$ (ii): It suffices to show that each $x \in R \setminus \{0\}$ is a product of irreducible elements. If $x$ is irreducible or a unit, we're done. Otherwise, $x$ has a factorization $x=r_1r_2$ with $r_1,r_2$ not units. If both $r_1$ and $r_2$ are irreducible, we're done. Otherwise, one of them factors further, etc. The continued factorization leads to an ascending sequence of principal ideals, which must terminate by assumption. This termination corresponds to irreducibility of factors.
+\end{proof}
+
+\begin{thm}
+    $R$ is a PID $\implies$ $R$ is a UFD.
+\end{thm}
+
+\begin{proof}
+    We check that $R$ satisfies (iii). We've already shown that if $x$ is irreducible, then $x$ is prime. Given an ascending chain $(r_1)\subset (r_2)\subset \cdots$, we form the ideal $I=\bigcup (r_i)$. Since $R$ is a PID, $I=(r)$ for some $r$. Then, there must exists some $r_k$ such that $r \in (r_k)$. Thus, $(r_k) \subset (r) \subset (r_k)$, so the chain stabilizes.
+\end{proof}
+
+\begin{rmk}
+    Greatest common divisors and least common multiples exists in UFDs. In fact, if $R$ is a UFD and $x,y\in R$, we work as follows: For each principal prime ideal $I$, fix a generator $p$ so $I=Rp$, and let $\mathcal P $ be the set of all chosen primes. Then,
+    $$x = \veps \prod _{p \in \mathcal P}p^{\nu_p(x)},y=\veps '\prod_{p \in \mathcal P}p^{\nu_p(y)}$$
+    and then
+    $$\gcd(x,y) = \prod _{p \in \mathcal P}p^{\min\{\nu _p(x),\nu _p(y)\}},\lcm (x,y) = \prod_{p \in \mathcal P}p^{\max \{\nu_p(x), \nu_p(y)\}}$$
+    However, we don't necessarily have a Euclidean algorithm for finding them.
+\end{rmk}
+
+\begin{notebox*}[Diagram of Containment]
+    Fields $\subsetneq$ Euclidean Domains $\subsetneq$ PIDs $\subsetneq$ UFDs $\subsetneq$ Integral Domains. The last containment is huge.
+\end{notebox*}
+
+Between UFDs and integral domains we have Dedekind domains. In \textbf{Dedekind domains}, unique factorization of elements fails, but one has unique factorization of ideals into prime ideals.
+
+\begin{notebox*}[Motivating Questions]
+    \begin{enumerate}
+        \item If $F$ is a field, we know $F[x]$ is a PID, hence a UFD. What about $F[x,y]$? We'll show that if $A$ is a UFD, then $A[x]$ is a UFD. Then, $F[x,y]=(F[x])[y]$ is a UFD.
+        \item Suppose $f \in \Z[x]$ is irreducible. Is $f$ still irreducible in $\Q[x]$?
+    \end{enumerate}
+\end{notebox*}
+
+\begin{defn}
+    For a UFD $A$, if $f \in A[x]\setminus\{0\}$ with $f(x) = \sum _{i=0}^na_ix^i$, the \textbf{content} of $f$, denoted $c(f)$, is the gcd of all non-zero coefficients of $f$. We say that $f$ is \textbf{primitive} if $c(f)=1$. If $c(f)=d$, then $a_i=a_i'd$, so $f=c(f)\cdot f'$, where $f'=\sum a_i'x^i$ is primitive.
+
+    If $0 \neq f = df'$ for some $d \in A$, then $c(f) =d \iff c(f')=1$.
+\end{defn}
+
+\begin{lem}[Gauss's Lemma]
+    If $A$ is a UFD, and $f,g \in A[x]\setminus\{0\}$, then $c(fg)=c(f)c(g)$.
+\end{lem}
+
+\begin{proof}
+    Write $f=c(f)f_1$ and $g=c(g)g_1$ with $f_1,g_1$ primitive. Then, $f\cdot g=c(f)c(g)f_1g_1$, so it suffices to show that the product of two primitive polynomials is primitive.
+    \begin{notebox*}[Sub-lemma]
+        $p \in A$ is prime $\iff$ $p$ is prime in $A[x]$.
+    \end{notebox*}
+    \begin{proof}
+        For any ideal $I$ of $A$, let $I[x]$ be the ideal of $A[x]$ generated by $I$. We have
+        $$I[x] = \{ \sum _{i=0}^na_ix_i \mid a_i \in I,n\geq 0\}$$
+        The canonical map $\pi: A \to A/I$ induces a map $\tilde \pi : A[x] \to (A/I)[x]$ called a \textbf{reduction of coefficients} mod $I$. We have $\ker \tilde \pi = I[x]$, and therefore we obtain an isomorphism $A[x]/I[x] \cong (A/I)[x]$. Now, $I$ is a prime ideal in $A$ $\iff A/I$ is a domain $\iff (A/I)[x]$ is a domain $\iff I[x]$ is a prime ideal in $A[x]$. Applying this to $I=(p)$, we obtain the sub-lemma.
+    \end{proof}
+    Now, suppose $f,g$ are both primitive in $A[x]$ and $c(fg)=d$. Let $p\in A$ be a prime dividing $d$. Then, $p \mid fg$ in $A[x]$. Since $p$ remains prime in $A[x]$, we get that $p \mid f$ or $p \mid g$, contradicting the fact that $f$ and $g$ are primitive.
+\end{proof}
+
+\begin{cor}
+    Suppose $A$ is a UFD, and $K$ is the quotient field of $A$. Then,
+    \begin{enumerate}
+        \item If $f\in A[x]\setminus \{0\}$ is irreducible, with $\deg f >0$, then $f$ is irreducible in $K[x]$.
+        \item Suppose $f\in A[x]$ is primitive. Then, the ideal $K[x]\cdot f$ in $K[x]$ satisfies $K[x]f \cap A[x] = A[x]f$.
+    \end{enumerate}
+\end{cor}
+
+\begin{proof}
+    \hfill
+
+    1. If $f$ is irreducible, then $f$ must be primitive, for $f = c(f) f_1$, with $f_1$ primitive, and $c(f_1)$ must be a unit. Suppose $f$ is reducible in $K[x]$, so let $f=g\cdot h$, where $g,h\in K[x]$, and $\deg f > \deg g,\deg h>0$. Write $g = g_1/a$ and $h=h_1/b$, with $a,b \in A\setminus \{0\}$ and $g_1,h_1 \in A[x]$. Then, $abf=g_1h_1$ and $ab=c(abf)=c(g_1)c(h_1)$, hence $abf=c(g_1)c(h_1)g_2h_2$, where $g_2,h_2 \in A[x]$ are primitive. Thus, $f=g_2h_2$, which is a contradiction as $g_2,h_2$ are not units.
+
+    2. Suppose $f$ is primitive, and $g \in K[x]f \cap A[x]$. Then, $g=hf$ for some $h \in K[x]$. Now, there exists $a \in A \setminus \{0\}$ so that $ag=h_1f$ with $h_1 \in A[x]$. Also, $ac(g)=c(h_1)\implies h_1=ac(g)h_2f \implies g= c(g)h_2f$, and since $c(g)h_2 \in A[x]$, we're done.
+\end{proof}
+
+\begin{thm}[Gauss's Theorem]
+    A is a UFD $\implies$ $A[x]$ is a UFD.
+\end{thm}
+
+\begin{proof}
+    We start with the following lemma
+    \begin{lem}
+        $f \in A[x] \setminus \{0\}$ irreducible $\implies$ $f$ is prime.
+    \end{lem}
+    \begin{proof}
+        If $\deg f =0$ is irreducible in $A$, a UFD, hence $f$ is prime in $A$, and also in $A[x]$. If $\deg f>0$, then $f$ is primitive, hence $K[x]f \cap A[x] = A[x] f$. Consider the map
+        $$\eta :A[x] \overset{i}{ \hookrightarrow} K[x] \overset{\pi}{ \to} K[x]/K[x]f.$$
+        Clearly, $\ker \eta = K[x] f \cap A[x] = A[x]f$. Hence we get an inclusion $A[x] / A[x]f \hookrightarrow K[x] / K[x]f$. Now, $f$ is irreducible in $A[x]$, so $f$ is irreducible in $K[x]$ by the corollary. Therefore, since $K$ is a field, $K[x]$ is a PID, so $f$ is prime in $K[x]$, hence $K[x] /K[x]f$ is a domain. It follows that $A[x]/A[x]f$ is a domain, hence $f$ is prime in $A[x]$.
+    \end{proof}
+
+    Our second claim is:
+
+    \begin{lem}
+        Any $f \in A[x] \setminus \{0\}$ is a product of irreducible elements.
+    \end{lem}
+
+    \begin{proof}
+        We will prove this by induction on $n = \deg f$. If $n =0$, then $f \in A$, so $f = \prod p_i$, with $p_i$ primes in $A$, which remain irreducible in $A[x]$. If $n>0$, we can factor $f = c(f) \cdot f_1$, where $f_1 \in A[x]$ is primitive. It suffices to show that $f_1$ is a product of irreducibles. If $f_1$ is not irreducible, we have a factorization $f_1=gh$, with $0 <\deg g, \deg h < \deg f = n$. By induction, $g$ and $h$ are products of irreducibles, and we're done.
+    \end{proof}
+    Gauss's Theorem now follows from \Cref{prop:ufd-criterion}.
+\end{proof}
+
+\begin{cor}
+    If $A$ is a UFD, then $A[x_1,\dots,x_n]$ is a UFD. Hence $\Z[x_1,\dots,x_n],F[x_1,\dots,x_n]$ are UFDs ($F$ is a field).
+
+    It's worth noting that they are not PIDs, as $(x_1,\dots,x_n)$ is not principal for $n\geq 2$.
+\end{cor}
+
+\section{Irreducibility in Polynomial Rings}
+
+We want to obtain irreducibility tests in $A[x]$, when $A$ is a UFD. By Gauss's Lemma, it suffices to consider factorizations in $K[x]$, where $K = Q(A)$.
+
+\begin{prop}
+    A polynomial $p \in F[x]$ has a linear factor $\iff$ $p(x)$ has a root in $F$. Hence, a polynomial of degree $2$ or $3$ is irreducible in $F[x] \iff$ it has no roots in $F[x]$.
+\end{prop}
+
+\begin{ex}
+    $p(x) = x^2+x+1$ is irreducible in $\Z/2\Z [x]$, since $0^2+0^2+1=1^2+1+1=0 \neq 1 \pmod 2$. It follows that $\F_4 := (\Z/2\Z)[x] / (x^2+x+1)$ is a field with $4$ elements, the classes of $0,1,x,x+1$.
+\end{ex}
+
+Checking for rational roots of a polynomial in $\Q[x]$ is easy using:
+
+\begin{prop}[Rational Root Theorem]
+    Let $p(x) = a_nx^n+a_{n-1}x^{n-1}+\cdots +a_1x+a_0 \in \Z[x]$, with $a_n \neq 0$. If $\frac{r}{s} \in \Q$ with $(r,s)=1$ is a root of $p(x)$, then $r \mid a_0,s \mid a_n$.
+\end{prop}
+
+\begin{proof}
+    $p(\frac{r}{s})=0 \implies a_nr^n+a_{n-1}sr^{n-1}+\cdots + a_1s^{n-1}r+a_0s^n=0$, hence $s \mid a_nr^n \implies s \mid a_n$. Similarly, $r \mid a_0$.
+\end{proof}
+
+\begin{notebox*}
+    There is an analogous property for any UFD in place of $\Z$.
+\end{notebox*}
+
+\begin{prop}[Reducing Modulo an Ideal]
+    Let $R$ be an integral domain and $I$ be a proper ideal of $R$. Let $p \in R[x]$ be a non-constant monic polynomial. If the image of $p(x)$ in $(R/I)[x]$, under the reduction mod $I$ map, cannot be factored in $(R/I)[x]$ into two polynomials of strictly smaller degree, then $p$ is irreducible in $R[x]$.
+\end{prop}
+
+\begin{proof}
+    If $p(x) =f(x)g(x)$, then the leading coefficients of $f$ and $g$ are units in $R$. WLOG, we may assume $f$ and $g$ are monic. But then reducing mod $I$ gives a non-trivial factorization in $(R/I)[x]$, contradicting the assumption.
+\end{proof}
+
+\begin{ex}
+    \begin{enumerate}
+        \item $x^2+x+1 \in \Z[x]$ is irreducible, since it's irreducible in  $(\Z/2\Z)[x]$. Note that it does reduce modulo $3$: $x^2+x+1 \equiv (x-1)^2 \pmod 3$, so the inverse of the previous proposition does not hold.
+        \item $x^4+1 \in \Z[x]$ is irreducible, but it is reducible modulo \underline{every} prime $p \in \Z$.
+    \end{enumerate}
+\end{ex}
+
+We have a special case:
+\begin{thm}[Eisenstein's Criterion]
+    Let $P$ be a prime ideal of an integral domain $R$, and let $f(x) = x^n+a_{n-1}x^{n-1}+\cdots +a_1x+a_0$ be a monic polynomial with coefficients in $R$, $n \geq 1$. Suppose $a_{n-1},\dots,a_1,a_0 \in P$, but $a_0 \not \in P^2$. Then, $f(x)$ is irreducible in $R[x]$.
+\end{thm}
+
+\begin{proof}
+    If we can reduce $f(x) = g(x)h(x) \in R[x]$, then reducing mod $P$ gives
+    $$\bar f(x) = \bar g(x) \bar h(x) = \bar x^n \in (R/P)[x],$$
+    since all the coefficients vanish. Since $R/P$ is a domain, $\bar g$ and $\bar h$ must both have a zero constant term, which implies the constant terms of $g$ and $h$ are both in $P$. But then $a_0 \in P^2$, a contradiction.
+\end{proof}
+
+\begin{cor}
+    If $f(x) \in \Z[x]$, then $f(x) = x^n + a_{n-1}x^{n-1}+\cdots +a_1x + a_0$, and $p$ is a prime such that $p \mid a_{n-1},\dots,a_0$, but $p^2 \nmid a_0$, then $f$ is irreducible in $\Z[x]$ and $\Q[x]$.
+\end{cor}
+
+\begin{ex}
+    \begin{enumerate}
+        \item $x^4+10x+5$ is irreducible in $\Z[x]$.
+        \item Let $p \in \Z$ be prime, and consider the cyclotomic polynomial $\Phi_p(x) = \frac{x^p-1}{x-1}=x^{p-1}+x^{p-2}+\cdots +x+1$. Then, $\Phi_p(x)$ is irreducible $\iff \Phi _p(x+1)$ is irreducible, and
+        $$\Phi_p(x+1)=x^{p-1}+\binom{p}{1}x^{p-2}+\binom{p}{2}x^{p-3}+\cdots +\binom{p}{2}x + p.$$
+        Since $p \mid \binom{p}{k}$ for all $k \in [1,p-1]$, Eisenstein's Criterion applies, proving $\Phi_p(x)$ is irreducible.
+        \item Let $t$ be a variable and consider $f(x) =x^n-t \in R[x]$, where $R = \Q[t]$. Now, $P:= (t)$ is prime (in fact maximal) in $R$, since $\Q[t] / (t) \cong \Q$. Eisensteins criterion shows that $f$ is irreducible in $R[x]$.
+        \item The irreducible polynomials in $\R[x]$ are linear or quadratic: By FTA, any polynomial $f \in \C[x]$ reduces to linear factors: $f(x) = \prod _{i=1}^n(x-p_i),p_i\in \C$. If $f \in \R[x]$ and $\deg f >2$, then if $f$ has a root $\rho \in \R$, it's divisible by $(x-\rho ) \in \C[x]$, hence also in $\R[x]$. Otherwise, it has a pair of complex conjugate roots $z$ and $\bar z$, so $f$ is divisible by $(x-z)(x-\bar z) \in \R[x]$, hence is reducible in $\R[x]$.
+    \end{enumerate}
+\end{ex}
+
+\section{Noetherian Rings}
+(Emmy Noether $\sim 1880-1930$)
+
+Rings need some notion of "finiteness", analogous to "finite dimensional" for vector spaces. For many applications, the most fruitful way to define this is the Noetherian condition.
+
+\begin{defn}
+    A (not necessarily commutative) ring $A$ is (left) \textbf{Noetherian} if every (left) ideal in $A$ is finitely generated.
+\end{defn}
+
+\begin{prop}
+    Let $A$ be a ring. TFAE:
+    \begin{enumerate}[(i)]
+        \item $A$ is Noetherian
+        \item If $I_1\subset I_2 \subset \cdots$ is an \textbf{ascending chain} of ideals, then there exists $m$ such that $I_k = I_m$ for all $k \geq m$. (This was Noether's original definition)
+        \item The ideals of $A$ satisfy a "\textbf{maximum condition}": If $\mathcal F$ is any non-empty collection of ideals in $A$, then $\mathcal F$ contains a maximal element.
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    (ii) $\iff$ (iii) is immediate.
+
+    (i) $\implies$ (ii): If $I _1\subset I_2 \subset \cdots$ is a chain of ideals, then $I := \bigcup _{j=1}^\infty I_j$ is also an ideal, which by (i) is finitely generated: $I= (x_1,\dots,x_n)$ for some $x_i \in A$. Thus, there exists $m \geq 1$ such that $x_i \in I_m$ for all $i \in [1,n]$. So, $I = I_m$, and the chain stabilizes at $m$.
+
+    (iii) $\implies$ (i): Let $I$ be an ideal of $A$. Let $\mathcal F:= \{ J \subset I \mid J$ is finitely generated ideal$\}$. Let $J_0$ be a maximal element of $\mathcal F$. If $J_0 \subsetneq I$, choose $x_0 \in I \setminus J_0$, and form $J_0'=J_0 + Ax_0$. Then, $J_0'$ is finitely generated, and $J_0 \subsetneq J_0 '$, a contradiction.
+\end{proof}
+
+\begin{thm}[Hilbert Basis Theorem]
+    If $A$ is a commutative Noetherian ring, then $A[x]$ is Noetherian.
+\end{thm}
+
+\begin{proof}
+    Given a polynomial $f(x) = a_nx^n+\cdots +a_0$, with $a_n \neq 0$, we call $a_n$ the \textbf{leading coefficient} of $f$. Given an ideal $I \subset A[x]$, we define a sequence $f_1,f_2,\dots \in I$ as follows: $f_1$ is a non-zero element of least degree in $I$. For each $n \geq 1$, if $(f_1,\dots,f_n) \neq I$, choose $f_{n+1}$ to be an element of least degree in $I \setminus (f_1,\dots,f_n)$. Otherwise, stop (we want to prove $I$ is finitely generated). Let $a_j$ be the leading coefficient of $f_j$. Since $A$ is Noetherian, $J:= (a_1,a_2,\dots)$ is finitely generated. We may choose a set of generators among the $a_j$, so say $J = (a_1,a_2,\dots,a_m)$. We claim $I = (f_1,\dots,f_m)$. If not, our process chose $f_{m+1} \in I \setminus (f_1,\dots,f_m)$, so write $a_{m+1}=\sum_{j=1}^mu_ja_j$ for some $u_j \in A$. Since the degree of $f_{m+1}$ by construction is $\geq $ the degree of $f_i$ for $1 \leq i \leq m$, we can define $g:= \sum_{j=1}^m u_jf_jx^{\deg f_{m+1}- \deg f_j} \in (f_1,\dots,f_m)$. Now, $f_{m+1}-g$ is in $I \setminus (f_1,\dots,f_m)$, and has degree $< \deg f_{m+1}$, a contradiction by construction.
+\end{proof}
+
+We're basically going to assume every ring is commutative from now on.
+
+\begin{cor}
+    If $A$ is Noetherian, then $A[x_1,\dots,x_n]$ is Noetherian. So, $\Z[x_1,\dots,x_n],F[x_1,\dots,x_n]$ are Noetherian.
+\end{cor}
+
+\begin{ex}
+    $\Z[x_1,x_2,\dots]$ is a UFD, but not Noetherian.
+\end{ex}
+
+\begin{prop}
+    If $A$ is commutative and Noetherian, and $I \subset A$ is an ideal, then $A/I$ is Noetherian. If $f : A \to B$ is a surjective homomorphism, then $B$ is Noetherian.
+\end{prop}
+
+\begin{proof}
+    We know that any ideal of $A/I$ is of the form $J/I$, where $J$ is an ideal of $A$ containing $I$. So, if $x_1,\dots,x_r$ are generators of $J$, then $x_1+I,\dots,x_r+I$ are generators of $J/I$. If $f:A \to B$ is onto, then $B \cong A/ \ker f$.
+\end{proof}
