@@ -455,4 +455,15 @@ Suppose $X \sim u[0,1]$. Compute $E[X]$ and $E[e^X]$.
     \]
 \end{solution}
 
+\begin{thm}[LOTUS]
+    Let $X$ be a random variable with density function $f_X$. Then, for $g:\R\to\R$,
+    \[
+    E[g(X)]=\int_{-\infty}^\infty g(x)f_{X}(x)dx
+    \]
+\end{thm}
+
+\begin{thm}[Linearity of Expectation]
+    If $X,Y$ are random variables, and $a$ is a real number, then $E[aX+Y]=aE[X]+E[Y]$.
+\end{thm}
+
 \end{document}
