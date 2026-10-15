@@ -455,7 +455,7 @@ Suppose $X \sim u[0,1]$. Compute $E[X]$ and $E[e^X]$.
     \]
 \end{solution}
 
-\begin{thm}[LOTUS]
+\begin{thm}[LOTUS][label=thm:LOTUS]
     Let $X$ be a random variable with density function $f_X$. Then, for $g:\R\to\R$,
     \[
     E[g(X)]=\int_{-\infty}^\infty g(x)f_{X}(x)dx
@@ -465,5 +465,35 @@ Suppose $X \sim u[0,1]$. Compute $E[X]$ and $E[e^X]$.
 \begin{thm}[Linearity of Expectation]
     If $X,Y$ are random variables, and $a$ is a real number, then $E[aX+Y]=aE[X]+E[Y]$.
 \end{thm}
+
+\begin{thm}[Markov's Inequality]
+    Suppose $X \geq 0$ and $c \in \R^+$. Then
+    \[
+    P(X \geq c) \leq E[X]/c,
+    \]
+\end{thm}
+
+\begin{thm}[Chebyshev's Inequality]
+    Let $X$ be a random variable with finite mean $\mu$ and finite variance $\sigma^2$. For any $c \in \R^+$,
+    \[
+    P\paren{ |X-\mu| \geq c} \le \frac{\sigma^2}{c^2}
+    \]
+\end{thm}
+
+\begin{prop}
+    If $E[X^k]$ is finite, then $E[X^n]$ is finite for all $n \in \{1,\dots,k\}$. In particular, for Chebyshev's inequality, it's sufficient to know that $\sigma^2$ is finite.
+\end{prop}
+
+\begin{proof}
+    Observe
+    \[
+    E\braks{|X^m|}=\int_{-\infty}^\infty |x^m|f_X(x)dx=\int_{|x^m|>1}|x^m|f_X(x)dx + \int_{|x^m| \leq 1} |x^m|f_X(x)dx
+    \]
+    by LOTUS (\Cref{thm:LOTUS}), for any $m$. Let $A$ be the first term above when $m=k$, and $B$ the second term when $m=k$. When $x^n>1$, then $|x^n|f_X(x)\leq |x^k|f_X(x)$. When $|x^m|\leq 1$, then $|x^m|f_X(x) \leq f(x)$. Thus,
+    \[
+    E[|X^n|] \leq \int_{|x^n|>1}|x^k|f_X(x)dx + \int_{-\infty}^\infty f_X(x)\leq A+1 < \infty,
+    \]
+    so $E[X^n]$ is finite.
+\end{proof}
 
 \end{document}
