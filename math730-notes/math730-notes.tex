@@ -1048,11 +1048,34 @@ Given $\tilde x \in \tilde X$, take a curve $\tilde \mu$ from $\tilde{x_0}$ to $
     \begin{claim}
         For $g \in \pi_1(X,x_0)$, if $g(U_\alpha)\cap U_\beta \ne \emptyset$, then $g(U_\alpha)=U_\beta$.
     \end{claim}
-    Indeed, let $\tilde{z_0} \in U_\alpha$ be such that $g\tilde{z_0} \in U_\beta$. Since $U_\alpha$ and $U$ are path connected, we may take $z_0:= p(\tilde{z_0})$, and then for all $\tilde z \in U_\alpha$, we take a path $\tilde \gamma$ in $U_\alpha$ connection $\tilde{z_0}$ and $\tilde z$. Take $\gamma:=p \circ\tilde \gamma$, and lift $\gamma$ to a path starting at $g\tilde{z_0}$. We claim that $g \cdot \tilde \gamma$ is such a lift. Thus, $g \tilde z \in U_\beta$. Show the reverse inclusion finishes the claim.
-
-    Continued next time.
+    Indeed, let $\tilde{z_0} \in U_\alpha$ be such that $g\tilde{z_0} \in U_\beta$. Since $U_\alpha$ and $U$ are path connected, we may take $z_0:= p(\tilde{z_0})$, and then for all $\tilde z \in U_\alpha$, we take a path $\tilde \gamma$ in $U_\alpha$ connection $\tilde{z_0}$ and $\tilde z$. Take $\gamma:=p \circ\tilde \gamma$, and lift $\gamma$ to a path starting at $g\tilde{z_0}$. We claim that $g \cdot \tilde \gamma$ is such a lift. Thus, $g \tilde z \in U_\beta$. Showing the reverse inclusion finishes the claim...
 \end{proof}
 
+\begin{defn}
+    Let $\tilde X \arr[p] X$ be a covering map, and let $T : \tilde X \to \tilde X$ be continuous such that $p \circ T = p$. Then, $T$ is called a \textbf{deck transformation}.
+\end{defn}
 
+\begin{defn}
+    Let $\tilde X$ be a topological space, and $G$ act on $\tilde X$ on the right via continuous maps. The action of $G$ is called \textbf{properly discontinuous} if for all $\tilde x \in \tilde X$, there exists $\tilde U \ni \tilde x$ such that for all $g \in G$, $g(\tilde U)\cap \tilde U \neq \emptyset \implies g=e$.
+\end{defn}
+
+\begin{thm}[][label=thm:quotientaction]
+    Let $\paren{\tilde X,\tilde{x_0}}$ be a simply connected, locally path connected, path connected space. Let $G$ act on $\tilde X$ properly discontinuously, and set $X:= \tilde X/G$ with the natural projection $p:\tilde X \to X$. Then, $\tilde X$ is the universal cover of $x$, and setting $x_0 = p(\tilde x_0)$ gives
+    \[
+    \pi_1(X , x_0)\simeq G
+    \]
+\end{thm}
+
+\begin{proof}
+Take $x \in X$, $\tilde x \in p^{-1}(x)$, and let $\tilde U$ be a neighborhood of $\tilde x$ as in the definition, and $U = p(\tilde U)$. Then, $p:\tilde U \to U$ is a homeomorphism, amd $p^{-1}(U)=\bigsqcup_{g \in G}g\tilde U.$ Thus, $\tilde X$ is the universal cover, and both $\pi_1(X,x_0)$ and $G$ act on $\tilde X$ by deck transformations. For all $\tilde x_0' \in p^{-1}(x_0)$, there exists a unique $g \in G$ such that $g(\tilde{x}_0) = \tilde x_0'$, and there exists a unique $\gamma \in \pi_1(X,x_0)$ such that $F_\gamma(\tilde x_0)=\tilde x_0'=F\gamma=g$.
+\end{proof}
+
+\begin{ex}
+    Recall that $\R\P^n= S^n /\brax{x \sim (-x)}$. Observe that $\Z/2\Z$ acts on $S^n$ by $x \mapsto -x$, and $S^n$ is simply connected for $n \geq 2$. The quotient of this action on $S^n$ is exactly $\R\P^n$, hence by \Cref{thm:quotientaction}, $\pi_1(\R\P^n) \cong \Z/2\Z$ for $n \ge 2$.
+\end{ex}
+
+\begin{exercise}
+    Use the universal cover to compute the fundamental group of the Klein bottle.
+\end{exercise}
 
 \end{document}
