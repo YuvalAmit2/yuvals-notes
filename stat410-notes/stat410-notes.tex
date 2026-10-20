@@ -496,4 +496,81 @@ Suppose $X \sim u[0,1]$. Compute $E[X]$ and $E[e^X]$.
     so $E[X^n]$ is finite.
 \end{proof}
 
+\section{Special Distributions}
+
+In this section, we study some important distributions to know.
+
+\subsection{Bernoulli Distribution}
+
+\begin{defn}
+A \textbf{Bernoulli trial} is a random variable which has two outcomes: success $(1)$ and failure $(0)$.
+\end{defn}
+
+\begin{prop}
+A bernoulli random variable $X$ has a probability mass function
+\[
+p_X(x) = \case{1-p & x =0 \\ p & x=1}
+\]
+where $p$ is the probability of success. Moreover,
+\begin{align*}
+    E[X] &= p
+    \\ V[X] &=p(1-p)
+\end{align*}
+\end{prop}
+
+\begin{proof}
+    We compute
+\begin{align*}
+    E[X] &=\sum xp_X(x)=0\cdot (1-p) + 1\cdot p = p
+    \\ V[X] &= E[X^2]-E[X]^2 = p-p^2=p(1-p)
+\end{align*}
+\end{proof}
+
+\begin{ex}
+Repeat a Bernoulli trial in an independent manner. Let $X$ be a random variable that counts the number of trials until the first success. Then, we know $X$ has the probability mass function
+\begin{align*}
+    p_X(x) = p(1-p)^{x-1} \qquad x=1,2,\dots
+\end{align*}
+Moreover,
+\[
+E[X]= \sum_{n=1}^\infty n\cdot p(1-p)^{n-1}=\frac{1}{p}
+\]
+To compute this sum, use the derivative trick. Remember the sums and derivatives commute when we're within the \ul{radius of convergence}.
+\end{ex}
+
+\begin{que}
+    The probability of an independent event happening is $p$. What's the expected number of attempts does it take for the event to happen?
+\end{que}
+
+\begin{solution}
+    Let $X$ be the number of attempts to make the event happen, and we saw in the previous example that $X \sim \Geom( 1/ 10^7 )$. Then, $E[X]=10^7$.
+\end{solution}
+
+\subsection{Binomial Distribution}
+
+We repeat a Bernoulli trial, with success chance $p$, $n$ times, where $n$ is fixed. Let $X$ be the random variable counting the number of successes.
+
+Let's compute $P(X=k)$. This involves $k$ successes, which has probability $p^k$, and $n-k$ failures, with probability $(1-p)^k$. Now, we must count the number of ways in which we can achieve $k$ successes. This is $\binom{n}{k}$, and so 
+\[
+P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}
+\]
+Moreover,
+\[
+E[X]=\sum_{k=0}^nk\binom{n}{k}p^k(1-p)^{n-k}.
+\]
+This sum can be computed with some neat tricks. However, we will eventually see that $X$ can be written $X = X_1+\cdots + X_n$ as the sum of $n$ Bernoulli random variables, which are independent and identically distributed (\textbf{IID}). Note that $E[X_i]=p$, so $E[X]=np$.
+
+
+\subsection{Hypergeometric Distributions}
+
+Say we want to sample a portion of a population for some property. Do we sample with or without replacement? If we sample with replacement, we get a binomial distribution. However, it can be better to sample with replacement, in which case we get a hypergeometric distribution.
+
+\begin{defn}
+Let $N,N_A,n$ be integers with $0 \leq n\leq N_A\leq N$. A random variable $X$ is said to follow a \textbf{hypergeometric distribution} with respect to the parameters $(N,N_A,n)$ if $X$ takes values in $\{1,\dots,n\}$, and
+\[
+P(X=k)=\frac{\binom{N_A}{k}\binom{N-N_A}{n-k}}{\binom{N}{n}}.
+\]
+This is interpreted as follows: there are $\binom{N}{n}$ ways to select $n$ people out of your population of $N$. Then, if $N_A$ of those people have the condition, there are $\binom{N_A}{k}$ ways to find $k$ of them, and $\binom{N-N_A}{n-k}$ for the rest of them to not have it. 
+\end{defn}
+
 \end{document}

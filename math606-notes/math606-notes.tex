@@ -1377,7 +1377,7 @@ Let $\mc F$ be a sheaf on the topological space $X$, and $\mc U:= \{U_i\}_{i \in
     Define \textbf{cochain groups} to be 
     \begin{align*}
         C^0(\mc U,\mc F) &:= \prod_{i \in I}\mc F(U_i) = \brax{ (f_i)_{i \in I} \setbar f_i \in \mc F(U_i), \: \forall i \in I} \\
-        C^1 (\mc U,\mc F) &:= \prod_{(i,j)}\mc F(U_i \cap U_j)=\brax{ (f_{ij})_{i \in I} \setbar f_{ij} \in \mc F (U_i \cap U_j), \forall i,j \in I}
+        C^1 (\mc U,\mc F) &:= \prod_{(i,j)}\mc F(U_i \cap U_j)=\brax{ (f_{ij}) \setbar f_{ij} \in \mc F (U_i \cap U_j), \forall i,j \in I}
     \end{align*}
     Let $Z^1(\mc U,\mc F) \subset C^1(\mc U, \mc F)$ be the subgroup of $\bm 1$\textbf{-cocycles}, consisting of families $(f_{ij})$ for which
     \begin{align} \label{eq:cechcochain}
@@ -2066,7 +2066,7 @@ is a finite dimensional $\C$-vector space.
         \]
         which proves the claim
     \end{proof}
-    \begin{claim}[Schwartz' Lemma]
+    \begin{claim}[Schwartz' Lemma][label=lem:schwartz]
         Let $s \in H^0(X,E)$, and suppose that $\ord_{a_i}(s) \geq k$, where $k \geq 0$ is a fixed integer, and $a_i \in U_i$ is such that $z_i(a_i)=0$, for all $i \in \{1,\dots,n\}$. Then, $\norm{s}_V \leq 2^{-k}\norm{s}_U$.
     \end{claim}
     \begin{proof}
@@ -2095,7 +2095,7 @@ is a finite dimensional $\C$-vector space.
     This proves the theorem.
 \end{proof}
 
-\begin{thm}
+\begin{thm}[][label=thm:H1-is-finite]
     Let $X$ be a compact Riemann surface, and $\pi:E \to X$ be a holomorphic vector bundle on $X$. Then, $H^1(X,E)$ is a finite dimensional $\C$-vector space.
 \end{thm}
 
@@ -2163,12 +2163,184 @@ is a finite dimensional $\C$-vector space.
         \Cref{claim:2nd-finite-claim-2} shows that the map is injective. For surjectivity: we may use Leray's theorem, which implies that the map $H^1(\cU(2),E)\arr[i]H^1(\cU(t),E)$ is an isomorphism for all $t \in [1/2,1]$. Notice that $i$ factors through $H^1_b(t)$, since $D(0,1)$ is relatively compact in $D(0,2)$, implying surjectivity.
     \end{proof}
      Note also that the restriction map $H_b^1(1) \to H_b^1(t)$ is an isomorphism for all $t\in[1/2,1]$, so in particular the map $\Phi:Z^1_b(1) \to H_b^1(t)$ induced by the restriction $Z^1_b(1) \to Z^1_b(t)$ is surjective. Observe that $Z_b(1)$ is a Banach space, and we want to know that $H_b^1(t)=Z_b^1(t)/\delta C_b^0(t)$ is a Banach space.
-     \begin{claim}
-        $\paren{H_b^1(t),\norm{\cdot}}$ is a Banach space.
-     \end{claim}
-     \begin{proof}
-        Next time.
-     \end{proof}
+
+     We conclude the proof later in 
+\end{proof}
+
+\subsection{Functional Analysis Background}
+
+\begin{defn}
+A \textbf{topological vector space} (over $\C$) is a topological space $V$ which is also a $\C$-vector space such that
+\begin{enumerate}
+    \item[(i)] every point in $V$ is closed, and
+    \item[(ii)] the vector space operations are continuous .
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+    Normed vector spaces, and Banach spaces are topological vector spaces.
+\end{ex}
+
+\begin{notebox}[Facts]
+    Let $V$ be a topological vector space.
+    \begin{enumerate}
+        \item $\dim_\C V<\infty \iff V$ is locally compact.
+        \item $V$ is Hausdorff.
+        \item Any finite dimensional subspace $W \subset V$ is closed in $V$.
+    \end{enumerate}
+\end{notebox}
+
+\begin{defn}
+Let $V$ be a topological vector space, and $N$ be a closed linear subspace of $V$. Then, $V/N$ together with the quotient topology coming from $\pi:V \to V/N$ is a topological vector space such that $\pi$ is a continuous open map. We call $V/N$ the \textbf{quotient space}.
+\end{defn}
+
+\begin{proof}
+The quotient topology makes $\pi$ continuous by definition. A subset $F \subset V/N$ is closed $\iff \pi^{-1}(F)$ is closed in $V$. Hence each point of $V/N$ is closed, since $\pi^{-1}(\pi(x))=x+N$ is closed (because $N$ is closed). Finally, if $U \subset V$ is open, then since $\pi^{-1}(\pi(U))=U+N=\bigcup_{n \in \N}(n+U)$, which is open in $V$, so we see that $\pi(U)$ is open in $V/N$.
+\end{proof}
+
+\begin{defn}
+If $\paren{V,\norm{\cdot}}$ is a normed vector space, we get a \textbf{quotient norm} on $V/N$ by setting
+\[
+\norm{\pi(x)}:= \inf \brax{ \norm{x-n}:n\in \N }=:\w{dist}(x,N).
+\]
+\end{defn}
+
+\begin{exercise}
+Check that $(V/N,\norm{\cdot})$ is a normed vector space. If $(V,\norm{\cdot})$ is a Banach space, check that $(V/N,\norm{\cdot})$ is also Banach.
+\end{exercise}
+
+\begin{ex}
+For $1 \leq p < \infty$, let $V$ be the space of all Lebesgue measurable functions $f:[0,1]\to \C$ such that $\int_{[0,1]}|f|^p < \infty$. Let $N$ be the subspace of $f \in V$ which are zero outside a set of measure zero. Then $N$ is closed in $V$, and $V/N$ is the Banach space $L^p[0,1]$.
+\end{ex}
+
+\begin{ex}[Non-example]
+Let $\ell_2$ be the Hilbert space of all sequence $\{x_n\}_{n \geq 1}$ such that $\sum_{n=1}^\infty |x_n|^2 < \infty$. Let $N \subset \ell_2$ be the linear subspace of sequences $\{x_n\}$ such that $x_n=0$ for all $n \geq n_0$ (with $n_0$ depending on the sequence). Then, $N$ is a dense linear subspace of $\ell_2$, but not closed, so the quotient topology on $\ell_2/N$ is not Hausdorff.
+\end{ex}
+
+\begin{thm}[Open Mapping Theorem][label=thm:open-mapping-thm]
+If $X$ and $Y$ are Banach spaces, and $T:X \to Y$ is continuous, linear, and surjective, then $T$ is an open map.
+\end{thm}
+
+\begin{exercise}[Easy][label=exer:quotient-to-closed]
+Suppose $N \subset E \subset V$ are linear subspaces of a topological vector space $V$ with $N$ closed. Show that if $E/N$ is closed in $V/N$, then $E$ is closed in $V$.
+\end{exercise}
+
+\subsection{\texorpdfstring{Concluding \Cref{thm:H1-is-finite}}{Concluding Second Finiteness Theorem}}
+
+We have local trivialization neighborhood $\{(W_i,z_i)\}$ covering $X$. For $t \in [1/2,2]$, we set $U_i(t):= z_i^{-1}(D(0,t))$, and $\{\mc U_i(t)\}$ an open cover of $X$. We showed that for $t \in [1/2,1]$ the map
+\[
+\Phi:Z_b^1(1) \to H^1_b(t):= Z^1_b(t)/\delta C_b^0(t)
+\]
+is surjective. Moreover, $Z_b^1(t)$ and $C_b^0(t)$ are Banach spaces.
+
+\begin{claim}
+$\paren{H_b^1(t),\norm{\cdot}}$ is a Banach space.
+\end{claim}
+\begin{proof}
+As we saw, this is equivalent to $\delta C_b^0(t)$ being a closed subspace of $Z_b^1(t)$. Fix an integer $N \geq 1$, and take $\rho$ such that $1/2 \leq \rho < t < 1$. Let $a_i \in W_i$ be the point where $z_i(a_i)=0$, and let
+\[
+C^0_b(t,N) := \brax{ \eta =(c_i)\in C_b^0(t) \setbar \ord_{a_i}(c_i) \geq N }.
+\]
+By Schwartz' Lemma, we know
+\[
+\norm{\eta}_\rho \leq \paren{\frac{\rho}{t}}^N\norm{\eta}_\rho
+\]
+if $\rho \in C_b^0(t,N)$, so pick $N$ such that $(\rho/t)^NC \leq 1/2$. Then, for $\rho \in C_b^0(t,N)$, we have
+\[
+\norm{\eta}_t \leq \norm{\delta_\eta}_t + C\norm{\eta}_\rho \leq \norm{\delta_\rho}_t + C\paren{\frac{\rho}{t}}^N\norm{\eta}_t \implies \norm{\eta}_t \leq 2 \norm{\delta_\eta}_t.
+\] 
+Now, a sequence $\{\delta_{\eta_n}\}_{n \geq 1}$ being Cauchy implies that $\{\eta_n\}$ is Cauchy, which implies $\{\eta_n\}$ converges because $C_b^0$ is a Banach space, which implies $\{\delta_{\eta_n}\}$ converges. Hence $\delta C_b^0(t,N) \subset Z_b^1(t)$ is a closed subspace, and it follows that the quotient
+\[
+\cH := Z_b^1(t)/\delta C_b^0(t,N)
+\]
+is a Banach space. Now the vector space $C_b^0(t)/C_b^0(t,N)$ is finite dimensional, so $\delta C_b^0(t)/ \delta C_b^0(t,N)$ is also finite dimensional, hence closed in $\cH$. Now, using \Cref{exer:quotient-to-closed}, it follows that $\delta C_b^0(t)$ is closed in $Z_b^1(t)$, hence $H_b^1(t)$ is a Banach space.
+\end{proof}
+We now complete the proof as follows:
+\begin{proof}
+    For $t<1$, $U_i(t)\cap U_j(t)$ is relatively compact in $U_i(1) \cap U_j(1)$. Montel's theorem implies that the restriction map $Z_b^1(1) \to Z_b^1(t)$ is compact when $t<1$ (i.e the image of the unit ball in $Z_b^1(1)$ is relatively compact). The induced map $\Phi:Z^1_b(1) \to H_b^1(t)$ is therefore both compact and surjective, so by the open mapping theorem, $\Phi$ is open, hence $H_b^1(t)$ has a relatively compact neighborhood of $0$, namely $\Phi(\text{unit ball})$. Therefore, $H_b^1(t)$ is locally compact, hence finite dimensional. We showed that $H^1(X,E) \simeq H_b^1(t)$, concluding the proof.
+\end{proof}
+
+\subsection{Applications}
+
+\begin{thm}
+Let $X$ be a compact Riemann surface, and suppose $\pi:L \to X$ is a holomorphic line bundle. Then $L$ has a meromorphic section which is not holomorphic. In particular:
+\begin{enumerate}[(a)]
+    \item any line bundle $L$ on $X$ is isomorphic to $L(D)$ for some divisor $D$ on $X$, and
+    \item there exists a non-constant meromorphic function on $X$.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+Choose $a \in X$, and $(U,z)$ a coordinate neighborhood of $a$ with $z(a)=0$, such that we have a holomorphic local trivialization $\varphi:\pi^{-1}(U) \to U \times \C$ of $L$. Let $k \geq 1$ and $s_k$ be the meromorphic section of $L$ over $U$ for which $\varphi(s_k(x))= (x,1/z(x)^k)$, $x \in U \setminus \{a\}$. 
+
+Consider the open cover $\cU := \{U, X\setminus \{a\}\}$, and set
+\begin{align*}
+    f_{12}^{(k)}:= s_k|_{U \setminus \{a\}}, \qquad f_{21}^{(k)}=-f_{12}^{(k)}, \qquad f_{ij}^{(k)}=f_{ji}^{(k)}=0.
+\end{align*}
+This defines a cocycle $f^{(k)} \in Z^1(\cU,L)$. Since $H^1(X,L)$ is finite dimensional and $H^1(\cU,L)\hookrightarrow H^1(X,L)$ is injective, then for $d:= \dim_\C H^1(X,L)$ there exists constants $c_1,\dots,c_{d+1}$ not all zero such that 
+\[
+c_1f^{(1)}+\cdots +c_{d+1}f^{(d+1)}\in B^1(\cU,L),
+\]
+i.e. zero in cohomology. So, there exists holomorphic sections $u_1$ and $u_2$ of $L$ over $U$ and $X\setminus \{a\}$ respectively such that
+\[
+c_rs_r+\cdots + c_{d+1}s_{d+1}=u_1 -u_2
+\]
+on $U \setminus \{a\}$ with $c_r \neq 0$. The section $s:= u_2$ of $L$ on $X \setminus \{a\}$ is therefore meromorphic, and not holomorphic on $X$, since 
+\[
+s = -\sum_{\nu=r}^{d+1}c_\nu s_\nu + u_1
+\]
+on $U \setminus \{a\}$.
+\end{proof}
+
+\begin{cor}[][label=cor:pole-less-genus]
+Let $g:=\dim_\C H^1(X,\mc O)$, called the \textbf{genus} of $X$, then there exists a non-constant meromorphic function on $X$, holomorphic on $X \setminus \{a\}$, with a pole of order $\leq g+1$ at $a$.
+\end{cor}
+\begin{proof}
+    Use the trivial line bundle.
+\end{proof}
+
+\begin{rmk}
+We'll see later that $g$ is indeed the topological genus of $X$, i.e. $g= \frac{1}{2}\rank H_1(X,\Z)$.
+\end{rmk}
+
+\begin{cor}
+    Every Riemann surface of genus $0$ is isomorphic to $\P^1$.
+\end{cor}
+\begin{proof}
+Let $a \in X$ and $f$ be a meromorphic function on $X$ with a single pole of order $\leq g+1=1$ at $a$, with $f$ not holomorphic, guaranteed by \Cref{cor:pole-less-genus}. Then, $f$ is a branched holomorphic covering map $X \to \P^1$, with only one sheet. Hence $f$ is a biholomorphism.
+\end{proof}
+
+\begin{thm}
+Let $X$ be a compact Riemann surface, and $f$ be a non-constant meromorphic function on $X$. Then there exists an integer $d \geq 1$ such that for any $g \in \mc M(X)$, there exist rational functions $a_1,\dots,a_d \in \C(x)$ such that
+\begin{align} \label{eq:f-is-algebraic}
+    g(x)^d+a_1(f(x))g(x)^{d-1}+\cdots + a_d(f(x))=0
+\end{align}
+
+for all $x \in X$. In other words, $g$ is algebraic over $\C(f)$.
+\end{thm}
+
+\begin{proof}
+Let $f:X \to \P^1$ be a non-constant holomorphic map, let $A \subset X$ be the set of critical points of $f$, let $B:=f(A) \subset \P^1$ be the critical values, and let $Y:=X \setminus f^{-1}(B)$. Then, $f|_Y:Y \to \P^1\setminus B$ is a finite covering map. Let $d$ be the number of sheets.
+
+Given any $g \in \cM (X)$, let $S\subset X$ denote the set of poles of $g$. For $z \in \P^1\setminus (B \cup f(S))$, define $a_i(z)$, $1\leq i \leq d$ by
+\[
+a_i(z)=e_i(g(x_1),\dots,g(x_d)),
+\]
+where $e_i$ is the $i$'th elementary symmetric polynomial, and $\{x_1,\dots,x_d\}=f^{-1}(z)$.
+
+\begin{claim}
+$a_i$ is holomorphic on $\P^1\setminus (B \cup f(S))$.
+\end{claim}
+\begin{proof}
+Indeed, if $z_0 \in \P^1\setminus (B \cup f(S))$, we can choose a neighborhood $V$ of $z_0$ and disjoint open sets $U_1,\dots,U_d$ in $X \setminus A$ such that $f_j:=f|_{U_j}$ is a biholomorphic map onto $V$, and $f^{-1}(V)=\coprod_{j=1}^dU_j$. It follows that
+\[
+a_i(z)= e_i\paren{g (f_1^{-1}(z)),\dots, g(f_d^{-1}(z))}
+\]
+is holomorphic.
+\end{proof}
+Clearly \eqref{eq:f-is-algebraic} holds for any $x \in Y \setminus f^{-1} (f(S))$, hence we only need to check that the $a_i$ extend meromorphically to all of $\P^1$, since then $a_i(z)$ with be rational for all $i$.
+
+Let $a \in B \cup f(S)$ and $U$ be a neighborhood of $a$ such that the only poles of $g$ on $f^{-1}(U)$ lie in $f^{-1}(a)$, and such that there exists a holomorphic function $w$ on $U$ with $w(a)=0$, $w \not \equiv 0$. Then, there exists an integer $N \geq 1$ such that $(w \circ f)^Ng$ is holomorphic on $f^{-1}(U)$. If $V$ is an open set such that $a \in V \subset U$, and $V$ is relatively compact in $U$, then $(w \circ f)^Ng$ is bounded on $f^{-1}(V)$. Hence, for $z \in V\setminus \{a\}$, define $b_i(z)$ to be the $i$'th elementary symmetric function of the values of $(w \circ f)^Ng$ at $f^{-1}(z)=\{x_1,\dots,x_d\}$, so then the $b_i$ are bounded. We deduce that the $b_i$ extend holomorphically to $a$ for all $i$. Now we're done, because $a_i=b_i/w^{iN}$, $1 \leq i \leq d$, so $a_i(z)$ has at most a pole at $a$.
 \end{proof}
 
 \end{document}
