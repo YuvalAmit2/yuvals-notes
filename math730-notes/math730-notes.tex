@@ -1078,4 +1078,97 @@ Take $x \in X$, $\tilde x \in p^{-1}(x)$, and let $\tilde U$ be a neighborhood o
     Use the universal cover to compute the fundamental group of the Klein bottle.
 \end{exercise}
 
+\section{Homology}
+
+\begin{defn}
+Let $v_0,\dots,v_n \in \R^n$ be ordered points such that no points $v_{i_1},\dots,v_{i_k}$ lie in any $k-1$ dimensional affine space. The $n$-\textbf{simplex} $[v_0,\dots,v_n]$ is the convex hull of $v_0,\dots,v_n$. That is,
+\[
+[v_0,\dots,v_n]= \brax{ \sum t_iv_i \setbar t_i\geq 0, \sum t_i=1 }
+\]
+\end{defn}
+
+\begin{ex}
+The \textbf{standard n-simplex} $\Delta^n \subset \R^{n+1}$ is the simplex $[e_1,\dots,e_{n+1}]$. For instance, the standard $1$-simplex is:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.2\textwidth]{figures/standard-simplex.png}
+\end{figure}
+\end{ex}
+
+
+
+\begin{defn}
+Given an $n$-simplex $[v_0,\dots,v_n]$, the $i$-th \textbf{face} is the $(n-1)$-simplex $[v_0,\dots,v_{i-1},v_{i+1},\dots,v_n]$. The \textbf{boundary} $\partial[v_0,\dots,v_n]$ of a simplex is the union of its faces. The \textbf{interior}, is union of the simplex minus the boundary.
+\end{defn}
+
+\begin{defn}
+A topological space $X$ is called a \textbf{$\Delta$-complex} if there exists a collection of continuous maps $\brax{\sigma_\alpha : \Delta^{n(\alpha)}\to X}_{\alpha \in I}$ with the following properties:
+\begin{enumerate}[(i)]
+    \item For every $\alpha \in I$, the restriction $\sigma_\alpha|_{\mathring \Delta^{n(\alpha)}}$ is injective, and for all $x \in X$, there exists a unique $\alpha$ such that $x \in \Img (\sigma_{\alpha}|_{\mathring \Delta^{n(\alpha)}})$.
+    \item $U \subset X$ is open if and only if $\sigma_{\alpha}^{-1}(U)$ is open for all $\alpha \in I$
+    \item For all $\alpha \in I$, and every $0 \leq i \leq n(\alpha)$, the restriction of $\sigma_\alpha$ to the $i$-th face is in the collection of maps. That is, there exists $\beta\in I$ such that $\sigma_\beta =\sigma_\alpha|_{[e_0,\dots,\hat e_i,\dots,e_{n(\alpha)+1}]}.$ This is the case if and only if, denoting by $\iota_i:\Delta^{n(\alpha)-1}\to \Delta^{n(\alpha)}$  the map sending $(x_0,\dots,x_{n(\alpha)-1}) \mapsto (x_0,\dots,x_{i-1},0,x_{i+1},\dots,x_{n(\alpha)-1})$, we have $\sigma_\beta = \sigma _\alpha \circ \iota_i$.
+\end{enumerate}
+\end{defn}
+
+\begin{ex}[$\Delta$-complex structure on $S^1$]
+Simple...
+\end{ex}
+
+\begin{ex}[$\Delta$-complex structure of $\mb T^2$]
+We have a single $0$-complex $x$ (the point representing the four corners of the rectangle), two $1$-simplices $a,b$ representing the attached sides of the rectangle. Note that the complex $\Delta^1$ is a triangle, but we're working with a rectangle. We fix this by taking another line $c$ attaching opposite corners...
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJ4Il0sWzMsMCwieCJdLFszLDMsIngiXSxbMCwzLCJ4Il0sWzEsMSwiVSJdLFsyLDIsIkwiXSxbMCwxLCJiIl0sWzMsMiwiYiIsMl0sWzAsMywiYSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6ImFycm93aGVhZCJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMiwiYSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6ImFycm93aGVhZCJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsMSwiYyJdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	x \&\&\& x \\
+	\& U \\
+	\&\& L \\
+	x \&\&\& x
+	\arrow["b", from=1-1, to=1-4]
+	\arrow["a"', tail reversed, no head, from=1-1, to=4-1]
+	\arrow["a", tail reversed, no head, from=1-4, to=4-4]
+	\arrow["c", from=4-1, to=1-4]
+	\arrow["b"', from=4-1, to=4-4]
+\end{tikzcd}\]
+\end{ex}
+
+\begin{ex}[$\Delta$-complex structure of $\R\P^2$]
+    Similar to $\T^2$...
+    % https://q.uiver.app/#q=WzAsNixbMCwwLCJ4Il0sWzAsMywieSJdLFszLDMsIngiXSxbMywwLCJ5Il0sWzEsMSwiVSJdLFsyLDIsIkwiXSxbMCwzLCJiIl0sWzAsMSwiYSIsMl0sWzIsMSwiYiJdLFsyLDMsImEiLDJdLFsxLDMsImMiXV0=
+\[\begin{tikzcd}[ampersand replacement=\&]
+	x \&\&\& y \\
+	\& U \\
+	\&\& L \\
+	y \&\&\& x
+	\arrow["b", from=1-1, to=1-4]
+	\arrow["a"', from=1-1, to=4-1]
+	\arrow["c", from=4-1, to=1-4]
+	\arrow["a"', from=4-4, to=1-4]
+	\arrow["b", from=4-4, to=4-1]
+\end{tikzcd}\]
+\end{ex}
+
+\begin{exercise}
+Find a $\Delta$-complex structure on $S^2$ and the Klein bottle.
+\end{exercise}
+
+\begin{defn}
+Let $X$ be a $\Delta$-complex, with simplices $\{\sigma_\alpha : \Delta^{n(\alpha)} \to X\}_{\alpha \in I}$, let $I(n)=\{\alpha \mid n(\alpha)=n\}$, and $I = \bigcup I(n)$. The \textbf{group of simplicial $n$-chains} $\Delta_n(X)$ is the free abelian group on $\{\sigma_\alpha\}_{\alpha \in I(n)}$. That is,
+\[
+\Delta_n(x)= \brax{ \sum_{\alpha \in I(n)} m_\alpha \sigma_\alpha \setbar m_\alpha \in \Z, m_\alpha=0 \text{ for all but finitely many }\alpha}.
+\]
+Such an expression $\sum m_\alpha \sigma(\alpha)$ is called a \textbf{simplicial chain}. 
+\end{defn}
+
+\begin{defn}
+The $n\th$ \textbf{boundary map} $\partial_n :\Delta_n(X) \to \Delta_{n-1}(X)$ is the homomorphism defined on the basis by 
+\[
+\partial_n(\sigma_\alpha)=\sum_{i=1}^n(-1)^i\sigma_\alpha|_{[e_0,\dots,\hat e_i,\dots,e_n]}
+\]
+\end{defn}
+
+\begin{prop}
+$\partial_{n-1}\circ \partial _n\equiv 0$.
+\end{prop}
+
+
+
 \end{document}
