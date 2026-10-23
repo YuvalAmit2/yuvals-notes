@@ -500,6 +500,8 @@ Suppose $X \sim u[0,1]$. Compute $E[X]$ and $E[e^X]$.
 
 In this section, we study some important distributions to know.
 
+\subsection*{Discrete Distributions}
+
 \subsection{Bernoulli Distribution}
 
 \begin{defn}
@@ -571,6 +573,69 @@ Let $N,N_A,n$ be integers with $0 \leq n\leq N_A\leq N$. A random variable $X$ i
 P(X=k)=\frac{\binom{N_A}{k}\binom{N-N_A}{n-k}}{\binom{N}{n}}.
 \]
 This is interpreted as follows: there are $\binom{N}{n}$ ways to select $n$ people out of your population of $N$. Then, if $N_A$ of those people have the condition, there are $\binom{N_A}{k}$ ways to find $k$ of them, and $\binom{N-N_A}{n-k}$ for the rest of them to not have it. 
+\end{defn}
+
+\begin{ex}
+Suppose that a collection of 20 rare books contains 5 first editions, each costing $\$5000$, and 15 second editions, each costing $\$1000$. Four books are picked at random to be sold. What is the expected income?
+\end{ex}
+
+\begin{solution}
+Let $X$ be the number of first editions, so $4-X$ is the number of second editions. Then, the revenue is
+\[
+r(X):=5000X+1000(4-X)=4000X+4000.
+\]
+By linearity of expectation,
+\[
+E[r(X)]=E[4000X+4000]=4000E[X]+4000.
+\]
+We're now left to compute $E[X]$. Note that $X$ is sampling randomly from a population without replacement, so it's a hypergeometric distribution. The population size is $N=20$, the number of first editions is $N_A=5$, and the sample size is $n=4$. Computing $E[X]$ is left as an exercise.
+\end{solution}
+
+\subsection{Poisson Distribution}
+
+\begin{defn}
+Fix $\lambda >0$. A random variable $X$ is said to have a \textbf{Poisson distribution} with parameter $\lambda$ if $X \geq 0$ is integer valued, and has a probability mass function
+\[
+p_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}
+\]
+for $k \in \{0,1,2,\dots\}$.
+\end{defn}
+
+\begin{rmk}
+If $X \sim \Poisson(\lambda)$, then $E[X]=V[X]=\lambda$.
+\end{rmk}
+
+Let $X \sim \Bin(n.p)$ and $Y \sim \Poisson(np)$. Then, for any $A \subset \{0,1,2,\dots\}$, we have
+\[
+\abs{ P(X \in A)-P(Y \in A)} \leq np^2
+\]
+
+\begin{ex}
+Assume that a random variable $X$ counts the occurrence of rare events that are not ``strongly dependent''. Then, the distribution of $X$ can be approximated with a $\Poisson(E[X])$ distribution.
+\end{ex}
+
+\begin{ex}
+Suppose that a large factory experiences, on average, three accidents each month. What is the probability that on a particular month there are two accidents?
+\end{ex}
+
+\begin{solution}
+Since the factory is large, we can assume that three accidents per month is very small, so we may assume that the number of accidents is represented by $X \sim \Poisson(3)$. Then,
+\[
+P(X=2)=e^{-3}\frac{3^2}{2!}\approx 0.224
+\]
+\end{solution}
+
+\subsection*{Continuous Distributions}
+
+There are three types of continuous distributions: uniform, exponential, and normal.
+
+Uniform distributions try to compute the idea that the regions with equal ``length'' have the same probability of having something ``drawn'' from them.
+
+\begin{defn}
+    A random variable $X$ is said to have a \textbf{uniform distribution}, denoted $X \sim \Unif[a,b]$ for $a<b$ if
+    \[
+    f_X(x)=\frac{1}{b-a},\quad x \in [a,b]
+    \]
 \end{defn}
 
 \end{document}

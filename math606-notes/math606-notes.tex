@@ -1884,7 +1884,7 @@ Suppose now that $s$ is a meromorphic section of a holomorphic vector bundle $E$
     The section $s_D$ is called the \textbf{standard section} of $L(D)$.
 \end{defn}
 
-\begin{notethm}[Remarks]
+\begin{rmk}[][label=rmk:sheaf-on-divisor]
     \begin{enumerate}
         \item If $s$ is a meromorphic section of a vector bundle $E \to X$, $s \not \equiv 0$, then $s$ is holomorphic if and only if $\div(s)$ is effective (so $s$ may have zeros, but no poles).
         \item If $D$ is a divisor on $X$, and $U \subset X$ is open, we obtain a sheaf structure on $X$ by defining \[
@@ -1895,7 +1895,7 @@ Suppose now that $s$ is a meromorphic section of a holomorphic vector bundle $E$
         is an isomorphism. Hence the sheaf of holomorphic sections of $L(D)$ can be canonically identified with $\mc O_D$.
         \item If $L \to X$ is any holomorphic line bundle, and $s_0,s_1$ are two meromorphic sections of $L$, $s_0 \not \equiv 0$, then there exists a meromorphic function $f$ on $X$ with $s_1 =f s_0$. Indeed, $s_1/s_0$ is well-defined independent of any local trivialization, since $f_i^1 = g_{ij}f_j^1$ and $f_i^0=g_{ij}f_{j}^0$ on $U_i \cap U_j$, so $f_i^1/f_j^1 = f_i^0/f_j^0$.
     \end{enumerate}
-\end{notethm}
+\end{rmk}
 
 \section{Linear Equivalence of Divisors}
 
@@ -2262,7 +2262,7 @@ We now complete the proof as follows:
 
 \subsection{Applications}
 
-\begin{thm}
+\begin{thm}[][label=thm:exists-meromorphic]
 Let $X$ be a compact Riemann surface, and suppose $\pi:L \to X$ is a holomorphic line bundle. Then $L$ has a meromorphic section which is not holomorphic. In particular:
 \begin{enumerate}[(a)]
     \item any line bundle $L$ on $X$ is isomorphic to $L(D)$ for some divisor $D$ on $X$, and
@@ -2310,12 +2310,11 @@ We'll see later that $g$ is indeed the topological genus of $X$, i.e. $g= \frac{
 Let $a \in X$ and $f$ be a meromorphic function on $X$ with a single pole of order $\leq g+1=1$ at $a$, with $f$ not holomorphic, guaranteed by \Cref{cor:pole-less-genus}. Then, $f$ is a branched holomorphic covering map $X \to \P^1$, with only one sheet. Hence $f$ is a biholomorphism.
 \end{proof}
 
-\begin{thm}
+\begin{thm}[][label=thm:mer-is-algebraic]
 Let $X$ be a compact Riemann surface, and $f$ be a non-constant meromorphic function on $X$. Then there exists an integer $d \geq 1$ such that for any $g \in \mc M(X)$, there exist rational functions $a_1,\dots,a_d \in \C(x)$ such that
 \begin{align} \label{eq:f-is-algebraic}
     g(x)^d+a_1(f(x))g(x)^{d-1}+\cdots + a_d(f(x))=0
 \end{align}
-
 for all $x \in X$. In other words, $g$ is algebraic over $\C(f)$.
 \end{thm}
 
@@ -2342,5 +2341,198 @@ Clearly \eqref{eq:f-is-algebraic} holds for any $x \in Y \setminus f^{-1} (f(S))
 
 Let $a \in B \cup f(S)$ and $U$ be a neighborhood of $a$ such that the only poles of $g$ on $f^{-1}(U)$ lie in $f^{-1}(a)$, and such that there exists a holomorphic function $w$ on $U$ with $w(a)=0$, $w \not \equiv 0$. Then, there exists an integer $N \geq 1$ such that $(w \circ f)^Ng$ is holomorphic on $f^{-1}(U)$. If $V$ is an open set such that $a \in V \subset U$, and $V$ is relatively compact in $U$, then $(w \circ f)^Ng$ is bounded on $f^{-1}(V)$. Hence, for $z \in V\setminus \{a\}$, define $b_i(z)$ to be the $i$'th elementary symmetric function of the values of $(w \circ f)^Ng$ at $f^{-1}(z)=\{x_1,\dots,x_d\}$, so then the $b_i$ are bounded. We deduce that the $b_i$ extend holomorphically to $a$ for all $i$. Now we're done, because $a_i=b_i/w^{iN}$, $1 \leq i \leq d$, so $a_i(z)$ has at most a pole at $a$.
 \end{proof}
+
+\begin{defn}
+Let $K\supset \C$ be a field. We say that $K$ is an \textbf{algebraic function field} in $m$ variables if there exist $x_1,\dots,x_m$ in $K$ such that $x_1,\dots,x_m$ are algebraically independent over $\C$, and the extension $\C(x_1,\dots,x_m)\hookrightarrow K$ is finite.
+\end{defn}
+
+\begin{thm}
+Let $X$ be a compact Riemann surface, and $\cM(X)$ denote the field of meromorphic functions on $X$. Then, $\cM(X)$ is an algebraic function field in $1$ variable.
+\end{thm}
+
+\begin{proof}
+Let $f$ be a non-constant meromorphic function on $X$, which \Cref{thm:exists-meromorphic} guarantees. Then, $f$ is algebraically independent over $\C$, since if
+\[
+f^n+c_{n-1}f^{n-1}+\cdots + c_0=0, \quad c_i \in \C,
+\]
+then $f$ takes on finitely many values, which is not the case. So, $\C(f) \simeq \C(z)$. By \Cref{thm:mer-is-algebraic}, there exists $d \geq 1$ such that any $g \in \cM(X)$ is algebraic over $\C(f)$, of degree at most $d$. Choose $g_0 \in \cM(X)$ such that $[\C(f,g_0):\C(f)]$ is maximal.
+\begin{claim}
+    We claim that $\C(f,g_0)=\cM(X)$.
+\end{claim}
+\begin{proof}
+Indeed, if there exists $h \in \cM(X)$, $h \not \in \C(f,g_0)$, then since $\C(f)$ has characteristic zero, the primitive element theorem guarantees some $g \in \cM(X)$ such that $\C(f)(g_0,h)=\C(f)(g)$. This gives a contradiciton, because
+\[
+[\C(f)(g):\C(f)] = \braks{\C(f)(g_0,h):\C(f)}> [\C(f)(g_0):\C(f)],
+\]
+proving the claim.
+\end{proof}
+This claim proves the theorem.
+\end{proof}
+
+\begin{que}
+    If $X$ is a compact Riemann surface, does $\cM(X)$ determine $X$ up to isomorphism?
+\end{que}
+
+\begin{notethm}[Answer]
+    Yes. This is the approach one takes in abstract algebraic geometry, which uses valuation theory: if we know $K:= \cM(X)$, then points $p \in X$ correspond to discrete valuations $\nu:K \to \Z$, $f \mapsto \ord_pf$.
+\end{notethm}
+
+\begin{rmk}
+Let $X,Y$ be compact Riemann surfaces, and $f:Y \to X$ a (branched) holomorphic covering map. Then, the pullback $f^*\cM(X)$ given by meromorphic $g\circ f :Y \to \C$ for meromorphic $g \in \cM(X)$ is naturally a subfield of $\cM(Y)$. Identifying $f^*\cM(X)$ with $\cM(X)$, the Galois group $\Gal(\cM(Y)/\cM(X))$ is then naturally isomorphic to the group of Deck transformations $\w{Deck}(Y/X)$ of the covering map $f$. Moreover, the covering is Galois (or normal) if and only if the extension $\cM(Y)/\cM(X)$ is Galois.
+\end{rmk}
+
+\section{The Riemann-Roch Theorem}
+
+\begin{defn}
+If $D = \sum n_P[P]$ is a divisor on a compact Riemann surface $X$, then the \textbf{degree} of $D$ is $\deg D:= \sum n_P$. We think of $D$ as a function $D:X \to \Z$ with finite support (i.e. $D(P)=n_P$).
+\end{defn}
+
+\begin{prop}
+If $D_1$ and $D_2$ are linearly equivalent, then $\deg D_1=\deg D_2$.
+\end{prop}
+
+\begin{proof}
+Recall that $D_1 \sim D_2 \iff D_1 -D_2 = \div f$ for some $f \in \cM(X)$, hence
+\[
+\deg D_1 - \deg D_2 = \deg \div f=0.
+\]
+\end{proof}
+
+We recall that for any divisor $D$, we introduced (\Cref{rmk:sheaf-on-divisor}) the sheaf $\cO_D$ on $X$ with
+\[
+\cO_D(U):=\brax{ f \in \cM(X) \setbar \div f \geq -D \text{ on } U}.
+\]
+Moreover, $\cO_D$ is isomorphic to the sheaf of holomorphic sections of the line bundle $L(D) \to X$, so
+\[
+\cO_D(U) = H^0(U,L(D))= \Gamma (U,L(D)).
+\]
+
+\begin{notebox}[The Riemann-Roch Problem]
+    Riemann showed that
+    \[
+    h^0(D):= \dim_\C(H^0(X,\cO_D))=\dim_\C \cO_D(X)=\dim_\C \brax{f \in \cM(X) \setbar \div f \geq -D}
+    \]
+    is finite. Moreover, Riemann showed that $h^0(D) \geq 1 -g + \deg D$, and assigned his student Roch to compute the difference.
+\end{notebox}
+
+An element of the stalk $\cO_{D,a}$ is given by a convergent Laurent series
+\[
+f = \sum_{n \geq -D(a)}c_nz^n,
+\]
+where $z$ is a local coordinate function near $a$ with $z(a)=0$. If $D_1,D_2$ are divisors with $D_1 \leq D_2$, then $-D_1 \geq -D_2$, and so clearly $\cO_{D_1}(U) \subset \cO_{D_2}(U)$, for all $U \subset X$ open. Hence, we get an injective map of sheaves $\cO_{D_1} \hookrightarrow \cO_{D_2}$. 
+
+In terms of line bundles $L(D_1)$ and $L(D_2)$, the map is given by 
+\begin{align*}
+    \Gamma(U, L(D_1)) &\to \Gamma(U, L(D_2))
+    \\ f & \mapsto f \otimes s_{D_2-D_1},
+\end{align*}
+where $s_{D_2-D_1}$ is the standard section of $L(D_2 - D_1)$ with $\div s = D_2-D_1$. This is because $L(D_2) \simeq L(D_1) \otimes L(D_2 - D_1)$.
+
+In the following, \textbf{$X$ will always be a compact Riemann surface}.
+
+\begin{prop}
+If $D$ is a divisor on $X$ with $\deg D < 0$, then $H^0(X,\cO_D)=0$.
+\end{prop}
+
+\begin{proof}
+If not, then there exists $f \neq 0$, $f \in \cO_D(X)$, so $\div f \geq -D$ implies $$0 = \deg \div f \geq -\deg D >0,$$ a contradiction.
+\end{proof}
+
+\begin{defn}[Recall]
+Let $P$ be a point on $X$. The \textbf{skyscraper sheaf} $\C_P$ on $X$ satisfies
+\[
+\C_P(U)= \case{\C & P \in U \\ 0 & P \not \in U}
+\]
+with the obvious restriction maps. 
+\end{defn}
+
+\begin{prop}
+\begin{enumerate}[(i)]
+    \item $H^0(X,\C_p) \simeq \C$
+    \item $H^1(X,\C_p)=0$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+(i) is trivial. For (ii), consider a $\xi \in H^1(X, \C_P)$ represented by a cocycle in $Z^1(\cU,\C_P)$. The open cover $\cU$ has a refinement $\mc V= \{V_\alpha\}_{\alpha \in A}$ so that $P \in V_\alpha$ for a unique $\alpha \in A$.  Then $Z^1(\mc V,\C_P)=0$, so $\xi =0$ in $H^1(X,\C_p)$.
+\end{proof}
+
+Now, it turns out that we can use the skyscraper sheaf to help us understand the Riemann-Roch problem on a compact Riemann surface $X$. For each divisor $D$ and point $P \in X$, we have a map $\cO_D \to \cO_{D+P}$. Let $(W,z)$ be a local coordinate chart on $X$ around $P$ such that $z(P)=0$. We define a sheaf homomorphism $\beta :\cO_{D+P} \to \C_P$ as follows: given $U \subset X$, if $P \not \in U$, then the homomorphism $\beta_U$ is zero. Otherwise, if $P \in U$ and $f \in \cO_{D+P}(U)$, expand $f = \sum_{n=-k-1}^\infty c_nz^n$ in the $z$-coordinate, where $k = D(P)$. We then set $\beta_U(f):= c_{-k-1} \in \C= \C_P(U)$.
+
+We obtain a short exact sequence of sheaves on $X:$
+\[
+0 \to \cO_D \to \cO_{D+P}\arr[\beta] \C_P \to 0,
+\]
+inducing a long exact cohomology sequence
+\begin{align} \label{eq:long-exact-RR-cohom}
+0 \to H^0(X,\cO_D) \to H^0(X,\cO_{D+P}) \to \C \to H^1(X,\cO_D) \to H^1(X,\cO_{D+P})\to 0.    
+\end{align}
+
+\begin{cor}
+    If $D_1 \leq D_2$ are two divisors on $X$, then the inclusion map $\cO_{D_1}\hookrightarrow \cO_{D_2}$ induces a surjective homomorphism
+    \[
+    H^1(X, \cO_{D_1}) \to H^1(X, \cO_{D_2}) \to 0.
+    \]
+\end{cor}
+
+\begin{proof}
+If $D_2 = D_1 + P$ for some $P \in X$, we've just proved this by the penultimate map in the sequence \eqref{eq:long-exact-RR-cohom}. Otherwise, $D_2 = D_1 + P_1 + P_2 + \cdots + P_r$, so we use induction.
+\end{proof}
+
+\begin{defn}
+If $D$ is a divisor on $X$, define $h^i(D):= \dim_\C H^i(X,\cO_D)$ for $i = 0,1$. Then, define the \textbf{Euler characteristic} $\chi(D):= h^0(D)- h^1(D)$.
+\end{defn}
+
+\begin{notethm*}[Historical Note]
+    This definition leaps us forward in history by 100 years. Riemann didn't have this notion of cohomology or Euler characteristic.
+\end{notethm*}
+
+\begin{lem}[][label=lem:chi-deg]
+If $D_1$ and $D_2$ are divisors, then
+\begin{align} \label{eq:chi-deg}
+    \chi(D_2)-\deg(D_2)=\chi(D_1)-\deg(D_1). 
+\end{align}
+\end{lem}
+
+\begin{proof}
+    Suppose first that $D_2 = D_1 + P$. Then, the exact cohomology sequence
+    \[
+    0 \to \cO_{D_1}(X) \to \cO_{D_1 + P}(X) \to \C \to H_1(X, \cO_{D_1}) \to H^1(X, \cO_{D_2}) \to 0
+    \]
+    can be split into two short exact sequence as follows: set $V := \Img (\cO_{D_1 +P}(X) \to \C)$, and $W:= \C /V$. Then $$\dim V + \dim W = \dim \C = 1 = \deg D_2 - \deg D_1,$$ and the sequences
+    \begin{align*}
+        &0 \to \cO_{D_1}(X) \to \cO_{D_1 +P}(X) \to V \to 0, \\ &0 \to W \to H^1(X,\cO_{D_1}) \to H^1(X,\cO_{D_2}) \to 0
+    \end{align*}
+    are exact. Since all the vector spaces are finite dimensional, we get 
+    \begin{align*}
+        h^0(D_2) &= h^0(D_1)+ \dim V, \\
+        h^1 ( D_1) &= h^1(D_2)+ \dim W.
+    \end{align*}
+    Adding yields $\chi (D_2)=\chi(D_1)+1=\chi(D_1)+\deg D_2 - \deg D_1.$ Iterating this calculation shows that this assertion holds whenever $D_1 \leq D_2$. Finally, if $D_1$ and $D_2$ are arbitrary, find a $D$ such that $D \leq D_1$ and $D \leq D_2$. Then,
+    \[
+    \chi(D_i)-\deg D_i = \chi(D)-\deg D, \quad i =1,2,
+    \]
+    proving the claim.
+\end{proof}
+
+\begin{thm}[Riemann-Roch Theorem (weak form)][label=thm:weak-riemann-roch]
+If $D$ is a divisor on a compact Riemann surface $X$, then $h^0(D) - h^1(D)=1-g+ \deg D$, where $g$ is the genus of $X$.
+\end{thm}
+
+\begin{proof}
+By \Cref{lem:chi-deg},
+\[
+h^0(D)-h^1(D)=\chi(D)\overset{\eqref{eq:chi-deg}}{=} \chi(0)+\deg D = h^0(\cO)-h^1(\cO) = 1-g+\deg D.
+\]
+\end{proof}
+
+\begin{rmk}
+Riemann-Roch shows that
+\[
+\dim H^0(X,\cO_D) - \dim H^1(X, \cO_D) = 1-g + \deg D.
+\]
+What's cool is that the LHS is an analytic invariant, while the RHS is a topological invariant. For instance, when $D=0$, $\dim H^1(X,\cO)=g$, the genus.
+\end{rmk}
+
 
 \end{document}
