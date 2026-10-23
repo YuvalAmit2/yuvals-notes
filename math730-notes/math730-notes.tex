@@ -1078,7 +1078,7 @@ Take $x \in X$, $\tilde x \in p^{-1}(x)$, and let $\tilde U$ be a neighborhood o
     Use the universal cover to compute the fundamental group of the Klein bottle.
 \end{exercise}
 
-\section{Homology}
+\section{Simplicial Homology}
 
 \begin{defn}
 Let $v_0,\dots,v_n \in \R^n$ be ordered points such that no points $v_{i_1},\dots,v_{i_k}$ lie in any $k-1$ dimensional affine space. The $n$-\textbf{simplex} $[v_0,\dots,v_n]$ is the convex hull of $v_0,\dots,v_n$. That is,
@@ -1161,14 +1161,96 @@ Such an expression $\sum m_\alpha \sigma(\alpha)$ is called a \textbf{simplicial
 \begin{defn}
 The $n\th$ \textbf{boundary map} $\partial_n :\Delta_n(X) \to \Delta_{n-1}(X)$ is the homomorphism defined on the basis by 
 \[
-\partial_n(\sigma_\alpha)=\sum_{i=1}^n(-1)^i\sigma_\alpha|_{[e_0,\dots,\hat e_i,\dots,e_n]}
+\partial_n(\sigma_\alpha)=\sum_{i=0}^{n}(-1)^{i}\sigma_\alpha|_{[e_0,\dots,\hat e_i,\dots,e_n]}
 \]
 \end{defn}
 
-\begin{prop}
+\begin{prop}[][label=prop:cycle-condition]
 $\partial_{n-1}\circ \partial _n\equiv 0$.
 \end{prop}
 
+\begin{proof}
+We break the sum up corresponding to when the second removed basis element comes before or after the first:
+\begin{align*}
+    \partial_{n-1}\circ \partial_n(\sigma_\alpha) &= \partial_{n-1}\paren{ \sum_{i=0}^{n} (-1)^i \sigma_\alpha|_{[e_0,\dots,\hat{e_i},\dots,e_n]} =}
+    \\ &=\sum_{j=0}^{i-1}(-1)^{i+j}\sigma_\alpha|_{[e_0,\dots,\hat{e_i},\dots,\hat{e_j},\dots,e_n]}+ \sum_{j=i+1}^n(-1)^{i+j+1} \sigma_\alpha|_{[e_0,\dots,\hat{e_j},\dots,\hat{e_i},\dots,e_n]}.
+\end{align*}
+Now, for every $k<\ell \in \{0,\dots,n\}$, the $(n-2)$-simplex
+\[
+\sigma_\alpha|_{[e_0,\dots,\hat{e_k},\dots,\hat{e_\ell},\dots,e_n]}
+\]
+appears twice, for $(k,\ell)=(i,j)$ and $(k,\ell)=(j,i)$, but they appear with opposite sign. Therefore, they cancel, and the resulting sum is zero.
+\end{proof}
 
+
+\begin{defn}
+A \textbf{chain complex} is a sequence of abelian groups $\{C_n\}_{n=0}^\infty$ with homomorphisms $\partial_n : C_n \to C_{n-1}$ such that $\partial_{n-1} \circ \partial_n \equiv 0$. 
+
+The elements of $\ker(\partial_n)\subset C_n$ are called $n$\textbf{-cycles}, and the elements of $\Img(\partial_{n+1})\subset C_n$ are called $n$\textbf{-boundaries}. 
+
+Note that the condition $\partial_{n} \circ \partial_{n+1} \equiv 0$ means that every $n$-boundary is an $n$-cycle, since $\Img(\partial_{n+1})\subset \ker(\partial _n)$. The $n$-th \textbf{homology group} is the quotient $H_n(C):=\ker(\partial_n)/\Img(\partial_{n+1})$.
+\end{defn}
+
+\begin{defn}
+By \Cref{prop:cycle-condition}, the simplicial $n$-chains $\{\Delta_n(X)\}_{n=0}^\infty$ along with the boundary maps $\partial_n:\Delta_n(X)\to \Delta_{n-1}(X)$ form a chain complex. The $n$-th \textbf{simplicial homology group} of $X$ is
+\[
+H_n^\Delta (X):= \ker(\Delta_{n+1}(X))/\Img \paren{\Delta_{n}(X)}
+\]
+\end{defn}
+
+\begin{ex}
+Let $X = S^1$, with the simplicial structure
+\begin{figure}[H]
+	\centering
+	\incfig{circle-simplex}
+	\label{fig:circle-simplex}
+\end{figure}
+Observe that $\Delta^1(X)\simeq \Z$ because we have a single $1$-simplex, and $\partial_1 \equiv 0$, so $H_1^\Delta(S^1)=\Z$. For $n \geq 2$, the homology group is $H_n^\Delta(S^1) \simeq 0$ since there are no $n$-simplices. It then follows that  $H_0^\Delta (S^1) \simeq \Z$ because the homology groups form a chain complex.
+\end{ex}
+
+\begin{ex}
+Let $X = \T^2$.
+\begin{figure}[H]
+	\centering
+	\incfig{torus-homology}
+	\label{fig:torus-homology}
+\end{figure}
+Similar to before, we have $H_k^\Delta(\T^2)=0$ for $k \geq 3$ because that's the highest level of simplex we have.
+
+Now, we observe that the two $2$-simplices $U$ and $L$ have the same image under the boundary map:
+\begin{align*}
+    \partial _2U &= b-c+a, \\
+    \partial _2L &= a-c+b,
+\end{align*}
+Since $U$ and $L$ generate $\Delta_2(X)$, it follows that $\ker (\partial_2)= \angles{U-L}\simeq \Z$, i.e. the free abelian group on 1 generator. Moreover, there are no $3$-simplices so $\Img(\partial_3)=0$, and we deduce that
+\[
+H_2^\Delta(\T^2)=\ker (\partial _2)/\Img(\partial_3)=\Z.
+\]
+Next, we have three generators of $\Delta_1(X)$, namely $a,b,c$. Observe that they all satisfy $\partial_1a=\partial_1b=\partial_1c=x-x=0$, i.e. all three generators are in $\ker \partial _1$, so $\ker(\partial_1)\simeq \Z^3$. Moreover, we computed that $\partial_2U=\partial_2L$, so $\Img(\partial_2)=\Z$, thus
+\[
+H_1^\Delta(\T^2)=\ker(\partial_1)/\Img(\partial_2)\simeq \Z^3/\Z \simeq \Z^2.
+\]
+Finally, $x$ is the only $0$-simplex, and is trivially in the kernel of $\partial_0$. Moreover, we saw everything was in the kernel of $\partial_1$, so $\Img (\partial_1)=0$, and we conclude that
+\[
+H_0^\Delta(\T^2)=\ker(\partial_0)/\Img(\partial_1) \simeq \Z
+\]
+\end{ex}
+
+\begin{exercise}
+Compute $H_n^\Delta (X)$ for the Klein bottle, $\R\P^2$, and $S^2$.
+\end{exercise}
+
+\begin{rmk}
+There are generally a few problems with simplicial homology. First, it's not immediately clear that the simplicial homology groups are independent of the choice of $\Delta$-structure. While this is true, it's tedious to show. Furthermore, doing computations with a $\Delta$-structure can be annoying, especially as we're taking more and more complicated spaces. We therefore look for a better solution.
+\end{rmk}
+
+\section{Singular Homology}
+
+\begin{defn}
+Let $X$ be a topological space. The group of \textbf{singular $n$-chains} in $X$ is the free abelian groups on
+\[
+\brax{ \sigma: \Delta ^n \to X \setbar \sigma \text{ continuous}}.
+\]
+\end{defn}
 
 \end{document}

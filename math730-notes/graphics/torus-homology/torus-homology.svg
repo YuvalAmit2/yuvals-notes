@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="160mm"
+   height="80mm"
+   viewBox="0 0 160 80"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.4.4 (dcaf3e7d, 2026-05-05)"
+   sodipodi:docname="torus-homology.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.4164241"
+     inkscape:cx="315.342"
+     inkscape:cy="132.22017"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showborder="true"
+     width="200mm"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1470"
+     inkscape:window-height="746"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="0"
+     inkscape:showpageshadow="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815"
+       units="mm"
+       spacingx="10"
+       spacingy="10"
+       empspacing="4"
+       dotted="false"
+       originx="0"
+       originy="0" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-177)">
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.093001;stroke-dashoffset:0.75924;paint-order:markers fill stroke"
+       id="rect1"
+       width="49.891823"
+       height="34.80357"
+       x="59.548302"
+       y="196.31296" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.093001;stroke-dashoffset:0.75924;paint-order:markers fill stroke"
+       d="m 107.35975,215.3049 2.08037,-1.59016 1.49829,1.59016"
+       id="path1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.093001;stroke-dashoffset:0.75924;paint-order:markers fill stroke"
+       d="m 83.993954,194.0714 2.114571,2.35044 -2.75044,1.04687"
+       id="path2" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.093001;stroke-dashoffset:0.75924;paint-order:markers fill stroke"
+       d="m 84.694915,229.35445 2.385772,1.72305 -2.253229,1.8556"
+       id="path3" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.093001;stroke-dashoffset:0.75924;paint-order:markers fill stroke"
+       d="m 58.053792,213.4493 1.457971,-1.59052 1.457973,1.59052"
+       id="path4" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.093001;stroke-dashoffset:0.75924;paint-order:markers fill stroke"
+       d="m 59.114134,230.81242 49.968676,-34.5937"
+       id="path5" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.093001;stroke-dashoffset:0.75924;paint-order:markers fill stroke"
+       d="m 81.248799,213.05167 3.18103,-0.13254 -0.132543,2.65085"
+       id="path6" />
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1"
+       y="194.45547"
+       x="111.93131"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="111.93131"
+         y="194.45547"
+         style="stroke-width:0.264583">\large $x$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-9"
+       y="233.75764"
+       x="110.9383"><tspan
+         sodipodi:role="line"
+         id="tspan1-1"
+         x="110.9383"
+         y="233.75764"
+         style="stroke-width:0.264583">\large $x$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-2"
+       y="234.48004"
+       x="58.45332"><tspan
+         sodipodi:role="line"
+         id="tspan1-3"
+         x="58.45332"
+         y="234.48004"
+         style="stroke-width:0.264583">\large $x$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-5"
+       y="194.18748"
+       x="57.488949"><tspan
+         sodipodi:role="line"
+         id="tspan1-5"
+         x="57.488949"
+         y="194.18748"
+         style="stroke-width:0.264583">\large $x$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-8"
+       y="207.03046"
+       x="75.017166"><tspan
+         sodipodi:role="line"
+         id="tspan1-14"
+         x="75.017166"
+         y="207.03046"
+         style="stroke-width:0.264583">\large $U$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-3"
+       y="219.21033"
+       x="94.594315"><tspan
+         sodipodi:role="line"
+         id="tspan1-8"
+         x="94.594315"
+         y="219.21033"
+         style="stroke-width:0.264583">\large $L$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-0"
+       y="237.76382"
+       x="84.975861"><tspan
+         sodipodi:role="line"
+         id="tspan1-4"
+         x="84.975861"
+         y="237.76382"
+         style="stroke-width:0.264583">\large $b$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-0-2"
+       y="192.45792"
+       x="84.762985"><tspan
+         sodipodi:role="line"
+         id="tspan1-4-6"
+         x="84.762985"
+         y="192.45792"
+         style="stroke-width:0.264583">\large $b$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-94"
+       y="213.79417"
+       x="115.36587"><tspan
+         sodipodi:role="line"
+         id="tspan1-13"
+         x="115.36587"
+         y="213.79417"
+         style="stroke-width:0.264583">\large $a$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-83"
+       y="212.45416"
+       x="52.122917"><tspan
+         sodipodi:role="line"
+         id="tspan1-81"
+         x="52.122917"
+         y="212.45416"
+         style="stroke-width:0.264583">\large $a$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-54"
+       y="215.22598"
+       x="76.888924"><tspan
+         sodipodi:role="line"
+         id="tspan1-36"
+         x="76.888924"
+         y="215.22598"
+         style="stroke-width:0.264583">\large $c$</tspan></text>
+  </g>
+</svg>
