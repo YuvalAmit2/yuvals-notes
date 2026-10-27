@@ -631,11 +631,75 @@ There are three types of continuous distributions: uniform, exponential, and nor
 
 Uniform distributions try to compute the idea that the regions with equal ``length'' have the same probability of having something ``drawn'' from them.
 
+\subsection{Uniform Distribution}
+
 \begin{defn}
     A random variable $X$ is said to have a \textbf{uniform distribution}, denoted $X \sim \Unif[a,b]$ for $a<b$ if
     \[
     f_X(x)=\frac{1}{b-a},\quad x \in [a,b]
     \]
 \end{defn}
+
+\subsection{Exponential Distribution}
+
+\begin{defn}
+Let $0 < \lambda < \infty$. The \textbf{exponential distribution} with rate $\lambda$ is given by $f_X(x)=\lambda e^{-\lambda x}$, $x \geq 0$. If $X$ is a random variable with this distribution, we write $X \sim \exp(\lambda)$.
+\end{defn}
+
+Note that the exponential distribution is related to the geometric distribution.
+
+\begin{prop}
+Let $X$ be a continuous random variable with an exponential distribution with rate $\lambda$. Then
+\begin{align*}
+    E[X] &=  1/\lambda, \\
+    V[X] &= 1/\lambda^2.
+\end{align*}
+\end{prop}
+
+\begin{proof}
+We compute
+\begin{align*}
+    E[X] &=\int_0^\infty x \lambda e^{-\lambda x}dx=\lim_{h \to \infty}\braks{ -xe^{-\lambda x} \biggl |_0^h + \int_0^h e^{-\lambda x}dx } = \frac{1}{\lambda}.
+\end{align*}
+The variance computation is similar.
+\end{proof}
+
+\begin{prop} \label{prop:exponential-cumulative}
+Let $X$ be a continuous random variable with an exponential distribution with rate $\lambda$. Then,
+\[
+F_X(x) = \case{ 1- e^{-\lambda x} & x \geq 0 \\ 0 & x<0. }
+\]
+\end{prop}
+
+
+\begin{ex}
+A library has 5 computers for public use. The average lifetime of a computer is 6 years, and follows an exponential distribution. What is the probability that at least one computer is working after 7 years? You may assume the lifetimes are independent.
+\end{ex}
+
+\begin{solution}
+Let $T_i$ be the lifetime of computer $i \in\{1,\dots,5\}$. Then, $T_i \sim \exp(1/6)$, and
+\[
+P(T_1>7 \lor \cdots \lor T_5 > 7) = 1-P(T_1 \leq 7, \cdots, T_5 \leq 7)=1-\prod_{i=1}^5P(T_i\leq 7)=1-P(T \leq 7)^5
+\]
+where $T \sim \exp(1/6)$. We computed in \Cref{prop:exponential-cumulative} that $P(T \leq 7)=1-e^{-7/6}$. Thus,
+\[
+\cdots = 1-(1-e^{-7/6})^5
+\]
+\end{solution}
+
+\subsection{Normal Distributions}
+
+\begin{defn}
+A continuous random variable $X$ is said to have a \textbf{normal distribution} with parameters $\mu,\sigma^2$ (mean and variance) if
+\[
+f_X(x)= \frac{1}{\sqrt {2 \pi}\sigma}\exp\paren{ \frac{-(x-\mu)^2}{2\sigma^2} }
+\]
+for $- \infty < x < \infty$.
+\end{defn}
+
+\begin{thm}[Central Limit Theorem (Philosophy)]
+For large samples, the sample average follows a normal distribution.
+\end{thm}
+
 
 \end{document}
