@@ -2636,5 +2636,117 @@ H^0(U,K_X)=\Omega(U).
 In fact we have $(K_X)_a = T^{1,0}_aX$.
 \end{defn}
 
+We can give transition functions for $K_X$ as follows: Let $\{(U_i,z_i)\}$ be an open cover of $X$ by charts. Then by the above analysis, there exist $g_{ij} \in \mc O^*(U_i \cap U_j)$ such that $dz_j=g_{ij}d z_i$ on $U_i \cap U_j$. Thus $K_X$ is the line bundle given by the transition functions $\brax{g_{ij}}$.
+
+Over any open set $W \subset X$, a section $s \in H^0(W,K_X)$ is gen by a family $\{f_i\}$ with $f_i \in \mc O(W \cap U_i)$ such that $f_i = g_{ij}f_j$ on $U_i \cap U_j \cap W$ for all $i,j$. Consider the holomorphic $1$-form $\omega_i := f_idz_i$ on $W \cap U_i$. Then on $W \cap U_i \cap U_j$, 
+$$w_i = f_idz_i=g_{ij}f_jdz_i=f_jdz_j=w_j,$$ hence the $\{\omega_i\}$ patch to define $\omega \in \Omega (W)$. The map $s \mapsto \omega$ is an isomorphism.
+
+\begin{rmk}
+Under the above correspondence, meromorphic sections of $K_X$ correspond to meromorphic $1$-forms. Moreover, if we apply the construction to $C^\infty$-sections of $K_X$ over $W \subset X$, we obtain an isomorphism $C^\infty (W,K_X)\simeq \mc A^{1,0}(W)$.
+\end{rmk}
+
+\section{The Dolbeault Isomorphism}
+
+\begin{defn}
+Let $E \arr[\pi]X$ be a holomorphic vector bundle on the Riemann surface $X$. The sheaf of holomorphic sections of $E$ is denoted $\mc E$, while $\mc A_E=C^\infty _E$ denotes the sheaf of smooth sections of $E$, so
+\[
+ \mc A_E(U)= \brax{C^\infty \text{ maps } s:U \to E, \pi\circ s = \id_U}.
+\]
+\end{defn}
+\begin{rmk}
+If $E|_U$ is trivial, then the map, then the map
+\begin{align*}
+    \mc E(U) \otimes_{\mc O(U)} \mc A(U) &\to \mc A_E(U) \\
+    s \otimes f & \maps fs
+\end{align*}
+is an isomorphism. Set $\mc A_E^{0,1}(W):= \mc A_E(W)\otimes _{\mc A(W)}\mc A^{0,1}(W)$, for $W$ open in $X$. If $E|_W$ is trivial, then $\mc A_E^{0,1}(W) = \mc E(W) \otimes _{\mc O (W)} \mc A^{0,1}(W)$. It follows that there exists a unique $\mc O(W)$-linear map
+\[
+\bar \partial_{E,W}: \mc A_E(W) \to \mc A_E^{0,1}(W)
+\]
+over each open set $W$ where $E|_W$ is trivial, induced by the map
+\begin{align} \label{eq:big-tensor-stuff}
+1 \otimes \bar \partial : \mc E(W) \otimes_{ \mc O(W) } \mc A(W) \to \mc E(W)\otimes _{\mc O(W)} \mc A^{0,1}(W).    
+\end{align}
+This map is well defined since $\bar \partial$ is $\mc O(W)$-linear.
+\end{rmk}
+
+\begin{defn}
+ The map \eqref{eq:big-tensor-stuff} extends to a map
+\begin{align*}
+    \bar \partial_E : \mc A_E \to \mc A_E^{0,1}.
+\end{align*}
+\end{defn}
+
+\begin{defn}
+    We have an alternative definition of $\bar \partial _E$. Locally, a section $\alpha$ of $\mc A_E$ can be written a $f\otimes s$, for $f \in \mc A(U)$ and $s \in \mc E(U)$. We could try to define $d_\alpha = df \otimes s$, but this fails: for any holomorphic function $g:U \to \C^*$, we have $\alpha = fg \otimes g^{-1}s$, but if $g$ is not constant then
+    \[
+    d(fg) \otimes g^{-1}s \neq df \otimes s.
+    \]
+    However, setting $\bar \partial_E(f \otimes s):= \bar \partial f \otimes s$ makes sense, and satisfies the Leibniz rule
+    \[
+    \partial _E(f \cdot \alpha)= \bar \partial f \land \alpha+ f \bar \partial_E (\alpha).
+    \]
+\end{defn}
+
+\begin{proof}
+To justify this, fix a holomorphic trivialization of $E|_U$ and write $s=(s_1,\dots,s_r)$, while $\alpha = \sum_{i=1}^r f_i \otimes s_i$ for $s_i \in \mc A(U)$. Now set $\bar \partial_E \alpha := \sum_{i=1}^r \bar \partial f_i \otimes s_i$. Then if $s'=(s_1',\dots,s_r')$ is a different local trivialization, it gives rise to $\bar \partial '_E$.
+\begin{claim}
+$\bar \partial_E = \bar \partial '_E$.
+\end{claim}
+Indeed, if $\brax{\psi_{ij}}$ is. the transition matrix, then $s_i = \sum_j \psi_{ij}s_j'$
+and
+\[
+\bar \partial _E'(\alpha) = \bar \partial'_E\paren{ \sum_{i,j}f_i \times \psi_{ij}s_j' } = \sum_{i,j}\bar \partial \paren{f_i \psi_{ij}} \otimes s_j' = \sum_{i,j} (\bar \partial f_i)\psi_{ij}\otimes s_j' = \bar \partial _E(\alpha).
+\]
+\end{proof}
+
+\begin{thm}
+For any holomorphic vector bundle $\pi:E \to X$ over a Riemann surface $X$, the sequence
+\[
+0 \to \mc E(X) \to \mc A_E(X) \arr[\bar \partial] \mc A_E^{0,1}(X) \to H^1(X,E)\to 0
+\]
+is exact.
+\end{thm}
+
+\begin{proof}
+The main point is to show that $\coker (\bar \partial)= H^1(X,E)$, i.e
+\[
+\mc A_E(X) \arr[\bar \partial] \mc A_E^{0,1}(X) \to H^1(X,E)
+\]
+is exact.
+\begin{lem} \label{lem:H1XAE-cohom-is-0}
+We claim $H^1(X,\mc A_E)=0$.
+\end{lem}
+\begin{proof}
+$\mc A_E$ is a fine sheaf, i.e. it admits partitions of unity. Let $\mc U = \{U_i\}_{i \in I}$ be an open cover, and take cocycles $s_{ij} \in \mc A_E(U_i \cap U_j)$ with $\{s_{ij}\} \in Z^1(\mc U, \mc A_E)$. If $\brax{\varphi_i}_{i \in I}$ is a partition of unity with respect to $\mc U$, define $s_i \in \mc A_E(U_i)$ by $s_i = \sum_{j \in I} \varphi_j s_{ij}$, where 
+\[
+(\varphi_js_{ij})(x)=\case{ \varphi_js_{ij}(x), & x \in U_i \cap U_j \\ 0, & x \in U_i \smallsetminus (U_i \cap U_j).}
+\]
+On $U_i \cap U_j$, we obtain
+\[
+s_k - s_\ell = \sum_j \varphi_j(s_{kj}-s_{\ell j})= \sum_j \varphi_j s_{k\ell}=s_{k\ell}.
+\]
+\end{proof}
+Now, we apply the long exact cohomology sequence (\cref{thm:longexact}) to the exact sequence of sheaves:
+\[
+0 \to \mc E \to \mc A_E \arr[\bar \partial] \mc A_E^{0,1}\to 0
+\]
+to obtain the result. More explicitly, we can construct a map
+\[
+D:H^1(X,E) \to \mc A_E^{0,1}(X)/\bar \partial \mc A_E(X)
+\]
+as follows: let $\{s_{ij}\} \in Z^1(\mc U, E)$, so $s_{ij} \in H^0(U_i \cap U_j, E)$ for all $i,j \in I$. Using \Cref{lem:H1XAE-cohom-is-0}, find $\alpha \in \mc A_E(U_i)$ such that $\alpha _i - \alpha _j = s_{ij}$ on $U_i \cap U_j$. Then $\bar \partial \alpha _i = \bar \partial \alpha _j$ on $U_i \cap U_j$, so the $\brax{\bar \partial \alpha_i}$ define an element of $\mc A^{0,1}_E(X)$, whose image in the quotient $\mc A_E^{0,1}(X)/\bar \partial \mc A_E$ is $D(\brax{s_{ij}})$.
+\begin{exercise}
+Check that $D$ is independent of the choices made, and is injective.
+\end{exercise}
+The hard part is proving that $D$ is surjective. We complete this next time.
+\end{proof}
+
+\begin{defn}
+The \textbf{$(0,1)$-Dolbeault cohomology group} of $X$ is defined as the quotient group
+\[
+H_{\bar \partial}^{0,1}(X) := \mc A_E^{0,1}(X)/ \bar \partial  \mc A_E(X).
+\]
+\end{defn}
 
 \end{document}
