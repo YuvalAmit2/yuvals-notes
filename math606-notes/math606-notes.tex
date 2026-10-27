@@ -2537,7 +2537,7 @@ What's cool is that the LHS is an analytic invariant, while the RHS is a topolog
 \section{Differential Forms on Riemann Surfaces}
 
 \begin{defn}
-Recall that if $X$ is a real $n$-dimensional $C^\infty$-manifold, then we have the \textbf{tangent bundle} $TX$. In a coordinate chart $\{x_i\}_{i=1}^n$ on $X$, a local basis of sections of $TX$ is given by vector fields $\partder[]{}{x_1},\dots,\partder[]{}{x_n}$. At any point $a \in X$, $\partder[]{}{x_i}|_a$ is a \textbf{derivation} $C_a^\infty \to \R$. The \textbf{cotangent space} $T_a^*X = (T_aX)^*$ has basis $dx_1|_a,\dotsm,dx_n|_a$.
+Recall that if $X$ is a real $n$-dimensional $C^\infty$-manifold, then we have the \textbf{tangent bundle} $TX$. In a coordinate chart $\{x_i\}_{i=1}^n$ on $X$, a local basis of sections of $TX$ is given by vector fields $\partder[]{}{x_1},\dots,\partder[]{}{x_n}$. At any point $a \in X$, $\partder[]{}{x_i}|_a$ is a \textbf{derivation}, i.e. a linear map $C_a^\infty \to \R$ obeying the product rule. The \textbf{cotangent space} $T_a^*X = (T_aX)^*$ has basis $dx_1|_a,\dotsm,dx_n|_a$.
 
 We define the \textbf{complex tangent bundle} $T_\C X:=TX \otimes _\R \C$, the bundle of complex valued tangent vectors, and we define $T_\C^*X$ similarly.
 \end{defn}
@@ -2555,6 +2555,86 @@ d_af:= (f-f(a)) \pmod {m_a^2}.
 \]
 \end{defn}
 
+\begin{prop}
+The dual space $(m_a/m_a^2)^*$ is the tangent space $T_aX$.
+\end{prop}
+
+\begin{proof}
+Let $T: m_a/m_a^2 \to \C$ be a linear functional. We can define a derivation $D_T:\mc A_a \to \C$ by $D_T(f) = T(f-f(a))$. Note that $D_T$ is indeed a derivation, since for $f,g \in \mc A_a$, we have
+\[
+T\paren{ (f-f(a))(g-g(a)) }=0 \iff D_T(fg)=f(a)D_T(g)+ g(a)D_T(f).
+\]
+\end{proof}
+
+Now for $(U,z)$ a coordinate neighborhood of $a \in X$ with $z=x+iy$, we have $\{d_ax,d_ay\}$ and $\{d_az,d_a\bar z\}$ for two bases of $T^*_{\C,a}X$. For any function $f \in C_a^\infty$, the Taylor formula
+\[
+f-f(a)=\partder[]{f}{x}(a)(x-x(a))+\partder[]{f}{y}(a)(y-y(a)) \pmod{m_a^2}
+\]
+translates to
+\[
+d_af = \partder[]{f}{x}(a)\cdot d_ax+\partder[]{f}{y}(a)\cdot d_ay.
+\]
+Similarly, we have
+\[
+df = \partder[]{f}{z}dz + \partder[]{f}{\bar z}d \bar z.
+\]
+Now, if $(U',z')$ is a second coordinate neighborhood at $a$, then
+\[
+\partder[]{z'}{z}(a)=c \in \C^*, \qquad \partder[] {\bar{z'}}{\bar z}(a)= \bar c,
+\]
+while
+\[
+\partder[]{z'}{\bar z}(a)=\partder[]{\bar{z'}}{z}(a)=0.
+\]
+These are both consequences of the Cauchy-Riemann equations. Therefore $d_az'= cd_az$ and $d_a\bar{z'}=\bar c d_a\bar z$. Hence the subspaces $T_a^{1,0}X,T_a^{0,1}x$ of $T^*_\C X$ spanned by $d_az$ and $d_a \bar z$ are independent of the choice of local coordinate at $a$. Thus we get a decomposition
+\[
+T^*_{\C,a}X=T_a^{1,0}X \bigoplus T_a^{0,1}X
+\]
+
+\begin{defn}
+A \textbf{differential 1-form} on $X$ is a $C^\infty$-section of $T_\C^* X$.
+
+Locally, any differential $1$-form equals $adz + bd \bar z$ for $a,b \in C^\infty(U)$. These patch together to form a sheaf. We denote the \textbf{sheaf of smooth 1-forms} on $X$ by $\mc A^1$. We also sometimes write $\mc A =\mc A^0$.
+
+A 1-form $\varphi$ is of \textbf{type (1,0)} if, for any local coordinate system $(U,z)$, $\varphi$ is of the form $adz$ (respectively $b d \bar z$ for \textbf{type (0,1)}).
+
+Let $\mc A^{1,0}$ and $\mc A^{0,1}$ denote the sheaves of $C^\infty$-forms of type $(1,0)$ and $(0,1)$. So for $U \subset X$ open,
+\[
+\mc A^{1,0}(U) = C^\infty (U,T^{1,0}U).
+\]
+\end{defn}
+
+\begin{defn}
+For $f \in \mc A(U)=\C^\infty (U)$, the \textbf{exterior derivative} $df$ has a unique expression $df = \partial f + \bar \partial f$ with $\partial f \in \mc A^{1,0}(U)$ and $\bar \partial f \in \mc A^{0,1}(U)$. In local coordinates, $\partial f = \partder[]{f}{z}dz$ and $\bar \partial f = \partder[]{f}{\bar z}d \bar z.$
+\end{defn}
+
+\begin{rmk}
+Let $\mc A^k(U)$ denote smooth $k$-forms on $U$. Just as $d$ extends to a map $\mc A^k(U) \to \mc A^{k+1}(U)$, so do $\partial$ and $\bar \partial$.
+
+For $\alpha \in \mc A^{1,0}(U)$, $\partial \alpha =0$ and $\bar \partial \alpha = d\alpha$. Similarly for $\beta \in \mc A^{0,1}(U)$, $\partial b = d \beta$ and $\bar \partial \beta =0$.
+
+In local coordinates, if $\alpha = fdz$ and $\beta = g d \bar z$,
+\begin{align*}
+    \bar \partial \alpha &= \partder[]{f}{\bar z}d \bar z \land d z = -\partder[]{f}{\bar z}dz \land d \bar z, \\
+    \partial \beta &= \partder[]{g}{z}dz \land d \bar z.
+\end{align*} 
+\end{rmk}
+
+\section{\texorpdfstring{The Canonical Bundle $K_X$}{The Canonical Bundle KX}}
+
+\begin{defn}
+Let $W \subset X$ be open. A \textbf{holomorphic 1-form} on $W$ is an element $\omega \in \mc A^{1,0}(W)$ such that $\bar \partial w =0$ (equivalently, $dw=0$). If $(U,z)$ is a coordinate chart and $w|_{W \cap U} = fdz$, then $w$ is holomorphic if and only if $f$ is holomorphic. We can similarly define meromorphic $1$-forms: there are forms defined outside of a discrete set $A \subset W$, which, for any coordinate chart $(U,z)$ with $U \subset W$, are of the form $fdz$ with $f$ meromorphic on $U$.
+
+Let $\Omega = \Omega^1_X$ be the \textbf{sheaf of holomorphic 1-forms} on $X$, with
+\[
+W \mapsto \Omega(W) := \brax{ \text{holomorphic 1-forms on }W}.
+\]
+The \textbf{canonical line bundle} $K_X=K$ on $X$ is a line bundle such that, for all $U \subset X$ open,
+\[
+H^0(U,K_X)=\Omega(U).
+\]
+In fact we have $(K_X)_a = T^{1,0}_aX$.
+\end{defn}
 
 
 \end{document}
