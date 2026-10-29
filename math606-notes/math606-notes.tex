@@ -19,11 +19,11 @@
 For example, if $U \subset \C$ is open. and $f:U \to \C$ has a single complex derivative at each point $x \in U$, then $f$ is smooth (has infinitely many derivatives) and analytic (locally representable by a power series). Since power series are close to polynomials, it's not surprising that the local study of power series (analysis) and polynomials (geometry) is similar.
 
 \begin{defn}
-    A \textbf{complex analytic set} is defined locally as 
+    A \term{complex analytic set} is defined locally as 
     $$\{x \in U \mid f_1(x) =\cdots = f_m(x) =0\},$$ 
     where $f_i: U \to \C$ are holomorphic.
 
-    A \textbf{complex algebraic set} is defined in the same way, replacing ``holomorphic'' by ``polynomial''.
+    A \term{complex algebraic set} is defined in the same way, replacing ``holomorphic'' by ``polynomial''.
 \end{defn}
 
 \subsection{Classification of Real and Complex Manifolds}
@@ -37,7 +37,7 @@ Real manifolds were defined and studied as sub-manifolds of $\R^n$ long before t
 Suppose $X$ is a complex manifold (more generally, a complex analytic space, which is a space locally defined by a system of holomorphic functions). Then, there exists a holomorphic embedding $f:X \hookrightarrow \C^N$ for some $N \iff X$ is a Stein manifold.
 
 \begin{defn}
-    A complex manifold $X$ is \textbf{Stein} if for any discrete subset $\{x_n\}_{n \geq 1}$ for points in $X$, and sequence $\{c_n\}_{n\geq1}$ of complex numbers, there exists a holomorphic function $f:X \to \C$ such that $f(x_n) =c_n$ for all $n \geq 1$.
+    A complex manifold $X$ is \term{Stein} if for any discrete subset $\{x_n\}_{n \geq 1}$ for points in $X$, and sequence $\{c_n\}_{n\geq1}$ of complex numbers, there exists a holomorphic function $f:X \to \C$ such that $f(x_n) =c_n$ for all $n \geq 1$.
 \end{defn}
 
 \begin{thm}
@@ -71,7 +71,7 @@ Soon after, Serre proved comparison theorems for sheaves and sheaf cohomology on
 \end{thm}
 
 \begin{defn}
-    A \textbf{Riemann surface} is a 1-dimensional complex manifold $X$. Underlying $X$ is a 2-dimensional orientable real manifold $X_\R$. If $X$ is compact, then $X_\R$ is diffeomorphic to a $g$-torus, which we represent as
+    A \termnt{Riemann surface} is a 1-dimensional complex manifold $X$. Underlying $X$ is a 2-dimensional orientable real manifold $X_\R$. If $X$ is compact, then $X_\R$ is diffeomorphic to a $g$-torus, which we represent as
     $$H_1(X_\R, \Z) \simeq \Z^{2g}$$
 \end{defn}
 
@@ -128,17 +128,17 @@ This problem in its entirety is still open, and is a motivating problem for this
 \section{Riemann Surfaces}
 
 \begin{defn}
-Let $X$ be a 2-dimensional real topological manifold. We consider pairs $(U,\varphi)$ where $U \subset X$ is open, and $\varphi:U\to \C$ is a homeomorphism on its image. Two such pairs $(U_1,\varphi_1)$ and $(U_2,\varphi_2)$ are said to be \textbf{compatible} if
+Let $X$ be a 2-dimensional real topological manifold. We consider pairs $(U,\varphi)$ where $U \subset X$ is open, and $\varphi:U\to \C$ is a homeomorphism on its image. Two such pairs $(U_1,\varphi_1)$ and $(U_2,\varphi_2)$ are said to be \term{compatible} if
 $$\varphi_2 \circ \varphi_1^{-1} :\varphi_1(U_1\cap U_2) \to \varphi_2(U_1\cap U_2)$$
 is holomorphic. In this case, its inverse is also holomorphic.
 
-A \textbf{complex structure} on $X$ is a family of pairs $\{(U_i,\varphi_i)\}_{i \in I}$ which are compatible, and $X = \bigcup _IU_i$. We typically assume such a family is maximal. The pairs $(U_i,\varphi_i)$ are called \textbf{holomorphic charts}. In a coordinate neighborhood $U$, we usually identify $U$ with $\varphi(U)$, and write $z$ for the map $\varphi$ as one does with 1 complex variable in $\C$. 
+A \term{complex structure} on $X$ is a family of pairs $\{(U_i,\varphi_i)\}_{i \in I}$ which are compatible, and $X = \bigcup _IU_i$. We typically assume such a family is maximal. The pairs $(U_i,\varphi_i)$ are called \term[holomorphic chart]{holomorphic charts}. In a coordinate neighborhood $U$, we usually identify $U$ with $\varphi(U)$, and write $z$ for the map $\varphi$ as one does with 1 complex variable in $\C$. 
 
-A \textbf{Riemann surface} is a connected 2-dimensional real manifold with a complex structure on it. Given a Riemann surface $X$, a function $f:X \to \C$ is \textbf{holomorphic} if $f$ is continuous, and for every chart $(U,\varphi)$ of $X$, 
+A \term[Riemann surfaces]{Riemann surface} is a connected 2-dimensional real manifold with a complex structure on it. Given a Riemann surface $X$, a function $f:X \to \C$ is \term{holomorphic} if $f$ is continuous, and for every chart $(U,\varphi)$ of $X$, 
 $$f \circ \varphi^{-1}: \varphi(U) \to \C$$
-is holomorphic. This also defines holomorphic functions on open subsets $\Omega \subset X$. Let $\bm{\mc O(\Omega)}$ denote the $\C$-algebra of all holomorphic functions on $\Omega$. If $X,Y$ are Riemann surfaces, and $f:X \to Y$ is continuous, we say that $f$ is \textbf{holomorphic} if for every chart $(V,\psi)$ on $Y$, the function 
+is holomorphic. This also defines holomorphic functions on open subsets $\Omega \subset X$. Let $\bm{\mc O(\Omega)}$ denote the $\C$-algebra of all holomorphic functions on $\Omega$. If $X,Y$ are Riemann surfaces, and $f:X \to Y$ is continuous, we say that $f$ is \term{holomorphic} if for every chart $(V,\psi)$ on $Y$, the function 
 $$\psi\circ f:f^{-1}(V)\to \psi(V)$$
-is holomorphic. A holomorphic map $f:X \to Y$ is an \textbf{analytic isomorphism} (or \textbf{biholomorphism}) if there exists a holomorphic map $g:Y \to X$ such that $f\circ g =\id_Y$ and $g \circ f=\id_X$.
+is holomorphic. A holomorphic map $f:X \to Y$ is an \term[analytic isomorphisms]{analytic isomorphism} (or \term[biholomorphic,biholomorphisms]{biholomorphism}) if there exists a holomorphic map $g:Y \to X$ such that $f\circ g =\id_Y$ and $g \circ f=\id_X$.
 \end{defn}
 
 \begin{rmk}
@@ -150,7 +150,7 @@ is holomorphic. A holomorphic map $f:X \to Y$ is an \textbf{analytic isomorphism
 \end{ex}
 
 \begin{ex}[The Riemann sphere $\P^1$]
-    The \textbf{Riemann sphere} $\P^1=\C \cup \{\infty\}$ is the one-point compactification of $\C$, where the open neighborhoods of $\infty$ are complements of compact subsets $K \subset \C$. With this topology, $\P^1$ is homeomorphic to the 2-sphere $S^2 \subset \R^3$. Set $U_1 := \P^1\setminus \{\infty \} = \C$ and $U_2:=\P_1\setminus \{0\}=\C^*\cup \{\infty\}$, and define the charts $\varphi_i:U_i\to \C$ by $\varphi_1=\id_\C$, and
+    The \term{Riemann sphere} $\P^1=\C \cup \{\infty\}$ is the one-point compactification of $\C$, where the open neighborhoods of $\infty$ are complements of compact subsets $K \subset \C$. With this topology, $\P^1$ is homeomorphic to the 2-sphere $S^2 \subset \R^3$. Set $U_1 := \P^1\setminus \{\infty \} = \C$ and $U_2:=\P_1\setminus \{0\}=\C^*\cup \{\infty\}$, and define the charts $\varphi_i:U_i\to \C$ by $\varphi_1=\id_\C$, and
     $$\varphi_2(z) = \case{1/z & z \in \C^*, \\ 0 & z=\infty.}$$
     Then,
     $$\varphi_2\circ \varphi_1^{-1}:\varphi_1(U_1\cap U_2) = \C^* \to \C^* = \varphi_2(U_1 \cap U_2)$$
@@ -158,7 +158,7 @@ is holomorphic. A holomorphic map $f:X \to Y$ is an \textbf{analytic isomorphism
 \end{ex}
 
 \begin{ex}[Complex tori]
-    Let $\omega_1$ and $\omega_2$ be non-zero complex numbers, which are linearly independent over $\R$. Define $\Lambda =\Z\omega_1 + \Z\omega_2$ to be a \textbf{lattice} in $\C$, and let $\pi:\C \surj \C/\Lambda$ be the canonical projection, giving $\C/\Lambda$ the quotient topology. Since $\pi$ is a covering map, $\C/\Lambda$ inherits a complex structure from the complex structure on $\C$. Note that $\C/\Lambda$ is compact, and is homeomorphic to the real $2$-torus $S^1 \times S^1$.
+    Let $\omega_1$ and $\omega_2$ be non-zero complex numbers, which are linearly independent over $\R$. Define $\Lambda =\Z\omega_1 + \Z\omega_2$ to be a \term{lattice} in $\C$, and let $\pi:\C \surj \C/\Lambda$ be the canonical projection, giving $\C/\Lambda$ the quotient topology. Since $\pi$ is a covering map, $\C/\Lambda$ inherits a complex structure from the complex structure on $\C$. Note that $\C/\Lambda$ is compact, and is homeomorphic to the real $2$-torus $S^1 \times S^1$.
 
     More explicitly, let $\C = \bigcup V_i$ be an open cover of $\C$ by disks such that $\pi|_{V_i}$ is a homeomorphism onto $U_i := \pi (V_i)\subset \C/\Lambda$. Let $\varphi_i:U_i \to V_i \subset \C$ be the inverse $\paren{\pi|_{V_i}}^{-1}$. Then, the family $\{(U_i,\varphi_i)\}$ is a complex structure on $X := \C/\Lambda$. Indeed, let $x_0 \in U_i \cap U_j$, $z_i:=\varphi_i(x_0)$, and $z_j := \varphi_j(x_0)$. Then, $\lambda:=z_i-z_j \in \Lambda$, and
     $$\varphi_i \circ \varphi_j^{-1}: \varphi_j(U_i \cap U_j) \to \varphi_i(U_i \cap U_j)$$
@@ -186,13 +186,13 @@ is holomorphic. A holomorphic map $f:X \to Y$ is an \textbf{analytic isomorphism
 \end{exercise}
 
 \begin{defn}
-    A \textbf{meromorphic function} on a Riemann surface $X$ is a holomorphic function $f:X'\to \C$, where $X'\subset X$ is an open subset such that
+    A \termnt{meromorphic function} on a Riemann surface $X$ is a holomorphic function $f:X'\to \C$, where $X'\subset X$ is an open subset such that
     \begin{enumerate}[(i)]
         \item $X \setminus X'$ is discrete in $X$,
         \item For any point $p \in X'$, 
         $$\lim_{x \to p}|f(x)| = \infty$$
     \end{enumerate}
-    The points of $X\setminus X'$ are called the \textbf{poles} of $f$. Let $\mc M(X)$ denote the $\C$-algebra of all meromorphic functions on $X$. We'll soon show that $\mc M(x)$ is a field.
+    The points of $X\setminus X'$ are called the \term[pole]{poles} of $f$. Let $\mc M(X)$ denote the $\C$-algebra of all meromorphic functions on $X$. We'll soon show that $\mc M(x)$ is a field.
 \end{defn}
 
 \begin{rmk}
@@ -203,7 +203,7 @@ is holomorphic. A holomorphic map $f:X \to Y$ is an \textbf{analytic isomorphism
 
 Our definition of meromorphic functions does not work in higher dimensions, since isolated zeros/poles don't exist in complex dimension $n\geq 2$. The following is a better, more generalized definition:
 \begin{defn}
-    A \textbf{meromorphic function} $f$ is one that locally can be written as $\frac{g}{h}$, where $g$ and $h$ are holomorphic functions.
+    A \term[meromorphic functions]{meromorphic function} $f$ is one that locally can be written as $\frac{g}{h}$, where $g$ and $h$ are holomorphic functions.
 \end{defn}
 
 \begin{thm}[][label=thm:mer_is_hol]
@@ -252,7 +252,7 @@ for all $z \in U$
 \end{proof}
 
 \begin{rmk}
-    The integer $k$ may be characterized as follows: for any neighborhood $U_0$ of $a$, there exists neighborhoods $U \subset U_0$ of $a$ and $W$ of $b=f(a)$ such that $\#f^{-1}(y) \cap U = k$ for all $y \in W$, $y \neq b$. This $k$ is the \textbf{multiplicity} of $f$ at $k$.
+    The integer $k$ may be characterized as follows: for any neighborhood $U_0$ of $a$, there exists neighborhoods $U \subset U_0$ of $a$ and $W$ of $b=f(a)$ such that $\#f^{-1}(y) \cap U = k$ for all $y \in W$, $y \neq b$. This $k$ is the \term{multiplicity} of $f$ at $k$.
     \end{rmk}
 
 \begin{notethm*}[Notation]
@@ -312,15 +312,15 @@ We've shown that $\mc M(\P^1) \simeq \C(z)$, the field of rational functions in 
 In this section, $X$ and $Y$ are topological manifolds.
 
 \begin{defn}
-    Let $X$ and $Y$ be topological manifolds (more generally, locally compact Hausdorff spaces). A continuous map $f:X \to Y$ is \textbf{proper} if $f^{-1}(K)$ is compact for any compact $K \subset Y$. We say that $f$ is a \textbf{local homeomorphism} if for all $x \in X$, there exists an open neighborhood $U \ni x$ such that $f(U)$ is open in $Y$, and $f|_U:U \to f(U)$ is a homeomorphism. We say that $f$ is a \textbf{covering map} if for all $y \in Y$, there exists a neighborhood $V \ni y$ which is \textbf{evenly covered} by $f$, meaning 
+    Let $X$ and $Y$ be topological manifolds (more generally, locally compact Hausdorff spaces). A continuous map $f:X \to Y$ is \term{proper} if $f^{-1}(K)$ is compact for any compact $K \subset Y$. We say that $f$ is a \term[local homeomorphisms]{local homeomorphism} if for all $x \in X$, there exists an open neighborhood $U \ni x$ such that $f(U)$ is open in $Y$, and $f|_U:U \to f(U)$ is a homeomorphism. We say that $f$ is a \term[covering maps]{covering map} if for all $y \in Y$, there exists a neighborhood $V \ni y$ which is \term{evenly covered} by $f$, meaning 
     $$f^{-1}(V) = \bigsqcup_{j \in J}U_j$$
-    is a disjoint union of open sets $U_j$ such that $f|_{U_j}:U_j \to V$ is a homeomorphism onto $V$, for all $j \in J$. We say $X$ is a \textbf{covering} of $Y$ if a covering map exists.
+    is a disjoint union of open sets $U_j$ such that $f|_{U_j}:U_j \to V$ is a homeomorphism onto $V$, for all $j \in J$. We say $X$ is a \term[coverings]{covering} of $Y$ if a covering map exists.
 \end{defn}
 
 \begin{rmk}
     \begin{enumerate}
-        \item Since the cardinality $|J|$ of $f^{-1}(y)$ is a locally constant function on $Y$ for any covering map $f$, if $Y$ is connected then $\# f^{-1}(y)$ is independent of $y \in Y$. The covering is said to be \textbf{finite} (resp. \textbf{infinite}) if $f^{-1}(y)$ is constant (resp. infinite). The covered is said to be an $\bm n$\textbf{-sheeted covering} if $\#f^{-1}(y) = n$.
-        \item If $f:X \to Y$ and $\tilde f:\tilde X \to Y$ are two coverings of $Y$, they are said to be \textbf{isomorphic coverings} if there exists a homeomorphism $\varphi :\tilde X \to X$ such that $f \circ \varphi = \tilde \varphi$. That is, the diagram
+        \item Since the cardinality $|J|$ of $f^{-1}(y)$ is a locally constant function on $Y$ for any covering map $f$, if $Y$ is connected then $\# f^{-1}(y)$ is independent of $y \in Y$. The covering is said to be \term{finite} (resp. \term{infinite}) if $f^{-1}(y)$ is constant (resp. infinite). The covered is said to be an \term[sheeted cover,sheeted covering]{n-sheeted covering} if $\#f^{-1}(y) = n$.
+        \item If $f:X \to Y$ and $\tilde f:\tilde X \to Y$ are two coverings of $Y$, they are said to be \term{isomorphic coverings} if there exists a homeomorphism $\varphi :\tilde X \to X$ such that $f \circ \varphi = \tilde \varphi$. That is, the diagram
         % https://q.uiver.app/#q=WzAsMyxbMCwwLCJYIl0sWzIsMCwiXFx0aWxkZSBYIl0sWzEsMiwiWSJdLFswLDIsImYiXSxbMSwyLCJcXHRpbGRlIGYiLDJdLFsxLDAsIlxcdmFycGhpIl1d
 \[\begin{tikzcd}[ampersand replacement=\&,cramped]
 	X \&\& {\tilde X} \\
@@ -365,7 +365,7 @@ commutes.
 \section{Branched and Unbranched Coverings}
 
 \begin{defn}
-    Let $f:X \to Y$ be a non-constant holomorphic map of Riemann surfaces. A point $x \in X$ is called a \textbf{branch point} or \textbf{ramification point} of $f$ if there is no neighborhood $U$ of $x$ such that $f|_U$ is injective. We say that $f$ is an \textbf{unbranched holomorphic map} if it has no branch points. This happens if and only if $f$ is a local homeomorphism. 
+    Let $f:X \to Y$ be a non-constant holomorphic map of Riemann surfaces. A point $x \in X$ is called a \term[branch points]{branch point} or \term[ramification points]{ramification point} of $f$ if there is no neighborhood $U$ of $x$ such that $f|_U$ is injective. We say that $f$ is an \term{unbranched holomorphic map} if it has no branch points. This happens if and only if $f$ is a local homeomorphism. 
 \end{defn}
 
 \begin{rmk}
@@ -373,7 +373,7 @@ commutes.
 \end{rmk}
 
 \begin{defn}
-Assume $f:X \to Y$ is a proper map, and let $A$ be the set of all branch points of $f$. Then, the set $B:= f(A)$ is also closed and discrete. $B$ is called the set of \textbf{critical values} of $f$. 
+Assume $f:X \to Y$ is a proper map, and let $A$ be the set of all branch points of $f$. Then, the set $B:= f(A)$ is also closed and discrete. $B$ is called the set of \term[critical value]{critical values} of $f$. 
 \end{defn}
 
 Let $Y' :=Y \setminus B$ and $X' := X \setminus f^{-1}(B) \subset X \setminus A$. Then, $f|_X : X' \to Y'$ is a proper unbranched holomorphic covering map, with a well-defined finite number of sheets in $n$ (that is, every $c \in Y'$ is achieved exactly $n$ times). We will extend this statement to include the critical values $b \in B$ by considering multiplicities. For $x \in X$, let $v(f,x)$ be the multiplicity with which $f$ takes the value $f(x)$ at the point $x$. We say that $f$ takes the value $c \in Y$, counting multiplicities, $m$ times on $X$, if
@@ -405,18 +405,18 @@ $$m := \sum_{x \in f^{-1}(c)}v(f,x)$$
 
 We want to study $\mc M(X)$ for any compact Riemann surface $X$, generalizing $\mc M(\P^1) \simeq \C(z)$. The main difficulty is that if $X$ is a compact Riemann surface, we can construct any non-constant $f \in \mc M(X)$. We examine the case of $\mc M(\C\setminus \Lambda)$ where $\Lambda \subset \C$ is a lattice. These are elliptic functions.
 
-\begin{defn}
-    A meromorphic function $f$ on $\C$ is said to be \textbf{elliptic} if there exists a lattice $\Lambda =\Z\omega_1 \oplus  \Z\omega_2$ in $\C$ such that $f(z+\omega) = f(z)$ for all $z \in \C \setminus \Lambda$ and $\omega \in \Lambda$. These correspond to meromorphic functions on the torus $\C /\Lambda$.
-\end{defn}
+% \begin{defn}
+%     A meromorphic function $f$ on $\C$ is said to be \termnt{elliptic} if there exists a lattice $\Lambda =\Z\omega_1 \oplus  \Z\omega_2$ in $\C$ such that $f(z+\omega) = f(z)$ for all $z \in \C \setminus \Lambda$ and $\omega \in \Lambda$. These correspond to meromorphic functions on the torus $\C /\Lambda$.
+% \end{defn}
 
 \section{Elliptic Functions}
 
 \begin{defn}
-    Let $\Omega:= \Z\omega_1  +\Z\omega_2$ be a lattice in $\C$. A meromorphic function $f:\C \to \P^1$ is \textbf{elliptic} with respect to $\Omega$ if $f(z+\omega)=f(z)$ for all $\omega \in \Omega$. Such a function corresponds to a holomorphic map $f:T \to \P^1$, where $T:=\C/\Omega$.
+    Let $\Omega:= \Z\omega_1  +\Z\omega_2$ be a lattice in $\C$. A meromorphic function $f:\C \to \P^1$ is \term{elliptic} with respect to $\Omega$ if $f(z+\omega)=f(z)$ for all $\omega \in \Omega$. Such a function corresponds to a holomorphic map $f:T \to \P^1$, where $T:=\C/\Omega$.
 \end{defn}
 
 \begin{defn}
-    The \textbf{order} $\ord(f)$ of an elliptic function $f$ is the number of solutions $f(z) = \infty$, i.e. the number of poles of $f$ on $T$, counted with multiplicity.
+    The \term{order} $\ord(f)$ of an elliptic function $f$ is the number of solutions $f(z) = \infty$, i.e. the number of poles of $f$ on $T$, counted with multiplicity.
 \end{defn}
 
 \begin{rmk}
@@ -488,7 +488,7 @@ This means we cannot just choose any set of zeros/poles, and assume an elliptic 
 \end{proof}
 
 \begin{defn}
-    The \textbf{Weierstrass $\bm {\wp}$-function} for a lattice $\Omega$ is
+    The \term[\wp]{Weierstrass $\wp$-function} for a lattice $\Omega$ is
     $$\wp(z) := \frac{1}{z^2} + \sum_{\omega \in \Omega^*}\paren{\frac{1}{(z-\omega)^2}-\frac{1}{\omega^2}}.$$
     For $z$ bounded and staying away from the lattice points, $1/(z-\omega)^2 - 1/\omega^2$ has order of magnitude $1/|\omega^3|$. Hence, $p(z)$ is meromorphic with a pole of order $2$ at each lattice point.
 \end{defn}
@@ -570,7 +570,7 @@ We've shown that $\mc M(\Omega) = \C(\wp, \wp')$. This is not to say that $\wp$ 
 \section{\texorpdfstring{The Differential Equation for $\wp(z)$}{The Differential Equation for p(z)}}
 
 \begin{defn}
-    We define the \textbf{Weierstrass $\bm \zeta$-function}
+    We define the \term[\zeta]{Weierstrass $\zeta$-function}
     \begin{align} \label{eq:weierstrass_zeta}
         \zeta(z) := \frac{1}{z}+\sum_{\omega \in \Omega^*}\paren{\frac{1}{z-\omega}+\frac{1}{\omega}+\frac{z}{\omega^2}}.
     \end{align}
@@ -587,7 +587,7 @@ We've shown that $\mc M(\Omega) = \C(\wp, \wp')$. This is not to say that $\wp$ 
     $$\zeta(z) = \frac{1}{z} +\sum_{\omega \in \Omega^*}\paren{ -\frac{z^2}{\omega^3} - \frac{z^3}{\omega^4}-\cdots }= \frac{1}{z}-G_3z^2 - G_4z^3-\cdots $$
     for all $z \in D$, where
     $$G_k:=G_k(\Omega):= \sum_{\omega \in \Omega^*}\frac{1}{\omega^k}$$
-    are the \textbf{Eisenstein} series for $\Omega$.
+    are the \term{Eisenstein} series for $\Omega$.
 
     For $k$ odd, the terms $1/\omega^k$ and $1/(-\omega)^k$ cancel, so $G_k=0$. Therefore, the Laurent series for $\zeta(z)$ at $0$ is
     $$\zeta(z) = \frac{1}{z}-\sum_{n=2}^\infty G_{2n}z^{2n-1}$$
@@ -615,7 +615,7 @@ We've shown that $\mc M(\Omega) = \C(\wp, \wp')$. This is not to say that $\wp$ 
         \end{align*}
         Thus, the points $(\wp(z),\wp'(z))$ lie in the algebraic curve with equation
         $$y^2 = 4x^3 - g_2x -g_3,$$
-        called an \textbf{elliptic curve}. The RHS is a cubic with discriminant $\Delta = 16(g_2^3-27g_3^2)$.
+        called an \term{elliptic curve}. The RHS is a cubic with discriminant $\Delta = 16(g_2^3-27g_3^2)$.
     \end{thm}
 
 \begin{proof}
@@ -658,8 +658,8 @@ Suppose $b_n \neq 0$ for all $n$.
     \begin{enumerate}
     \item $\prod_{n=1}^\infty b_n$ converges $\iff \sum_{n=1}^\infty \Log(b_n)$ converges, in which case
     $$\prod_{n=1}^\infty b_n = \exp\paren{\sum_{n=1}^\infty \Log(b_n)}$$
-    \item We say $\prod_{n=1}^\infty b_n$ \textbf{converges absolutely} if $\sum_{n=1}^\infty \Log(b_n)$ converges absolutely. Then, the product $\prod_{n=1}^\infty (1+c_n)$ converges absolutely $\iff \sum_{n=1}^\infty |c_n| < \infty$.
-    \item If $\{f_n\}$ is a sequence of holomorphic functions on an open $U \subset \C$, and if $f_n = 1+F_n$, we say that the product $\prod_{n=1}^\infty f_n$ \textbf{converges uniformly on $\bm U$} if and only if the series $\sum_{n=1}^\infty F_n$ converges uniformly on $U$. Moreover, uniform convergence on compact subsets of $U$ implies $\prod_{n=1}^\infty f_n$ is holomorphic on $U$.
+    \item We say $\prod_{n=1}^\infty b_n$ \term{converges absolutely} if $\sum_{n=1}^\infty \Log(b_n)$ converges absolutely. Then, the product $\prod_{n=1}^\infty (1+c_n)$ converges absolutely $\iff \sum_{n=1}^\infty |c_n| < \infty$.
+    \item If $\{f_n\}$ is a sequence of holomorphic functions on an open $U \subset \C$, and if $f_n = 1+F_n$, we say that the product $\prod_{n=1}^\infty f_n$ \term[converges uniformly]{converges uniformly on $U$} if and only if the series $\sum_{n=1}^\infty F_n$ converges uniformly on $U$. Moreover, uniform convergence on compact subsets of $U$ implies $\prod_{n=1}^\infty f_n$ is holomorphic on $U$.
 \end{enumerate}
 \end{prop}
 
@@ -678,7 +678,7 @@ We extend our definition of convergence to mean $\prod_{n=1}^\infty b_n$ converg
 \subsection{\texorpdfstring{The $\sigma$-Function}{The sigma-Function}}
 
 \begin{defn}
-    Given a lattice $\Omega = \Z\omega_1 + \Z\omega_2 \subset \C$, define the \textbf{Weierstrass $\bm \sigma$-function} to be
+    Given a lattice $\Omega = \Z\omega_1 + \Z\omega_2 \subset \C$, define the \term[\sigma]{Weierstrass $\sigma$-function} to be
     $$\sigma(z):=z\prod_{\omega \in \Omega^*}\paren{1-\frac{z}{\omega}}\exp\paren{\frac{z}{\omega
     }+\frac{z^2}{2\omega^2} }.$$
     The exponential factor is included to ensure convergence.
@@ -821,9 +821,9 @@ Then, $f$ is holomorphic on $U$ if and only if the Cauchy-Riemann equations hold
 $$\partder{f}{\bar z}(a)=0, \quad \forall a \in U.$$
 Note that size $z=x+iy$ and $\bar z=x-iy$, then $x=\frac{z+\bar z}{2}$ and $y=\frac{z-\bar z}{2i}$, so the formulas for $\partder{f}{z}$ and $\partder{f}{\bar z}$ are just the chain rule.
 
-Now, let $\Omega$ be open in $\C^n$.
+
 \begin{defn}
-    A function $f:\Omega \to \C$ is \textbf{holomorphic} if for every point $a:=(a_1,\dots,a_n) \in \Omega$, there exists a neighborhood $U$ of $a$ and constants $c_\alpha:=c_{\alpha_1,\dots,\alpha_n}, \alpha_j \in \Z_{\geq 0}$ such that
+    L et $\Omega \subset \C^n$ be open. A function $f:\Omega \to \C$ is \term{holomorphic} if for every point $a:=(a_1,\dots,a_n) \in \Omega$, there exists a neighborhood $U$ of $a$ and constants $c_\alpha:=c_{\alpha_1,\dots,\alpha_n}, \alpha_j \in \Z_{\geq 0}$ such that
     \begin{align} \label{eq:holseries}
         f(z) = \sum_{\alpha}c_\alpha(z_1-a_1)^{\alpha_1}\cdots (z_n-a_n)^{\alpha_n}, \quad z \in U.
     \end{align}
@@ -942,7 +942,7 @@ Intuitively, the equation $P(x,y)=0$ defines an algebraic function $y=y(x)$. We 
         \\ S_1 &:= \brax{x \in \C \mid \exists y \in \C, P(x,y)=\partder{P}{y}(x,y)=0},
         \\ S &:= S_0\cup S_1 \cup \{\infty\}.
     \end{align*}
-    Then, $S \subset \P^1$ is called the set of \textbf{critical points} of $x$. Note that $S$ is finite by \Cref{prop:simsolutions}.
+    Then, $S \subset \P^1$ is called the set of \term[critical point]{critical points} of $x$. Note that $S$ is finite by \Cref{prop:simsolutions}.
 \end{defn}
 
 \begin{prop}[][label=prop:projproper]
@@ -1097,7 +1097,7 @@ Let $\w{pr}_2:V \to \C$ be the second projection, where $V=V(P)$. Then, the func
 \end{proof}
 
 \begin{defn}
-    In algebraic geometry, $X$ is called the \textbf{normalization} of the algebraic curve $V=V(P)$
+    In algebraic geometry, $X$ is called the \term{normalization} of the algebraic curve $V=V(P)$
 \end{defn}
 
 
@@ -1181,9 +1181,9 @@ Next, let $R'$ and $R$ be closed rectangles with $R' \subset \Int(R)$. Choose $f
 Now, we want to show that $\partder{u}{\bar z}=f$ has a solution for any $f\in C^\infty (\Omega)$, i.e. not necessarily compact supported, and any open $\Omega$. For this, we use Runge's theorem.
 
 \begin{defn}
-    Let $\Omega \subset \C$ be open, and $A \subset \Omega$ be any open subset. The \textbf{topological hull} $\hat A_\Omega$ of $A$ in $\Omega$ is the union of $A$ with the connected components of $\Omega \setminus A$ which are relatively compact (closure is compact) in $\Omega$.
+    Let $\Omega \subset \C$ be open, and $A \subset \Omega$ be any open subset. The \term{topological hull} $\hat A_\Omega$ of $A$ in $\Omega$ is the union of $A$ with the connected components of $\Omega \setminus A$ which are relatively compact (closure is compact) in $\Omega$.
 
-    Such a connected component is called a \textbf{hole} of A. Intuitively, one gets $\hat A_\Omega$ by filling the holes of $A$.
+    Such a connected component is called a \term[holes]{hole} of A. Intuitively, one gets $\hat A_\Omega$ by filling the holes of $A$.
 \end{defn}
 
 \begin{ex}
@@ -1296,26 +1296,26 @@ Then, on $U_i \cap U_j \cap U_k$, we have $f_{ij}+f_{jk}+f_{ki}=0$. Thus, solvin
 
 In the \v{C}ech cohomology theory, $\{f_{ij}\} : f_{ij}+ f_{jk}+f_{ki}=0$ is a cocycle in $Z^1(\mc U,\mc O)$, and
 $$\brax{\{f_{ij}\} \setbar f_{ij}=g_j-g_i \text{ for some } \{g_i\}  }=B^1(\mc U,\mc O)$$
-is a coboundary group. The \textbf{first \v{C}ech cohomology group}
+is a coboundary group. The \term{first \v{C}ech cohomology group}
 $$H^1(\mc U,\mc O):=Z^1(\mc U,\mc O)/B^1 (\mc U,\mc O)$$
 is the obstruction to solving the problem in general. The Mittag-Leffler theorem says that this group is zero, for all $\Omega \subset \C$ open, and for all open covers $\mc U$ of $\Omega$.
 
 \section{Sheaves of Abelian Groups}
 ''Sheaves are friends"
 \begin{defn}
-    Let $X$ be a topological space. A \textbf{presheaf} $\mc F$ of abelian groups of $X$ is an assignment $U \mapsto \mc F(U)$ of abelian groups $\mc F(U)$ to each open set $U \subset X$, with $F(\emptyset)=0$, and for every pair $V \subset U$ of open sets, there are homomorphisms $r_{U,V}: \mc F(U) \to \mc F(V)$ called \textbf{restriction maps}, satisfying
+    Let $X$ be a topological space. A \term[presheafs]{presheaf} $\mc F$ of abelian groups of $X$ is an assignment $U \mapsto \mc F(U)$ of abelian groups $\mc F(U)$ to each open set $U \subset X$, with $F(\emptyset)=0$, and for every pair $V \subset U$ of open sets, there are homomorphisms $r_{U,V}: \mc F(U) \to \mc F(V)$ called \term[restriction map]{restriction maps}, satisfying
     \begin{enumerate}[(i)]
         \item $r_{U,U}=\id_{\mc F(U)}$ for all $U \subset X$ open
         \item If $W \subset V \subset U$ are three open sets, then $r_{U,W}=r_{V,W} \circ r_{U,V}$.
     \end{enumerate}
      We usually denote $r_{U,V}(f)$ by $f|_V$, as if $f$ is a function of $U$ and $r_{U,V}(f)$ is its restriction to $V$.
 
-     The presheaf $\mc F$ is called a \textbf{sheaf} if for any $U \subset X$ and open cover $U=\bigcup_{i \in I}U_i$, we have
+     The presheaf $\mc F$ is called a \term[sheafs]{sheaf} if for any $U \subset X$ and open cover $U=\bigcup_{i \in I}U_i$, we have
      \begin{enumerate}[(i)]
         \item If $f,g \in \mc F(U)$ with $r_{U,U_i}(f) = r_{U,U_i}(g)$ for all $i \in I$, then $f=g$.
         \item If we are given, for each $i \in I$, an element $f_i \in \mc F(U_i)$ such that $r_{U_i,U_i \cap U_j}(f_i)=r_{U_j,U_i\cap U_j}(f_j)$ for all $i,j \in I$, then there exists $f \in \mc F(U)$ such that $r_{U,U_i}(f)=f_i$ for all $i \in I$.
      \end{enumerate}
-     An element $f \in \mc F(U)$ is called a \textbf{section} of $\mc F$ over $U$.
+     An element $f \in \mc F(U)$ is called a \term[sections]{section} of $\mc F$ over $U$.
 \end{defn}
 
 \begin{rmk}
@@ -1325,16 +1325,16 @@ is the obstruction to solving the problem in general. The Mittag-Leffler theorem
 \begin{ex}
     Let $X$ be a Riemann surface.
     \begin{enumerate}
-        \item \textbf{The sheaf of holomorphic functions $\mc O$}: for any open set $U \subset X$, $\mc O(U)$ is the group of holomorphic functions $U \to \C$
-        \item The \textbf{sheaf of $C^\infty$-functions $\mc A$}: for any open set $U \subset X$, \[ \mc A(U) = C^\infty (U):= \{f:U \to C \mid f \text{ is } C^\infty \} \]
-        \item \textbf{The presheaf $\mc F$ of constant functions}: $\mc F(U) = \{ f:U \to \C \text{ constant}\}$. Note that $\mc F$ is not a sheaf, as property (ii) fails: if $U$ is disconnected, we can send one component to $0$, another to $1$, and then we can't get a constant function that restricts to $0$ and $1$. However, one gets a sheaf $\C$ by setting $\C(U) := \{ f:U \to \C, f$ is locally constant$\}$.
+        \item \term[sheaf of holomorphic functions,\cO]{The sheaf of holomorphic functions $\mc O$}: for any open set $U \subset X$, $\mc O(U)$ is the group of holomorphic functions $U \to \C$
+        \item \term[sheaf of $C^\infty$ functions,\cA]{The sheaf of $C^\infty$ functions $\cA$}: for any open set $U \subset X$, \[ \mc A(U) = C^\infty (U):= \{f:U \to C \mid f \text{ is } C^\infty \} \]
+        \item \term[presheaf of constant functions,\cF]{The presheaf of constant functions $\mc F$}: $\mc F(U) = \{ f:U \to \C \text{ constant}\}$. Note that $\mc F$ is not a sheaf, as property (ii) fails: if $U$ is disconnected, we can send one component to $0$, another to $1$, and then we can't get a constant function that restricts to $0$ and $1$. However, one gets a sheaf $\C$ by setting $\C(U) := \{ f:U \to \C, f$ is locally constant$\}$.
     \end{enumerate}
 \end{ex}
 
 \begin{defn}
-    Let $\mc F$ be a presheaf on $X$, and fix $a \in X$. We define an equivalence relation $\sim$ on pairs $(U,f)$, where $U\subset X$ is open with $a \in U$, and $f \in \mc F(U)$ as follows: we say $(U, f) \sim (V,g)$ if there exists $W$ open with $a \in W \subset U \cap V$ such that $f|_W = g|_W$. The equivalence class of a pair $(U,f)$ is called the \textbf{germ} of the section $f$ at $a$, denoted $f_a$. 
+    Let $\mc F$ be a presheaf on $X$, and fix $a \in X$. We define an equivalence relation $\sim$ on pairs $(U,f)$, where $U\subset X$ is open with $a \in U$, and $f \in \mc F(U)$ as follows: we say $(U, f) \sim (V,g)$ if there exists $W$ open with $a \in W \subset U \cap V$ such that $f|_W = g|_W$. The equivalence class of a pair $(U,f)$ is called the \term[germs]{germ} of the section $f$ at $a$, denoted $f_a$. 
     
-    The set of all germs of sections at $a$ forms an abelian group $\mc F_a$ called the \textbf{stalk} of $\mc F$ at $a$.
+    The set of all germs of sections at $a$ forms an abelian group $\mc F_a$ called the \term[stalks]{stalk} of $\mc F$ at $a$.
 \end{defn}
 
 \begin{notethm*}
@@ -1343,9 +1343,9 @@ is the obstruction to solving the problem in general. The Mittag-Leffler theorem
     \mc F_a := \coprod _{U \ni a} (\mc F(U)/\sim) =: \varinjlim_{U \ni a} \mc F(U) 
     \]
 \end{notethm*}
-We can associate a sheaf to any presheaf $\mc F$ as follows: Let $|\mc F|=\coprod_{a \in X}\mc F_a$ and $p:|\mc F| \to X$, $f_a \mapsto a$ be the natural projection. Define a topology on $|\mc F|$ as follows: for any $U \subset X$ and $f \in \mc F(U)$, let $N(U,f):=\brax{f_a \setbar a \in U}$, where $f_a$ is the equivalence class in $\mc F_a$ defined by $(U, f)$. The system of sets $\brax{N(U,f)}_{U \subset X}$ is a basis for a topology on $|\mc F|$ such that $p$ is a local homeomorphism (exercise).
+We can associate a sheaf to any presheaf $\mc F$ as follows: Let \term{$|\cF|$}$:=\coprod_{a \in X}\mc F_a$ and $p:|\mc F| \to X$, $f_a \mapsto a$ be the natural projection. Define a topology on $|\mc F|$ as follows: for any $U \subset X$ and $f \in \mc F(U)$, let $N(U,f):=\brax{f_a \setbar a \in U}$, where $f_a$ is the equivalence class in $\mc F_a$ defined by $(U, f)$. The system of sets $\brax{N(U,f)}_{U \subset X}$ is a basis for a topology on $|\mc F|$ such that $p$ is a local homeomorphism (exercise).
 
-A \textbf{section} of $|\mc F|$ over $U$ is a continuous map $s:U \to |\mc F|$ such that $p \circ s=\id_U$, i.e. $s(a) \in \mc F_a$, for all $a \in U$. Let $|\mc F|(U)$ denote the set of all sections of $|\mc F|$ over $U$.
+A \termnt{section} of $|\mc F|$ over $U$ is a continuous map $s:U \to |\mc F|$ such that $p \circ s=\id_U$, i.e. $s(a) \in \mc F_a$, for all $a \in U$. Let $|\mc F|(U)$ denote the set of all sections of $|\mc F|$ over $U$.
 
 \begin{exercise}
     $|\mc F|$, together with the natural restriction maps, is a sheaf.
@@ -1359,7 +1359,7 @@ A \textbf{section} of $|\mc F|$ over $U$ is a continuous map $s:U \to |\mc F|$ s
 \end{exercise}
 
 \begin{ex}
-    If $X$ is a Riemann surface, and $p \in X$, we define the \textbf{skyscraper sheaf} $\C_p$ by
+    If $X$ is a Riemann surface, and $p \in X$, we define the \term{skyscraper sheaf} $\C_p$ by
     \[
     \C_p(U) := \case{\C & p \in U, \\ 0 & p \not \in U.}
     \]
@@ -1374,24 +1374,24 @@ A \textbf{section} of $|\mc F|$ over $U$ is a continuous map $s:U \to |\mc F|$ s
 
 Let $\mc F$ be a sheaf on the topological space $X$, and $\mc U:= \{U_i\}_{i \in I}$ be an open cover of $X$.
 \begin{defn}
-    Define \textbf{cochain groups} to be 
+    Define \term[cochain group]{cochain groups} to be 
     \begin{align*}
         C^0(\mc U,\mc F) &:= \prod_{i \in I}\mc F(U_i) = \brax{ (f_i)_{i \in I} \setbar f_i \in \mc F(U_i), \: \forall i \in I} \\
         C^1 (\mc U,\mc F) &:= \prod_{(i,j)}\mc F(U_i \cap U_j)=\brax{ (f_{ij}) \setbar f_{ij} \in \mc F (U_i \cap U_j), \forall i,j \in I}
     \end{align*}
-    Let $Z^1(\mc U,\mc F) \subset C^1(\mc U, \mc F)$ be the subgroup of $\bm 1$\textbf{-cocycles}, consisting of families $(f_{ij})$ for which
+    Let $Z^1(\mc U,\mc F) \subset C^1(\mc U, \mc F)$ be the subgroup of \term[cocycle,cocycles,1-cocycle]{1-cocycles}, consisting of families $(f_{ij})$ for which
     \begin{align} \label{eq:cechcochain}
         f_{ij}+f_{jk}=f_{ik} \quad \text{on } U_i \cap U_j \cap U_k, \: \forall i,j,k \in I
     \end{align}
     Note that \eqref{eq:cechcochain} implies $f_{ii}=0$, and $f_{ij}=-f_{ji}$ for any cocycle $(f_{ij})$.
 
-    Define a \textbf{coboundary map} $\delta: C^0(\mc U,\mc F)\to C^1(\mc U,\mc F)$ by setting $\delta(f_i)_{i\in I}:=(f_{ij})$, where $f_{ij}:= f_j-f_i$ on $U_i \cap U_j$. Moreover, let
+    Define a \term[coboundary maps,coboundary]{coboundary map} $\delta: C^0(\mc U,\mc F)\to C^1(\mc U,\mc F)$ by setting $\delta(f_i)_{i\in I}:=(f_{ij})$, where $f_{ij}:= f_j-f_i$ on $U_i \cap U_j$. Moreover, let
     \[ B^1(\mc U,\mc F) := \delta C^0(\mc U,\mc F) \subset Z^1(\mc U,\mc F). \]
-    Then, the \textbf{1$\st$ \v{C}ech cohomology group} is
+    Then, the \term[H^1,\v{C}ech coholomogy group]{first \v{C}ech cohomology group $H^1(\mc U,\mc F)$} is
     \[
     H^1(\mc U,\mc F):= Z^1(\mc U,\mc F)/B^1 (\mc U, \mc F).
     \]
-    Moreover, the \textbf{0$\th$ cohomology group} is
+    Moreover, the \term[$H^0(\cU,\cF)$]{zeroth \v{C}ech cohomology group $H^0(\cU,\cF)$} is
     \[
     H^0(\mc U,\mc F):= \ker \delta \in C^0(\mc U,\mc F)
     \]
@@ -1409,10 +1409,10 @@ Let $\mc F$ be a sheaf on the topological space $X$, and $\mc U:= \{U_i\}_{i \in
 \subsection{Partitions of Unity}
 
 \begin{defn}
-    A \textbf{partition of unity} relative to the open cover $\mc U:=\{U_i\}_{i \in I}$ of $\Omega \subset \C$ is a family $\{\varphi_i\}_{i \in I}$ of $C^\infty$ functions on $\Omega$, such that
+    A \term{partition of unity} relative to the open cover $\mc U:=\{U_i\}_{i \in I}$ of $\Omega \subset \C$ is a family $\{\varphi_i\}_{i \in I}$ of $C^\infty$ functions on $\Omega$, such that
     \begin{enumerate}[(i)]
         \item $\varphi_i:\Omega \to \R_{\geq 0}$ has $\supp \varphi_i \subset U_i$,
-        \item the family of closed sets $\{\supp \varphi _i\}_{i \in I}$ is \textbf{locally finite}, i.e. for any compact set $K \subset \Omega$, the set $\brax{i \in I \setbar K \cap \supp \varphi_i \neq \emptyset}$ is finite
+        \item the family of closed sets $\{\supp \varphi _i\}_{i \in I}$ is \term{locally finite}, i.e. for any compact set $K \subset \Omega$, the set $\brax{i \in I \setbar K \cap \supp \varphi_i \neq \emptyset}$ is finite
         \item $\sum_{i \in I}\varphi_i = 1$ on $\Omega$.
     \end{enumerate}
     Partitions of unity always exists for any open cover $\mc U$ of $\Omega$.
@@ -1448,7 +1448,7 @@ Let $\mc F$ be a sheaf on the topological space $X$, and $\mc U:= \{U_i\}_{i \in
 \end{proof}
 
 \begin{defn}
-A sheaf that admits of a partition of unity is called a \textbf{fine sheaf}. So, $\mc A$ is a fine sheaf.
+A sheaf that admits of a partition of unity is called a \term{fine sheaf}. So, $\mc A$ is a fine sheaf.
 \end{defn}
 
 
@@ -1469,7 +1469,7 @@ Now, by \Cref{thm:grothmagic}, we know there exists $A \in C^\infty (\Omega)$ su
 Now, we aim to remove our choice of open cover from the definition of the \v{C}ech cohomology groups. Namely, we want to define $H^1(X, \mc F)$.
 
 \begin{defn}
-Let $\mc U:=\{U_i\}_{i \in I}$ and $\mc V:= \{V_i\}_{j \in J}$ be two open covers of $X$. Then, $\mc V$ is said to be a \textbf{refinement} of $\mc U$ if there exists a \textbf{refinement map} $\tau :J \to I$ such that $V_j \subset U_{\tau(j)}$ for all $j \in J$. Such a map $\tau$ induces a map
+Let $\mc U:=\{U_i\}_{i \in I}$ and $\mc V:= \{V_i\}_{j \in J}$ be two open covers of $X$. Then, $\mc V$ is said to be a \term{refinement} of $\mc U$ if there exists a \term{refinement map} $\tau :J \to I$ such that $V_j \subset U_{\tau(j)}$ for all $j \in J$. Such a map $\tau$ induces a map
 \[
 \tau^* : H^1 (\mc U,\mc F) \to H^1 (\mc V,\mc F)
 \]
@@ -1563,7 +1563,7 @@ H^1(X,\mc F) \simeq H^1(\mc U,\mc F).
 \subsection{Morphisms on Presheaves}
 
 \begin{defn}
-    A \textbf{morphism} of presheaves $\varphi:\mc F \to \mc G$ on $X$ is an assignment, to each open set $U \subset X$, of a map $\varphi_U :\mc F(U)\to \mc G(U)$ such that for any open sets $V \subset U$, the diagram
+    A \term[morphisms]{morphism} of presheaves $\varphi:\mc F \to \mc G$ on $X$ is an assignment, to each open set $U \subset X$, of a map $\varphi_U :\mc F(U)\to \mc G(U)$ such that for any open sets $V \subset U$, the diagram
     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXG1jIEYoVSkiXSxbMiwwLCJcXG1jIEcoVSkiXSxbMCwyLCJcXG1jIEYoVikiXSxbMiwyLCJcXG1jIEcoVikiXSxbMCwxLCJcXHZhcnBoaV9VIl0sWzAsMiwicl97VSxWfSIsMl0sWzEsMywicl97VSxWfSJdLFsyLDMsIlxcdmFycGhpX1YiXV0=
 \[\begin{tikzcd}[ampersand replacement=\&,cramped]
 	{\mc F(U)} \&\& {\mc G(U)} \\
@@ -1584,7 +1584,7 @@ Any morphism $\varphi$ of sheaves induces a map $\varphi:\mc F_a \to \mc G_a$ of
     \[
     \mc F \arr[\alpha] \mc G \arr[\beta] \mc H
     \]
-    of sheaves on $X$ is \textbf{exact} if, for all $a \in X$, the induced sequence
+    of sheaves on $X$ is \term{exact} if, for all $a \in X$, the induced sequence
     \[
     \mc F_a \arr[\alpha]\mc G_a \arr[\beta]\mc H_a
     \]
@@ -1700,9 +1700,9 @@ where the RHS is singular cohomology.
 Let $X, E$ be topological spaces, and $p:E \to X$ a continuous map. We assume that for every $x \in X$, the fiber $E_x:=p^{-1}(x)$ has the structure of an $n$-dimensional complex vector space.
 
 \begin{defn}
- The map $p:E \to X$ is called a \textbf{vector bundle} of rank $n$ over $X$ if every point $a \in X$ has a neighborhood $U \ni a$ such that there is a homeomorphism $\varphi:p^{-1}(U) \to U\times \C^n$, called a \textbf{local trivialization} of $E$ over $U$, which is
+ The map $p:E \to X$ is called a \term[vector bundles]{vector bundle} of rank $n$ over $X$ if every point $a \in X$ has a neighborhood $U \ni a$ such that there is a homeomorphism $\varphi:p^{-1}(U) \to U\times \C^n$, called a \term[local trivializations]{local trivialization} of $E$ over $U$, which is
  \begin{enumerate}[(i)]
-    \item \textbf{fiber preserving:} the diagram
+    \item \term{fiber preserving}: the diagram
     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJwXnstMX0oVSkiXSxbMiwwLCJVIFxcdGltZXMgXFxDXm4iXSxbMSwyLCJVIl0sWzAsMiwicCIsMl0sWzAsMSwiXFx2YXJwaGkiXSxbMSwyLCJcXHd7cHJ9XzEiXV0=
 \[\begin{tikzcd}[ampersand replacement=\&]
 	{p^{-1}(U)} \&\& {U \times \C^n} \\
@@ -1718,13 +1718,13 @@ commutes, and
 E_x \arr[\sim] \{x\} \times \C^n \equiv \C^n.
 \]
  \end{enumerate}
-An \textbf{atlas} for $E$ is a family $\brax{(U_i,\varphi_i)}_{i \in I}$ of local trivializations such that $\bigcup_{i \in I}U_i = X$.
+An \term{atlas} for $E$ is a family $\brax{(U_i,\varphi_i)}_{i \in I}$ of local trivializations such that $\bigcup_{i \in I}U_i = X$.
 
-A vector bundle of rank $1$ is called a \textbf{line bundle}.
+A vector bundle of rank $1$ is called a \term[line bundles]{line bundle}.
 \end{defn}
 
 \begin{defn}
-    A vector bundle $E \to X$ is said to be \textbf{trivial} if it has a linear trivialization  $E \arr[\sim] X \times \C^n$. Hence, any vector bundle is \textit{locally} trivial by definition.
+    A vector bundle $E \to X$ is said to be \term{trivial} if it has a linear trivialization  $E \arr[\sim] X \times \C^n$. Hence, any vector bundle is \textit{locally} trivial by definition.
 \end{defn}
 
 \begin{prop}[][label=prop:transition-funcs]
@@ -1740,7 +1740,7 @@ A vector bundle of rank $1$ is called a \textbf{line bundle}.
     \[
     \varphi_{ij}(x,t) = (x,g_{ij}(x)t),\qquad \forall (x,t) \in U_i \cap U_j \times \C^n.
     \]
-    On $U_i \cap U_j \cap U_k$, the equation $g_{ij}g_{jk}=g_{ik}$ holds. The $\{g_{ij}\}$ are called \textbf{transition functions} for the vector bundle.
+    On $U_i \cap U_j \cap U_k$, the equation $g_{ij}g_{jk}=g_{ik}$ holds. The $\{g_{ij}\}$ are called \term[transition function]{transition functions} for the vector bundle.
 \end{prop}
 
 \begin{proof}
@@ -1756,11 +1756,11 @@ A vector bundle of rank $1$ is called a \textbf{line bundle}.
 \end{proof}
 
 \begin{defn}
-    Let $X$ be a Riemann surface (or more generally a complex manifold), and $E\to X$ be a rank $n$ vector bundle over $X$. Two local trivializations $(U_i, \varphi_i)$ and $(U_j, \varphi_j)$ are said to be \textbf{compatible} if the associated transition function $g_{ij}:U_i \cap U_j \to \GL_n(\C)$ is holomorphic.
+    Let $X$ be a Riemann surface (or more generally a complex manifold), and $E\to X$ be a rank $n$ vector bundle over $X$. Two local trivializations $(U_i, \varphi_i)$ and $(U_j, \varphi_j)$ are said to be \term{compatible} if the associated transition function $g_{ij}:U_i \cap U_j \to \GL_n(\C)$ is holomorphic.
 \begin{notethm}[Remark]
-    If $\Omega \subset \C^m$ is open, then a map $f: \Omega \to \C^n$ is \textbf{holomorphic} if $f=(f_1,\dots,f_n)$, with each $f_i :\Omega \to \C$ holomorphic.
+    If $\Omega \subset \C^m$ is open, then a map $f: \Omega \to \C^n$ is \term{holomorphic} if $f=(f_1,\dots,f_n)$, with each $f_i :\Omega \to \C$ holomorphic.
 \end{notethm}
-If $X$ has a covering by a compatible trivializations for $E$, in which case we say $E$ has a \textbf{holomorphic atlas}, then $E$ is called a \textbf{holomorphic vector bundle} over $X$.
+If $X$ has a covering by a compatible trivializations for $E$, in which case we say $E$ has a \term{holomorphic atlas}, then $E$ is called a \term[holomorphic line bundle]{holomorphic vector bundle} over $X$.
 \end{defn}
 
 \begin{rmk}
@@ -1768,7 +1768,7 @@ If $X$ has a covering by a compatible trivializations for $E$, in which case we 
 \end{rmk}
 
 \begin{defn}
-    Let $E \arr[p]X$ and $E' \arr[p']X$ be two vector bundles over a Riemann surface $X$. A \textbf{morphism} $u:E \to E'$ is a map such that the diagram
+    Let $E \arr[p]X$ and $E' \arr[p']X$ be two vector bundles over a Riemann surface $X$. A \term{morphism} $u:E \to E'$ is a map such that the diagram
     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJFIl0sWzEsMSwiWCJdLFsyLDAsIkUnIl0sWzAsMiwidSJdLFswLDEsInAiLDJdLFsyLDEsInAnIl1d
 \[\begin{tikzcd}[ampersand replacement=\&]
 	E \&\& {E'} \\
@@ -1779,7 +1779,7 @@ If $X$ has a covering by a compatible trivializations for $E$, in which case we 
 \end{tikzcd}\]
 commutes (i.e. $p'u =p$), and $u:p^{-1}(x) \to (p')^{-1}(x)$ is $\C$-linear for all $x \in X$.
 
-The morphism $u$ is called continuous/$C^\infty$/holomorphic if the function $u$ has this property. We use this notion to define \textbf{isomorphic vector bundles}. 
+The morphism $u$ is called continuous/$C^\infty$/holomorphic if the function $u$ has this property. We use this notion to define \term{isomorphic vector bundles}. 
 \end{defn}
 
 \begin{ex}
@@ -1789,7 +1789,7 @@ The morphism $u$ is called continuous/$C^\infty$/holomorphic if the function $u$
 \section{Sections of Vector Bundles}
 
 \begin{defn}
-    If $p:E \to X$ is a vector bundle, a \textbf{section} $E$ is a morphism $s:X \to E$ such that $s(x) \in E_x$ for all $x \in X$. Such sections can be continuous/$C^\infty$/holomorphic as before.
+    If $p:E \to X$ is a vector bundle, a \term[sections]{section} $E$ is a morphism $s:X \to E$ such that $s(x) \in E_x$ for all $x \in X$. Such sections can be continuous/$C^\infty$/holomorphic as before.
 \end{defn}
 
 If $\varphi_i: p^{-1}(U_i) \to U_i \times \C^n$ are local trivialization maps for $E$, then $\varphi_i \circ s(x)=(x,f_i(x))$ for all $x \in U_i$, where $f_i :U_i \to \C^n$ is a continuous/$C^\infty$/holomorphic map.
@@ -1806,11 +1806,11 @@ Hence, a section $s$ of $E$ may be identified with a family $\{f_i\}_{i \in I}$ 
 \end{ex}
 
 \begin{defn}
-    Let $X$ be a Riemann surface and $\pi :E \to X$ be a holomorphic vector bundle on $X$. Let $S \subset X$ be a discrete set, and $s:X\setminus S \to E$ be a holomorphic section of $E$ over $X \setminus S$. Then, $s$ is called a \textbf{meromorphic section} if, for all $a \in S$, there exists a neighborhood $U$ of $a$ and a coordinate $z$ on $U$ with $z(a)=0$ such that $U \cap S = \{a\}$, and for some $N>0$, $z^Ns$ is the restriction to $U \setminus \{a\}$ of a holomorphic section of $E$ over $U$.
+    Let $X$ be a Riemann surface and $\pi :E \to X$ be a holomorphic vector bundle on $X$. Let $S \subset X$ be a discrete set, and $s:X\setminus S \to E$ be a holomorphic section of $E$ over $X \setminus S$. Then, $s$ is called a \term[meromorphic sections]{meromorphic section} if, for all $a \in S$, there exists a neighborhood $U$ of $a$ and a coordinate $z$ on $U$ with $z(a)=0$ such that $U \cap S = \{a\}$, and for some $N>0$, $z^Ns$ is the restriction to $U \setminus \{a\}$ of a holomorphic section of $E$ over $U$.
 \end{defn}
 
 \begin{defn}
-    The \textbf{sheaf of holomorphic sections} $\cE$ of $E$ is defined by the group 
+    The \term[\cE]{sheaf of holomorphic sections $\cE$} of $E$ is defined by the group 
     \[
     \cE(U)=\Gamma(U,E):=\{\text{holomorphic sections of } E \text{ over } U\}.
     \] 
@@ -1819,7 +1819,7 @@ Hence, a section $s$ of $E$ may be identified with a family $\{f_i\}_{i \in I}$ 
 \section{Divisors and Line Bundles}
 
 \begin{defn}
-    Let $X$ be a Riemann surface. A \textbf{divisor} on $X$ is a map $D: X \to \Z$ such that the support of $D$ is locally finite. That is, for every compact $K \subset X$,
+    Let $X$ be a Riemann surface. A \term[divisors]{divisor} on $X$ is a map $D: X \to \Z$ such that the support of $D$ is locally finite. That is, for every compact $K \subset X$,
     \[
     \{p \in X \mid D(p) \neq 0\} \cap K \text{ is finite.}
     \]
@@ -1828,7 +1828,7 @@ We assume now that $X$ is compact so the support of $D$ is finite.
 \begin{defn}
     The sum and difference $D_1+D_2$ and $D_1-D_2$ of two divisors are defined in the obvious way.
 
-    A divisor $D$ is said to be \textbf{effective} if $D(p) \geq 0$ for all $p \in X$. We write $D_1 \geq D_2$ if $D_1 -D_2$ is effective. The set $\{p \in X \mid D(p) \neq 0\}$ is called the \textbf{support} of $D$, denoted $|D|$ or $\supp (D)$.
+    A divisor $D$ is said to be \term{effective} if $D(p) \geq 0$ for all $p \in X$. We write $D_1 \geq D_2$ if $D_1 -D_2$ is effective. The set $\{p \in X \mid D(p) \neq 0\}$ is called the \term{support} of $D$, denoted $|D|$ or $\supp (D)$.
 \end{defn}
 
 \begin{notethm}[Recall]
@@ -1848,7 +1848,7 @@ Suppose now that $s$ is a meromorphic section of a holomorphic vector bundle $E$
 \end{exercise}
 
 \begin{defn}
-    The \textbf{divisor} of $s$ is the function $a \mapsto \ord_a(s)$. That is, 
+    The \term{divisor} of $s$ is the function $a \mapsto \ord_a(s)$. That is, 
     \[
     \div(s) = \sum_{a \in X}\ord_a(s)[a]. 
     \]
@@ -1881,7 +1881,7 @@ Suppose now that $s$ is a meromorphic section of a holomorphic vector bundle $E$
 \end{proof}
 
 \begin{defn}
-    The section $s_D$ is called the \textbf{standard section} of $L(D)$.
+    The section $s_D$ is called the \term{standard section} of $L(D)$.
 \end{defn}
 
 \begin{rmk}[][label=rmk:sheaf-on-divisor]
@@ -1900,7 +1900,7 @@ Suppose now that $s$ is a meromorphic section of a holomorphic vector bundle $E$
 \section{Linear Equivalence of Divisors}
 
 \begin{defn}
-    Two divisors $D_1$ and $D_2$ are \textbf{linearly equivalent} if there exists a meromorphic function $f$ on $X$, not identically zero, such that $\div f= D_1 - D_2$. We write $D_1 \sim D_2$ when this is the case. 
+    Two divisors $D_1$ and $D_2$ are \term{linearly equivalent} if there exists a meromorphic function $f$ on $X$, not identically zero, such that $\div f= D_1 - D_2$. We write $D_1 \sim D_2$ when this is the case. 
 \end{defn}
 
 \begin{prop}
@@ -1932,17 +1932,17 @@ Linear operations on vector spaces/matrices can by bundle-ized, provided that th
 \begin{ex}
     Suppose $E \to X$ and $E' \to X$ are two vector bundles over the same base $X$, and $\{g_{ij}\}$ and $\{g'_{ij}\}$ are transition functions for $E$ and $E'$ with respect to the same trivializing open cover of $X$.
     \begin{enumerate}
-        \item \textbf{Direct sum:} The direct sum $E \oplus E'$ of $E$ and $E'$ is a vector bundle on $X$ such that $(E \oplus E')_x = E_x \oplus E'_x$, and the transition functions $\{g_{ij}^{E \oplus E'} \}$ are given by \[
+        \item \term{Direct sum}: The direct sum $E \oplus E'$ of $E$ and $E'$ is a vector bundle on $X$ such that $(E \oplus E')_x = E_x \oplus E'_x$, and the transition functions $\{g_{ij}^{E \oplus E'} \}$ are given by \[
         g_{ij}^{E \oplus E'} = g_{ij} \oplus g'_ij = \matr{g_{ij} & 0 \\ 0 & g_{ij}'}
         \]
-        \item \textbf{Tensor product:} The tensor product $E \otimes E'$ has $(E \times E')_x = E_x\otimes E'_x$ and $g_{ij}^{E \times E'}=g_{ij} \otimes g_{ij}'$. In particular, if $L$ and $L'$ are two line bundles on $X$, then $L \otimes L'$ has transition functions $\{g_{ij}\cdot g'_{ij}\}$. Observe that this is the group operation on $H^1(X,\cO^*)$.
-        \item \textbf{Dual vector bundle $E^*$:} If $E \arr[p] X$ is a holomorphic vector bundle, and $E^*:= \coprod_{a \in X}E_a^*$, we make $E^*$ into a vector bundle as follows: for a trivialization $\varphi_U:p^{-1}(U) \to U \times \C^n$ of $E$ over $U \subset X$, define $\tilde \varphi_U :\coprod_{a \in U}E_a^* \to U \times \C^n$ by 
+        \item \term{Tensor product}: The tensor product $E \otimes E'$ has $(E \times E')_x = E_x\otimes E'_x$ and $g_{ij}^{E \times E'}=g_{ij} \otimes g_{ij}'$. In particular, if $L$ and $L'$ are two line bundles on $X$, then $L \otimes L'$ has transition functions $\{g_{ij}\cdot g'_{ij}\}$. Observe that this is the group operation on $H^1(X,\cO^*)$.
+        \item \term[dual vector bundle]{Dual vector bundle $E^*$}: If $E \arr[p] X$ is a holomorphic vector bundle, and $E^*:= \coprod_{a \in X}E_a^*$, we make $E^*$ into a vector bundle as follows: for a trivialization $\varphi_U:p^{-1}(U) \to U \times \C^n$ of $E$ over $U \subset X$, define $\tilde \varphi_U :\coprod_{a \in U}E_a^* \to U \times \C^n$ by 
         \[
         \tilde \varphi_U(v) = \paren{ a, (\varphi_{U,a})^{-1}(v)}, \quad v \in E_a^*.
         \] 
         It follows that if $\{g_{ij}\}$ are the transition functions of $E$ with respect to an open cover, then the transition functions for $E^*$ are $\brax{ (g_{ij}^t)^{-1} }$.
-        \item \textbf{Exterior and symmetric powers:} We have the $k$'th symmetric power $S^kE$, and the $k$'th exterior power $\Wedge^kE$, with transition functions $\{S^kg_{ij}\},\brax{\Wedge ^kg_{ij}}$ respectively.
-        \item \textbf{Hom bundle:} We have the vector bundle $\Hom(E,E')\to X$, defined via the isomorphism $\Hom(E,E') \simeq E^* \otimes E'$.
+        \item \term[exterior power,symmetric power]{Exterior and symmetric powers}: We have the $k$'th symmetric power $S^kE$, and the $k$'th exterior power $\Wedge^kE$, with transition functions $\{S^kg_{ij}\},\brax{\Wedge ^kg_{ij}}$ respectively.
+        \item \term[Hom bundle]{Hom bundle}: We have the vector bundle $\Hom(E,E')\to X$, defined via the isomorphism $\Hom(E,E') \simeq E^* \otimes E'$.
     \end{enumerate}
 \end{ex}
 
@@ -1982,7 +1982,7 @@ If $L \to X$ is any line bundle, then $L \otimes L^*$ is a trivial line bundle o
 \end{proof}
 
 \begin{defn}
-    Let $\bm{Z^1(X)}$ denote the abelian group of all divisors on $X$ (sometimes denoted $\Div(X)$), and let $\bm{A^1(X)} := Z^1(X)/\sim$, where $\sim$ denotes linear equivalence. Let $\bw{Pic}\bm{(X)}$ be the group of isomorphism classes of line bundles on $X$, under the tensor product, called the \textbf{Picard group}.
+    Let $\bm{Z^1(X)}$ denote the abelian group of all divisors on $X$ (sometimes denoted $\Div(X)$), and let $\bm{A^1(X)} := Z^1(X)/\sim$, where $\sim$ denotes linear equivalence. Let $\bw{Pic}\bm{(X)}$ be the group of isomorphism classes of line bundles on $X$, under the tensor product, called the \term{Picard group}.
 \end{defn}
 
 \begin{rmk}[Homework exercise]
@@ -2021,7 +2021,7 @@ We now want to prove some facts about finiteness in cohomology. We first need so
 \end{thm}
 
 \begin{thm}[Montel's Theorem]
-    Let $\Omega \subset \C$ be open, and $\cF \subset \cO(\Omega)$ be a bounded family, i.e. for any compact set $K \subset \C$, there exists $M=M_K$ such that $|f(z)| \leq M$, for all $z \in K$ and $f \in \cF$. Then, every sequence $\{f_n\}$ of elements of $\cF$ contains a subsequence $\{f_{n_k}\}$ that converges uniformly on compact subsets of $\Omega$. That is, $\cF$ is \textbf{precompact}.
+    Let $\Omega \subset \C$ be open, and $\cF \subset \cO(\Omega)$ be a bounded family, i.e. for any compact set $K \subset \C$, there exists $M=M_K$ such that $|f(z)| \leq M$, for all $z \in K$ and $f \in \cF$. Then, every sequence $\{f_n\}$ of elements of $\cF$ contains a subsequence $\{f_{n_k}\}$ that converges uniformly on compact subsets of $\Omega$. That is, $\cF$ is \term{precompact}.
 \end{thm}
 
 We can now state some important finiteness theorems.
@@ -2170,7 +2170,7 @@ is a finite dimensional $\C$-vector space.
 \subsection{Functional Analysis Background}
 
 \begin{defn}
-A \textbf{topological vector space} (over $\C$) is a topological space $V$ which is also a $\C$-vector space such that
+A \term{topological vector space} (over $\C$) is a topological space $V$ which is also a $\C$-vector space such that
 \begin{enumerate}
     \item[(i)] every point in $V$ is closed, and
     \item[(ii)] the vector space operations are continuous .
@@ -2191,7 +2191,7 @@ A \textbf{topological vector space} (over $\C$) is a topological space $V$ which
 \end{notebox}
 
 \begin{defn}
-Let $V$ be a topological vector space, and $N$ be a closed linear subspace of $V$. Then, $V/N$ together with the quotient topology coming from $\pi:V \to V/N$ is a topological vector space such that $\pi$ is a continuous open map. We call $V/N$ the \textbf{quotient space}.
+Let $V$ be a topological vector space, and $N$ be a closed linear subspace of $V$. Then, $V/N$ together with the quotient topology coming from $\pi:V \to V/N$ is a topological vector space such that $\pi$ is a continuous open map. We call $V/N$ the \term{quotient space}.
 \end{defn}
 
 \begin{proof}
@@ -2199,7 +2199,7 @@ The quotient topology makes $\pi$ continuous by definition. A subset $F \subset 
 \end{proof}
 
 \begin{defn}
-If $\paren{V,\norm{\cdot}}$ is a normed vector space, we get a \textbf{quotient norm} on $V/N$ by setting
+If $\paren{V,\norm{\cdot}}$ is a normed vector space, we get a \term{quotient norm} on $V/N$ by setting
 \[
 \norm{\pi(x)}:= \inf \brax{ \norm{x-n}:n\in \N }=:\w{dist}(x,N).
 \]
@@ -2293,7 +2293,7 @@ on $U \setminus \{a\}$.
 \end{proof}
 
 \begin{cor}[][label=cor:pole-less-genus]
-Let $g:=\dim_\C H^1(X,\mc O)$, called the \textbf{genus} of $X$, then there exists a non-constant meromorphic function on $X$, holomorphic on $X \setminus \{a\}$, with a pole of order $\leq g+1$ at $a$.
+Let $g:=\dim_\C H^1(X,\mc O)$, called the \term{genus} of $X$, then there exists a non-constant meromorphic function on $X$, holomorphic on $X \setminus \{a\}$, with a pole of order $\leq g+1$ at $a$.
 \end{cor}
 \begin{proof}
     Use the trivial line bundle.
@@ -2343,7 +2343,7 @@ Let $a \in B \cup f(S)$ and $U$ be a neighborhood of $a$ such that the only pole
 \end{proof}
 
 \begin{defn}
-Let $K\supset \C$ be a field. We say that $K$ is an \textbf{algebraic function field} in $m$ variables if there exist $x_1,\dots,x_m$ in $K$ such that $x_1,\dots,x_m$ are algebraically independent over $\C$, and the extension $\C(x_1,\dots,x_m)\hookrightarrow K$ is finite.
+Let $K\supset \C$ be a field. We say that $K$ is an \term{algebraic function field} in $m$ variables if there exist $x_1,\dots,x_m$ in $K$ such that $x_1,\dots,x_m$ are algebraically independent over $\C$, and the extension $\C(x_1,\dots,x_m)\hookrightarrow K$ is finite.
 \end{defn}
 
 \begin{thm}
@@ -2384,7 +2384,7 @@ Let $X,Y$ be compact Riemann surfaces, and $f:Y \to X$ a (branched) holomorphic 
 \section{The Riemann-Roch Theorem}
 
 \begin{defn}
-If $D = \sum n_P[P]$ is a divisor on a compact Riemann surface $X$, then the \textbf{degree} of $D$ is $\deg D:= \sum n_P$. We think of $D$ as a function $D:X \to \Z$ with finite support (i.e. $D(P)=n_P$).
+If $D = \sum n_P[P]$ is a divisor on a compact Riemann surface $X$, then the \term{degree} of $D$ is $\deg D:= \sum n_P$. We think of $D$ as a function $D:X \to \Z$ with finite support (i.e. $D(P)=n_P$).
 \end{defn}
 
 \begin{prop}
@@ -2412,7 +2412,7 @@ Moreover, $\cO_D$ is isomorphic to the sheaf of holomorphic sections of the line
     \[
     h^0(D):= \dim_\C(H^0(X,\cO_D))=\dim_\C \cO_D(X)=\dim_\C \brax{f \in \cM(X) \setbar \div f \geq -D}
     \]
-    is finite. Moreover, Riemann showed that $h^0(D) \geq 1 -g + \deg D$, and assigned his student Roch to compute the difference.
+    is finite. Moreover, he showed that $h^0(D) \geq 1 -g + \deg D$, and assigned his student Roch to compute the difference.
 \end{notebox}
 
 An element of the stalk $\cO_{D,a}$ is given by a convergent Laurent series
@@ -2439,7 +2439,7 @@ If not, then there exists $f \neq 0$, $f \in \cO_D(X)$, so $\div f \geq -D$ impl
 \end{proof}
 
 \begin{defn}[Recall]
-Let $P$ be a point on $X$. The \textbf{skyscraper sheaf} $\C_P$ on $X$ satisfies
+Let $P$ be a point on $X$. The \termnt{skyscraper sheaf} $\C_P$ on $X$ satisfies
 \[
 \C_P(U)= \case{\C & P \in U \\ 0 & P \not \in U}
 \]
@@ -2480,7 +2480,7 @@ If $D_2 = D_1 + P$ for some $P \in X$, we've just proved this by the penultimate
 \end{proof}
 
 \begin{defn}
-If $D$ is a divisor on $X$, define $h^i(D):= \dim_\C H^i(X,\cO_D)$ for $i = 0,1$. Then, define the \textbf{Euler characteristic} $\chi(D):= h^0(D)- h^1(D)$.
+If $D$ is a divisor on $X$, define $h^i(D):= \dim_\C H^i(X,\cO_D)$ for $i = 0,1$. Then, define the \term{Euler characteristic} $\chi(D):= h^0(D)- h^1(D)$.
 \end{defn}
 
 \begin{notethm*}[Historical Note]
@@ -2537,9 +2537,9 @@ What's cool is that the LHS is an analytic invariant, while the RHS is a topolog
 \section{Differential Forms on Riemann Surfaces}
 
 \begin{defn}
-Recall that if $X$ is a real $n$-dimensional $C^\infty$-manifold, then we have the \textbf{tangent bundle} $TX$. In a coordinate chart $\{x_i\}_{i=1}^n$ on $X$, a local basis of sections of $TX$ is given by vector fields $\partder[]{}{x_1},\dots,\partder[]{}{x_n}$. At any point $a \in X$, $\partder[]{}{x_i}|_a$ is a \textbf{derivation}, i.e. a linear map $C_a^\infty \to \R$ obeying the product rule. The \textbf{cotangent space} $T_a^*X = (T_aX)^*$ has basis $dx_1|_a,\dotsm,dx_n|_a$.
+Recall that if $X$ is a real $n$-dimensional $C^\infty$-manifold, then we have the \term[tangent bundles]{tangent bundle} $TX$. In a coordinate chart $\{x_i\}_{i=1}^n$ on $X$, a local basis of sections of $TX$ is given by vector fields $\partder[]{}{x_1},\dots,\partder[]{}{x_n}$. At any point $a \in X$, $\partder[]{}{x_i}|_a$ is a \term[derivations]{derivation}, i.e. a linear map $C_a^\infty \to \R$ obeying the product rule. The \term{cotangent space} $T_a^*X = (T_aX)^*$ has basis $dx_1|_a,\dotsm,dx_n|_a$.
 
-We define the \textbf{complex tangent bundle} $T_\C X:=TX \otimes _\R \C$, the bundle of complex valued tangent vectors, and we define $T_\C^*X$ similarly.
+We define the \term{complex tangent bundle} $T_\C X:=TX \otimes _\R \C$, the bundle of complex valued tangent vectors, and we define $T_\C^*X$ similarly.
 \end{defn}
 
 Suppose $X$ is a Riemann surface and $a \in X$. Let $\mc A = C^\infty$ denote the sheaf of smooth functions $U \to \C$ for $U \subset X$ open. On any coordinate neighborhood $(U,z)$, with $z = x+iy$, we have the differential operators
@@ -2549,7 +2549,7 @@ Suppose $X$ is a Riemann surface and $a \in X$. Let $\mc A = C^\infty$ denote th
 The stalk $\mc A_a$ consists of germs of smooth functions defined in a neighborhood of $a$. Let $m_a \subset \mc A_a$ be the maximal ideal of germs of functions which vanish at $a$.
 
 \begin{defn}
-Let $X$ be a Riemann surface. The \textbf{cotangent space} at $a \in X$ is $T_a^* X:= m_a/m_a^2$. For any $f \in \mc A(U)$, where $U$ is an open neighborhood of $a$, we define
+Let $X$ be a Riemann surface. The \term{cotangent space} at $a \in X$ is $T_a^* X:= m_a/m_a^2$. For any $f \in \mc A(U)$, where $U$ is an open neighborhood of $a$, we define
 \[
 d_af:= (f-f(a)) \pmod {m_a^2}.
 \]
@@ -2592,11 +2592,11 @@ T^*_{\C,a}X=T_a^{1,0}X \bigoplus T_a^{0,1}X
 \]
 
 \begin{defn}
-A \textbf{differential 1-form} on $X$ is a $C^\infty$-section of $T_\C^* X$.
+A \term{differential 1-form} on $X$ is a $C^\infty$-section of $T_\C^* X$.
 
-Locally, any differential $1$-form equals $adz + bd \bar z$ for $a,b \in C^\infty(U)$. These patch together to form a sheaf. We denote the \textbf{sheaf of smooth 1-forms} on $X$ by $\mc A^1$. We also sometimes write $\mc A =\mc A^0$.
+Locally, any differential $1$-form equals $adz + bd \bar z$ for $a,b \in C^\infty(U)$. These patch together to form a sheaf. We denote the \term{sheaf of smooth 1-forms} on $X$ by \term[\cA^1]{$\cA^1$}. We also sometimes write $\mc A =\mc A^0$.
 
-A 1-form $\varphi$ is of \textbf{type (1,0)} if, for any local coordinate system $(U,z)$, $\varphi$ is of the form $adz$ (respectively $b d \bar z$ for \textbf{type (0,1)}).
+A 1-form $\varphi$ is of \term[(1,0)]{type (1,0)} if, for any local coordinate system $(U,z)$, $\varphi$ is of the form $adz$ (respectively $b d \bar z$ for \term[(0,1)]{type (0,1)}).
 
 Let $\mc A^{1,0}$ and $\mc A^{0,1}$ denote the sheaves of $C^\infty$-forms of type $(1,0)$ and $(0,1)$. So for $U \subset X$ open,
 \[
@@ -2605,7 +2605,7 @@ Let $\mc A^{1,0}$ and $\mc A^{0,1}$ denote the sheaves of $C^\infty$-forms of ty
 \end{defn}
 
 \begin{defn}
-For $f \in \mc A(U)=\C^\infty (U)$, the \textbf{exterior derivative} $df$ has a unique expression $df = \partial f + \bar \partial f$ with $\partial f \in \mc A^{1,0}(U)$ and $\bar \partial f \in \mc A^{0,1}(U)$. In local coordinates, $\partial f = \partder[]{f}{z}dz$ and $\bar \partial f = \partder[]{f}{\bar z}d \bar z.$
+For $f \in \mc A(U)=\C^\infty (U)$, the \term{exterior derivative} $df$ has a unique expression $df = \partial f + \bar \partial f$ with $\partial f \in \mc A^{1,0}(U)$ and $\bar \partial f \in \mc A^{0,1}(U)$. In local coordinates, $\partial f = \partder[]{f}{z}dz$ and $\bar \partial f = \partder[]{f}{\bar z}d \bar z.$
 \end{defn}
 
 \begin{rmk}
@@ -2623,13 +2623,13 @@ In local coordinates, if $\alpha = fdz$ and $\beta = g d \bar z$,
 \section{\texorpdfstring{The Canonical Bundle $K_X$}{The Canonical Bundle KX}}
 
 \begin{defn}
-Let $W \subset X$ be open. A \textbf{holomorphic 1-form} on $W$ is an element $\omega \in \mc A^{1,0}(W)$ such that $\bar \partial w =0$ (equivalently, $dw=0$). If $(U,z)$ is a coordinate chart and $w|_{W \cap U} = fdz$, then $w$ is holomorphic if and only if $f$ is holomorphic. We can similarly define meromorphic $1$-forms: there are forms defined outside of a discrete set $A \subset W$, which, for any coordinate chart $(U,z)$ with $U \subset W$, are of the form $fdz$ with $f$ meromorphic on $U$.
+Let $W \subset X$ be open. A \term{holomorphic 1-form} on $W$ is an element $\omega \in \mc A^{1,0}(W)$ such that $\bar \partial w =0$ (equivalently, $dw=0$). If $(U,z)$ is a coordinate chart and $w|_{W \cap U} = fdz$, then $w$ is holomorphic if and only if $f$ is holomorphic. We can similarly define meromorphic $1$-forms: there are forms defined outside of a discrete set $A \subset W$, which, for any coordinate chart $(U,z)$ with $U \subset W$, are of the form $fdz$ with $f$ meromorphic on $U$.
 
-Let $\Omega = \Omega^1_X$ be the \textbf{sheaf of holomorphic 1-forms} on $X$, with
+Let $\Omega = \Omega^1_X$ be the \term{sheaf of holomorphic 1-forms} on $X$, with
 \[
 W \mapsto \Omega(W) := \brax{ \text{holomorphic 1-forms on }W}.
 \]
-The \textbf{canonical line bundle} $K_X=K$ on $X$ is a line bundle such that, for all $U \subset X$ open,
+The \term[canonical line bundle,K_X]{canonical line bundle $K_X$} on $X$ is a line bundle such that, for all $U \subset X$ open,
 \[
 H^0(U,K_X)=\Omega(U).
 \]
@@ -2743,7 +2743,7 @@ The hard part is proving that $D$ is surjective. We complete this next time.
 \end{proof}
 
 \begin{defn}
-The \textbf{$(0,1)$-Dolbeault cohomology group} of $X$ is defined as the quotient group
+The \term{$(0,1)$-Dolbeault cohomology group} of $X$ is defined as the quotient group
 \[
 H_{\bar \partial}^{0,1}(X) := \mc A_E^{0,1}(X)/ \bar \partial  \mc A_E(X).
 \]
