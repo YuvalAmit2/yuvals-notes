@@ -2850,10 +2850,57 @@ If $\omega' = f\omega$ for $f \in \cO^*(U)$, then $s|_U = \paren{\frac{1}{f}\lam
 \paren{\frac{1}{f}\lambda, \frac{1}{\bar f}\alpha} \omega' \land \bar{\omega '} = \frac{1}{\abs{f}^2}(\lambda, \alpha) f \bar f (\omega \land \bar{\omega}) = (\lambda,\alpha) \omega \land \bar{\omega}.
 \]
 \end{proof}
-Therefore $(s,\varphi)$ is a well-defined 2-form on $X$, and we set
+Therefore $(s,\varphi)$ is a well-defined 2-form on $X$.
+
+\begin{defn}
+We set \term{$\angles{s,\varphi}$} to be
 \[
 \angles{s,\varphi}:= \int_X(s,\varphi) \in \C.
 \]
+\end{defn}
 Now note that if $W \subset X$ is any open set, and $\supp(\varphi) \subset W$, then $\angles{s,\varphi}$ is defined for all $s \in H^0(W,E^*\otimes K_X)$.
+
+Let $(U,z)$ be a coordinate neighborhood on $X$ such that there exists a holomorphic trivialization $h_U: \pi^{-1}(U) \to U \times \C^n$, and let $h_u^*:\pi^{-1}(U) \to U \times \C^n$ be the corresponding trivialization of the dual bundle. For $x \in U,v \in E_x,v^*\in E_x^*$, and 
+\[
+h_u(v)=\paren{x,(u_1,\dots,u_n)}, \quad h_u^*(v^*)\paren{x,(u_1',\dots,u_n')},
+\]
+we have $v^*(v)= \sum _{i=1}^nu_iu_i'$. If $s \in H^0(X,E^* \otimes K_X)$ and $\varphi \in \cA_E^{0,1}(X)$ with $\supp(\varphi) \subset U$, write
+\begin{align*}
+    s|_U = \lambda \otimes dz, &\qquad h_u^*(\lambda(x))  = \paren{x,\lambda_1(x),\dots,\lambda_n(x)}, \\
+    \varphi|_U = \alpha \otimes d \bar z, &\qquad h_u(\alpha (x)) = \paren{x, \alpha_1(x),\dots,\alpha_n(x)}.
+\end{align*}
+Then
+\[
+\angles{s, \varphi}=\int_U \paren{\sum_{k=1}^n \lambda _k(z)\alpha_k(z)}dz \land d \bar z.
+\]
+
+\begin{claim}
+For any $f \in \cA_E(X)$ and $s \in H^0(X,E^*\otimes K_X)$, we have $\angles{s, \bar \partial f}=0$.
+\end{claim}
+
+\begin{proof}
+Use a partition of unity to write $f = \sum_{\nu=1}^Nf_\nu,$ where each $f_\nu$ has support in a compact neighborhood $(U_\nu,z_\nu)$ on which $E|_{U_\nu}$ is trivial. We may thus assume that $N=1$, and $\supp(\varphi) \subset U$, with $(U,z)$ as above.
+
+If $h_u(f(x))=\paren{x,(f_1(x),\dots,f_n(x))}$, then $\bar \partial f = \alpha \otimes d \bar z$ with
+\[
+h_u(\alpha(z)) = \paren{x,\paren{\partder[]{f_1}{\bar z},\dots,\partder[]{f_n}{\bar z}}}.
+\]
+Hence if $h_u^*(s(z))=\paren{z,\paren{\lambda_1(z),\dots,\lambda_n(z)}}$ on $U$, we have
+\[
+\angles{s,\varphi}=\int_U \sum_k \lambda _k(z) \partder[]{f_k}{\bar z}dz \land d \bar z = -\int_U \sum_k \partder[]{\lambda_k}{\bar z}f_k dz\land d\bar z=0
+\]
+by integrating by be parts.
+\end{proof}
+
+\begin{thm}[Weyl's Lemma (or the Regularity Theorem for $\bar \partial$).] \label{thm:weyl-lemma-regularity-thm}
+Let $X$ be a compact Riemann surface and $\pi :E \to X$ be a holomorphic vector bundle on $X$. Suppose $F:\cA_E^{0,1}(X) \to \C$ is a continuous linear functional such that $F|_{\bar \partial \cA_E(X)}\equiv 0$. Then there exists a unique $s\in H^0(X,E^*\otimes K_x)$ such that
+\[
+F(\varphi) = \angles{s,\varphi}, \quad \forall \varphi \in \cA_E^{0,1}(X).
+\]
+\end{thm}
+
+\begin{cor}[Serre Duality] \label{cor:serre-duality}
+The induced pairing $\angles{,}_E:H^0(X,E^*\otimes K_X) \otimes H^1(X,E) \to \C$ is \term{perfect}, i.e it's a non-degenerate bilinear form. Hence the two vector spaces involved are dual to each other.
+\end{cor}
 
 \end{document}
