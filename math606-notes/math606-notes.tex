@@ -1327,7 +1327,7 @@ is the obstruction to solving the problem in general. The Mittag-Leffler theorem
     \begin{enumerate}
         \item \term[sheaf of holomorphic functions,\cO]{The sheaf of holomorphic functions $\mc O$}: for any open set $U \subset X$, $\mc O(U)$ is the group of holomorphic functions $U \to \C$
         \item \term[sheaf of $C^\infty$ functions,\cA]{The sheaf of $C^\infty$ functions $\cA$}: for any open set $U \subset X$, \[ \mc A(U) = C^\infty (U):= \{f:U \to C \mid f \text{ is } C^\infty \} \]
-        \item \term[presheaf of constant functions,\cF]{The presheaf of constant functions $\mc F$}: $\mc F(U) = \{ f:U \to \C \text{ constant}\}$. Note that $\mc F$ is not a sheaf, as property (ii) fails: if $U$ is disconnected, we can send one component to $0$, another to $1$, and then we can't get a constant function that restricts to $0$ and $1$. However, one gets a sheaf $\C$ by setting $\C(U) := \{ f:U \to \C, f$ is locally constant$\}$.
+        \item \term[presheaf of constant functions]{The presheaf of constant functions $\mc F$}: $\mc F(U) = \{ f:U \to \C \text{ constant}\}$. Note that $\mc F$ is not a sheaf, as property (ii) fails: if $U$ is disconnected, we can send one component to $0$, another to $1$, and then we can't get a constant function that restricts to $0$ and $1$. However, one gets a sheaf $\C$ by setting $\C(U) := \{ f:U \to \C, f$ is locally constant$\}$.
     \end{enumerate}
 \end{ex}
 
@@ -2217,7 +2217,7 @@ For $1 \leq p < \infty$, let $V$ be the space of all Lebesgue measurable functio
 Let $\ell_2$ be the Hilbert space of all sequence $\{x_n\}_{n \geq 1}$ such that $\sum_{n=1}^\infty |x_n|^2 < \infty$. Let $N \subset \ell_2$ be the linear subspace of sequences $\{x_n\}$ such that $x_n=0$ for all $n \geq n_0$ (with $n_0$ depending on the sequence). Then, $N$ is a dense linear subspace of $\ell_2$, but not closed, so the quotient topology on $\ell_2/N$ is not Hausdorff.
 \end{ex}
 
-\begin{thm}[Open Mapping Theorem][label=thm:open-mapping-thm]
+\begin{thm}[Open Mapping Theorem] \label{thm:open-mapping-thm}
 If $X$ and $Y$ are Banach spaces, and $T:X \to Y$ is continuous, linear, and surjective, then $T$ is an open map.
 \end{thm}
 
@@ -2647,7 +2647,7 @@ Under the above correspondence, meromorphic sections of $K_X$ correspond to mero
 
 \section{The Dolbeault Isomorphism}
 
-\begin{defn}
+\begin{defn}[Recall]
 Let $E \arr[\pi]X$ be a holomorphic vector bundle on the Riemann surface $X$. The sheaf of holomorphic sections of $E$ is denoted $\mc E$, while $\mc A_E=C^\infty _E$ denotes the sheaf of smooth sections of $E$, so
 \[
  \mc A_E(U)= \brax{C^\infty \text{ maps } s:U \to E, \pi\circ s = \id_U}.
@@ -2659,7 +2659,7 @@ If $E|_U$ is trivial, then the map, then the map
     \mc E(U) \otimes_{\mc O(U)} \mc A(U) &\to \mc A_E(U) \\
     s \otimes f & \maps fs
 \end{align*}
-is an isomorphism. Set $\mc A_E^{0,1}(W):= \mc A_E(W)\otimes _{\mc A(W)}\mc A^{0,1}(W)$, for $W$ open in $X$. If $E|_W$ is trivial, then $\mc A_E^{0,1}(W) = \mc E(W) \otimes _{\mc O (W)} \mc A^{0,1}(W)$. It follows that there exists a unique $\mc O(W)$-linear map
+is an isomorphism. Set \term[$\cA_E^{0,1}$]{$\cA_E^{0,1}(W)$} $:= \mc A_E(W)\otimes _{\mc A(W)}\mc A^{0,1}(W)$, for $W$ open in $X$. If $E|_W$ is trivial, then $\mc A_E^{0,1}(W) = \mc E(W) \otimes _{\mc O (W)} \mc A^{0,1}(W)$. It follows that there exists a unique $\mc O(W)$-linear map
 \[
 \bar \partial_{E,W}: \mc A_E(W) \to \mc A_E^{0,1}(W)
 \]
@@ -2732,14 +2732,14 @@ Now, we apply the long exact cohomology sequence (\cref{thm:longexact}) to the e
 0 \to \mc E \to \mc A_E \arr[\bar \partial] \mc A_E^{0,1}\to 0
 \]
 to obtain the result. More explicitly, we can construct a map
-\[
-D:H^1(X,E) \to \mc A_E^{0,1}(X)/\bar \partial \mc A_E(X)
-\]
+\begin{align} \label{eq:H1-A-quotient-isom}
+    D:H^1(X,E) \to \mc A_E^{0,1}(X)/\bar \partial \mc A_E(X)
+\end{align}
 as follows: let $\{s_{ij}\} \in Z^1(\mc U, E)$, so $s_{ij} \in H^0(U_i \cap U_j, E)$ for all $i,j \in I$. Using \Cref{lem:H1XAE-cohom-is-0}, find $\alpha \in \mc A_E(U_i)$ such that $\alpha _i - \alpha _j = s_{ij}$ on $U_i \cap U_j$. Then $\bar \partial \alpha _i = \bar \partial \alpha _j$ on $U_i \cap U_j$, so the $\brax{\bar \partial \alpha_i}$ define an element of $\mc A^{0,1}_E(X)$, whose image in the quotient $\mc A_E^{0,1}(X)/\bar \partial \mc A_E$ is $D(\brax{s_{ij}})$.
 \begin{exercise}
 Check that $D$ is independent of the choices made, and is injective.
 \end{exercise}
-The hard part is proving that $D$ is surjective. We complete this next time.
+The hard part is proving that $D$ is surjective. Given $\omega \in \cA^{0,1}_E(X)$, we can find an open cover $\mf U = \{U_i\}$ of $X$ and $\varphi_i \in \cA_E(U_i)$ with $\bar \partial \varphi_i = w|_{U_i}$, using our solution to $\bar \partial u =f$ locally. Set $s_{ij}:= \varphi_i-\varphi_j |_{U_i \cap U_j}$ for all $i,j$. Then $\bar \partial s_{ij}=0$ on $U_i \cap U_j$, so $s_{ij} \in \cE (U_i \cap U_j)=H^0(U_i \cap U_j,E)$. Clearly $\{s_{ij}\} \in Z^1(\mf U,E)$, and from construction it follows that $D(\{s_{ij}\}) = [w]$ in $\cA_E^{0,1}(X)/\bar \partial \cA_E(X)$.
 \end{proof}
 
 \begin{defn}
@@ -2748,5 +2748,112 @@ The \term{$(0,1)$-Dolbeault cohomology group} of $X$ is defined as the quotient 
 H_{\bar \partial}^{0,1}(X) := \mc A_E^{0,1}(X)/ \bar \partial  \mc A_E(X).
 \]
 \end{defn}
+
+\begin{rmk}
+We've shown that the map in \eqref{eq:H1-A-quotient-isom} is a vector space isomorphism. However, we will want to put topologies on the structures, and we'll want an isomorphism of the associated complete topological vector spaces.
+\end{rmk}
+
+\subsection{Frech\'{e}t Spaces}
+
+\begin{defn}
+A topological space $X$ is a \term[Freschet space]{Frech\'{e}t space} if 
+\begin{enumerate}
+    \item[(i)] the topology on $X$ may be induced by a countably family of seminorms $\brax{\norm{\cdot}_n}_{n \geq 1}$. That is, $U \subset X$ is open if and only if for all $x \in U$, there exists $N \geq 1$ and $\veps >0$ such that
+\[
+\brax{ y \setbar \norm{y-x}_n < \veps, \: \forall n \leq N } \subset U.
+\]
+    \item[(ii)] $X$ is complete with respect to the family $\brax{\norm{\cdot}_n}_{n \geq 1}$ of seminorms.
+\end{enumerate}
+\end{defn}
+
+\begin{prop}
+Any Frech\'{e}t space is metrizable: one defines a matrix on $X$ by
+\[
+d(x,y):= \sum_{n=1}^\infty \frac{1}{2^n}\frac{\norm{x-y}_n}{1+\norm{x-y}_n}.
+\]
+\end{prop}
+
+\begin{rmk}
+Since $X$ is a topological vector space, it's already Hausdorff, but not that the topology in a Frech\'{e}t space is Hausdorff if and only if
+\[
+\bigcap_{n=1}^\infty \brax{ x \in X \setbar \norm{x}_n=0 } = \{0\}.
+\]
+\end{rmk}
+
+\begin{rmk}
+Let $(U,z)$ be any coordinate chart on $X$. Then $C^\infty (U)$ carries a \term{$C^\infty$ topology} (or \term{Schwartz topology}) of uniform convergence of all derivatives $D^k$ on compact subsets of $U$.
+
+Next, suppose $E\to X$ is a rank $n$ vector bundle where $E|_U$ trivial. If $\varphi \in \cA_E^{0,1}(X)$, then $\varphi|_U$ may be identified with an expression $(\varphi_1,\dots,\varphi_n)d\bar z$, where $\varphi \in C^\infty (U)$. Then we say that a sequence $\varphi^{(\nu)} \in \cA_E^{0,1}(X)$ converges if and only if, for any $U \subset X$ as above, the corresponding sequence $(\varphi_1^{(\nu)},\dots,\varphi_n^{(\nu)})$ with $(\varphi_1^{(\nu)},\dots,\varphi_n^{(\nu)})d\bar z = \varphi^{(\nu)}|_U$ converging in $\prod_{j=1}^nC^\infty (U)$. We also have a similar topology on $\cA_E(X)$.
+
+In this way, $\cA_E^{0,1}(X)$ and $\cA_E(X)$ become Frech\'{e}t spaces, so in particular they are complete metric spaces.
+\end{rmk}
+
+\begin{thm}
+$\bar \partial \cA_E(X)$ is a closed subspace of $\cA_E^{0,1}(X)$.
+\end{thm}
+\begin{proof}
+Since $\codim \bar \partial \cA_E(X)<\infty$, this follows from \Cref{prop:frechet-func-anal}.
+\end{proof}
+\begin{prop} \label{prop:frechet-func-anal}
+Let $X,Y$ be Frech\'{e}t spaces, and $T:X \to Y$ a continuous linear map. If $\dim _\C(Y/T(X))<\infty$, then $T(X)$ is closed in $Y$.
+\end{prop}
+
+\begin{proof}
+$\ker T$ is closed, so $X/\ker T$ is a Frech\'{e}t space. Hence we may assume that $T$ is injective. Let $Y_0 \subset Y$ be a finite dimensional subspace such that the projection map $Y_0 \to Y/T(X)$ is an algebraic isomorphism.
+\begin{claim}
+We claim $Y_0$ is closed in $Y$.
+\end{claim}
+\begin{proof}
+Indeed, if $y_1,\dots,y_n$ is a basis for $Y_0$, then the map $\C^n \to Y_0$ sending $(\lambda_1,\dots,\lambda_n) \mapsto \sum \lambda _iy_i$ is continuous and bijective. In fact, it is a homeomorphism since the image of
+\[
+\brax{\sum_{i=1}^n \abs{\lambda_i}^2=1}
+\]
+is a compact, hence closed, subset of $Y_0$. Then there exists a neighborhood of $0$ which is disjoint from this image, which implies that the map is open. We deduce that $Y_0$ is complete in the induced topology from $Y$, hence closed.
+\end{proof}
+Now consider the map $Y_0 \oplus X \to Y$ sending $(y,x) \mapsto y+T(x)$. This is a continuous bijection, so the open mapping theorem 
+% (\Cref{thm:open-mapping-thm}) 
+implies that it is a homeomorphism. As $X$ is closed in $Y_0 \oplus X$, its image $T(X)$ is closed in $Y$.
+\end{proof}
+
+\begin{cor}
+Under the conditions of \Cref{prop:frechet-func-anal}, the quotient $Y/T(X)$ is a finite dimensional Hausdorff topological vector space.
+\end{cor}
+
+\begin{rmk}
+It is not necessarily true that a finite codimension linear subspace of a Frech\'{e}t space is closed.
+\end{rmk}
+
+
+
+\section{Serre Duality}
+
+\textit{``A differential form is something that you can integrate on a manifold''.}
+
+Let $X$ be a compact Riemann surface, and $\pi:E \to X$ a holomorphic vector bundle on $X$.
+
+We define a bilinear form 
+\[
+\angles{,}:H^0(X,E^*\otimes K_X)\otimes \cA_E^{0,1}(X) \to \C
+\]
+as follows: fix $s \in H^0(X,E^*\otimes K_X)$ and $\varphi \in \cA_E^{0,1}(X)$. Let $(U,z)$ be a coordinate neighborhood, and $\omega \in \Omega(U)$ be a holomorphic 1-form on $U$ without zeros (i.e. $w = fdz$, where $f(a) \neq 0$ for all $a \in U$). Then by restricting $s$ to $U$, we may write $s|_U = \lambda \otimes \omega$ for $\lambda \in H^0(U,E^*)$, and $\varphi|_U = \alpha \otimes \bar \omega$ for $\alpha \in \cA_E(U)$. Then we may define a pairing
+\begin{align} \label{eq:serre-pairing}
+    (s,\varphi)_U:= (\lambda,\alpha)\omega \land \bar \omega
+\in \cA^2(U).
+\end{align}
+\begin{claim}
+The pairing \eqref{eq:serre-pairing} is independent of the choice of $\omega$.
+\end{claim}
+
+\begin{proof}
+If $\omega' = f\omega$ for $f \in \cO^*(U)$, then $s|_U = \paren{\frac{1}{f}\lambda}\otimes \omega '$ and $\varphi|_U = \paren{\frac{1}{\bar f}\alpha} \land \bar{\omega '}$, so
+\[
+\paren{\frac{1}{f}\lambda, \frac{1}{\bar f}\alpha} \omega' \land \bar{\omega '} = \frac{1}{\abs{f}^2}(\lambda, \alpha) f \bar f (\omega \land \bar{\omega}) = (\lambda,\alpha) \omega \land \bar{\omega}.
+\]
+\end{proof}
+Therefore $(s,\varphi)$ is a well-defined 2-form on $X$, and we set
+\[
+\angles{s,\varphi}:= \int_X(s,\varphi) \in \C.
+\]
+Now note that if $W \subset X$ is any open set, and $\supp(\varphi) \subset W$, then $\angles{s,\varphi}$ is defined for all $s \in H^0(W,E^*\otimes K_X)$.
 
 \end{document}

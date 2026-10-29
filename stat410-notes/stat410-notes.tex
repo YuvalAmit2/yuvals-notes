@@ -565,7 +565,7 @@ This sum can be computed with some neat tricks. However, we will eventually see 
 
 \subsection{Hypergeometric Distributions}
 
-Say we want to sample a portion of a population for some property. Do we sample with or without replacement? If we sample with replacement, we get a binomial distribution. However, it can be better to sample with replacement, in which case we get a hypergeometric distribution.
+Say we want to sample a portion of a population for some property. Do we sample with or without replacement? If we sample with replacement, we get a binomial distribution. However, it can be better to sample without replacement, in which case we get a hypergeometric distribution.
 
 \begin{defn}
 Let $N,N_A,n$ be integers with $0 \leq n\leq N_A\leq N$. A random variable $X$ is said to follow a \textbf{hypergeometric distribution} with respect to the parameters $(N,N_A,n)$ if $X$ takes values in $\{1,\dots,n\}$, and
@@ -605,7 +605,7 @@ for $k \in \{0,1,2,\dots\}$.
 If $X \sim \Poisson(\lambda)$, then $E[X]=V[X]=\lambda$.
 \end{rmk}
 
-Let $X \sim \Bin(n.p)$ and $Y \sim \Poisson(np)$. Then, for any $A \subset \{0,1,2,\dots\}$, we have
+Let $X \sim \Bin(n,p)$ and $Y \sim \Poisson(np)$. Then, for any $A \subset \{0,1,2,\dots\}$, we have
 \[
 \abs{ P(X \in A)-P(Y \in A)} \leq np^2
 \]
@@ -648,7 +648,7 @@ Let $0 < \lambda < \infty$. The \textbf{exponential distribution} with rate $\la
 
 Note that the exponential distribution is related to the geometric distribution.
 
-\begin{prop}
+\begin{prop} \label{prop:expect-var-expon-distr}
 Let $X$ be a continuous random variable with an exponential distribution with rate $\lambda$. Then
 \begin{align*}
     E[X] &=  1/\lambda, \\
@@ -701,5 +701,128 @@ for $- \infty < x < \infty$.
 For large samples, the sample average follows a normal distribution.
 \end{thm}
 
+\begin{ex}
+The height of males in a particular island can be modeled by a normal distribution with mean $170$ and standard deviation $5$. What is the probability that a randomly picked male has a height that balls between 160 and 180?
+\end{ex}
+
+\begin{solution}
+Let $X$ be the height of a randomly picked male, so $X \sim N(170,25)$. Then
+\[
+P(160<X<180)=P\paren{ \frac{160-170}{5}<\frac{X-\mu}{\sigma}<\frac{180-170}{5}}=P(-2<Z<2)
+\]
+where $Z = (X-\mu)/\sigma$. Note that $Z \sim N(0,1)$, and so we've translated this problem into one about the standard normal.
+
+Assume we have a table (called a $Z$-table) which gives values of $\Phi(z)=P(Z \leq z) = F_Z(z)$. Then
+\[
+P(a<Z<b)=\Phi(b)-\Phi(a).
+\]
+\begin{figure}[htbp]
+    \centering
+    % Left Column Figure
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{z-table-neg.png}
+        \caption{Z-table of negatives}
+    \end{subfigure}
+    \hfill % Adds horizontal space to separate the two columns
+    % Right Column Figure
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{z-table-pos.png}
+        \caption{Z-table of positives}
+    \end{subfigure}
+    \caption{Z-table}
+    \label{fig:z-table}
+\end{figure}
+\Cref{fig:z-table} is an example of a $Z$-table. Using it, we get
+\[
+\Phi(2)-\Phi(-2) \approx  0.9772 - 0.228 \approx 0.95.
+\]
+
+% Here's an example of a Z-table:
+% \begin{figure}[h] 
+% 	\centering
+% 	\includegraphics[width=0.4\linewidth]{z-table-neg}
+% \end{figure}
+% \begin{figure}[h] 
+% 	\centering
+% 	\includegraphics[width=0.4\linewidth]{z-table-pos}
+% \end{figure}
+\end{solution}
+
+\section{Moment Generating Functions}
+
+\begin{defn}
+The \term[moment]{$k$-th moment} of a random variable $X$ is defined as $E[X^k]$.
+\end{defn}
+
+\begin{rmk}
+Recall that if $E[X^k]<\infty$, then $E[X^m]<\infty$ for $m \in \{1,\dots,k\}$, but the converse does not hold.
+\end{rmk}
+
+\begin{defn}
+A \term{moment generation function} of a random variable $X$ is defined as
+\[
+\mu_X(t)=E[e^{tX}].
+\]
+We say that the moment generating function exists if $\mu_X(t)$ is finite on some open interval $(-\veps,\veps)$.
+\end{defn}
+
+
+\begin{thm}
+Let $X$ be a random variable. Then,
+\begin{align*}
+    \mu^{(n)}_X(t)&=E[X^ne^{tX}], 
+    \\ \mu_X^{(n)}(0) &=E[X^n].
+\end{align*}
+\end{thm}
+
+% \begin{rmk}
+% A few remarks on moment generating functions:
+% \begin{enumerate}
+%     \item For any random variable $X$, $\mu_X(0)=1$.
+%     \item We compute \[
+%     \mu_X'(t)=\frac{d}{dt}\paren{E [e^{tX}]}=E[Xe^{tX}],
+%     \]
+%     so $\mu'_X(0)=E[X]$.
+%     \item In general, $\mu^{(n)}_X(t)=E[X^ne^{tX}]$, and $\mu_X^{(n)}(0)=E[X^n]$.
+% \end{enumerate}
+% \end{rmk}
+
+\begin{ex}
+Let $X \sim \exp(\lambda)$. Then
+\begin{align*}
+    \mu_X(t)=E[e^{tx}] &=\int_{-\infty}^\infty e^{tx}f_X(x)dx \\
+    &= \lambda \int _0^\infty e^{tx}e^{-\lambda x}dx
+    \\ &= \lambda \lim_{h \to \infty}\int_0^h e^{(t-\lambda)x}dx.
+\end{align*}
+If $t \geq \lambda$, this diverges. Otherwise,
+\[
+\mu_X(t)=\frac{\lambda}{t-\lambda}\lim_{h \to \infty}\braks{e^{(t-\lambda)x}}_0^h= \frac{\lambda}{\lambda- t}.
+\]
+Thus
+\[
+\mu_X(t)= \case{ \frac{\lambda}{\lambda - t}& t< \lambda, \\ \infty & t \geq \lambda.}
+\]
+Now computing the variance is easy. Namely,
+\begin{align*}
+    V[X] &=E[X^2]-E[X]^2=\mu_X^{''}(0)-\braks{\mu_X'(0)}^2
+    \\ &=\frac{2\lambda}{(\lambda-t)^3}\biggl |_{t=0}-\paren{\frac{\lambda}{(\lambda-t)^2}}^2 \biggl |_{t=0}
+    \\ &= \frac{2}{\lambda ^2}-\frac{1}{\lambda ^2}=\frac{1}{\lambda^2}.
+\end{align*}
+This aligns with \Cref{prop:expect-var-expon-distr}.
+\end{ex}
+
+\begin{ex}
+Let $Z \sim N(0,1)$. Then
+\begin{align*}
+    \mu_Z(t) &=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty e^{tz}\cdot e^{-z^2/2}dz 
+    \\ &= \frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\paren{ \frac{2tz-z^2}{2}}dz
+    \\ &= \frac{1}{\sqrt {2\pi}}\int _{-\infty}^\infty \exp\paren{t^2/2}\exp\paren{-(t-z)^2/2}dz
+    \\ &= \frac{\exp(t^2/2)}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\paren{\frac{-(t-z)^2}{2}}dz
+    \\ &= \frac{\exp(t^2/2)}{\sqrt{2\pi}}\int_{-\infty}^\infty \exp\paren{\frac{-z^2}{2}}dz
+    \\ &= \frac{\exp(t^2/2)}{\sqrt{2\pi}}\cdot \sqrt{2\pi}=\exp(t^2/2).
+\end{align*}
+\end{ex}
 
 \end{document}
