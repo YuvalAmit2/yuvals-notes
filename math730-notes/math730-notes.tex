@@ -1436,6 +1436,79 @@ Let $\sigma : \Delta^n \to X$ be a singular $n$-simplex. Then $f_* \circ \sigma 
 This will be used to obtain a chain homotopy.
 \end{proof}
 
+\begin{defn}
+A sequence of abelian is groups
+\[
+A_{n} \arr[f_n] A_{n-1} \arr[f_{n-1}] \cdots \arr A_1 \arr[f_1]0
+\]
+is said to be an \term[]{exact sequence} if $\Img(f_n)=\ker (f_{n+1})$ for all $n$. A \term[]{short exact sequence} is an exact sequence of the form
+\[
+0 \to A \arr[f] B \arr[g] C \to 0.
+\]
+That is $f$ is injective, $g$ is surjective, and $\Img (f) = \ker (g)$.
+
+Let $\w{Stuff}=\brax{\w{Stuff}_n}$ be chain complexes, where $\w{Stuff}=A,B,C$. Let $f=\brax{f_n}$ and $g=\brax{g_n}$ be chain maps, with $f:A \to B$ and $g:B \to C$. The sequence
+\[
+0 \to A \arr[f] B \arr[g] C \to 0
+\]
+is said to be a \term{short exact sequence of chain complexes} if
+\[
+0 \to A_n \arr[f_n]B_n \arr[g_n]C_n \to 0,
+\]
+is exact, and the diagram
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJBX24iXSxbMCwxLCJBX3tuLTF9Il0sWzEsMCwiQl9uIl0sWzEsMSwiQl97bi0xfSJdLFswLDIsImZfbiJdLFsxLDMsImZfe24tMX0iXSxbMCwxLCJhX24iLDJdLFsyLDMsImJfbiJdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{A_n} \& {B_n} \\
+	{A_{n-1}} \& {B_{n-1}}
+	\arrow["{f_n}", from=1-1, to=1-2]
+	\arrow["{a_n}"', from=1-1, to=2-1]
+	\arrow["{b_n}", from=1-2, to=2-2]
+	\arrow["{f_{n-1}}", from=2-1, to=2-2]
+\end{tikzcd}\]
+commutes.
+\end{defn}
+
+\begin{thm}[Snake Lemma] \label{thm:snake-lemma}
+Let $0 \to A \arr[f] B \arr[g]C \to 0$ be a short exact sequence of chain complexes. Then there exist natural homomorphisms $d_n:H_n(C) \to H_{n-1}(A)$ such that the sequence
+\begin{align*}
+    \cdots \to H_{n+1}(C) \arr[d_{n+1}] H_n(A) \arr[f_{n*}] H_n(B)\arr[g_{n*}] H_n(C) \arr[d_n]H_{n-1}(A) \to \cdots
+\end{align*}
+is exact.
+
+The maps $d_n$ are natural in the following sense: given short exact sequences and chain maps
+% https://q.uiver.app/#q=WzAsMTAsWzAsMCwiMCJdLFsxLDAsIkEiXSxbMiwwLCJCIl0sWzMsMCwiQyJdLFs0LDAsIjAiXSxbMCwxLCIwIl0sWzEsMSwiQSciXSxbMiwxLCJCJyJdLFszLDEsIkMnIl0sWzQsMSwiMCJdLFswLDFdLFsxLDIsImYiXSxbMiwzLCJnIl0sWzMsNF0sWzUsNl0sWzYsNywiZiciXSxbNyw4LCJnJyJdLFs4LDldLFsxLDYsIlxcYWxwaGEiLDJdLFsyLDcsIlxcYmV0YSIsMl0sWzMsOCwiXFxnYW1tYSIsMl1d
+\[\begin{tikzcd}[ampersand replacement=\&]
+	0 \& A \& B \& C \& 0 \\
+	0 \& {A'} \& {B'} \& {C'} \& 0,
+	\arrow[from=1-1, to=1-2]
+	\arrow["f", from=1-2, to=1-3]
+	\arrow["\alpha"', from=1-2, to=2-2]
+	\arrow["g", from=1-3, to=1-4]
+	\arrow["\beta"', from=1-3, to=2-3]
+	\arrow[from=1-4, to=1-5]
+	\arrow["\gamma"', from=1-4, to=2-4]
+	\arrow[from=2-1, to=2-2]
+	\arrow["{f'}", from=2-2, to=2-3]
+	\arrow["{g'}", from=2-3, to=2-4]
+	\arrow[from=2-4, to=2-5]
+\end{tikzcd}\]
+the associated homomorphisms $\brax{d_n}$ and $\brax{d_n'}$ make the following diagram commute:
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJIX24oQykiXSxbMiwwLCJIX3tuLTF9KEEpIl0sWzAsMiwiSF9uKEMnKSJdLFsyLDIsIkhfe24tMX0oQScpIl0sWzAsMSwiZF9uIl0sWzAsMiwiXFxnYW1tYV97bip9IiwyXSxbMSwzLCJcXHZlcHNfe24tMSp9Il0sWzIsMywiZF9uJyIsMl1d
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{H_n(C)} \&\& {H_{n-1}(A)} \\
+	\\
+	{H_n(C')} \&\& {H_{n-1}(A')}
+	\arrow["{d_n}", from=1-1, to=1-3]
+	\arrow["{\gamma_{n*}}"', from=1-1, to=3-1]
+	\arrow["{\veps_{n-1*}}", from=1-3, to=3-3]
+	\arrow["{d_n'}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+\end{thm}
+
+\begin{proof}
+Diagram chasing.
+\end{proof}
+
 
 
 \end{document}
