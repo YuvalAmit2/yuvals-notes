@@ -1247,10 +1247,195 @@ There are generally a few problems with simplicial homology. First, it's not imm
 \section{Singular Homology}
 
 \begin{defn}
-Let $X$ be a topological space. The group of \textbf{singular $n$-chains} in $X$ is the free abelian groups on
+Let $X$ be a topological space. The group \term{$C_n(X)$} \term{singular $n$-chains} in $X$ is the free abelian groups on
 \[
 \brax{ \sigma: \Delta ^n \to X \setbar \sigma \text{ continuous}}.
 \]
+That is
+\[
+C_n(X) := \brax{ \sum_{i=1}^m k_i\sigma_i \setbar \sigma_i : \Delta^n \to X, k_i \in \Z}
+\]
+Each such $\sigma$ is called a \term{singular simplex}.
+
+If $\sigma$ is a singular simplex, we define its \term{boundary} to be
+\[
+\partial \sigma = \sum_{i=0}^n(-1)^i\sigma \circ \iota_i.
+\]
+This extends to a homomorphism $\partial_n:C_n(X) \to C_{n-1}(X)$, and $\partial_{n-1}\circ \partial _n=0$. The \term[singular homology,$H_n$]{$n\th$ singular homology group $H_n(X)$} of $X$ is the $n\th$ homology of the chain complex $C_n(X)$. That is
+\[
+H_n(X)=\ker \partial _n/\Img\partial_{n+1}.
+\]
+The elements of $\ker \partial _n$ are called \term[cycle,cycles]{$n$-cycles}, and the elements of $\Img \partial_{n+1}$ are called \term[boundary,boundaries]{$n$-boundaries}.
 \end{defn}
+
+\begin{rmk}
+If $f:X \to Y$ is continuous, and $\sigma:\Delta^n \to X$ is a singular $n$-simplex in $X$, then $f \circ \sigma$ is a singular $n$-simplex in $Y$. Hence $f_*: C_n(X) \to C_n(Y)$  sending $\sigma \mapsto f \circ \sigma$ defines a homomorphism. Moreover
+\[
+f_*(\partial _n \sigma)=\partial_{n-1}(f_*\sigma).
+\]
+\end{rmk}
+
+\begin{defn}
+Let $\brax{C_n}_{n=0}^\infty,\brax{D_n}_{n=0}^\infty$ be chain complexes. A \term{chain map} $f_*: \brax{C_n} \to \brax{D_n}$ is a sequence of homomorphisms $h_n:C_n \to D_n$, $n \geq 0$ such that
+\[
+\partial _n h_n = h_{n-1}\partial _n,
+\]
+i.e. the following diagram commutes:
+% https://q.uiver.app/#q=WzAsOCxbMCwwLCJDX24iXSxbMCwxLCJEX24iXSxbMSwwLCJDX3tuLTF9Il0sWzMsMCwiQ18xIl0sWzQsMCwiQ18wIl0sWzEsMSwiRF97bi0xfSJdLFszLDEsIkRfMSJdLFs0LDEsIkRfMCJdLFswLDIsIlxccGFydGlhbF9uIl0sWzIsMywiXFxjZG90cyJdLFszLDQsIlxccGFydGlhbF8xIl0sWzEsNSwiXFxwYXJ0aWFsX24iXSxbNSw2LCJcXGNkb3RzIl0sWzYsNywiXFxwYXJ0aWFsXzEiXSxbMCwxLCJoX24iLDJdLFsyLDUsImhfe24tMX0iXSxbMyw2LCJoXzEiLDJdLFs0LDcsImhfMCJdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{C_n} \& {C_{n-1}} \&\& {C_1} \& {C_0} \\
+	{D_n} \& {D_{n-1}} \&\& {D_1} \& {D_0}
+	\arrow["{\partial_n}", from=1-1, to=1-2]
+	\arrow["{h_n}"', from=1-1, to=2-1]
+	\arrow["\cdots", from=1-2, to=1-4]
+	\arrow["{h_{n-1}}", from=1-2, to=2-2]
+	\arrow["{\partial_1}", from=1-4, to=1-5]
+	\arrow["{h_1}"', from=1-4, to=2-4]
+	\arrow["{h_0}", from=1-5, to=2-5]
+	\arrow["{\partial_n}", from=2-1, to=2-2]
+	\arrow["\cdots", from=2-2, to=2-4]
+	\arrow["{\partial_1}", from=2-4, to=2-5]
+\end{tikzcd}\]
+\end{defn}
+
+Hence if $f:X \to Y$ is continuous, then $(f_*)_n$ sending $\sigma \mapsto f \circ \sigma$ is a chain map. Moreover, given three continuous maps
+\[
+X \arr[f]Y \arr[g]Z,
+\]
+we have $g_*f_*=(gf)_*$, and $\id_*=\id$.
+\begin{prop}
+Let $f_*:\{C_n\} \to \{D_n\}$ be a chain map. Then $h_n(\ker \partial _n) \subset \ker \partial_n$ and $h_n(\Img(\partial_{n+1}))\subset \Img(\partial_{n+1})$ in the following sense:
+% https://q.uiver.app/#q=WzAsNixbMCwxLCJDX24oWCkiXSxbMSwwLCJcXGtlcihcXHBhcnRpYWxfbikiXSxbMSwyLCJcXEltZyhcXHBhcnRpYWxfe24rMX0pIl0sWzIsMCwiXFxrZXIgKFxccGFydGlhbF9uKSJdLFszLDEsIkRfbihYKSJdLFsyLDIsIlxcSW1nKFxccGFydGlhbF9uKSJdLFsxLDAsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzIsMCwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbMSwzLCJoX24iXSxbMCw0LCJoX24iXSxbMyw0LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFs1LDQsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsNSwiaF9uIl1d
+\[\begin{tikzcd}[ampersand replacement=\&]
+	\& {\ker(\partial_n)} \& {\ker (\partial_n)} \& \\
+	{C_n(X)} \&\&\& {D_n(X)} \\
+	\& {\Img(\partial_{n+1})} \& {\Img(\partial_n)}
+	\arrow["{h_n}", from=1-2, to=1-3]
+	\arrow[hook', from=1-2, to=2-1]
+	\arrow[hook, from=1-3, to=2-4]
+	\arrow["{h_n}", from=2-1, to=2-4]
+	\arrow[hook', from=3-2, to=2-1]
+	\arrow["{h_n}", from=3-2, to=3-3]
+	\arrow[hook, from=3-3, to=2-4]
+\end{tikzcd}\]
+Thus $h_n$ induces a map $h_{n*} : H_n(C) \to H_n(D)$.
+\end{prop}
+
+\begin{proof}
+Easy.
+\end{proof}
+
+\begin{cor}
+Let $f:X \to Y$ be continuous. Then for every $n \geq 0$, we have induced homomorphisms $f_{n*}:H_n(X)\to H_n(Y)$. Moreover, for $f:X \to Y$ and $g:Y \to Z$, we have $g_{n*}\circ f_{n*}=(g \circ f)_{n*}$, and $\id_{n*}=\id$. In particular, if $f:X \to Y$ is a homeomorphism, then $f_{n*}:H_n(X)\to H_n(Y)$ is an isomorphism.
+\end{cor}
+
+\begin{prop}
+If $X = \coprod_{\alpha \in I}X_\alpha$ is a disjoint union, then for all $n \geq 0$,
+\[
+H_n(X)= \bigoplus_{\alpha \in I}H_n(X_\alpha).
+\]
+\end{prop}
+
+\begin{defn}
+Given a space $X$, define $\veps:C_0(X)\to \Z$ by 
+\[
+\veps\paren{\sum_{i=1}^mk_i\sigma_i}=\sum_{i=1}^mk_i,
+\]
+which is a homomorphism
+\end{defn}
+
+\begin{prop}
+For every $a \in C_1(X)$, $\veps(\partial a)=0$.
+\end{prop}
+
+\begin{proof}
+If $\partial a= \sum_{i=1}^m k_i\sigma_i$ with $\sigma:\Delta^n \to X$, then
+\[
+\partial a = \sum_{i=1}^mk_i(\sigma_i(1)-\sigma_i(0)),
+\]
+hence
+\[
+\veps(\partial a)=\sum k_i - \sum k_i = 0.
+\]
+\end{proof}
+
+This means $\veps$ defines a map $H_0(X) \to \Z$.
+
+\begin{prop} \label{prop:path-connected-zero-reduced}
+If $X$ is path connected, then $\veps :H_0(X) \to \Z$ is an isomorphism.
+\end{prop}
+
+\begin{proof}
+Consider a 0-chain $\sum_{i=1}^m k_i p_i$, where $p_i \in X$. Then for every $i = 2,\dots,m$, consider a $1$-simplex $\gamma:[0,1]\to X$ with $\gamma_i(0)=p_1$ and $\gamma_i(0)=p_i$. Note $\partial \gamma_i = p_i -p_1$. Thus
+\[
+\sum_{i=1}^m k_ip_i - \partial \paren{ \sum_{i=2}^m k_i \gamma_i } = \paren{\sum_{i=1}^m k _i}p_1.
+\]
+Thus every element in $H_0(X)$ is represented by $kp$.  Choosing some $p_0$ for all $p \in X$, we have
+\[
+mp - mp_0 = \partial(m\gamma),
+\]
+where $\gamma$ is a curve from $p_0$ to $p$. Thus for all $x \in C_0(X)$, $x \in \braks{\veps(X)p_0}$. Therefore if $x,y \in [\veps(x)p_0]$, then $[x]=[y]$, so $\veps$ is injective.
+
+Furthermore, $\veps\paren{[mp_0]}=m$.
+\end{proof}
+
+\begin{defn}
+The \term[reduced homology]{reduced homology groups} of $X$ are the homologies of the complex
+\[
+C_n(X) \arr[\partial_n]C_{n-1}(X) \arr \cdots \arr C_1(X)\arr[\partial _1]C_0(X) \arr[\veps] \Z.
+\]
+We write this has
+\[
+\tilde H_n(X)= \case{ H_n(X) & n \geq 1 \\ \ker \veps /\Img \partial _1  & n=0.}
+\]
+So by \Cref{prop:path-connected-zero-reduced}, $\tilde H_0(X)=0$.
+\end{defn}
+
+\begin{thm}
+For $X = \{p\}$, $\tilde H_n(X)=0$ for all $n$.
+\end{thm}
+
+\begin{proof}
+We know $\tilde H_0(X)=0$. Now observe that 
+\[
+\partial \sigma_n = \sum_{i=0}^n (-1)^i \sigma_{n-1} = \case{ \sigma_{n-1}  & n \text{ even} \\ 0 & n \text{ odd}},
+\]
+as there is only one $n$-simplex $\sigma_n$, and only one $(n-1)$-simplex $\sigma_{n-1}$. 
+
+Now if $n$ is even then $\ker \partial _n = 0$, so $H_n(X)=0$. On the other hand if $n$ is odd, then $\ker \partial _n = \Img \partial_{n+1}$, so again $H_n(X)=0$.
+\end{proof}
+
+\begin{thm}[Homotopy Invariance of Homology] \label{thm:homo-invar-of-hom}
+Suppose $f,g:X \to Y$ are homotopic. Then $f_{*n},g_{*n}:H_n(X)\to H_n(Y)$ are equal. In particular, if $f:X \to Y$ is a homotopy equivalence, then $f_{*n}$ is an isomorphism.
+\end{thm}
+
+To prove this, we need a helpful algebraic notion first.
+\begin{defn}
+Let $\{C_n\},\{D_n\}$ be chain complexes, and $\brax{f_n:C_n \to D_n}_{n=0}^\infty,\brax{g_n:C_n \to D_n}_{n=0}^\infty$ chain maps. A sequence of homomorphisms $\brax{p_n:C_n \to D_{n+1}}_{n=0}^\infty$ is called a \term{chain homotopy} between $f$ and $g$ if $\partial_{n+1} p_n = g-f+p_{n-1}\partial _n$. In this case, we say that $f$ and $g$ are \term{chain homotopic}.
+\end{defn}
+
+\begin{claim} \label{clm:chain-homo-gives-isom}
+If $f,g : \brax{C_n} \to \brax{D_n}$ are chain homotopic maps, then $f_{*n}:H_n(C) \to H_n(D)$ is an isomorphism for all $n$.
+\end{claim}
+
+\begin{proof}
+Let $[z] \in H_n(C)$, and we want to show $g_{*n}(z)-f_{*n}(z)=0$, i.e. that it's a boundary. Well if $p$ is a chain homotopy between $f$ and $g$, then
+\[
+g_{*n}(z)-f_{*n}(z) = \partial p_n(z)- p_{n-1}(\partial \Z)= \partial p_n(z),
+\]
+as desired.
+\end{proof}
+
+\begin{proof}[Proof of Homotopy Invarance of Homology]
+Let $f,g :X \to Y$ be homotopic, so we have a homotopy $F:X \times [0,1]\to Y$. By \Cref{clm:chain-homo-gives-isom}, it suffices to find a chain homotopy between $f_*$ and $g_*$.
+
+Let $\sigma : \Delta^n \to X$ be a singular $n$-simplex. Then $f_* \circ \sigma = f\circ \sigma$, and similarly for $g$. In fact, we may use the homotopy $F$ to have
+\[
+\Delta^n \times I \arr[\sigma \times \id]X \times I \arr[F]Y.
+\]
+This will be used to obtain a chain homotopy.
+\end{proof}
+
+
 
 \end{document}
