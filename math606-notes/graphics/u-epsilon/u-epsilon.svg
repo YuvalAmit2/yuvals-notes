@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="160mm"
+   height="80mm"
+   viewBox="0 0 160 80"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.4.4 (dcaf3e7d, 2026-05-05)"
+   sodipodi:docname="u-epsilon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.594299"
+     inkscape:cx="366.3052"
+     inkscape:cy="148.9683"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showborder="true"
+     width="200mm"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1407"
+     inkscape:window-height="694"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="0"
+     inkscape:showpageshadow="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815"
+       units="mm"
+       spacingx="10"
+       spacingy="10"
+       empspacing="4"
+       dotted="false"
+       originx="0"
+       originy="0" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-177)">
+    <path
+       style="fill:none;stroke:black;stroke-width:0.14877521;stroke-dashoffset:0.757727;paint-order:markers fill stroke;fill-opacity:1;marker-end:none;marker-start:none;stroke-dasharray:none;stroke-linecap:butt;stroke-opacity:1"
+       d="m 81.952742,195.62562 c -17.029142,2.12865 -22.084668,-0.79824 -26.608034,10.11106 -4.523365,10.90929 -7.71633,19.42386 11.973615,22.8829 19.689945,3.45905 21.818586,-3.19296 33.526117,-1.3304 11.70754,1.86257 30.86532,10.64322 29.26884,-1.3304 -1.59648,-11.97361 5.32161,-32.19572 -13.03793,-31.39748 -18.359548,0.79824 -35.122608,1.06432 -35.122608,1.06432 z"
+       id="path1" />
+    <path
+       style="fill:#000000;fill-opacity:0.08783784;stroke:#000000;stroke-width:0.0944686;stroke-linecap:butt;stroke-dasharray:none;stroke-dashoffset:0.757727;stroke-opacity:1;marker-start:none;marker-end:none;paint-order:markers fill stroke"
+       d="m 85.930287,200.89271 c -11.119689,1.31437 -14.420847,-0.49289 -17.374514,6.24326 -2.953667,6.73615 -5.038609,11.99363 7.818531,14.12948 12.85714,2.13586 14.2471,-1.97155 21.891884,-0.82148 7.644782,1.15008 20.154432,6.57186 19.111972,-0.82148 -1.04248,-7.39333 3.4749,-19.87986 -8.51351,-19.38697 -11.98842,0.49289 -22.934363,0.65719 -22.934363,0.65719 z"
+       id="path1-0" />
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1"
+       y="195.52078"
+       x="59.266678"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="59.266678"
+         y="195.52078"
+         style="stroke-width:0.264583">\large $U$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-3"
+       y="208.3744"
+       x="79.89724"><tspan
+         sodipodi:role="line"
+         id="tspan1-9"
+         x="79.89724"
+         y="208.3744"
+         style="stroke-width:0.264583">\large $U_\veps$</tspan></text>
+  </g>
+</svg>

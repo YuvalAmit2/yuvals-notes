@@ -2893,7 +2893,7 @@ by integrating by be parts.
 \end{proof}
 
 \begin{thm}[Weyl's Lemma (or the Regularity Theorem for $\bar \partial$).] \label{thm:weyl-lemma-regularity-thm}
-Let $X$ be a compact Riemann surface and $\pi :E \to X$ be a holomorphic vector bundle on $X$. Suppose $F:\cA_E^{0,1}(X) \to \C$ is a continuous linear functional such that $F|_{\bar \partial \cA_E(X)}\equiv 0$. Then there exists a unique $s\in H^0(X,E^*\otimes K_x)$ such that
+Let $X$ be a compact Riemann surface and $\pi :E \to X$ be a holomorphic vector bundle on $X$. Suppose $F:\cA_E^{0,1}(X) \to \C$ is a continuous linear form such that $F|_{\bar \partial \cA_E(X)}\equiv 0$. Then there exists a unique $s\in H^0(X,E^*\otimes K_x)$ such that
 \[
 F(\varphi) = \angles{s,\varphi}, \quad \forall \varphi \in \cA_E^{0,1}(X).
 \]
@@ -2902,5 +2902,190 @@ F(\varphi) = \angles{s,\varphi}, \quad \forall \varphi \in \cA_E^{0,1}(X).
 \begin{cor}[Serre Duality] \label{cor:serre-duality}
 The induced pairing $\angles{,}_E:H^0(X,E^*\otimes K_X) \otimes H^1(X,E) \to \C$ is \term{perfect}, i.e it's a non-degenerate bilinear form. Hence the two vector spaces involved are dual to each other.
 \end{cor}
+
+\begin{proof}
+Let $T:\cA_E^{0,1}(X)/\bar \partial \cA_E(X)\to \C$ is any linear functional. By the Dolbeault isomorphism, the domain is isomorphic to $H^1(X,E)$. We've seen that the for $C^\infty$-topology, $\bar \partial \cA_E(X)$ is closed in $\cA_E^{0,1}(X)$, and has finite codimension. Since any linear form on a finite dimensional topological vector space is continuous, the induced composition
+\[
+F_T:\cA_E^{0,1}(X) \arr[\proj] \cA_E^{0,1}(X)/\bar{\partial}\cA_E(X)\arr[T]\C
+\]
+is continuous, and vanishes on $\bar \partial \cA_E(X)$. By Weyl's Lemma, there exists a unique $s \in H^0(X,E^*\otimes K_X)$ such that
+\[
+T([ \varphi]) =F_T(\vphi) =\angles {s,\vphi} =: \angles{s,[\vphi]}_E,
+\]
+for all $\vphi \in \cA_E^{0,1}(X)$. Hence the induced map
+\begin{align*}
+    H^0(X,E^*\otimes K_X) &\arr[\Delta_E] H^1(X,E)^* \\
+    s & \mapsto (\xi \maps \angles{s,\xi}_E)
+\end{align*}
+is surjective. To prove $\Delta_E$ is injective, we need to show that if $s \in H^0(X,E^*\otimes K_X)$ satisfies $\angles{s, \vphi}=0$ for all $\vphi \in \cA_{E}^{0,1}(X)$, then $s=0$. This is easy: just consider a bump function $\varphi$ with $\supp (\varphi) \subset U$ for a small neighborhood $U$ of a point where $s(a)\neq 0$. This leads to a contradiction, so $s$ must be $0$.
+\end{proof}
+
+\begin{rmk}
+If $E$ is the trivial line bundle on $X$, and $X \subset \C$ is open, we are dealing with linear functionals on $C_0^\infty(X)$, i.e. $C^\infty$ functions with compact support. These linear functionals are called \term[]{distributions}, and generalize smooth functions. The derivatives of distributions are defined so that $F|_{\bar \partial C_0^\infty (X)}=0$ means $\partder[]{F}{\bar z}=0$ in the sense of distributions. So Weyl's Lemma asserts that distributions $F$ with $\partder[]{F}{\bar z}=0$ are given by holomorphic functions.
+\end{rmk}
+
+\subsection{\texorpdfstring{Proof of Weyl's Lemma (\cref{thm:weyl-lemma-regularity-thm})}{Proof of Weyl's Lemma}}
+
+We begin with the following remark.
+\begin{rmk} \label{rmk:inner-prod-0-s-0}
+If $W \subset X$ is open, $s \in H^0(W,E^*\otimes K_X)$, and $\angles{s,\varphi}=0$ for all $\varphi \in \cA_E^{0,1}(X)$ with $\supp \varphi \subset W$, then $s=0$.
+\end{rmk}
+
+\begin{proof}
+This is clear, similar to the end of the proof of Serre Duality (take a bump function).
+\end{proof}
+
+Now let $(U,z)$ be a coordinate neighborhood such that there is a holomorphic trivialization
+\[
+h_U: \pi^{-1}(U) \to U \times \C^n
+\]
+of $E|_U$. By \Cref{rmk:inner-prod-0-s-0}, it suffices to show that there exists $s \in H^0(U,E^* \otimes K_X)$ such that $F(\varphi)= \angles{s,\varphi}$ for all $\varphi \in \cA_E^{0,1}(X)$ with $\supp \varphi \subset U$ (so the statement of Weyl's Lemma is local). Equivalently, we must show there exists holomorphic functions $\lambda_1,\dots,\lambda_n$ on $U$ such that for all $\alpha_1,\dots,\alpha_n \in C_0^\infty (U)$,
+\[
+F(\varphi)= \int _U \sum_{k=1}^n \lambda_k(z)\alpha_k(z)dz \land d \bar z,
+\]
+where $\varphi = \alpha \otimes d\bar z$, and $h_U(\alpha(z))=(z,\alpha_1(z),\dots,\alpha_n(z))$. Define $G(\alpha_1,\dots,\alpha_n):= F(\alpha \otimes d \bar z)$, and then the condition $F|_{\bar \partial C_E^\infty (X)}=0$ means
+\[
+G\paren{ \partder[]{\beta_1}{\bar z},\dots, \partder[]{\beta_n}{\bar z} }=0
+\]
+for $\beta _j \in C_0^\infty (U)$. It suffices to prove that for all $k \in \{1,\dots, n\}$, there exists $\lambda _k \in \cO(U)$ such that
+\[
+G(0,\dots,0,\alpha_k,0\dots,0) = \int _U \lambda _k \alpha _k dz \land d \bar z
+\]
+for all $\alpha _k \in C_0^\infty (U)$. This will follow from the next result, concluding the proof of Weyl's Lemma.
+
+\subsection{\texorpdfstring{The Regularity Theorem for $\bar \partial$}{The Regularity Theorem for d-bar}}
+
+\begin{thm}[The Regularity Theorem for $\bar \partial$] \label{thm:regularity-thm-for-dbar}
+Let $U \subset \C$ be open. Let $T : C_0^\infty (U) \to \C$ be a $\C$-linear map such that
+\begin{enumerate}[(i)]
+    \item If $\{\alpha_n\}_{n=1}^\infty \in C_0^\infty (U)$ is a sequence with supports in a fixed compact set $U$, converging in the $C^\infty$-topology to $\alpha \in C_0^\infty (U)$, then $T(\alpha _n)\to T(\alpha)$.
+    \item $T \paren{\partder[]{\beta}{\bar z}}=0$ for all $\beta \in C_0^\infty (U)$.
+\end{enumerate}
+Then there exists $\lambda \in \cO(U)$ such that \[
+T(\alpha) = \int _U \lambda \alpha dz \land d \bar z,
+\]
+for all $\alpha \in C_0^\infty (U)$.
+\end{thm}
+
+\begin{proof}
+We may assume that $U$ is bounded, and define
+\[
+U_\veps := \brax{z \in U \setbar \w{dist}(z,\C\sm U)> \veps}
+\]
+\begin{figure}[H]
+	\centering
+	\incfig{u-epsilon}
+	\label{fig:u-epsilon}
+\end{figure}
+Let $\varphi \in C_0^\infty (\C)$ be such that
+\[
+\varphi(z)= \case{1 & |z| \leq \veps / 2 \\ 0 & |z| \geq \veps}
+\]
+with $0 \leq \varphi \leq 1$ everywhere.
+
+Note that any $\alpha \in C_0^\infty (U)$ lies in $C_0^\infty (U_\veps)$ for some $\veps >0$.  Moreover if $\alpha \in C_0^\infty (U_\veps)$, define $\tilde \alpha \in C_0^\infty (U)$ by
+\[
+\tilde \alpha(z) := \frac{1}{2\pi i }\int_\C \alpha (z+w)\frac{\varphi(w)}w{dw \land d\bar w}
+\]
+\begin{claim} \label{clm:alpha-is-integral}
+Consider the function \[
+f(w)= \case{ \partder[]{}{\bar w}\paren{\frac{\varphi(w)}{w}} & w \neq 0  \\ 0 & w = 0,}
+\]
+which is $C^\infty$ and $\supp f \subset \brax{w : \frac{\veps}{2}\leq |w| \leq \veps}$. Then
+\begin{equation} \label{eq:alpha-is-integral}
+    \alpha(z)
+ = \partder[]{\tilde \alpha}{\bar z}(z) + \frac{1}{2\pi i }\int_\C \alpha(z+w)f(w)dw \land d \bar w
+\end{equation}
+for $z \in U$.
+\end{claim}
+
+\begin{proof}
+Fix $z \in U$, and let $\Delta_\delta$ be a small disk of radius $\delta >0$ around $z$. Then
+\begin{align*}
+    \partder[]{\tilde \alpha}{\bar z} &= \frac{1}{2\pi i }\int_\C \partder[]{\alpha}{\bar z}(z+w)\frac{\varphi (w)}{w}dw \land d \bar w \\
+    &= \lim_{\delta \to 0}\frac{1}{2\pi i }\int_{\C \sm \Delta_\delta} \partder[]{\alpha}{\bar z}(z+w)\frac{\vphi (w)}w{dw \land d \bar w}.
+\end{align*}
+Moreover, we may replace $\partder[]{\alpha}{\bar z}$ with $\partder[]{\alpha}{\bar w}$ by linearity. Then for a fixed $\delta >0$ we have
+\begin{align*}
+    &\int_{\C \sm \Delta_\delta}\partder[]{\alpha}{\bar w}(z+w)\frac{\varphi(w)}{w}dw \land d \bar w  \\&= -\int_{\C \sm \Delta_\delta} d\paren{ \alpha(z+w)\frac{\vphi(w)}w}-\int_{\C \sm \Delta _\delta} \alpha (z+w)\partder[]{}{\bar w}\paren{\frac{\varphi(w)}{w}}dw \land d \bar w \\
+    &= \int_{|w| = \delta}\frac{\alpha(z+w)\vphi(w)}w{dw - \int_{\C \sm \Delta_\delta}}\alpha (z+w)f(w)dw \land d \bar w.
+\end{align*}
+Now we let $\delta \to 0$. The first term converges to $2\pi i \alpha(z)\varphi (0)=2\pi i\alpha(z)$, by continuity at $0$ of $\alpha$ and $\vphi$. This yields \eqref{eq:alpha-is-integral}.
+\end{proof}
+We can also rewrite \eqref{eq:alpha-is-integral} as
+\begin{equation} \label{eq:alpha-is-integral-2}
+\alpha(z) = \partder[]{\tilde \alpha}{\bar z} + \frac{1}{2\pi i }\int _U \alpha(w)f(w-z)dw \land d\bar w.
+\end{equation}
+Now approximate the integral in \eqref{eq:alpha-is-integral-2} by Riemann sums: these sums converge to the integral in the $C^\infty$-topology because $f$ is $C^\infty$, and have support in a fixed compact set in $U$ since $\alpha \in C_0^\infty (U_\veps)$ and $f(w-z)=0$ whenever $|w-z| \geq \veps$.
+
+Now, by assumption (i) of the theorem, $T$ is continuous, so we deduce that
+\[
+T(\alpha)=T\paren{\partder[]{\tilde \alpha}{\bar z}}+\frac{1}{2\pi i }\int_U \alpha (w)T(z \mapsto f(w-z))dw \land d \bar w.
+\]
+Set $\lambda (w) := T(z \mapsto f(w-z))$. Then assumption (ii) implies
+\begin{equation} \label{eq:T-is-integral}
+    T(\alpha) = \frac{1}{2\pi i }\int_U\alpha (w)\lambda (w)dw \land d \bar w
+\end{equation}
+for all $\alpha \in C_0^\infty (U_\veps)$. We claim $\lambda \in C^\infty (U_\veps)$. Indeed, suppose $h$ is a real number, $h\neq0$, and $h \to 0$. Then 
+\[
+\frac{\lambda(w+h)-\lambda(w)}{h}=T\paren{\frac{f(w+h-z)-f(w-z)}h{}}
+\]
+and the term under $T$ converges in the $C^\infty$-topology as $h \to 0$. We iterate this argument to show that it has all of its partials.
+
+Finally, apply \eqref{eq:T-is-integral} for any $\beta \in C_0^\infty (U_\veps)$ so that
+\[
+0 = T\paren{\partder[]{\beta}{\bar z}}=\frac{1}{2\pi i }\int_U \partder{\beta}{\bar w}\lambda (w)dw \land d\bar w = -\frac{1}{2\pi i }\int_U \beta \partder[]{\lambda}{\bar w} dw \land d \bar w.
+\]
+Since $\beta$ was arbitrary, it follows that $\partder[]{\lambda}{\bar w}=0$ on $U_\veps$, i.e $\lambda \in \cO(U_\veps)$ for any $\veps>0$. This proves the theorem.
+\end{proof}
+
+\section{Riemann-Roch and Applications}
+Let $X$ be a Riemann surface and $D$ a divisor on $X$.
+
+\begin{defn}
+For $U \subset X$ open, let
+\[
+\Omega_D(U):= \brax{\omega \text{ meromorphic 1-form on } U \setbar \div (w) \geq -D}.
+\]
+Then \term[]{$\Omega_D$} is a sheaf on $X$, isomorphic to the sheaf of sections of $K_X \otimes L(D)$.
+\end{defn}
+
+\begin{thm}[Serre Duality] \label{thm:strong-serre-duality}
+For $X$ a compact Riemann surface, there is a canonical perfect pairing
+\[
+H^1(X,\cO_D)\otimes H^0(X,\Omega_{-D}) \to \C
+\]
+\end{thm}
+
+\begin{thm}[Riemann-Roch (strong form)] \label{thm:strong-riemann-roch}
+For $X$ a compact Riemann and $D$ a divisor on $X$,
+\[
+\dim_\C H^0(X,\cO_D)-\dim_\C H^0(X,\Omega_{-D}) = 1-g+\deg D.
+\]
+\end{thm}
+
+\begin{defn}
+If $L \to X$ is a holomorphic line bundle, write \term{$\deg L$} for $\deg D$ if $L \simeq L(D)$. Also write $h^i(L)$ for $h^i(D)$. $i=0,1$.
+\end{defn}
+
+\begin{cor}
+By Serre duality, $h^0(K_X)=h^1(\cO)=g$, the genus. Hence there exists $g$ linearly independent holomorphic 1-forms $\omega_1,\dots,\omega_g$ on $X$, which form a basis of $\Omega(X)=H^0(X,K_X)$.
+\end{cor}
+
+\begin{cor}
+By Riemann-Roch,
+\[
+g-1 = h^0(K_X)-h^0(\cO) = 1-g + \deg K_X \implies \deg K_X = 2g-2,
+\]
+Equivalently, if $w \neq 0$ is a meromorphic 1-form, then $\deg \div(w)=2g-2$.
+\end{cor}
+
+\begin{thm}[Vanishing Theorem] \label{thm:vanishing-thm}
+Let $D$ be a divisor on $X$ such that $\deg D \geq 2g-2$. Then $H^1(X,\cO_D)=0$, and therefore $h^0(D)=1-g+\deg D$.
+\end{thm}
+
+\begin{proof}
+Note that if $L \to X$ is a holomorphic line bundle and $h^0(L)>0$, then $\deg L \geq 0$ (in fact, if $s \in H^0(X,L)$ is non-zero, then $L \simeq L(\div(s))$, and $\deg \div s \geq 0$ since $s$ is holomorphic). Now suppose $\deg D > 2g-2$. Then $h^1(D)=h^0(K-D)$ where $K$ is any canonical divisor. But since $\deg (K-D)=2g-2 -\deg D <0$, we see that $h^0(K-D)=0$.
+\end{proof}
 
 \end{document}

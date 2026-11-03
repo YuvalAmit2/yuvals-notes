@@ -825,4 +825,100 @@ Let $Z \sim N(0,1)$. Then
 \end{align*}
 \end{ex}
 
+\section{Random Vectors}
+
+\begin{defn}
+Let $X_1,\dots,X_n : \Omega \to \R$ be a collection of random variables. We define the \term[]{random vector} $\vec X:\Omega \to \R^n$ to be \[
+\vec X = \matr{X_1 \\ X_2 \\ \vdots \\ X_n},
+\]
+also written $\vec X = (X_1,\dots,X_n)$.  The probability distribution of $X$ is called the \term[]{joint distribution}.
+\end{defn}
+
+\begin{prop} \label{prop:disc-joint-pmf}
+If $X,Y$ are random variables, then
+\[
+p_{X,Y}(x,y)=p_X(x)p_{Y|X}(y|x).
+\]
+\end{prop}
+
+\begin{proof}
+By definition
+\begin{align*}
+    p_{X,Y}(x,y) &= P(X=x,Y=y) \\ &=P(X=x)\cdot P(Y=y|X=x) \\
+    &= p_X(x)\cdot p_{Y|X}(y|x),
+\end{align*}
+as desired.
+\end{proof}
+
+\begin{ex} \label{ex:joint-coin-dice}
+We flip a coin, and if heads we roll a D6, and if tails we roll a D4. Then 
+\[
+\Omega = \brax{ (H,1),\dots,(H,6),(T,1),\dots,(T,4)}.
+\]
+We write
+\begin{align*}
+X(a,b) &=\case{0 & a= T \\ 1 & a = H} \\
+Y(a,b) &= b
+\end{align*}
+Compute the joint probability mass function $p_{X,Y}(x,y)$/
+\end{ex}
+
+\begin{solution}
+By \cref{prop:disc-joint-pmf},
+\begin{align*}
+    p_{X,Y}(x,y) = p_X(x)\cdot p_{Y|X}(y|x).
+\end{align*}
+Note that $X\sim \w{Ber}(1/2)$, and $p_X(x)=1/2$ when $x \in \{0,1\}$. Moreover
+\begin{align*}
+    p_{Y|X}(y|0) &= 1/4, \quad y \in \{1,\dots,4\}, \\
+    p_{Y|X}(y|1) &= 1/6, \quad y \in \{1,\dots,6\}.
+\end{align*}
+Hence
+\[
+p_{Y|X}(y|x) = \case{ 1/4 & x=0,y=1,\dots,4 \\ 1/6 & x=1, y=1,\dots,6 \\ 0 & \text{otherwise.}}
+\]
+We conclude that
+\[
+p_{X,Y}(x,y)= \case{ 1/8 & x=0,y=1,\dots,4 \\ 1/12 & x=0, y=1,\dots,6 \\ 0 & \text{otherwise.}}
+\]
+\end{solution}
+
+\begin{que}
+What is the probability that the die roll in \Cref{ex:joint-coin-dice} is prime?
+\end{que}
+
+\begin{solution}
+We are computing
+\[
+p_{X,Y}(0,2)+p_{X,Y}(0,3) + p_{X,Y}(1,2) + p_{X,Y}(1,3) + p_{X,Y}(1,5).
+\]
+This evaluates to
+\[
+\frac{1}{8} + \frac{1}{8} + \frac{1}{12} + \frac{1}{12}+\frac{1}{12}= \frac 12.
+\]
+However, we kay take another approach: if we compute $p_Y(y)$, then all we need is $p_Y(2)+p_Y(3)+p_Y(5)$. Well, by the law of total probability,
+\begin{align*}
+    p_Y(y)=p(Y=y)=p(Y=y|X=0)+p(Y=y|X=1).
+\end{align*}
+We compute that
+\[
+p_Y(y) = \case{5/24 & y=1,2,3,4 \\ 1/12 & y=5,6,}
+\]
+and so $p_Y(2)+p_Y(3)+p_Y(5)=5/24+5/24+1/12=1/2$.
+\end{solution}
+
+\begin{prop}
+For random variables $X,Y$,
+\[
+p_Y(y)=\sum_{x}p_{X,Y}(x,y).
+\]
+\end{prop}
+
+\begin{defn}
+The random variables $X_1,\dots,X_n$ are said to be \term[]{independent} if \[
+p_{X_{i_1},\dots,X_{i_k}}(x_{i_1},\dots,x_{i_k}) = \prod_{j=1}^k p_{X_{i_j}(x_{i_j})}
+\]
+for all $(i_1,\dots,i_k)\subset (1,\dots,n).$
+\end{defn}
+
 \end{document}
