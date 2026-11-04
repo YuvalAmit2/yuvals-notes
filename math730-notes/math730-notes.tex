@@ -1513,13 +1513,48 @@ Diagram chasing.
 Suppose $X$ is contractable. Show that $\tilde{H}_n(X )=0$ for all $n$.
 \end{exercise}
 
-\begin{defn}
+\begin{defn} \label{def:collection-interior-cover}
 Suppose $X$ is a topological space, and suppose $\cA$ is a collection of sets in $X$ whose interior cover $X$. Denote by \term{$C^{\cA}(X)$} the free abelian group over simplices $\sigma :\Delta^n \to X$ such that $\Img(\sigma) \subset A$ for some $A \in \cA$.
 \end{defn}
 
 \begin{prop}
 Let $A,B \subset X$ be open such that $A \cup B = X$. Then the following sequence of complexes is exact:
+\[
+0 \to C_n(A \cap B)\arr[(i_{1*},i_{2*})] C_n(A)\oplus C_n(B) \arr[(C_1,C_2)\mapsto C_1-C_2] C_n(X)\to 0
+\]
 \end{prop}
 
+\begin{thm}
+Let $X$ be a topological space, and $\cA$ be as \Cref{def:collection-interior-cover}. Then there exists a chain map
+\[
+S:\brax{C_n(X)} \to \brax{C_n^{\cA}(X)}
+\]
+such that, considering the inclusion $\iota : \brax{C_n^\cA (X)}\to \brax{C_n(X)},$
+we have that $s \circ \iota$ and $\iota \circ s$ are chain homotopic to the identity. In particular
+\[
+i_{x}:H_n(C_n^{\cA}(X)) \to H_n(X)
+\]
+is an isomorphism.
+\end{thm}
+
+\begin{exercise}
+Given a 1-chain $\sigma:[0,1]\to X$, $\partial \sigma =0$, consider the simplices $\sigma_1:[0,1]\to X$ and $\sigma_2:[0,1]\to X$, where
+\begin{align*}
+    \sigma_1(t)&=\sigma(t/2), \\
+    \sigma_2(t)&=\sigma(1/2+t/2).
+\end{align*}
+Show that 
+\[
+\sigma - \sigma_1 - \sigma_2 = \partial \tau
+\]
+for some 2-chain $\tau$.
+\end{exercise}
+
+\begin{cor}[The Mayer-Vietorius Sequence]
+Suppose $X = A \cup B$ for $A,B$ open. Then there exists a long exact sequence
+\[
+\cdots \arr H_{n+1}(X) \arr[d_{n+1}] H_n(A\cap B)\arr H_n(A)\oplus H_n(B) \arr H_n(X)\arr[d_n]H_{n-1}(A\cap B)\arr \cdots
+\]
+\end{cor}
 
 \end{document}
