@@ -2774,7 +2774,7 @@ d(x,y):= \sum_{n=1}^\infty \frac{1}{2^n}\frac{\norm{x-y}_n}{1+\norm{x-y}_n}.
 \end{prop}
 
 \begin{rmk}
-Since $X$ is a topological vector space, it's already Hausdorff, but not that the topology in a Frech\'{e}t space is Hausdorff if and only if
+Since $X$ is a topological vector space, it's already Hausdorff, but note that the topology in a Frech\'{e}t space is Hausdorff if and only if
 \[
 \bigcap_{n=1}^\infty \brax{ x \in X \setbar \norm{x}_n=0 } = \{0\}.
 \]
@@ -2900,7 +2900,7 @@ F(\varphi) = \angles{s,\varphi}, \quad \forall \varphi \in \cA_E^{0,1}(X).
 \end{thm}
 
 \begin{cor}[Serre Duality] \label{cor:serre-duality}
-The induced pairing $\angles{,}_E:H^0(X,E^*\otimes K_X) \otimes H^1(X,E) \to \C$ is \term{perfect}, i.e it's a non-degenerate bilinear form. Hence the two vector spaces involved are dual to each other.
+The induced pairing $\angles{\:,}_E:H^0(X,E^*\otimes K_X) \otimes H^1(X,E) \to \C$ is \term{perfect}, i.e it's a non-degenerate bilinear form. Hence the two vector spaces involved are dual to each other.
 \end{cor}
 
 \begin{proof}
@@ -3072,7 +3072,7 @@ If $L \to X$ is a holomorphic line bundle, write \term{$\deg L$} for $\deg D$ if
 By Serre duality, $h^0(K_X)=h^1(\cO)=g$, the genus. Hence there exists $g$ linearly independent holomorphic 1-forms $\omega_1,\dots,\omega_g$ on $X$, which form a basis of $\Omega(X)=H^0(X,K_X)$.
 \end{cor}
 
-\begin{cor}
+\begin{cor} \label{cor:deg-1-form-is-2g-2}
 By Riemann-Roch,
 \[
 g-1 = h^0(K_X)-h^0(\cO) = 1-g + \deg K_X \implies \deg K_X = 2g-2,
@@ -3087,5 +3087,93 @@ Let $D$ be a divisor on $X$ such that $\deg D \geq 2g-2$. Then $H^1(X,\cO_D)=0$,
 \begin{proof}
 Note that if $L \to X$ is a holomorphic line bundle and $h^0(L)>0$, then $\deg L \geq 0$ (in fact, if $s \in H^0(X,L)$ is non-zero, then $L \simeq L(\div(s))$, and $\deg \div s \geq 0$ since $s$ is holomorphic). Now suppose $\deg D > 2g-2$. Then $h^1(D)=h^0(K-D)$ where $K$ is any canonical divisor. But since $\deg (K-D)=2g-2 -\deg D <0$, we see that $h^0(K-D)=0$.
 \end{proof}
+
+\section{The Riemann-Hurwitz Formula}
+
+\begin{defn}
+Let $f:X \to Y$ be a non-constant holomorphic map of compact Riemann surfaces. For $a \in X$ and $b=f(a)$, we define the \term[]{multiplicity} $v(f,a)$ to be the integer $k \geq 0$ such that locally near $a$, $f$ is isomorphic to the covering $z \mapsto z^k$ of deleted neighborhoods of $a$ and $b$.
+
+The \term[]{ramification index} of $f$ at $a$ is defined to be $b(f,a):=v(f,a)-1$. The \term[]{total ramification index} of $f$ is defined to be $\mb b := \sum_{a \in X}b(f,a)$. The \term[]{degree} $d$ of $f$ is the number of sheets in the branched covering map determined by $f$.
+\end{defn}
+
+\begin{rmk}
+$f$ is a local homeomorphism at $a$ if and only if $b(f,a)=0$.
+\end{rmk}
+
+\begin{thm}[Riemann-Hurwitz Formula] \label{thm:riemann-hurwitz}
+Let $f:X \to Y$ be a non-constant holomorphic maps of compact Riemann surfaces. Let $g_X$ and $g_Y$ denote the genus of $X$ and $Y$, respectively. Then
+\[
+2g_X - 2 =d(2g_y - 2)+ \mb b.
+\]
+Hence if such a function $f$ exists, then $g_x \geq g_y$. If $g_x=g_y\geq 1$, then $\mb b =0$ and $d = 1$ unless $g_x=g_y=1$.
+\end{thm}
+
+\begin{proof}
+Fix $a \in X$ and $b = f(a)$, and $z,w$ be local coordinates of $a,b$ respectively with $z(a)=0$ and $w(b)=0$, and so that $f$ is given by $z \mapsto z^n=w$ near $a$. Note that $n = v(f,a)$.
+
+Let $\omega \neq 0$ be a meromorphic 1-form on $Y$, and $\omega_0 := f^*\omega$ be its pullback to $X$. Then we have
+\begin{align} \label{eq:deg-w0-w}
+    \deg (\omega_0) = 2g_X-2 \qquad \deg(\omega) = 2g_Y-2.
+\end{align}
+by \Cref{cor:deg-1-form-is-2g-2}. Moreover if $\omega = h(w)dw$ near $b$, then
+\[
+\omega_0 = f^*\omega = h(z^n)nz^{n-1}dz
+\]
+near $a$, so \[
+\ord_a(\omega_0)=n \ord_b(\omega)+n-1,
+\]
+where $n = v(f,a)$. Now we sum this relation, first over $a \in f^{-1}(b)$, and then over $b \in Y$:
+\begin{align*}
+    \deg (\omega _0) &= \sum_{a \in X}\ord_a(\omega_0) \\ &=\sum_{b \in Y}\paren{\sum_{a \in f^{-1}(b)}v(f,a)}\ord_b(\omega ) + \sum_{b \in Y}\sum_{a \in f^{-1}(b)}(v(f,a)-1) \\
+    &= d \cdot \deg (\omega) + \mb b,
+\end{align*}
+and substituting \eqref{eq:deg-w0-w} yields the desired result.
+\end{proof}
+
+Let $A = \brax{a \in X \setbar b(f,a) > 0}$ be the critical points of $f$, and $B := f(A)$ so that $f:X \sm f^{-1}(B) \to Y \sm B$ is a $d$-sheeted covering map. Suppose $A = \brax{a_1,\dots,a_r}$ and $b_j = f(a_j)$ for $1 \leq j \leq r$. Let $\chi (X)$ and $\chi(Y)$ be the topological Euler characteristics of $X$ and $Y$, so in particular
+\[
+\chi(X) = \dim_\C H^0(X,\C) - \dim _\C H^1(X,\C) + \dim _\C H^2(X,\C)=2-b_1(X),
+\]
+where \term{$b_1(X)$} $:= \dim _\C H^1(X,\C)$ is the first \term[]{Betti number} of $X$. Triangulate $Y$ be simplices in which all points in $B$ are vertices, and assume that this triangulation is sufficient fine. We can then use $f$ to lift this to a triangulation of $X$. Let $e_0(X)$ be the number of vertices, $e_1(X)$ the number of edges, and $e_2(x)$ the number of faces. Similarly defined $e_i(Y)$, $i=0,1,2$. Then
+\[
+e_2(X) = de_2(Y), \qquad e_1(X)=de_1(Y).
+\]
+\begin{claim}
+$e_0(X)= de_0(Y)-\mb b$.
+\end{claim}
+
+\begin{proof}
+If $a_j \in A$, then each edge at $b_j = f(a_j)$ lefts to $b(f,a_j)+1$ edges all ending in the same vertex $a_j$. Hence the cardinality of $f^{-1}(B)$ equals $d|B| - \mathbb{b}$.
+\end{proof}
+
+Now, take Euler characteristics to obtain
+\begin{equation} \label{eq:betti-relation}
+    2- b_1(X)=d(2-b_1(Y))-\mb b.
+\end{equation}
+
+If we take $Y = \mb P^1$, there exists a non-constant holomorphic map $f:X \to \P^1$, and note $g_{\P^1}=0$ and $b_1(\P^1)=b_1(S^2)=0$. Then the Riemann-Hurwitz formula (\Cref{thm:riemann-hurwitz}) gives
+\[
+2g_{X}-2=-2d+\mb b,
+\]
+where $d:=\deg (f)$. On the other hand, \eqref{eq:betti-relation} shows $2-b_1(X)=2d-\mb b=-(2g_x-2)$, which implies
+\[
+b_1(X)=2g_X.
+\]
+\begin{thm}
+The genus
+\[
+g_X=\dim_\C H^1(X,\cO) = \dim_\C H^0(X,\Omega),
+\]
+is a topological invariant of $X$, equal to $b_1(X)/2$.
+\end{thm}
+\begin{proof}
+The above discussion.
+\end{proof}
+
+\section{The Weierstrass Gap Theorem}
+
+
+
+
 
 \end{document}
