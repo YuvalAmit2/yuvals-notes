@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="160mm"
+   height="80mm"
+   viewBox="0 0 160 80"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.4.4 (dcaf3e7d, 2026-05-05)"
+   sodipodi:docname="sum-of-poles.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.7189228"
+     inkscape:cx="262.37363"
+     inkscape:cy="171.90999"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showborder="true"
+     width="200mm"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1397"
+     inkscape:window-height="756"
+     inkscape:window-x="0"
+     inkscape:window-y="33"
+     inkscape:window-maximized="0"
+     inkscape:showpageshadow="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815"
+       units="mm"
+       spacingx="10"
+       spacingy="10"
+       empspacing="4"
+       dotted="false"
+       originx="0"
+       originy="0" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-177)">
+    <ellipse
+       style="fill:#000000;fill-opacity:0.00900901;stroke:#000000;stroke-width:0.148775;stroke-dashoffset:0.757727;paint-order:markers fill stroke"
+       id="path1"
+       cx="80.755379"
+       cy="220.37109"
+       rx="25.14459"
+       ry="24.21331" />
+    <ellipse
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.148775;stroke-linecap:butt;stroke-dasharray:none;stroke-dashoffset:0.75924;stroke-opacity:1;marker-start:none;marker-end:none;paint-order:markers fill stroke"
+       id="path1-2"
+       cx="88.472885"
+       cy="209.12148"
+       rx="0.55683273"
+       ry="0.56166822" />
+    <ellipse
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.148775;stroke-linecap:butt;stroke-dasharray:none;stroke-dashoffset:0.75924;stroke-opacity:1;marker-start:none;marker-end:none;paint-order:markers fill stroke"
+       id="path1-8"
+       cx="70.745804"
+       cy="219.96939"
+       rx="0.55683273"
+       ry="0.56166822" />
+    <ellipse
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.148775;stroke-linecap:butt;stroke-dasharray:none;stroke-dashoffset:0.75924;stroke-opacity:1;marker-start:none;marker-end:none;paint-order:markers fill stroke"
+       id="path1-9"
+       cx="87.149971"
+       cy="232.14021"
+       rx="0.55683273"
+       ry="0.56166822" />
+    <ellipse
+       style="fill:#000000;fill-opacity:0.0788288;stroke:#000000;stroke-width:0.148775;stroke-dashoffset:0.757727;paint-order:markers fill stroke"
+       id="path2"
+       cx="88.429291"
+       cy="209.01617"
+       rx="3.4632881"
+       ry="3.5402503" />
+    <ellipse
+       style="fill:#000000;fill-opacity:0.0788288;stroke:#000000;stroke-width:0.148775;stroke-dashoffset:0.757727;paint-order:markers fill stroke"
+       id="path2-5"
+       cx="70.741844"
+       cy="220.03755"
+       rx="3.4632881"
+       ry="3.5402503" />
+    <ellipse
+       style="fill:#000000;fill-opacity:0.0788288;stroke:#000000;stroke-width:0.148775;stroke-dashoffset:0.757727;paint-order:markers fill stroke"
+       id="path2-2"
+       cx="86.881424"
+       cy="232.47296"
+       rx="3.4632881"
+       ry="3.5402503" />
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1"
+       y="200.8125"
+       x="100.54166"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="100.54166"
+         y="200.8125"
+         style="stroke-width:0.264583">\large $X$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-7"
+       y="204.25209"
+       x="85.460419"><tspan
+         sodipodi:role="line"
+         id="tspan1-9"
+         x="85.460419"
+         y="204.25209"
+         style="stroke-width:0.264583">\large $a_1$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-3"
+       y="215.89375"
+       x="73.554169"><tspan
+         sodipodi:role="line"
+         id="tspan1-99"
+         x="73.554169"
+         y="215.89375"
+         style="stroke-width:0.264583">\large $a_2$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.11588px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       id="text1-39"
+       y="226.47708"
+       x="87.3125"><tspan
+         sodipodi:role="line"
+         id="tspan1-8"
+         x="87.3125"
+         y="226.47708"
+         style="stroke-width:0.264583">\large $a_3$</tspan></text>
+  </g>
+</svg>

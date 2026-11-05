@@ -3172,8 +3172,134 @@ The above discussion.
 
 \section{The Weierstrass Gap Theorem}
 
+Let $X$ be a compact Riemann surface of genus $g \geq 1$, and $P \in X$.
+\begin{que}
+What are the possible orders of poles at $P$ of functions $f \in \cM(X)$, $f \in \cO(X\sm P)$.
+\end{que}
+
+\begin{thm}
+There are exactly $g$ integers
+\[
+1 = n_1 < n_2 <\cdots < n_g \leq 2g-1
+\]
+such that no meromorphic function $X$, holomorphic on $X \sm \{P\}$, has a pole of order $n_k$ at $P$ for $k = 1,2,\dots,g$.
+\end{thm}
+
+\begin{proof}
+Set $D_k := k[P]$ for $k \in \N$. Then there exists $f \in \cM(X)$, $f \in \cO(X \sm P)$ with a pole of order $k$ at $P$ if and only if there exists $f \in \cM(X)$ with 
+\begin{align} \label{eq:divisor-comparison}
+  -D_k \leq \div (f) < -D_{k-1}  
+\end{align}
+Now recall that we have an inclusion
+\begin{align} \label{eq:hol-divisor-inj}
+\cO_{D_{k-1}}(X) \inj \cO_{D_k}(X)
+\end{align}
+so \eqref{eq:divisor-comparison} is equivalent to saying that \eqref{eq:hol-divisor-inj} is not surjective. Now note that
+\[
+\cO_{D_{k-1}}(X) = H^0(X,L(D_{k-1})) \inj[\otimes s_P] H^0(X,L(D_k)) = \cO_{D_k}(X)
+\]
+is the same map. Moreover, the short exact sequence of sheaves
+\[
+0 \to \cO_{D_{k-1}} \to \cO_{D_{k}}\to \C_P \to 0,
+\]
+where $\C_P$ is the skyscraper sheaf, induces the long exact sequence
+\[
+0 \to H^0 (X,L(D_{k-1})) \inj H^0(X,L(D_k)) \to H^0(X,\C_P) \simeq \C.
+\]
+Now we see that there exists $f \in \cM(X)$ with $\div f \geq -D$ and $\div f < -D_{k-1}$ if and only if $h^0(D_k)>h^0(D_{k-1})$, and in this case $h^0(D_k)=h^0(D_{k-1})+1$. But Riemann-Roch gives
+\begin{align} \label{eq:hDk-sum}
+    h^0(D_k)-h^0(D_{k-1})=1-h^1(D_{k-1})+h^1(D_k)
+\end{align}
+and summing \eqref{eq:hDk-sum} for $k=1,\dots,m$ yields
+\[
+h^0(D_m)-h^0(D_0)=\sum_{k=1}^m \paren{h^0(D_k)-h^0(D_{k-1})}=m-h^1(D_0)+h^1(D_m).
+\]
+However $h^1(D_m)=0$ for $m \geq 2g-1$ by the vanishing theorem (\Cref{thm:vanishing-thm}), while $h^1(D_0)=g$ and $h^0(D_0)=1$. Hence for $m \geq 2g-1$, we have
+\[
+h^0(D_m)=m-g+1.
+\]
+Now we also have $h^0(D_m)-1= \sum_{k=1}^m \paren{h^0(D_k)-h^0(D_{k-1})}$ is the number of integers $k \le m$ which occur as the order of a pole at $P$ for some $f \in \cM(X)$, $f \in \cO(X\sm P)$. Hence the number of ``gaps'' is 
+\[
+m-(h^0(D_m)-1)=m-(m-g)=g,
+\]
+proving the theorem.
+\end{proof}
+
+\begin{rmk}
+Except for finitely many points $P$ of $X$, there exists a meromorphic function on $X$, holomorphic on $X \sm \{P\}$, with a pole of order $m$ at $P$ if and only if $m \geq g+1$. The finitely many exceptions (of which there are at most $(g-1)g(g+1)$) are the \term[]{Weierstrass points} of $X$.
+\end{rmk}
 
 
+\begin{defn}
+Let $\omega \ne 0$ be a meromorphic 1-form on $X$. For $a \in X$, the \term[]{residue} of $a$ at $\omega$, denoted \term[]{$\res_a(\omega)$}, is defined as follows: let $(U,z)$ be a coordinate chart around $a$ with $z(a)=0$ and let $w = fdz$. Then $\res_a(\omega):=\Res(f,a)$, the coefficient of $1/z$ in the Laurent expansion of $f$.
+
+Alternatively, if $\gamma$ is a smooth curve in $U \sm \{a\}$ with winding number $n(\gamma,a)=1$, then $$\res_a(\omega):=\frac{1}{2\pi i}\int_\gamma \omega.$$
+\end{defn}
+
+One checks that the first definition is independent of the coordinate chart $z$.
+
+\begin{lem} \label{lem:sum-of-res-is-0}
+Let $\omega \neq 0$ be a meromorphic 1-form on $X$. Then
+\[
+\sum_{a \in X}\res_a(\omega)=0.
+\]
+\end{lem}
+
+\begin{proof}
+Let $a_1,\dots,a_m$ be the poles of $\omega$ on $X$. Choose coordinate neighborhoods $(U_j,z_j)$ around $a_j$ with $z_j(a_j)=0$ for all $j$, and let $\Delta_j := \brax{x \in U_j \setbar |z_j(x)| < \veps }$ for $\veps >0$ small.
+\begin{figure}[H]
+	\centering
+	\incfig{sum-of-poles}
+	\label{fig:sum-of-poles}
+\end{figure}
+Let $U := X \sm \bigcup _{j=1}^n\Delta_j$. By Stokes' theorem applied to $U$, we have
+\begin{align} \label{eq:stoke-on-omega}
+    \int_U d\omega = -\sum_{j}\int_{\partial \Delta_j}\omega = -2\pi i \sum_j \res_{a_j}(\omega).
+\end{align}
+But $\omega$ is holomorphic on $U$, and any holomorphic 1-form on a Riemann surfaces is \term[]{closed}, meaning
+\[
+dw = \partder[]{f}{z}dz \land d z + \partder[]{f}{\bar z}d\bar z \land d z=0
+\]
+where $w = fz$. Thus the LHS of \eqref{eq:stoke-on-omega} is zero, proving the claim.
+\end{proof}
+
+\begin{cor}
+If $f \in \cM(X)^*$ is a non-zero meromorphic function on $X$, then $\deg \div f =0$.
+\end{cor}
+
+\begin{proof}
+We recall
+\[
+\deg \div f = \sum_{a \in X}\res_a \paren{\frac{df}{f}}
+\]
+by the argument principal. The claim follows immediately by \Cref{lem:sum-of-res-is-0}
+\end{proof}
+
+Let $X$ be a compact Riemann surfaces, let $\mc U := \brax{U_i}_{i \in I}$ be an open cover of $X$, and let $\omega _i$ be a meromorphic 1-form on $U_i$ such that $\omega_i -\omega_j$ is holomorphic on $U_i \cap U_j$, for all $i,j$. Let $\tilde \omega := \{\omega_i\}_{i \in I}$, and set $\res (\tilde \omega):=\res_a(\omega_i)$ for $a \in X$, where $i \in I$ is such that $a \in U_i$.
+
+\begin{thm}[Mittag-Leffler's Theorem for Forms]
+There exists a meromorphic 1-form $\omega$ on $X$ with $\omega - \omega _i$ holomorphic on $U_i$, for all $i \in I$, if and only if $\sum_{a \in X} \res_a(\tilde \omega)=0$.
+\end{thm}
+
+\begin{proof}
+Note that $\omega$ exists if and only if the cohomology class $\{\omega_{ij}:=\omega_i - \omega_j\}$ in $H^1(X,\Omega)$ vanishes. Now recall that for a non-zero effective divisor $D$ on $X$, $H^0(X,\cO_{-D})=0$. Let $s_D$ be the standard section of $L(D)$ with $\div(s_D)=D$, and recall $\Omega _D$ is defined by $\Omega _D=\brax{\text{meromorphic 1-forms }\omega, \div (\omega) \geq -D}$. We have an exact sequence
+\begin{align} \label{eq:omegas-sequence}
+    0 \to \Omega \arr[s_D]\Omega_d \to \C_D \to 0.
+\end{align}
+Note that the sheaf $\C_D$ is zero outside $|D|$, while for $a \in D$, the stalk $\C_{D,a}$ is the group of all finite sums $\sum_{v=1}^{D(a)}\frac{c_v}{z^v}dz$, where $z$ is a local coordinate at $a$ with $z(a)=0$. Now Riemann-Roch gives
+\[
+\dim H^0(X,\cO_D)-\dim H^0(X,\Omega_{-D})=1-g+\deg D
+\]
+and \eqref{eq:omegas-sequence} yields
+\[
+H^0(X,\Omega_d) \arr[i]H^0(X,\C_D) \to H^1(X,\Omega) \to H^1(X,\Omega_D),
+\]
+with $\dim H^1(X,\Omega)=1$ and $H^1(X,\Omega_D) \simeq H^0(X,\cO_{-D})^*=0$. Hence $i\paren{H^0(X,\Omega)}$ has codimension 1 in $H^0(X,\C_D)\simeq \C^{\deg D}$. But \Cref{lem:sum-of-res-is-0} says that the image of $i$ lies in the set $\brax{\omega_a}_{a \in |D|}$ with $\ord_a(\omega_a)\geq -D(a)$ such that $\sum_{a \in |D|} \res_a(\omega_a)=0$. Since both subspaces have codimension 1, they are equal.
+\end{proof}
+
+\begin{exercise}[]
+Complete the argument: take $-D$ to be the divisor defined by $\tilde \omega = \{\omega_i\}$.
+\end{exercise}
 
 
 \end{document}
