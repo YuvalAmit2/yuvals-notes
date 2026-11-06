@@ -1384,7 +1384,7 @@ The \term[reduced homology]{reduced homology groups} of $X$ are the homologies o
 \[
 C_n(X) \arr[\partial_n]C_{n-1}(X) \arr \cdots \arr C_1(X)\arr[\partial _1]C_0(X) \arr[\veps] \Z.
 \]
-We write this has
+We write this as
 \[
 \tilde H_n(X)= \case{ H_n(X) & n \geq 1 \\ \ker \veps /\Img \partial _1  & n=0.}
 \]
@@ -1556,5 +1556,97 @@ Suppose $X = A \cup B$ for $A,B$ open. Then there exists a long exact sequence
 \cdots \arr H_{n+1}(X) \arr[d_{n+1}] H_n(A\cap B)\arr H_n(A)\oplus H_n(B) \arr H_n(X)\arr[d_n]H_{n-1}(A\cap B)\arr \cdots
 \]
 \end{cor}
+
+\begin{cor} \label{cor:hom-circle-zero}
+We have $\tilde H_0(S^n)=\Z$, and $\tilde H_k(S^n)=0$ for $k \geq 1$.
+\end{cor}
+
+\begin{proof}
+Write $S^n = U\cup L$, where $U$ is the thickened upper-hemisphere and $L$ the thickened lower-hemisphere. Now we want to use Mayer–Vietoris, and we observe
+\begin{align*}
+    \tilde H_k(U \cap L) &= \tilde H_k(S^{n-1}), \\
+    \tilde H_k(U) &= \tilde H_k(L)=0.
+\end{align*}
+Hence we have the exact sequence
+\[
+\tilde H_k(S^{n-1}) \to 0 \to \tilde H_k(S^n) \to \tilde H_{k-1}(S^{n-1}) \to 0 \to \tilde H_{k-1}(S^n),
+\]
+thus for all $k$
+\[
+\tilde H_k(S^n) \simeq \tilde H_{k-1}(S^{n-1}).
+\]
+The result then follows by induction on $n$, with the base case trivial.
+\end{proof}
+
+\begin{thm}[Brauer's Fixed Point Theorem in All Dimensions]
+There does not exist a continuous $f:\bar D^n \to S^{n-1}$ such that $f(x)=x$ for all $x \in \partial \bar D^n$.
+\end{thm}
+
+\begin{proof}
+Suppose such an $f$ existed. Then the maps
+\[
+\tilde H_{n-1}(S^{n-1}) \arr[i_*] \tilde H^{n} (\bar D^n) \arr[f_*] \tilde H_{n-1}(S^{n-1})
+\]
+compose to the identity, but this is impossible by \Cref{cor:hom-circle-zero}.
+\end{proof}
+
+\begin{thm}
+$\R^n \simeq \R^m$ if and only if $m=n$.
+\end{thm}
+
+\begin{proof}
+Suppose $m\neq n$ and there exists a homeomorphism $\vphi :\R^m \to \R^n$. Then we have a homeomorphism $\varphi :\R^m \sm \{0\} \to \R^n \sm \{\varphi(0)\}$, but are homeomorphic to $S^{m-1}$ and $S^{n-1}$, respectively. But these two spaces or not homeomorphic, because they have different reduced homology groups.
+\end{proof}
+
+\begin{cor}
+Let 
+\[
+\H_n := \brax{(x_1,\dots,x_n)\in \R^n \setbar x_n \geq 0}.
+\]
+Given $x,y \in \H_n$, there exists a homeomorphism $\vphi :\H_n \to \H_n$ with $\vphi(x)=y$ if and only if $x_n=y_n=0$, or $x_n,y_n\neq 0$.
+\end{cor}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{defn}
+Let $\sigma:=[v_0,\dots,v_n]$ be a simplex. The \term[baricenter]{baricenter} of $\sigma$, denoted \term[]{$b_\sigma$} is the point
+\[
+b_\sigma := \sum_{i=0}^n\frac{1}{n+1}v_i.
+\]
+Define the \term[]{baricentric subdivision} of $\sigma$ to be
+\[
+\braks{b_\sigma, w_0,\dots,w_{n-1}}
+\]
+where $[w_0,\dots,w_{n-1}]$ is a simplex appearing in the baricentric subdivision of a face of $\sigma$.
+\begin{figure}[H]
+	\centering
+	\incfig{baricentric-subdivision}
+	\label{fig:baricentric-subdivision}
+\end{figure}
+\end{defn}
+
+\begin{prop}
+Let $\sigma = [v_0,\dots,v_n]$ be an $n$-simplex in $\R^m$. Let $[w_0,\dots,w_n]$ be a simplex appearing in its baricentric subdivision. Then
+\[
+\diam \paren{[w_0,\dots,w_n]} \leq \frac{n}{n+1}\diam\paren{[v_0,\dots,v_n]},
+\]
+where $\diam (A):=\sup_{x,y \in A}\norm{x-y}$.
+\end{prop}
+
+\begin{defn}
+Let $Y \subset \R^m$ be a convex set. The \term[linear chain,linear chains]{$n\th$ linear chain} of $Y$ is defined to be
+\[
+\LC_n(Y) := \brax{\sum m_i \sigma _i \setbar \sigma_i:\Delta^n \to Y \text{ is linear}}.
+\]
+Note that $\sigma_i$ being linear means that it's the restriction of a linear map $T_{\sigma_i}:\R^{n+1}\to \R^m$ such that $\sigma_i(\Delta^n)\subset Y$. We also set $\LC_{-1}(Y)=m[\emptyset]$.
+
+% Identify $\sigma$ with $[\sigma(e)]$ 
+For every points $b \in Y$, define $b:\LC_n(Y) \to \LC_{n+1}(Y)$ by 
+\[
+b\paren{[v_0,\dots,v_n]} := [bv_0,\dots,v_n].
+\]
+\end{defn}
 
 \end{document}
