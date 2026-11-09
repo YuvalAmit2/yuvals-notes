@@ -1527,10 +1527,10 @@ Let $A,B \subset X$ be open such that $A \cup B = X$. Then the following sequenc
 \begin{thm}
 Let $X$ be a topological space, and $\cA$ be as \Cref{def:collection-interior-cover}. Then there exists a chain map
 \[
-S:\brax{C_n(X)} \to \brax{C_n^{\cA}(X)}
+\rho:\brax{C_n(X)} \to \brax{C_n^{\cA}(X)}
 \]
 such that, considering the inclusion $\iota : \brax{C_n^\cA (X)}\to \brax{C_n(X)},$
-we have that $s \circ \iota$ and $\iota \circ s$ are chain homotopic to the identity. In particular
+we have that $\rho \circ \iota$ and $\iota \circ \rho$ are chain homotopic to the identity. In particular
 \[
 i_{x}:H_n(C_n^{\cA}(X)) \to H_n(X)
 \]
@@ -1643,10 +1643,115 @@ Let $Y \subset \R^m$ be a convex set. The \term[linear chain,linear chains]{$n\t
 Note that $\sigma_i$ being linear means that it's the restriction of a linear map $T_{\sigma_i}:\R^{n+1}\to \R^m$ such that $\sigma_i(\Delta^n)\subset Y$. We also set $\LC_{-1}(Y)=m[\emptyset]$.
 
 % Identify $\sigma$ with $[\sigma(e)]$ 
-For every points $b \in Y$, define $b:\LC_n(Y) \to \LC_{n+1}(Y)$ by 
+For any point $b \in Y$, define $b:\LC_n(Y) \to \LC_{n+1}(Y)$ by 
 \[
-b\paren{[v_0,\dots,v_n]} := [bv_0,\dots,v_n].
+b\paren{[v_0,\dots,v_n]} := [b,v_0,\dots,v_n].
 \]
 \end{defn}
+
+\begin{rmk} \label{rmk:sigma-as-partials-and-bari}
+Let $b_\sigma$ be the baricenter of $\sigma$. Then
+\begin{align*}
+\partial b_\sigma\paren{[v_0,\dots,v_n]} &= \partial [b_\sigma,w_0,\dots,w_n] \\
+ &= [w_0,\dots,w_n]-b_\sigma\partial [w_2,\dots,w_n],
+\end{align*}
+hence $\partial b_\sigma \sigma = \sigma - b_\sigma \partial \sigma$, so
+\begin{align*}
+\sigma = \partial b_\sigma \sigma + b_\sigma \partial \sigma.
+\end{align*}
+\end{rmk}
+
+\begin{defn}
+Define the \term[]{baricentric subdivision operator} $S:\LC_n(Y) \to \LC_n(Y)$ inductively by
+\begin{align*}
+S(\sigma) = b_\sigma (S(\partial \sigma)),
+\end{align*}
+and $S[\emptyset] = [\emptyset]$ on $\LC_{-1}(Y)$.
+\end{defn}
+
+\begin{ex}
+On $\LC_0(Y)$, $S(\sigma)= \sigma$.
+\end{ex}
+
+\begin{prop}
+The baricentric subdivision operator $S$ is a chain map: we have $\partial S = S\partial$, i.e. the following diagram commutes:
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXExDX24oWSkiXSxbMiwwLCJcXExDX24oWSkiXSxbMCwyLCJcXExDX3tuLTF9KFkpIl0sWzIsMiwiXFxMQ197bi0xfShZKSJdLFswLDEsIlMiXSxbMCwyLCJcXHBhcnRpYWwiLDJdLFsyLDMsIlMiLDJdLFsxLDMsIlxccGFydGlhbCJdXQ==
+\[\begin{tikzcd}[ampersand replacement=\&]
+	{\LC_n(Y)} \&\& {\LC_n(Y)} \\
+	\\
+	{\LC_{n-1}(Y)} \&\& {\LC_{n-1}(Y)}
+	\arrow["S", from=1-1, to=1-3]
+	\arrow["\partial"', from=1-1, to=3-1]
+	\arrow["\partial", from=1-3, to=3-3]
+	\arrow["S"', from=3-1, to=3-3]
+\end{tikzcd}\]
+\end{prop}
+
+\begin{proof}
+We compute
+\begin{align*}
+\partial S(\sigma) &=\partial b_\sigma (S\partial \sigma) \\
+ &= S \partial \sigma - b_\sigma \partial S \partial \sigma \qquad (\Cref{rmk:sigma-as-partials-and-bari}) \\ 
+ &= S \partial \sigma - b_\sigma S \partial \partial \sigma \qquad (\text{Induction}) \\ 
+ &= S \partial \sigma,
+\end{align*}
+thus $S$ is a chain map.
+\end{proof}
+
+\begin{prop}
+$S$ is chain homotopic to the identity.
+\end{prop}
+
+\begin{proof}
+Define $T$ inductively by $T([\emptyset]):=0$ and $T(\sigma):=b_\sigma(\sigma - T(\partial \sigma))$. We claim
+\begin{align*}
+\partial T + T\partial = S-\id. \label{eq:chain-hom-identity-relation}
+\end{align*}
+Checking this for the base case is an exercise. Now inductively,
+\begin{align*}
+\partial T (\sigma) 
+&= \partial b_\sigma ( \sigma - T(\partial \sigma)) \\
+&= \sigma - T\partial \sigma - b_\sigma\partial(\sigma - T\partial \sigma) \\
+&= \sigma - T\partial \sigma - b_\sigma \partial \sigma + b_\sigma (\partial \sigma - S \partial \sigma)- b_\sigma (T \partial \partial \sigma) \\
+&= \sigma - T\partial \sigma-b_\sigma (S \partial \sigma) \\
+&= \sigma - T\partial \sigma-S(\sigma),
+\end{align*}
+and rearranging gives \eqref{eq:chain-hom-identity-relation}.
+\end{proof}
+
+\begin{defn}
+We define
+\begin{align*}
+S &: C_n(X) \to C_n(X) \\
+T &:C_n(X) \to C_{n+1}(X)
+\end{align*}
+by pushing forward $S$ and $T$ via simplices. That is, defining $S,T$ amounts to defining them on $\sigma : \Delta^n \to X$ continuous. For instance
+\begin{align*}
+S(\sigma) &= \sigma_*\paren{S [ e_0,\dots,e_n]} \\
+&= \sigma_* \paren{\sum m_{\alpha}[w_0^\alpha,\dots,w_n^\alpha]} \\
+&= \sum{m_\alpha} \sigma |_{[w_0^\alpha,\dots,w_n^\alpha]},
+\intertext{and similarly}
+T(\sigma) &= \sigma_*(T[e_0,\dots,e_n]).
+\end{align*}
+\end{defn}
+
+\begin{prop}
+$S$ is a chain map, and $T$ is a chain homomorphism.
+\end{prop}
+
+\begin{proof}
+We compute
+\begin{align*}
+\partial S(\sigma) &= \partial \sigma_* \paren{S [e_0,\dots,e_n]} \\
+&= \sigma_*\paren{\partial S[e_0,\dots,e_n]} \\
+&= \sigma_*(S \partial [e_0,\dots,e_n]) \\
+&= \sigma_*\paren{S\paren{\sum (-1)^i\braks{e_2,\dots,\hat{e_i},\dots,e_n}}} \\
+&= \sum (-1)^i \sigma_*\paren{S\braks{e_0,\dots,\hat{e_i},\dots,e_n}} \\
+&= \sum (-1)^i S\sigma|_{[e_0,\dots,\hat{e_i},\dots,e_n]} \\
+&= S(\partial \sigma).
+\end{align*}
+The proof for $T$ is similar.
+\end{proof}
+
 
 \end{document}
