@@ -424,7 +424,7 @@ We want to study $\mc M(X)$ for any compact Riemann surface $X$, generalizing $\
 \end{rmk}
 
 Assume that $P$ is a fundamental parallelogram for $\Omega$ with vertices at $t,t+\omega_1,t+\omega_1+\omega_2$, and $t+\omega_2$, where $t \in \C$ is such that $\partial P$ has no zeros or poles of $f$. In the homework, we showed
-$$\int_{\partial P}f(z)dz =0,$$
+$$\int_{\partial P}f(z) \d z =0,$$
 so by the residue theorem, the sum of the residues of $f$ inside $P$ is $0$.
 
 \begin{cor}
@@ -717,14 +717,14 @@ We extend our definition of convergence to mean $\prod_{n=1}^\infty b_n$ converg
 \begin{proof}
     Since $\zeta(z)$ is meromorphic with a single pole at $0$ with residue $1$, we get that
     \begin{align} \label{eq:int_zeta}
-        \int_{\partial P}\zeta(z) dz = 2\pi i.
+        \int_{\partial P}\zeta(z) \d z = 2\pi i.
     \end{align}
     Break $\partial P$ into the four sides $\gamma_1,\dots,\gamma_4$. Then, observe
     \begin{align*}
-        \int_{\gamma_3}\zeta(z)dz = -\int_{\gamma_1} \zeta(z+\omega_w)dz = -\int_{\gamma_1}\braks{\zeta(z) + \eta_2}dz,
+        \int_{\gamma_3}\zeta(z)\d z = -\int_{\gamma_1} \zeta(z+\omega_w)\d z = -\int_{\gamma_1}\braks{\zeta(z) + \eta_2}\d z,
     \end{align*}
     hence
-    $$\int_{\gamma_1}\zeta + \int_{\gamma_3}\zeta = -\int_{\gamma_1}\eta_2dz = -\eta_2\omega_1.$$
+    $$\int_{\gamma_1}\zeta + \int_{\gamma_3}\zeta = -\int_{\gamma_1}\eta_2\d z = -\eta_2\omega_1.$$
     Similarly,
     $$\int_{\gamma_2}\zeta + \int_{\gamma_4}\zeta = \eta_1\omega_2,$$
     so plugging into \eqref{eq:int_zeta} yields the result.
@@ -845,15 +845,15 @@ where $\alpha! = \alpha_1!\cdots \alpha_n!$, and $D^\alpha =\frac{\partial^{|\al
     Let $r>0$ be such that the closed polydisk 
     $$\bar P(a,r):=\prod_{j=1}^n\bar D(a_j,r) = \brax{z \setbar |z_j-a_j|<r, 1 \leq j \leq n}$$
     is contained in $\Omega$. For $w_1 \in D(a_1,r)$ and $z_2,\dots,z_n$ fixed, Cauchy's formula gives
-    $$f(w_1,z_2,\dots,z_n) = \frac{1}{2\pi i}\int_{C_1}\frac{f(z_1,\dots,z_n)}{z_1-w_1}dz_1,$$
+    $$f(w_1,z_2,\dots,z_n) = \frac{1}{2\pi i}\int_{C_1}\frac{f(z_1,\dots,z_n)}{z_1-w_1}\d z_1,$$
     where $C_1$ is the circle $t \mapsto a_1 +re^{2\pi i t}$, $t \in [0,1]$. Let $C_j$ be the circle $t \mapsto a_j +re^{2\pi it}$, and iterate Cauchy's formula to get
     \begin{align*}
-        f(w_1,\dots,w_n) = \frac{1}{(2\pi i )^n}\int_{C_1}\cdots \int_{C_n}\frac{f(z_1,\dots,z_n)}{\prod_{j=1}^n(z_j-w_j)}dz_n \cdots dz_1
+        f(w_1,\dots,w_n) = \frac{1}{(2\pi i )^n}\int_{C_1}\cdots \int_{C_n}\frac{f(z_1,\dots,z_n)}{\prod_{j=1}^n(z_j-w_j)}\d z_n \cdots dz_1
     \end{align*}
     for $|w_j-a_j|<r$, $1 \leq j \leq n$. Since $f$ is continuous, $f$ is bounded on $\bar P(a,r)$. We may expand for each $j$, and see that
     $$-\frac{1}{z_j-w_j}=\frac{1}{(z_j-a_j)-(w_j-a_j)}=\sum_{m=0}^\infty \frac{(w_j-a_j)^m}{(z_j-a_j)^{m+1}},$$
     which converges uniformly on compact subsets of $D(a_j,r)$. Hence, $f(w) = \sum_{\alpha}c_\alpha(w-a)^{\alpha}$ with
-    $$c_\alpha = \frac{1}{(2\pi i)^n}\int_{C_1}\cdots \int_{C_n}\frac{f(z_1,\dots, z_n)}{\prod_{j=1}^n(z_j-a_j)^{\alpha_j+1}}dz_1\cdots dz_n,$$
+    $$c_\alpha = \frac{1}{(2\pi i)^n}\int_{C_1}\cdots \int_{C_n}\frac{f(z_1,\dots, z_n)}{\prod_{j=1}^n(z_j-a_j)^{\alpha_j+1}}\d z_1\cdots dz_n,$$
     so $f$ is holomorphic.
 \end{proof}
 
@@ -1106,16 +1106,16 @@ Let $\w{pr}_2:V \to \C$ be the second projection, where $V=V(P)$. Then, the func
 Let $R$ be a closed rectangle in $\C$, and $f \in C^{\infty}(R)$ (that is, $f$ is $C^\infty$ in an open neighborhood of $R$).
 
 \begin{prop}[][label=prop:sortastokes]
-    $$\iint_R\partder{f}{\bar z}dz\land d\bar z = -\int_{\partial R}f dz,$$
-    where $dz \land d \bar z = (dx+idy)\land (dx - idy)=-2i\,dx \land dy$
+    $$\iint_R\partder{f}{\bar z}\d z\land \d \bar z = -\int_{\partial R}f \d z,$$
+    where $d z \land d \bar z = (dx+idy)\land (dx - idy)=-2i\,dx \land dy$
 \end{prop}
 
 \begin{proof}
     Suppose $R=[a,b]\times [c,d]$, and parametrize the four sides of $\partial R$ by $\gamma_1,\gamma_2,\gamma_3,\gamma_4$. Then,
     \begin{align*}
-        \iint_R \partder{f}{\bar z}dz \land d \bar z &=-i \int_{c}^d\int_a^b\paren{\partder{f}{x}+i\partder{f}{y}}dxdy
+        \iint_R \partder{f}{\bar z}\d z \land d \bar z &=-i \int_{c}^d\int_a^b\paren{\partder{f}{x}+i\partder{f}{y}}dxdy
         \\ &= -i\int_c^d \braks{f(b,y)-f(a,y)}dy
-        \\ &=-\int_{\gamma_2}fdz -\int_{\gamma_4}fdz.
+        \\ &=-\int_{\gamma_2}f\d z -\int_{\gamma_4}f\d z.
     \end{align*}
     The rest is an exercise.
 \end{proof}
@@ -1123,20 +1123,20 @@ Let $R$ be a closed rectangle in $\C$, and $f \in C^{\infty}(R)$ (that is, $f$ i
 Next, let $R'$ and $R$ be closed rectangles with $R' \subset \Int(R)$. Choose $f$ in some closed annulus $C^\infty (R\setminus \Int(R'))$.
 \begin{claim}
     We claim
-    $$\iint_{R\setminus \Int(R')}\partder{f}{\bar z}dz \land d\bar z = -\int_{\partial R}fdz + \int_{\partial R'}fdz.$$
+    $$\iint_{R\setminus \Int(R')}\partder{f}{\bar z}\d z \land d\bar z = -\int_{\partial R}f\d z + \int_{\partial R'}f\d z.$$
 \end{claim}
 \begin{proof}
     We have $f \in C^\infty (U)$ for some open set $U \supset R\setminus \Int (R')$. Let $\alpha \in C^\infty _0(U)$ with $\alpha \equiv 1$ in a neighborhood of $R\setminus \Int(R')$ (the $0$ in the subscript means compactly supported). Consider
     $$g(z) :=\case{\alpha(z)f(z) & z \in U \\ 0 & z \not \in U.}$$
     Then, $g \in C^\infty (\C)$. Applying \Cref{prop:sortastokes} to $g$ on $R$ and $R'$, we obtain
-    $$\iint_R \partder{g}{\bar z}dz \land d\bar z = -\int_{\partial R}f, \quad \iint_{R'}\partder{g}{\bar z}dz \land d\bar z=-\int_{\partial R'}f,$$
+    $$\iint_R \partder{g}{\bar z}\d z \land d\bar z = -\int_{\partial R}f, \quad \iint_{R'}\partder{g}{\bar z}\d z \land d\bar z=-\int_{\partial R'}f,$$
     and subtracting gives the claim.
 \end{proof}
 
 \begin{thm}[][label=thm:fisdoubleint]
     Let $f \in C_0^\infty (\C)$. Then, for any $\omega \in \C$,
     \begin{align} \label{eq:fisdoubleint}
-        f(w) = \frac{1}{2\pi i }\iint_\C \partder{f}{\bar z}(z)\cdot  \frac{1}{z-w}dz \land d \bar z
+        f(w) = \frac{1}{2\pi i }\iint_\C \partder{f}{\bar z}(z)\cdot  \frac{1}{z-w}\d z \land d \bar z
     \end{align}
 \end{thm}
 
@@ -1144,37 +1144,37 @@ Next, let $R'$ and $R$ be closed rectangles with $R' \subset \Int(R)$. Choose $f
     Observe that the function $z \mapsto \frac{1}{z}$ for $0 < |z| \leq 1$ lies in $L^1(\bar D(0,1))$, i.e.
     $$\iint_{|z|\leq 1}\frac{1}{|z|}dxdy < \infty.$$
     (Indeed, passing to polar coordinates shows that the integral equals $2\pi$). We now change variables in \eqref{eq:fisdoubleint} and consider
-    $$I:= \iint_\C \partder{f}{\bar z}(z+w)\frac{1}{z}dz \land d \bar z.$$
+    $$I:= \iint_\C \partder{f}{\bar z}(z+w)\frac{1}{z}\d z \land d \bar z.$$
     We claim $I = 2\pi i f(w)$.
 
     Indeed, fix $w$, and choose a closed rectangle $R$ such that $\supp(z \mapsto f(z+w)) \subset \Int (R)$ and $0 \in R$. Let $R_\veps$ be a small square centered at $0$ with side length $\veps$, and $R_\veps \subset R$. Using Lebesgue's dominated convergence theorem, we have
     \begin{align*}
-        \iint_\C \partder{f}{\bar z}(z+w) \frac{dz \land d \bar z}{z}&=\iint_\C \partder{}{\bar z} \paren{\frac{f(z+w)}{z}}dz \land d \bar z
-        \\ &= \lim_{\veps \to 0}\iint_{R \setminus \Int (R_\veps)}\partder{}{\bar z}\paren{\frac{f(z+w)}{z}}dz \land d\bar z
-        \\ &= \lim_{\veps \to 0}\int_{\partial R_\veps}\frac{f(z+w)}{z}dz
-        \\ &= 2\pi if(w) + \lim_{\veps \to 0}\int_{\partial R_\veps}\frac{f(z+w)-f(w)}{z}dz.
+        \iint_\C \partder{f}{\bar z}(z+w) \frac{\d z \land d \bar z}{z}&=\iint_\C \partder{}{\bar z} \paren{\frac{f(z+w)}{z}}\d z \land d \bar z
+        \\ &= \lim_{\veps \to 0}\iint_{R \setminus \Int (R_\veps)}\partder{}{\bar z}\paren{\frac{f(z+w)}{z}}\d z \land d\bar z
+        \\ &= \lim_{\veps \to 0}\int_{\partial R_\veps}\frac{f(z+w)}{z}\d z
+        \\ &= 2\pi if(w) + \lim_{\veps \to 0}\int_{\partial R_\veps}\frac{f(z+w)-f(w)}{z}\d z.
     \end{align*}
     Then, since $f \in C_0^\infty (\C)$, there exists $M>0$ such that $|f(z+w)-f(w)| \leq M|z|$ for $|z|$ small, hence
-    $$\abs{\int_{\partial R_\veps}\frac{f(z+w)-f(w)}{z}dz}\leq M\cdot 4\veps \to 0,$$
+    $$\abs{\int_{\partial R_\veps}\frac{f(z+w)-f(w)}{z}\d z}\leq M\cdot 4\veps \to 0,$$
     proving the claim.
 \end{proof}
 
 \begin{thm}[][label=thm:fispartder]
     Let $f \in C_0^\infty (\C)$, and define 
-    $$u(w) := \frac{1}{2\pi i }\iint_\C \frac{f(z)}{z-w}dz \land d \bar z.$$
+    $$u(w) := \frac{1}{2\pi i }\iint_\C \frac{f(z)}{z-w}\d z \land d \bar z.$$
     Then, $u \in C^\infty (\C)$, and $\partder{u}{\bar z}=f$ on $\C$.
 \end{thm}
 
 \begin{proof}
     We change variables in the integral so that
-    $$u(w) = \frac{1}{2\pi i } \iint _\C \frac{f(z+w)}{z}dz\land d \bar z.$$
-    We claim $$\partder{u}{x}(w) =\frac{1}{2\pi i }\iint _\C \frac{\partder{f}{x}(z+w)}{z}dz \land d \bar z.$$
+    $$u(w) = \frac{1}{2\pi i } \iint _\C \frac{f(z+w)}{z}\d z\land d \bar z.$$
+    We claim $$\partder{u}{x}(w) =\frac{1}{2\pi i }\iint _\C \frac{\partder{f}{x}(z+w)}{z}\d z \land d \bar z.$$
     Indeed, for $h \in \R$,
-    $$\frac{u(w+h)-u(w)}{h}=\frac{1}{2\pi i}\iint_\C \frac{f(z+w+h)-f(z+w)}{h}\cdot \frac{1}{z} dz \land d \bar z.$$
-    Since $f$ is differentiable, the first factor in the integral is a bounded function of $h$, and $\frac{1}{z}dz \land d\bar z$ is $L^1$ on any compact set, so we obtain the claim by taking the limit as $h \to 0$ (the exchange of limit and integral is justified by the dominated convergence theorem).
+    $$\frac{u(w+h)-u(w)}{h}=\frac{1}{2\pi i}\iint_\C \frac{f(z+w+h)-f(z+w)}{h}\cdot \frac{1}{z} \d z \land d \bar z.$$
+    Since $f$ is differentiable, the first factor in the integral is a bounded function of $h$, and $\frac{1}{z}\d z \land d\bar z$ is $L^1$ on any compact set, so we obtain the claim by taking the limit as $h \to 0$ (the exchange of limit and integral is justified by the dominated convergence theorem).
 
     Arguing in the same way shows that $\partder{u}{y}(w) $, and in fact all derivatives of $u$, exist. Hence, $u \in C^\infty (\C)$. Moreover, since $z=x+iy$, and $\partder{}{\bar z}=\frac{1}{2}\paren{\partder{}{x}+i\partder{}{y}}$, we have
-    $$\partder{u}{\bar z}(w) = \frac{1}{2 \pi i} \iint_\C \partder{f}{\bar z}(z+w)\frac{1}{z}dz \land d \bar z = f(w)$$
+    $$\partder{u}{\bar z}(w) = \frac{1}{2 \pi i} \iint_\C \partder{f}{\bar z}(z+w)\frac{1}{z}\d z \land d \bar z = f(w)$$
     by \Cref{thm:fisdoubleint}.
 \end{proof}
 
@@ -2576,7 +2576,7 @@ d_af = \partder[]{f}{x}(a)\cdot d_ax+\partder[]{f}{y}(a)\cdot d_ay.
 \]
 Similarly, we have
 \[
-df = \partder[]{f}{z}dz + \partder[]{f}{\bar z}d \bar z.
+df = \partder[]{f}{z}\d z + \partder[]{f}{\bar z}d \bar z.
 \]
 Now, if $(U',z')$ is a second coordinate neighborhood at $a$, then
 \[
@@ -2594,9 +2594,9 @@ T^*_{\C,a}X=T_a^{1,0}X \bigoplus T_a^{0,1}X
 \begin{defn}
 A \term{differential 1-form} on $X$ is a $C^\infty$-section of $T_\C^* X$.
 
-Locally, any differential $1$-form equals $adz + bd \bar z$ for $a,b \in C^\infty(U)$. These patch together to form a sheaf. We denote the \term{sheaf of smooth 1-forms} on $X$ by \term[\cA^1]{$\cA^1$}. We also sometimes write $\mc A =\mc A^0$.
+Locally, any differential $1$-form equals $a\d z + bd \bar z$ for $a,b \in C^\infty(U)$. These patch together to form a sheaf. We denote the \term{sheaf of smooth 1-forms} on $X$ by \term[\cA^1]{$\cA^1$}. We also sometimes write $\mc A =\mc A^0$.
 
-A 1-form $\varphi$ is of \term[(1,0)]{type (1,0)} if, for any local coordinate system $(U,z)$, $\varphi$ is of the form $adz$ (respectively $b d \bar z$ for \term[(0,1)]{type (0,1)}).
+A 1-form $\varphi$ is of \term[(1,0)]{type (1,0)} if, for any local coordinate system $(U,z)$, $\varphi$ is of the form $a\d z$ (respectively $b d \bar z$ for \term[(0,1)]{type (0,1)}).
 
 Let $\mc A^{1,0}$ and $\mc A^{0,1}$ denote the sheaves of $C^\infty$-forms of type $(1,0)$ and $(0,1)$. So for $U \subset X$ open,
 \[
@@ -2605,25 +2605,21 @@ Let $\mc A^{1,0}$ and $\mc A^{0,1}$ denote the sheaves of $C^\infty$-forms of ty
 \end{defn}
 
 \begin{defn}
-For $f \in \mc A(U)=\C^\infty (U)$, the \term{exterior derivative} $df$ has a unique expression $df = \partial f + \bar \partial f$ with $\partial f \in \mc A^{1,0}(U)$ and $\bar \partial f \in \mc A^{0,1}(U)$. In local coordinates, $\partial f = \partder[]{f}{z}dz$ and $\bar \partial f = \partder[]{f}{\bar z}d \bar z.$
+For $f \in \mc A(U)=\C^\infty (U)$, the \term{exterior derivative} $df$ has a unique expression $df = \partial f + \bar \partial f$ with $\partial f \in \mc A^{1,0}(U)$ and $\bar \partial f \in \mc A^{0,1}(U)$. In local coordinates, $\partial f = \partder[]{f}{z}\d z$ and $\bar \partial f = \partder[]{f}{\bar z}d \bar z.$
 \end{defn}
 
 \begin{rmk}
-Let $\mc A^k(U)$ denote smooth $k$-forms on $U$. Just as $d$ extends to a map $\mc A^k(U) \to \mc A^{k+1}(U)$, so do $\partial$ and $\bar \partial$.
-
-For $\alpha \in \mc A^{1,0}(U)$, $\partial \alpha =0$ and $\bar \partial \alpha = d\alpha$. Similarly for $\beta \in \mc A^{0,1}(U)$, $\partial b = d \beta$ and $\bar \partial \beta =0$.
-
-In local coordinates, if $\alpha = fdz$ and $\beta = g d \bar z$,
+Let $\mc A^k(U)$ denote smooth $k$-forms on $U$. Just as $d$ extends to a map $\mc A^k(U) \to \mc A^{k+1}(U)$, so do $\partial$ and $\bar \partial$. For $\alpha \in \mc A^{1,0}(U)$, $\partial \alpha =0$ and $\bar \partial \alpha = d\alpha$. Similarly for $\beta \in \mc A^{0,1}(U)$, $\partial b = d \beta$ and $\bar \partial \beta =0$. In local coordinates, if $\alpha = f\d z$ and $\beta = g d \bar z$,
 \begin{align*}
-    \bar \partial \alpha &= \partder[]{f}{\bar z}d \bar z \land d z = -\partder[]{f}{\bar z}dz \land d \bar z, \\
-    \partial \beta &= \partder[]{g}{z}dz \land d \bar z.
+    \bar \partial \alpha &= \partder[]{f}{\bar z}d \bar z \land d z = -\partder[]{f}{\bar z}\d z \land d \bar z, \\
+    \partial \beta &= \partder[]{g}{z}\d z \land d \bar z.
 \end{align*} 
 \end{rmk}
 
 \section{\texorpdfstring{The Canonical Bundle $K_X$}{The Canonical Bundle KX}}
 
 \begin{defn}
-Let $W \subset X$ be open. A \term{holomorphic 1-form} on $W$ is an element $\omega \in \mc A^{1,0}(W)$ such that $\bar \partial w =0$ (equivalently, $dw=0$). If $(U,z)$ is a coordinate chart and $w|_{W \cap U} = fdz$, then $w$ is holomorphic if and only if $f$ is holomorphic. We can similarly define meromorphic $1$-forms: there are forms defined outside of a discrete set $A \subset W$, which, for any coordinate chart $(U,z)$ with $U \subset W$, are of the form $fdz$ with $f$ meromorphic on $U$.
+Let $W \subset X$ be open. A \term{holomorphic 1-form} on $W$ is an element $\omega \in \mc A^{1,0}(W)$ such that $\bar \partial w =0$ (equivalently, $dw=0$). If $(U,z)$ is a coordinate chart and $w|_{W \cap U} = f\d z$, then $w$ is holomorphic if and only if $f$ is holomorphic. We can similarly define meromorphic $1$-forms: there are forms defined outside of a discrete set $A \subset W$, which, for any coordinate chart $(U,z)$ with $U \subset W$, are of the form $f\d z$ with $f$ meromorphic on $U$.
 
 Let $\Omega = \Omega^1_X$ be the \term{sheaf of holomorphic 1-forms} on $X$, with
 \[
@@ -2636,10 +2632,10 @@ H^0(U,K_X)=\Omega(U).
 In fact we have $(K_X)_a = T^{1,0}_aX$.
 \end{defn}
 
-We can give transition functions for $K_X$ as follows: Let $\{(U_i,z_i)\}$ be an open cover of $X$ by charts. Then by the above analysis, there exist $g_{ij} \in \mc O^*(U_i \cap U_j)$ such that $dz_j=g_{ij}d z_i$ on $U_i \cap U_j$. Thus $K_X$ is the line bundle given by the transition functions $\brax{g_{ij}}$.
+We can give transition functions for $K_X$ as follows: Let $\{(U_i,z_i)\}$ be an open cover of $X$ by charts. Then by the above analysis, there exist $g_{ij} \in \mc O^*(U_i \cap U_j)$ such that $\d z_j=g_{ij}d z_i$ on $U_i \cap U_j$. Thus $K_X$ is the line bundle given by the transition functions $\brax{g_{ij}}$.
 
-Over any open set $W \subset X$, a section $s \in H^0(W,K_X)$ is gen by a family $\{f_i\}$ with $f_i \in \mc O(W \cap U_i)$ such that $f_i = g_{ij}f_j$ on $U_i \cap U_j \cap W$ for all $i,j$. Consider the holomorphic $1$-form $\omega_i := f_idz_i$ on $W \cap U_i$. Then on $W \cap U_i \cap U_j$, 
-$$w_i = f_idz_i=g_{ij}f_jdz_i=f_jdz_j=w_j,$$ hence the $\{\omega_i\}$ patch to define $\omega \in \Omega (W)$. The map $s \mapsto \omega$ is an isomorphism.
+Over any open set $W \subset X$, a section $s \in H^0(W,K_X)$ is gen by a family $\{f_i\}$ with $f_i \in \mc O(W \cap U_i)$ such that $f_i = g_{ij}f_j$ on $U_i \cap U_j \cap W$ for all $i,j$. Consider the holomorphic $1$-form $\omega_i := f_i\d z_i$ on $W \cap U_i$. Then on $W \cap U_i \cap U_j$, 
+$$w_i = f_i\d z_i=g_{ij}f_j\d z_i=f_j\d z_j=w_j,$$ hence the $\{\omega_i\}$ patch to define $\omega \in \Omega (W)$. The map $s \mapsto \omega$ is an isomorphism.
 
 \begin{rmk}
 Under the above correspondence, meromorphic sections of $K_X$ correspond to meromorphic $1$-forms. Moreover, if we apply the construction to $C^\infty$-sections of $K_X$ over $W \subset X$, we obtain an isomorphism $C^\infty (W,K_X)\simeq \mc A^{1,0}(W)$.
@@ -2654,7 +2650,7 @@ Let $E \arr[\pi]X$ be a holomorphic vector bundle on the Riemann surface $X$. Th
 \]
 \end{defn}
 \begin{rmk}
-If $E|_U$ is trivial, then the map, then the map
+If $E|_U$ is trivial, then the map
 \begin{align*}
     \mc E(U) \otimes_{\mc O(U)} \mc A(U) &\to \mc A_E(U) \\
     s \otimes f & \maps fs
@@ -2835,7 +2831,7 @@ We define a bilinear form
 \[
 \angles{,}:H^0(X,E^*\otimes K_X)\otimes \cA_E^{0,1}(X) \to \C
 \]
-as follows: fix $s \in H^0(X,E^*\otimes K_X)$ and $\varphi \in \cA_E^{0,1}(X)$. Let $(U,z)$ be a coordinate neighborhood, and $\omega \in \Omega(U)$ be a holomorphic 1-form on $U$ without zeros (i.e. $w = fdz$, where $f(a) \neq 0$ for all $a \in U$). Then by restricting $s$ to $U$, we may write $s|_U = \lambda \otimes \omega$ for $\lambda \in H^0(U,E^*)$, and $\varphi|_U = \alpha \otimes \bar \omega$ for $\alpha \in \cA_E(U)$. Then we may define a pairing
+as follows: fix $s \in H^0(X,E^*\otimes K_X)$ and $\varphi \in \cA_E^{0,1}(X)$. Let $(U,z)$ be a coordinate neighborhood, and $\omega \in \Omega(U)$ be a holomorphic 1-form on $U$ without zeros (i.e. $w = f\d z$, where $f(a) \neq 0$ for all $a \in U$). Then by restricting $s$ to $U$, we may write $s|_U = \lambda \otimes \omega$ for $\lambda \in H^0(U,E^*)$, and $\varphi|_U = \alpha \otimes \bar \omega$ for $\alpha \in \cA_E(U)$. Then we may define a pairing
 \begin{align} \label{eq:serre-pairing}
     (s,\varphi)_U:= (\lambda,\alpha)\omega \land \bar \omega
 \in \cA^2(U).
@@ -2866,12 +2862,12 @@ h_u(v)=\paren{x,(u_1,\dots,u_n)}, \quad h_u^*(v^*)\paren{x,(u_1',\dots,u_n')},
 \]
 we have $v^*(v)= \sum _{i=1}^nu_iu_i'$. If $s \in H^0(X,E^* \otimes K_X)$ and $\varphi \in \cA_E^{0,1}(X)$ with $\supp(\varphi) \subset U$, write
 \begin{align*}
-    s|_U = \lambda \otimes dz, &\qquad h_u^*(\lambda(x))  = \paren{x,\lambda_1(x),\dots,\lambda_n(x)}, \\
+    s|_U = \lambda \otimes \d z, &\qquad h_u^*(\lambda(x))  = \paren{x,\lambda_1(x),\dots,\lambda_n(x)}, \\
     \varphi|_U = \alpha \otimes d \bar z, &\qquad h_u(\alpha (x)) = \paren{x, \alpha_1(x),\dots,\alpha_n(x)}.
 \end{align*}
 Then
 \[
-\angles{s, \varphi}=\int_U \paren{\sum_{k=1}^n \lambda _k(z)\alpha_k(z)}dz \land d \bar z.
+\angles{s, \varphi}=\int_U \paren{\sum_{k=1}^n \lambda _k(z)\alpha_k(z)}\d z \land d \bar z.
 \]
 
 \begin{claim}
@@ -2887,7 +2883,7 @@ h_u(\alpha(z)) = \paren{x,\paren{\partder[]{f_1}{\bar z},\dots,\partder[]{f_n}{\
 \]
 Hence if $h_u^*(s(z))=\paren{z,\paren{\lambda_1(z),\dots,\lambda_n(z)}}$ on $U$, we have
 \[
-\angles{s,\varphi}=\int_U \sum_k \lambda _k(z) \partder[]{f_k}{\bar z}dz \land d \bar z = -\int_U \sum_k \partder[]{\lambda_k}{\bar z}f_k dz\land d\bar z=0
+\angles{s,\varphi}=\int_U \sum_k \lambda _k(z) \partder[]{f_k}{\bar z}\d z \land d \bar z = -\int_U \sum_k \partder[]{\lambda_k}{\bar z}f_k \d z\land d\bar z=0
 \]
 by integrating by be parts.
 \end{proof}
@@ -2941,7 +2937,7 @@ h_U: \pi^{-1}(U) \to U \times \C^n
 \]
 of $E|_U$. By \Cref{rmk:inner-prod-0-s-0}, it suffices to show that there exists $s \in H^0(U,E^* \otimes K_X)$ such that $F(\varphi)= \angles{s,\varphi}$ for all $\varphi \in \cA_E^{0,1}(X)$ with $\supp \varphi \subset U$ (so the statement of Weyl's Lemma is local). Equivalently, we must show there exists holomorphic functions $\lambda_1,\dots,\lambda_n$ on $U$ such that for all $\alpha_1,\dots,\alpha_n \in C_0^\infty (U)$,
 \[
-F(\varphi)= \int _U \sum_{k=1}^n \lambda_k(z)\alpha_k(z)dz \land d \bar z,
+F(\varphi)= \int _U \sum_{k=1}^n \lambda_k(z)\alpha_k(z)\d z \land d \bar z,
 \]
 where $\varphi = \alpha \otimes d\bar z$, and $h_U(\alpha(z))=(z,\alpha_1(z),\dots,\alpha_n(z))$. Define $G(\alpha_1,\dots,\alpha_n):= F(\alpha \otimes d \bar z)$, and then the condition $F|_{\bar \partial C_E^\infty (X)}=0$ means
 \[
@@ -2949,7 +2945,7 @@ G\paren{ \partder[]{\beta_1}{\bar z},\dots, \partder[]{\beta_n}{\bar z} }=0
 \]
 for $\beta _j \in C_0^\infty (U)$. It suffices to prove that for all $k \in \{1,\dots, n\}$, there exists $\lambda _k \in \cO(U)$ such that
 \[
-G(0,\dots,0,\alpha_k,0\dots,0) = \int _U \lambda _k \alpha _k dz \land d \bar z
+G(0,\dots,0,\alpha_k,0\dots,0) = \int _U \lambda _k \alpha _k \d z \land d \bar z
 \]
 for all $\alpha _k \in C_0^\infty (U)$. This will follow from the next result, concluding the proof of Weyl's Lemma.
 
@@ -2962,7 +2958,7 @@ Let $U \subset \C$ be open. Let $T : C_0^\infty (U) \to \C$ be a $\C$-linear map
     \item $T \paren{\partder[]{\beta}{\bar z}}=0$ for all $\beta \in C_0^\infty (U)$.
 \end{enumerate}
 Then there exists $\lambda \in \cO(U)$ such that \[
-T(\alpha) = \int _U \lambda \alpha dz \land d \bar z,
+T(\alpha) = \int _U \lambda \alpha \d z \land d \bar z,
 \]
 for all $\alpha \in C_0^\infty (U)$.
 \end{thm}
@@ -3062,10 +3058,15 @@ For $X$ a compact Riemann and $D$ a divisor on $X$,
 \[
 \dim_\C H^0(X,\cO_D)-\dim_\C H^0(X,\Omega_{-D}) = 1-g+\deg D.
 \]
+Equivalently,
+\begin{align*}
+h^0(D)-h^0(K-D)=1-g+\deg D.
+\end{align*}
+where $K$ is a canonical divisor.
 \end{thm}
 
 \begin{defn}
-If $L \to X$ is a holomorphic line bundle, write \term{$\deg L$} for $\deg D$ if $L \simeq L(D)$. Also write $h^i(L)$ for $h^i(D)$. $i=0,1$.
+If $L \to X$ is a holomorphic line bundle, write \term{$\deg L$} for $\deg D$ if $L \simeq L(D)$. Also write $h^i(L)$ for $h^i(D)$, $i=0,1$.
 \end{defn}
 
 \begin{cor}
@@ -3081,7 +3082,7 @@ Equivalently, if $w \neq 0$ is a meromorphic 1-form, then $\deg \div(w)=2g-2$.
 \end{cor}
 
 \begin{thm}[Vanishing Theorem] \label{thm:vanishing-thm}
-Let $D$ be a divisor on $X$ such that $\deg D \geq 2g-2$. Then $H^1(X,\cO_D)=0$, and therefore $h^0(D)=1-g+\deg D$.
+Let $D$ be a divisor on $X$ such that $\deg D > 2g-2$. Then $H^1(X,\cO_D)=0$, and therefore $h^0(D)=1-g+\deg D$.
 \end{thm}
 
 \begin{proof}
@@ -3117,7 +3118,7 @@ Let $\omega \neq 0$ be a meromorphic 1-form on $Y$, and $\omega_0 := f^*\omega$ 
 \end{align}
 by \Cref{cor:deg-1-form-is-2g-2}. Moreover if $\omega = h(w)dw$ near $b$, then
 \[
-\omega_0 = f^*\omega = h(z^n)nz^{n-1}dz
+\omega_0 = f^*\omega = h(z^n)nz^{n-1}\d z
 \]
 near $a$, so \[
 \ord_a(\omega_0)=n \ord_b(\omega)+n-1,
@@ -3134,7 +3135,7 @@ Let $A = \brax{a \in X \setbar b(f,a) > 0}$ be the critical points of $f$, and $
 \[
 \chi(X) = \dim_\C H^0(X,\C) - \dim _\C H^1(X,\C) + \dim _\C H^2(X,\C)=2-b_1(X),
 \]
-where \term{$b_1(X)$} $:= \dim _\C H^1(X,\C)$ is the first \term[]{Betti number} of $X$. Triangulate $Y$ be simplices in which all points in $B$ are vertices, and assume that this triangulation is sufficient fine. We can then use $f$ to lift this to a triangulation of $X$. Let $e_0(X)$ be the number of vertices, $e_1(X)$ the number of edges, and $e_2(x)$ the number of faces. Similarly defined $e_i(Y)$, $i=0,1,2$. Then
+where \term{$b_1(X)$} $:= \dim _\C H^1(X,\C)$ is the first \term[]{Betti number} of $X$. Triangulate $Y$ by simplices in which all points in $B$ are vertices, and assume that this triangulation is sufficient fine. We can then use $f$ to lift this to a triangulation of $X$. Let $e_0(X)$ be the number of vertices, $e_1(X)$ the number of edges, and $e_2(x)$ the number of faces. Similarly define $e_i(Y)$, $i=0,1,2$. Then
 \[
 e_2(X) = de_2(Y), \qquad e_1(X)=de_1(Y).
 \]
@@ -3231,7 +3232,7 @@ Except for finitely many points $P$ of $X$, there exists a meromorphic function 
 
 
 \begin{defn}
-Let $\omega \ne 0$ be a meromorphic 1-form on $X$. For $a \in X$, the \term[]{residue} of $a$ at $\omega$, denoted \term[]{$\res_a(\omega)$}, is defined as follows: let $(U,z)$ be a coordinate chart around $a$ with $z(a)=0$ and let $w = fdz$. Then $\res_a(\omega):=\Res(f,a)$, the coefficient of $1/z$ in the Laurent expansion of $f$.
+Let $\omega \ne 0$ be a meromorphic 1-form on $X$. For $a \in X$, the \term[]{residue} of $a$ at $\omega$, denoted \term[]{$\res_a(\omega)$}, is defined as follows: let $(U,z)$ be a coordinate chart around $a$ with $z(a)=0$ and let $w = f\d z$. Then $\res_a(\omega):=\Res(f,a)$, the coefficient of $1/z$ in the Laurent expansion of $f$.
 
 Alternatively, if $\gamma$ is a smooth curve in $U \sm \{a\}$ with winding number $n(\gamma,a)=1$, then $$\res_a(\omega):=\frac{1}{2\pi i}\int_\gamma \omega.$$
 \end{defn}
@@ -3258,7 +3259,7 @@ Let $U := X \sm \bigcup _{j=1}^n\Delta_j$. By Stokes' theorem applied to $U$, we
 \end{align}
 But $\omega$ is holomorphic on $U$, and any holomorphic 1-form on a Riemann surfaces is \term[]{closed}, meaning
 \[
-dw = \partder[]{f}{z}dz \land d z + \partder[]{f}{\bar z}d\bar z \land d z=0
+dw = \partder[]{f}{z}\d z \land d z + \partder[]{f}{\bar z}d\bar z \land d z=0
 \]
 where $w = fz$. Thus the LHS of \eqref{eq:stoke-on-omega} is zero, proving the claim.
 \end{proof}
@@ -3284,22 +3285,25 @@ There exists a meromorphic 1-form $\omega$ on $X$ with $\omega - \omega _i$ holo
 \begin{proof}
 Note that $\omega$ exists if and only if the cohomology class $\{\omega_{ij}:=\omega_i - \omega_j\}$ in $H^1(X,\Omega)$ vanishes. Now recall that for a non-zero effective divisor $D$ on $X$, $H^0(X,\cO_{-D})=0$. Let $s_D$ be the standard section of $L(D)$ with $\div(s_D)=D$, and recall $\Omega _D$ is defined by $\Omega _D=\brax{\text{meromorphic 1-forms }\omega, \div (\omega) \geq -D}$. We have an exact sequence
 \begin{align} \label{eq:omegas-sequence}
-    0 \to \Omega \arr[s_D]\Omega_d \to \C_D \to 0.
+    0 \to \Omega \arr[s_D]\Omega_D \to \C_D \to 0.
 \end{align}
-Note that the sheaf $\C_D$ is zero outside $|D|$, while for $a \in D$, the stalk $\C_{D,a}$ is the group of all finite sums $\sum_{v=1}^{D(a)}\frac{c_v}{z^v}dz$, where $z$ is a local coordinate at $a$ with $z(a)=0$. Now Riemann-Roch gives
+Note that the sheaf $\C_D$ is zero outside $|D|$, while for $a \in D$, the stalk $\C_{D,a}$ is the group of all finite sums $\sum_{v=1}^{D(a)}\frac{c_v}{z^v}\d z$, where $z$ is a local coordinate at $a$ with $z(a)=0$. Now Riemann-Roch gives
 \[
 \dim H^0(X,\cO_D)-\dim H^0(X,\Omega_{-D})=1-g+\deg D
 \]
 and \eqref{eq:omegas-sequence} yields
 \[
-H^0(X,\Omega_d) \arr[i]H^0(X,\C_D) \to H^1(X,\Omega) \to H^1(X,\Omega_D),
+H^0(X,\Omega_D) \arr[i]H^0(X,\C) \to H^1(X,\Omega) \to H^1(X,\Omega_D),
 \]
-with $\dim H^1(X,\Omega)=1$ and $H^1(X,\Omega_D) \simeq H^0(X,\cO_{-D})^*=0$. Hence $i\paren{H^0(X,\Omega)}$ has codimension 1 in $H^0(X,\C_D)\simeq \C^{\deg D}$. But \Cref{lem:sum-of-res-is-0} says that the image of $i$ lies in the set $\brax{\omega_a}_{a \in |D|}$ with $\ord_a(\omega_a)\geq -D(a)$ such that $\sum_{a \in |D|} \res_a(\omega_a)=0$. Since both subspaces have codimension 1, they are equal.
+with $\dim H^1(X,\Omega)=1$ and $H^1(X,\Omega_D) \simeq H^0(X,\cO_{-D})^*=0$. Hence $i\paren{H^0(X,\Omega_D)}$ has codimension 1 in $H^0(X,\C_D)\simeq \C^{\deg D}$. But \Cref{lem:sum-of-res-is-0} says that the image of $i$ lies in the set $\brax{\omega_a}_{a \in |D|}$ with $\ord_a(\omega_a)\geq -D(a)$ such that $\sum_{a \in |D|} \res_a(\omega_a)=0$. Since both subspaces have codimension 1, they are equal.
 \end{proof}
 
 \begin{exercise}
 Complete the argument: take $-D$ to be the divisor defined by $\tilde \omega = \{\omega_i\}$.
 \end{exercise}
+
+
+
 
 
 \end{document}
