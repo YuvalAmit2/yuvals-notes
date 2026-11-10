@@ -3278,7 +3278,7 @@ by the argument principal. The claim follows immediately by \Cref{lem:sum-of-res
 
 Let $X$ be a compact Riemann surfaces, let $\mc U := \brax{U_i}_{i \in I}$ be an open cover of $X$, and let $\omega _i$ be a meromorphic 1-form on $U_i$ such that $\omega_i -\omega_j$ is holomorphic on $U_i \cap U_j$, for all $i,j$. Let $\tilde \omega := \{\omega_i\}_{i \in I}$, and set $\res (\tilde \omega):=\res_a(\omega_i)$ for $a \in X$, where $i \in I$ is such that $a \in U_i$.
 
-\begin{thm}[Mittag-Leffler's Theorem for Forms]
+\begin{thm}[Mittag-Leffler's Theorem for Forms] \label{thm:mittag-leffler-forms}
 There exists a meromorphic 1-form $\omega$ on $X$ with $\omega - \omega _i$ holomorphic on $U_i$, for all $i \in I$, if and only if $\sum_{a \in X} \res_a(\tilde \omega)=0$.
 \end{thm}
 
@@ -3302,8 +3302,211 @@ with $\dim H^1(X,\Omega)=1$ and $H^1(X,\Omega_D) \simeq H^0(X,\cO_{-D})^*=0$. He
 Complete the argument: take $-D$ to be the divisor defined by $\tilde \omega = \{\omega_i\}$.
 \end{exercise}
 
+We recall the sheaves that we've defined thus far:
+\begin{enumerate}
+    \item $\cM$ is the sheaf of meromorphic functions on $X$.
+    \item $\Omega$ is the sheaf of holomorphic 1-forms on $X$.
+\end{enumerate}
+\begin{defn}
+Let \term[]{$\Omega_m$} denote the sheaf of meromorphic 1-forms on $X$.
+\end{defn}
 
+\begin{cor}[of Vanishing Theorem]
+For $X$ a compact Riemann surface,
+\begin{align*}
+H^1(X,\cM)=H^1(X,\Omega_m)=0.
+\end{align*}
+\end{cor}
 
+\begin{proof}
+Let $\cU = \{U_i\}_{i \in I}$ be a finite open cover of $X$, and let $\{V_i\}$ be open sets with $\bigcup V_i =X$ and $\bar {V_i} \subset U_i$.
+\begin{exercise}[]
+Show that such a collection of $V_i$ exists.
+\end{exercise}
+Now fix $\brax{f_{ij}} \in Z^1(\cU,\cM)$, and choose a divisor $D>0$ with $\deg D > 2g-2$ and $\div f_{ij}\geq -D$ on $V_i \cap V_j$ ($\bar V_i \cap \bar V_j$ is compact, so we can do this). By the Vanishing Theorem (\cref{thm:vanishing-thm}), there exists meromorphic functions $f_i$ on $V_i$ with $\div f_i \geq -D$ on $V_i$ and $f_i -f_j = f_{ij}$ on $V_i \cap V_j$, for all $i,j \in I$. Hence the image of $\{f_{ij}\}$ in $Z^1(\{V_i\},\cM)$ lies in $B^1(\{V_i\},\cM)$.
 
+The proof for $\Omega_m$ is similar.
+\end{proof}
+
+\section{The Residue Form of Serre Duality}
+
+We want to give another interpretation of the duality pairing
+\begin{align*}
+H^0(X,\Omega_{-D}) \otimes H^1(X,\cO_D) \to \C.
+\end{align*}
+For this, we need a notion of a residue map from $H^1(X,\Omega)\to \C$. We define it as follows.
+
+Let $\{\omega_{ij}\} \in Z^1(\mc U,\Omega)$. Since $H^1(\cU,\Omega_m)=0$, we can find 1-forms $\omega _i$ on $U_i$ such that $\omega_i-\omega_j = \omega_{ij}$ on $U_i \cap U_j$.  Set $\tilde \omega := \{\omega_i\} \in C^0(\cU,\Omega_m)$. For $a \in X$ with $a \in U_i$, set $\res_a(\tilde \omega):=\res_a(\omega_i)$, and note that this is independent of the choice of $i$. 
+
+Now recall that we have a Dolbeault isomorphism
+\begin{align*}
+D: H^1 (X,\Omega) = H^1(X,K_X) \to \frac{\cA^{0,1}_{K_X}(X)}{\bar \partial \cA_{K_X}(X)}.
+\end{align*}
+To obtain $D(\{w_{ij}\})$, find $C^\infty$-forms $\alpha_i$ on $U_i$ of type (1,0) such that $\omega_{ij}=\alpha_i - \alpha_j$ on $U_i \cap U_j$. Then the 2-form $\varphi$ on $X$ defined by $\varphi|_{U_i}= \bar \partial \alpha _i = d\alpha _i$ represents the class $D(\{w_{ij}\})$.
+
+\begin{lem}
+We have \begin{align*}
+\int_X D(\{w_{ij}\}) = 2\pi i \sum_{a \in X}\res_a(\tilde \omega).
+\end{align*}
+\end{lem}
+
+\begin{proof}
+Set $\beta = \omega_i - \alpha_i$ on $U_i$, for all $i \in I$. Then $\beta$ is a $C^\infty$-form on $X \sm S$, where $S := \{a_1,\dots,a_m\}$ is the set of poles of $\tilde \omega$ (so $S\cap U_i$ is the st of poles of $\omega_i$, for all $i \in I$). Since $d\omega_i =0$ on $U_i \sm S$, we have $d \beta = -d\alpha_i$, hence
+\begin{align*}
+\varphi = D(\{w_{ij}\}) = - d\beta \quad \text{on } X \sm S.
+\end{align*}
+For $1 \leq k \leq m$, let $\Delta_k(\veps)$ be a small disk of radius $\veps>0$ around $a_k$. Then
+\begin{align*}
+\int_X \vphi &= -\lim_{\veps \to 0}\int _{X \sm \bigcup_k \Delta_k(\veps)}d\beta \\
+&= \lim_{\veps \to 0}\sum_{k=1}^m \int_{\partial \Delta_k(\veps)}\beta,
+\end{align*}
+while on $U_i$, $\beta = \omega_i - \alpha_i$. If $\veps >0$ is small and $i$ is such that $a_k \in U_i$, then
+\begin{align*}
+\int_{\partial \Delta_k(\veps)} \omega_i = 2\pi i \res_{a_k}(\omega_i)=2\pi i \res_{a_k}(\tilde \omega)
+\end{align*}
+and
+\begin{align*}
+\lim_{\veps \to 0}\int_{\partial \Delta_k(\veps)}\alpha_i =0,
+\end{align*}
+since $\alpha_i$ is smooth. We conclude that
+\begin{align*}
+\int_X D(\{\omega_{ij}\}) = \int_X \varphi = 2 \pi i \sum_{k=1}^m \res_{a_k}(\tilde \omega)
+\end{align*}
+as desired.
+\end{proof}
+
+In particular, the lemma shows that $\sum_k \res_{a_k}(\tilde \omega)$ depends only on the cohomology class $\xi$ of $\{w_{ij}\}^k$ in $H^1(X,\Omega)$, and not on its representation as a coboundary of $\Omega_m$. This gives us our well defined residue map.
+
+\begin{defn}
+The \term[]{residue map}, denoted \term[]{$\Res$} $:H^1(X,\Omega)\to \C$, is the sum
+\begin{align*}
+\Res(\xi):= \sum_{k}\res_{a_k}(\tilde \omega)
+\end{align*}
+as above.
+\end{defn}
+
+Now Serre duality implies
+\begin{align*}
+H^1(X,\Omega)=H^1(X,K_X)\simeq H^0\paren{X, K_X^*\otimes K_X}^* = H^0(X,\cO)^* \simeq \C,
+\end{align*}
+with the pairing for $K_X$ given by
+\begin{align*}
+(\lambda,\{\omega_{ij}\}) \mapsto \int _X \lambda D(\{w_{ij}\}), \quad \lambda \in \C.
+\end{align*}
+This yields the following proposition.
+\begin{prop}
+The residue map $\Res:H^1(X,\Omega) \to \C$ is an isomorphism.
+\end{prop}
+
+\begin{thm}[Residue Version of Serre Duality for Line Bundles]
+Let $D$ be a divisor on a compact Riemann surface $X$. We have a natural pairing 
+\begin{align*}
+(,)_D:H^0(X,\Omega_{-D})\otimes H^1(X,\cO_D) &\to H^1(X, \Omega) \\
+(\omega, \{f_{ij}\}) & \maps \brax{f_{ij}\omega},
+\end{align*}
+where $\omega$ is a meromorphic 1-form with $\div(\omega)\geq -D$, while $f_{ij} \in \cM(U_i \cap U_j)$ with $\div(f_{ij}) \geq -D$, so $f_{ij}\omega \in \Omega(U_i \cap U_j)$. 
+
+Moreover, the duality pairing $\angles, _D$ in Serre duality (\Cref{thm:serre-duality}) for $L(D)$ equals $2\pi i \Res(,)_D$, hence the bilinear form
+\begin{align*}
+H^0(X,\Omega_{-D}) \otimes H^1(X,\cO_D) & \to \C \\ (\omega,\xi) & \maps \Res\paren{(\omega,\xi)_D}
+\end{align*}
+is non-degenerate.
+\end{thm}
+
+\begin{proof}
+Exercise from the previous construction.
+\end{proof}
+
+\begin{thm}[Mittag-Leffler Theorem for Functions] \label{thm:mittag-leffler-functions}
+Let $\mc U=\{U_i\}_{i \in I}$ be an open cover of the compact Riemann surface $X$. Let $f_i \in \cM(U_i)$ for all $i \in I$, and suppose $f_i - f_j \in \cO(U_i \cap U_j)$ for all $i,j\in I$. Then, there exists $f \in \cM(X)$ with $f-f_i \in \cO(U_i)$ for all $i \in I$ if and only if, for every holomorphic 1-form $\omega$ on $X$, we have $\Res(\tilde\omega_0)=0$, where $\tilde \omega_0 \in C^0(\cU,\Omega_m)$ is the 0-cochain $(f_i\omega)_{i\in I}$.
+\end{thm}
+
+\begin{proof}
+The existence of $f$ is equivalent to the statement that the cohomology class of $\xi = \brax{f_i -f_j|_{U_i \cap U_j}}$ vanishes in $H^1(X,\cO)$. By the previous theorem, this is equivalent to the residue condition.
+\end{proof}
+
+\begin{rmk}
+The Mittag-Leffler theorem for forms (\Cref{thm:mittag-leffler-forms}) follows easily as well: we want $\{\omega_i-\omega_j\}=0$ in $H^1(X,\Omega) \arr[\Res] \C$. This is equivalent to $\sum_a \res_a(\omega_i)=0$.
+\end{rmk}
+
+\section{Weierstrass Points}
+
+\begin{defn}
+Let $P$ be a point on $X$, and $(U,z)$ a coordinate at $P$ with $z(P)=0$. We call $P$ a \term[]{Weierstrass point} if there exists a meromorphic $f \in \cM(X)$, and constants $c_0,\dots,c_{g-1}$ not all zero so that
+\begin{enumerate}[(i)]
+    \item $f|_{X \sm P}$ is holomorphic (i.e. $P$ is the only possible pole of $f$), and
+    \item $f - \sum_{\nu=0}^{g-1} \frac{c_\nu}{z^{\nu + 1}}$ is holomorphic at $P$.
+\end{enumerate}
+\end{defn}
+
+\begin{rmk}
+By Mittag-Leffler for functions (\Cref{thm:mittag-leffler-functions}), $P$ is a Weierstrass point if and only if there exist constants $c_0,\dots,c_{g-1}$ not all zero such that
+\begin{align*}
+\res_P\paren{\sum_{\nu=0}^{g-1}\frac{c_\nu}{z^{\nu+1}}\omega}=0, \quad \forall \omega \in H^0(X,\Omega).
+\end{align*}
+\end{rmk}
+
+Let $\omega_1,\dots,\omega_g$ be a basis of $\Omega(X)$, and let $\omega_k =f_kdz$ on $U$, where $f_k \in \cO(U)$. Now if
+$f_k =\sum_{n=0}^\infty f_{k,n}z^n$, then $f_{k,n}=\frac{1}{n!}f_k^{(n)}(0)$ and
+\begin{align*}
+\res_P\paren{\sum_{\nu=0}^{g-1} \frac{c_\nu}{z^{\nu+1}}\omega_k} = c_0f_{k,0} + c_1f_{k,1}+ \cdots + c_{g-1}f_{k,g-1} = \sum_{\nu=0}^{g-1}\frac{c_\nu}{\nu!} f_k^{(\nu)}(0).
+\end{align*}
+This gives us the following proposition.
+\begin{prop}
+$P$ is a Weierstrass point if and only if the system of $g$ linear equations
+\begin{align*}
+\sum_{\nu=0}^{g-1} c_\nu f_k^{(\nu)}(0)=0, \quad k=1,2,\dots,g
+\end{align*}
+has a non-trivial solution. This is the case if and only if
+\begin{align*}
+\det \brax{f_k^{(\nu)}(0)}_{\substack{1 \leq k \leq g \\ 0 \leq \nu \leq g-1}} = 0.
+\end{align*}
+This kind of determinant is known as a Wronskian.
+\end{prop}
+
+\begin{defn}
+Let $U \subset \C$ be a connected open set, and $f_1,\dots,f_n \in \cO(U)$. The \term[]{Wronskian} of $f_1,\dots,f_n$, denoted \term[]{$W(f_1,\dots,f_n)$}, is
+\begin{align*}
+W(f_1,\dots f_n) := \det \brax{f_k^{(\nu)}(z)}_{\substack{1 \leq k \leq n \\ 0 \leq \nu \leq n-1}}.
+\end{align*}
+\end{defn}
+
+\begin{prop} \label{prop:wronskian-zero-dependent}
+$f_1,\dots,f_n$ are linearly independent over $\C$ if and only if $W(f_1,\dots,f_n)=0$.
+\end{prop}
+
+\begin{proof}
+Suppose $W(f_1,\dots,f_n)=0$. Observe that if $\vphi \in \cO(U)$, $\vphi \not \equiv 0$, and $g_k :=\vphi f_k$ for $1 \leq k \leq n$, then
+\begin{align*}
+g_k^{(\nu)}= \vphi f_k^{(\nu)}+ \sum_{\mu < \nu}\binom{\nu}{\mu} \vphi^{(\nu-\mu)}f_k^{(\mu)}.
+\end{align*}
+Since the transition matrix from $\{f_k^{(\nu)}\}$ to $\{g_k^{(\nu)}\}$ is lower triangular with $\vphi I_n$ on the diagonal, we get
+\begin{align*}
+\deg \paren{g_k^{(\nu)}} = \vphi ^n \det \paren{f_k^{(\nu)}} \iff W(g_1,\dots,g_n) = \vphi^n W(f_1,\dots,f_n).
+\end{align*}
+We prove this by induction on $n$. The base case $n=1$ is trivial. If $f_1 \not \equiv 0$ and $V := U \sm \{f_1=0\}$, it is enough to show that $1,f_2/f_1,\dots,f_n/f_1$ are linearly independent on $V$ over $\C$. Note that
+\begin{align*}
+W\paren{1,\frac{f_2}{f_1},\dots,\frac{f_n}{f_1}} = f_1^{-n}W(f_1,\dots,f_n)=0,
+\end{align*}
+so if $g_k:= f_k/f_1$, $k=2,\dots,n$, then
+\begin{align*}
+W(1,g_2,\dots,g_n)=W\paren{ \frac{dg_2}{dz},\dots,\frac{dg_n}{dz}}=0.
+\end{align*}
+By induction, there exists constants $c_2,\dots,c_n$ not all zero so that
+$\sum_{k=2}^nc_k g_k'(z)=0$
+on $V$, and so $\sum_{k=2}^nc_kg_k(z)$ is a constant. We conclude that $1,g_2,\dots,g_n$ are linearly dependent over $\C$.
+\end{proof}
+
+We now return to Weierstrass points. Let $\omega_1,\dots,\omega_g$ be a basis of $\Omega (X)$ as before, and $(U,z)$ a local coordinate chart. Set
+\begin{align*}
+W(\omega_1,\dots,\omega_g):=W(f_1,\dots,f_g),
+\end{align*} 
+where $\omega_k = f_k\d z$ on $U$. Then, since the 1-forms $\omega_1,\dots,\omega_g$ are $\C$-linearly independent, it follows by \Cref{prop:wronskian-zero-dependent} that $W(\omega_1,\dots,\omega_g) \not \equiv 0$ on $U$. We deduce that the Weierstrass points are isolated.
+\begin{prop}
+There are only finitely many Weierstrass points on a compact Riemann surface $X$.
+\end{prop}
+\begin{proof}
+The Weierstrass points are isolated by the discussion above, and finiteness follows from compactness.
+\end{proof}
 
 \end{document}
