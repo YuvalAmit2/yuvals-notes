@@ -136,7 +136,9 @@ A \term{complex structure} on $X$ is a family of pairs $\{(U_i,\varphi_i)\}_{i \
 
 A \term[Riemann surfaces]{Riemann surface} is a connected 2-dimensional real manifold with a complex structure on it. Given a Riemann surface $X$, a function $f:X \to \C$ is \term{holomorphic} if $f$ is continuous, and for every chart $(U,\varphi)$ of $X$, 
 $$f \circ \varphi^{-1}: \varphi(U) \to \C$$
-is holomorphic. This also defines holomorphic functions on open subsets $\Omega \subset X$. Let $\bm{\mc O(\Omega)}$ denote the $\C$-algebra of all holomorphic functions on $\Omega$. If $X,Y$ are Riemann surfaces, and $f:X \to Y$ is continuous, we say that $f$ is \term{holomorphic} if for every chart $(V,\psi)$ on $Y$, the function 
+is holomorphic. This also defines holomorphic functions on open subsets $\Omega \subset X$. 
+% Let \term{$\mc O(\Omega)$} denote the $\C$-algebra of all holomorphic functions on $\Omega$. 
+If $X,Y$ are Riemann surfaces, and $f:X \to Y$ is continuous, we say that $f$ is \term{holomorphic} if for every chart $(V,\psi)$ on $Y$, the function 
 $$\psi\circ f:f^{-1}(V)\to \psi(V)$$
 is holomorphic. A holomorphic map $f:X \to Y$ is an \term[analytic isomorphisms]{analytic isomorphism} (or \term[biholomorphic,biholomorphisms]{biholomorphism}) if there exists a holomorphic map $g:Y \to X$ such that $f\circ g =\id_Y$ and $g \circ f=\id_X$.
 \end{defn}
@@ -488,7 +490,8 @@ This means we cannot just choose any set of zeros/poles, and assume an elliptic 
 \end{proof}
 
 \begin{defn}
-    The \term[\wp]{Weierstrass $\wp$-function} for a lattice $\Omega$ is
+    The \term[\wp]{Weierstrass $\wp$-function} for a lattice 
+    $\Omega$ is
     $$\wp(z) := \frac{1}{z^2} + \sum_{\omega \in \Omega^*}\paren{\frac{1}{(z-\omega)^2}-\frac{1}{\omega^2}}.$$
     For $z$ bounded and staying away from the lattice points, $1/(z-\omega)^2 - 1/\omega^2$ has order of magnitude $1/|\omega^3|$. Hence, $p(z)$ is meromorphic with a pole of order $2$ at each lattice point.
 \end{defn}
@@ -2885,7 +2888,7 @@ Hence if $h_u^*(s(z))=\paren{z,\paren{\lambda_1(z),\dots,\lambda_n(z)}}$ on $U$,
 \[
 \angles{s,\varphi}=\int_U \sum_k \lambda _k(z) \partder[]{f_k}{\bar z}\d z \land d \bar z = -\int_U \sum_k \partder[]{\lambda_k}{\bar z}f_k \d z\land d\bar z=0
 \]
-by integrating by be parts.
+by integrating by parts.
 \end{proof}
 
 \begin{thm}[Weyl's Lemma (or the Regularity Theorem for $\bar \partial$).] \label{thm:weyl-lemma-regularity-thm}

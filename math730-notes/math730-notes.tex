@@ -1524,7 +1524,7 @@ Let $A,B \subset X$ be open such that $A \cup B = X$. Then the following sequenc
 \]
 \end{prop}
 
-\begin{thm}
+\begin{thm} \label{thm:chain-homology-A-map}
 Let $X$ be a topological space, and $\cA$ be as \Cref{def:collection-interior-cover}. Then there exists a chain map
 \[
 \rho:\brax{C_n(X)} \to \brax{C_n^{\cA}(X)}
@@ -1752,6 +1752,76 @@ We compute
 \end{align*}
 The proof for $T$ is similar.
 \end{proof}
+
+We are now equipped to prove \Cref{thm:chain-homology-A-map}.
+\begin{proof}[Proof of \Cref{thm:chain-homology-A-map}]
+Since $\brax{\Int(U)\setbar U \in A}$ is an open cover of $X$, for every $\sigma :\Delta^n\to X$, there exists $m=m(\sigma)$ such that $S^{m(\sigma)}(\sigma)\in C_n^{\cA}(X)$. Now choose $m$ to be minimal.
+
+Define $D:C_n(X)\to C_{n+1}(X)$ by $D(\sigma)=D_{m(\sigma)}(\sigma)$, so then we define $\rho:C_n(X) \to C_n(X)$ by the relation
+\begin{align*}
+\partial D + D\partial = \id - \rho.
+\end{align*}
+We claim $\rho$ has all the desired properties. Namely,
+\begin{enumerate}
+    \item $\rho$ is a chain map: \begin{align*}
+    \partial \rho(\sigma)= \partial (\id \sigma)-\partial \partial D\sigma - \partial D \partial \sigma = \partial \sigma -\partial D \partial \sigma = \rho(\partial \sigma)
+    \end{align*}
+    \item $\rho$ is well-defined: \begin{align*}
+    \rho(\sigma)=\sigma - \partial D \sigma - D \partial \sigma = \sigma - \partial D_{m(\sigma)}\sigma -D\partial \sigma,
+    \end{align*}
+    and $\partial D_{m(\sigma)}\sigma + D_{m(\sigma)}\partial\sigma =\sigma-S^{m(\sigma)}\sigma$, so
+    \begin{align*}
+    \rho(\sigma)= \cdots=  S^{m(\sigma)}\sigma + D_{m(\sigma)}\partial \sigma - D\partial \sigma.
+    \end{align*}
+    Clearly $S^{m(\sigma)}\sigma \in C_n^{\cA}(X)$. Moreover 
+    \begin{align*}
+    D_{m(\sigma)}\partial \sigma - D\partial \sigma = \sum_{\tau }\sum_{j=m(\tau)}^{m(\sigma)}TS^j(\tau) \in C_n^{\cA}(X),
+    \end{align*}
+    hence $\rho (\sigma) \in C_n^{\cA}(X)$.
+    \item $i\circ \rho$ is chain homotopic to the identity: $i\circ \rho - \id = \partial D + D\partial$
+    \item $\rho \circ i$ is chain homotopic to the identity: $\rho(i(\sigma))=\sigma$.
+\end{enumerate}
+This concludes the proof.
+\end{proof}
+
+Let $A \subset X$. Denote by $C_n(X,A):= C_n(X)/C_n(A)$
+
+\begin{defn}
+Let $A \subset X$. The \term[]{chains in $X$ relative to $A$}, denoted \term[]{$C_n(X,A)$}, is
+\begin{align*}
+C_n(X,A):= C_n(X)/C_n(A).
+\end{align*}
+Observe that $\partial _n:C_n(X) \to C_{n-1}(X)$ descends naturally to $\partial_n:C_n(X,A)\to C_{n-1}(X,A)$, so we denote by \term[]{$H_n(X,A)$} the homology groups of this complex. Namely, $[Z]\in C_n(X,A)$ is a \term[]{relative cycle} if $\partial Z \in C_{n-1}(A)$, and $\partial [Z]=0$ in $H_n(X,A)$ if and only if there exists $Z_{n+1}\in C_{n+1}(X)$ such that $\partial Z_{n+1}=Z-a$ for $a \in C_n(A)$.
+\end{defn}
+
+\begin{thm}
+There exists a long exact sequence of homologies
+\begin{align*}
+\cdots \to H_{n+1}(X,A) \to H_n(A) \to H_n(X) \to H_n(X,A) \to H_{n-1}(A) \to \cdots.
+\end{align*}
+\end{thm}
+
+\begin{proof}
+First, we clearly have
+\begin{align*}
+0 \to C_n(A) \to C_n(X) \to C_n(X,A) \to 0.
+\end{align*}
+Moreover, for $A \subset B \subset X$ we have
+\begin{align*}
+0 \to C_n(B,A) \to C_n(X,A) \to C_n(X,B) \to 0.
+\end{align*}
+\begin{thm}
+Suppose $A \subset X$ is closed and is a deformation retract of an open set $A \subset U \subset X$. Then
+\begin{align*}
+H_n(X,A) \arr[q_*] H_n(X/A, A/A)\simeq \tilde H_n(X/A)
+\end{align*}
+is an isomorphism.
+\end{thm}
+\end{proof}
+
+
+
+
 
 
 \end{document}
