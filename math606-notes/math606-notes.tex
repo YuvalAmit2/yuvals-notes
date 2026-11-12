@@ -1535,7 +1535,7 @@ H^1(X,\mc F) \simeq H^1(\mc U,\mc F).
 \end{thm}
 
 \begin{proof}
-    It suffices to show that for any refinement $\mc V:= \{V_\alpha\}_{\alpha \in A}$ of $\mc U$, the induced map $\tau^*: H^1(\mc U,\mc F)\to H^1(\mc V,\mc F)$ is surjective. Here, $\tau:A \to I$ is a refinement map such that $V_\alpha \subset U_{\tau(\alpha)}$ for all $\alpha \in A$.
+    It suffices to show that for any refinement $\mc V:= \{V_\alpha\}_{\alpha \in A}$ of $\mc U$, the induced map $$\tau^*: H^1(\mc U,\mc F)\to H^1(\mc V,\mc F)$$ is surjective. Here, $\tau:A \to I$ is a refinement map such that $V_\alpha \subset U_{\tau(\alpha)}$ for all $\alpha \in A$.
 
     Let $\{c_{\alpha \beta}\}_{\alpha,\beta \in A} \in Z^1(\mc V, \mc F)$. Then, 
     \[
@@ -3511,5 +3511,206 @@ There are only finitely many Weierstrass points on a compact Riemann surface $X$
 \begin{proof}
 The Weierstrass points are isolated by the discussion above, and finiteness follows from compactness.
 \end{proof}
+
+Let $z$ and $w(z)$ be two coordinates on $U$. Then
+\begin{align*}
+w_k=f_kdz = g_k(w)\d w\qquad f_k = g_k(w(z))\frac{dw}{dz}.
+\end{align*}
+It follows that
+\begin{align*}
+f_k^{(\nu)} = \paren{\frac{dw}{dz}}^{\nu+1}g_k^{(\nu)}(w(z))+ \sum_{\mu < \nu} \lambda_\mu^\nu g_k^{(\mu)}(w(z)),
+\end{align*}
+where the $\lambda_\mu^k$ are independent of $k$. Hence
+\begin{align*}
+W(f_1,\dots,f_n)=\paren{\frac{dw}{dz}}^{1+2+\cdots + n}W(g_1,\dots,g_n)
+\end{align*}
+for all $n \leq g(z)$.
+
+Now let $\brax{(U_i,z_i)}_{i \in I}$ be a covering of $X$ by charts. The transition functions $g_{ij}:= \frac{dz_j}{dz_i}$ define the canonical bundle $K_X$. If $w_k = f_{k,i}\d z_i$ on $U_i$, then the assignment
+\begin{align*}
+i \maps W_i := W(f_{1,i},\dots,f_{g,i})
+\end{align*}
+shows
+\begin{align*}
+W_i = g_{ij}^NW_j \quad \text{on } U_i \cap U_j,
+\end{align*}
+where $N:=1+2+\cdots + g = \binom{g+1}{2}$. Hence the $W_i$ define a holomorphic section of $K_X^{\otimes N}$, such that the zeros of $W$ are exactly the Weierstrass points of $X$.
+
+\begin{thm}
+There is a Wronskian $W$ whose zeros are exactly the Weierstrass points of $X$. The construction of this $W$ is detailed above.
+\end{thm}
+
+\begin{rmk} \label{rmk:g-more-1-implies-wp}
+We have
+\begin{align*}
+\deg (\div W)=N\deg K_X = N(2g-2) = (g-1)g(g+1).
+\end{align*}
+Hence there are at most $(g-1)g(g+1)$ Weierstrass points. If $g>1$, then $W$ must have some zeros, so there exist Weierstrass points on $X$.
+\end{rmk}
+
+\section{Hyperelliptic Riemann Surfaces}
+
+\begin{defn}
+A Riemann surface $X$ is \term[]{hyperelliptic} if it can be realized as a 2-sheeted (ramified) covering of $\P^1$. Equivalently, if there exists $f \in \cM(X)$ with either 2 simple poles, or a single pole of order 2.
+\end{defn}
+
+\begin{prop} \label{prop:pos-genus-hyperelliptic-condition}
+Let $X$ be a compact Riemann surface. If $\w{genus}(X)>0$, then $X$ is hyperelliptic if and only if there exists an effective divisor $D$ on $X$ with $\deg D=2$ and $h^0(D)\geq 2$.
+\end{prop}
+
+\begin{proof}
+($\implies$) If $X$ is hyperelliptic, and $f \in \cM(X)$ with $\deg f =2$, let $D$ be the divisor of poles of $f$. Then $\deg D= 2$, and $h^0(D)\ge 2$ since $\div(1)\ge -D$ and $\div (f) \geq -D$, so we have at least two independent elements in $H^0(X,\cO_D)$.
+
+($\impliedby$) Suppose $\deg D = 2$ and $h^0(D) \ge 2$ for $D$ an effective divisor. Then there exists a non-constant $f \in \cM(X)$ with $\div f \geq -D$.
+\end{proof}
+
+\begin{cor}
+If $\genus(X)=1$, then $X$ is hyperelliptic.
+\end{cor}
+
+\begin{proof}
+If $D$ is any divisor of degree $2$, then $\deg D > 2g-2 =0$, so by the vanishing theorem (\Cref{thm:vanishing-thm}) $h^0(D)=1-g+\deg D=2$. Now use \Cref{prop:pos-genus-hyperelliptic-condition}.
+\end{proof}
+
+\begin{cor}
+If $\genus(X)=2$, then $X$ is hyperelliptic.
+\end{cor}
+
+\begin{proof}
+By \Cref{rmk:g-more-1-implies-wp}, $X$ has a Weierstrass point $P$. Then there exists $f \in \cM(X)$ such that $f \in \cO(X \sm P)$, hence $f$ has a pole of order 2 at $P$.
+\end{proof}
+
+We aim to understand what hyperelliptic surfaces look like. Let $X$ be hyperelliptic of genus $g$, and $f:X \to \P^1$ a holomorphic map of degree $2$. By composing $f$ with an automorphism of $\P^1$, we may assume that $f^{-1}(\infty)$ consists of 2 distinct points. Let $A$ be the set of critic points of $f$, and $B:=f(A)$, so by our assumption $B \subset \P^1 \sm \{\infty\} =\C$. Note that if $a \in A$, then $\ord_af = 2$, so $\#f^{-1}(b)=1$ for all $b \in B$.
+
+\begin{figure}[H]
+	\centering
+	\incfig{hyperelliptic-figure}
+	\label{fig:hyperelliptic-figure}
+\end{figure}
+
+\begin{defn}
+Let $X$ be hyperelliptic and $A$ the set of critical points of $f$, as above. We can define a map $\tau :X \sm A \to X \sm A$ called the \term[]{hyperelliptic involution}, taking $x_1\in X \sm A$ to the opposing $x_2 \in X \sm A$, with $f(x_1)=f(x_2)$. This extends to a holomorphic map $\tau :X \to X$ by setting $\tau(a)=a$ for $a \in A$. Note that $\tau^2 = \id _X$.
+\end{defn}
+
+Let $g = \genus(X)$, and note that $\genus(\P^1)=0$ and $d=2$. Thus the Riemann-Hurwitz formula (\Cref{thm:riemann-hurwitz}) gives
+\begin{align*}
+2g-2 = -4 + \sum_{a \in A}(\ord_af - 1)=-4 + |A|.
+\end{align*}
+Hence number of branch points $|A|$ of $f$ equals $2g+2$, and each of these is a Weierstrass point of $f$.
+\begin{prop}
+The number of branch points $|A|$ of $f$ is $2g+2$, and each of these is a Weierstrass point of $f$.
+\end{prop}
+\begin{proof}
+Above.
+\end{proof}
+
+Now consider $u \in \cM(X)$ such that $u(x) \neq u(\tau (x))$ for some $x \in X \sm A$.
+
+\begin{exercise}[Homework]
+Prove the $u$ described above exists.
+\end{exercise}
+
+For all $z$ near $f(x)$, $u(x_1) \neq u(x_2)$ if $f^{-1}(z)=\{x_1,x_2\}$. Write $z$ for $f(x)$. Then size $\deg f =2$, we have an equation
+\begin{align*}
+u^2(x)=2a_1(z)u(x)+ a_2(z)=0
+\end{align*}
+for some $a_i \in \C(z)$. Completing the square gives
+\begin{align*}
+(u(x)+a_1(z))^2 = a_1^2(z)-a_2(z)=:\frac{p(z)}{q(z)}
+\end{align*}
+for $p,q \in \C[z]$. Now write $p/q =pq/q^2$, and $pq = PQ^2$, where $P,Q \in \C[z]$, with $P$ have no multiple roots. Then
+\begin{align*}
+(u+a_1)^2 =\frac{PQ^2}{q^2}\implies w^2=P(z)
+\end{align*}
+where $w:=(u_1+a_1)q/Q$. Also, there exists an open set of values of $z$ such that if $f^{-1}(z)=\{x_1,x_2\}$, then $w(x_1)\neq w(x_2)$. Let $Y$ be the compact Riemann surfaces of the algebraic function $w^2 = P(z)$. It looks like:
+\textbf{TODO: FIGURE}
+
+The branch points of $Y$ over $\P^1$ are the zeros of $w$. We get a map $\pi :X \to Y$ sending $x \mapsto (f(x),w(x))$, initially defined outside a finite set in $X$ (corresponding to the poles of $f,w$ and the branch points of $Y$ over $\P^1$), but $\pi$ extends to a holomorphic map $X \to Y$, giving a commutative diagram:
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJYIl0sWzIsMCwiWSJdLFsxLDIsIlxcUF4xIl0sWzAsMSwiXFxwaSJdLFsxLDIsIih6LHcpIFxcbWFwc3RvIHoiXSxbMCwyLCJmIiwyXV0=
+\begin{figure}[h]
+    \centering
+\[\begin{tikzcd}[ampersand replacement=\&]
+	X \&\& Y \\
+	\\
+	\& {\P^1}
+	\arrow["\pi", from=1-1, to=1-3]
+	\arrow["f"', from=1-1, to=3-2]
+	\arrow["{(z,w) \mapsto z}", from=1-3, to=3-2]
+\end{tikzcd}\]
+\caption{Diagram given by $\pi$}
+\label{fig:pi-diagram}
+\end{figure}
+
+\begin{rmk}
+For an open set of $x \in X$, we have $w(x)\neq w(\tau (x))$. In particular, since $w(x)^2 = w(\tau(x))^2$, we have $w(x)=-w(\tau(x))$. By analytic continuation, we have $w(x)=-w(\tau(x))$ for all $x \in X$.
+\end{rmk}
+
+\begin{exercise}[]
+Show that if follows that $\pi$ is a biholomorphism, making the diagram \Cref{fig:pi-diagram} commute.
+\end{exercise}
+
+\begin{rmk}
+Since $f:X \to \P^1$ is unbranched over $\infty$, and the number of branch points is $2g+2$, we have
+\begin{align*}
+P(z)=c(z-z_1)\cdots (z-z_{2g+2})
+\end{align*}
+for some $c \in \C^*$ and $z_1,\dots,z_{2g+2}$ distinct points in $\C$. We may assume $c=1$.
+\end{rmk}
+
+Now recall $Y \subset \C^2 \cup \{$extra points$\}$ is the Riemann surface of $w^2=P(z)$. Consider the 1-forms $\omega_j :=\frac{z^j}{w}dz$ on $Y$ for $j = 1,\dots,g$. Now
+\begin{align*}
+w^2 = P(z) &\implies 2w\d w = P'(z) \d z \\ &\implies \omega_j = \frac{2z^{j-1}}{P'(z)}dw. \label{eq:wj-formula}
+\end{align*}
+As $P'(z)\neq 0$ at the branch points $z_1,\dots,z_{2g+2}$, we see \eqref{eq:wj-formula} is holomorphic at the points of $Y$ near $\P^1 \sm \{\infty\} = \C$. Near $z=\infty$, we have
+\begin{align*}
+w = \pm z^{g+1} \paren{1 + O(1/z)} \implies \omega_j = \pm z^{j-g-2}\paren{1+O(1/z)},
+\end{align*}
+which is holomorphic at $\infty$. Hence $\omega_1,\dots,\omega_g$ form a basis of $\Omega(Y)$. 
+
+Now we've therefore shown that each branch point of $f$ is a Weierstrass point of $Y$.
+
+\begin{claim}
+Conversely, any Weierstrass point on the hyperelliptic Riemann surface $X$ is a branch point of the (essentially unique) map $f:X \to \P^1$ of degree 2.
+\end{claim}
+
+\begin{proof}
+Identify $X$ with the Riemann surface $Y$ of the algebraic function $w^2=P(z)$ as above. For $w \ne 0$ (thus $P(z) \ne 0$), we compute the Wronskian
+\begin{align*}
+W\paren{\frac{1}{w},\frac{z}{w},\dots,\frac{z^{g-1}}{w}}=\frac{1}{w^g}\det \matr{ 1 & z & z^2 & \cdots & z^{g-1} \\ 0 & 1 & 2z & \cdots & (g-1)z^{g-1} \\ 0 & 0 & 2! \\ \vdots & 0 & \ddots & \ddots \\ 0 & \cdots & &0 & (g-1)! }=\frac{c_g}{w^g}
+\end{align*}
+where $c_g = 1!\cdot 2! \cdots (g-1)!$. For $z = \infty$, we have
+\begin{align*}
+\omega_j
+ = \pm z ^{j - g-2}\paren{1+O\paren{\frac{1}{z}}}dz = \mp \paren{\frac{1}{z}}^{g-j}\paren{1+O\paren{\frac{1}{z}}}d \paren{\frac{1}{z}},
+\end{align*}
+and the Wronskian at $\infty$ is again a determinant of a triangular matrix with non-zero diagonal elements. Hence the points with $P(z)\ne 0$ and the points over $z=\infty$ are not Weierstrass points. This proves the claim.
+\end{proof}
+
+\section{Complex Manifolds}
+
+\begin{defn}
+A \term[]{holomorphic atlas} on a smooth manifold $X$ is an atlas of holomorphic charts $\brax{(U_i,\vphi_i)}$, with $\vphi:U_i \to \C^n$ a homeomorphism onto its image, and the transition functions $\vphi_i \circ \vphi_j^{-1}:\vphi_j(U_i \cap U_j)\to \vphi_i(U_i \cap U_j)$ are holomorphic for all $i,j$ (a map $f:\C^n \to \C^m$ is holomorphic if each component $f_i :\C^n \to \C$ is holomorphic).
+
+Two holomorphic atlases $\brax{(U_i,\vphi_i)}$ and $\brax{(V_j,\psi_j)}$ are \term[]{equivalent atlases} if all maps $\vphi_i\circ \psi_j^{-1}:\psi_j(U_i \cap V_j) \to \vphi_i(U_i \cap V_j)$ are biholomorphic. A \term[]{complex manifold} $X$ of dimension $n$ is a $C^\infty$-manifold of dimension $2n$ over $\R$, together with an equivalence class of atlases called a \term[]{complex structure} on $X$.
+\end{defn}
+
+As usual, these can be specified by a single open cover of $X$.
+
+\begin{defn}
+We define holomorphic functions $f:X \to \C$ and holomorphic maps $F : X \to Y$ over complex manifolds as usual. The \term[]{structure sheaf} $\cO_X$ of $X$ is the sheaf of holomorphic functions on $X$. Namely, for $U \subset X$ open, we have
+\begin{align*}
+\cO_X(U):=\Gamma(U,\cO_X):= \brax{f:U \to C \text{ holomorphic}}.
+\end{align*}
+For each point $x \in X$, the stalk $\cO_{X,x}$ is a local ring isomorphic to $\cO_{\C^n,0}$.
+\end{defn}
+
+\begin{prop}
+Let $X$ be a compact (connected)\footnote{We usually just assume connectedness} complex manifold. Then $\Gamma(X,\cO_X)=\C$.
+\end{prop}
+
+\begin{proof}
+If $x_0 \in X$ is the part where $f \in \Gamma(X,\cO_X)$ attains its maximum absolutely value, then for any holomorphic chart $(U,\vphi)$ with $x_0 \in U$, we know $f \circ \vphi^{-1}$ is locally constant buy the maximum principle on $\vphi(U_i)\subset \C$. Since $X$ is connected, $f$ must be constant.
+\end{proof}
+
 
 \end{document}
