@@ -552,7 +552,7 @@ To compute this sum, use the derivative trick. Remember the sums and derivatives
 
 We repeat a Bernoulli trial, with success chance $p$, $n$ times, where $n$ is fixed. Let $X$ be the random variable counting the number of successes.
 
-Let's compute $P(X=k)$. This involves $k$ successes, which has probability $p^k$, and $n-k$ failures, with probability $(1-p)^k$. Now, we must count the number of ways in which we can achieve $k$ successes. This is $\binom{n}{k}$, and so 
+Let's compute $P(X=k)$. This involves $k$ successes, which has probability $p^k$, and $n-k$ failures, with probability $(1-p)^{n-k}$. Now, we must count the number of ways in which we can achieve $k$ successes. This is $\binom{n}{k}$, and so 
 \[
 P(X=k)=\binom{n}{k}p^k(1-p)^{n-k}
 \]
@@ -702,7 +702,7 @@ For large samples, the sample average follows a normal distribution.
 \end{thm}
 
 \begin{ex}
-The height of males in a particular island can be modeled by a normal distribution with mean $170$ and standard deviation $5$. What is the probability that a randomly picked male has a height that balls between 160 and 180?
+The height of males in a particular island can be modeled by a normal distribution with mean $170$ and standard deviation $5$. What is the probability that a randomly picked male has a height that falls between 160 and 180?
 \end{ex}
 
 \begin{solution}
