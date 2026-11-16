@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{364.01411883bp}%
+    \setlength{\unitlength}{256.51776411bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,9 +50,23 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.23944854)%
+  \begin{picture}(1,0.28118601)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{hyperelliptic-figure.pdf}}%
+    \put(0.03946767,0.17321225){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\large $a_1$\end{tabular}}}}%
+    \put(0.28233149,0.12550814){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\large $a_2$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{hyperelliptic-figure.pdf}}%
+    \put(0.17415182,0.2716969){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\large $x_1$\end{tabular}}}}%
+    \put(0.17415182,0.0465662){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\large $x_2$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{hyperelliptic-figure.pdf}}%
+    \put(0.05720087,0.00563341){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\large $b_1$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{hyperelliptic-figure.pdf}}%
+    \put(0.28233148,0.00254687){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\large $b_2$\end{tabular}}}}%
+    \put(0.9606471,0.17521239){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\large $a_p$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{hyperelliptic-figure.pdf}}%
+    \put(0.94602817,0.0045487){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\large $b_p$\end{tabular}}}}%
+    \put(0.86029966,0.25637349){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\Large $X$\end{tabular}}}}%
+    \put(0.0338107,0.07872787){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\large $f$\end{tabular}}}}%
   \end{picture}%
 \endgroup%

@@ -1190,36 +1190,13 @@ Now, we want to show that $\partder{u}{\bar z}=f$ has a solution for any $f\in C
 \end{defn}
 
 \begin{ex}
-We have the following example:
+The following is an example of a topological hull:
 
-
-\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
-
-\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
-%uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
-
-%Rounded Rect [id:dp08608192025104822] 
-\draw   (146,90.45) .. controls (146,77.36) and (156.61,66.75) .. (169.7,66.75) -- (335.8,66.75) .. controls (348.89,66.75) and (359.5,77.36) .. (359.5,90.45) -- (359.5,161.55) .. controls (359.5,174.64) and (348.89,185.25) .. (335.8,185.25) -- (169.7,185.25) .. controls (156.61,185.25) and (146,174.64) .. (146,161.55) -- cycle ;
-%Shape: Rectangle [id:dp2222508720890346] 
-\draw  [fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.45 ] (184,96.5) -- (327,96.5) -- (327,153) -- (184,153) -- cycle ;
-%Shape: Circle [id:dp29213986219014754] 
-\draw  [fill={rgb, 255:red, 255; green, 255; blue, 255 }  ,fill opacity=1 ] (210.5,124.5) .. controls (210.5,114.56) and (218.56,106.5) .. (228.5,106.5) .. controls (238.44,106.5) and (246.5,114.56) .. (246.5,124.5) .. controls (246.5,134.44) and (238.44,142.5) .. (228.5,142.5) .. controls (218.56,142.5) and (210.5,134.44) .. (210.5,124.5) -- cycle ;
-%Shape: Circle [id:dp02286357511317405] 
-\draw  [fill={rgb, 255:red, 255; green, 255; blue, 255 }  ,fill opacity=1 ] (266.5,124.5) .. controls (266.5,114.56) and (274.56,106.5) .. (284.5,106.5) .. controls (294.44,106.5) and (302.5,114.56) .. (302.5,124.5) .. controls (302.5,134.44) and (294.44,142.5) .. (284.5,142.5) .. controls (274.56,142.5) and (266.5,134.44) .. (266.5,124.5) -- cycle ;
-%Shape: Rectangle [id:dp7950584391965025] 
-\draw  [fill={rgb, 255:red, 155; green, 155; blue, 155 }  ,fill opacity=0.45 ] (424.2,95.6) -- (567.2,95.6) -- (567.2,152.1) -- (424.2,152.1) -- cycle ;
-
-% Text Node
-\draw (138.5,52.9) node [anchor=north west][inner sep=0.75pt]    {$\Omega $};
-% Text Node
-\draw (166,87.4) node [anchor=north west][inner sep=0.75pt]    {$A$};
-% Text Node
-\draw (390.6,86.6) node [anchor=north west][inner sep=0.75pt]    {$\hat{A}_{\Omega }$};
-\end{tikzpicture}
+\tikzfig{topological-hull}
 \end{ex}
 
 \begin{exercise}
-    If $A \subset \Omega$, then $\hat{\paren{\hat{A}}}_\Omega=\hat A_\Omega \supset A$. (Don't know what's going on with the TeX here, I'll fix it) 
+    If $A \subset \Omega$, then $\hat{\paren{\hat{A}}}_\Omega=\hat A_\Omega \supset A$.
 \end{exercise}
 
 \begin{exercise}
@@ -3582,11 +3559,15 @@ By \Cref{rmk:g-more-1-implies-wp}, $X$ has a Weierstrass point $P$. Then there e
 
 We aim to understand what hyperelliptic surfaces look like. Let $X$ be hyperelliptic of genus $g$, and $f:X \to \P^1$ a holomorphic map of degree $2$. By composing $f$ with an automorphism of $\P^1$, we may assume that $f^{-1}(\infty)$ consists of 2 distinct points. Let $A$ be the set of critic points of $f$, and $B:=f(A)$, so by our assumption $B \subset \P^1 \sm \{\infty\} =\C$. Note that if $a \in A$, then $\ord_af = 2$, so $\#f^{-1}(b)=1$ for all $b \in B$.
 
-\begin{figure}[H]
-	\centering
-	\incfig{hyperelliptic-figure}
-	\label{fig:hyperelliptic-figure}
-\end{figure}
+\tikzfig[0.6]{hyperelliptic-dance}
+
+
+% \begin{figure}[H]
+% 	\centering
+% 	\incfig{hyperelliptic-figure}
+% 	\label{fig:hyperelliptic-figure}
+% \end{figure}
+
 
 \begin{defn}
 Let $X$ be hyperelliptic and $A$ the set of critical points of $f$, as above. We can define a map $\tau :X \sm A \to X \sm A$ called the \term[]{hyperelliptic involution}, taking $x_1\in X \sm A$ to the opposing $x_2 \in X \sm A$, with $f(x_1)=f(x_2)$. This extends to a holomorphic map $\tau :X \to X$ by setting $\tau(a)=a$ for $a \in A$. Note that $\tau^2 = \id _X$.
@@ -3623,7 +3604,8 @@ for $p,q \in \C[z]$. Now write $p/q =pq/q^2$, and $pq = PQ^2$, where $P,Q \in \C
 (u+a_1)^2 =\frac{PQ^2}{q^2}\implies w^2=P(z)
 \end{align*}
 where $w:=(u_1+a_1)q/Q$. Also, there exists an open set of values of $z$ such that if $f^{-1}(z)=\{x_1,x_2\}$, then $w(x_1)\neq w(x_2)$. Let $Y$ be the compact Riemann surfaces of the algebraic function $w^2 = P(z)$. It looks like:
-\textbf{TODO: FIGURE}
+
+\tikzfig{hyperelliptic-surface}
 
 The branch points of $Y$ over $\P^1$ are the zeros of $w$. We get a map $\pi :X \to Y$ sending $x \mapsto (f(x),w(x))$, initially defined outside a finite set in $X$ (corresponding to the poles of $f,w$ and the branch points of $Y$ over $\P^1$), but $\pi$ extends to a holomorphic map $X \to Y$, giving a commutative diagram:
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJYIl0sWzIsMCwiWSJdLFsxLDIsIlxcUF4xIl0sWzAsMSwiXFxwaSJdLFsxLDIsIih6LHcpIFxcbWFwc3RvIHoiXSxbMCwyLCJmIiwyXV0=
@@ -3711,5 +3693,7 @@ Let $X$ be a compact (connected)\footnote{We usually just assume connectedness} 
 \begin{proof}
 If $x_0 \in X$ is the part where $f \in \Gamma(X,\cO_X)$ attains its maximum absolutely value, then for any holomorphic chart $(U,\vphi)$ with $x_0 \in U$, we know $f \circ \vphi^{-1}$ is locally constant buy the maximum principle on $\vphi(U_i)\subset \C$. Since $X$ is connected, $f$ must be constant.
 \end{proof}
+
+
 
 \end{document}
