@@ -1890,7 +1890,7 @@ H_n(B, A \cap B)\arr[i_*] H_n(X,A)
 is an isomorphism.
 \end{thm}
 
-\begin{thm}[V2 Excision Theorem]
+\begin{thm}[V2 Excision Theorem] \label{thm:excision}
 Suppose $A \subset X$ and $Z \subset A$ is such that $\bar Z \subset \Int(A)$. Then
 \begin{align*}
 H_n(X\sm Z,A \sm Z)\arr[i_*] H_n(X,A)
@@ -1921,7 +1921,9 @@ H_n(U,U\sm p) = \Z.
 \end{align*}
 \end{proof}
 
-\begin{thm}
+\subsection{Homology of quotients}
+
+\begin{thm} \label{thm:quotient-homology-isom}
 Suppose $A \subset X$ is closed and $A$ is a deformation retract of $A \subset U \subset X$, with $U$ open. Then the quotient map
 \begin{align*}
 q_{n_*}: H_n(X,A) \to H_n(X/A, A/A) \simeq \tilde H_n (X/A)
@@ -1929,12 +1931,95 @@ q_{n_*}: H_n(X,A) \to H_n(X/A, A/A) \simeq \tilde H_n (X/A)
 is an isomorphism.
 \end{thm}
 
+To prove this, we need a few lemmas.
+
+\begin{lem} \label{lem:HnUA-zero}
+If $A \subset U$, and $U$ deformation retracts to $A$, then $H_n(U,A)=0$.
+\end{lem}
+
 \begin{proof}
-We know
+Since $U$ deformation retracts to $A$, the embedding $i:A \to U$ induces an isomorphism of homologies $i_{n*}:H_n(A) \to H_n(U)$. Now we have the long exact sequence
 \begin{align*}
-H_n(X,A)\arr[i_*]H_n(X,U)
+H_n(A) \arr[\sim] H_n(U) \to H_n(U,A) \to H_{n-1}(A) \arr[\sim] H_{n-1}(U),
 \end{align*}
-is an isomorphism, since $U$ deformation retracts to $A$. Continued next time.
+but isomorphisms are bijective so the middle section becomes
+\begin{align*}
+H_n(U)\arr[0]H_n(U,A)\arr[0]H_{n-1}(A).
+\end{align*}
+Now the image of the first zero map (which is just $\{0\}$) is the kernel of the second (which is everything), so it must follow that $H_n(U,A)=0$.
+\end{proof}
+
+\begin{cor} \label{cor:XA-XU-homology-isom}
+Let $A \subset U \subset X$ be such that $U$ deformation retracts to $A$. Then
+\begin{align*}
+H_n(X,A) \to H_n(X,U)
+\end{align*}
+is an isomorphism.
+\end{cor}
+
+\begin{proof}
+We have the short exact sequence of complexes
+\begin{align*}
+0 \to C_n(U,A) \to C_n(X,A)\to C_n(X,U)\to 0,
+\end{align*}
+which induces the long exact sequence
+\begin{align*}
+H_n(U,A) \to H_n(X,A) \to H_n(X,U)\to H_{n-1}(U,A),
+\end{align*}
+but \Cref{lem:HnUA-zero} says that this is
+\begin{align*}
+0 \to H_n(X,A) \to H_n(X,U) \to 0,
+\end{align*}
+hence $H_n(X,A)\arr[\sim] H_n(X,U)$.
+\end{proof}
+
+We're now prepared to prove \Cref{thm:quotient-homology-isom}.
+
+\begin{proof}[Proof that $H_n(X,A)\simeq \tilde H_n(X/A)$]
+By \Cref{cor:XA-XU-homology-isom} and \Cref{thm:excision}, we have isomorphisms
+\begin{align*}
+H_n(X,A)\underset{\ref{cor:XA-XU-homology-isom}}{\arr[\sim]}
+H_n(X,U)\underset{\ref{thm:excision}}{\arr[\sim]} H_n(X \sm A, U \sm A).
+\end{align*}
+Next one sees
+\begin{align*}
+H_n(X \sm A, U \sm A) \underset{p_*}{\arr[\sim]} H_n \paren{\frac{X}{A}\sm \frac{A}{A},\frac{U}{A}\sm \frac{A}{A}} \underset{\ref{thm:excision}}{\arr[\sim]} H_n\paren{\frac{X}{A},\frac{U}{A}},
+\end{align*}
+and finally
+\begin{align*}
+H_n\paren{\frac{X}{A},\frac{U}{A}} \underset{\ref{cor:XA-XU-homology-isom}}{\arr[\sim]} H_n \paren{\frac{X}{A}, \frac{A}{A}}.
+\end{align*}
+\end{proof}
+
+\begin{que}
+What is a generator of $H_n(S^n)$? What is a generator of $H_n(\Delta^n,\partial \Delta^n)$?
+\end{que}
+
+\begin{rmk}
+Observe that there exists $U \subset \Delta^n$ which deformation retracts to $\partial \Delta^n$, hence
+\begin{align*}
+H_n(\Delta^n,\partial \Delta^n)\underset{\ref{thm:quotient-homology-isom}}{\arr[\sim]} \tilde H_n(\Delta^n/\partial \Delta^n) \simeq \tilde H_n(S^n).
+\end{align*}
+\end{rmk}
+
+\begin{prop}
+The identity simplex $\id :\Delta^n \to \Delta ^n$ is a generator of $H_n(\Delta^n, \partial \Delta^n)$.
+\end{prop}
+
+\begin{proof}
+We induct on $n$. Let $\Lambda^{n-1}\subset \partial \Delta^n$ be the union of all faces but one, and observe that $\Delta^n$ deformation retracts to $\Lambda^{n-1}$. For example in a 2-simplex, this deformation looks like:
+
+\tikzfig{boundary-def-retract}
+
+Now we have the long exact sequence
+\begin{align*}
+H_k(\partial \Delta^n, \Lambda^{n-1}) \arr H_k(\Delta^n,\Lambda^{n-1}) \to H_k(\Delta^n,\partial \Delta^n) \to H_{k-1}(\partial \Delta^n,\Lambda^{n-1}) \to H_{k-1}(\Delta^n,\Lambda^{n-1}).
+\end{align*}
+Now by \Cref{lem:HnUA-zero}, $H_j(\Delta^n,\Lambda^{n-1}) \simeq 0$ for all $j$, hence $d:H_n(\Delta^n,\partial \Delta^n) \to H_{n-1}(\partial \Delta^n,\Lambda^{n-1})$ is an isomorphism. Now one sees that
+\begin{align*}
+d(\sigma) = \pm \braks{\hat{e_0},e_1,\dots,e_n},
+\end{align*}
+which we recall by the construction of the map $d$. So when $n=1$, $d(\sigma)= \pm e_1$ which is a generator of $H_0(\partial  \Delta^1,\Lambda^0)=$ ``$H_0(\cdot \: \cdot, \cdot)$''. Finished next time (I think?).
 \end{proof}
 
 \end{document}
