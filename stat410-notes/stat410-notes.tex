@@ -4,22 +4,43 @@
 
 \title{STAT410: Intro to Probability Theory}
 \author{Yuval Amit}
-\date{}
+\date{Instructor: Mestiyage D. Gunatilleka \\ Fall 2026}
 
 \begin{document}
 \maketitle
 
+\section*{Preface}
+
+\vspace{-0.5em}
+
+These notes were taken during lectures of \textit{STAT410: Intro to Probability Theory} in the fall 2026 semester at the University of Maryland. The primary purpose of these notes is to act as a reference for material covered in lecture for me and my fellow students. 
+
+I cannot promise that these notes do not contain errors, and on the contrary there may be various problems ranging from small typos to (rarely) real mathematical flaws. Obviously, I am responsible for all such errors, and not the lecturer. Using these notes as a reference outside of the context of this course should be done cautiously. 
+
+Some links:
+\begin{itemize}
+    \item \href{https://docs.google.com/forms/d/e/1FAIpQLSdhZbMDXPyvQ3KKiL1MLr5d0WGBrnASU8-LFDA73ICSnwH_Og/viewform?usp=publish-editor}{Error report form}
+    \item \href{https://github.com/YuvalAmit2/yuvals-notes/tree/main/stat410-notes}{Source code for these notes}
+    \item \href{https://github.com/YuvalAmit2/yalatex}{LaTeX template}
+\end{itemize}
+
+
+
+\vspace{1em}
+
 \tableofcontents
+
+
 \newpage
 
 \section{Probability: The Mathematical Study of Uncertainty}
 
 \begin{defn}
-    A \textbf{probability space} $(\Omega,\mc F,P)$ is composed of
+    A \term{probability space} $(\Omega,\mc F,P)$ is composed of
     \begin{enumerate}[(i)]
-        \item The \textbf{sample space} $\Omega$. It contains all possible outcomes of the ``experiment''.
-        \item The \textbf{event space} $\mc F$ consisting of \textbf{events}. An event is a collection of outcomes.
-        \item The \textbf{probability measure} $P:\mc F \to \R$.
+        \item The \term{sample space} $\Omega$. It contains all possible outcomes of the ``experiment''.
+        \item The \term{event space} $\mc F$ consisting of \term{events}. An event is a collection of outcomes.
+        \item The \term{probability measure} $P:\mc F \to \R$.
     \end{enumerate}
 \end{defn}
 
@@ -45,7 +66,7 @@
         \item If $A \in \mc F$, then $A^c \in \mc F$.
         \item If $\{A_i\}$ is a sequence of events in $\mc F$, then $\bigcup A_i \in \mc F$.
     \end{enumerate}
-    This is the definition of a $\bm \sigma$\textbf{-algebra}.
+    This is the definition of a term{$\sigma$-algebra}.
 \end{defn}
 
 \begin{rmk}
@@ -153,25 +174,25 @@ $$P(A\cup B) = P(A) + P(B) - P(A \cap B)$$
 \section{Intro to Random Variables}
 
 \begin{defn}
-    A \textbf{random variable} is a (measurable) function $X : \Omega \to \R$.
+    A \term{random variable} is a (measurable) function $X : \Omega \to \R$.
 \end{defn}
 
 \begin{defn}
-    The \textbf{cumulative distribution function}, abbreviated \textbf{cdf}, is
+    The \term{cumulative distribution function}, abbreviated \term{cdf}, is
     $$F_X(a) := P(X \leq a)=P(X \in [-\infty, a]).$$
 
-Now, suppose $X$ takes countably many values, i.e. $\{ X(\omega) \mid \omega \in \Omega\}$ is countable. A \textbf{probability mass function}, abbreviated \textbf{pmt}, is a function $p_X$ such that there's sequence of real numbers $\{x_n\}$ with $p_X(x_n)=P(X = x_n)>0$ for all $n$, and $p_X(x)=P(X=x)=0$ for all other $x$.
+Now, suppose $X$ takes countably many values, i.e. $\{ X(\omega) \mid \omega \in \Omega\}$ is countable. A \term{probability mass function}, abbreviated \term{pmt}, is a function $p_X$ such that there's sequence of real numbers $\{x_n\}$ with $p_X(x_n)=P(X = x_n)>0$ for all $n$, and $p_X(x)=P(X=x)=0$ for all other $x$.
 \end{defn}
 
 \begin{ex}
-    Any experiment with finitely many outcomes $X$ is called a discrete random variable. Then, $P_X(x)$ is the probability mass function of $X$. The set where $P_X(x)>0$ is called the \textbf{support.}
+    Any experiment with finitely many outcomes $X$ is called a discrete random variable. Then, $P_X(x)$ is the probability mass function of $X$. The set where $P_X(x)>0$ is called the \term{support}.
 
     For any set $B$, we have
     $$P(x\in B) = \sum_{x \in \w{supp}(X)\cap B}p_X(x).$$
 \end{ex}
 
 \begin{defn}
-    A random variable $X$ is said to be \textbf{(absolutely) continuous} if there exists a function $f_X(x)$ such that $f_X(x) \geq 0$, and for any interval $I=[a,b]$,
+    A random variable $X$ is said to be \term{(absolutely) continuous} if there exists a function $f_X(x)$ such that $f_X(x) \geq 0$, and for any interval $I=[a,b]$,
     $$P(x \in I) = \int_a^bf_X(x)dx$$
 \end{defn}
 
@@ -242,7 +263,7 @@ $$P(D|T) = \frac{P(T|D)P(D)}{P(T|D)P(D) + P(T|D^c)P(D^c)}=\frac{(1-0.03)\cdot 0.
 \section{Independence}
 
 \begin{defn}
-    Events $A$ and $B$ are said to be \textbf{independent} of $P(A\cap B)=P(A)P(B)$.
+    Events $A$ and $B$ are said to be \term{independent} of $P(A\cap B)=P(A)P(B)$.
 \end{defn}
 
 \begin{thm}
@@ -302,13 +323,13 @@ The function $F_X:\R \to \R$ satisfies the following properties:
 \end{prop}
 
 \begin{defn}[Discrete Random Variables]
-    $X$ is called \textbf{discrete} if there is a countable $A \subset \R$ such that $P(X \in A)=1$.
+    $X$ is called \term{discrete} if there is a countable $A \subset \R$ such that $P(X \in A)=1$.
 
-    Then, the function $a \mapsto P(X=a)$ is called the \textbf{probability mass function} (pmf), and the probabilites of interest are computed by taking a suitable sum of the pmf.
+    Then, the function $a \mapsto P(X=a)$ is called the \term{probability mass function} (pmf), and the probabilites of interest are computed by taking a suitable sum of the pmf.
 \end{defn}
 
 \begin{defn}[Continuous Random Variables]
-    $X$ is called \textbf{(absolutely) continuous} if there is some function $f_X(x)$ such that $f_X(x) \geq 0$, and for any interval $I$ with endpoints $-\infty \leq a \leq b \leq \infty$,
+    $X$ is called \term{(absolutely) continuous} if there is some function $f_X(x)$ such that $f_X(x) \geq 0$, and for any interval $I$ with endpoints $-\infty \leq a \leq b \leq \infty$,
     \[
     P(X \in I) = \int_a^b f_X(x)dx
     \]
@@ -319,7 +340,7 @@ The function $F_X:\R \to \R$ satisfies the following properties:
 \end{defn}
 
 \begin{defn}[Identical Distributions]
-    Random variables $X,Y$ are said to be \textbf{identically distributed} if $D_X = D_Y$, which holds if and only if $F_X = F_Y$.
+    Random variables $X,Y$ are said to be \term{identically distributed} if $D_X = D_Y$, which holds if and only if $F_X = F_Y$.
 \end{defn}
 
 A good way to think about identical distributions is with an example: how do you generate a random integer in $\{0,1\}$?
@@ -385,7 +406,7 @@ f_{X^2}(a) = \case{0 & a<0 \\ \frac{1}{2 \sqrt a} & 0 \leq a <1 \\ 0 & a \geq 1.
 \end{ex}
 
 \begin{defn}
-    We say that a random variable $X$ has a \textbf{uniform distribution} on $[a,b]$, denoted $X \sim u[a,b]$, if \[
+    We say that a random variable $X$ has a \term{uniform distribution} on $[a,b]$, denoted $X \sim u[a,b]$, if \[
     f_X(x)=\frac{1}{b-a}
     \]
     for $x \in a,b$.
@@ -414,7 +435,7 @@ Suppose $X \sim u[0,1]$. Find the pdf of $Y:=e^X$.
 
 
 \begin{defn}[Expected Value (Discrete)]
-    Let $X$ be a discrete random variable with support $A$. Then, the \textbf{expected value} of $X$, denoted $E[X]$, is
+    Let $X$ be a discrete random variable with support $A$. Then, the \term{expected value} of $X$, denoted $E[X]$, is
         \[
     E[X] = \sum_{x \in A} xp_X(x)=\sum_{x \in A} xP(X=x)
     \]
@@ -422,14 +443,14 @@ Suppose $X \sim u[0,1]$. Find the pdf of $Y:=e^X$.
 
 
 \begin{defn}[Expected Value (Continuous)]
-    Let $X$ be a continuous random variable. Then, the \textbf{expected value} of $X$, denoted $E[X]$, is
+    Let $X$ be a continuous random variable. Then, the \term{expected value} of $X$, denoted $E[X]$, is
     \[
     E[X] = \int_{-\infty}^\infty xf_X(x) dx
     \]
 \end{defn}
 
 \begin{defn}
-    We say that the expected value $E[X]$ \textbf{exists} if $E[|X|]< \infty$.
+    We say that the expected value $E[X]$ \term{exists} if $E[|X|]< \infty$.
 \end{defn}
 
 \begin{ex}
@@ -505,7 +526,7 @@ In this section, we study some important distributions to know.
 \subsection{Bernoulli Distribution}
 
 \begin{defn}
-A \textbf{Bernoulli trial} is a random variable which has two outcomes: success $(1)$ and failure $(0)$.
+A \term{Bernoulli trial} is a random variable which has two outcomes: success $(1)$ and failure $(0)$.
 \end{defn}
 
 \begin{prop}
@@ -560,7 +581,7 @@ Moreover,
 \[
 E[X]=\sum_{k=0}^nk\binom{n}{k}p^k(1-p)^{n-k}.
 \]
-This sum can be computed with some neat tricks. However, we will eventually see that $X$ can be written $X = X_1+\cdots + X_n$ as the sum of $n$ Bernoulli random variables, which are independent and identically distributed (\textbf{IID}). Note that $E[X_i]=p$, so $E[X]=np$.
+This sum can be computed with some neat tricks. However, we will eventually see that $X$ can be written $X = X_1+\cdots + X_n$ as the sum of $n$ Bernoulli random variables, which are independent and identically distributed (\term{IID}). Note that $E[X_i]=p$, so $E[X]=np$.
 
 
 \subsection{Hypergeometric Distributions}
@@ -568,7 +589,7 @@ This sum can be computed with some neat tricks. However, we will eventually see 
 Say we want to sample a portion of a population for some property. Do we sample with or without replacement? If we sample with replacement, we get a binomial distribution. However, it can be better to sample without replacement, in which case we get a hypergeometric distribution.
 
 \begin{defn}
-Let $N,N_A,n$ be integers with $0 \leq n\leq N_A\leq N$. A random variable $X$ is said to follow a \textbf{hypergeometric distribution} with respect to the parameters $(N,N_A,n)$ if $X$ takes values in $\{1,\dots,n\}$, and
+Let $N,N_A,n$ be integers with $0 \leq n\leq N_A\leq N$. A random variable $X$ is said to follow a \term{hypergeometric distribution} with respect to the parameters $(N,N_A,n)$ if $X$ takes values in $\{1,\dots,n\}$, and
 \[
 P(X=k)=\frac{\binom{N_A}{k}\binom{N-N_A}{n-k}}{\binom{N}{n}}.
 \]
@@ -594,7 +615,7 @@ We're now left to compute $E[X]$. Note that $X$ is sampling randomly from a popu
 \subsection{Poisson Distribution}
 
 \begin{defn}
-Fix $\lambda >0$. A random variable $X$ is said to have a \textbf{Poisson distribution} with parameter $\lambda$ if $X \geq 0$ is integer valued, and has a probability mass function
+Fix $\lambda >0$. A random variable $X$ is said to have a \term{Poisson distribution} with parameter $\lambda$ if $X \geq 0$ is integer valued, and has a probability mass function
 \[
 p_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}
 \]
@@ -634,7 +655,7 @@ Uniform distributions try to compute the idea that the regions with equal ``leng
 \subsection{Uniform Distribution}
 
 \begin{defn}
-    A random variable $X$ is said to have a \textbf{uniform distribution}, denoted $X \sim \Unif[a,b]$ for $a<b$ if
+    A random variable $X$ is said to have a \term{uniform distribution}, denoted $X \sim \Unif[a,b]$ for $a<b$ if
     \[
     f_X(x)=\frac{1}{b-a},\quad x \in [a,b]
     \]
@@ -643,7 +664,7 @@ Uniform distributions try to compute the idea that the regions with equal ``leng
 \subsection{Exponential Distribution}
 
 \begin{defn}
-Let $0 < \lambda < \infty$. The \textbf{exponential distribution} with rate $\lambda$ is given by $f_X(x)=\lambda e^{-\lambda x}$, $x \geq 0$. If $X$ is a random variable with this distribution, we write $X \sim \exp(\lambda)$.
+Let $0 < \lambda < \infty$. The \term{exponential distribution} with rate $\lambda$ is given by $f_X(x)=\lambda e^{-\lambda x}$, $x \geq 0$. If $X$ is a random variable with this distribution, we write $X \sim \exp(\lambda)$.
 \end{defn}
 
 Note that the exponential distribution is related to the geometric distribution.
@@ -690,7 +711,7 @@ where $T \sim \exp(1/6)$. We computed in \Cref{prop:exponential-cumulative} that
 \subsection{Normal Distributions}
 
 \begin{defn}
-A continuous random variable $X$ is said to have a \textbf{normal distribution} with parameters $\mu,\sigma^2$ (mean and variance) if
+A continuous random variable $X$ is said to have a \term{normal distribution} with parameters $\mu,\sigma^2$ (mean and variance) if
 \[
 f_X(x)= \frac{1}{\sqrt {2 \pi}\sigma}\exp\paren{ \frac{-(x-\mu)^2}{2\sigma^2} }
 \]
@@ -920,5 +941,131 @@ p_{X_{i_1},\dots,X_{i_k}}(x_{i_1},\dots,x_{i_k}) = \prod_{j=1}^k p_{X_{i_j}(x_{i
 \]
 for all $(i_1,\dots,i_k)\subset (1,\dots,n).$
 \end{defn}
+
+\begin{defn}
+A \term[]{simple random sample} of size $n$ is a collection $X_1,\dots,X_n$ of \term[]{iid} (independent identically distributed) random variable. A \term[]{statistic} is a function defined on a random variable.
+\end{defn}
+
+\begin{ex}
+Suppose $X_1,X_2$ are IID random variables with common pmf
+\begin{align*}
+p_X(x) := \case{1/3 & x=1,2,3m \\ 0 & \text{otherwise.}}
+\end{align*}
+Compute
+\begin{enumerate}[(i)]
+    \item $p_{X_1,X_2}(x_1,x_2)$
+    \item $p_{X_1+X_2}(t)$
+    \item $E[X_1+X_2]$
+    \item $E[X_1X_2]-E[X_1]E[X_2]$.
+\end{enumerate}
+\end{ex}
+
+We discuss the solution to this problem, and make note of general lessons along the way.
+
+We can represent out probability distribution as a table:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|ccc}
+        $x_1\backslash x_2$ & 1 & 2 & 3 \\ \hline
+        1 & 1/9 & 1/9 & 1/9 \\
+        2 & 1/9 & 1/9 & 1/9\\
+        3 & 1/9 & 1/9 & 1/9
+    \end{tabular}
+\end{table}
+This is the joint probability distribution $p_{X_1,X_2}(x_1,x_2)$, solving (i).
+
+For (ii), we note that the only non-zero values $X_1+X_2$ can take are $\{2,3,\dots,6\}$. Here's how we compute the pmf of the sum:
+\begin{align*}
+P(X_1+X_2=2) &=P(X_1=1,X_2=1) \\
+&= P(X_1=1)P(X_2=1)=1/9 \\
+P(X_1+X_2=3) &= P(X_1=1,X_2=2 \text{ or } X_1=2,X_2=1) \\
+&= P(X_1=1,X_2=2) + P(X_1=2,X_2=1) \\
+&= 1/9 + 1/9 = 2/9.
+\end{align*}
+Observing a pattern, we compute
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|ccccc}
+        $t$ & 2&3&4&5&6 \\ \hline
+        $p_{X_1+X_2}(t)$ & 1/9 & 2/9 & 3/9 & 2/9 & 1/9
+    \end{tabular}
+\end{table}
+This solves (ii).
+
+For (iii), we note the following.
+\begin{prop}
+For any $g:\R^n \to \R$, we have
+\begin{align*}
+E[g(\vec X)]=\sum p_{\vec X}(x)g(x)
+\end{align*}
+if $\vec X$ is discrete, and
+\begin{align*}
+E[g(\vec X)] = \int_\R \cdots \int_\R g(x_1,\dots,x_n)p_X(x_1,\dots,x_n)\d x_1\cdots dx_n
+\end{align*}
+if $\vec X$ is continuous.
+
+Furthermore, for random variables $X, Y$,
+\begin{align*}
+E[a X + b Y]=aE[X]+bE[Y].
+\end{align*}
+\end{prop}
+Now we see
+\begin{align*}
+E[X_1+X_2]&=E[X_1]+E[X_2]=2E[X_1] \\
+&= 2\paren{\frac{1}{3}+\frac{2}{3}+\frac{3}{3}}=4.
+\end{align*}
+This solves (iii). Finally, for (iv), we note that we should have
+\begin{align*}
+E[X_1X_2]-E[X_1]E[X_2]=0
+\end{align*}
+because of independence. This is indeed the case.
+
+\begin{prop}
+If $X,Y$ are independent, then
+\begin{align*}
+E[XY]=E[X]E[Y].
+\end{align*}
+\end{prop}
+
+\begin{proof}
+\begin{align*}
+E[XY] &=\int_{-\infty}^\infty \int_{-\infty}^\infty  xy f_{X,Y}(x,y) \d y dx \\
+&= \int_{-\infty}^\infty \int_{-\infty}^\infty xy f_X(x)f_Y(y) \d y dx \\ 
+&= \int_{-\infty}^\infty x f_X(x)\d x \int_{-\infty}^\infty yf_Y(y)\d y \\
+&= E[X]E[Y].
+\end{align*}
+\end{proof}
+
+\section{Transformation of a Joint Density Function}
+
+Consider two jointly continuous random variables $X,Y$ with joint density $f_{X,Y}$. Let $U:=g(X,Y)$ and $V:=h(X,Y)$, so $(U,V)$ are themselves jointly continuous random variables. We aim to compute $f_{U,V}$.
+
+Let $K\subset \R^2$ be the support of $f_{X,Y}$. Let $G(x,y)=(g(x,y),h(x,y))$ be an injective function, and let $L:=G(K)$. Hence $G:K\to L$ is bijective. Denote $G^{-1}(u,v):=(q(u,v),r(u,v))$. Then $q,r$ are functions from $L \to K$ such that
+\begin{align*}
+u &= g(q(u,v),r(u,v)) \\ 
+v &= h(q(u,v),r(u,v)).
+\end{align*}
+
+Now, assume that $q$ and $r$ satisfy the following conditions.
+\begin{enumerate}[(i)]
+    \item The partial derivatives $\partder[]{q}{u}, \partder[]{q}{v},\partder[]{r}{u},\partder[]{r}{v}$ exist and are continuous.
+    \item The determinant of the matrix \begin{align*}
+    J(u,v):=\matr{ \partder[]{q}{u} & \partder[]{q}{v} \\ \partder[]{r}{u} & \partder[]{r}{v}},
+    \end{align*}
+    known as the \term[]{Jacobian}, does not vanish anywhere on $L$. The determinant is denoted \term[]{$|J(u,v)|$}.
+\end{enumerate}
+
+\begin{thm}
+Under the conditions discussed above, \begin{align*}
+f_{U,V}(u,v)=f_{X,Y}(q(u,v),r(u,v))\cdot |J(u,v)|
+\end{align*}
+for all $(u,v)\in L$, and $f_{U,V}(u,v)=0$ elsewhere.
+\end{thm}
+
+
+
+
+
+
 
 \end{document}

@@ -3187,7 +3187,7 @@ where $\C_P$ is the skyscraper sheaf, induces the long exact sequence
 \[
 0 \to H^0 (X,L(D_{k-1})) \inj H^0(X,L(D_k)) \to H^0(X,\C_P) \simeq \C.
 \]
-Now we see that there exists $f \in \cM(X)$ with $\div f \geq -D$ and $\div f < -D_{k-1}$ if and only if $h^0(D_k)>h^0(D_{k-1})$, and in this case $h^0(D_k)=h^0(D_{k-1})+1$. But Riemann-Roch gives
+Now we see that there exists $f \in \cM(X)$ with $\div f \geq -D_k$ and $\div f < -D_{k-1}$ if and only if $h^0(D_k)>h^0(D_{k-1})$, and in this case $h^0(D_k)=h^0(D_{k-1})+1$. But Riemann-Roch gives
 \begin{align} \label{eq:hDk-sum}
     h^0(D_k)-h^0(D_{k-1})=1-h^1(D_{k-1})+h^1(D_k)
 \end{align}
@@ -3212,7 +3212,7 @@ Except for finitely many points $P$ of $X$, there exists a meromorphic function 
 
 
 \begin{defn}
-Let $\omega \ne 0$ be a meromorphic 1-form on $X$. For $a \in X$, the \term[]{residue} of $a$ at $\omega$, denoted \term[]{$\res_a(\omega)$}, is defined as follows: let $(U,z)$ be a coordinate chart around $a$ with $z(a)=0$ and let $w = f\d z$. Then $\res_a(\omega):=\Res(f,a)$, the coefficient of $1/z$ in the Laurent expansion of $f$.
+Let $\omega \ne 0$ be a meromorphic 1-form on $X$. For $a \in X$, the \term[]{residue} of $a$ at $\omega$, denoted \term[]{$\res_a(\omega)$}, is defined as follows: let $(U,z)$ be a coordinate chart around $a$ with $z(a)=0$ and let $\omega = f\d z$. Then $\res_a(\omega):=\Res(f,a)$, the coefficient of $1/z$ in the Laurent expansion of $f$.
 
 Alternatively, if $\gamma$ is a smooth curve in $U \sm \{a\}$ with winding number $n(\gamma,a)=1$, then $$\res_a(\omega):=\frac{1}{2\pi i}\int_\gamma \omega.$$
 \end{defn}
@@ -3693,6 +3693,170 @@ Let $X$ be a compact (connected)\footnote{We usually just assume connectedness} 
 \begin{proof}
 If $x_0 \in X$ is the part where $f \in \Gamma(X,\cO_X)$ attains its maximum absolutely value, then for any holomorphic chart $(U,\vphi)$ with $x_0 \in U$, we know $f \circ \vphi^{-1}$ is locally constant buy the maximum principle on $\vphi(U_i)\subset \C$. Since $X$ is connected, $f$ must be constant.
 \end{proof}
+
+\begin{thm}[Hartog's Theorem, 1905 (``Birth of several complex variables'')]
+Let $P:=\brax{|z_1|<1, |z_2|<1} \subset \C^2$ be the open unit polydisk in $\C^2$. Then ``any function holomorphic near $\partial P$ extends holomorphically to $P$''.
+
+Precisely, let $U \subset \C^2$ be open with $U \supset \partial P$, and $U \cap P$ connected. Then if $f \in \cO(U \cap P)$, there exists $F \in \cO(P)$ such that $F|_{U \cap P}= f$.
+\end{thm}
+
+\begin{proof}
+Note first that 
+\begin{align*}
+\partial P = \brax{|z_1|=1,|z_2| \le 1} \cup \brax{|z_1| \leq 1,|z_2|=1}
+\end{align*}
+is connected. If $U$ is an open neighborhood of $\partial P$, then there exists $\veps >0$ such that
+\begin{align*}
+U \supset \brax{1 - \veps < |z_1| < 1, |z_1|<1}\cup \brax{|z_1|<1, 1-\veps < |z_2| < 1}:= A_1 \cup A_2.
+\end{align*}
+The picture of $A_1 \cup A_2$ in absolute space $\R_{\ge 0}\times \R_{\ge 0}$ is:
+
+\tikzfig{eps-nbhd-abs-space}
+
+Now expand $f(z_1,z_2)$ by a Laurent series in the annulus $A_1$:
+\begin{align*}
+f(z_1,z_2) = \sum_{\nu = -\infty}^\infty f_\nu(z_2)z_1^\nu.
+\end{align*}
+Fix $z_2$ with $1-\veps < |z_2| < 1$. For such $z_2$ we we see that $f_\nu(z_2) =0$ for $\nu < 0$. Thus by analytic continuous (using the fact that $U \cap P$ is connected), $f_\nu (z_2)=0$ when $|z_2|<1$ and $\nu <0$. Therefore \begin{align*}
+f = \sum_{\nu = 0}^\infty f_\nu(z_2)z_1^\nu
+\end{align*}
+converges on $P$.
+\end{proof}
+
+\begin{ex}
+Now we mention some important examples of complex manifolds.
+\begin{enumerate}
+    \item \term[]{Affine space} $\C^n$.  Open sets $U \subset \C^n$ provide local models of complex manifolds.
+    \item \termnt{Projective space} $\P^n=(\C^{n+1}\sm \{0\})/ \sim$. More on this later.
+    \item \term[]{Complex tori}: $X = \C^n /\Lambda$, where $\Lambda \subset \C^n$ is a lattice.
+    \item \term[]{Complex Lie groups}: These are groups which are also complex manifolds such that the group operations of multiplication and inversion are holomorphic maps.
+    \item Compact quotients of complex Lie groups: for example, Grassmannians and Flag manifolds.
+\end{enumerate}
+\end{ex}
+
+\begin{rmk}
+Complex tori are exactly the compact (connected) complex Lie groups. Non-abelian examples include $\GL_n(\C)$, $\SL_n(\C)$, $\SO _n(\C)$, and $\Sp_{2n}(\C)$.
+\end{rmk}
+
+\section{Projective Space}
+
+\begin{defn}
+We define \term[]{projective space} \term[]{$\P^n$} in 3 ways.
+\begin{enumerate}
+    \item Set theoretically, $\P^n$ consists of all 1-dimensional linear subspaces of $\C^{n+1}$.
+    \item Let $S^{2n+1}\subset \C^{n+1}$ be the unit $2n+1$-sphere in $\R^{2n+2}\equiv \C^{n+1}$. Then there is a natural projection map $\pi : S^{2n+1}\to \P^n$ with $\pi(z):=\C z$. Then we have $\pi(z)=\pi(w) \iff $ there exists $\lambda \in \C$ such that $z=\lambda w$. For instance, $\pi^{-1}(x)$ is a circle $S^1$, for all $x \in \P^1$, so $\pi$ is a fiber bundle with fiber $S^1$. Now $\P^n$ becomes a topological space with the quotient topology, and $\P^n$ is compact. This $\pi$ is called the \term[]{Hopf fibration} of $S^{2n+1}$.
+    \item We define an equivalence relation $\sim$ on $\C^{n+1}\sm \{0\}$ by $z \sim w \iff$ there exists $\lambda \in \C^*$ such that $z = \lambda w$.  Then $\P^n := (\C^{n+1}\sm \{0\})/\sim$. If $z=(z_0,\dots,z_n) \in \C^{n+1}\sm \{0\}$, we denote the equivalence class of $z$ in $\P^n$ by \begin{align*}
+    [z]:= [z_0:z_1 : \cdots : z_n].
+    \end{align*}
+    These $z_i$'s are called \term[]{homogeneous coordinates} on $\P^n$.
+\end{enumerate}
+\end{defn}
+
+Define an open set $U_0 \subset \P^n$ by
+\begin{align*}
+U_0 := \brax{[z]\in \P^n \setbar z_0 \ne 0}.
+\end{align*}
+Then there's a homeomorphism $\vphi_0:U_0 \to \C^n$ sending \begin{align*}
+[z]\mapsto \paren{\frac{z_1}{z_0},\dots,\frac{z_n}{z_0}}.
+\end{align*}
+Now we also notice that the compliment identifies as
+\begin{align*}
+\P^n \sm U_0 = \brax{[z] \in \P^n \setbar z_0 = 0} = \brax{[0:z_1:\cdots:z_n] \setbar \sum |z_i| \ne 0} \simeq \P^{n-1}.
+\end{align*}
+Thus we have a decomposition
+\begin{align*}
+\P^n = \C^n \sqcup \P^{n-1}.
+\end{align*}
+We see that $\P^n$ compactifies affine $n$-space $\C^n$ by adding a projective $(n-1)$-space ``at infinity''.
+
+More generally, for each $i \in [0,n]$, we have an affine open set $U_i$ on $\P^n$ defined by
+\begin{align*}
+U_i := \brax{ [z] \in \P^n \setbar z_i \ne 0 }
+\end{align*}
+and a corresponding homeomorphism $\vphi:U_i \to \C^n$ in a similar way. These $U_i$'s give an open cover of $\P^n$, and one checks that
+\begin{align*}
+\vphi _i \circ \varphi_j^{-1} :\vphi_j(U_i \cap U_j) \to \vphi_i (U_i \cap U_j)
+\end{align*}
+is holomorphic for all $i,j$.
+\begin{prop}
+$\P^n$ is a complex manifold of dimension $n$.
+\end{prop}
+
+\begin{notethm*}[Warning]
+The homogeneous coordinates $z_i$ are not functions on $\P^n$. Only the quotients $z_i/z_j$ make sense as functions on $U_i \cap U_j$.
+\end{notethm*}
+
+We have one more definition of $\P^n$, this one being more intrinsic: Let $E$ be a complex vector space of dimension $n+1$, and $P(E)$ be the projective space of complex 1-dimensional linear subspaces in $E$. If $W \subset E$ is a linear subspace, then $P(W)\subset P(E)$ is called a \term[]{linear subspace of $P(E)$}. Notice that $\dim P(W)=\dim_\C W -1$.
+
+Now consider the projective space $P(E^*)$, which can be identified with the set of all linear \term[hyperplane]{hyperplanes} in $E$ (i.e codimension 1 subspaces). This is done by sending a line of linear functionals in $E^*$ to their common kernel in $E$.
+
+
+\begin{ex}
+The projective plane $\P^2 = \C^2 \sqcup \P^1$ compactifies $\C^2$ by adding a projective line at $\infty$. A collection of parallel lines in $\C^2$ meet the $\P^1$ at infinity at a single point.
+
+\tikzfig{point-at-infinity}
+\end{ex}
+
+\subsection{Affine and Projective Algebraic Varieties}
+
+\begin{defn}
+An \term[]{affine algebraic set} $V \subset \C^n$, sometimes called an \term[]{algebraic set}, is defined as the locus of zeros of a finite set of polynomials in $\C[z_1,\dots,z_n]$. That is, for some $f_1,\dots,f_k \in \C[z_1,\dots,z_n]$, we have
+\begin{align*}
+V:= V(f_1,\dots,f_k):= \brax{z \in \C^n \setbar f_i(z)=0, \: \forall \: 1 \le i \le k}.
+\end{align*}
+\end{defn}
+
+\begin{rmk}
+It's a fact that $V$ is determined by its \term[]{ideals} \term[]{$I(V)$}, defined by
+\begin{align*}
+I(V):= \brax{f \in \C[z_1,\dots,z_n] \setbar f(x)=0, \: \forall x \in V}.
+\end{align*}
+The quotient ring $\Gamma(V):=\C[z_1,\dots,z_n]/I(V)$, called the \term[]{coordinate ring} of $V$, may be identified with the ring of polynomial functions on $V$.
+\end{rmk}
+
+\begin{defn}
+Algebraic sets in projective space $\P^n$ are defined similarly, but using \term[homogeneous polynomial]{homogeneous polynomials} $f_1,\dots,f_k$, which are defined by the property
+\begin{align*}
+f(\lambda(z_1,\dots,z_n))=\lambda^n f(z_1,\dots,z_n).
+\end{align*}
+In this context, $I(V)$ is a \term[]{homogeneous ideal}, meaning it's generated by homogeneous elements.
+\end{defn}
+
+\begin{defn}
+An algebraic set (in $\C^n$ or $\P^n$) is \term[]{irreducible} if it cannot be written as a union $V=V_1 \cup V_2$, where the $V_i$ are nonempty and distinct from $V$. An irreducible algebraic set is called an (affine or projective) \term[]{embedded algebraic variety}. Since $\C[z_1,\dots,z_n]$ is Noetherian, one finds that every algebraic set $V$ is a union of finitely many irreducible algebraic sets. If we decompose $V$ like this using a minimal number of irreducible subsets, then these are called the \term[]{irredicuble components} of $V$.
+\end{defn}
+
+\begin{ex}
+The algebraic set $V(xy)$ is not irreducible. Its irreducible components are the two lines $V(x)$ and $V(y)$.
+\end{ex}
+
+\begin{defn}
+Every embedded algebraic variety $X$ has a topology it inherits from affine or projective space. However, the \term[]{Zariski topology} on $X$ is much coarser, defined by specifying that the closed sets are exactly the algebraic subsets of $X$.
+\end{defn}
+
+\begin{rmk}
+An embedded algebraic variety $X$ need not be a manifold. Indeed, it can have singularities, but one can show that any $X$ has a Zariski open subset that is a complex manifold. The complex dimension of this manifold is the dimension $\dim X$ of $X$.
+\end{rmk}
+
+\begin{ex}
+Consider $\P^2$ with coordinates $x,y,z$, and the plane conic curve $C:=V(xy-z^2)$ (which is a compact Riemann surface). In the affine chart $U_x:=\brax{[x:y:z]\setbar x \ne 0}$, use the affine coordinates $s:=y/x$ and $t:=z/x$. Then $C$ becomes the parabola $s-t^2=0$. However, in the chart $U_z:= \brax{[x:y:z]\setbar z \ne 0}$ with affine coordinates $u:=x/z$ and $v:=y/z$, $C$ becomes the hyperbola $uv=1$. We deduce that the parabola and the hyperbola are \term[]{projectively equivalent}, meaning that their projective closures are isomorphic. This is surprising since the parabola has one point at infinity, whereas the hyperbola has 2.
+\end{ex}
+
+
+\subsection{\texorpdfstring{The Tautological Line Bundle on $\P^n$}{The Tautological Line Bundle on Pn}}
+
+\begin{defn}
+The \term[]{tautological line bundle} on $\P^n$ is a holomorphic line bundle $L \to \P^n$ such that the fiber of $L$ over a point $[z] \in \P^n$ is $z$ itself, though of as a complex line in $\C^{n+1}$. The total space of $L$ is
+\begin{align*}
+L:= \brax{([z],w)\in \P^n \times \C^{n+1}\setbar w \in \Span(z)} \subset \P^n \times \C^{n+1},
+\end{align*}
+which exhibits projections $\proj_1$ to $\P^n$ and $\proj_2$ to $\C^{n+1}$. Let $\pi:L \to\P^n$ be the restriction of the first projection map $\proj_1:\P^n\times \C^{n+1} \to \P^n$ to $L$.
+\end{defn}
+
+\begin{que}
+What are the transition functions of $g_{ij}$ for $L$?
+\end{que}
+
 
 
 
