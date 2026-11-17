@@ -152,6 +152,7 @@ First, suppose $W$ is another representation of $G$ with decomposition $W=\bigop
 Here's some motivation for what's coming: given an abelian group $G$, the action $g:V \to V$ is determined as soon as we know the eigenvalues $\lambda_1,\dots,\lambda_r$ for the action. The important thing is, we actually only need to know $\sum_{i}\lambda_i$ for all $g \in G$, because, then we'd know $\sum_{i}\lambda_i^k$ for all $k \geq 1$, using $g^k:V \to V$, and this is enough to know all the $\lambda_i$. But, $\sum \lambda_i = \Tr (g:V \to V)=: \chi_V(g)$. We'll see in general that $\chi _V:G \to \C$ determines $V$ (not just for abelian groups).
 
 \begin{ex}[More Important Examples of New Representations from Old Ones]
+    \hfill
     \begin{enumerate}
         \item Given $V,W$ two representations of $G$, the tensor product $V \otimes W$ becomes a $G$-representation in a natural way: $\rho_1 \otimes \rho_2:G \to \GL(V\otimes W)$ satisfies $g \cdot (v \otimes w)=gv\otimes gw$.
         \item $\Hom(V,W)$ is also a representation of $G$: For any $\varphi \in \Hom(V,W)$ and $g \in G$, we define $g \varphi :V \to W$ so that the diagram
@@ -571,7 +572,7 @@ where the second term is $\cong 0 \pmod{pq}$. We deduce that there are at least 
 
 For example, the groups $D_4$ (the dihedral group of order $8$) and $Q_8$ (the quaternion group) have the same character table: Indeed, both groups have the same commutator quotient $G/[G,G]\cong V_4$, the Klein $4$-group. It follows that they both have exactly four characters of degree $1$, which are easily computed, and then the orthogonality relations can be used to find the fifth irreducible character, which has dimension 2. So the complete character table for $Q_8$ is
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{tabular}{c|rrrrr }
         Sizes & 1 & 1 & 2 & 2 & 2 \\
