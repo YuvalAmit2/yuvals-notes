@@ -1820,6 +1820,8 @@ Hence, a section $s$ of $E$ may be identified with a family $\{f_i\}_{i \in I}$ 
     \] 
 \end{defn}
 
+
+
 \section{Divisors and Line Bundles}
 
 \begin{defn}
@@ -2380,6 +2382,24 @@ This claim proves the theorem.
 \begin{notethm}[Answer]
     Yes. This is the approach one takes in abstract algebraic geometry, which uses valuation theory: if we know $K:= \cM(X)$, then points $p \in X$ correspond to discrete valuations $\nu:K \to \Z$, $f \mapsto \ord_pf$.
 \end{notethm}
+
+\begin{defn}
+Suppose $\pi:E \to X$ is a vector bundle, and $\vphi:X' \to X$ is any holomorphic map of complex manifolds. The \term[]{pullback} by $\vphi$ of $E$ to $X'$ is the vector bundle $\vphi^*:E \to X'$ such that $\paren{\vphi^*E}_x=E_{\vphi(x')}$ for all $x' \in X'$. This corresponds to the \term[]{pullback diagram}
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHZwaGleKkUiXSxbMiwwLCJFIl0sWzIsMiwiWCJdLFswLDIsIlgnIl0sWzAsM10sWzAsMV0sWzEsMiwiXFxwaSIsMl0sWzMsMiwiXFx2cGhpIl1d
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{\vphi^*E} \&\& E \\
+	\\
+	{X'} \&\& X
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-1, to=3-1]
+	\arrow["\pi"', from=1-3, to=3-3]
+	\arrow["\vphi", from=3-1, to=3-3]
+\end{tikzcd}\]
+\end{defn}
+
+\begin{prop}
+If $\{U_i\}$ is an open cover of $X$ which trivializes $E$ with transition function $\{g_{ij}\}$, then $\{\vphi^{-1}(U_i)\}_i$ is an open cover of $X'$ trivializing $\vphi^*E$ with transition functions $\brax{g_{ij}\circ \vphi}$. Moreover, sections of $E$ pull back to sections of $\vphi^*E$: if the section $s \in H^0(X,E)$ is given by a collection of function $\{f_i\}$, then the collection $\{f_i \circ \vphi\}$ defines the \term[]{pullback section} $\vphi^*s$.
+\end{prop}
 
 \begin{rmk}
 Let $X,Y$ be compact Riemann surfaces, and $f:Y \to X$ a (branched) holomorphic covering map. Then, the pullback $f^*\cM(X)$ given by meromorphic $g\circ f :Y \to \C$ for meromorphic $g \in \cM(X)$ is naturally a subfield of $\cM(Y)$. Identifying $f^*\cM(X)$ with $\cM(X)$, the Galois group $\Gal(\cM(Y)/\cM(X))$ is then naturally isomorphic to the group of Deck transformations $\w{Deck}(Y/X)$ of the covering map $f$. Moreover, the covering is Galois (or normal) if and only if the extension $\cM(Y)/\cM(X)$ is Galois.
@@ -3887,5 +3907,199 @@ which exhibits projections $\proj_1$ to $\P^n$ and $\proj_2$ to $\C^{n+1}$. Let 
 What are the transition functions of $g_{ij}$ for $L$?
 \end{que}
 
+Recall $U_i := \brax{[z] \setbar z_i \ne 0}$. Define a local trivialization $\vphi_i:\pi^{-1}(U_i) \to U_i \times \C$ for $L$ by
+\begin{align*}
+\vphi_i \paren{[z], \lambda \paren{\frac{z_0}{z_i},\dots,1,\dots,\frac{z_n}{z_i}} } = ([z],\lambda)
+\end{align*}
+for $\lambda \in \C$. Now the find the transition functions $g_{ij}$, we compute
+\begin{align*}
+([z],\lambda)\maps[\vphi_j^{-1}] \paren{[z],\lambda \paren{\frac{z_0}{z_j},\dots,\overbrace{1}^j,\dots,\frac{z_n}{z_j}}} \maps[\vphi_i]\paren{[z],\frac{z_i}{z_j}\lambda},
+\end{align*}
+so
+\begin{align*}
+g_{ij}([z])=\frac{z_i}{z_j}
+\end{align*}
+on $U_i \cap U_j$.
+
+\begin{defn}
+For any $d \in \Z$, the functions $g_{ij}([z])=(z_i/z_j)^d$ define a line bundle on $\P^n$, denoted \term[]{$\cO(d)$}. The this notation, the tautological line bundle is \term[]{$\cO(-1)$}.
+\end{defn}
+
+\begin{rmk}
+The most important line bundle in algebraic geometry is the line bundle \term[]{$\cO(1)$} $\simeq L^*$, called the \term[]{canonical line bundle}, or \term[]{hyperplane bundle}. By definition, $\cO(1)$ has the transition functions $g_{ij}([z])=z_j/z_i$ on $U_i \cap U_j$.
+\end{rmk}
+
+\subsection{\texorpdfstring{Sections of $\cO(d)$ on $\P^n$}{Sections of O(d) on Pn}}
+
+\begin{claim}
+For any $d \ge 0$, the space $H^0(\P^n,\cO(d))$ of holomorphic sections of $\cO(d)$ on $\P^n$ can be identified with the vector space $\C[z_0,\dots,z_n]_d$ of homogeneous degree $d$ polynomials.
+\end{claim}
+
+\begin{proof}
+Any section of $\cO(d)$ is given by a family $\{f_i\}$ of holomorphic functions $f_i$ on $U_i$ such that
+\begin{align*}
+f_i=(z_j/z_i)^d f_j \quad \text{on } U_i \cap U_j. \label{eq:hol-sec-cond-Od}
+\end{align*}
+Given any homogeneous polynomial $F \in \C[z_0,\dots,z_n]_d$, define $f_i$ on $U_i$ by \begin{align*}
+f_i([z]) = \frac{F}{z_i^d}=F \paren{\frac{z_0}{z_i},\dots,1,\dots,\frac{z_n}{z_i}}.
+\end{align*}
+Clearly the family of $\{f_i\}$ defined satisfies \eqref{eq:hol-sec-cond-Od}, and hence defines a holomorphic section of $\cO(d)$.
+
+Conversely, given a family $\{f_i\}$ of holomorphic functions satisfying \eqref{eq:hol-sec-cond-Od}, define a function $F:\C^{n+1}\sm \{0\} \to \C$ by
+\begin{align*} \label{eq:od-converse-section}
+F(z_0,\dots,z_n) := z_i^d f_i\paren{\frac{z_0}{z_i},\dots,1,\dots,\frac{z_n}{z_i}}
+\end{align*}
+wherever $z_i \ne 0$. Then \eqref{eq:hol-sec-cond-Od} ensures that $F$ is well defined, and holomorphic on $\C^{n+1}\sm \{0\}$. By Hartog's theorem, $F$ extends to a holomorphic function on $\C^{n+1}$, and \eqref{eq:od-converse-section} implies
+\begin{align*}
+F(\lambda z) = \lambda^d F(z) \label{eq:F-is-homo}
+\end{align*}
+for all $\lambda \ne 0$. Now $F$ has a power series expansion at $0$, written as
+\begin{align*}
+F(z)=\sum_{\alpha \ge 0}c_\alpha z_1^{\alpha_1}\cdots z_n^{\alpha_n}, \quad c_\alpha \in \C,
+\end{align*}
+but then condition \eqref{eq:F-is-homo} requires $F \in \C[z_0,\dots,z_n]_d$ (Exercise).
+\end{proof} 
+
+\begin{cor}
+On the canonical line bundle,
+\begin{align*}
+H^0(\P^n,\cO(1)) = \C z_0 \oplus \cdots \oplus \C z_n.
+\end{align*}
+\end{cor}
+
+\begin{exercise}[]
+Show that $\cO(d)$ has no non-zero holomorphic sections if $d<0$.
+\end{exercise}
+
+\begin{defn}
+Suppose $\pi:E \to X$ is a vector bundle, and $\vphi:X' \to X$ is any holomorphic map of complex manifolds. The \term[]{pullback} by $\vphi$ of $E$ to $X'$ is the vector bundle $\vphi^*:E \to X'$ such that $\paren{\vphi^*E}_x=E_{\vphi(x')}$ for all $x' \in X'$. This corresponds to the \term[]{pullback diagram}
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXHZwaGleKkUiXSxbMiwwLCJFIl0sWzIsMiwiWCJdLFswLDIsIlgnIl0sWzAsM10sWzAsMV0sWzEsMiwiXFxwaSIsMl0sWzMsMiwiXFx2cGhpIl1d
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{\vphi^*E} \&\& E \\
+	\\
+	{X'} \&\& X
+	\arrow[from=1-1, to=1-3]
+	\arrow[from=1-1, to=3-1]
+	\arrow["\pi"', from=1-3, to=3-3]
+	\arrow["\vphi", from=3-1, to=3-3]
+\end{tikzcd}\]
+\end{defn}
+
+\begin{prop}
+If $\{U_i\}$ is an open cover of $X$ which trivializes $E$ with transition function $\{g_{ij}\}$, then $\{\vphi^{-1}(U_i)\}_i$ is an open cover of $X'$ trivializing $\vphi^*E$ with transition functions $\brax{g_{ij}\circ \vphi}$. Moreover, sections of $E$ pull back to sections of $\vphi^*E$: if the section $s \in H^0(X,E)$ is given by a collection of function $\{f_i\}$, then the collection $\{f_i \circ \vphi\}$ defines the \term[]{pullback section} $\vphi^*s$.
+\end{prop}
+
+\section{Maps to Projective Space}
+
+Suppose that $L \to X$ is a holomorphic line bundle on a compact complex manifold $X$. We'll show that the vector space $H^0(X,L)$ is finite dimensional. 
+
+\begin{defn}
+We say that a subspace $V \subset H^0(X,L)$ \term[]{has no base points} if for every $x \in X$, there exists $s \in V$ such that $s(x) \ne 0$. If this is the case, then for any $x \in X$, the $\C$-vector space \term[]{$\hat H_x$} defined by
+\begin{align*}
+\hat H_x := \brax{s \in V \setbar s(x) = 0}
+\end{align*}
+is a hyperplane in $V$, since
+\begin{align*}
+\hat H_x = \ker \brax{\ev _x:V \to L_x \simeq \C}.
+\end{align*}
+\end{defn}
+Equivalently, $\hat H_x$ is a line $H_x$ in $V^*$. We thus get a map
+\begin{align*}
+\vphi_V : X &\to P(V^*) \\
+x & \maps H_x.
+\end{align*}
+We can describe $\vphi_V$ more explicitly by choosing a basis $s_0,\dots,s_n$ for $V$. Suppose $x \in U \subset X$, and $h$ is a trivialization of $L|_U$. Clearly point
+\begin{align*}
+\braks{h s_0(x):\cdots : hs_n(x)} \in \P^n
+\end{align*}
+is independent of the trivialization $h$ chosen, hence we denote this point by $[s_0(x):\cdots :s_n(x)]$. Now we have 
+\begin{align*}
+\vphi_V(x) = \braks{s_0(x):\cdots : s_n(x)},
+\end{align*}
+using the identification $P(V^*)\simeq \P^n$ corresponding to the choice of basis $s_0,\dots,s_n$ of $V$. From this representation, it's clear that $\vphi_V$ is a holomorphic map. Observe that the morphism $\vphi_V$ induces an isomorphism $L \simeq \vphi_V^* \cO(1)$ with $s_0,\dots,s_n$ as pullbacks of the global sections $z_0,\dots,z_n$ of $\cO(1)$. Conversely, any holomorphic map $\vphi:X \to \P^n$ defines a holomorphic line bundle $\vphi^* \cO(1)$ on $X$ with no base points since $\vphi^*(z_0),\dots,\vphi^*(z_n)$ generate the fiber at each point $x\in X$. We thus have a dictionary:
+\begin{align*}
+\brax{\text{Morphisms } \vphi:X \to \P^n \atop \text{ modulo projective transformations} } \leftrightarrow \brax{\text{Line bundles } L\to X \text{ with } V \subset H^0(X,L) \atop \text{such that } V \text{ has no base points} },
+\end{align*}
+and a choice of homogeneous coordinates on $\P^n$ corresponds to a choice of basis $s_0,\dots,s_n$ for $V$. 
+\begin{defn}
+When $V = H^0(X,L)$, we write \term[]{$\vphi_L$} instead of $\vphi_{H^0(X,L)}$.
+\end{defn}
+
+\begin{rmk}
+$\vphi_L$ is injective if and only if the sections of $L$ \term{separate points}, i.e for all $x,y \in X$ with $x\ne y$, there exists $s \in H^0(X,L)$ such that $s(x)=0$ and $s(y) \ne 0$. When this occurs, $\vphi_L$ is a homeomorphism on its image, however this is not sufficient for it to be an embedding. We say that $\vphi_L$ is a \term[]{closed embedding} if $\vphi_L$ is injective and its differential $d\vphi_L$ has maximal rank at each point (hence $\vphi_L$ separates tangent vectors). 
+\end{rmk}
+
+\begin{defn}
+We say that a line bundle $L \to X$ is \term[]{very ample} if $H^0(X,L)$ gives a closed embedding $\vphi_L : X \to \P^n$ with $L =\vphi^* \cO(1).$ We say that $L$ is \term[]{ample} if $L^{\otimes m}$ is very ample for some $m \ge 1$.
+\end{defn}
+
+\begin{ex}[The Veronese embedding]
+Consider a line bundle $\cO(d)\to \P^n$. When $d>0$, we've seen that the global holomorphic sections of $\cO(d)$ correspond to homogeneous degree $d$ polynomials in $\C[z_0,\dots,z_n]$. We can thus use the basis
+\begin{align*}
+\brax{ z^\alpha = z_0^{\alpha_0}\cdots z_n^{\alpha_n}\setbar \alpha_i \ge 0, \sum \alpha _i=d }
+\end{align*}
+of $\C[z_0,\dots,z_n]_d$ to get a map
+\begin{align*}
+V_d := \vphi_{\cO(d)}: \P^n &\inj \P^N \qquad N = \binom{n+d}{d}-1 \\ [z_0:\cdots :z_n] & \maps \braks{\cdots : z^\alpha:\cdots }_{\alpha \ge 0 \atop |\alpha| = d}.
+\end{align*}
+We can verify that \term[]{$V_d$} is an embedding (see below) called the \term[]{Veronese embedding} (or \term[]{$d$-tuple embedding})
+\end{ex}
+
+\begin{rmk}
+A \term[]{hypersurface of degree $d$} in $\P^n$ is the set
+\begin{align*}
+V(f) = \brax{[z] \in \P^n \setbar f(z)=0 , \text{ for some } f \in \C[z_0,\dots,z_n]_d\sm \{0\} }.
+\end{align*}
+Note that every hypersurface of degree $d$ in $\P^n$ becomes a hyperplane section of $V_d(\P^n)$ in $\P^n$.
+
+\tikzfig{hypersurface-embedding}
+\end{rmk}
+
+
+\begin{rmk}[Special cases of the Veronese map]
+The Veronese map $V_d:\P^1 \to \P^d$ is given, in terms of the affine coordinate $t:=z_1/z_0$ on $\P^1$, by 
+\begin{align*}
+t \maps  \braks{1:t:t^2:\cdots:t^d}.
+\end{align*}
+Its image in $\P^d$ is a curve (Riemann surface) of degree $d$ called the \term[]{rational normal curve}.
+
+The Veronese map $V_2 :\P^2 \inj \P^5$ is given, in terms of the affine coordinates $s:=z_1/z_0$ and $t:=z_2/z_0$ on $\P^2$, by
+\begin{align*}
+(s,t) \maps \braks{1:s:t:s^2:st:t^2}.
+\end{align*}
+The image $S := V_2(\P^2)$ is a surface in $\P^5$ called the \term[]{Veronese surface}.
+\end{rmk}
+
+\begin{rmk}
+Clearly, these two maps above are embeddings.
+\end{rmk}
+
+\begin{ex}[The Segre embedding]
+Consider the two projections $\proj_1,\proj_2$ from $\P^m \times \P^n$ onto $\P^m$ and $\P^n$ respectively, and the line bundle
+\begin{align*}
+L := \proj_1^*\cO_{\P^m}(1) \otimes \proj_2^* \cO_{\P^n}(1).
+\end{align*}
+The \term[]{Segre embedding} is defined to be the morphism $\vphi_L$. If $[x_0:\cdots :x_m]$ and $[y_0:\cdots :y_n]$ are homogeneous coordinates on $\P^m$ and $\P^n$, then a basis of $H^0(\P^m\otimes \P^n,L)$ is given by
+\begin{align*}
+\brax{x_iy_j \setbar 0 \le i \le m ,0 \le j \le n}.
+\end{align*}
+Now the Segre map is the morphism
+\begin{align*}
+S:\P^m \times \P^n & \inj \P^{mn+m+n} \\
+([x],[y]) & \maps \braks{\cdots : x_iy_j : \cdots}_{\substack{0 \le i \le m \\ 0 \le j \le n}}.
+\end{align*}
+\end{ex}
+
+\begin{rmk}[An intrinsic description of $S$]
+Let $E_1$ and $E-2$ be vector spaces of dimension $m+1$ and $n+1$ respectively. Then $S$ is the map
+\begin{align*}
+S: P(E_1)\times P(E_2) &\inj P(E_1 \otimes E_2) \\ 
+(\angles v, \angles w) \mapsto \angles{v \otimes w}.
+\end{align*}
+\end{rmk}
+
+\begin{que}
+Is there an intrinsic description of $V_d$?
+\end{que}
 
 \end{document}
