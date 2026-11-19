@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[11pt]{report}
 \usepackage[notes]{yalatex}
 % \addbibresource{references.bib}   % uncomment for citations
 
@@ -8,9 +8,9 @@
 
 \begin{document}
 \maketitle
+\setcounter{page}{2}
 
-\section*{Preface}
-\vspace{-0.5em}
+\chapter*{Preface}
 These notes were taken during lectures of \textit{MATH606: Algebraic Geometry I} in the fall 2026 semester at the University of Maryland. The primary purpose of these notes is to act as a reference for material covered in lecture for me and my fellow students. 
 
 I cannot promise that these notes do not contain errors, and on the contrary there may be various problems ranging from small typos to (rarely) real mathematical flaws. Obviously, I am responsible for all such errors, and not the lecturer. Using these notes as a reference outside of the context of this course should be done cautiously. 
@@ -21,11 +21,14 @@ Some links:
     \item \href{https://github.com/YuvalAmit2/yuvals-notes/tree/main/math606-notes}{Source code for these notes}
     \item \href{https://github.com/YuvalAmit2/yalatex}{LaTeX template}
 \end{itemize}
-\vspace{1em}
+
+\newpage
 \tableofcontents
 \newpage
 
-\section{Introduction: From Complex Analysis to Algebraic Geometry}
+\chapter{Introduction}
+
+\section{From Complex Analysis to Algebraic Geometry}
 
 ``Complex analysis is more rigid, even magical, when compared to real analysis."
 
@@ -113,7 +116,7 @@ So, $\mc M(X) \supset \C(z)$ is a field extension, which turns out to be finite.
 $$\mc M(x) = \C(\pi)(g).$$
 Let $\tilde p \in \C(\pi)[z]$ be the minimal polynomial of $g$. Then, clearing denominators, we get a polynomial $p$ with $p(\pi,g)=0$. Moreover, $X$ is the Riemann surface associated to $p$. We therefore see that $X$ is determined by $m(X)$, an ``algebraic function field in one variable''. This is the point of view in algebraic geometry, where $X$ is a smooth algebraic curve over $\C$.
 
-\subsection{The Riemann-Roch Problem}
+\subsection{The Riemann--Roch Problem}
 
 Given a compact Riemann surface $X$, let $f \in m(X)$ be meromorphic, and
 $$D:=\div (f) = \text{``Zeros}(f)'' - ``\text{Poles}(f)''.$$
@@ -131,14 +134,16 @@ In fact, $D$ determines $f$ up to scalar. Indeed, if $\div f = \div g$, then $\f
     Then, $\dim_\C H^0(D) < \infty$.
 \end{notethm*}
 
-\begin{notethm*}[Riemann-Roch Problem]
+\begin{notethm*}[Riemann--Roch Problem]
     Compute $\dim_\C H^0(D).$
 \end{notethm*}
 Riemann showed
 $$\dim H^0(D) \geq 1-g+\deg D.$$
 This problem in its entirety is still open, and is a motivating problem for this course.
 
-\section{Riemann Surfaces}
+\chapter{Riemann Surfaces}
+
+\section{Intro to Riemann Surfaces}
 
 \begin{defn}
 Let $X$ be a 2-dimensional real topological manifold. We consider pairs $(U,\varphi)$ where $U \subset X$ is open, and $\varphi:U\to \C$ is a homeomorphism on its image. Two such pairs $(U_1,\varphi_1)$ and $(U_2,\varphi_2)$ are said to be \term{compatible} if
@@ -424,7 +429,9 @@ We want to study $\mc M(X)$ for any compact Riemann surface $X$, generalizing $\
 %     A meromorphic function $f$ on $\C$ is said to be \termnt{elliptic} if there exists a lattice $\Lambda =\Z\omega_1 \oplus  \Z\omega_2$ in $\C$ such that $f(z+\omega) = f(z)$ for all $z \in \C \setminus \Lambda$ and $\omega \in \Lambda$. These correspond to meromorphic functions on the torus $\C /\Lambda$.
 % \end{defn}
 
-\section{Elliptic Functions}
+\chapter{Elliptic Functions}
+
+\section{Intro to Elliptic Functions}
 
 \begin{defn}
     Let $\Omega:= \Z\omega_1  +\Z\omega_2$ be a lattice in $\C$. A meromorphic function $f:\C \to \P^1$ is \term{elliptic} with respect to $\Omega$ if $f(z+\omega)=f(z)$ for all $\omega \in \Omega$. Such a function corresponds to a holomorphic map $f:T \to \P^1$, where $T:=\C/\Omega$.
@@ -1117,6 +1124,8 @@ Let $\w{pr}_2:V \to \C$ be the second projection, where $V=V(P)$. Then, the func
 \end{defn}
 
 
+\chapter{Sheaves and Cohomology}
+
 \section{\texorpdfstring{The Equation $\partial u/\partial \bar z=f$}{The Equation du/dzbar = f}}
 
 Let $R$ be a closed rectangle in $\C$, and $f \in C^{\infty}(R)$ (that is, $f$ is $C^\infty$ in an open neighborhood of $R$).
@@ -1687,6 +1696,8 @@ where the RHS is singular cohomology.
     \\ \to H^2(X,\mc F) \to H^2(X,\mc G) \to H^2(X,\mc H) \to H^3(X,\mc F)\to \cdots.
 \end{align*}
 \end{rmk}
+
+\chapter{Bundles}
 
 \section{Vector Bundles, Line Bundles, and Divisors}
 
@@ -2374,7 +2385,9 @@ This claim proves the theorem.
 Let $X,Y$ be compact Riemann surfaces, and $f:Y \to X$ a (branched) holomorphic covering map. Then, the pullback $f^*\cM(X)$ given by meromorphic $g\circ f :Y \to \C$ for meromorphic $g \in \cM(X)$ is naturally a subfield of $\cM(Y)$. Identifying $f^*\cM(X)$ with $\cM(X)$, the Galois group $\Gal(\cM(Y)/\cM(X))$ is then naturally isomorphic to the group of Deck transformations $\w{Deck}(Y/X)$ of the covering map $f$. Moreover, the covering is Galois (or normal) if and only if the extension $\cM(Y)/\cM(X)$ is Galois.
 \end{rmk}
 
-\section{The Riemann-Roch Theorem}
+\chapter{Differential Forms}
+
+\section{Looking Ahead to Riemann--Roch}
 
 \begin{defn}
 If $D = \sum n_P[P]$ is a divisor on a compact Riemann surface $X$, then the \term{degree} of $D$ is $\deg D:= \sum n_P$. We think of $D$ as a function $D:X \to \Z$ with finite support (i.e. $D(P)=n_P$).
@@ -2400,7 +2413,7 @@ Moreover, $\cO_D$ is isomorphic to the sheaf of holomorphic sections of the line
 \cO_D(U) = H^0(U,L(D))= \Gamma (U,L(D)).
 \]
 
-\begin{notebox}[The Riemann-Roch Problem]
+\begin{notebox}[The Riemann--Roch Problem]
     Riemann showed that
     \[
     h^0(D):= \dim_\C(H^0(X,\cO_D))=\dim_\C \cO_D(X)=\dim_\C \brax{f \in \cM(X) \setbar \div f \geq -D}
@@ -2450,7 +2463,7 @@ with the obvious restriction maps.
 (i) is trivial. For (ii), consider a $\xi \in H^1(X, \C_P)$ represented by a cocycle in $Z^1(\cU,\C_P)$. The open cover $\cU$ has a refinement $\mc V= \{V_\alpha\}_{\alpha \in A}$ so that $P \in V_\alpha$ for a unique $\alpha \in A$.  Then $Z^1(\mc V,\C_P)=0$, so $\xi =0$ in $H^1(X,\C_p)$.
 \end{proof}
 
-Now, it turns out that we can use the skyscraper sheaf to help us understand the Riemann-Roch problem on a compact Riemann surface $X$. For each divisor $D$ and point $P \in X$, we have a map $\cO_D \to \cO_{D+P}$. Let $(W,z)$ be a local coordinate chart on $X$ around $P$ such that $z(P)=0$. We define a sheaf homomorphism $\beta :\cO_{D+P} \to \C_P$ as follows: given $U \subset X$, if $P \not \in U$, then the homomorphism $\beta_U$ is zero. Otherwise, if $P \in U$ and $f \in \cO_{D+P}(U)$, expand $f = \sum_{n=-k-1}^\infty c_nz^n$ in the $z$-coordinate, where $k = D(P)$. We then set $\beta_U(f):= c_{-k-1} \in \C= \C_P(U)$.
+Now, it turns out that we can use the skyscraper sheaf to help us understand the Riemann--Roch problem on a compact Riemann surface $X$. For each divisor $D$ and point $P \in X$, we have a map $\cO_D \to \cO_{D+P}$. Let $(W,z)$ be a local coordinate chart on $X$ around $P$ such that $z(P)=0$. We define a sheaf homomorphism $\beta :\cO_{D+P} \to \C_P$ as follows: given $U \subset X$, if $P \not \in U$, then the homomorphism $\beta_U$ is zero. Otherwise, if $P \in U$ and $f \in \cO_{D+P}(U)$, expand $f = \sum_{n=-k-1}^\infty c_nz^n$ in the $z$-coordinate, where $k = D(P)$. We then set $\beta_U(f):= c_{-k-1} \in \C= \C_P(U)$.
 
 We obtain a short exact sequence of sheaves on $X:$
 \[
@@ -2508,7 +2521,7 @@ If $D_1$ and $D_2$ are divisors, then
     proving the claim.
 \end{proof}
 
-\begin{thm}[Riemann-Roch Theorem (weak form)][label=thm:weak-riemann-roch]
+\begin{thm}[Riemann--Roch Theorem (weak form)][label=thm:weak-riemann-roch]
 If $D$ is a divisor on a compact Riemann surface $X$, then $h^0(D) - h^1(D)=1-g+ \deg D$, where $g$ is the genus of $X$.
 \end{thm}
 
@@ -2520,7 +2533,7 @@ h^0(D)-h^1(D)=\chi(D)\overset{\eqref{eq:chi-deg}}{=} \chi(0)+\deg D = h^0(\cO)-h
 \end{proof}
 
 \begin{rmk}
-Riemann-Roch shows that
+Riemann--Roch shows that
 \[
 \dim H^0(X,\cO_D) - \dim H^1(X, \cO_D) = 1-g + \deg D.
 \]
@@ -3028,7 +3041,9 @@ Finally, apply \eqref{eq:T-is-integral} for any $\beta \in C_0^\infty (U_\veps)$
 Since $\beta$ was arbitrary, it follows that $\partder[]{\lambda}{\bar w}=0$ on $U_\veps$, i.e $\lambda \in \cO(U_\veps)$ for any $\veps>0$. This proves the theorem.
 \end{proof}
 
-\section{Riemann-Roch and Applications}
+\chapter{Riemann--Roch and Applications}
+
+\section{The Riemann--Roch Theorem}
 Let $X$ be a Riemann surface and $D$ a divisor on $X$.
 
 \begin{defn}
@@ -3046,7 +3061,7 @@ H^1(X,\cO_D)\otimes H^0(X,\Omega_{-D}) \to \C
 \]
 \end{thm}
 
-\begin{thm}[Riemann-Roch (strong form)] \label{thm:strong-riemann-roch}
+\begin{thm}[Riemann--Roch (strong form)] \label{thm:strong-riemann-roch}
 For $X$ a compact Riemann and $D$ a divisor on $X$,
 \[
 \dim_\C H^0(X,\cO_D)-\dim_\C H^0(X,\Omega_{-D}) = 1-g+\deg D.
@@ -3067,7 +3082,7 @@ By Serre duality, $h^0(K_X)=h^1(\cO)=g$, the genus. Hence there exists $g$ linea
 \end{cor}
 
 \begin{cor} \label{cor:deg-1-form-is-2g-2}
-By Riemann-Roch,
+By Riemann--Roch,
 \[
 g-1 = h^0(K_X)-h^0(\cO) = 1-g + \deg K_X \implies \deg K_X = 2g-2,
 \]
@@ -3082,7 +3097,7 @@ Let $D$ be a divisor on $X$ such that $\deg D > 2g-2$. Then $H^1(X,\cO_D)=0$, an
 Note that if $L \to X$ is a holomorphic line bundle and $h^0(L)>0$, then $\deg L \geq 0$ (in fact, if $s \in H^0(X,L)$ is non-zero, then $L \simeq L(\div(s))$, and $\deg \div s \geq 0$ since $s$ is holomorphic). Now suppose $\deg D > 2g-2$. Then $h^1(D)=h^0(K-D)$ where $K$ is any canonical divisor. But since $\deg (K-D)=2g-2 -\deg D <0$, we see that $h^0(K-D)=0$.
 \end{proof}
 
-\section{The Riemann-Hurwitz Formula}
+\section{The Riemann--Hurwitz Formula}
 
 \begin{defn}
 Let $f:X \to Y$ be a non-constant holomorphic map of compact Riemann surfaces. For $a \in X$ and $b=f(a)$, we define the \term[]{multiplicity} $v(f,a)$ to be the integer $k \geq 0$ such that locally near $a$, $f$ is isomorphic to the covering $z \mapsto z^k$ of deleted neighborhoods of $a$ and $b$.
@@ -3094,7 +3109,7 @@ The \term[]{ramification index} of $f$ at $a$ is defined to be $b(f,a):=v(f,a)-1
 $f$ is a local homeomorphism at $a$ if and only if $b(f,a)=0$.
 \end{rmk}
 
-\begin{thm}[Riemann-Hurwitz Formula] \label{thm:riemann-hurwitz}
+\begin{thm}[Riemann--Hurwitz Formula] \label{thm:riemann-hurwitz}
 Let $f:X \to Y$ be a non-constant holomorphic maps of compact Riemann surfaces. Let $g_X$ and $g_Y$ denote the genus of $X$ and $Y$, respectively. Then
 \[
 2g_X - 2 =d(2g_y - 2)+ \mb b.
@@ -3145,7 +3160,7 @@ Now, take Euler characteristics to obtain
     2- b_1(X)=d(2-b_1(Y))-\mb b.
 \end{equation}
 
-If we take $Y = \mb P^1$, there exists a non-constant holomorphic map $f:X \to \P^1$, and note $g_{\P^1}=0$ and $b_1(\P^1)=b_1(S^2)=0$. Then the Riemann-Hurwitz formula (\Cref{thm:riemann-hurwitz}) gives
+If we take $Y = \mb P^1$, there exists a non-constant holomorphic map $f:X \to \P^1$, and note $g_{\P^1}=0$ and $b_1(\P^1)=b_1(S^2)=0$. Then the Riemann--Hurwitz formula (\Cref{thm:riemann-hurwitz}) gives
 \[
 2g_{X}-2=-2d+\mb b,
 \]
@@ -3200,7 +3215,7 @@ where $\C_P$ is the skyscraper sheaf, induces the long exact sequence
 \[
 0 \to H^0 (X,L(D_{k-1})) \inj H^0(X,L(D_k)) \to H^0(X,\C_P) \simeq \C.
 \]
-Now we see that there exists $f \in \cM(X)$ with $\div f \geq -D_k$ and $\div f < -D_{k-1}$ if and only if $h^0(D_k)>h^0(D_{k-1})$, and in this case $h^0(D_k)=h^0(D_{k-1})+1$. But Riemann-Roch gives
+Now we see that there exists $f \in \cM(X)$ with $\div f \geq -D_k$ and $\div f < -D_{k-1}$ if and only if $h^0(D_k)>h^0(D_{k-1})$, and in this case $h^0(D_k)=h^0(D_{k-1})+1$. But Riemann--Roch gives
 \begin{align} \label{eq:hDk-sum}
     h^0(D_k)-h^0(D_{k-1})=1-h^1(D_{k-1})+h^1(D_k)
 \end{align}
@@ -3280,7 +3295,7 @@ Note that $\omega$ exists if and only if the cohomology class $\{\omega_{ij}:=\o
 \begin{align} \label{eq:omegas-sequence}
     0 \to \Omega \arr[s_D]\Omega_D \to \C_D \to 0.
 \end{align}
-Note that the sheaf $\C_D$ is zero outside $|D|$, while for $a \in D$, the stalk $\C_{D,a}$ is the group of all finite sums $\sum_{v=1}^{D(a)}\frac{c_v}{z^v}\d z$, where $z$ is a local coordinate at $a$ with $z(a)=0$. Now Riemann-Roch gives
+Note that the sheaf $\C_D$ is zero outside $|D|$, while for $a \in D$, the stalk $\C_{D,a}$ is the group of all finite sums $\sum_{v=1}^{D(a)}\frac{c_v}{z^v}\d z$, where $z$ is a local coordinate at $a$ with $z(a)=0$. Now Riemann--Roch gives
 \[
 \dim H^0(X,\cO_D)-\dim H^0(X,\Omega_{-D})=1-g+\deg D
 \]
@@ -3538,6 +3553,8 @@ We have
 Hence there are at most $(g-1)g(g+1)$ Weierstrass points. If $g>1$, then $W$ must have some zeros, so there exist Weierstrass points on $X$.
 \end{rmk}
 
+\chapter{Manifolds and Projective Space}
+
 \section{Hyperelliptic Riemann Surfaces}
 
 \begin{defn}
@@ -3586,7 +3603,7 @@ We aim to understand what hyperelliptic surfaces look like. Let $X$ be hyperelli
 Let $X$ be hyperelliptic and $A$ the set of critical points of $f$, as above. We can define a map $\tau :X \sm A \to X \sm A$ called the \term[]{hyperelliptic involution}, taking $x_1\in X \sm A$ to the opposing $x_2 \in X \sm A$, with $f(x_1)=f(x_2)$. This extends to a holomorphic map $\tau :X \to X$ by setting $\tau(a)=a$ for $a \in A$. Note that $\tau^2 = \id _X$.
 \end{defn}
 
-Let $g = \genus(X)$, and note that $\genus(\P^1)=0$ and $d=2$. Thus the Riemann-Hurwitz formula (\Cref{thm:riemann-hurwitz}) gives
+Let $g = \genus(X)$, and note that $\genus(\P^1)=0$ and $d=2$. Thus the Riemann--Hurwitz formula (\Cref{thm:riemann-hurwitz}) gives
 \begin{align*}
 2g-2 = -4 + \sum_{a \in A}(\ord_af - 1)=-4 + |A|.
 \end{align*}
