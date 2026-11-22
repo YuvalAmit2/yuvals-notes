@@ -1,0 +1,8 @@
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,decorations.markings,backgrounds,cd,calc}
+\colorlet{c1}{blue!70!black}\colorlet{c2}{red!70!black}\colorlet{c3}{green!45!black}
+\tikzset{
+ ->-/.style={decoration={markings,mark=at position .55 with {\arrow{Stealth[length=2.4mm]}}},postaction={decorate}},
+ ->>-/.style={decoration={markings,mark=at position .5 with {\arrow{Stealth[length=2.4mm]}},mark=at position .6 with {\arrow{Stealth[length=2.4mm]}}},postaction={decorate}},
+ every picture/.append style={show background rectangle, background rectangle/.style={fill=white}}
+}

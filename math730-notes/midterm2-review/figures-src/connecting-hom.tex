@@ -1,0 +1,7 @@
+\documentclass[dvisvgm,tikz,border=6pt]{standalone}\input{preamble}
+\begin{document}
+\begin{tikzcd}[column sep=4.2em,row sep=4em]
+ & {\color{c1}b}\in B_n \arrow[r,"g",mapsto] \arrow[d,"\partial",mapsto] & {\color{c1}z}\in C_n \arrow[l,dashed,c1,bend right=35,"\text{(1) lift}"'] \arrow[d,"\partial",mapsto] \\
+ {\color{c2}a}\in A_{n-1} \arrow[r,"f",mapsto] & \partial b\in B_{n-1} \arrow[r,"g",mapsto] \arrow[l,dashed,c2,bend left=35,"\text{(3) pull back}"] & 0\in C_{n-1}
+\end{tikzcd}
+\end{document}

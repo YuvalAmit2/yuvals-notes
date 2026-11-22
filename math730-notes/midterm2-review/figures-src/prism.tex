@@ -1,0 +1,9 @@
+\documentclass[dvisvgm,tikz,border=4pt]{standalone}\input{preamble}
+\begin{document}\begin{tikzpicture}[scale=1.2]
+\fill[c1!8] (0,0)--(0,2.5)--(3,2.5)--cycle; \fill[c2!8] (0,0)--(3,0)--(3,2.5)--cycle;
+\draw[thick] (0,0)--(3,0) node[midway,below]{$\Delta^1\times\{0\}$ \ (maps by $f\circ\sigma$)};
+\draw[thick] (0,2.5)--(3,2.5) node[midway,above]{$\Delta^1\times\{1\}$ \ (maps by $g\circ\sigma$)};
+\draw[thick] (0,0)--(0,2.5) (3,0)--(3,2.5); \draw[thick] (0,0)--(3,2.5);
+\node[below left] at (0,0){$v_0$};\node[below right] at (3,0){$v_1$};\node[above left] at (0,2.5){$w_0$};\node[above right] at (3,2.5){$w_1$};
+\node[c1] at (0.8,1.75){$[v_0,w_0,w_1]$}; \node[c2] at (2.2,0.7){$[v_0,v_1,w_1]$};
+\end{tikzpicture}\end{document}

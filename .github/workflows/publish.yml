@@ -1,0 +1,139 @@
+# Publish the notes site: on every push to main, rebuild the HTML version of
+# each course that changed and publish it with the PDFs.
+#
+# Site: https://yuvalamit2.github.io/yuvals-notes/
+#   index.html, <course>/<course>.pdf   from this repo, as committed (the PDFs
+#                                       are compiled locally before pushing)
+#   <course>/html/                      built here by yalatex/html/build.mjs
+#
+# A course's HTML is rebuilt only when its files (not its PDF) or the template
+# (yalatex's .sty/.tex files and html/) changed since the last run; the other
+# courses come from the cache. A course that fails to build keeps its last
+# HTML, and the run shows a warning.
+#
+# Needs: Settings > Pages > Build and deployment > Source = "GitHub Actions".
+name: Publish notes
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # "Run workflow" button, e.g. after a template change
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest       # full TeX Live, with make4ht and dvisvgm
+    env:
+      YA_HTML_CACHE: /github/home/.cache/yalatex-html
+    steps:
+      - name: Get the notes
+        uses: actions/checkout@v4
+
+      - name: Get the template
+        uses: actions/checkout@v4
+        with:
+          repository: YuvalAmit2/yalatex
+          path: yalatex
+
+      - name: Install the template
+        run: |
+          texmfhome=$(kpsewhich -var-value TEXMFHOME)
+          mkdir -p "$texmfhome/tex/latex"
+          ln -s "$GITHUB_WORKSPACE/yalatex" "$texmfhome/tex/latex/yalatex"
+          kpsewhich yalatex.sty
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install the HTML build's tools
+        run: |
+          apt-get update -qq && apt-get install -y -qq --no-install-recommends python3-venv >/dev/null
+          yalatex/html/setup.sh
+
+      # LuaTeX's font list takes a while to make the first time
+      - name: Restore LuaTeX's font cache
+        uses: actions/cache@v4
+        with:
+          path: /github/home/.texlive*/texmf-var/luatex-cache
+          key: luatex-cache-v1
+
+      - name: Restore last run's HTML
+        uses: actions/cache/restore@v4
+        with:
+          path: html-cache
+          key: html-${{ github.run_id }}
+          restore-keys: html-
+
+      - name: Build the HTML of changed courses
+        shell: bash
+        run: |
+          set -u
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          # hash_dir DIR FIND-PRUNE-EXPR: a hash of the files under DIR that the expression keeps
+          hash_dir() { (cd "$1" && shift && find . "$@" -type f -print0 | sort -z | xargs -0 -r sha256sum) | sha256sum | cut -c1-16; }
+          template=$(hash_dir yalatex \( -path ./.git -o -path ./build \) -prune -o \( -name '*.sty' -o -name '*.tex' -o -path './html/*' \))
+          mkdir -p html-cache
+          echo "## HTML" >> "$GITHUB_STEP_SUMMARY"
+          for dir in *-notes/; do
+            course=${dir%/}
+            ls "$course"/*.tex >/dev/null 2>&1 || continue
+            key="$template-$(hash_dir "$course" \( -path ./build -o -name '*.pdf' -o -name '*.synctex.gz' \) -prune -o)"
+            if [ -f "html-cache/$course.key" ] && [ "$(cat "html-cache/$course.key")" = "$key" ]; then
+              echo "- $course: unchanged" >> "$GITHUB_STEP_SUMMARY"
+              continue
+            fi
+            echo "::group::$course"
+            if node yalatex/html/build.mjs "$course" --out "html-cache/$course" --home ../../; then
+              echo "$key" > "html-cache/$course.key"
+              echo "- $course: rebuilt" >> "$GITHUB_STEP_SUMMARY"
+            else
+              echo "::warning::$course: the HTML build failed; the site keeps its last HTML (if any)"
+              echo "- $course: **build failed**, kept the last HTML" >> "$GITHUB_STEP_SUMMARY"
+            fi
+            echo "::endgroup::"
+          done
+
+      - name: Save this run's HTML
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: html-cache
+          key: html-${{ github.run_id }}
+
+      - name: Put the site together
+        shell: bash
+        run: |
+          mkdir _site
+          # the repo's own files, as committed (what Pages served before)
+          git ls-files -z | grep -zv '^\.github/' | xargs -0 cp --parents -t _site
+          for out in html-cache/*/; do
+            course=$(basename "$out")
+            [ -d "$course" ] || continue          # a course since removed
+            cp -r "$out" "_site/$course/html"
+            rm -f "_site/$course/html/.yalatex-html"
+          done
+          du -sh _site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

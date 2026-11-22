@@ -1,0 +1,10 @@
+\documentclass[dvisvgm,tikz,border=4pt]{standalone}\input{preamble}
+\begin{document}\begin{tikzpicture}
+\draw[gray] (0,0) circle(1.5);
+\draw[c1,line width=2.2pt] (-25:1.68) arc[start angle=-25,end angle=205,radius=1.68];
+\draw[c2,line width=2.2pt] (155:1.32) arc[start angle=155,end angle=385,radius=1.32];
+\fill (0,1.5) circle(1.6pt) node[above=5pt]{$N$}; \fill (0,-1.5) circle(1.6pt) node[below=5pt]{$S$};
+\node[c1] at (-2.0,1.5){$U=S^n\setminus\{S\}$};
+\node[c2] at (0,-0.6){$L=S^n\setminus\{N\}$};
+\draw[->] (3.0,0.6) node[right,align=left]{$U\cap L$ (a band around\\ the equator) $\simeq S^{n-1}$} -- (1.75,0.1);
+\end{tikzpicture}\end{document}

@@ -1,0 +1,864 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{tikz,tikz-cd}
+\usepackage{standalone}
+\input{figures-src/preamble}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true,linkcolor=blue!60!black]{hyperref}
+\usepackage{booktabs}
+
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\RP}{\mathbb{RP}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\Hred}{\tilde H}
+\newcommand{\fig}[2]{\begin{center}\resizebox{#2}{!}{\includestandalone{figures-src/#1}}\end{center}}
+
+\theoremstyle{definition}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{exercise}{Exercise}[section]
+
+\tcolorboxenvironment{thm}{colback=blue!4,colframe=blue!50!black,boxrule=0.5pt,arc=2pt}
+\tcolorboxenvironment{defn}{colback=green!4,colframe=green!40!black,boxrule=0.5pt,arc=2pt}
+\tcolorboxenvironment{exercise}{colback=orange!5,colframe=orange!60!black,boxrule=0.5pt,arc=2pt}
+\newtcolorbox{note}{colback=gray!6,colframe=gray!60,boxrule=0.5pt,arc=2pt}
+\newtcolorbox{intuition}{colback=yellow!6,colframe=yellow!45!black,boxrule=0.4pt,arc=2pt,title={In words},fonttitle=\small\bfseries,coltitle=black,colbacktitle=yellow!25,toptitle=0.5mm,bottomtitle=0.5mm}
+
+\title{MATH 730 --- Midterm II Review\\\large Homology (Notes \S9--10)}
+\date{}
+\emergencystretch=3em
+
+\begin{document}
+\maketitle
+
+This review assumes you know point-set topology, CW complexes, $\pi_1$, van Kampen and covering spaces, and \emph{nothing} about homology. Read it in order; each section uses the previous ones. Solutions to the exercises are in the appendix at the end --- try each one first.
+
+\begin{note}
+\textbf{On the practice exam.} You haven't looked at \texttt{midterm2p} yet, so none of its problems are solved here. Section~\ref{sec:practice} maps each practice problem to the section it uses.
+\end{note}
+
+\tableofcontents
+
+%=====================================================
+\section{What the exam probably looks like}
+
+From Midterm I and its practice exam:
+\begin{itemize}
+\item \textbf{Format.} 50 minutes, 3 problems $\times$ 10 points.
+\item \textbf{The practice exam predicts the real one closely.} Practice Q1 (define a covering space) appeared \emph{verbatim} on Midterm I; practice Q2 (a cover of $S^1\vee S^1$) came back as a variation. The real exam also had a classic application (no retraction $\R^3\to T^2$) and a standard computation with the big theorem (van Kampen for $\RP^2$).
+\item \textbf{Expect on Midterm II:}
+\begin{enumerate}
+\item a \textbf{definition} ($\sim$5 pts): chain complex, chain map, chain homotopy, exact sequence, relative homology, $\Delta$-complex;
+\item an \textbf{explanation of a construction}: the connecting homomorphism, or why chain-homotopic maps agree on homology;
+\item a \textbf{simplicial homology computation}: $T^2$, Klein bottle, $S^2$, $\RP^2$, cylinder, \dots;
+\item a \textbf{Mayer--Vietoris / long exact sequence argument}: spheres, attaching a cell, wedges, suspensions;
+\item possibly a \textbf{classic application}: Brouwer, $\R^m\not\cong\R^n$, no retraction.
+\end{enumerate}
+\end{itemize}
+
+%=====================================================
+\section{Algebra toolkit}
+
+All homology groups here are finitely generated abelian groups, i.e.\ of the form $\Z^r\oplus\Z/n_1\oplus\cdots\oplus\Z/n_k$.
+
+\subsection{Computing quotients $\Z^m/\langle\text{vectors}\rangle$}
+\textbf{Trick: change basis so the relations become diagonal.}
+\begin{itemize}
+\item If $v\in\Z^m$ is \textbf{primitive} (gcd of coordinates is $1$), it extends to a basis of $\Z^m$, so $\Z^m/\langle v\rangle\cong\Z^{m-1}$.\\
+\emph{Example:} $\Z^3/\langle(1,1,-1)\rangle\cong\Z^2$, using the basis $\{(1,0,0),(0,1,0),(1,1,-1)\}$.
+\item If $v=k w$ with $w$ primitive, then $\Z^m/\langle v\rangle\cong\Z/k\oplus\Z^{m-1}$.\\
+\emph{Example:} $(2,4)=2(1,2)$ and $\{(1,2),(0,1)\}$ is a basis, so $\Z^2/\langle(2,4)\rangle\cong\Z/2\oplus\Z$.
+\item \textbf{Warning:} ``$\Z^3/\Z\cong\Z^2$'' is false in general: $\Z^3/\langle(2,0,0)\rangle\cong\Z/2\oplus\Z^2$. Always check primitivity. This is exactly where torsion (Klein bottle, $\RP^2$) comes from.
+\item For $m$ relations in $\Z^m$ with integer matrix $M$ and $\det M\ne0$, the quotient is finite of order $|\det M|$. \emph{Example:} $\Z^2/\langle(1,1),(1,-1)\rangle$ has order $2$, so it is $\Z/2$.
+\end{itemize}
+
+\subsection{Exact sequences}
+A sequence $\cdots\to A\xrightarrow{f}B\xrightarrow{g}C\to\cdots$ is \textbf{exact at $B$} if $\im f=\ker g$. A \textbf{short exact sequence} $0\to A\xrightarrow{f}B\xrightarrow{g}C\to0$ means: $f$ injective, $g$ surjective, $\im f=\ker g$ (so $C\cong B/f(A)$).
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{ll}
+\toprule
+Exact piece & Conclusion\\
+\midrule
+$0\to A\xrightarrow{f}B$ & $f$ injective\\
+$A\xrightarrow{f}B\to0$ & $f$ surjective\\
+$0\to A\xrightarrow{f}B\to0$ & $f$ is an isomorphism\\
+$0\to A\to0$ & $A=0$\\
+$A\xrightarrow{f}B\to C\to0$ & $C\cong\coker f=B/\im f$\\
+$0\to C\to A\xrightarrow{f}B$ & $C\cong\ker f$\\
+$A\xrightarrow{0}B\xrightarrow{g}C\xrightarrow{0}D$ & $g$ is an isomorphism\\
+$0\to A\to B\to\Z^k\to0$ & splits: $B\cong A\oplus\Z^k$\\
+$0\to\Z\to B\to\Z/2\to0$ & \textbf{ambiguous}: $B\cong\Z$ or $\Z\oplus\Z/2$; need the maps\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{lem}[Five Lemma]
+Given a commutative diagram with exact rows
+\[\begin{tikzcd}
+A\ar[r]\ar[d,"\alpha"] & B\ar[r]\ar[d,"\beta"] & C\ar[r]\ar[d,"\gamma"] & D\ar[r]\ar[d,"\delta"] & E\ar[d,"\varepsilon"]\\
+A'\ar[r] & B'\ar[r] & C'\ar[r] & D'\ar[r] & E'
+\end{tikzcd}\]
+if $\alpha,\beta,\delta,\varepsilon$ are isomorphisms, then so is $\gamma$.
+\end{lem}
+(Proof: diagram chase. Know when to use it: comparing two long exact sequences.)
+
+%=====================================================
+\section{Chain complexes and homology}
+
+\begin{defn}
+A \textbf{chain complex} $C_\bullet=\{C_n,\partial_n\}$ is a sequence of abelian groups and homomorphisms
+\[\cdots\to C_{n+1}\xrightarrow{\partial_{n+1}}C_n\xrightarrow{\partial_n}C_{n-1}\to\cdots\to C_0\to0\]
+with $\partial_n\circ\partial_{n+1}=0$. Elements of $\ker\partial_n$ are \textbf{$n$-cycles}, elements of $\im\partial_{n+1}$ are \textbf{$n$-boundaries}, and
+\[H_n(C)=\frac{\ker\partial_n}{\im\partial_{n+1}}=\frac{\text{cycles}}{\text{boundaries}}.\]
+\end{defn}
+The condition $\partial_n\circ\partial_{n+1}=0$ says exactly that $\im\partial_{n+1}\subseteq\ker\partial_n$ (every boundary is a cycle), so the quotient makes sense. An element of $H_n(C)$ is a coset $[z]=z+\im\partial_{n+1}$ of a cycle $z$; two cycles $z,z'$ are \textbf{homologous}, $[z]=[z']$, iff $z-z'=\partial w$ for some $w\in C_{n+1}$.
+
+\begin{intuition}
+In the topological examples below, $C_n$ consists of formal sums of oriented $n$-dimensional pieces and $\partial$ takes the (signed) edge of a piece. A \emph{cycle} is a combination of pieces with no edge (e.g.\ a closed loop); a \emph{boundary} is a cycle that is the edge of something one dimension up (e.g.\ a loop that bounds a disk). $H_n$ keeps the cycles and throws away those that are filled in, so a nonzero class in $H_n$ detects an ``$n$-dimensional hole'': the loop around a circle is a cycle that bounds nothing, so it survives in $H_1(S^1)$.
+\end{intuition}
+
+\begin{defn}
+A \textbf{chain map} $f:C_\bullet\to D_\bullet$ is a sequence of homomorphisms $f_n:C_n\to D_n$ such that $\partial^D_n\circ f_n=f_{n-1}\circ\partial^C_n$ for all $n$.
+\end{defn}
+A chain map sends cycles to cycles ($\partial fz=f\partial z=f(0)=0$) and boundaries to boundaries ($f(\partial w)=\partial(fw)$). Hence $f_*:H_n(C)\to H_n(D)$, $[z]\mapsto[f z]$, is well defined: if $z'=z+\partial w$ then $fz'=fz+\partial(fw)$.
+\begin{intuition}
+``Commutes with $\partial$'' means: applying $f$ and then taking the edge is the same as taking the edge and then applying $f$. Continuous maps of spaces have this property (the image of the edge of a triangle is the edge of the image triangle), which is why they act on homology.
+\end{intuition}
+
+%=====================================================
+\section{$\Delta$-complexes and simplicial homology}
+
+\subsection{Simplices}
+\begin{defn}
+Points $v_0,\dots,v_n\in\R^m$ are \textbf{affinely independent} if $v_1-v_0,\dots,v_n-v_0$ are linearly independent. The \textbf{$n$-simplex} $[v_0,\dots,v_n]$ is their convex hull
+\[[v_0,\dots,v_n]=\Big\{\textstyle\sum_{i=0}^n t_iv_i:\ t_i\ge0,\ \sum t_i=1\Big\},\]
+\emph{together with the ordering} of its vertices. The \textbf{standard $n$-simplex} is $\Delta^n=[e_0,\dots,e_n]\subset\R^{n+1}$. The \textbf{$i$-th face} is $[v_0,\dots,\widehat{v_i},\dots,v_n]$ (the points with $t_i=0$), with the inherited ordering.
+\end{defn}
+\begin{intuition}
+Affine independence just means the simplex is not squashed: $3$ points not on a line give a genuine triangle, $4$ points not in a plane a genuine tetrahedron. The ordering is extra data that orients the simplex; in pictures we draw it as arrows on edges, from lower to higher index.
+\end{intuition}
+
+The \textbf{face inclusion} $\iota_i:\Delta^{n-1}\to\Delta^n$ is the unique linear map sending $e_0,\dots,e_{n-1}$ in order to $e_0,\dots,\widehat{e_i},\dots,e_n$, i.e.\ $\iota_i(t_0,\dots,t_{n-1})=(t_0,\dots,t_{i-1},0,t_i,\dots,t_{n-1})$. It identifies $\Delta^{n-1}$ with the $i$-th face \emph{preserving vertex order}.
+
+\begin{defn}[Boundary formula --- memorize]
+\[\partial[v_0,\dots,v_n]=\sum_{i=0}^n(-1)^i[v_0,\dots,\widehat{v_i},\dots,v_n].\]
+So $\partial[v_0,v_1]=v_1-v_0$ and $\partial[v_0,v_1,v_2]=[v_1,v_2]-[v_0,v_2]+[v_0,v_1]$.
+\end{defn}
+
+\fig{simplex-boundary}{0.38\textwidth}
+
+Going around the triangle as a loop $v_0\to v_1\to v_2\to v_0$ traverses $[v_0,v_1]$ and $[v_1,v_2]$ forwards and $[v_0,v_2]$ backwards --- hence the signs.
+
+\textbf{Why $\partial\partial=0$:} in $\partial\partial\sigma$, the face with $v_j,v_k$ removed ($j<k$) appears twice: removing $v_k$ then $v_j$ gives sign $(-1)^k(-1)^j$; removing $v_j$ first shifts $v_k$ to position $k-1$, giving $(-1)^j(-1)^{k-1}$. They cancel.
+
+\subsection{$\Delta$-complexes}
+\begin{defn}
+A \textbf{$\Delta$-complex structure} on a space $X$ is a collection of continuous maps $\{\sigma_\alpha:\Delta^{n_\alpha}\to X\}_{\alpha\in I}$ (the \textbf{simplices} of $X$; $n_\alpha$ is the dimension of $\sigma_\alpha$) such that
+\begin{enumerate}[label=(\roman*)]
+\item each restriction $\sigma_\alpha|_{\mathring\Delta^{n_\alpha}}$ to the open simplex (the simplex minus its boundary) is injective, and every $x\in X$ lies in the image of exactly one of these restrictions;
+\item for every $\alpha$ and every face inclusion $\iota_i$, the composite $\sigma_\alpha\circ\iota_i:\Delta^{n_\alpha-1}\to X$ is again one of the maps, i.e.\ $\sigma_\alpha\circ\iota_i=\sigma_\beta$ for some $\beta$ with $n_\beta=n_\alpha-1$;
+\item a set $U\subseteq X$ is open iff $\sigma_\alpha^{-1}(U)$ is open in $\Delta^{n_\alpha}$ for every $\alpha$.
+\end{enumerate}
+\end{defn}
+\begin{intuition}
+Take a pile of standard simplices, one copy of $\Delta^{n_\alpha}$ for each $\alpha$, and glue faces of them together; $X$ is the result, with the quotient topology (that is condition (iii)). Condition (i) says the open simplices are not glued to anything, so $X$ is a disjoint union of open simplices (one ``cell'' per $\alpha$). Condition (ii) says the gluing of faces is rigid: whenever a face of one simplex is glued, it is glued to a lower-dimensional simplex of $X$ \emph{by the order-preserving linear map}, so you never glue an edge backwards or twist a triangle. Different faces may be glued to the \emph{same} simplex, even faces of the same simplex: $S^1$ is one edge whose two endpoints are both glued to one vertex.
+
+So a $\Delta$-complex is a CW complex in which every cell is a simplex and every attaching map is ``linear and order-preserving on each face''. In a picture: each labelled vertex is a $0$-simplex, each labelled arrow is a $1$-simplex (arrow = order $v_0\to v_1$), each triangle is a $2$-simplex, and edges with the same label are the same simplex.
+\end{intuition}
+
+\textbf{Practical rule for polygons.} Triangulate, orient every edge compatibly with the identifications, and check that the three arrows around each triangle \emph{don't form a cycle}. Reason: a $2$-simplex needs a vertex order $v_0<v_1<v_2$ with every edge running from its lower to its higher vertex (that is what (ii) forces). Three arrows on a triangle come from such an order exactly when they are acyclic: then one vertex has both arrows leaving (it is $v_0$), one has both arriving ($v_2$), and the remaining vertex is $v_1$.
+
+\subsection{A gallery of $\Delta$-complex structures}
+\fig{delta-gallery}{\textwidth}
+Notes on the pictures (double arrows only distinguish edge labels; identically labelled edges are glued respecting arrows):
+\begin{enumerate}
+\item \textbf{$S^1$, minimal:} one vertex and one edge whose two ends are the same vertex. Allowed in a $\Delta$-complex (not in a simplicial complex).
+\item \textbf{$S^1$ again}, with two vertices and two edges $e,f$ both from $v_0$ to $v_1$. The loop is $e-f$, and $\partial(e-f)=0$. Same homology, different structure --- this is why independence of the structure matters.
+\item \textbf{$S^1\vee S^1$:} one vertex, two loop edges. Every 1-dimensional $\Delta$-complex is a graph.
+\item \textbf{$D^2$:} a single 2-simplex with its faces. Note this has $H_1=0$: the loop $[v_0,v_1]+[v_1,v_2]-[v_0,v_2]$ is the boundary of the face.
+\item \textbf{Möbius band:} square with the vertical sides glued with a twist, top and bottom left free. Corners pair up into \emph{two} vertices $v,w$. Check: neither triangle has cyclic arrows.
+\item \textbf{$S^2=\partial\Delta^3$:} the four faces of a tetrahedron, vertex order inherited from $[v_0,v_1,v_2,v_3]$. A second structure on $S^2$ besides the two-triangle one in Example~\ref{ex:s2}.
+\item \textbf{Dunce cap:} one triangle with all three edges glued to a single edge $a$ (arrows $v_0\to v_1$, $v_1\to v_2$, $v_0\to v_2$ are not cyclic, so this is legal). It is contractible, though that is not obvious.
+\item \textbf{Non-example:} if the arrows go around the triangle cyclically there is no compatible vertex ordering, so this labelling does not define a $\Delta$-complex. Fix it by reversing an edge, or by subdividing.
+\end{enumerate}
+Together with the torus, Klein bottle and cylinder below, these cover every structure you are likely to be asked for. To build one yourself: draw the space as a polygon with edge identifications, add diagonals until everything is triangles, then orient the new diagonals so no triangle has cyclic arrows.
+
+\begin{exercise}\label{exr:gallery}
+Compute the simplicial homology of (5) the Möbius band and (7) the dunce cap, and of (6) $\partial\Delta^3$ in degree $2$ only (find a generator of $H_2$).
+\end{exercise}
+
+\subsection{Simplicial homology}
+\begin{defn}
+Let $X$ be a $\Delta$-complex with simplices $\{\sigma_\alpha\}$. The group of \textbf{simplicial $n$-chains} $\Delta_n(X)$ is the free abelian group with basis the $n$-dimensional simplices $\{\sigma_\alpha:n_\alpha=n\}$:
+\[\Delta_n(X)=\Big\{\textstyle\sum_\alpha m_\alpha\sigma_\alpha:\ m_\alpha\in\Z,\ \text{only finitely many }m_\alpha\neq0\Big\}.\]
+The boundary map $\partial_n:\Delta_n(X)\to\Delta_{n-1}(X)$ is the homomorphism defined on basis elements by
+\[\partial_n\sigma_\alpha=\sum_{i=0}^n(-1)^i\,\sigma_\alpha\circ\iota_i,\]
+which makes sense because each $\sigma_\alpha\circ\iota_i$ is itself a basis element of $\Delta_{n-1}(X)$ by condition (ii). Then $\partial\partial=0$ (same cancellation as above), and the \textbf{simplicial homology} is $H^\Delta_n(X)=\ker\partial_n/\im\partial_{n+1}$.
+\end{defn}
+\begin{intuition}
+A chain is a ``weighted list'' of simplices of $X$: $2U-3L$ means ``$U$ twice and $L$ three times with the opposite orientation''. The coefficient sign is orientation: $-\sigma$ is $\sigma$ traversed backwards. To compute $\partial\sigma_\alpha$ you write down the boundary formula for the simplex and then \emph{replace each face by the name it has in $X$}. Since the gluing can identify faces, terms can combine or cancel: in the torus both triangles have $c$ as their $[v_0,v_2]$-face, and the dunce cap has $\partial T=a-a+a=a$. That is the only difference from the formula for a single simplex, and it is where all the topology comes from.
+\end{intuition}
+
+\textbf{Recipe.}
+\begin{enumerate}
+\item List vertices, edges, 2-simplices \emph{after identification}.
+\item Compute $\partial_2$ of each triangle (using its vertex order) and $\partial_1$ of each edge: $\partial[v_0,v_1]=v_1-v_0$, i.e.\ (vertex at the arrow's head) $-$ (vertex at its tail).
+\item $H_2=\ker\partial_2$ (no 3-simplices).
+\item $H_1=\ker\partial_1/\im\partial_2$ --- use the basis-change trick.
+\item $H_0=\Delta_0/\im\partial_1$ ($=\Z$ if connected).
+\item \textbf{Shortcut:} with one vertex, $\partial_1=0$.
+\item \textbf{Sanity checks} (true, but not in your notes, so use them to check, not to justify):
+Euler characteristic $\#V-\#E+\#F=\operatorname{rk}H_0-\operatorname{rk}H_1+\operatorname{rk}H_2$; and $H_1(X)\cong\pi_1(X)^{ab}$ for path-connected $X$ (Hurewicz).
+\end{enumerate}
+
+\begin{ex}[$S^1$]
+One vertex $v$, one edge $e$, $\partial e=v-v=0$. So $H_1=\Z$, $H_0=\Z$, $H_n=0$ for $n\ge2$.
+\end{ex}
+
+\begin{ex}[$S^2$]\label{ex:s2}
+\fig{s2-delta}{0.6\textwidth}
+Two triangles $U,L$, both $[v_0,v_1,v_2]$, glued along their boundaries: $3$ vertices, $3$ edges, $2$ faces.
+\begin{itemize}
+\item $\partial U=\partial L=e_{12}-e_{02}+e_{01}$, so $\ker\partial_2=\langle U-L\rangle\cong\Z$ and $\im\partial_2=\langle e_{01}+e_{12}-e_{02}\rangle$.
+\item $\im\partial_1=\langle v_1-v_0,v_2-v_1\rangle$ has rank $2$, so $\ker\partial_1$ has rank $1$; it contains the primitive vector $e_{01}+e_{12}-e_{02}$, so is generated by it.
+\item $H_2=\Z$, $H_1=0$, $H_0=\Z^3/\langle v_1-v_0,v_2-v_1\rangle\cong\Z$. Euler: $3-3+2=2=1-0+1$.
+\end{itemize}
+\end{ex}
+
+\begin{ex}[The torus $T^2$ --- know this cold]\label{ex:torus}
+\fig{torus-delta}{0.4\textwidth}
+One vertex $v$, edges $a,b,c$, triangles $U$ (blue) and $L$ (red); small numbers give the vertex orders.
+\begin{itemize}
+\item In $U$: $[v_0,v_1]=a$, $[v_1,v_2]=b$, $[v_0,v_2]=c$. In $L$: $[v_0,v_1]=b$, $[v_1,v_2]=a$, $[v_0,v_2]=c$. So
+\[\partial U=b-c+a,\qquad\partial L=a-c+b.\]
+\item $\partial_1=0$ (one vertex).
+\item $H_2$: $\partial(mU+nL)=(m+n)(a+b-c)=0\iff n=-m$, so $H_2=\langle U-L\rangle\cong\Z$.
+\item $H_1=\Z\langle a,b,c\rangle/\langle a+b-c\rangle\cong\Z^2$, since $\{a,b,a+b-c\}$ is a basis. Generated by $[a],[b]$.
+\item $H_0=\Z$. Checks: Euler $1-3+2=0=1-2+1$; $\pi_1(T^2)^{ab}=\Z^2$.
+\end{itemize}
+The generator of $H_2$ is $U-L$: the signs make the boundaries cancel. This is the oriented ``fundamental class''.
+\end{ex}
+
+\begin{exercise}[Klein bottle]\label{exr:klein}
+Using this $\Delta$-structure (right edge $a$ reversed relative to the torus), compute $H^\Delta_*(K)$. First find each triangle's vertex order.
+\fig{klein-delta}{0.4\textwidth}
+\end{exercise}
+
+\begin{exercise}[Cylinder --- two vertices, so $\partial_1\neq0$]\label{exr:cyl}
+Compute $H^\Delta_*$ of $S^1\times[0,1]$ with this structure (vertical edges identified; top and bottom not).
+\fig{cylinder-delta}{0.4\textwidth}
+\end{exercise}
+
+\begin{note}
+$\RP^2$ is practice-exam Problem 1. Hint: use the square with both pairs of sides identified ``antipodally'' (as in the Midterm I picture). That gives \textbf{two} vertices, so be careful with $\partial_1$.
+\end{note}
+
+\textbf{Downside of simplicial homology:} it's not obvious it is independent of the $\Delta$-structure or a homeomorphism invariant. Singular homology fixes this, and Section~\ref{sec:delta-sing} shows they agree.
+
+%=====================================================
+\section{Singular homology}
+
+\subsection{Definition}
+\begin{defn}
+A \textbf{singular $n$-simplex} in $X$ is any continuous map $\sigma:\Delta^n\to X$ (no injectivity or other condition). The group of \textbf{singular $n$-chains} $C_n(X)$ is the free abelian group with basis the set of all singular $n$-simplices, so its elements are finite sums $\sum_{j=1}^k m_j\sigma_j$ with $m_j\in\Z$. The boundary is the homomorphism defined on basis elements by
+\[\partial_n\sigma=\sum_{i=0}^n(-1)^i\,\sigma\circ\iota_i\qquad(\sigma\circ\iota_i:\Delta^{n-1}\to X\text{ is ``$\sigma$ restricted to its $i$-th face''}),\]
+$\partial_{n-1}\partial_n=0$, and $H_n(X)=\ker\partial_n/\im\partial_{n+1}$ is the \textbf{$n$-th singular homology group}.
+\end{defn}
+\begin{intuition}
+This is simplicial homology where you are allowed to use \emph{every} way of mapping a simplex into $X$ --- degenerate, crumpled, overlapping, anything --- rather than a fixed chosen decomposition. $C_n(X)$ is uncountably generated and never computed directly. The payoff is that no choices are involved, so invariance under homeomorphism is automatic; the cost is that computing requires the tools of the following sections (homotopy invariance, long exact sequences, Mayer--Vietoris, excision).
+\end{intuition}
+
+\textbf{Functoriality.} A continuous $f:X\to Y$ induces $f_\sharp:C_n(X)\to C_n(Y)$, defined on basis elements by $f_\sharp(\sigma)=f\circ\sigma$. It is a chain map because $f\circ(\sigma\circ\iota_i)=(f\circ\sigma)\circ\iota_i$, so $f_\sharp\partial\sigma=\partial f_\sharp\sigma$. So we get $f_*:H_n(X)\to H_n(Y)$, and directly from the definition $(g\circ f)_\sharp=g_\sharp f_\sharp$ and $(\mathrm{id}_X)_\sharp=\mathrm{id}$, hence $(gf)_*=g_*f_*$ and $\mathrm{id}_*=\mathrm{id}$. Consequently, if $f$ is a homeomorphism with inverse $g$, then $g_*f_*=\mathrm{id}$ and $f_*g_*=\mathrm{id}$, so $f_*$ is an isomorphism.
+
+\textbf{Disjoint unions.} Let $X=\coprod_\alpha X_\alpha$ be the decomposition into path components. Since $\Delta^n$ is path-connected, each singular simplex lands in a single $X_\alpha$, so $C_n(X)=\bigoplus_\alpha C_n(X_\alpha)$; the boundary of a simplex in $X_\alpha$ stays in $X_\alpha$, so $\partial$ respects the splitting, and hence $H_n(X)=\bigoplus_\alpha H_n(X_\alpha)$. (Homology of a space is the sum of the homology of its path components.)
+
+\subsection{$H_0$ counts path components}
+Let $\varepsilon:C_0(X)\to\Z$, $\sum k_ip_i\mapsto\sum k_i$. Since $\partial\gamma=\gamma(1)-\gamma(0)$, $\varepsilon\partial=0$.
+\begin{prop}
+If $X$ is nonempty and path-connected, $\varepsilon$ induces $H_0(X)\cong\Z$.
+\end{prop}
+(Here a singular $0$-simplex $\Delta^0\to X$ is the same as a point of $X$, so $C_0(X)$ is the free abelian group on the points of $X$; and every $0$-chain is a cycle since $C_{-1}=0$, so $H_0(X)=C_0(X)/\im\partial_1$.)
+\begin{proof}
+Since $\varepsilon\circ\partial_1=0$, $\varepsilon$ descends to $\bar\varepsilon:H_0(X)\to\Z$; it is surjective because $\varepsilon(p)=1$ for any point $p$. For injectivity, fix $p_0\in X$ and, for each $p$, a path $\gamma_p:[0,1]=\Delta^1\to X$ from $p_0$ to $p$. Then $\partial\gamma_p=p-p_0$, so $p\sim p_0$ in $H_0$, and any $0$-chain satisfies $\sum k_ip_i\sim(\sum k_i)p_0=\varepsilon(\cdot)\,p_0$. If $\bar\varepsilon[c]=0$, then $c\sim0\cdot p_0=0$.
+\end{proof}
+Combining with the previous paragraph: $H_0(X)\cong\bigoplus_{\text{path components}}\Z$.
+\begin{intuition}
+Two points are homologous iff a path joins them (the path is a 1-chain whose boundary is their difference). So $H_0$ only remembers ``how many points, counted with sign, in each path component''.
+\end{intuition}
+
+\subsection{Reduced homology}
+\begin{defn}
+The \textbf{reduced homology} $\Hred_n(X)$ is the homology of the \emph{augmented} complex
+\[\cdots\to C_1(X)\xrightarrow{\partial_1}C_0(X)\xrightarrow{\varepsilon}\Z\to0,\]
+i.e.\ $\Hred_n(X)=H_n(X)$ for $n\ge1$ and $\Hred_0(X)=\ker\varepsilon/\im\partial_1$.
+\end{defn}
+For $X\neq\emptyset$, $\Hred_0(X)$ is a subgroup of $H_0(X)=C_0/\im\partial_1$, and $\bar\varepsilon$ gives $H_0(X)/\Hred_0(X)\cong\im\varepsilon=\Z$. A quotient that is free splits, so
+\[H_0(X)\cong\Hred_0(X)\oplus\Z.\]
+In particular $\Hred_0(X)=0$ iff $H_0(X)\cong\Z$ iff $X$ is path-connected.
+\begin{intuition}
+Reduced homology deletes the one copy of $\Z$ in degree $0$ that every nonempty space has. It changes nothing else, but makes statements cleaner: ``$\Hred_*(X)=0$'' means ``$X$ has the homology of a point'', and $\Hred_k(S^n)=\Z$ for $k=n$, $0$ otherwise, holds even for $n=0$. In $\Hred_0$, a $0$-chain only counts if its coefficients sum to $0$, e.g.\ $q-p$: so $\Hred_0$ detects whether you can connect points, not how many points there are.
+\end{intuition}
+
+\subsection{Homology of a point}
+There is one singular $n$-simplex $\sigma_n$ for each $n$, and $\partial\sigma_n=\sum_{i=0}^n(-1)^i\sigma_{n-1}$, which is $\sigma_{n-1}$ for even $n\ge2$ and $0$ for odd $n$. The complex is
+\[\cdots\xrightarrow{\cong}\Z\xrightarrow{0}\Z\xrightarrow{\cong}\Z\xrightarrow{0}\Z\to0\qquad(\text{degrees }\dots,3,2,1,0).\]
+In odd degrees the kernel is $\Z$ and equals the image of the next isomorphism; in even degrees $\ge2$, $\partial_n$ is injective. So $H_0=\Z$ and $H_n=0$ for $n\ge1$; $\Hred_*(\mathrm{pt})=0$.
+
+\subsection{Loops give 1-cycles}\label{sec:loops}
+Identify $\Delta^1=[e_0,e_1]$ with $[0,1]$ via $(1-s)e_0+se_1\leftrightarrow s$. Then a path $\gamma:[0,1]\to X$ is a singular 1-simplex with $\partial\gamma=\gamma(1)-\gamma(0)$, so a \emph{loop} ($\gamma(0)=\gamma(1)$) is a 1-cycle. Write $\sim$ for ``homologous'' (differ by a boundary).
+\begin{prop}\label{prop:loops}
+For paths $\gamma,\eta$ in $X$ with $\gamma(1)=\eta(0)$:
+\begin{enumerate}
+\item a constant 1-simplex $c$ is a boundary, so $c\sim0$;
+\item $\gamma+\bar\gamma\sim0$, where $\bar\gamma(s)=\gamma(1-s)$;
+\item $\gamma\cdot\eta\sim\gamma+\eta$ (concatenation);
+\item if $\gamma\simeq\gamma'$ rel endpoints, then $\gamma\sim\gamma'$.
+\end{enumerate}
+\end{prop}
+\begin{proof}
+Each item is ``find a singular 2-simplex with the right three edges''. (1) and (2) are Exercise~\ref{exr:loops}. For (3), let $p:\Delta^2\to[0,1]$, $p(t_0,t_1,t_2)=\tfrac12t_1+t_2$ (linear; sends $e_0,e_1,e_2$ to $0,\tfrac12,1$), and $\sigma=(\gamma\cdot\eta)\circ p$. Its faces: $[e_0,e_1]$ maps to the first half of $\gamma\cdot\eta$, which is $\gamma$; $[e_1,e_2]$ to the second half, which is $\eta$; $[e_0,e_2]$ to all of $\gamma\cdot\eta$. So $\partial\sigma=\eta-\gamma\cdot\eta+\gamma$. For (4), cut the square of a path homotopy $F:[0,1]^2\to X$ along a diagonal into two 2-simplices; the two side edges are constant (rel endpoints), so the boundary of the signed sum is $\gamma-\gamma'$ plus constants, and constants are boundaries by (1).
+\end{proof}
+Consequently $[\gamma]_{\pi_1}\mapsto[\gamma]_{H_1}$ is a well-defined homomorphism $\pi_1(X,x_0)\to H_1(X)$; for path-connected $X$ it induces $\pi_1^{ab}\cong H_1$ (Hurewicz --- true, but not proved in your notes).
+
+\begin{intuition}
+Homology turns loop \emph{words} into \emph{sums}: products become sums, inverses become negatives, and order no longer matters. \textbf{Practical upshot:} in $S^1\vee S^1$ with the two circles $a,b$ (each a 1-cycle), the loop $aba^{-1}b^{-1}$ is homologous to $a+b-a-b=0$, and $abab^{-1}$ is homologous to $2a$. This is how you identify maps in Mayer--Vietoris computations.
+\end{intuition}
+
+\begin{exercise}\label{exr:loops}
+(a) Show that the constant 1-simplex at $p$ is a boundary.\\
+(b) Show that $\gamma+\bar\gamma$ is a boundary, where $\bar\gamma(t)=\gamma(1-t)$.
+\end{exercise}
+
+%=====================================================
+\section{Chain homotopy and homotopy invariance}
+
+\begin{defn}[Know verbatim]
+Let $f,g:C_\bullet\to D_\bullet$ be chain maps. A \textbf{chain homotopy} from $f$ to $g$ is a sequence of homomorphisms $P_n:C_n\to D_{n+1}$ with
+\[\partial_{n+1}P_n+P_{n-1}\partial_n=g_n-f_n\quad\text{for all }n.\]
+\end{defn}
+(Some sources write $f-g$; replace $P$ by $-P$.)
+\begin{intuition}
+This is the algebraic shadow of a homotopy. If $F$ is a homotopy from $f$ to $g$ and $z$ is a cycle, then $P(z)$ should be ``the cylinder swept out by $z$ during the homotopy'': an $(n+1)$-chain whose edge consists of the end $g(z)$, the start $-f(z)$, and the sides $-P(\partial z)$ swept out by the edge of $z$. The equation $\partial P=g-f-P\partial$ says exactly this. When $z$ is a cycle there are no sides, so $g(z)-f(z)$ is literally the edge of the cylinder.
+\end{intuition}
+
+\begin{prop}
+Chain-homotopic maps induce the same map on homology: $f_*=g_*$.
+\end{prop}
+\begin{proof}
+If $\partial z=0$, then $g(z)-f(z)=\partial Pz+P\partial z=\partial(Pz)$, a boundary.
+\end{proof}
+
+\begin{cor}
+If $f:C\to D$, $h:D\to C$ are chain maps with $hf\simeq\mathrm{id}_C$ and $fh\simeq\mathrm{id}_D$ (``$f$ is a \textbf{chain homotopy equivalence}''), then $f_*$ is an isomorphism with inverse $h_*$.
+\end{cor}
+\begin{proof}
+$h_*f_*=(hf)_*=(\mathrm{id})_*=\mathrm{id}$ by the proposition, and likewise $f_*h_*=\mathrm{id}$.
+\end{proof}
+
+\begin{thm}[Homotopy invariance]
+If $f\simeq g:X\to Y$ then $f_*=g_*$. Hence homotopy equivalences induce isomorphisms on $H_n$ and $\Hred_n$.
+\end{thm}
+\begin{proof}[Proof (prism operator)]
+By the proposition it suffices to build a chain homotopy $P:C_n(X)\to C_{n+1}(Y)$ from $f_\sharp$ to $g_\sharp$. Let $F:X\times[0,1]\to Y$ be the homotopy, $F(\cdot,0)=f$, $F(\cdot,1)=g$. In $\Delta^n\times[0,1]$ write $v_i=(e_i,0)$ and $w_i=(e_i,1)$. The prism $\Delta^n\times[0,1]$ is the union of the $n+1$ simplices $[v_0,\dots,v_i,w_i,\dots,w_n]$, $i=0,\dots,n$. For a singular simplex $\sigma$ define
+\[P(\sigma)=\sum_{i=0}^n(-1)^i\,F\circ(\sigma\times\mathrm{id})\big|_{[v_0,\dots,v_i,w_i,\dots,w_n]}\ \in C_{n+1}(Y),\]
+where ``$|_{[\dots]}$'' means: precompose with the linear map $\Delta^{n+1}\to[v_0,\dots,v_i,w_i,\dots,w_n]$ sending $e_0,\dots,e_{n+1}$ to the listed vertices in order.
+\fig{prism}{0.5\textwidth}
+Expanding $\partial P(\sigma)$ with the boundary formula, the faces fall into three kinds:
+\begin{itemize}
+\item faces that are \emph{interior} to the prism (shared by two consecutive simplices) appear twice with opposite signs and cancel, except for two survivors:
+\item the top $[w_0,\dots,w_n]$ (from $i=0$, deleting $v_0$), which is $F(\cdot,1)\circ\sigma=g\circ\sigma$, with sign $+$, and the bottom $[v_0,\dots,v_n]$ (from $i=n$, deleting $w_n$), which is $f\circ\sigma$, with sign $-$;
+\item faces lying over the boundary $\partial\Delta^n$, which add up to $-P(\partial\sigma)$.
+\end{itemize}
+So $\partial P(\sigma)=g_\sharp\sigma-f_\sharp\sigma-P(\partial\sigma)$, i.e.\ $\partial P+P\partial=g_\sharp-f_\sharp$. For $n=1$ (figure): $P(\sigma)=[v_0,w_0,w_1]-[v_0,v_1,w_1]$, and $\partial P(\sigma)=[w_0,w_1]-[v_0,v_1]-\big([v_1,w_1]-[v_0,w_0]\big)$, the bracket being $P(\partial\sigma)=P(\sigma(e_1))-P(\sigma(e_0))$ (for a $0$-simplex, $P$ is the vertical segment $[v_0,w_0]$). (The diagonal $[v_0,w_1]$ appears in both triangles and cancels.)
+\end{proof}
+\begin{intuition}
+To compare $f\circ\sigma$ and $g\circ\sigma$, slide $\sigma$ along the homotopy; it sweeps out a prism. Chop the prism into simplices and you get $P(\sigma)$. Its edge is top minus bottom minus the sides, which is the chain homotopy equation.
+\end{intuition}
+
+\textbf{Consequences.}
+\begin{itemize}
+\item If $X$ is contractible, the constant map $X\to\{p\}$ is a homotopy equivalence, so $H_n(X)\cong H_n(\mathrm{pt})$ for all $n$; hence $\Hred_*(X)=0$.
+\item If $X$ deformation retracts onto $A$, the inclusion $A\hookrightarrow X$ induces isomorphisms. E.g.\ $\R^n\setminus\{0\}$ retracts onto $S^{n-1}$ via $(x,t)\mapsto(1-t)x+tx/|x|$; the solid torus and the Möbius band retract onto their core circles.
+\end{itemize}
+
+%=====================================================
+\section{Short exact sequences give long exact sequences}
+
+A \textbf{short exact sequence of chain complexes} $0\to A_\bullet\xrightarrow{f}B_\bullet\xrightarrow{g}C_\bullet\to0$ is a pair of chain maps with each $0\to A_n\to B_n\to C_n\to0$ exact.
+
+\begin{thm}[Long exact sequence]
+There are homomorphisms $d:H_n(C)\to H_{n-1}(A)$ making
+\[\cdots\to H_n(A)\xrightarrow{f_*}H_n(B)\xrightarrow{g_*}H_n(C)\xrightarrow{d}H_{n-1}(A)\xrightarrow{f_*}H_{n-1}(B)\to\cdots\to H_0(C)\to0\]
+exact.
+
+\textbf{Naturality.} Suppose $\alpha:A\to A'$, $\beta:B\to B'$, $\gamma:C\to C'$ are chain maps making the squares
+\[\begin{tikzcd}
+0\ar[r] & A\ar[r,"f"]\ar[d,"\alpha"] & B\ar[r,"g"]\ar[d,"\beta"] & C\ar[r]\ar[d,"\gamma"] & 0\\
+0\ar[r] & A'\ar[r,"f'"] & B'\ar[r,"g'"] & C'\ar[r] & 0
+\end{tikzcd}\]
+commute (with exact rows). Then $d'\circ\gamma_*=\alpha_*\circ d$, so the two long exact sequences form a commutative ladder.
+\end{thm}
+\begin{intuition}
+Naturality means ``the LES is compatible with maps''. It is what lets you compare two long exact sequences (e.g.\ with the Five Lemma), and it is why, for instance, a map of pairs $(X,A)\to(Y,B)$ gives a map between their long exact sequences.
+\end{intuition}
+
+\subsection{The connecting homomorphism --- be able to explain this}
+\[\begin{tikzcd}
+0\ar[r] & A_n\ar[r,"f"]\ar[d,"\partial"] & B_n\ar[r,"g"]\ar[d,"\partial"] & C_n\ar[r]\ar[d,"\partial"] & 0\\
+0\ar[r] & A_{n-1}\ar[r,"f"] & B_{n-1}\ar[r,"g"] & C_{n-1}\ar[r] & 0
+\end{tikzcd}\]
+\fig{connecting-hom}{0.55\textwidth}
+Given $[z]\in H_n(C)$:
+\begin{enumerate}
+\item \textbf{Lift:} $g$ is surjective, so choose $b\in B_n$ with $g(b)=z$.
+\item \textbf{Boundary:} $g(\partial b)=\partial g(b)=\partial z=0$, so $\partial b\in\ker g=\im f$.
+\item \textbf{Pull back:} there is a unique $a\in A_{n-1}$ with $f(a)=\partial b$.
+\item \textbf{$a$ is a cycle:} $f(\partial a)=\partial\partial b=0$ and $f$ is injective.
+\item Define $d[z]=[a]$.
+\end{enumerate}
+Slogan: \emph{lift, take boundary, pull back}.
+
+\textbf{Well-definedness.} Two choices were made: the lift $b$ and the representative $z$.
+\begin{itemize}
+\item \emph{Another lift $b'$ of $z$:} $g(b-b')=0$, so $b-b'=f(a')$ for some $a'\in A_n$. Then $f(a)-f(a_{\text{new}})=\partial b-\partial b'=\partial f(a')=f(\partial a')$, and by injectivity $a-a_{\text{new}}=\partial a'$. Same class in $H_{n-1}(A)$.
+\item \emph{Another representative $z+\partial c$, $c\in C_{n+1}$:} lift $c$ to $\tilde c\in B_{n+1}$; then $b+\partial\tilde c$ lifts $z+\partial c$ and $\partial(b+\partial\tilde c)=\partial b$, so we get the same $a$. Combined with the first point, any lift gives the same class.
+\end{itemize}
+Finally $d$ is a homomorphism, since lifts of $z_1+z_2$ can be chosen as $b_1+b_2$.
+\begin{intuition}
+In topological situations $d$ is ``take the boundary''. For a pair $(X,A)$, a relative cycle is a chain $z$ in $X$ whose edge lies in $A$, and $d[z]=[\partial z]$ is that edge, now viewed as a cycle in $A$. The abstract recipe is just this, made precise: the lift is ``$z$ as a chain upstairs'', its boundary is not zero upstairs, but it comes from the subcomplex.
+\end{intuition}
+
+\textbf{Exactness at $H_n(B)$ (sample).} $g_*f_*=0$. Conversely if $g_*[b]=0$ then $g(b)=\partial c$; lift $c$ to $b'$, then $g(b-\partial b')=0$, so $b-\partial b'=f(a)$ with $a$ a cycle, and $f_*[a]=[b]$.
+
+\begin{exercise}\label{exr:exact}
+Prove exactness at $H_n(C)$: $\im g_*=\ker d$.
+\end{exercise}
+
+%=====================================================
+\section{Relative homology and the LES of a pair}
+
+\begin{defn}
+For a subspace $A\subseteq X$, $C_n(A)$ is a subgroup of $C_n(X)$ (a simplex in $A$ is a simplex in $X$) and $\partial(C_n(A))\subseteq C_{n-1}(A)$. So $\partial$ descends to the quotients
+\[C_n(X,A):=C_n(X)/C_n(A),\]
+giving a chain complex whose homology is the \textbf{relative homology} $H_n(X,A)$.
+\end{defn}
+Unwinding the quotient:
+\begin{itemize}
+\item $C_n(X,A)$ is free with basis the singular simplices \emph{not} contained in $A$;
+\item a class $[z]$, $z\in C_n(X)$, is a \textbf{relative cycle} iff $\partial z\in C_{n-1}(A)$;
+\item it is a \textbf{relative boundary} iff $z=\partial w+a$ for some $w\in C_{n+1}(X)$, $a\in C_n(A)$.
+\end{itemize}
+\begin{intuition}
+Homology of $X$ ``modulo $A$'': chains in $A$ are declared to be zero. So a relative cycle may have its edge anywhere in $A$ (e.g.\ a path from one point of $A$ to another, or a disk whose boundary circle lies in $A$), and anything that can be pushed into $A$ up to a boundary is trivial. For good pairs, $H_n(X,A)\cong\Hred_n(X/A)$ (Section~\ref{sec:excision}), which is the cleanest picture: collapse $A$ to a point.
+\end{intuition}
+
+\begin{thm}[LES of a pair]
+The inclusion $i:C(A)\to C(X)$ and quotient $j:C(X)\to C(X,A)$ form a short exact sequence of chain complexes $0\to C(A)\to C(X)\to C(X,A)\to0$, hence a long exact sequence
+\[\cdots\to H_n(A)\xrightarrow{i_*}H_n(X)\xrightarrow{j_*}H_n(X,A)\xrightarrow{d}H_{n-1}(A)\to\cdots\to H_0(X,A)\to0,\]
+where $d[z]=[\partial z]$. (Recipe of Section 7.1: the lift of $[z]$ is $z\in C_n(X)$ itself, and $\partial z$ already lies in $C_{n-1}(A)$.)
+
+If $A\neq\emptyset$, the same holds with $\Hred_n(A)$, $\Hred_n(X)$ in place of $H_n$ (the relative groups are unchanged). For a triple $B\subseteq A\subseteq X$, the short exact sequence $0\to C(A,B)\to C(X,B)\to C(X,A)\to0$ gives an LES
+$\cdots\to H_n(A,B)\to H_n(X,B)\to H_n(X,A)\to H_{n-1}(A,B)\to\cdots$.
+\end{thm}
+
+Consequences:
+\begin{itemize}
+\item $H_n(X,\{x_0\})\cong\Hred_n(X)$: in the reduced LES of the pair, $\Hred_*(\{x_0\})=0$, so $0\to\Hred_n(X)\xrightarrow{j_*}H_n(X,\{x_0\})\to0$.
+\item If $A\hookrightarrow X$ is a homotopy equivalence (e.g.\ $X$ deformation retracts onto $A$), then $H_n(X,A)=0$: in $H_n(A)\xrightarrow{\cong}H_n(X)\to H_n(X,A)\to H_{n-1}(A)\xrightarrow{\cong}H_{n-1}(X)$, both maps touching $H_n(X,A)$ are zero.
+\end{itemize}
+
+\begin{ex}[$(D^n,S^{n-1})$]
+$\Hred_*(D^n)=0$, so $H_k(D^n,S^{n-1})\xrightarrow{d,\ \cong}\Hred_{k-1}(S^{n-1})$: $d$ takes a relative cycle filling the disk to its boundary sphere.
+\end{ex}
+
+\begin{exercise}\label{exr:retract}
+(a) If $r:X\to A$ is a retraction, show $i_*:H_n(A)\to H_n(X)$ is injective.\\
+(b) Show there is no retraction of the solid torus $S^1\times D^2$ onto its boundary torus. (Compare Midterm I, Q1.)
+\end{exercise}
+
+%=====================================================
+\section{Small simplices and Mayer--Vietoris}
+
+\subsection{Small simplices}
+\begin{defn}
+Let $\mathcal U$ be a collection of subsets of $X$ whose \emph{interiors} cover $X$. A singular simplex $\sigma$ is \textbf{$\mathcal U$-small} if $\sigma(\Delta^n)\subseteq U$ for some $U\in\mathcal U$. $C_n^{\mathcal U}(X)\subseteq C_n(X)$ is the subgroup generated by $\mathcal U$-small simplices. It is a subcomplex, since faces of a $\mathcal U$-small simplex are $\mathcal U$-small.
+\end{defn}
+\begin{thm}[Small simplices]
+There is a chain map $\rho:C_\bullet(X)\to C_\bullet^{\mathcal U}(X)$ such that $\rho\circ\iota=\mathrm{id}$ and $\iota\circ\rho\simeq\mathrm{id}$, where $\iota$ is the inclusion. In particular $\iota_*:H_n(C^{\mathcal U}(X))\to H_n(X)$ is an isomorphism.
+\end{thm}
+\begin{intuition}
+Any cycle can be replaced, without changing its homology class, by a homologous cycle built only from tiny simplices --- each one inside some set of the cover. So for computing homology we may pretend every simplex is small. Without this, there is no way to split a chain on $X=A\cup B$ into a part in $A$ plus a part in $B$, which is exactly what Mayer--Vietoris and excision need.
+\end{intuition}
+
+\textbf{How it works.} The \textbf{barycenter} of $[v_0,\dots,v_n]$ is $b=\frac1{n+1}\sum v_i$. The \textbf{barycentric subdivision} is defined inductively: subdivide each face, then cone each resulting $(n-1)$-simplex $[w_0,\dots,w_{n-1}]$ off $b$, giving the $n$-simplices $[b,w_0,\dots,w_{n-1}]$.
+\fig{barycentric}{0.28\textwidth}
+\begin{enumerate}
+\item \textbf{Shrinking:} every simplex of the subdivision has diameter $\le\frac{n}{n+1}\operatorname{diam}[v_0,\dots,v_n]$, so after $m$ subdivisions diameters are $\le(\frac n{n+1})^m\operatorname{diam}\Delta^n\to0$.
+\item \textbf{Smallness:} for a singular $\sigma:\Delta^n\to X$, the sets $\sigma^{-1}(\operatorname{int}U)$ form an open cover of the compact metric space $\Delta^n$; let $\delta$ be a Lebesgue number. Once the pieces of $\Delta^n$ have diameter $<\delta$, each lies in some $\sigma^{-1}(\operatorname{int}U)$, so $\sigma$ restricted to it is $\mathcal U$-small.
+\item \textbf{Algebra:} the subdivision operator $S$ on chains (on a linear simplex: $S\sigma=b_\sigma\cdot S(\partial\sigma)$, ``cone the subdivided boundary from the barycenter''; on singular simplices: $S\sigma=\sigma_\sharp S(\mathrm{id}_{\Delta^n})$) is a chain map, and $T\sigma=b_\sigma\cdot(\sigma-T\partial\sigma)$ satisfies $\partial T+T\partial=\mathrm{id}-S$. So $S\simeq\mathrm{id}$, and the same holds for $S^m$. Choosing for each $\sigma$ an $m(\sigma)$ large enough and patching gives $\rho$.
+\end{enumerate}
+For the exam: know the statement, the role of the Lebesgue number, and why it is needed.
+
+\subsection{Mayer--Vietoris}
+\begin{thm}[Mayer--Vietoris]
+If $X=\operatorname{int}A\cup\operatorname{int}B$, there is a long exact sequence
+\[\cdots\to H_n(A\cap B)\xrightarrow{\varphi}H_n(A)\oplus H_n(B)\xrightarrow{\psi}H_n(X)\xrightarrow{d}H_{n-1}(A\cap B)\to\cdots\to H_0(X)\to0\]
+where $\varphi(x)=(i_{A*}x,\ i_{B*}x)$ and $\psi(a,b)=j_{A*}a-j_{B*}b$, with $i_A:A\cap B\hookrightarrow A$, $i_B:A\cap B\hookrightarrow B$, $j_A:A\hookrightarrow X$, $j_B:B\hookrightarrow X$ the inclusions. The same holds for $\Hred$ if $A\cap B\neq\emptyset$.
+\end{thm}
+\begin{intuition}
+$H_n(X)$ is assembled from the pieces: classes in $A$ and $B$ give classes in $X$ ($\psi$), but classes coming from the overlap are counted twice ($\varphi$), and a cycle in $X$ that is not made of cycles in $A$ and $B$ can be cut along the overlap, producing a cycle one dimension lower in $A\cap B$ ($d$).
+\end{intuition}
+
+\textbf{Proof.} Consider
+\[0\to C_n(A\cap B)\xrightarrow{x\mapsto(x,x)}C_n(A)\oplus C_n(B)\xrightarrow{(a,b)\mapsto a-b}C_n^{\{A,B\}}(X)\to0.\]
+This is a short exact sequence of chain complexes:
+\begin{itemize}
+\item the first map is injective;
+\item $(a,b)\mapsto a-b$ is surjective onto $C_n^{\{A,B\}}(X)$ \emph{by definition} of small chains (every small simplex lies in $A$ or in $B$);
+\item exactness in the middle: $a-b=0$ in $C_n(X)$ means $a=b$ as formal sums of simplices; such a sum uses only simplices lying in $A$ and in $B$, i.e.\ in $A\cap B$, so $(a,b)=(x,x)$ with $x\in C_n(A\cap B)$.
+\end{itemize}
+Its LES is the MV sequence with $H_n(C^{\{A,B\}}(X))$ in place of $H_n(X)$, and the small simplices theorem (with $\mathcal U=\{A,B\}$) identifies these. Note the third term must be the small chains: a simplex lying in neither $A$ nor $B$ is not of the form $a-b$.
+
+For reduced MV, augment each complex by $\Z$ in degree $-1$ using $0\to\Z\xrightarrow{(1,1)}\Z\oplus\Z\xrightarrow{(m,n)\mapsto m-n}\Z\to0$, which is exact.
+
+\textbf{The connecting map.} Let $z$ be a cycle in $X$. By small simplices, $z$ is homologous to a cycle of the form $x+y$ with $x\in C_n(A)$, $y\in C_n(B)$. Since $\partial(x+y)=0$, $\partial x=-\partial y$ is a chain lying in both $A$ and $B$, i.e.\ in $C_{n-1}(A\cap B)$, and
+\[d[z]=[\partial x]\in H_{n-1}(A\cap B).\]
+(Recipe check: lift $x+y$ to $(x,-y)$; its boundary $(\partial x,-\partial y)=(\partial x,\partial x)$ is the image of $\partial x$.)
+
+\begin{ex}[Seeing $d$ on the circle]
+$S^1=A\cup B$ with $A$ an open upper arc and $B$ an open lower arc, overlapping in two small arcs around the points $E$ (east) and $W$ (west); $A\cap B\simeq S^0=\{E,W\}$. The loop $z$ going once around is homologous to $x+y$ with $x$ the upper half from $E$ to $W$ and $y$ the lower half from $W$ to $E$. Then $d[z]=[\partial x]=[W-E]$, which generates $\Hred_0(A\cap B)\cong\Z$. So the loop is ``cut'' at the two seam points.
+\end{ex}
+
+\textbf{How to use MV.}
+\begin{enumerate}
+\item Choose open $A,B$ with known homology (contractible, or deformation retracting onto something simple); understand $A\cap B$.
+\item Write out the sequence, usually in reduced homology.
+\item Look for zeros: they force isomorphisms, injections, surjections.
+\item If needed, identify $\varphi$ explicitly, often via Section~\ref{sec:loops} (loops $\mapsto$ words $\mapsto$ sums).
+\end{enumerate}
+
+\subsection{Spheres}
+\fig{mv-sphere}{0.6\textwidth}
+$U=S^n\setminus\{S\}$ and $L=S^n\setminus\{N\}$ are open, and each is homeomorphic to $\R^n$ by stereographic projection, so contractible. Under stereographic projection from $S$, $U\cap L=S^n\setminus\{N,S\}$ corresponds to $\R^n\setminus\{0\}$, which deformation retracts onto $S^{n-1}$; so $U\cap L\simeq S^{n-1}$. Reduced MV ($n\ge1$, so $U\cap L\neq\emptyset$):
+\[0=\Hred_k(U)\oplus\Hred_k(L)\to\Hred_k(S^n)\xrightarrow{d}\Hred_{k-1}(S^{n-1})\to\Hred_{k-1}(U)\oplus\Hred_{k-1}(L)=0.\]
+So $\Hred_k(S^n)\cong\Hred_{k-1}(S^{n-1})$. Base case: $S^0$ is two points, $\Hred_0(S^0)=\Z$. By induction:
+\begin{thm}
+$\Hred_k(S^n)\cong\Z$ if $k=n$ and $0$ otherwise. Equivalently, for $n\ge1$, $H_k(S^n)=\Z$ for $k=0,n$ and $0$ otherwise.
+\end{thm}
+
+\subsection{Wedge sums}
+\begin{prop}
+Suppose each basepoint $x_i\in X_i$ has an open neighborhood $V_i\subseteq X_i$ that deformation retracts onto $x_i$ (true e.g.\ for vertices of CW complexes). Then the inclusions $X_i\hookrightarrow\bigvee_iX_i$ induce
+\[\bigoplus_i\Hred_n(X_i)\xrightarrow{\ \cong\ }\Hred_n\Big(\bigvee_iX_i\Big).\]
+\end{prop}
+\begin{proof}[Proof for two spaces]
+In $X=X_1\vee X_2$ let $A=X_1\vee V_2$ and $B=V_1\vee X_2$. These are open, $A$ deformation retracts onto $X_1$ (retract $V_2$ to the wedge point), $B$ onto $X_2$, and $A\cap B=V_1\vee V_2$ deformation retracts onto the point, so $\Hred_*(A\cap B)=0$. Reduced MV becomes $0\to\Hred_n(A)\oplus\Hred_n(B)\xrightarrow{\psi}\Hred_n(X)\to0$, so $\psi$ is an isomorphism. (The sign in $\psi(a,b)=a-b$ is harmless.) The general finite case follows by induction.
+\end{proof}
+\begin{intuition}
+Gluing at a single (nice) point creates no new cycles and kills none, so the holes of a wedge are just the holes of the pieces.
+\end{intuition}
+
+\subsection{Attaching a cell (the torus)}\label{sec:cell}
+
+\medskip\noindent\textbf{What we are trying to do.} Most spaces we care about are built by gluing disks onto simpler spaces:
+\begin{itemize}
+\item the torus is $S^1\vee S^1$ with a 2-disk glued along the loop $aba^{-1}b^{-1}$;
+\item $S^n$ is a point with an $n$-disk glued on, its whole boundary sent to the point;
+\item more generally, a CW complex is built one cell at a time.
+\end{itemize}
+So it is natural to ask: \emph{if we know $H_*(X)$ and we glue a $k$-disk onto $X$ along its boundary sphere, what is the homology of the result?} The two simplest cases show the two things that can happen:
+\fig{cell-examples}{0.8\textwidth}
+\begin{itemize}
+\item Glue $D^2$ onto $S^1$ by the identity of the boundary. The disk fills in the loop, so the old 1-dimensional hole disappears: $H_1$ goes from $\Z$ to $0$.
+\item Glue $D^2$ onto a point. Its boundary circle was already ``filled'' (it is a constant loop), so there is nothing to fill; instead the disk closes up into a sphere and creates a new 2-dimensional hole: $H_2$ goes from $0$ to $\Z$.
+\end{itemize}
+What decides between these is the class of the boundary of the new disk in the homology of $X$. The goal of this subsection is to make that precise, using Mayer--Vietoris. The answer is that everything is controlled by a single homomorphism
+\[\varphi_*:\Hred_{k-1}(S^{k-1})\cong\Z\longrightarrow\Hred_{k-1}(X),\]
+which records ``the boundary of the new disk, as a $(k-1)$-dimensional class in $X$''.
+
+\medskip\noindent\textbf{The construction.} Given a continuous map $\varphi:S^{k-1}\to X$ (the \textbf{attaching map}), let
+\[Y=X\cup_\varphi D^k=(X\sqcup D^k)/(x\sim\varphi(x)\text{ for }x\in S^{k-1}),\]
+with quotient map $q$. In words: each point $x$ on the boundary sphere of the disk is glued to the point $\varphi(x)$ of $X$. The \textbf{open cell} is $e^k=q(\operatorname{int}D^k)$, a copy of the open disk, and $0$ denotes $q(0)$, its center.
+
+\medskip\noindent\textbf{The plan: choose $A$ and $B$.} To apply Mayer--Vietoris we need two open sets covering $Y$ whose homology we know, with an overlap we also know. The natural choice is to separate ``the new disk'' from ``the old space'':
+\fig{cell-attach}{0.95\textwidth}
+\begin{itemize}
+\item $B=e^k\cong\operatorname{int}D^k$, the open cell. It is open and contractible, so $\Hred_*(B)=0$.
+\item $A=Y\setminus\{0\}$, everything except the center of the disk. It is open, and it deformation retracts onto $X$ by pushing the punctured disk out to its rim: use $H_t(x)=(1-t)x+t\,x/|x|$ on $D^k\setminus\{0\}$ and the identity on $X$. This is well defined on the quotient because it fixes $S^{k-1}$ pointwise. At $t=1$ it gives a retraction $r:A\to X$, a homotopy equivalence, so $r_*:\Hred_*(A)\xrightarrow{\cong}\Hred_*(X)$.
+\item $A\cap B=e^k\setminus\{0\}\cong\operatorname{int}D^k\setminus\{0\}$, a punctured open disk. It deformation retracts onto the sphere $S_{1/2}=\{|x|=\tfrac12\}$, so $\Hred_*(A\cap B)\cong\Hred_*(S^{k-1})$, via $S^{k-1}\to S_{1/2}$, $x\mapsto x/2$.
+\item Clearly $A\cup B=Y$.
+\end{itemize}
+
+\medskip\noindent\textbf{Identifying the map.} In MV, the map $\Hred_{k-1}(A\cap B)\to\Hred_{k-1}(A)\oplus\Hred_{k-1}(B)$ is $x\mapsto(i_{A*}x,\,i_{B*}x)$, and the second component is $0$ because $\Hred_*(B)=0$. For the first component, follow a point of $S^{k-1}$ through the identifications:
+\[S^{k-1}\xrightarrow{x\mapsto x/2}S_{1/2}\subseteq A\cap B\xrightarrow{i_A}A\xrightarrow{r}X,\qquad x\mapsto \tfrac x2\mapsto \varphi\big(\tfrac{x/2}{|x/2|}\big)=\varphi(x).\]
+So after identifying $\Hred_*(A\cap B)\cong\Hred_*(S^{k-1})$ and $\Hred_*(A)\cong\Hred_*(X)$, the MV map is exactly $\varphi_*$. Likewise $\Hred_*(A)\to\Hred_*(Y)$ becomes the map induced by the inclusion $X\hookrightarrow Y$, because $X\hookrightarrow A$ is the homotopy inverse of $r$.
+
+\medskip\noindent\textbf{The result.} Substituting all of this into reduced MV (valid since $A\cap B\neq\emptyset$) gives, for every $n$, the exact sequence
+\[\cdots\to\Hred_n(S^{k-1})\xrightarrow{\varphi_*}\Hred_n(X)\longrightarrow\Hred_n(Y)\xrightarrow{\ d\ }\Hred_{n-1}(S^{k-1})\xrightarrow{\varphi_*}\Hred_{n-1}(X)\to\cdots\]
+Since $\Hred_*(S^{k-1})$ is $\Z$ in degree $k-1$ and $0$ otherwise, most terms of this sequence are $0$. Deciding which ones, and reading off $H_*(Y)$, is the whole computation. You will do it in general in Practice Problem 3, so here it is only done for the torus.
+\begin{intuition}
+Remove the center of the new disk: what is left squashes back onto $X$. The disk itself is contractible. Their overlap is a thin sphere just inside the rim of the disk, and pushing that sphere out to the rim is exactly the attaching map. So MV compares $X$ with ``$X$ with the image of $\varphi$ filled in''. The part of $\Hred_{k-1}(X)$ hit by $\varphi_*$ is filled in and dies in $Y$ (the cokernel of $\varphi_*$ survives). If $\varphi_*$ kills the generator, the disk closes up and gives a new class in degree $k$ (the kernel of $\varphi_*$ contributes to $\Hred_k(Y)$). These match the two examples above.
+\end{intuition}
+
+\begin{ex}[Torus]
+$T^2=X\cup_\varphi D^2$ with $X=S^1\vee S^1$ (loops $a,b$) and $\varphi=aba^{-1}b^{-1}$. Here $k=2$, and the relevant part of the sequence is
+\[\underbrace{\Hred_2(X)}_{0}\to\Hred_2(T^2)\xrightarrow{d}\underbrace{\Hred_1(S^1)}_{\Z}\xrightarrow{\varphi_*}\underbrace{\Hred_1(X)}_{\Z^2}\to\Hred_1(T^2)\to\underbrace{\Hred_0(S^1)}_{0}.\]
+(The wedge sum proposition gives $\Hred_*(X)$.) So $\Hred_2(T^2)\cong\ker\varphi_*$ and $\Hred_1(T^2)\cong\coker\varphi_*$. To compute $\varphi_*$: $H_1(S^1)\cong\Z$ is generated by the loop $\ell$ going once around. In the one-vertex $\Delta$-structure on $S^1$ this loop is the edge $e$, which generates $H^\Delta_1(S^1)=\Z$, and simplicial homology agrees with singular (Section~\ref{sec:delta-sing}). Its image $\varphi_*[\ell]=[\varphi\circ\ell]$ is the class of the loop $aba^{-1}b^{-1}$ in $X$, which by Proposition~\ref{prop:loops} is $a+b-a-b=0$. So $\varphi_*=0$, giving $\Hred_2(T^2)\cong\Z$ and $\Hred_1(T^2)\cong\Z^2$, matching Example~\ref{ex:torus}. (The boundary loop was already $0$ in $H_1$, so nothing is filled in and a new 2-dimensional class appears.)
+
+\textbf{Klein bottle, same method:} $\varphi=abab^{-1}$, so $\varphi_*(1)=a+b+a-b=2a$, which is injective. Hence $H_2=\ker\varphi_*=0$ and $H_1=\coker\varphi_*=\Z^2/\langle(2,0)\rangle=\Z/2\oplus\Z$.
+\end{ex}
+
+\begin{note}
+Practice-exam Problem 3 uses exactly this set-up (attaching an $(n+2)$-cell to a space with no homology above degree $n$). Write down the sequence above in each degree, notice which terms vanish for degree reasons, and notice why the dimension gap means you never need to know $\varphi_*$.
+\end{note}
+
+\begin{exercise}[Suspension]\label{exr:susp}
+The suspension of a nonempty $X$ is $SX=X\times[-1,1]/\!\sim$, collapsing $X\times\{1\}$ to a point and $X\times\{-1\}$ to another point. Show $\Hred_{n+1}(SX)\cong\Hred_n(X)$ for all $n$. (Since $SS^n\cong S^{n+1}$, this generalizes the sphere computation.)
+\end{exercise}
+
+\begin{exercise}[Klein bottle via Möbius bands]\label{exr:mobius}
+The Klein bottle is two Möbius bands glued along their boundary circles. Use MV to compute $H_*(K)$. You may use that the boundary of a Möbius band wraps twice around its core, so $H_1(\partial M)\to H_1(M)$ is $\times2$.
+\end{exercise}
+
+%=====================================================
+\section{Excision and quotients}\label{sec:excision}
+
+\begin{thm}[Excision]
+\begin{enumerate}
+\item If $X=\operatorname{int}A\cup\operatorname{int}B$, then $H_n(B,A\cap B)\to H_n(X,A)$ is an isomorphism.
+\item If $Z\subseteq A\subseteq X$ with $\overline Z\subseteq\operatorname{int}A$, then $H_n(X\setminus Z,A\setminus Z)\to H_n(X,A)$ is an isomorphism.
+\end{enumerate}
+\end{thm}
+The two are equivalent: given (2), set $B=X\setminus Z$; then $\overline Z\subseteq\operatorname{int}A$ says exactly $X=\operatorname{int}A\cup\operatorname{int}B$, and $(B,A\cap B)=(X\setminus Z,A\setminus Z)$.
+\begin{intuition}
+In $H_n(X,A)$, everything inside $A$ is already zero, so deleting a part $Z$ buried \emph{strictly inside} $A$ changes nothing. The hypothesis $\overline Z\subseteq\operatorname{int}A$ is what makes ``buried'' precise: a small simplex near $Z$ lies entirely in $A$, so it was zero anyway.
+\end{intuition}
+\begin{proof}[Proof of (1)]
+With $\mathcal U=\{A,B\}$, the map $C_n(B)/C_n(A\cap B)\to C^{\mathcal U}_n(X)/C_n(A)$ is an isomorphism of chain complexes: both are free on the simplices that lie in $B$ but not in $A$ (a $\mathcal U$-small simplex not in $A$ must lie in $B$). So $H_n(B,A\cap B)\cong H_n(C^{\mathcal U}(X)/C(A))$. Small simplices plus the Five Lemma applied to the LES of $C(A)\subseteq C^{\mathcal U}(X)$ versus $C(A)\subseteq C(X)$ identify the latter with $H_n(X,A)$.
+\end{proof}
+
+\begin{defn}
+$(X,A)$ is a \textbf{good pair} if $A$ is a nonempty closed subspace that is a deformation retract of some open neighborhood $U\supseteq A$. (CW pairs are good.)
+\end{defn}
+
+\begin{thm}
+For a good pair $(X,A)$, the quotient map $q:(X,A)\to(X/A,A/A)$ induces isomorphisms $H_n(X,A)\cong H_n(X/A,A/A)\cong\Hred_n(X/A)$.
+\end{thm}
+\begin{proof}
+Let $U\supseteq A$ be the open neighborhood that deformation retracts onto $A$. Consider the commutative diagram
+\[\begin{tikzcd}
+H_n(X,A)\ar[r,"\text{(a)}"]\ar[d,"q_*"] & H_n(X,U)\ar[d,"q_*"] & H_n(X\setminus A,U\setminus A)\ar[l,"\text{(b)}"']\ar[d,"q_*"]\\
+H_n(X/A,A/A)\ar[r,"\text{(a)}"] & H_n(X/A,U/A) & H_n(X/A\setminus A/A,\ U/A\setminus A/A)\ar[l,"\text{(b)}"']
+\end{tikzcd}\]
+\begin{itemize}
+\item[(a)] are isomorphisms: in the LES of the triple $(X,U,A)$, the terms $H_*(U,A)$ vanish since $A\hookrightarrow U$ is a homotopy equivalence (Section 8). Same for $(X/A,U/A,A/A)$, since $U/A$ deformation retracts onto the point $A/A$.
+\item[(b)] are isomorphisms by excision of $A$ (resp.\ $A/A$): $A$ is closed and contained in the open set $U=\operatorname{int}U$.
+\item The right vertical map is an isomorphism because $q$ restricts to a homeomorphism $X\setminus A\to X/A\setminus A/A$ (taking $U\setminus A$ to $U/A\setminus A/A$).
+\end{itemize}
+Chasing around the diagram, the left $q_*$ is an isomorphism. Finally $H_n(X/A,A/A)\cong\Hred_n(X/A)$ by the pair with a point (Section 8).
+\end{proof}
+\begin{intuition}
+Relative homology of $(X,A)$ is the homology of $X$ with $A$ crushed to a point --- provided $A$ is reasonable (has a collar-like neighborhood). Without the good pair condition this can fail.
+\end{intuition}
+Combined with the LES of the pair, for a good pair:
+\[\cdots\to\Hred_n(A)\to\Hred_n(X)\to\Hred_n(X/A)\to\Hred_{n-1}(A)\to\cdots\]
+
+\textbf{Examples.}
+\begin{itemize}
+\item $D^n/S^{n-1}\cong S^n$, so $\Hred_k(S^n)\cong H_k(D^n,S^{n-1})\cong\Hred_{k-1}(S^{n-1})$: a second proof for spheres.
+\item $\Delta^n/\partial\Delta^n\cong S^n$, so $H_n(\Delta^n,\partial\Delta^n)\cong\Z$, \textbf{generated by the identity map} $\Delta^n\to\Delta^n$ as a relative cycle. (Induction via the triple $(\Delta^n,\partial\Delta^n,\Lambda)$, $\Lambda$ = all faces but one; $d$ sends $[\mathrm{id}]$ to the remaining face.)
+\item Let $X^k$ be the $k$-skeleton (union of simplices/cells of dimension $\le k$) of a $\Delta$- or CW complex. Then $X^k\setminus X^{k-1}$ is a disjoint union of open $k$-cells, and each closed $k$-cell has its boundary in $X^{k-1}$; so in $X^k/X^{k-1}$ each $k$-cell becomes a copy of $D^k/S^{k-1}\cong S^k$, all joined at the single point $X^{k-1}/X^{k-1}$. That is, $X^k/X^{k-1}$ is a wedge of $k$-spheres, \textbf{one per $k$-cell}. By the wedge formula, $H_n(X^k,X^{k-1})\cong\Hred_n(X^k/X^{k-1})$ is free on the $k$-cells for $n=k$ and $0$ otherwise.
+\end{itemize}
+
+\begin{exercise}\label{exr:pairs}
+(a) Let $A=\{N,S\}\subset S^2$. Compute $H_n(S^2,A)$ from the LES. What is $S^2/A$, and does it agree?\\
+(b) Compute $H_n(S^2,E)$, $E$ the equator. Which quotient is this?
+\end{exercise}
+
+%=====================================================
+\section{Classic applications}
+
+\begin{thm}[Brouwer, no-retraction form]
+There is no retraction $r:D^n\to S^{n-1}$.
+\end{thm}
+\begin{proof}
+Otherwise $S^{n-1}\xrightarrow{i}D^n\xrightarrow{r}S^{n-1}$ is the identity; on $\Hred_{n-1}$ this is $\Z\to0\to\Z$ composing to $\mathrm{id}_\Z$, impossible.
+\end{proof}
+\begin{cor}[Brouwer fixed point theorem]
+Every continuous $f:D^n\to D^n$ has a fixed point.
+\end{cor}
+\begin{proof}
+If $f(x)\neq x$ for all $x$, let $r(x)$ be the point where the ray starting at $f(x)$ and passing through $x$ exits the disk, i.e.\ $r(x)=x+t(x-f(x))$ with $t\ge0$ the unique solution of $|r(x)|=1$. Solving the quadratic shows $t$ depends continuously on $x$, so $r:D^n\to S^{n-1}$ is continuous, and $r(x)=x$ for $x\in S^{n-1}$ (then $t=0$). This contradicts the theorem.
+\end{proof}
+
+\begin{thm}[Invariance of dimension]
+$\R^m\cong\R^n\implies m=n$.
+\end{thm}
+\begin{proof}
+A homeomorphism restricts to $\R^m\setminus\{0\}\cong\R^n\setminus\{p\}$; these are homotopy equivalent to $S^{m-1}$ and $S^{n-1}$, which $\Hred_*$ distinguishes.
+\end{proof}
+
+\textbf{Local homology.} For $U\subseteq\R^n$ open and $p\in U$:
+\[H_k(U,U\setminus\{p\})\overset{\text{(i)}}{\cong}H_k(\R^n,\R^n\setminus\{p\})\overset{\text{(ii)}}{\cong}\Hred_{k-1}(\R^n\setminus\{p\})\cong\Hred_{k-1}(S^{n-1})=\begin{cases}\Z&k=n,\\0&\text{else.}\end{cases}\]
+(i) is excision of $Z=\R^n\setminus U$ from the pair $(\R^n,\R^n\setminus\{p\})$: $Z$ is closed and contained in the open set $\R^n\setminus\{p\}$. (ii) is the reduced LES of the pair, using $\Hred_*(\R^n)=0$.
+\begin{intuition}
+$H_*(X,X\setminus p)$ only depends on an arbitrarily small neighborhood of $p$ (by excision), and it detects the dimension near $p$. A homeomorphism $h:U\to V$ with $h(p)=q$ gives $H_*(U,U\setminus p)\cong H_*(V,V\setminus q)$, so nonempty open subsets of $\R^m$ and $\R^n$ are homeomorphic only if $m=n$.
+\end{intuition}
+
+\begin{exercise}\label{exr:halfspace}
+Let $\mathbb H^n=\{x\in\R^n:x_n\ge0\}$. Show no homeomorphism $\mathbb H^n\to\mathbb H^n$ sends a boundary point ($x_n=0$) to an interior point.
+\end{exercise}
+
+%=====================================================
+\section{Simplicial equals singular}\label{sec:delta-sing}
+
+\begin{thm}
+For a $\Delta$-complex $X$, the map $\Delta_n(X)\to C_n(X)$ induces isomorphisms $H^\Delta_n(X)\cong H_n(X)$.
+\end{thm}
+\begin{proof}[Idea (finite-dimensional case)]
+Induct on skeleta, comparing the LES of $(X^k,X^{k-1})$ in both theories:
+\[\begin{tikzcd}[column sep=tiny,cells={font=\footnotesize}]
+H^\Delta_{n+1}(X^k,X^{k-1})\ar[r]\ar[d] & H^\Delta_n(X^{k-1})\ar[r]\ar[d] & H^\Delta_n(X^k)\ar[r]\ar[d] & H^\Delta_n(X^k,X^{k-1})\ar[r]\ar[d] & H^\Delta_{n-1}(X^{k-1})\ar[d]\\
+H_{n+1}(X^k,X^{k-1})\ar[r] & H_n(X^{k-1})\ar[r] & H_n(X^k)\ar[r] & H_n(X^k,X^{k-1})\ar[r] & H_{n-1}(X^{k-1})
+\end{tikzcd}\]
+\begin{itemize}
+\item 2nd and 5th vertical maps: isomorphisms by the induction hypothesis (for $X^{k-1}$).
+\item 1st and 4th: on the simplicial side, $\Delta_n(X^k,X^{k-1})=\Delta_n(X^k)/\Delta_n(X^{k-1})$ is $0$ for $n\neq k$ and free on the $k$-simplices for $n=k$, with all differentials zero, so $H^\Delta_n(X^k,X^{k-1})$ is free on the $k$-simplices in degree $k$ and $0$ otherwise. On the singular side the same is true (Section 10, Examples). The vertical map sends a $k$-simplex $\sigma_\alpha$ to the class of the singular simplex $\sigma_\alpha$, which is the image of the generator $[\mathrm{id}]\in H_k(\Delta^k,\partial\Delta^k)$, i.e.\ the generator of the $\alpha$-th sphere. So it maps basis to basis: isomorphism.
+\item The Five Lemma gives the middle one. The base case $k=0$ is clear (both sides are free on the vertices in degree $0$).
+\end{itemize}
+\end{proof}
+Why it matters: your $\Delta$-computations are the \emph{real} homology (invariant, independent of structure), and $H_n(X)=0$ for $n>\dim X$.
+
+%=====================================================
+\section{Cheat sheet}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lcccc}
+\toprule
+Space & $H_0$ & $H_1$ & $H_2$ & higher\\
+\midrule
+point, $D^n$, $\R^n$, contractible & $\Z$ & $0$ & $0$ & $0$\\
+$S^1$, cylinder, Möbius band, solid torus & $\Z$ & $\Z$ & $0$ & $0$\\
+$S^n$ ($n\ge2$) & $\Z$ & \multicolumn{3}{c}{$\Z$ in degree $n$ only}\\
+$\bigvee_kS^1$ & $\Z$ & $\Z^k$ & $0$ & $0$\\
+$T^2$ & $\Z$ & $\Z^2$ & $\Z$ & $0$\\
+Klein bottle & $\Z$ & $\Z\oplus\Z/2$ & $0$ & $0$\\
+genus-$g$ surface & $\Z$ & $\Z^{2g}$ & $\Z$ & $0$\\
+$\R^3$ minus $k$ points $\simeq\bigvee_kS^2$ & $\Z$ & $0$ & $\Z^k$ & $0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{ll}
+\toprule
+Situation & Tool\\
+\midrule
+glued polygon / $\Delta$-complex & simplicial chain complex\\
+deformation retracts onto something known & homotopy invariance\\
+wedge or disjoint union & wedge formula / direct sum\\
+union of two nice open pieces & Mayer--Vietoris\\
+$X$ with a cell attached & MV: punctured cell vs.\ open cell\\
+quotient $X/A$ or pair $(X,A)$ & good pair + LES of the pair\\
+``no map/retraction/homeomorphism exists'' & apply $H_*$, get a contradiction\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Proofs to be able to write in a few lines:} $\partial\partial=0$; $H_0$ of a path-connected space; $\Hred_*(\mathrm{pt})=0$ and contractible $\Rightarrow\Hred_*=0$; chain homotopic $\Rightarrow$ same map; construction and well-definedness of $d$, one spot of exactness; $\Hred_*(S^n)$; wedge formula; Brouwer; invariance of dimension; $U$ deformation retracts to $A\Rightarrow H_*(U,A)=0$.
+
+%=====================================================
+\section{Errata in your notes (\S9--10)}
+\begin{enumerate}
+\item \textbf{Simplicial homology definition} (line $\sim$1210) reads\\ $\ker(\Delta_{n+1})/\im(\Delta_n)$; it should be $\ker\partial_n/\im\partial_{n+1}$.
+\item \textbf{$S^1$ example:} ``$H_0=\Z$ because the homology groups form a chain complex'' is not a reason. Correct: one vertex and $\partial e=v-v=0$, so $H_0=\Delta_0=\Z$.
+\item \textbf{Torus $H_1$:} ``$\Z^3/\Z\cong\Z^2$'' needs $a+b-c$ to be primitive.
+\item \textbf{Chain homotopy:} notes have $\partial p_n=g-f+p_{n-1}\partial$; standard is $\partial P+P\partial=g-f$.
+\item \textbf{``Chain homotopic $\Rightarrow f_*$ is an isomorphism''} is wrong; the conclusion is $f_*=g_*$.
+\item \textbf{Snake lemma naturality square:} $\varepsilon_{n-1*}$ should be $\alpha_{n-1*}$.
+\item \textbf{MV short exact sequence:} third term must be $C_n^{\{A,B\}}(X)$, not $C_n(X)$.
+\item \textbf{Sphere corollary} (``$\Hred_0(S^n)=\Z$, $\Hred_k(S^n)=0$ for $k\ge1$'') is wrong: $\Hred_k(S^n)=\Z$ iff $k=n$. Base case is $S^0$.
+\item \textbf{``Brauer''} should be \textbf{Brouwer}; the middle term should be $\Hred_{n-1}(D^n)=0$.
+\item \textbf{$\R^m\not\cong\R^n$:} $\R^m\setminus\{0\}$ is homotopy equivalent, not homeomorphic, to $S^{m-1}$.
+\item \textbf{Reduced homology:} $\Hred_0(X)=0$ only for path-connected $X$.
+\item \textbf{$H_0$ proof typo:} $\gamma_i(0)=p_1,\gamma_i(0)=p_i$ should end $\gamma_i(1)=p_i$.
+\item \textbf{``$T$ is a chain homomorphism''}: $T$ is a chain homotopy between $S$ and $\mathrm{id}$.
+\item \textbf{$\Delta$ = singular proof:} $X^k/X^{k-1}$ is a wedge of $S^k$'s, one per $k$-simplex.
+\item \textbf{Point homology:} ``$n$ even $\Rightarrow\partial_n$ isomorphism'' needs $n\ge2$.
+\end{enumerate}
+
+%=====================================================
+\section{Before the practice exam}\label{sec:practice}
+Do \texttt{midterm2p.pdf} timed (50 minutes) after this review.
+\begin{itemize}
+\item \textbf{Problem 1} $\to$ Section 4: the recipe, the torus, Exercises~\ref{exr:klein}--\ref{exr:cyl}.
+\item \textbf{Problem 2(a)} $\to$ Section 6 (chain homotopy). \textbf{2(b)} $\to$ Section 7.1 (connecting homomorphism).
+\item \textbf{Problem 3} $\to$ Sections 9.2 and \ref{sec:cell}; also recall why $H_n(X)=0$ above the dimension.
+\end{itemize}
+
+%=====================================================
+\appendix
+\section{Solutions to exercises}
+
+\paragraph{Exercise~\ref{exr:klein} (Klein bottle).}
+All corners are one vertex, so $\partial_1=0$. $U$ is as for the torus: $\partial U=a+b-c$. In $L$, both $b$ and $c$ leave the bottom-left corner and $a$ goes from top-right to bottom-right, so the order is $v_0=$ bottom-left, $v_1=$ top-right, $v_2=$ bottom-right. Then $[v_1,v_2]=a$, $[v_0,v_2]=b$, $[v_0,v_1]=c$, so $\partial L=a-b+c$.
+\begin{itemize}
+\item $H_2$: $m(a+b-c)+n(a-b+c)=0$ forces $m+n=0=m-n$, so $H_2=0$.
+\item $H_1$: in the basis $\{a,b,x=a+b-c\}$, $a-b+c=2a-x$, so $\im\partial_2=\langle x,2a\rangle$ and $H_1\cong\Z/2\oplus\Z$.
+\item $H_0=\Z$. Checks: Euler $0=1-1+0$; $\langle a,b\mid abab^{-1}\rangle^{ab}=\Z/2\oplus\Z$.
+\end{itemize}
+
+\paragraph{Exercise~\ref{exr:gallery} (gallery).}
+\emph{Möbius band.} In $L$ (bottom-right triangle) the arrows force the order $v_0=(0,0)$, $v_1=(1,1)$, $v_2=(1,0)$, so $\partial L=a-b_1+c$. In $U$ the order is $(0,0),(0,1),(1,1)$, so $\partial U=b_2-c+a$. Edges: $\partial a=\partial b_1=w-v$, $\partial b_2=v-w$, $\partial c=0$. So $H_0=\Z$, and $\ker\partial_1$ has rank $3$ with basis $\{c,\ x=a-b_1,\ y=a+b_2\}$. Then $\im\partial_2=\langle x+c,\ y-c\rangle$, and $\{x+c,y-c,c\}$ is a basis of $\ker\partial_1$ (determinant $\pm1$), so $H_1\cong\Z$, generated by the core circle $[c]$. The $b_1$- and $b_2$-coefficients of $\partial(mL+nU)$ are $-m$ and $n$, so $H_2=0$. Euler: $2-4+2=0=1-1+0$. Agrees with Möbius band $\simeq S^1$.
+
+\emph{Dunce cap.} One vertex, so $\partial_1=0$. $\partial T=[v_1,v_2]-[v_0,v_2]+[v_0,v_1]=a-a+a=a$. So $H_2=\ker\partial_2=0$, $H_1=\Z\langle a\rangle/\langle a\rangle=0$, $H_0=\Z$ --- the homology of a point, consistent with it being contractible.
+
+\emph{$\partial\Delta^3$.} The four faces are $F_i=[v_0,\dots,\widehat{v_i},\dots,v_3]$. Since $\partial\partial[v_0,v_1,v_2,v_3]=0$, the chain $F_0-F_1+F_2-F_3$ is a cycle; it generates $H_2\cong\Z$ (any cycle must use all four faces with coefficients $\pm$ equal, since each edge lies in exactly two faces).
+
+\paragraph{Exercise~\ref{exr:cyl} (cylinder).}
+Vertices $v$ (bottom), $w$ (top); edges $a,b_1,b_2,c$; $\partial L=a-c+b_1$, $\partial U=b_2-c+a$.
+$\partial_1$: $a,c\mapsto w-v$; $b_1,b_2\mapsto0$. So $H_0=\Z^2/\langle w-v\rangle\cong\Z$ and $\ker\partial_1=\langle x,b_1,b_2\rangle$ with $x=a-c$. Now $\im\partial_2=\langle x+b_1,x+b_2\rangle$, and $\{x+b_1,x+b_2,x\}$ is a basis of $\ker\partial_1$ (determinant $\pm1$), so $H_1\cong\Z$ (generated by $[x]$, or $[b_1]$). $\ker\partial_2=0$, so $H_2=0$. Agrees with cylinder $\simeq S^1$.
+
+\paragraph{Exercise~\ref{exr:loops}.}
+(a) The constant 2-simplex $c_2$ has $\partial c_2=c_1-c_1+c_1=c_1$.\\
+(b) Let $\sigma(t_0,t_1,t_2)=\gamma(t_1)$. On $[e_0,e_1]$ ($t_2=0$) it is $\gamma$; on $[e_1,e_2]$ ($t_0=0$, $t_1=1-t_2$) it is $\bar\gamma$; on $[e_0,e_2]$ ($t_1=0$) it is constant. So $\partial\sigma=\bar\gamma-c_1+\gamma$, and $\gamma+\bar\gamma=\partial(\sigma+c_2)$.
+
+\paragraph{Exercise~\ref{exr:exact}.}
+$\subseteq$: if $z=g(b)$ with $b$ a cycle, use $b$ as the lift; $\partial b=0$ so $d[z]=0$.
+$\supseteq$: if $d[z]=[a]=0$, write $a=\partial a''$. Then $\partial b=f(a)=\partial f(a'')$, so $b-f(a'')$ is a cycle with $g(b-f(a''))=z$; hence $[z]=g_*[b-f(a'')]$.
+
+\paragraph{Exercise~\ref{exr:retract}.}
+(a) $r_*i_*=(ri)_*=\mathrm{id}$, so $i_*$ is injective.
+(b) $H_1(T^2)=\Z^2$, $H_1(S^1\times D^2)\cong H_1(S^1)=\Z$. No homomorphism $\Z^2\to\Z$ is injective: if $(1,0)\mapsto p$, $(0,1)\mapsto q$, then $(q,-p)\mapsto0$ (and if $p=q=0$ everything dies). Contradicts (a).
+
+\paragraph{Exercise~\ref{exr:susp}.}
+$A=$ image of $X\times(-1,1]$, $B=$ image of $X\times[-1,1)$: open cones, contractible. $A\cap B=X\times(-1,1)\simeq X\neq\emptyset$. Reduced MV:
+$0\to\Hred_{n+1}(SX)\xrightarrow{d}\Hred_n(A\cap B)\to0$, so $\Hred_{n+1}(SX)\cong\Hred_n(X)$.
+
+\paragraph{Exercise~\ref{exr:mobius}.}
+Thicken the bands to open $A,B\simeq S^1$; $A\cap B$ is an annulus $\simeq S^1$. Then $\varphi:\Z\to\Z^2$, $1\mapsto(2,2)$ (signs irrelevant). Reduced MV:
+$0\to H_2(K)\to\Z\xrightarrow{\varphi}\Z^2\to H_1(K)\to0$. $\varphi$ is injective, so $H_2(K)=0$; with basis $\{(1,1),(0,1)\}$, $(2,2)=2(1,1)$, so $H_1(K)\cong\Z/2\oplus\Z$.
+
+\paragraph{Exercise~\ref{exr:pairs}.}
+(a) Reduced LES with $\Hred_0(A)=\Z$, rest $0$: degree 2 gives $0\to\Z\to H_2(S^2,A)\to0$, so $\Z$; degree 1 gives $0\to H_1(S^2,A)\to\Z\to0$, so $\Z$; $H_0(S^2,A)=0$. $S^2/A\simeq S^2\vee S^1$, with $\Hred$ equal to $\Z$ in degrees 1, 2. Agrees.\\
+(b) Degree 2: $0\to H_2(S^2)=\Z\to H_2(S^2,E)\to H_1(S^1)=\Z\to H_1(S^2)=0$; the quotient is free so it splits: $H_2(S^2,E)=\Z^2$. Degree 1: $0\to H_1(S^2,E)\to\Hred_0(S^1)=0$, so $0$. And $S^2/E\cong S^2\vee S^2$.
+
+\paragraph{Exercise~\ref{exr:halfspace}.}
+A homeomorphism $h$ with $h(x)=y$ gives $H_k(\mathbb H^n,\mathbb H^n\setminus x)\cong H_k(\mathbb H^n,\mathbb H^n\setminus y)$. For interior $y$, excise to a small ball: $\Z$ in degree $n$. For boundary $x$: $\mathbb H^n$ is contractible and $\mathbb H^n\setminus x$ is star-shaped about $x+e_n$ (the segment from $x+e_n$ to $z$ meets $x$ only if $z=x-te_n$, $t>0$, which is not in $\mathbb H^n$), so the reduced LES gives $0$ in all degrees. Contradiction.
+
+\paragraph{Practice Problem 1 answer check (open only after doing it).}
+\begin{center}\rotatebox{180}{$H_0(\RP^2)=\Z,\quad H_1(\RP^2)=\Z/2,\quad H_n(\RP^2)=0\ (n\ge2)$.}\end{center}
+
+\end{document}
