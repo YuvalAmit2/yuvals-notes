@@ -36,10 +36,10 @@ jobs:
       YA_HTML_CACHE: /github/home/.cache/yalatex-html
     steps:
       - name: Get the notes
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Get the template
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: YuvalAmit2/yalatex
           path: yalatex
@@ -51,7 +51,7 @@ jobs:
           ln -s "$GITHUB_WORKSPACE/yalatex" "$texmfhome/tex/latex/yalatex"
           kpsewhich yalatex.sty
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
 
@@ -62,13 +62,13 @@ jobs:
 
       # LuaTeX's font list takes a while to make the first time
       - name: Restore LuaTeX's font cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: /github/home/.texlive*/texmf-var/luatex-cache
           key: luatex-cache-v1
 
       - name: Restore last run's HTML
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: html-cache
           key: html-${{ github.run_id }}
@@ -104,8 +104,8 @@ jobs:
           done
 
       - name: Save this run's HTML
-        if: always()
-        uses: actions/cache/save@v4
+        if: always() && hashFiles('html-cache/**') != ''
+        uses: actions/cache/save@v6
         with:
           path: html-cache
           key: html-${{ github.run_id }}
@@ -124,7 +124,7 @@ jobs:
           done
           du -sh _site
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
@@ -136,4 +136,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
