@@ -7,7 +7,7 @@
 #   <course>/html/                      built here by yalatex/html/build.mjs
 #
 # A course's HTML is rebuilt only when its files (not its PDF) or the template
-# (yalatex's .sty/.tex files and html/) changed since the last run; the other
+# (yalatex's .sty/.tex files and html/, tikzfig.sty) changed since the last run; the other
 # courses come from the cache. A course that fails to build keeps its last
 # HTML, and the run shows a warning.
 #
@@ -44,12 +44,21 @@ jobs:
           repository: YuvalAmit2/yalatex
           path: yalatex
 
+      # \tikzfig (TikZ Editor figures): ya-base loads tikzfig.sty when it is installed
+      - name: Get tikzfig.sty
+        uses: actions/checkout@v7
+        with:
+          repository: YuvalAmit2/tikz-editor
+          path: tikz-editor
+          sparse-checkout: tex
+
       - name: Install the template
         run: |
           texmfhome=$(kpsewhich -var-value TEXMFHOME)
-          mkdir -p "$texmfhome/tex/latex"
+          mkdir -p "$texmfhome/tex/latex/tikzfig"
           ln -s "$GITHUB_WORKSPACE/yalatex" "$texmfhome/tex/latex/yalatex"
-          kpsewhich yalatex.sty
+          ln -s "$GITHUB_WORKSPACE/tikz-editor/tex/tikzfig.sty" "$texmfhome/tex/latex/tikzfig/tikzfig.sty"
+          kpsewhich yalatex.sty tikzfig.sty
 
       - uses: actions/setup-node@v7
         with:
@@ -81,7 +90,7 @@ jobs:
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           # hash_dir DIR FIND-PRUNE-EXPR: a hash of the files under DIR that the expression keeps
           hash_dir() { (cd "$1" && shift && find . "$@" -type f -print0 | sort -z | xargs -0 -r sha256sum) | sha256sum | cut -c1-16; }
-          template=$(hash_dir yalatex \( -path ./.git -o -path ./build \) -prune -o \( -name '*.sty' -o -name '*.tex' -o -path './html/*' \))
+          template=$(hash_dir yalatex \( -path ./.git -o -path ./build \) -prune -o \( -name '*.sty' -o -name '*.tex' -o -path './html/*' \))-$(hash_dir tikz-editor/tex \( -name '*.sty' \))
           mkdir -p html-cache
           echo "## HTML" >> "$GITHUB_STEP_SUMMARY"
           for dir in *-notes/; do
