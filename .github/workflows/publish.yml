@@ -7,7 +7,7 @@
 #   <course>/html/                      built here by yalatex/html/build.mjs
 #
 # A course's HTML is rebuilt only when its files (not its PDF) or the template
-# (yalatex's .sty/.tex files and html/, tikzfig.sty) changed since the last run; the other
+# (yalatex's .sty/.tex files and html/, tikzfig.sty, the build options) changed since the last run; the other
 # courses come from the cache. A course that fails to build keeps its last
 # HTML, and the run shows a warning.
 #
@@ -90,7 +90,9 @@ jobs:
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           # hash_dir DIR FIND-PRUNE-EXPR: a hash of the files under DIR that the expression keeps
           hash_dir() { (cd "$1" && shift && find . "$@" -type f -print0 | sort -z | xargs -0 -r sha256sum) | sha256sum | cut -c1-16; }
-          template=$(hash_dir yalatex \( -path ./.git -o -path ./build \) -prune -o \( -name '*.sty' -o -name '*.tex' -o -path './html/*' \))-$(hash_dir tikz-editor/tex \( -name '*.sty' \))
+          # the bar's "All notes" button: the website's notes page
+          options="--home /notes/"
+          template=$(echo "$options" | sha256sum | cut -c1-8)-$(hash_dir yalatex \( -path ./.git -o -path ./build \) -prune -o \( -name '*.sty' -o -name '*.tex' -o -path './html/*' \))-$(hash_dir tikz-editor/tex \( -name '*.sty' \))
           mkdir -p html-cache
           echo "## HTML" >> "$GITHUB_STEP_SUMMARY"
           for dir in *-notes/; do
@@ -102,7 +104,7 @@ jobs:
               continue
             fi
             echo "::group::$course"
-            if node yalatex/html/build.mjs "$course" --out "html-cache/$course" --home ../../; then
+            if node yalatex/html/build.mjs "$course" --out "html-cache/$course" $options; then
               echo "$key" > "html-cache/$course.key"
               echo "- $course: rebuilt" >> "$GITHUB_STEP_SUMMARY"
             else
