@@ -1,0 +1,16 @@
+% Made with TikZ Editor. Insert with \tikzfig{name} (tikzfig.sty).
+% Reopen this file in TikZ Editor to change it; edits made here by hand are not read back.
+%tikz-editor-scene {"version":1,"objects":[{"id":"mwtobkk5-ug45st","type":"path","style":{"stroke":"black","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false},"pts":[{"x":-4,"y":-2},{"x":0,"y":1}],"closed":false},{"id":"mwtobnvl-wb4ac1","type":"path","style":{"stroke":"black","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false},"pts":[{"x":0,"y":1},{"x":2,"y":-2}],"closed":false},{"id":"mwtobpy4-xega5u","type":"path","style":{"stroke":"black","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false},"pts":[{"x":2,"y":-2},{"x":-4,"y":-2}],"closed":false},{"id":"mwtocoml-xicqke","type":"point","style":{"stroke":"black","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false},"p":{"x":-2,"y":-0.5},"size":1.5},{"id":"mwtocriw-xj1e5b","type":"point","style":{"stroke":"black","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false},"p":{"x":-1,"y":-2},"size":1.5},{"id":"mwtoctjn-xk8wrn","type":"point","style":{"stroke":"black","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false},"p":{"x":1,"y":-0.5},"size":1.5},{"id":"mwtocz0z-z5qzya","type":"path","style":{"stroke":"black","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false},"pts":[{"x":-2,"y":-0.5},{"x":2,"y":-2}],"closed":false},{"id":"mwtod2c0-1121t7g","type":"path","style":{"stroke":"black","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false},"pts":[{"x":1,"y":-0.5},{"x":-4,"y":-2}],"closed":false},{"id":"mwtod5jb-1264oz1","type":"path","style":{"stroke":"black","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false},"pts":[{"x":-1,"y":-2},{"x":0,"y":1}],"closed":false},{"id":"mwtod9vu-1278cec","type":"point","style":{"stroke":"red","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false},"p":{"x":-0.6666666666666665,"y":-1},"size":1.5},{"id":"mwtodnkb-1282pxu","type":"label","style":{"stroke":"red","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false},"p":{"x":-0.5554201307596514,"y":-1.0368665359070155},"text":"b_\\sigma","textMode":false,"anchor":"south east","font":"","follow":{"ids":["mwtod9vu-1278cec"],"ref":{"x":-0.5256068489221157,"y":-0.9743931510778844},"avoid":true,"off":true}}]}
+\begin{tikzfigure}{6}{3}
+\path[draw,line width=0.1pt] (-4,-2) -- (0,1);
+\path[draw,line width=0.1pt] (0,1) -- (2,-2);
+\path[draw,line width=0.1pt] (2,-2) -- (-4,-2);
+\fill[black] (-2,-0.5) circle [radius=1.5pt];
+\fill[black] (-1,-2) circle [radius=1.5pt];
+\fill[black] (1,-0.5) circle [radius=1.5pt];
+\path[draw,line width=0.1pt] (-2,-0.5) -- (2,-2);
+\path[draw,line width=0.1pt] (1,-0.5) -- (-4,-2);
+\path[draw,line width=0.1pt] (-1,-2) -- (0,1);
+\fill[red] (-0.667,-1) circle [radius=1.5pt];
+\node[anchor=south east,outer sep=0pt,align=center,text=red] at (-0.555,-1.037) {$b_\sigma$};
+\end{tikzfigure}

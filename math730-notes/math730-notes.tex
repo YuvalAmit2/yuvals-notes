@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[11pt]{report}
 \usepackage[notes]{yalatex}
 % \addbibresource{references.bib}   % uncomment for citations
 
@@ -9,8 +9,8 @@
 \begin{document}
 \maketitle
 
-\section*{Preface}
-\vspace{-0.5em}
+\chapter*{Preface}
+
 These notes were taken during lectures of \textit{MATH730: Algebraic Topology I} in the fall 2026 semester at the University of Maryland. The primary purpose of these notes is to act as a reference for material covered in lecture for me and my fellow students. 
 
 I cannot promise that these notes do not contain errors, and on the contrary there may be various problems ranging from small typos to (rarely) real mathematical flaws. Obviously, I am responsible for all such errors, and not the lecturer. Using these notes as a reference outside of the context of this course should be done cautiously. 
@@ -22,8 +22,11 @@ Some links:
     \item \href{https://github.com/YuvalAmit2/yalatex}{LaTeX template}
 \end{itemize}
 \vspace{1em}
-\tableofcontents
+
 \newpage
+\tableofcontents
+
+\chapter{Introduction}
 
 \section{Motivation and Review}
 
@@ -303,6 +306,8 @@ Homotopy is denoted $f \sim g$ or $f \overset{H}{\sim} g$.
 \begin{proof}
     Exercise. Local contractibility allows you to understand path connectivity because of the path induced by a retract.
 \end{proof}
+
+\chapter{The Fundamental Group}
 
 \section{Fundamental Group}
 
@@ -742,6 +747,8 @@ Now $\pi_{1}(X)=\pi_{1}(X^{2})$.
     \end{itemize}
 \end{exercise}
 
+\chapter{Covering Spaces}
+
 \section{Covering Spaces}
 
 \begin{defn}
@@ -1091,6 +1098,8 @@ Take $x \in X$, $\tilde x \in p^{-1}(x)$, and let $\tilde U$ be a neighborhood o
     Use the universal cover to compute the fundamental group of the Klein bottle.
 \end{exercise}
 
+\chapter{Homology}
+
 \section{Simplicial Homology}
 
 \begin{defn}
@@ -1123,8 +1132,10 @@ A topological space $X$ is called a \textbf{$\Delta$-complex} if there exists a 
 \end{enumerate}
 \end{defn}
 
-\begin{ex}[$\Delta$-complex structure on $S^1$]
-Simple...
+\begin{ex}[$\Delta$-complex structure on $S^2$]
+We attach two 2-simplices by their edges and vertices:
+
+\tikzfig{s2-delta-complex}
 \end{ex}
 
 \begin{ex}[$\Delta$-complex structure of $\mb T^2$]
@@ -1160,7 +1171,7 @@ We have a single $0$-complex $x$ (the point representing the four corners of the
 \end{ex}
 
 \begin{exercise}
-Find a $\Delta$-complex structure on $S^2$ and the Klein bottle.
+Find a $\Delta$-complex structure on the Klein bottle.
 \end{exercise}
 
 \begin{defn}
@@ -1174,7 +1185,7 @@ Such an expression $\sum m_\alpha \sigma(\alpha)$ is called a \textbf{simplicial
 \begin{defn}
 The $n\th$ \textbf{boundary map} $\partial_n :\Delta_n(X) \to \Delta_{n-1}(X)$ is the homomorphism defined on the basis by 
 \[
-\partial_n(\sigma_\alpha)=\sum_{i=0}^{n}(-1)^{i}\sigma_\alpha|_{[e_0,\dots,\hat e_i,\dots,e_n]}
+\partial_n(\sigma_\alpha)=\sum_{i=0}^{n}(-1)^{i}\sigma_\alpha\big |_{[e_0,\dots,\hat e_i,\dots,e_n]}
 \]
 \end{defn}
 
@@ -1207,12 +1218,16 @@ Note that the condition $\partial_{n} \circ \partial_{n+1} \equiv 0$ means that 
 \begin{defn}
 By \Cref{prop:cycle-condition}, the simplicial $n$-chains $\{\Delta_n(X)\}_{n=0}^\infty$ along with the boundary maps $\partial_n:\Delta_n(X)\to \Delta_{n-1}(X)$ form a chain complex. The $n$-th \textbf{simplicial homology group} of $X$ is
 \[
-H_n^\Delta (X):= \ker(\Delta_{n+1}(X))/\Img \paren{\Delta_{n}(X)}
+H_n^\Delta (X):= \ker(\partial_{n}(X))/\Img \paren{\partial_{n+1}(X)}
 \]
 \end{defn}
 
 \begin{ex}
 Let $X = S^1$, with the simplicial structure
+
+\tikzfig{s1-delta-structure}
+
+
 \begin{figure}[H]
 	\centering
 	\incfig{circle-simplex}
@@ -1222,12 +1237,10 @@ Observe that $\Delta^1(X)\simeq \Z$ because we have a single $1$-simplex, and $\
 \end{ex}
 
 \begin{ex}
-Let $X = \T^2$.
-\begin{figure}[H]
-	\centering
-	\incfig{torus-homology}
-	\label{fig:torus-homology}
-\end{figure}
+Let $X = \T^2$. We have the $\Delta$-structure:
+
+\tikzfig{torus-delta-structure}
+
 Similar to before, we have $H_k^\Delta(\T^2)=0$ for $k \geq 3$ because that's the highest level of simplex we have.
 
 Now, we observe that the two $2$-simplices $U$ and $L$ have the same image under the boundary map:
@@ -1235,7 +1248,7 @@ Now, we observe that the two $2$-simplices $U$ and $L$ have the same image under
     \partial _2U &= b-c+a, \\
     \partial _2L &= a-c+b,
 \end{align*}
-Since $U$ and $L$ generate $\Delta_2(X)$, it follows that $\ker (\partial_2)= \angles{U-L}\simeq \Z$, i.e. the free abelian group on 1 generator. Moreover, there are no $3$-simplices so $\Img(\partial_3)=0$, and we deduce that
+Since $U$ and $L$ generate $\Delta_2(X)$, it follows that $\ker (\partial_2)= \angles{U-L}\simeq \Z$, i.e. the free abelian group on one generator. Moreover, there are no $3$-simplices so $\Img(\partial_3)=0$, and we deduce that
 \[
 H_2^\Delta(\T^2)=\ker (\partial _2)/\Img(\partial_3)=\Z.
 \]
@@ -1260,13 +1273,13 @@ There are generally a few problems with simplicial homology. First, it's not imm
 \section{Singular Homology}
 
 \begin{defn}
-Let $X$ be a topological space. The group \term{$C_n(X)$} \term{singular $n$-chains} in $X$ is the free abelian groups on
+Let $X$ be a topological space. The group \term{$C_n(X)$} of \term{singular $n$-chains} in $X$ is the free abelian group on
 \[
 \brax{ \sigma: \Delta ^n \to X \setbar \sigma \text{ continuous}}.
 \]
 That is
 \[
-C_n(X) := \brax{ \sum_{i=1}^m k_i\sigma_i \setbar \sigma_i : \Delta^n \to X, k_i \in \Z}
+C_n(X) := \brax{ \sum_{i=1}^m k_i\sigma_i \setbar \sigma_i : \Delta^n \to X, k_i \in \Z, m \in \N}
 \]
 Each such $\sigma$ is called a \term{singular simplex}.
 
@@ -1284,7 +1297,7 @@ The elements of $\ker \partial _n$ are called \term[cycle,cycles]{$n$-cycles}, a
 \begin{rmk}
 If $f:X \to Y$ is continuous, and $\sigma:\Delta^n \to X$ is a singular $n$-simplex in $X$, then $f \circ \sigma$ is a singular $n$-simplex in $Y$. Hence $f_*: C_n(X) \to C_n(Y)$  sending $\sigma \mapsto f \circ \sigma$ defines a homomorphism. Moreover
 \[
-f_*(\partial _n \sigma)=\partial_{n-1}(f_*\sigma).
+\partial_n \circ f_* = f_* \circ \partial _n
 \]
 \end{rmk}
 
@@ -1354,7 +1367,7 @@ Given a space $X$, define $\veps:C_0(X)\to \Z$ by
 \[
 \veps\paren{\sum_{i=1}^mk_i\sigma_i}=\sum_{i=1}^mk_i,
 \]
-which is a homomorphism
+which is a homomorphism.
 \end{defn}
 
 \begin{prop}
@@ -1362,7 +1375,7 @@ For every $a \in C_1(X)$, $\veps(\partial a)=0$.
 \end{prop}
 
 \begin{proof}
-If $\partial a= \sum_{i=1}^m k_i\sigma_i$ with $\sigma:\Delta^n \to X$, then
+If $\partial a= \sum_{i=1}^m k_i\sigma_i$ with $\sigma:\Delta^1 \to X$, then
 \[
 \partial a = \sum_{i=1}^mk_i(\sigma_i(1)-\sigma_i(0)),
 \]
@@ -1379,7 +1392,7 @@ If $X$ is path connected, then $\veps :H_0(X) \to \Z$ is an isomorphism.
 \end{prop}
 
 \begin{proof}
-Consider a 0-chain $\sum_{i=1}^m k_i p_i$, where $p_i \in X$. Then for every $i = 2,\dots,m$, consider a $1$-simplex $\gamma:[0,1]\to X$ with $\gamma_i(0)=p_1$ and $\gamma_i(0)=p_i$. Note $\partial \gamma_i = p_i -p_1$. Thus
+Consider a 0-chain $\sum_{i=1}^m k_i p_i$, where $p_i \in X$. Then for every $i = 2,\dots,m$, consider a $1$-simplex $\gamma_i:[0,1]\to X$ with $\gamma_i(0)=p_1$ and $\gamma_i(1)=p_i$. Note $\partial \gamma_i = p_i -p_1$. Thus
 \[
 \sum_{i=1}^m k_ip_i - \partial \paren{ \sum_{i=2}^m k_i \gamma_i } = \paren{\sum_{i=1}^m k _i}p_1.
 \]
@@ -1395,7 +1408,7 @@ Furthermore, $\veps\paren{[mp_0]}=m$.
 \begin{defn}
 The \term[reduced homology]{reduced homology groups} of $X$ are the homologies of the complex
 \[
-C_n(X) \arr[\partial_n]C_{n-1}(X) \arr \cdots \arr C_1(X)\arr[\partial _1]C_0(X) \arr[\veps] \Z.
+\cdots \to C_n(X) \arr[\partial_n]C_{n-1}(X) \arr \cdots \arr C_1(X)\arr[\partial _1]C_0(X) \arr[\veps] \Z \to 0
 \]
 We write this as
 \[
@@ -1428,13 +1441,13 @@ Let $\{C_n\},\{D_n\}$ be chain complexes, and $\brax{f_n:C_n \to D_n}_{n=0}^\inf
 \end{defn}
 
 \begin{claim} \label{clm:chain-homo-gives-isom}
-If $f,g : \brax{C_n} \to \brax{D_n}$ are chain homotopic maps, then $f_{*n}:H_n(C) \to H_n(D)$ is an isomorphism for all $n$.
+If $f,g : \brax{C_n} \to \brax{D_n}$ are chain homotopic maps, then the induced maps $f_{*n}$ and $g_{*n}$ are equal.
 \end{claim}
 
 \begin{proof}
 Let $[z] \in H_n(C)$, and we want to show $g_{*n}(z)-f_{*n}(z)=0$, i.e. that it's a boundary. Well if $p$ is a chain homotopy between $f$ and $g$, then
 \[
-g_{*n}(z)-f_{*n}(z) = \partial p_n(z)- p_{n-1}(\partial \Z)= \partial p_n(z),
+g_{*n}(z)-f_{*n}(z) = \partial p_n(z)- p_{n-1}(\partial z)= \partial p_n(z),
 \]
 as desired.
 \end{proof}
@@ -1469,14 +1482,17 @@ is said to be a \term{short exact sequence of chain complexes} if
 0 \to A_n \arr[f_n]B_n \arr[g_n]C_n \to 0,
 \]
 is exact, and the diagram
-% https://q.uiver.app/#q=WzAsNCxbMCwwLCJBX24iXSxbMCwxLCJBX3tuLTF9Il0sWzEsMCwiQl9uIl0sWzEsMSwiQl97bi0xfSJdLFswLDIsImZfbiJdLFsxLDMsImZfe24tMX0iXSxbMCwxLCJhX24iLDJdLFsyLDMsImJfbiJdXQ==
-\[\begin{tikzcd}[ampersand replacement=\&]
-	{A_n} \& {B_n} \\
-	{A_{n-1}} \& {B_{n-1}}
+% https://q.uiver.app/#q=WzAsNixbMCwwLCJBX24iXSxbMCwxLCJBX3tuLTF9Il0sWzEsMCwiQl9uIl0sWzEsMSwiQl97bi0xfSJdLFsyLDAsIkNfbiJdLFsyLDEsIkNfe24tMX0iXSxbMCwyLCJmX24iXSxbMSwzLCJmX3tuLTF9Il0sWzAsMSwiYV9uIiwyXSxbMiwzLCJiX24iXSxbMiw0LCJnX24iXSxbMyw1LCJnX3tuLTF9Il0sWzQsNSwiY19uIl1d
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{A_n} \& {B_n} \& {C_n} \\
+	{A_{n-1}} \& {B_{n-1}} \& {C_{n-1}}
 	\arrow["{f_n}", from=1-1, to=1-2]
 	\arrow["{a_n}"', from=1-1, to=2-1]
+	\arrow["{g_n}", from=1-2, to=1-3]
 	\arrow["{b_n}", from=1-2, to=2-2]
+	\arrow["{c_n}", from=1-3, to=2-3]
 	\arrow["{f_{n-1}}", from=2-1, to=2-2]
+	\arrow["{g_{n-1}}", from=2-2, to=2-3]
 \end{tikzcd}\]
 commutes.
 \end{defn}
@@ -1572,7 +1588,7 @@ called the \term[]{Mayer-Vietoris sequence}.
 \end{cor}
 
 \begin{cor} \label{cor:hom-circle-zero}
-We have $\tilde H_0(S^n)=\Z$, and $\tilde H_k(S^n)=0$ for $k \geq 1$.
+We have $\tilde H_0(S^n)=0$, $\tilde H_n(S^n)=\Z$, and $\tilde H_k(S^n)=0$ the rest of the time.
 \end{cor}
 
 \begin{proof}
@@ -1634,11 +1650,9 @@ Define the \term[]{baricentric subdivision} of $\sigma$ to be
 \braks{b_\sigma, w_0,\dots,w_{n-1}}
 \]
 where $[w_0,\dots,w_{n-1}]$ is a simplex appearing in the baricentric subdivision of a face of $\sigma$.
-\begin{figure}[H]
-	\centering
-	\incfig{baricentric-subdivision}
-	\label{fig:baricentric-subdivision}
-\end{figure}
+
+\tikzfig{baricentric-subdivision}
+
 \end{defn}
 
 \begin{prop}
@@ -2052,7 +2066,7 @@ so it suffices to show $T_{n-1*}:H_{n-1}(\Delta^{n-1},\partial \Delta^{n-1}) \to
 commutes. Now one sees that $i$ is an isomorphism, so we're done.
 \end{proof}
 
-\begin{thm}
+\begin{thm} \label{thm:homology-isom}
 Let $X$ be a (finite) $\Delta$-complex. Then the natural map $i:C_{n}^\Delta(X) \to C_n(X)$ induces an isomorphism on homology.
 \end{thm}
 
@@ -2095,11 +2109,105 @@ We aim to prove the {\color{red} red arrow ($\gamma$)} is an isomorphism. By ind
 H_n(X^k,X^{k-1})\simeq H_n(X^k/X^{k-1},\{p\}),
 \end{align*}
 but $X^k/X^{k-1}$ is a wedge of $k$ $S^k$'s, so the homology is 0 when $n\ne k$. Hence \begin{align*}
-H_n^\Delta(X^k,X^{k-1}) \simeq H_n^ (X^k,X^{k-1})
+H_n^\Delta(X^k,X^{k-1}) \simeq H_n (X^k,X^{k-1})
 \end{align*}
 when $n \ne k$, and one also sees (exercise) that the isomorphism holds for $n=k$. Thus the {\color{green} green arrows ($\alpha,\delta$)} are isomorphisms. We conclude that the {\color{red} red arrow ($\gamma$)} is an isomorphism by the Five Lemma (\Cref{lem:five-lemma}).
 \end{proof}
 
+We now want to remove the finite assumption from \Cref{thm:homology-isom}. To do this, we need to generalize the following claim for infinite $\Delta$-complexes.
+
+\begin{claim}
+Let $(X_\alpha,x_\alpha)$ be pointed sets such that for all $\alpha$, there exists $U_\alpha \subset X_\alpha$ open which deformation retracts to $x_\alpha$. Then
+\begin{align*}
+H_n\paren{\bigvee _{\alpha \in I} (X_\alpha,x_\alpha) }= \bigoplus \tilde H_n(X_\alpha).
+\end{align*}
+\end{claim}
+
+\begin{proof}
+Observe
+\begin{align*}
+H_n\paren{\coprod_{\alpha \in I} X_\alpha, \coprod_{\alpha \in I} \{x_\alpha\} } \underset{p_*}{\arr[\sim]} H_n\paren{\frac{\coprod_{\alpha \in I}X_\alpha}{\coprod_{\alpha \in I}\{x_\alpha\}}, \{\w{pt}\}} \simeq \tilde H_n\paren{\bigvee (X_\alpha,x_\alpha)}.
+\end{align*}
+\end{proof}
+
+\begin{claim}
+Let $X$ be a $\Delta$-complex. Then $i:X^k \inj X$ induces isomorphism on homologies up to the $k-1$ homology: that is, for all $n \le k-1$, \begin{align*}
+i_{*n}:H_n(X^k) \to H_n(X)
+\end{align*} 
+is an isomorphism.
+\end{claim}
+
+\begin{proof}
+We've seen that for every $k_2 \ge k$, the map $i_{k_2}:X^k \to X^{k_2}$ induces isomorphism on $H_n$ for $n \le k-1$. 
+
+To see that $i_*$ is injective: if not, then there exists a cycle $z \in C_n(X^k)$ such that $[z]\ne 0\in H_n(X^k)$, but $[z]=0$ in $H_n(X)$. Hence there exists $z_{n+1} \in C_{n+1}(X)$ such that $\partial z_{n+1}=z$. Now if $z_{n+1} = \sum_{i=1}^T \alpha_i\sigma_i$, then $\Img (\sigma_1)$ is compact, and so $\Img(\sigma_i) \subset X^{k_i}$. Thus there exists $K$ such that $z_{n-1} \in C_{n+1}(X^K)$, contradicting $i_{K^*}$ being injective.
+
+Surjectivity is similar.
+\end{proof}
+
+\begin{rmk}
+This claim is sufficient to prove the desired isomorphism $H_n^\Delta \simeq H_n$, since
+\begin{align*}
+H_n^\Delta(X) \simeq H_n^\Delta(X^{n+1}) \simeq H_n(X^{n+1}) \simeq H_n(X)
+\end{align*}
+\end{rmk}
+
+\section{Mapping Degrees}
+
+\begin{defn}
+Consider $f:S^n \to S^n$. Let $\alpha$ be a generator of $H_n(S^n) \simeq \Z$. Then $f_{n*}([\alpha]) = k[\alpha]$. The \term[]{degree} of $f$ is \term[]{$\deg (f)$} $:= k$.
+\end{defn}
+
+\begin{prop}
+The degree has some basic properties:
+\begin{enumerate}
+    \item $\deg(\id)=1$.
+    \item $\deg (f \circ g) = \deg (f)\cdot \deg (g)$.
+    \item If $f \sim g$ are homotopic, then $\deg (f)=\deg (g)$.
+    \item If $f$ is not surjective, then $\deg(f)=0$.
+    \item For each $i \in \{1,\dots,n+1\}$, consider $A_i:S^n \to S^n$ defined by \begin{align*}
+    (x_1,\dots,x_i,\dots ,x_{n+1}) \maps (x_1,\dots,-x_i,\dots,x_{n+1}).
+    \end{align*}
+    Then $\deg (A_i) = -1$.
+    \item The antipodal map $A:x \mapsto (-x)$ has degree $(-1)^{n+1}$. In particular, $A \sim \id$ if and only if $n$ is odd.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+(1) and (2) are easy to show. (3) follows from (1) and (2). (4) follows from $S^n \sm \{p\}$ being contractible.
+
+For (5), assume WLOG that $i=n+1$. Let $U = S^n\cap \{x_{n+1}\ge 0\}$ and $L = S^n\cap \{x_{n+1}\le 0\}$. Let $\sigma_1 : \Delta^n \to U$ be a homeomorphism such that $\partial \Delta^n$ is mapped to $U \cap \{x_{n+1}=0\}$. Then take $\sigma_2 = A_{n+1}(\sigma)$, and observe $\sigma_2$ is a homeomorphism of $\Delta^2 \to L$.
+
+We claim $\sigma_1 - \sigma_2$ is generator of $H_n(S^n)$. Clearly $\partial(\sigma_1-\sigma_2)=0$ because they agree on the boundary, thus $\sigma_1-\sigma_2 \in H_n(S^n)$. Moreover, we have
+\begin{align*}
+H_n(S^n) &\arr[\sim] H_n(S^n,L) \\ 
+\sigma_1 -\sigma_2 &\mapsto \sigma_1
+\end{align*}
+but additionally
+\begin{align*}
+H_n(\Delta^n,\partial\Delta^n) &\arr[\sigma_1] H_n(S^n,L) \\
+\id & \mapsto \sigma_1.
+\end{align*}
+Thus if we show that \begin{align*}
+\sigma_{1*}:H_n(\Delta^n,\partial \Delta^n) \to H_n(S^n,L),
+\end{align*}
+then we're done, because $\id$ is a generator, so $\sigma_1$ is a generator, so $\sigma_1-\sigma_2$ is a generator. Indeed, by \Cref{thm:quotient-homology-isom}, we have the diagram
+% https://q.uiver.app/#q=WzAsNCxbMCwwLCJIX24oXFxEZWx0YV5uLFxccGFydGlhbCBcXERlbHRhXm4pIl0sWzIsMCwiSF9uKFNebixMKSJdLFswLDIsIkhfbihcXERlbHRhXm4vXFxwYXJ0aWFsIFxcRGVsdGFebikiXSxbMiwyLCJIX24oU15uL0wpIl0sWzIsMywiXFxzaW0iXSxbMSwzLCJcXHZzaW0iLDJdLFswLDIsIlxcdnNpbSIsMl0sWzAsMSwiXFxzaWdtYV97MSp9Il1d
+\[\begin{tikzcd}[ampersand replacement=\&,cramped]
+	{H_n(\Delta^n,\partial \Delta^n)} \&\& {H_n(S^n,L)} \\
+	\\
+	{H_n(\Delta^n/\partial \Delta^n)} \&\& {H_n(S^n/L)}
+	\arrow["{\sigma_{1*}}", from=1-1, to=1-3]
+	\arrow["\vsim"', from=1-1, to=3-1]
+	\arrow["\vsim"', from=1-3, to=3-3]
+	\arrow["\sim", from=3-1, to=3-3]
+\end{tikzcd}\]
+thus the desired map is an isomorphism.
+
+Now (5) is clear, since $A_{n+1}$ maps $\sigma_1 -\sigma_2 \mapsto \sigma_2-\sigma_1$, then $\deg =-1$.
+
+For (6), if $A \sim \id$, then $(-1)^{n+1}=1$ and so $n$ is odd. On the other hand, if $n$ is odd... (continued next time).
+\end{proof}
 
 
 

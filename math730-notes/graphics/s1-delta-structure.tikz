@@ -1,0 +1,10 @@
+% Made with TikZ Editor. Insert with \tikzfig{name} (tikzfig.sty).
+% Reopen this file in TikZ Editor to change it; edits made here by hand are not read back.
+%tikz-editor-scene {"version":1,"objects":[{"id":"mwtnmpxp-jdzmv9","type":"point","style":{"stroke":"black","width":0.1,"dash":"solid","fill":"gray!15","arrowStart":false,"arrowEnd":false,"mid":1},"p":{"x":-1,"y":0},"size":1.5},{"id":"mwtnmru7-jezq6o","type":"label","style":{"stroke":"black","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false,"mid":1},"p":{"x":-1.0593725,"y":-0.5504648611111111},"text":"a","textMode":false,"anchor":"center","font":"","inkAt":{"x":-1,"y":-0.5}},{"id":"mwtnopjg-qzpjxi","type":"ellipse","style":{"stroke":"black","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false,"mid":1},"c":{"x":-1,"y":1},"rx":1,"ry":1,"rot":48.586058096277156},{"id":"mwtnxf1z-r0wcv6","type":"label","style":{"stroke":"black","width":0.1,"dash":"solid","fill":null,"arrowStart":false,"arrowEnd":false,"mid":1},"p":{"x":-2.3032341666666665,"y":0.9521104166666667},"text":"A","textMode":false,"anchor":"center","font":"","inkAt":{"x":-2.25,"y":1}}]}
+\begin{tikzfigure}{2}{2}
+\fill[black] (-1,0) circle [radius=1.5pt];
+\node[anchor=center,outer sep=0pt,align=center] at (-1.059,-0.55) {$a$};
+\path[draw,line width=0.1pt] (-1,1) ellipse [x radius=1, y radius=1];
+\path[draw,line width=0.1pt,->] (-2,1.05) -- (-2,1);
+\node[anchor=center,outer sep=0pt,align=center] at (-2.303,0.952) {$A$};
+\end{tikzfigure}
