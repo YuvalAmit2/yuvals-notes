@@ -1977,7 +1977,7 @@ If $L \to X$ is any line bundle, then $L \otimes L^*$ is a trivial line bundle o
     If $v \in L_x$, $v \neq 0$, then there exists a unique $\ell \in L_x^*$ such that $\ell(v) = 1$. Then, $x \mapsto v \otimes \ell$ is a nowhere vanishing section of $L \otimes L^*$ (indeed, the linear form corresponding to $cv$ is $\frac{1}{c}\ell$ for $c \in \C^*$).
 \end{proof}
 
-\begin{rmk}
+\begin{rmk} \label{rmk:line-bundle-comes-from-divisor}
     Let $L$ be a holomorphic line bundle on $X$, and $s$ be a meromorphic section of $L$, $s \not \equiv 0$. Then $L \simeq L(D)$, where $D = \div(s)$.
 \end{rmk}
 
@@ -4105,5 +4105,175 @@ S: P(E_1)\times P(E_2) &\inj P(E_1 \otimes E_2) \\
 \begin{que}
 Is there an intrinsic description of $V_d$?
 \end{que}
+
+\begin{ex}
+When $m=n=1$, the Segre embedding $S:\P^1 \times \P^1 \to \P^3$ becomes
+\begin{align*}
+S\paren{[x_0:y_0],[x_1:y_1]} := \braks{x_0y_0:x_0y_1:x_1y_0:x_1y_1}=:\braks{X:Y:Z:W}.
+\end{align*}
+Observe that $\Img(S) \subset V(XW-YZ)$, which is a quadric hypersurface in $\P^3$. The images of the curves $\{*\} \times \P^1$ and $\P^1 \times \{*\}$ are lines in $\P^3$, and give the two ``rulings'' of the quadric, which can be visualize in affine 3-space, where it becomes the hyperbolic paraboloid $XY=Z$.
+\end{ex}
+
+\section{The Embedding Theorem}
+
+Let $L \to X$ be a holomorphic line bundle on a Riemann surface. Suppose $s_0,\dots,s_n$ is a basis of $H^0(X,L)$ such that the $s_i$ have no common zeros on $X$. Then we get a map $\vphi_L:X \to \P^n$ sending
+\begin{align*}
+x \mapsto \braks{s_0(x):s_1(x):\cdots : s_n(x)}.
+\end{align*}
+We claim that, in fact, this map always exists as long as $H^0(X,L) \ne 0$. To see this, let 
+\begin{align*}
+A:= \brax{a \in X \setbar s_j(a) = 0, \forall.j \in [0,n]},
+\end{align*}
+and then $\vphi_L$ is defined on $X \sm A$. For $a \in A$, find $(U,z)$ a small coordinate chart at $a$ with $z(a) = 0$, and note that $\vphi_L|_{U \sm \{a\}}$ is given by $[f_0:\cdots :f_n]$, where $f_i \in \cO_*(U)$ and non-zero on $U \sm \{a\}$. We can write $f_j:=z^kg_j$, where $k :=\min_j \ord_a(f_j)$. Then $g_k(a)\ne 0$, so $\vphi_L|_U=[g_0,\dots,g_n] \in \P^n$.
+
+\begin{rmk}
+This construction only works because $\dim X = 1$. If $\dim X>1$, the base points of $H^0(X,L)$ can't be avoided in general.
+\end{rmk}
+
+\begin{thm}[The Embedding Theorem] \label{thm:embedding-thm}
+When $\deg L >2g$, then $\vphi_L$ is an embedding of $X$ into $\P^n$. That is, $L$ is very ample.
+\end{thm}
+
+\begin{proof}
+We need two intermediate results.
+
+\begin{prop} \label{prop:embedding-prop-1}
+If $D\in \Div(X)$ and $\deg D > 2g-1$, then for all $P \in X$, there exists $s \in H^0(X,L(D))$ such that $s(P) \ne 0$. Equivalently, there exists a divisor $D' \ge 0$, linearly equivalent to $D$, not containing $P$ in its support. 
+\end{prop}
+
+\begin{proof}
+Let $s_P$ be the standard section of $L(P)$ with $\div s_P=[P]$. Consider the map
+\begin{align*}
+\alpha : H^0(X,L(D-P)) &\to H^0(X,L(D)) \\
+f & \mapsto f \otimes s_P,
+\end{align*}
+and observe that $\Img(\alpha)$ is precisely the sections of $L(D)$ which vanish at $P$. But since $\deg (D-P)=\deg (D)-1>2g-2$, we have by the vanishing theorem (\Cref{thm:vanishing-thm}) that
+\begin{align*}
+h^0(D-P) = 1-g + \deg(D-P) < 1-g + \deg D = h^0(D).
+\end{align*}
+Hence $\alpha$ is not surjective, which proves the claim.
+\end{proof}
+
+\begin{prop} \label{prop:embedding-prop-2}
+Suppose $L\to X$ is a holomorphic line bundle with $\deg L >2g$. Then
+\begin{enumerate}[(a)]
+    \item If $P,Q \in X$ are distinct, there exists $s \in H^0(X,L)$ such that $s(P)=0$ and $s(Q)\ne 0$.
+    \item If $P \in X$, there exists $s \in H^0(X,L)$ such that $\ord_P(s)=1$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Consider the line bundle $L \otimes L(-P)$. Recall there exists some divisor $D$ with $\deg D = \deg L$ such that $L \simeq L(D)$, so $L\otimes L(-P)=L(D-P)$. Now \Cref{prop:embedding-prop-1} implies there exists $s' \in H^0(X,L \otimes L(-P))$ with $s'(Q) \ne 0$. Let $s_P$ be the standard section of $L(P)$, and consider $s:= s' \otimes s_P$.
+\begin{enumerate}
+    \item If $Q \ne P$, then $s(P)=0$, and $s(Q)\ne 0$, proving (a).
+    \item If $Q=P$, we have $\ord_P(s)=1$.
+\end{enumerate}
+\end{proof}
+
+We can now prove the embedding theorem. To show that $\vphi_L$ is an embedding, we must check that both $\vphi_L$ and $d\vphi_L$ are injective. Indeed, for $P \neq Q$ points of $X$, choose $s \in H^0(X,L)$ such that $s(P)=0 \ne s(Q)$, which exists by \Cref{prop:embedding-prop-2} (a). We have our basis $s_0,\dots,s_n$ of $H^0(X,L)$, so write $s = \sum \lambda _j s_j$ for some $\lambda _j \in \C$. Then $\vphi_L(P) \in \P^n$ lies on the hyperplane with equation $\sum \lambda _jz_j =0$, and $\vphi_L(Q)$ is not on this hyperplane. Hence $\vphi_L$ is injective.
+
+Now given $P \in X$, by \Cref{prop:embedding-prop-2} (b), there exists $s \in H^0(X,L)$ such that $\ord_P(S) = 1$, and $k \in [0.n]$ so that $s_K(P) \ne 0$. Write
+\begin{align*}
+s = \sum \lambda _js_j \implies \frac{s}{s_k}=\lambda_k +\sum_{j \ne k} \lambda _j \paren{\frac{s_j}{s_k}}. \label{eq:s-as-sum-with-lambdas}
+\end{align*}
+The functions $f_j := s_j/s_k$ for $j \ne k$ above give the homogeneous coordinates of $\vphi_L$ near $P$, so
+\begin{align*}
+\vphi_L(x) = \paren{f_0(x),\dots, \hat 1,\dots,f_n(x)} \in \C^n.
+\end{align*}
+Now since $\ord_p(s/s_k)=1$, \eqref{eq:s-as-sum-with-lambdas} implies $df_j(P)\ne 0$ for at least one $j \ne k$. Hence $d\vphi_L(P)$ is injective.
+\end{proof}
+
+\begin{cor}
+    A line bundle $L \to X$ is ample if and only if $\deg L >0$.
+\end{cor}
+
+\begin{proof}
+($\impliedby$) If $\deg L >0$, then $\deg L^{\otimes m}>2g$ for some $m>0$, hence $L$ is ample by the embedding theorem.
+
+($\implies$) If $L$ is ample, then $L^{\otimes m}$ is very ample for some $m>0$, hence $L^{\otimes m}\simeq L(D)$ for some effective divisor $D$, since $L^{\otimes m}$ must have at least one non-identically zero holomorphic section. Now $D \ge 0$, but also $D \ne 0$ since trivial line bundles do not embed $X$. Hence
+\begin{align*}
+m \deg L = \deg(L^{\otimes m}) = \deg D >0.
+\end{align*}
+\end{proof}
+
+\begin{rmk}
+The canonical line bundle $K_X$ on a compact Riemann surface $X$ satisfies $h^0(K_X)=g$, and so induces a holomorphic map $\vphi_{K_X}:X \to \P^{g-1}$ called the \term[]{canonical map} of $X$. (We assume $g \ge 1$)
+\end{rmk}
+
+\begin{thm}
+\begin{enumerate}[(a)]
+    \item If $X$ is hyperelliptic, the canonical map has degree $2$ onto its image, and the $2g+2$ Weierstrass points are exactly the branch points of $\vphi_{K_X}:X \to \vphi(X) \subset \P^{g-1}$.
+    \item If $g(X) \ge 3$ and $X$ is not hyperelliptic, then the canonical map is a closed embedding.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+Similar arguments as before. See the textbook.
+\end{proof}
+
+This theorem is used to construct moduli spaces of Riemann surfaces.
+
+\section{Blowing Up}
+
+The tautological line bundle $L \simeq \cO_{\P^n}(-1)$ is the set of pairs $(z,[w]) \in \C^{n +1}\times \P^n$, with $z \in \Span(w)$ and $\pi : L \to \P^n$ being $\proj_2|_L$. Consider $\pi_2 := \proj_1|_L$. We'll show that $\pi_1: L \to \C^{n+1}$ is the blow-up of $\C^{n+1}$ at $0$.
+
+Let $z = (z_0,\dots,z_n)$ and $w=[w_0:\cdots :w_n]$ be the coordinates on $\C^{n+1},\P^n$.
+
+\begin{claim}
+$L$ is the subvariety of $\C^{n+1}\times \P^n$ defined by the equations
+\begin{align*} \label{eq:zw-coordinate-relation}
+z_iw_j-z_jw_i=0 \quad \forall i,j \in \{0,\dots,n\}
+\end{align*}
+\end{claim}
+
+\begin{proof}
+Indeed, if $(z,[w])$ satisfies \eqref{eq:zw-coordinate-relation} and $i$ is such that $w_i \ne 0$, then we may normalize so that $w_i=1$. Then for $\lambda :=z_i$, we get $z_j = \lambda w_j$ for all $j$, i.e $z = \lambda w$. The converse is also easy.
+\end{proof}
+
+\begin{claim}
+$\pi_1$ is an isomorphism on the open set $\pi_1^{-1}\paren{\C^{n+1},\{0\}}$.
+\end{claim}
+
+\begin{proof}
+Since for all $z \in \C^{n+1} \sm \{0\}$, there exists a unique $[w]\in\P^n$ with $z \in \Span(w).$
+\end{proof}
+
+Also, $\pi_1^{-1}(0) = \P^n$. We visualize the blowup as follows:
+
+\tikzfig{blow-up-visualization}
+
+The inverse image of each line $\ell$ through $0$ in $\C^{n+1}$ consists of $\pi_1^{-1}(0)= E$, the exceptional divisor, together with a line that meets $E$ in the points of $E \simeq \P^n$ associated to $\ell$.
+
+Now we consider what happens to varieties:
+
+\tikzfig{blow-up-curves}
+
+\begin{defn}
+If $X \subset \C^{n+1}$ is a closed subvariety pushed through the origin, we define the \term[]{blow-up} of $X$ at $0$ 
+\begin{align*}
+\Bl_0(X) = \bar{\pi_1^{-1}(X \sm \{0\})}
+\end{align*}
+
+
+We denote by $\pi_1:\w{Bl}_0X \to X$ the map obtained by restricting $\pi_1:\C^{n+1}\times \P^n \to \C^{n+1}$ to $\w{Bl}_0 X$. To blow-up $X$ at any other points of $\C^{n+1}$, do an affine change of coordinates sending $P$ to $0$.
+\end{defn}
+
+$\pi_1$ induces an isomorphism $\w{Bl}_0X \sm \pi_1^{-1}(0) \to X \sm \{0\}$. We say that $\pi_1$ is a \term[]{birational map} $\w{Bl}_0 X \to X$. The effect of blowing up a point $P$ on $X$ is to ``pull apart'' $X$ near $P$ according to the different directions of the lines through $P$.
+
+\begin{ex}
+Take coordinates $(x,y)$ in $\C^2$ and $[s:t]$ in $\P^1$. Consider the plane cubic given by $y^2=x^2(x+1)$.
+
+\tikzfig{cubic-drawing}
+
+The equations for $\Bl_0 X$ are $y^2=x^2(x+1)$ and $ys=xt$ in $\C^2 \times \P^1$. Set $s=1$ on the affine chart $U_s$ of $\P^1$, so we have the equations
+\begin{align*}
+\begin{cases}
+y^2 = x^2(x+1) \\ y = xt
+\end{cases} \implies x^2t^2 = x^2(x+1) \implies x=0 \text{ or } t^2=x+1.
+\end{align*}
+We hence get two irreducible components, one defined by $x=y=0$ and $t \in \C$, which is $E$, and the other by $t^2=x+1$ and $y=xt$, which is $\Bl_0X$. Now $\Bl_0X$ meets $E$ at the two points $t = \pm 1$, i.e $[1:1]$ and $[1:-1]$, and these points correspond to the slopes of the two branches of the nodal curve at $0$.
+\end{ex}
+
+
 
 \end{document}
