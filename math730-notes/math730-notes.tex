@@ -37,11 +37,11 @@ Some links:
 Let's see some examples where the power of algebraic topology helps us prove important topological properties.
 
 \begin{thm}
-    The unit ball $\bar{\mb D}^{n+1}$ is not homeomorphic to $S^n$
+    The unit ball $\bar{\mb D}^{n+1}$ is not homeomorphic to $S^n$.
 \end{thm}
 
 \begin{proof}
-    The $n^{\text{th}}$ homology group $H_n$ distinguishes them. Namely, $H_n\paren{\bar{\mb D}^{n+1}} = \{0\}$, while $H_n(S^n) = \Z$.
+    The $n^{\text{th}}$ reduced homology group $\tilde H_n$ distinguishes them. Namely, $\tilde H_n\paren{\bar{\mb D}^{n+1}} = \{0\}$, while $\tilde H_n(S^n) = \Z$.
 \end{proof}
 
 \begin{thm}[][label=thm:boundaryfixedthm]
@@ -50,22 +50,22 @@ Let's see some examples where the power of algebraic topology helps us prove imp
 
 \begin{proof}
     Suppose such an $f$ exists. Consider the inclusion map $i: S^n \to \bar \D^{n+1}$. Then, the map $f \circ i : S^n \to S^n $ is the identity map. Moreover, $i$ and $f$ induce maps on the homology groups 
-    $$H_n(S^n) \arr[H_n(i)] H_n(\D^{n+1}) \arr[H_n(f)] H_n(S^n).$$
+    $$\tilde H_n(S^n) \arr[\tilde H_n(i)] \tilde H_n(\bar\D^{n+1}) \arr[\tilde H_n(f)] \tilde H_n(S^n).$$
     By functoriality,
-    $$H_n(f) \circ H_n(i) = H_n(f \circ i) = H_n(\id) = \id.$$
-    Hence, we have 
+    $$\tilde H_n(f) \circ \tilde H_n(i) = \tilde H_n(f \circ i) = \tilde H_n(\id) = \id.$$
+    Hence, the composition
     \begin{align*}
         \Z \to0 \to \Z
     \end{align*}
-    induces the identity map $\Z \to \Z$, which is impossible.
+    would be the identity map $\Z \to \Z$, which is impossible.
 \end{proof}
 
-\begin{thm}[Brauer's Fixed Point Theorem]
+\begin{thm}[Brouwer's Fixed Point Theorem]
     Every continuous function $f:\bar{\D}^n \to \bar{\D}^n$ has a point $x$ such that $f(x) = x$.
 \end{thm}
 
 \begin{proof}
-    Suppose $f$ does not have a fixed point. Then, for every $x \in \bar{\D}^n$, we may consider the unique straight line from $f(x)$ to $x$. Let $g(x)$ be the point where the line $f(x) \to x$ hits $S^n$. Observe that $g(x) = x$ for every $x \in S^n$, and $g$ is continuous. Thus, we have a contradiction by \Cref{thm:boundaryfixedthm}.
+    Suppose $f$ does not have a fixed point. Then, for every $x \in \bar{\D}^n$, we may consider the unique straight line from $f(x)$ to $x$. Let $g(x)$ be the point where the line $f(x) \to x$ hits $S^{n-1}$. Observe that $g(x) = x$ for every $x \in S^{n-1}$, and $g$ is continuous. Thus, we have a contradiction by \Cref{thm:boundaryfixedthm} (applied with $n-1$ in place of $n$).
 \end{proof}
 
 \subsection{Topology Review}
@@ -83,7 +83,7 @@ Let's see some examples where the power of algebraic topology helps us prove imp
 \end{thm}
 
 \begin{proof}
-    Suppose $X$ is compact. The set $\{B(0,n)\}_{n=1}^\infty$ of open balls is necessarily an open cover of $X$, hence has a finite subcover, thus $X$ is bounded. Moreover, if $\R^n-X$ is not open, let $p \in \R^n\setminus X$ be such that $B(p,\veps) \cap X \neq \emptyset$. Then, take the cover of $X$ by 
+    Suppose $X$ is compact. The set $\{B(0,n)\}_{n=1}^\infty$ of open balls is necessarily an open cover of $X$, hence has a finite subcover, thus $X$ is bounded. Moreover, if $\R^n-X$ is not open, let $p \in \R^n\setminus X$ be such that $B(p,\veps) \cap X \neq \emptyset$ for every $\veps>0$. Then, take the cover of $X$ by 
     $$\brax{B(x,\frac{d(p,x)}{2})}_{x \in X}.$$
     One sees that this does not have a finite subcover, a contradiction.
 
@@ -93,10 +93,10 @@ Let's see some examples where the power of algebraic topology helps us prove imp
 \end{claim}
 
 \begin{proof}
-    Contrarily, if this were not the case, there exists a sequence $\{x_i\} \subset X$ such that $B(x,1/n) \not \subset U_\alpha$ for all $\alpha \in I$. Then, $\{x_i\}$ has a subsequence converging to some $p$. This $p$ must be contained in some $U$ in the open cover, and it follows that there exists a $\delta$ and $N$ with $B(x_N,\delta) \subset U$.
+    Contrarily, if this were not the case, there exists a sequence $\{x_i\} \subset X$ such that $B(x_i,1/i) \not \subset U_\alpha$ for all $\alpha \in I$. Then, $\{x_i\}$ has a subsequence converging to some $p$. This $p$ must be contained in some $U$ in the open cover, and it follows that there exists $N$ with $B(x_N,1/N) \subset U$, a contradiction.
 \end{proof}
 
-Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint balls of radius $\delta$ around points in $X$ is bounded. Let $m$ be this upper bound. Take a point $p_1 \in X$. The ball $B(p,\delta)$ is contained in some cover element $U_1$. If $U_1$ covers $X$, we're done, but otherwise repeat with some $p_2$ and $U_2$. Continue to repeat until we have $p_{m+1}$ and $U_{m+1}$. We claim that $U_1,\dots,U_{m+1}$ must cover $X$: indeed, if it doesn't, then the balls $\{B(p_i,\delta/2)\}_{i=1}^{m+1}$ must all be disjoint, and this is a contradiciton.
+Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint balls of radius $\delta/2$ around points in $X$ is bounded. Let $m$ be this upper bound. Take a point $p_1 \in X$. The ball $B(p_1,\delta)$ is contained in some cover element $U_1$. If $U_1$ covers $X$, we're done, but otherwise repeat with some $p_2 \in X \setminus U_1$ and $U_2$. Continue to repeat until we have $p_{m+1}$ and $U_{m+1}$. We claim that $U_1,\dots,U_{m+1}$ must cover $X$: indeed, if it doesn't, then the balls $\{B(p_i,\delta/2)\}_{i=1}^{m+1}$ must all be disjoint, and this is a contradiction.
 \end{proof}
 
 \begin{defn}
@@ -104,7 +104,7 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \end{defn}
 
 \begin{defn}
-    $X$ is called \textbf{path connected} if for every $p,q \in U$, there exists a continuous map $\delta:[0,1] \to X$ such that $\delta(0)=p$ and $\delta(1) = q$.
+    $X$ is called \textbf{path connected} if for every $p,q \in X$, there exists a continuous map $\delta:[0,1] \to X$ such that $\delta(0)=p$ and $\delta(1) = q$.
 \end{defn}
 
 \begin{prop}
@@ -112,7 +112,7 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \end{prop}
 
 \begin{defn}
-    A topological space $X$ is called \textbf{Hausdorff} if for every distinct $p,q \in X$, there exists $p \in U$ and $q \in V$ open such that $U \cap V = \emptyset$.
+    A topological space $X$ is called \textbf{Hausdorff} if for every distinct $p,q \in X$, there exist open sets $U \ni p$ and $V \ni q$ such that $U \cap V = \emptyset$.
 \end{defn}
 
 \begin{thm}
@@ -120,7 +120,7 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \end{thm}
 
 \begin{proof}
-    It suffices to show $f$ is an closed map. Let $C \subset X$ be closed. Since $X$ is compact, one can see that $C$ is compact (theorem). Therefore, $f(C)$ is compact (theorem), hence closed (theorem).
+    It suffices to show $f$ is a closed map. Let $C \subset X$ be closed. Since $X$ is compact, one can see that $C$ is compact (theorem). Therefore, $f(C)$ is compact (theorem), hence closed (theorem).
 \end{proof}
 
 \begin{prop}
@@ -145,7 +145,7 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 
 \begin{defn}
     Let $(X_\alpha,\mc U_\alpha)_{\alpha \in I}$ be topological spaces. The \textbf{product topology} on $\prod_{I}X_\alpha$ has a basis of sets of the form
-    $$\prod_{\alpha \in U}U_\alpha,  \quad U_\alpha \in \mc U_\alpha,$$
+    $$\prod_{\alpha \in I}U_\alpha,  \quad U_\alpha \in \mc U_\alpha,$$
     and $U_\alpha =X_\alpha$ for all but finitely many $\alpha \in I$.
 \end{defn}
 
@@ -156,18 +156,18 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \section{CW Complexes}
 
 \begin{defn}
-    A \textbf{CW complex} is a topological space $X$, together with a sequence of subspaces $X_0 \subset X_1 \subset \cdots $ such that
+    A \textbf{CW complex} is a topological space $X$, together with a sequence of subspaces $X^0 \subset X^1 \subset \cdots $ such that
     \begin{enumerate}
-        \item $X = \bigcup X_n$
-        \item $U\subset X$ is open if and only if $U \cap X_n$ is open for all $n \geq 0$
-        \item $X_0$ is a discrete set of points
+        \item $X = \bigcup X^n$
+        \item $U\subset X$ is open if and only if $U \cap X^n$ is open for all $n \geq 0$
+        \item $X^0$ is a discrete set of points
         \item For every $n \geq 1$, there exists an indexing set $I(n)$, disks $\{D^n_\alpha\}_{\alpha \in I(n)}$, and continuous maps
         $\varphi^n_\alpha : \partial D^n_\alpha 
-         \to X_{n-1}$ such that 
-         $$X_n = \bigsqcup_{\alpha \in I(n)}\bar D_\alpha^n\sqcup X_n  /\sim$$
+         \to X^{n-1}$ such that 
+         $$X^n = \bigsqcup_{\alpha \in I(n)}\bar D_\alpha^n\sqcup X^{n-1}  /\sim$$
          where $x \sim \varphi_\alpha^n(x)$ for all $\alpha \in I(n)$, $x \in \partial D_\alpha^n$.
     \end{enumerate}
-    We call $X_n$ the $n^{\text{th}}$ \textbf{skeleton} of $X$, and $\varphi_\alpha^n$ is called an \textbf{attaching map}. For a CW complex $X$, the sets $\{X_n\}$ and $\{ \varphi_\alpha^n\}$ are called a \textbf{CW structure} on $X$. The quotient maps $\Phi_\alpha^n:\bar D_\alpha^n \to X_n$ are called the \textbf{characteristic maps}. If $X_{n-1} \subsetneq X_n$, but $X_i=X_j$ for all $i, j\geq n$, we say that $X$ is $\bm n$\textbf{-dimensional}.
+    We call $X^n$ the $n^{\text{th}}$ \textbf{skeleton} of $X$, and $\varphi_\alpha^n$ is called an \textbf{attaching map}. For a CW complex $X$, the sets $\{X^n\}$ and $\{ \varphi_\alpha^n\}$ are called a \textbf{CW structure} on $X$. The quotient maps $\Phi_\alpha^n:\bar D_\alpha^n \to X^n$ are called the \textbf{characteristic maps}. If $X^{n-1} \subsetneq X^n$, but $X^i=X^j$ for all $i, j\geq n$, we say that $X$ is $\bm n$\textbf{-dimensional}.
 \end{defn}
 
 
@@ -179,8 +179,8 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
     A graph is a $1$-dimensional CW complex.
 % https://q.uiver.app/#q=WzAsNyxbMCwxLCJYXzAiXSxbMiwxLCJcXGJ1bGxldCJdLFs0LDEsIlxcYnVsbGV0Il0sWzMsMCwiWF8wIl0sWzMsMywiXFxidWxsZXQiXSxbMiwyLCJcXGJ1bGxldCJdLFsxLDMsIlxcYnVsbGV0Il0sWzAsMCwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxLDIsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMywxLCIiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMywyLCIiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNSw0LCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsNiwiIiwyLHsiYW5nbGUiOi0xMzUsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNSw2LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsNCwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
 \[\begin{tikzcd}[ampersand replacement=\&,cramped]
-	\&\&\& {X_0} \& \\
-	{X_0} \&\& \bullet \&\& \bullet \\
+	\&\&\& {X^0} \& \\
+	{X^0} \&\& \bullet \&\& \bullet \\
 	\&\& \bullet \\
 	\& \bullet \&\& \bullet
 	\arrow[dashed, from=1-4, to=2-3]
@@ -195,7 +195,7 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \end{ex}
 
 \begin{ex}
-    $\R^n$ is a CW complex. For example, $\R^2$ has the $0$-cell $\Z^2$, the $1$-cell a $\Z^2$-grid, and the $2$-cell induced by attaching each disk to the square of the grid.
+    $\R^n$ is a CW complex. For example, $\R^2$ has the points of $\Z^2$ as $0$-cells, the edges of the $\Z^2$-grid as $1$-cells, and a $2$-cell attached along each square of the grid.
 \end{ex}
 
 \begin{ex}
@@ -203,16 +203,16 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \end{ex}
 
 \begin{ex}
-    $S^n$ is a CW complex. Namely, $X_0$ is a single point, $X_1=\cdots = X_{n-1}=X_0$, and the (only possible) attaching map $\varphi_1^n : D_1^n \to X_{n-1}$.
+    $S^n$ is a CW complex. Namely, $X^0$ is a single point, $X^1=\cdots = X^{n-1}=X^0$, and $X^n$ is obtained by attaching a single $n$-cell via the (only possible) attaching map $\varphi_1^n : \partial D_1^n \to X^{n-1}$.
 \end{ex}
 
 \begin{ex}
-    $\R\P^n=S^n/(x \sim -x)$ is a CW complex. When $n=0$, $\R\P^n$ is just a point, hence as a CW structure. Suppose $\R\P^{n-1}$ has a CW structure. Let $\bar D_\alpha^n$ be the upper hemisphere. We obtain the CW structure on $\R \P^n$ by attaching one $n$-cell to $\R\P^{n-1}$ via the attaching map 
-    $$\varphi_\alpha^n(x_1,\dots,x_n,0) = [(x_1,\dots,x_n)] \subset \R\P^{n-1}.$$
+    $\R\P^n=S^n/(x \sim -x)$ is a CW complex. When $n=0$, $\R\P^n$ is just a point, hence has a CW structure. Suppose $\R\P^{n-1}$ has a CW structure. Let $\bar D_\alpha^n$ be the upper hemisphere. We obtain the CW structure on $\R \P^n$ by attaching one $n$-cell to $\R\P^{n-1}$ via the attaching map 
+    $$\varphi_\alpha^n(x_1,\dots,x_n,0) = [(x_1,\dots,x_n)] \in \R\P^{n-1}.$$
 \end{ex}
 
 \begin{exercise}
-    Find a CW structure on $\C \P^n = (\C^{n+1}\setminus \{0\})/(x \sim \lambda x,\lambda \in \C^*)$
+    Find a CW structure on $\C \P^n = (\C^{n+1}\setminus \{0\})/(x \sim \lambda x,\lambda \in \C^*)$.
 \end{exercise}
 
 \begin{lem}
@@ -221,11 +221,11 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 
 \begin{proof}
     Recall that $U$ is open in $X$ if and only if $U \cap X^n$ is open for all $n$, if and only if for the projection map
-    $$P^n: X^n \sqcup \bigsqcup _{\alpha \in I(n)}D^\alpha_n \to X^n,$$
+    $$P^n: X^{n-1} \sqcup \bigsqcup _{\alpha \in I(n)}D_\alpha^n \to X^n,$$
     we have
     $$(P^n)^{-1}(U \cap X^n)$$
     is open. This is the case if and only if for each $\alpha \in I(n)$,
-    $$(\Phi_\alpha^n)^{-1}(U \cap X)$$
+    $$(\Phi_\alpha^n)^{-1}(U \cap X^n)$$
     and $U \cap X^{n-1}$ are open. So, $(\implies)$ is verified, and $(\impliedby)$ follows by induction on $n$.
 \end{proof}
 
@@ -259,7 +259,7 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \end{thm}
 
 \begin{proof}
-    Let $p \neq q \in X$, and suppose that $p,q \in X^n$ but $q \not \in X^{n-1}$. So, $q$ is in some disk $e_\alpha^n$. If $p \in X^{n-1}$, we may choose $\veps$ sufficiently small so that $N_\veps(X^{n-1})$ and $N_\veps(q)$ are disjoint. If $p \not \in X^{n-1}$, then $p,q$ are distinct points in $e_\alpha^n$ which is Hausdorff, hence separable in $\veps$-neighborhoods. These $\veps$-neighborhoods lift to the global structure of $X$ so that $N_\veps(p) \cap N_\veps(q) = \emptyset$.
+    Let $p \neq q \in X$, and suppose that $p,q \in X^n$ but $q \not \in X^{n-1}$. So, $q$ is in some open cell $e_\alpha^n$. If $p \in X^{n-1}$, we may choose $\veps$ sufficiently small so that $N_\veps(X^{n-1})$ and $N_\veps(q)$ are disjoint. If $p \not \in X^{n-1}$, then $p,q$ are distinct points in $e_\alpha^n$ which is Hausdorff, hence separated by $\veps$-neighborhoods. These $\veps$-neighborhoods lift to the global structure of $X$ so that $N_\veps(p) \cap N_\veps(q) = \emptyset$.
 \end{proof}
 
 \begin{defn}
@@ -270,25 +270,25 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 Homotopy is denoted $f \sim g$ or $f \overset{H}{\sim} g$.
 
 \begin{defn}
-    Two maps $f:X \to Y$ and $g:Y \to X$ are called \textbf{homotopy equivalent} if $g \circ f \sim \id_X$ and $f \circ g = \id_Y$. In this case, $X$ and $Y$ are said to be \textbf{homotopically equivalent.}
+    Two maps $f:X \to Y$ and $g:Y \to X$ are called \textbf{homotopy equivalent} if $g \circ f \sim \id_X$ and $f \circ g \sim \id_Y$. In this case, $X$ and $Y$ are said to be \textbf{homotopy equivalent.}
 
-    A subset $A \subset X$ is called a \textbf{retract} of $X$ if there exists $r:X \to A$ continuous such that $r(x)=x$ for every $x \in A$. Moreover, $A$ is called a \textbf{deformation retract} if $r \sim \id_X$ relative to $A$. $X$ is called \textbf{contractible} if $\id_X \sim $ constant
+    A subset $A \subset X$ is called a \textbf{retract} of $X$ if there exists $r:X \to A$ continuous such that $r(x)=x$ for every $x \in A$. Moreover, $A$ is called a \textbf{deformation retract} if $i \circ r \sim \id_X$ relative to $A$, where $i:A \hookrightarrow X$ is the inclusion. $X$ is called \textbf{contractible} if $\id_X \sim $ constant.
 \end{defn}
 
-\begin{ex}
+\begin{exercise}
     Show that $\R^{n+1}\setminus \{0\}$ deformation retracts to $S^n \subset \R^{n+1}$.
-\end{ex}
+\end{exercise}
 
-\begin{ex}
+\begin{exercise}
     Show that $i:\R^n \to \R^{n+k}$ and $\pi:\R^{n+k}\to \R^n$ are homotopy equivalent.
-\end{ex}
+\end{exercise}
 
-\begin{ex}
+\begin{exercise}
     Let $X$ be a topological space. Define $C(X) = X \times [0,1] / [(x,1) \sim (y,1)]$. Show that $C(X)$ is contractible.
-\end{ex}
+\end{exercise}
 
 \begin{defn}
-    $X$ is called \textbf{locally contractible} if for every $p \in X$ and $U \ni p$ open, there exists $V \subset U$ with $p \in V$ such that $p$ is contractible.
+    $X$ is called \textbf{locally contractible} if for every $p \in X$ and $U \ni p$ open, there exists an open $V \subset U$ with $p \in V$ such that $V$ is contractible.
 \end{defn}
 
 \begin{prop}
@@ -312,25 +312,24 @@ Homotopy is denoted $f \sim g$ or $f \overset{H}{\sim} g$.
 \section{Fundamental Group}
 
 \begin{defn}
-    Let $X$ be a topological space $p \in X$. The \textbf{fundamental group} of $X$ at $p$, is
-    $$\pi_1(X,p):=\brax{ \gamma:[0,1]\to X \mid \gamma(0)=\gamma(1) } / \braks{ \gamma \overset{\text{rel}(\{0,1\})}{\sim}\mu }.$$
+    Let $X$ be a topological space and $p \in X$. The \textbf{fundamental group} of $X$ at $p$ is
+    $$\pi_1(X,p):=\brax{ \gamma:[0,1]\to X \mid \gamma(0)=\gamma(1)=p } / \braks{ \gamma \overset{\text{rel}(\{0,1\})}{\sim}\mu }.$$
     Equivalently, let $q$ be a fixed point in $S^1$, and we have
-    $$\pi_1(X,p) = \brax{\gamma :S^1 \to X}/\braks{\gamma \overset{\text{rel(q)}}{\sim} \mu}$$
-    This definition is in some ways better, since changing $S^1$ to $S^n$ gives a more generalized definition of the $\bm n$\textbf{-th fundamental group} $\pi_n(X,p)$.
+    $$\pi_1(X,p) = \brax{\gamma :S^1 \to X \mid \gamma(q)=p}/\braks{\gamma \overset{\text{rel(q)}}{\sim} \mu}$$
+    This definition is in some ways better, since changing $S^1$ to $S^n$ gives a more generalized definition of the $\bm n$\textbf{-th homotopy group} $\pi_n(X,p)$.
 \end{defn}
 
 \begin{defn}
-    A connected space $X$ is called \textbf{simply connected} if there exists $p \in X$ such that $\pi_1(X,p)=\{ [p]\}$.
+    A path connected space $X$ is called \textbf{simply connected} if there exists $p \in X$ such that $\pi_1(X,p)=\{ [p]\}$.
 \end{defn}
 
 \begin{prop}
-    If $X$ is contractible, then
-    $$\pi_1(X,p) =\{[p]\}$$
-    for the $p$ such that $X$ deformation retracts to $p$.
+    If $X$ deformation retracts to $p \in X$, then
+    $$\pi_1(X,p) =\{[p]\}.$$
 \end{prop}
 
 \begin{proof}
-    Let $\gamma \in \pi_1(X,p)$. Let $H$ be a homotopy between $\id_X$ and $p$. Take
+    Let $\gamma \in \pi_1(X,p)$. Let $H$ be a homotopy between $\id_X$ and $p$ relative to $\{p\}$. Take
     $$\widetilde{H}(s,t) := H(\gamma(s),t).$$
     Then, $\gamma \overset{\widetilde H}{\sim}p$.
 \end{proof}
@@ -348,7 +347,7 @@ Indeed, in order to show that this concatenation of curves defines a group struc
 \end{claim}
 
 \begin{exercise}
-    Show that if $\varphi :[0,1] \to [0,1]$ is a continuous map with $\varphi(0)=0$ and $\varphi(1)=1$, then $\gamma \circ \varphi \sim \gamma$.
+    Show that if $\varphi :[0,1] \to [0,1]$ is a continuous map with $\varphi(0)=0$ and $\varphi(1)=1$, then $\gamma \circ \varphi \sim \gamma$ relative to $\{0,1\}$.
 \end{exercise}
 
 \begin{thm}[][label=thm:pathconnectedisom]
@@ -360,11 +359,11 @@ Since $X$ is path connected, we have a continuous curve $\mu:[0,1] \to X$ with $
     \begin{claim}
         Let $\Omega_p$ denote the space of curves starting and ending at $p$. Then, the map
     $$T_\mu :\Omega_p \to \Omega_q$$
-    defined by $T_\mu := \mu \star \gamma \star \mu^{-1}$
+    defined by $T_\mu(\gamma) := \mu \star \gamma \star \mu^{-1}$
     induces an isomorphism $\pi_1 (X,p) \arr[\sim] \pi_1(X,q)$.
     \end{claim}
     Indeed, suppose $[\gamma] = [\gamma ']$. Then, $[T_\mu (\gamma)] = [T_\mu(\gamma')]$. Moreover,
-    $$\mu \star (\gamma _1 \star \gamma_2)\star \mu^{-1}=\mu \star \gamma _1 \star \mu^{-1}\star \mu \star \gamma_2 \star \mu^{-1},$$
+    $$\mu \star (\gamma _1 \star \gamma_2)\star \mu^{-1}\sim\mu \star \gamma _1 \star \mu^{-1}\star \mu \star \gamma_2 \star \mu^{-1},$$
     hence $T_\mu$ is a homomorphism. Moreover, the map $\psi =\mu(1-t)$ induces a clear inverse homomorphism $T_{\psi}:\pi_1(X,q) \to \pi_1(X,p)$, so it follows that $T_\mu$ is an isomorphism.
 \end{proof}
 
@@ -377,11 +376,10 @@ Since $X$ is path connected, we have a continuous curve $\mu:[0,1] \to X$ with $
 \end{prop}
 
 \begin{proof}
-    Let $[\gamma] = [\gamma ']$. Then, $f\circ \gamma \sim f\circ \gamma'$ on $f \circ H$, relative to $\{0,1\}$, so this is well-defined, and
-    $$(f \circ \gamma ) \star (f \circ \mu) = f(\gamma \star \mu)$$
-    at the curves level, which induces the homomorphism
-    $(g \circ f)_* =g_* \circ f_*$
-    at the level of fundamental groups.
+    Let $[\gamma] = [\gamma ']$. Then, $f\circ \gamma \sim f\circ \gamma'$ via $f \circ H$, relative to $\{0,1\}$, so this is well-defined, and
+    $$(f \circ \gamma ) \star (f \circ \mu) = f\circ(\gamma \star \mu)$$
+    at the curves level, so $f_*$ is a homomorphism. Finally, $(g \circ f)\circ\gamma = g \circ (f \circ \gamma)$ gives
+    $(g \circ f)_* =g_* \circ f_*$.
 \end{proof}
 
 \begin{thm}[Functoriality of the Fundamental Group]
@@ -391,15 +389,15 @@ is a covariant functor.
 \end{thm}
 
 \begin{defn}
-    $X$ is called \textbf{strongly contractable} if there exists $p \in X$ such that $X$ deformation retracts to $p$.
+    $X$ is called \textbf{strongly contractible} if there exists $p \in X$ such that $X$ deformation retracts to $p$.
 \end{defn}
 
 \begin{prop}
-    If $X$ is strongly contractable, then $\pi_1(X,q) = \{e\}$ for all $q \in X$.
+    If $X$ is strongly contractible, then $\pi_1(X,q) = \{e\}$ for all $q \in X$.
 \end{prop}
 
 \begin{proof}
-When $q=p$, we know $\id _X \overset{\w{rel} p}{\sim}(x \mapsto p)$, and it follows that $\pi_1(X,p)$ is trivial. Then, the theorem follows for arbitrary $q$ by \Cref{thm:pathconnectedisom}, since strongly contractable implies path connected.
+When $q=p$, we know $\id _X \overset{\w{rel} p}{\sim}(x \mapsto p)$, and it follows that $\pi_1(X,p)$ is trivial. Then, the proposition follows for arbitrary $q$ by \Cref{thm:pathconnectedisom}, since strongly contractible implies path connected.
 \end{proof}
 
 \begin{notebox*}[Recall]
@@ -415,7 +413,7 @@ When $q=p$, we know $\id _X \overset{\w{rel} p}{\sim}(x \mapsto p)$, and it foll
 \begin{thm}[][label=thm:circlelift]
     Let $\gamma:[0,1] \to S^1$ be continuous with $\gamma(0)=1$. Then, there exists a unique $\theta:[0,1] \to \R$ such that $\theta (0)=0$, and
     $$e^{i\theta(t)}=\gamma(t).$$
-    Moreover, we can do this continuously along homotopies. That is, if $H:[0,1]\times [0,1] \to S^1$ has $H(0,s)=1$, there there exists a unique $\theta: [0,1] \times [0,1] \to \R$ such that $\theta(0,s)=0$ for all $s$, and $e^{i\theta}=H$ for all $t,s$.
+    Moreover, we can do this continuously along homotopies. That is, if $H:[0,1]\times [0,1] \to S^1$ has $H(0,s)=1$, then there exists a unique $\theta: [0,1] \times [0,1] \to \R$ such that $\theta(0,s)=0$ for all $s$, and $e^{i\theta}=H$ for all $t,s$.
 \end{thm}
 
 
@@ -427,7 +425,7 @@ When $q=p$, we know $\id _X \overset{\w{rel} p}{\sim}(x \mapsto p)$, and it foll
 \begin{proof}
 ($\implies$) Suppose $\gamma_1 \sim \gamma_2$ relative to $\{0,1\}$, via a homotopy $H$. Let $\theta:[0,1]\times [0,1] \to \R$ be the lift of $H$ as in \Cref{thm:circlelift}. Then, $\theta_1(x)=\theta(x,0)$ and $\theta_2(x)=\theta(x,1)$. Consider the path $s \mapsto \theta(1,s)$. Then, since $H(1,s)=1$, and $e^{i\theta}=H$, we have $\theta(1,s) \in 2 \pi \Z$. So, as $\theta(1,s)$ is continuous with a discrete image, it must be constant, hence $\theta_1(1)=\theta_2(1)$.
 
-$(\impliedby)$ Take $\theta(t,s)= (1-s)\theta_1(t) + s\theta_2(t)$. Then, $\theta(t,s)$ is a homotopy between $\theta_1$ and $\theta_2$, with $\theta(1,s)=\theta_1(1)$, and $\theta(0,s)=0$. Now, we may take $H(t,s):= e^{i\theta(t,s)}$, and $H$ is the desired homotopy from $\gamma_1$ to $\gamma_2$ relative to $\{0,1\}$. Note that relative to $1$ comes from the fact $\theta_1(1)=\theta_2(1)$.
+$(\impliedby)$ Take $\theta(t,s)= (1-s)\theta_1(t) + s\theta_2(t)$. Then, $\theta(t,s)$ is a homotopy between $\theta_1$ and $\theta_2$, with $\theta(1,s)=\theta_1(1)$, and $\theta(0,s)=0$. Now, we may take $H(t,s):= e^{i\theta(t,s)}$, and $H$ is the desired homotopy from $\gamma_1$ to $\gamma_2$ relative to $\{0,1\}$; it is relative to $\{0,1\}$ because $\theta(0,s)=0$ and $\theta(1,s)=\theta_1(1)=\theta_2(1)$ for all $s$.
 \end{proof}
 
 \begin{cor}
@@ -437,12 +435,12 @@ For any $p \in S^1$,
 \end{cor}
 
 \begin{proof}
-    Clearly, $(e^{2\pi i t})^k \overset{\w{rel}\{0,1\}}{\sim} e^{2\pi i kt}$, where the LHS denotes concatenation $k$ times. On the other hand, each element in $\pi_1(S^1,1)$ is in bijective correspondence with $t \mapsto e^{2\pi i kt}$ for some $k \in \Z$. Indeed, if $\theta$ is the lift of an element in $\pi_1(S^1,1)$, then $\theta_1(1) \in 2\pi \Z$, and the bijective correspondence is induced by $\gamma \leftrightarrow \frac{\theta_1(1)}{2\pi}$.
+    Clearly, $(e^{2\pi i t})^k \overset{\w{rel}\{0,1\}}{\sim} e^{2\pi i kt}$, where the LHS denotes concatenation $k$ times. On the other hand, each element in $\pi_1(S^1,1)$ is represented by $t \mapsto e^{2\pi i kt}$ for exactly one $k \in \Z$. Indeed, if $\theta$ is the lift of an element in $\pi_1(S^1,1)$, then $\theta(1) \in 2\pi \Z$, and the bijective correspondence is induced by $\gamma \leftrightarrow \frac{\theta(1)}{2\pi}$. The case of general $p$ follows by \Cref{thm:pathconnectedisom}.
 \end{proof}
 
 \begin{exercise}
     Let $\{ (X_i,p_i)\}_{i=1}^N$ be a set of pointed spaces. Show that
-    $$\pi_1\paren{\prod_{k=1}^N X_i, (p_1,\dots,p_n)} \cong \prod_{k=1}^N \pi_1(X_i,p_i).$$
+    $$\pi_1\paren{\prod_{i=1}^N X_i, (p_1,\dots,p_N)} \cong \prod_{i=1}^N \pi_1(X_i,p_i).$$
 \end{exercise}
 
 \begin{exercise}
@@ -454,7 +452,7 @@ For any $p \in S^1$,
 \end{prop}
 
 \begin{proof}
-    Let $\gamma:[0,1] \to S^k$ be continuous. We claim $\gamma$ is homotopic, relative to $\{0,1\}$, to a curve $\tilde \gamma$ that misses a point $q$. The proposition follows from the claim: indeed, we have $\psi:S^k \setminus \{q\} \arr[\sim] \D^k $, so consider $\mu:=\pi \circ \tilde \gamma$, which is homotopic to the constant map, and we may push it back to $S^k$ via $\psi^{-1}$ to show $[\gamma]=[\tilde \gamma]=[\id]$.
+    Let $\gamma:[0,1] \to S^k$ be continuous. We claim $\gamma$ is homotopic, relative to $\{0,1\}$, to a curve $\tilde \gamma$ that misses a point $q$. The proposition follows from the claim: indeed, we have $\psi:S^k \setminus \{q\} \arr[\sim] \R^k $, so consider $\mu:=\psi \circ \tilde \gamma$, which is homotopic to the constant map, and we may push it back to $S^k$ via $\psi^{-1}$ to show $[\gamma]=[\tilde \gamma]=[p]$, where $p = \gamma(0)$.
 
     To prove the claim, we approximate $\gamma$ via smooth maps, and smooth maps always miss points by \href{https://en.wikipedia.org/wiki/Sard%27s_theorem}{Sard's theorem}.
 \end{proof}
@@ -462,7 +460,7 @@ For any $p \in S^1$,
 
 \section{Amalgamated Products and Free Products}
 \begin{defn}
-    Let $H$, $G_1$, $G_2$ be groups, and let $\varphi_i:H \to G_i$ be homomorphisms. The \textbf{amalgamated product} of $G_1$ and $G_2$ along $H$, denoted $G_1*_HG_2$, is a group together with homomorphisms $\psi_i:G_i \to G_1 *_HG_2$ satisfying $\psi_1 \circ \varphi_1=\psi_2 \circ \varphi_2$. Moreover, it has the universal property that for every group $K$ and homomorphisms $f_i:G_i\to K$ with $f_1 \circ \varphi_1 = f_2 \circ \varphi_2$, there exists a unique homomorphism $T:G_1*_HG_2 \to k$ such that $T \circ \psi_i=f_i$. That is, the following diagram commutes:
+    Let $H$, $G_1$, $G_2$ be groups, and let $\varphi_i:H \to G_i$ be homomorphisms. The \textbf{amalgamated product} of $G_1$ and $G_2$ along $H$, denoted $G_1*_HG_2$, is a group together with homomorphisms $\psi_i:G_i \to G_1 *_HG_2$ satisfying $\psi_1 \circ \varphi_1=\psi_2 \circ \varphi_2$. Moreover, it has the universal property that for every group $K$ and homomorphisms $f_i:G_i\to K$ with $f_1 \circ \varphi_1 = f_2 \circ \varphi_2$, there exists a unique homomorphism $T:G_1*_HG_2 \to K$ such that $T \circ \psi_i=f_i$. That is, the following diagram commutes:
     % https://q.uiver.app/#q=WzAsNSxbMCwwLCJIIl0sWzIsMCwiR18xIl0sWzAsMiwiR18yIl0sWzIsMiwiR18xKl9IR18yIl0sWzMsMywiSyJdLFswLDEsIlxcdmFycGhpXzEiXSxbMCwyLCJcXHZhcnBoaV8yIiwyXSxbMSwzLCJcXHBzaV8xIiwyXSxbMiwzLCJcXHBzaV8yIl0sWzEsNCwiZl8xIl0sWzIsNCwiZl8yIiwyXSxbMyw0LCJcXGV4aXN0cyAhVCIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
 \[\begin{tikzcd}[ampersand replacement=\&,cramped]
 	H \&\& {G_1} \& \\
@@ -482,13 +480,13 @@ For any $p \in S^1$,
 A good way to think about this is gluing $G_1$ and $G_2$ along $H$.
 
 \begin{ex}
-    Consider a similar definition but with sets $A \arr[\varphi_1]B$ and $A \arr[\varphi_2] B_2$. If we have $f_1:B_1 \to K$ and $f_2:B_2 \to K$, then one can see $B_1 \sqcup B_2$ with the natural embeddings $i_1:B_1 \to B_1 \sqcup B_2$, $i_2:B_2\to B_1 \sqcup B_2$, has the desired unique $\tilde T:B_1 \sqcup B_2 \to K$. However, we do not have the desired commutativity $i_1 \circ \varphi_1 = i_2 \circ \varphi_2$. In order to have this, we need to quotient $B_1 \sqcup B_2$ by the relation $i_1\varphi_1(x) \sim i_2\varphi_2(x)$. Then,
+    Consider a similar definition but with sets $A \arr[\varphi_1]B_1$ and $A \arr[\varphi_2] B_2$. If we have $f_1:B_1 \to K$ and $f_2:B_2 \to K$, then one can see that $B_1 \sqcup B_2$, with the natural embeddings $i_1:B_1 \to B_1 \sqcup B_2$, $i_2:B_2\to B_1 \sqcup B_2$, has the desired unique $\tilde T:B_1 \sqcup B_2 \to K$. However, we do not have the desired commutativity $i_1 \circ \varphi_1 = i_2 \circ \varphi_2$. In order to have this, we need to quotient $B_1 \sqcup B_2$ by the relation $i_1\varphi_1(x) \sim i_2\varphi_2(x)$. Then,
     $(B_1 \sqcup B_2)/\sim$ is the amalgamated product of these sets.
 \end{ex}
 
 \begin{prop}[Existence and Uniqueness of the Amalgamated Product]
-    Let $H,G_1,G_2$ be groups with homomorphisms $\varphi_i:H \to G_i$. Then, the amalgamated product $(G_1*_HG_2, \psi_1,\psi_2)$ exists, and if $(\tilde{G_1*_HG_2},\tilde\psi_1,\tilde\psi_2)$ is another amalgamated product, then there exists a unique isomorphism
-    $$T:G_1 *_HG_2 \arr \tilde{G_1 *_HG_2}$$
+    Let $H,G_1,G_2$ be groups with homomorphisms $\varphi_i:H \to G_i$. Then, the amalgamated product $(G_1*_HG_2, \psi_1,\psi_2)$ exists, and if $(\widetilde{G_1*_HG_2},\tilde\psi_1,\tilde\psi_2)$ is another amalgamated product, then there exists a unique isomorphism
+    $$T:G_1 *_HG_2 \arr \widetilde{G_1 *_HG_2}$$
     such that $T \circ \psi_i = \tilde \psi_i$.
 \end{prop}
 
@@ -499,7 +497,7 @@ A good way to think about this is gluing $G_1$ and $G_2$ along $H$.
 	\\
 	{G_2} \&\& {G_1*_HG_2} \\
 	\\
-	\&\&\&\& {\tilde{G_1*_HG_2}}
+	\&\&\&\& {\widetilde{G_1*_HG_2}}
 	\arrow["{\varphi_1}"', from=1-1, to=1-3]
 	\arrow["{\varphi_2}", from=1-1, to=3-1]
 	\arrow["{\psi_1}"', from=1-3, to=3-3]
@@ -543,7 +541,7 @@ The claim follows immediately from the following lemma.
 
 \begin{exercise}
     Show that
-    $$G_1*_HG_2 \cong {(G_1*G_2)}/{\angles{\varphi_1(h) \varphi_2(h)^{-1}}}$$
+    $$G_1*_HG_2 \cong {(G_1*G_2)}/{\aangles{\varphi_1(h) \varphi_2(h)^{-1} : h \in H}}$$
 \end{exercise}
 
 
@@ -561,18 +559,18 @@ The claim follows immediately from the following lemma.
         \Phi: &*_{\alpha}\pi_1(U_\alpha,p) \to \pi_1(X,p)
         \\ &*_{\alpha}[\gamma_\alpha]\mapsto \star_\alpha[\gamma _\alpha]
     \end{align*}
-    is surjective. Moreover, if $\alpha,\beta, \delta \in I$ and $U_\alpha \cap U_\beta \cap U_\delta$ is path-connected, then
+    is surjective. Moreover, if $U_\alpha \cap U_\beta \cap U_\delta$ is path-connected for all $\alpha,\beta, \delta \in I$, then
     $$\pi_1(X,p) \cong *_\alpha\pi_1(U_\alpha, p)/\aangles{ i_{\alpha ,\beta}(\gamma) i_{\beta,\alpha}(\gamma^{-1})},$$
     where
     $$i_{\alpha,\beta}:\pi_1(U_\alpha \cap U_\beta, p) \to \pi_1(U_\alpha, p)$$
-    is the expected embedding, and $\aangles{-}$ is the normal closure. In particular, if $(X,p) = U_1 \cup U_2$ with $U_1 \cap U_2$ path connected, then
+    is the homomorphism induced by the inclusion, and $\aangles{-}$ is the normal closure. In particular, if $(X,p) = U_1 \cup U_2$ with $U_1 \cap U_2$ path connected, then
     $$\pi_1(X,p) = \pi_1(U_1,p) \underset{\pi_1(U_1\cap U_2,p)}{*} \pi_1(U_2,p)$$
 \end{thm}
 
 \begin{ex}
     Take $X= \bigvee_{\alpha \in I}(S^1,p)$, which is the space defined by attaching $I$ copies of $S^1$ at one shared point $p$. For each $\alpha$, take $U_\alpha = S^1_\alpha \cup N_\veps (p)$. Then,
     $$U_\alpha \cap U_\beta \cap U_\delta = N_\veps(p)$$
-    for every $\alpha,\beta,\delta \in I$ is connected (and contractible). Thus, by van Kampen's theorem,
+    for every $\alpha,\beta,\delta \in I$ is path connected (and contractible). Thus, by van Kampen's theorem,
     $$\pi_1(X,p) \cong *_\alpha \pi_1(S^1_\alpha,p)\cong *_\alpha \Z$$
     Indeed, the normal subgroup is trivial because $N_\veps(p)$ is contractible.
 \end{ex}
@@ -610,9 +608,9 @@ The claim follows immediately from the following lemma.
 \end{ex}
 
 \begin{rmk}
-    Recall that we required $U_\alpha \cap U_\beta$ to be connected for surjectivity to hold. If they are not connected, then we get examples of maps which aren't surjective: for instance, taking two arclengths of $S^1$, their intersection has two connected components, and $\{e\} *\{e\} \not\twoheadrightarrow \Z$.
+    Recall that we required $U_\alpha \cap U_\beta$ to be path connected for surjectivity to hold. If they are not path connected, then we get examples of maps which aren't surjective: for instance, taking two open arcs covering $S^1$, their intersection has two connected components, and $\{e\} *\{e\} \not\twoheadrightarrow \Z$.
 
-    The triple intersection condition is also necessary. Consider the graph:
+    The triple intersection condition is also necessary. Consider the graph $X$:
     % https://q.uiver.app/#q=WzAsNSxbMSwwLCJwIl0sWzAsMSwiQSJdLFsxLDEsIkIiXSxbMiwxLCJDIl0sWzEsMiwicSJdLFsxLDQsIiIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwxLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsMiwiIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDQsIiIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMCwzLCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsNCwiIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
 \[\begin{tikzcd}[ampersand replacement=\&,cramped]
 	\& p \& \\
@@ -625,26 +623,26 @@ The claim follows immediately from the following lemma.
 	\arrow[no head, from=2-2, to=3-2]
 	\arrow[no head, from=2-3, to=3-2]
 \end{tikzcd}\]
-Let $U_x = X \setminus \{x\}$. Then, $U_x \cap U_y$ is always contractible, but $U_A \cap U_B \cap U_C$ is disconnected. Notice further that $\pi_1(U_x,p)=\Z$, and $\pi_1(X,p)=\Z*\Z$. Then, van Kampen would say $\Z*\Z*\Z \surj \Z*\Z$, and $\Z*\Z*\Z/\angles e \cong \Z*\Z$, but this is absurd.
+Let $U_x = X \setminus \{x\}$. Then, $U_x \cap U_y$ is always contractible, but $U_A \cap U_B \cap U_C$ is disconnected. Notice further that $\pi_1(U_x,p)=\Z$, and $\pi_1(X,p)=\Z*\Z$. Then, van Kampen would say $\Z*\Z*\Z/\aangles e \cong \Z*\Z$, but this is absurd (the abelianizations are $\Z^3$ and $\Z^2$).
 \end{rmk}
 
 We now prove van Kampen's theorem.
 
 \begin{proof}[Proof of van Kampen]
 Let $(X,p)$ be a pointed space, $X = \bigcup _{\alpha \in I}(U_\alpha,p)$, suppose $U_\alpha \cap U_\beta$ is path connected for all $\alpha, \beta$, and let $\Phi$ be the map
-$$\Phi:*\pi_1(U_\alpha,p) \to \pi_1(X).$$
+$$\Phi:*\pi_1(U_\alpha,p) \to \pi_1(X,p).$$
 We claim $\Phi$ is surjective. Let $\gamma:[0,1] \to X$ be a loop at $p$, and we want to decompose it into loops in $(U_\alpha,p)$. Since $\gamma$ is continuous, the set
 $$\{ \gamma^{-1}(U_\alpha)\} _{\alpha \in I}$$
-is an open cover of $[0,1]$. Thus, there exists $\delta>0$ called the \href{https://en.wikipedia.org/wiki/Lebesgue%27s_number_lemma}{Lebesgue number}, such that any open subset of $[0,1]$ with diameter $<\delta$ is contained in $\gamma^{-1}(U_\alpha)$ for some $\alpha\in I$. Assume $\delta = 1/k$ for $k \in \N$, and partition the interval $[0,1]$ into $2k$ sub-intervals of length $1/2k$. Thus, each sub-interval $[\frac{i-1}{2k},\frac{i}{k}]$ is mapped via $\gamma$ into $U_\alpha$. Let $t_i = i/2k$ and $p_i = \gamma (t_i) \in U_{\alpha_i }$. Since $U_{\alpha_i}\cap U_{\alpha_{i+1}}$ is connected, there exists a curve $\mu_i$ from $p_i$ to $p$. Let $\gamma_i = \gamma|_{[t_{i-1},t_i]}$. Then,
-$$\gamma = \gamma_{2k}*\cdots *\gamma_1 \sim \gamma_{2k}\cdots \gamma_{3}\mu_2^{-1}\mu_2 \gamma_2 \mu_{1}^{-1}\mu _1 \gamma_1,$$
+is an open cover of $[0,1]$. Thus, there exists $\delta>0$ called the \href{https://en.wikipedia.org/wiki/Lebesgue%27s_number_lemma}{Lebesgue number}, such that any open subset of $[0,1]$ with diameter $<\delta$ is contained in $\gamma^{-1}(U_\alpha)$ for some $\alpha\in I$. Assume $\delta = 1/k$ for $k \in \N$, and partition the interval $[0,1]$ into $2k$ sub-intervals of length $1/(2k)$. Thus, each sub-interval $[\frac{i-1}{2k},\frac{i}{2k}]$ is mapped via $\gamma$ into some $U_{\alpha_i}$. Let $t_i = i/(2k)$ and $p_i = \gamma (t_i) \in U_{\alpha_i }\cap U_{\alpha_{i+1}}$. Since $U_{\alpha_i}\cap U_{\alpha_{i+1}}$ is path connected, there exists a curve $\mu_i$ in $U_{\alpha_i}\cap U_{\alpha_{i+1}}$ from $p_i$ to $p$. Let $\gamma_i = \gamma|_{[t_{i-1},t_i]}$. Then,
+$$\gamma = \gamma_{2k} \star \cdots \star \gamma_1 \sim \gamma_{2k}\cdots \gamma_{3}\mu_2^{-1}\mu_2 \gamma_2 \mu_{1}^{-1}\mu _1 \gamma_1,$$
 proving surjectivity.
 
-Now, in order to prove the desired isomorphism, it suffices to show $$\ker (\Phi) \cong  \angles{\angles{i_{\alpha \beta}(\gamma) \cdot i_{\beta\alpha}(\gamma^{-1})}}=:N.$$
+Now, in order to prove the desired isomorphism, it suffices to show $$\ker (\Phi) =  \angles{\angles{i_{\alpha \beta}(\gamma) \cdot i_{\beta\alpha}(\gamma^{-1})}}=:N.$$
 Indeed, first observe that 
 $$\Phi(i_{\alpha \beta}(\gamma) \cdot i_{\beta\alpha}(\gamma^{-1})) = [\gamma] [\gamma^{-1}]=e,$$
 so clearly $N \subset \ker \Phi$.
 
-For the other direction, we want to show that if $\gamma_1 *\cdots * \gamma_{k}$ is homotopic to $[e]$ as loops in $X$, then $\gamma_1 *\cdots * \gamma_k \in N$. This is provable, but the proof was confusing in lecture... I didn't feel like finishing it.
+For the other direction, we want to show that if $\gamma_1 \star \cdots \star \gamma_{k}$ is homotopic to $[e]$ as loops in $X$, then $\gamma_1 \star \cdots \star \gamma_k \in N$. This is provable, but the proof was confusing in lecture... I didn't feel like finishing it.
 \end{proof}
 
 \begin{exercise}
@@ -656,14 +654,14 @@ For the other direction, we want to show that if $\gamma_1 *\cdots * \gamma_{k}$
 \end{exercise}
 
 \begin{exercise}
-    How do you hang a picture using $1$ rope and $k$ nails such that removing any nail will make it fall.
+    How do you hang a picture using $1$ rope and $k$ nails such that removing any nail will make it fall?
 \end{exercise}
 
 \begin{ex}[The Fundamental Group of $\R^3 \setminus S^1$]
-    We can imagine the sphere of which $S^1$ is a cross section ($S_2$), and deformation retract everything outside that sphere down to it (that is, we can ignore everything fair outside our circle). We claim that $\bar B \setminus S^1$ deformation retracts to $S^2\cup L$, where $B$ is the closed ball corresponding to our sphere $S_2$, and $L$ is a line passing from one end of $S^1$ to another.
+    We can imagine the sphere of which $S^1$ is a cross section ($S^2$), and deformation retract everything outside that sphere down to it (that is, we can ignore everything far outside our circle). We claim that $\bar B \setminus S^1$ deformation retracts to $S^2\cup L$, where $B$ is the closed ball corresponding to our sphere $S^2$, and $L$ is the diameter of the sphere perpendicular to the disk bounded by $S^1$ (so $L$ passes through the center of $S^1$, missing $S^1$ itself).
 
     Then, $L$ can be homotoped within the interior of $S^2$ to a closed loop touching a point of $S^2$. That is, our space retracts to $S^2 \lor S^1$, and by van Kampen's theorem
-    $$\pi_1(\R \setminus \{0\}) = \pi_1(S^2 \lor S^1) = \pi_1(S^1)=\Z.$$
+    $$\pi_1(\R^3 \setminus S^1) = \pi_1(S^2 \lor S^1) = \pi_1(S^2)*\pi_1(S^1)=\Z.$$
 \end{ex}
 
 \begin{ex}
@@ -673,15 +671,15 @@ For the other direction, we want to show that if $\gamma_1 *\cdots * \gamma_{k}$
 \begin{ex}
     Now, consider $\R^3$, with two linked circles removed. We claim this is homotopy equivalent to $T^2 \lor S^2$, so the fundamental group is 
     $$\pi_1(T^2)*\pi_1(S^2)=\Z^2 *\{e\}=\Z^2.$$
-The idea is as follows: we thicken one of our circles so that it becomes a torus, and we surround our torus and circle by a sphere so that the torus touches the boundary of the sphere. Then, the second circle is ``jump-roped'' around the torus so that it reaches the boundary of the sphere at that same of the intersection point.
+The idea is as follows: we thicken one of our circles so that it becomes a torus, and we surround our torus and circle by a sphere so that the torus touches the boundary of the sphere. Then, the second circle is ``jump-roped'' around the torus so that it reaches the boundary of the sphere at the same point as the torus.
 \end{ex}
 
 \begin{ex}
-    Consider the space $S^n \setminus \{p\}$, for $n \geq 0$. We claim the fundamental group is trivial. Indeed, we may pass $S^{n-1}$ through our point, which splits $S^n$ into an ``upper-hemisphere'' $U$ and ``lower-hemisphere'' $L$. We widen $U$ and $L$ mildly so that they have non-trivial intersection, and $U \cap L \sim S^1$. Then,
+    Consider the space $S^n$, for $n \geq 2$, and a point $p \in S^n$. We claim the fundamental group is trivial. Indeed, we may pass $S^{n-1}$ through our point, which splits $S^n$ into an ``upper-hemisphere'' $U$ and ``lower-hemisphere'' $L$. We widen $U$ and $L$ mildly so that they have non-trivial intersection, and $U \cap L \simeq S^{n-1}$, which is path connected since $n \geq 2$. Then,
     \[
-    \pi_1(S^n,p)=\pi_1(U) *_{\pi_1(S^{n-1},p)}\pi_1(L),
+    \pi_1(S^n,p)=\pi_1(U,p) *_{\pi_1(U \cap L,p)}\pi_1(L,p),
     \]
-    which by induction is trivial (since $\pi_1(S^1\setminus \{p\})=\{0\}$).
+    which is trivial since $U$ and $L$ are contractible.
 \end{ex}
 
 \begin{prop}
@@ -689,9 +687,9 @@ Suppose $Y$ is obtained from a path-connected pointed space $(X,x_0)$ by attachi
 \[
 Y= X\sqcup \bar D^2/ (\varphi(x) \sim x),
 \]
-where $X \in \partial \bar D^2$ and $\varphi:\partial D^2 \to X$.  Let $p \in Y\cap X$ be a point such that there exists $\tilde p \in D^2$ with $\varphi(\tilde p)=p$. Let $\mu_p$ be a path in $X$ between $x_0$ and $p$. Then,
+where $x \in \partial \bar D^2$ and $\varphi:\partial D^2 \to X$.  Let $p \in X$ be a point such that there exists $\tilde p \in \partial D^2$ with $\varphi(\tilde p)=p$. Let $\mu_p$ be a path in $X$ between $x_0$ and $p$. Then,
 \[
-\pi_1(Y,x_0) = \pi_1(X,x_0)/ \aangles{\mu_p^{-1}*\varphi * \mu_p}.
+\pi_1(Y,x_0) = \pi_1(X,x_0)/ \aangles{\mu_p^{-1} \star \varphi \star \mu_p}.
 \]
 \end{prop}
 \begin{proof}
@@ -699,11 +697,11 @@ where $X \in \partial \bar D^2$ and $\varphi:\partial D^2 \to X$.  Let $p \in Y\
     \[
     \pi_1(Y,p') = \pi_1(G,p')*_{\pi_1(S^1,p')}\pi_1(P,p').
     \]
-    Moreover, $\tilde \varphi$ is homotopic to $\bar{p'p^{-1}}\varphi \bar{p'p}$, so
+    Moreover, $\tilde \varphi$ is homotopic to $\bar{p'p}^{-1}\varphi \bar{p'p}$, so
     \[
-    \pi_1(Y,p')\cong \pi_1(P,p')/\angles{\bar{p'p^{-1}}\varphi \bar{p'p}}.
+    \pi_1(Y,p')\cong \pi_1(P,p')/\aangles{\bar{p'p}^{-1}\varphi \bar{p'p}}.
     \]
-    But, note that $P$ deformation retracts via $\mu_p\bar{p'p^{-1}}$ to give the desired result.
+    But, note that $P$ deformation retracts via $\mu_p\bar{p'p}^{-1}$ to give the desired result.
 \end{proof}
 
 \begin{que}
@@ -716,21 +714,21 @@ That is, ``attaching $k$-cells with $k>2$ does not change the fundamental group'
 \end{claim}
 
 \begin{proof}
-    Doing the same thing we did last time, by van Kampen's we have that 
+    Arguing as in the previous proposition, by van Kampen's theorem we have that 
     $$\pi_{1}(Y)=\pi_{1}(X)*_{\pi_{1}(S^{k-1})} \pi_{1}(D^k)=\pi_{1}(X)$$ 
     as both $\pi_{1}(S^{k-1})$ and $\pi_{1}(D^k)$ are trivial.
 \end{proof}
 
 Let $X$ be a finite path connected CW-complex. 
 
-$X^0$ is just points. $X^1$ is a connected graph which is homotopic to $\bigvee_{i=1}^j S_{i}^1$ for some $j$, hence $\pi_{1}(X^1)=\mathbb{Z}^{*j}$.
+$X^0$ is just points. $X^1$ is a connected graph which is homotopy equivalent to $\bigvee_{i=1}^j S_{i}^1$ for some $j$, hence $\pi_{1}(X^1)=\mathbb{Z}^{*j}$.
 
 $X^2$ is then obtained by attaching $2$-cells via
 \[
-X^2=X_{1}\coprod \coprod_{k=1}^{j_{\alpha}}\overline{D}^2_{k} \pmod{x\sim \varphi^1_{j}(x)}.
+X^2=X^{1}\coprod \coprod_{k=1}^{m}\overline{D}^2_{k} \pmod{x\sim \varphi_{k}(x)}.
 \]
-Choosing $x_{0}\in X^1,$ points $p_{1},\cdots, p_{j_{\alpha}}\in \partial D^2_{k}$ and curves $\mu_{j}$ connecting $x_{0}$ to $p_{j}$ we have that 
-$$\pi_{1}(X^2,x_{0})=\pi_{1}(X^1,x_{0})/ \aangles{ \mu_{i}^{-1}\varphi^1_{j}\mu_{i}}.$$
+Choosing $x_{0}\in X^1,$ points $p_{k}\in \varphi_k(\partial D^2_{k})$ and curves $\mu_{k}$ connecting $x_{0}$ to $p_{k}$ we have that
+$$\pi_{1}(X^2,x_{0})=\pi_{1}(X^1,x_{0})/ \aangles{ \mu_{k}^{-1}\varphi_{k}\mu_{k} : 1 \leq k \leq m}.$$
 Now $\pi_{1}(X)=\pi_{1}(X^{2})$.
 
 \begin{rmk}
@@ -769,17 +767,17 @@ Now $\pi_{1}(X)=\pi_{1}(X^{2})$.
 \end{ex}
 
 \begin{ex}
-    $\mathbb{R}^2\to$ the Klein bottle given by the natural projection. "Think about it."
+    $\mathbb{R}^2\to$ the Klein bottle given by the natural projection. ``Think about it.''
 \end{ex}
 
 \begin{ex}
-We get an open cover of $S^{1}\lor S^{2}$ by turning $S^1$ into a interval. 
-   Then we find another covering by "going around $A$ at twice the speed."
+We get a covering of $S^{1}\lor S^{2}$ by turning $S^1$ into an interval. 
+   Then we find another covering by ``going around $A$ at twice the speed.''
    We of course want another covering, so we take the first covering and turn the remaining circles into intervals as well. This last covering is connected. 
 \end{ex}
 
 \begin{prop}[Homotopy Lifting Property][label=prop:homoliftingprop]
-    Suppose $\tilde{X}\to X$ is a covering map and $Y$ is a space, $f_{t}:Y\times [0,1] \to X$ is a homotopy (which inputs like $f_{.5}(y)$), and $\tilde{f}_{0}:Y\to \tilde{X}$ is such that the following diagram commutes:
+    Suppose $\tilde{X}\to X$ is a covering map and $Y$ is a space, $F:Y\times [0,1] \to X$ is a homotopy (we write $f_t := F(-,t)$), and $\tilde{f}_{0}:Y\to \tilde{X}$ is such that the following diagram commutes:
 % https://q.uiver.app/#q=WzAsMyxbMCwyLCJZIl0sWzIsMiwiWCJdLFsyLDAsIlxcdGlsZGV7WH0iXSxbMiwxLCJwIl0sWzAsMSwiZl8wIiwyXSxbMCwyLCJcXHRpbGRle2Z9XzAiXV0=
 \[\begin{tikzcd}[ampersand replacement=\&,cramped]
 	\&\& {\tilde{X}} \\
@@ -803,7 +801,7 @@ commutes for all $t$.
 \end{prop}
 
 \begin{proof}
-Fix a point $y\in Y$, then $\operatorname{Im} (\overbrace{ t\mapsto f_{t}(y) }^{ \gamma_{y}(t) })$ is compact and for each $t$ we can choose $U_{f_{t}(y)}\subset X$ as in the definition of the covering space. (a neighborhood whose preimage under $p$ is a disjoint union of itself). Now, $\left\{ \gamma_{y}^{-1}(U_{f_{t}(y)}) \right\}_{t\in [0,1]}$ is a open cover of $[0,1]$, which is compact so it has a Lebesgue number. Then, we want to construct $\tilde{\gamma}_{y}(t):=\tilde{f_{t}}(y)$, and to do this we can trace along the interval and watch where the path ``must lift''. 
+Fix a point $y\in Y$, then $\operatorname{Im} (\overbrace{ t\mapsto f_{t}(y) }^{ \gamma_{y}(t) })$ is compact and for each $t$ we can choose $U_{f_{t}(y)}\subset X$ as in the definition of the covering space. (a neighborhood whose preimage under $p$ is a disjoint union of open sets, each mapped homeomorphically onto it). Now, $\left\{ \gamma_{y}^{-1}(U_{f_{t}(y)}) \right\}_{t\in [0,1]}$ is an open cover of $[0,1]$, which is compact so it has a Lebesgue number. Then, we want to construct $\tilde{\gamma}_{y}(t):=\tilde{f_{t}}(y)$, and to do this we can trace along the interval and watch where the path ``must lift''. 
 
 \begin{exercise}
     Prove $\tilde{f_t}$ is continuous.
@@ -827,7 +825,7 @@ Fix a point $y\in Y$, then $\operatorname{Im} (\overbrace{ t\mapsto f_{t}(y) }^{
 \end{prop}
 
 \begin{proof}
-    If $\gamma$ lifts to a loop $\tilde \gamma$ in $\pi_1(\tilde{X},\tilde{x_0})$, then $\gamma = p \circ \tilde \gamma$, hence $p_*\paren{[\tilde \gamma]} = \gamma$. On the other hand, if $[\gamma] \in p_*\paren{\pi_1(\tilde X,\tilde{x_0})}$, then $\gamma$ is homotopic to $p \circ \tilde \mu$ for some loop $\tilde \mu$ at $\tilde{x_0}$ in $\tilde X$. Denoting by $f_t$ this homotopy such that $f_0 = p \circ \tilde \mu$ and $f_1 = \gamma$, by the homotopy lifting property, there exists a unique $\tilde{f_t}$ lifting $f_t$ such that $\tilde{f_0}=\tilde{\gamma}$.
+    If $\gamma$ lifts to a loop $\tilde \gamma$ at $\tilde{x_0}$, then $\gamma = p \circ \tilde \gamma$, hence $p_*\paren{[\tilde \gamma]} = [\gamma]$. On the other hand, if $[\gamma] \in p_*\paren{\pi_1(\tilde X,\tilde{x_0})}$, then $\gamma$ is homotopic to $p \circ \tilde \mu$ for some loop $\tilde \mu$ at $\tilde{x_0}$ in $\tilde X$. Denoting by $f_t$ this homotopy such that $f_0 = p \circ \tilde \mu$ and $f_1 = \gamma$, by the homotopy lifting property, there exists a unique $\tilde{f_t}$ lifting $f_t$ such that $\tilde{f_0}=\tilde{\mu}$.
 
 % https://q.uiver.app/#q=WzAsNixbMiwwLCJcXHRpbGRlIFgiXSxbMCwyLCJbMCwxXSJdLFsyLDIsIlgiXSxbNCwyLCJbMCwxXSJdLFs2LDAsIlxcdGlsZGUgWCJdLFs2LDIsIlgiXSxbMSwwLCJcXHRpbGRle1xcbXV9Il0sWzAsMiwicCJdLFsxLDIsImZfMD1wIFxcY2lyYyBcXHRpbGRlIFxcbXUiLDJdLFszLDQsIlxcdGlsZGUge2ZfdH0iXSxbNCw1LCJwIl0sWzMsNSwiZl90IiwyXV0=
 \[\begin{tikzcd}[ampersand replacement=\&,cramped]
@@ -842,9 +840,9 @@ Fix a point $y\in Y$, then $\operatorname{Im} (\overbrace{ t\mapsto f_{t}(y) }^{
 	\arrow["{f_t}"', from=3-5, to=3-7]
 \end{tikzcd}\]
 
-    We claim $\tilde{f_1}$ is a loop at $\tilde{x_0}$ lifting $\gamma$. Indeed, as $f_t$ is base-point preserving, $t \mapsto f_t(1)$ is a constant map. Hence, by \Cref{prop:lifttoconstant}, $f_t$ lifts to a constant path with
+    We claim $\tilde{f_1}$ is a loop at $\tilde{x_0}$ lifting $\gamma$. Indeed, as $f_t$ is base-point preserving, $t \mapsto f_t(0)$ and $t \mapsto f_t(1)$ are constant maps. Hence, by \Cref{prop:lifttoconstant}, their lifts $t \mapsto \tilde f_t(0)$ and $t \mapsto \tilde f_t(1)$ are constant paths, so
     \[
-    \tilde{f_1}(1)=\tilde{f_0}(1)=\tilde{\mu}(1)=\tilde{x_0}.
+    \tilde{f_1}(0)=\tilde{f_0}(0)=\tilde{\mu}(0)=\tilde{x_0} \quad \text{and} \quad \tilde{f_1}(1)=\tilde{f_0}(1)=\tilde{\mu}(1)=\tilde{x_0}.
     \]
 \end{proof}
 
@@ -852,14 +850,14 @@ Fix a point $y\in Y$, then $\operatorname{Im} (\overbrace{ t\mapsto f_{t}(y) }^{
 When do two elements $[\gamma_1],[\gamma_2] \in \pi_1(X,x_0)$ satisfy $\tilde{\gamma_1}(1) = \tilde{\gamma_2}(1)$ in $p^{-1}(x_0)$, assuming $\tilde{\gamma_1}(0)=\tilde{\gamma_2}(0)=\tilde{x_0}$?
 \end{que}
 
-Well, knowing $\tilde{\gamma_1}(1) = \tilde{\gamma_2}(1)$, we may apply \Cref{prop:liftingtoloop}, hence $\tilde{\gamma_2}^{-1}*\tilde{\gamma_1}$ is a loop at $\tilde{x_0}$ if and only if
+Well, knowing $\tilde{\gamma_1}(1) = \tilde{\gamma_2}(1)$, we may apply \Cref{prop:liftingtoloop}, hence $\tilde{\gamma_2}^{-1} \star \tilde{\gamma_1}$ is a loop at $\tilde{x_0}$ if and only if
 \[
-\braks{\gamma_2^{-1}*\gamma_1}\in p_*\paren{\pi_1(X,x_0)} \iff \gamma_1 \in \braks{\gamma_2}p_*\paren{\pi_1(\tilde X,\tilde{x_0})},
-\] 
-i.e. when we have equivalence in the quotient space.
+\braks{\gamma_2^{-1} \star \gamma_1}\in p_*\paren{\pi_1(\tilde X,\tilde{x_0})} \iff [\gamma_1] \in \braks{\gamma_2}p_*\paren{\pi_1(\tilde X,\tilde{x_0})},
+\]
+i.e. when $[\gamma_1]$ and $[\gamma_2]$ lie in the same left coset.
 
 \begin{cor}
-    $p^{-1}(x_0)$ is in bijective correspondence with
+    If $\tilde X$ is path connected, then $p^{-1}(x_0)$ is in bijective correspondence with
     \[
     \pi_1(X,x_0)/p_*\paren{\pi_1(\tilde X,\tilde{x_0})}.
     \]
@@ -870,7 +868,7 @@ When can $f$ be lifted to a map
 \[
 \tilde f:(Y,y_0)\to(\tilde X, \tilde{x_0})?
 \]
-That is, when can me make the following diagram commute?:
+That is, when can we make the following diagram commute?:
 % https://q.uiver.app/#q=WzAsMyxbMCwyLCIoWSx5XzApIl0sWzIsMCwiKFxcdGlsZGUgWCwgXFx0aWxkZXt4XzB9KSJdLFsyLDIsIihYLHhfMCkiXSxbMCwxLCJcXHRpbGRlIGYiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMCwyLCJmIiwyXSxbMSwyLCJwIl1d
 \[\begin{tikzcd}[ampersand replacement=\&,cramped]
 	\&\& {(\tilde X, \tilde{x_0})} \\
@@ -882,7 +880,7 @@ That is, when can me make the following diagram commute?:
 \end{tikzcd}\]
 \end{que}
 
-\begin{thm}
+\begin{thm}[][label=thm:lifting-criterion]
     Suppose $Y$ is path connected and locally path connected. Then, a map $f:(Y,y_0) \to (X,x_0)$ can be lifted to $\tilde f:(Y,y_0) \to (\tilde X,\tilde {x_0})$ if and only if
     \[
     f_*\paren{\pi_1(Y,y_0)} \subset p_*\paren{\pi_1(\tilde X,\tilde {x_0})}
@@ -897,11 +895,11 @@ That is, when can me make the following diagram commute?:
     \]
     proving the first direction. For the other direction, fix $y \in Y$, and take a path $\gamma$ connecting $y_0$ to $y$. Then, $f \circ \gamma$ is a curve in $X$ starting at $x_0$, so by the homotopy lifting property there exists $\tilde{\mu}(t)$ lifting $f(\gamma(t))$. Define $\tilde f_\gamma(y):=\tilde{\mu}(1)$. We now need to show that this $\tilde f$ is independent of the choice of $\gamma$. 
 
-    Let $\gamma_1,\gamma_2$ be two such paths from $y_0$ to $y$. Define $\mu_i(t)=f(\gamma_i(t))$, and let $\tilde{\mu_i}$ be the lifts. We want to show $\tilde{\mu_1}(1)=\tilde{\mu_2}(1)$. Note that $\mu_1^{-1}\circ \mu_2$ is a loop in $X$ at $x_0$, and 
+    Let $\gamma_1,\gamma_2$ be two such paths from $y_0$ to $y$. Define $\mu_i(t)=f(\gamma_i(t))$, and let $\tilde{\mu_i}$ be the lifts. We want to show $\tilde{\mu_1}(1)=\tilde{\mu_2}(1)$. Note that $\mu_1^{-1} \star \mu_2$ is a loop in $X$ at $x_0$, and 
     \[
-    [\mu_1^{-1}*\mu_2] = f_*\paren{[ \gamma_1^{-1}*\gamma_2 ]}\in f_*(\pi_1 (Y,y_0)) \subset p_*(\pi_1 (\tilde X, \tilde{x_0})).
+    [\mu_1^{-1} \star \mu_2] = f_*\paren{[ \gamma_1^{-1} \star \gamma_2 ]}\in f_*(\pi_1 (Y,y_0)) \subset p_*(\pi_1 (\tilde X, \tilde{x_0})).
     \]
-    Thus, $\mu_1,\mu_2,$ and $\mu_1^{-1}*\mu_2$ have all been lifted to $\tilde X$, and these lifts are unique. It follows that $\tilde{\mu_1}(1)=\tilde{\mu}_2(1)$. Since we have well-definedness, we may set $\tilde f(y)=\tilde f_{\gamma}(y)$ for any $\gamma$.
+    Thus, $\mu_1,\mu_2,$ and $\mu_1^{-1} \star \mu_2$ have all been lifted to $\tilde X$, and these lifts are unique. It follows that $\tilde{\mu_1}(1)=\tilde{\mu}_2(1)$. Since we have well-definedness, we may set $\tilde f(y)=\tilde f_{\gamma}(y)$ for any $\gamma$.
 
     % We're now left to show continuity. Fix $y \in Y$, and let $U \ni f(y)$ be as in the covering space definition. Take $U_\alpha \subset \tilde X$ containing $\tilde f(y)$, so that $U \arr[p]U_\alpha$ is a homeomorphism. Select $V \subset f^{-1}(U)$ to be path connected with $y\ in V$.
     Continuity is left to the reader.
@@ -918,7 +916,7 @@ That is, when can me make the following diagram commute?:
 \subsection{Covering Space / Subgroup Correspondence}
 
 \begin{prop}
-    Let $(X,x_0)$ be locally path connected, and suppose we have two coverings:
+    Let $(X,x_0)$ be locally path connected, and suppose we have two path connected, locally path connected coverings:
     % https://q.uiver.app/#q=WzAsMyxbMCwwLCIoXFx0aWxkZSBYLCBcXHRpbGRle3hfMH0pIl0sWzIsMCwiKFxcdGlsZGUgWCcsIFxcdGlsZGV7eF8wfScpIl0sWzEsMSwiKFgseF8wKSJdLFswLDIsInAiLDJdLFsxLDIsInAnIl1d
 \[\begin{tikzcd}[ampersand replacement=\&]
 	{(\tilde X, \tilde{x_0})} \&\& {(\tilde X', \tilde{x_0}')} \\
@@ -928,7 +926,7 @@ That is, when can me make the following diagram commute?:
 \end{tikzcd}\]
 Moreover, suppose 
 \[
-p_*\paren{\pi_1(\tilde X,\tilde{x_0})} \cong p_*'\paren{\pi_1(\tilde X',\tilde{x_0}')}.
+p_*\paren{\pi_1(\tilde X,\tilde{x_0})} = p_*'\paren{\pi_1(\tilde X',\tilde{x_0}')}.
 \]
 Then, there exists a unique homeomorphism $f:(\tilde X,\tilde{x_0})\to (\tilde X', \tilde{x_0}')$ such that the following diagram commutes:
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHRpbGRlIFgiXSxbMiwwLCJcXHRpbGRlIFgnIl0sWzEsMSwiWCJdLFswLDIsInAiLDJdLFsxLDIsInAnIl0sWzAsMSwiZiJdXQ==
@@ -942,7 +940,7 @@ Then, there exists a unique homeomorphism $f:(\tilde X,\tilde{x_0})\to (\tilde X
 \end{prop}
 
 \begin{proof}
-Use \Cref{thm:uniq-lifting-prop} to lift $p:\tilde X \to X$ to the cover $\tilde X'$, and to lift $p':\tilde X'\to X$. These lifts are unique, and one can show they are inverses, hence the lift of $p$ is the unique homeomorphism.
+Use \Cref{thm:lifting-criterion} to lift $p:\tilde X \to X$ to the cover $\tilde X'$, and to lift $p':\tilde X'\to X$ to $\tilde X$. These lifts are unique by \Cref{thm:uniq-lifting-prop}, and one can show they are inverses, hence the lift of $p$ is the unique homeomorphism.
 \end{proof}
 
 
@@ -969,19 +967,19 @@ If $X$ has a universal cover, then $X$ is semi-locally simply connected.
 \end{prop}
 
 \begin{proof}
-    Fix $x \in X$, and let $U \ni x$ be as in the definition of the covering space $\tilde X$, which is our universal covering. Let $\tilde x \in \tilde X$ be such that $p(\tilde x)=x$, and let $U_\alpha \ni \tilde x$ be such that $p: \tilde U_\alpha \to U$ is a homeomorphism. Then, any loop $\gamma$ at $x$ in $U$ lifts to a loop $\tilde \gamma$ at $\tilde x$ in $\tilde U_\alpha$. However, since $\tilde U_\alpha$ is simply connected by our assumption, we know $\tilde \gamma$ is homotopically trivial, and thus $\gamma$ is as well.
+    Fix $x \in X$, and let $U \ni x$ be as in the definition of the covering space $\tilde X$, which is our universal covering. Let $\tilde x \in \tilde X$ be such that $p(\tilde x)=x$, and let $\tilde U_\alpha \ni \tilde x$ be such that $p: \tilde U_\alpha \to U$ is a homeomorphism. Then, any loop $\gamma$ at $x$ in $U$ lifts to a loop $\tilde \gamma$ at $\tilde x$ in $\tilde U_\alpha$. However, since $\tilde X$ is simply connected by our assumption, we know $\tilde \gamma$ is homotopically trivial in $\tilde X$, and composing this homotopy with $p$ shows $\gamma$ is homotopically trivial in $X$.
 \end{proof}
 
 \begin{thm}[Existence of the Universal Cover]
-    Suppose $X$ is path connect, locally path connected, and semi-locally simply connected. Then, $X$ has a universal cover.
+    Suppose $X$ is path connected, locally path connected, and semi-locally simply connected. Then, $X$ has a universal cover.
 \end{thm}
 
 \begin{proof}
-    We want to construct the universal cover $\tilde X$. Suppose, for now, that such a universal cover existed, and $p:\tilde X \to X$ is the projection. Fix $x_0 \in X$, and $\tilde {x_0}\in X$. Given a curve $\gamma$ at $x_0$, we can lift it to $\tilde \gamma$ starting at $\tilde{x_0}$. Now, consider
+    We want to construct the universal cover $\tilde X$. Suppose, for now, that such a universal cover existed, and $p:\tilde X \to X$ is the projection. Fix $x_0 \in X$, and $\tilde {x_0}\in p^{-1}(x_0)$. Given a curve $\gamma$ at $x_0$, we can lift it to $\tilde \gamma$ starting at $\tilde{x_0}$. Now, consider
     \[
     \Gamma:= \{\gamma:[0,1] \to X, \gamma(0)=x_0\}.
     \]
-    Then, we have an induced map $F:\Gamma \to \tilde X$ given by $F(\gamma):=\tilde \gamma(1)$, where $\tilde \gamma$ is the correspond lift. Since $\tilde X$ is path connected, $F$ is surjective. Moreover, if $F(\gamma_1)=F(\gamma_2)$, we must have $\gamma_1(1)=\gamma_2(1)$, and $\tilde{\gamma_2}^{-1}\circ \tilde{\gamma_1}$ is a loop in $\tilde X$ and therefore homotopically trivial, which means $\gamma_2^{-1}\circ \gamma_1$ are as well. That is, $\gamma_1\overset{\w{rel\{0,1\}}}{\sim}  \gamma_2$. Conversely, if $\gamma_1 \sim \gamma_2$, then by the homotopy lifting property, $F(\gamma_1)=F(\gamma_2)$. Thus, $F$ induces a bijection $(\Gamma/\sim) \leftrightarrow \tilde X$, where $\sim$ is homotopy relative to $\{0,1\}$. This hints that, to find our universal cover $\tilde X$, we should use the collection $\Gamma \setminus \sim$.
+    Then, we have an induced map $F:\Gamma \to \tilde X$ given by $F(\gamma):=\tilde \gamma(1)$, where $\tilde \gamma$ is the corresponding lift. Since $\tilde X$ is path connected, $F$ is surjective. Moreover, if $F(\gamma_1)=F(\gamma_2)$, we must have $\gamma_1(1)=\gamma_2(1)$, and $\tilde{\gamma_2}^{-1} \star \tilde{\gamma_1}$ is a loop in $\tilde X$ and therefore homotopically trivial, which means $\gamma_2^{-1} \star \gamma_1$ is as well. That is, $\gamma_1\overset{\w{rel\{0,1\}}}{\sim}  \gamma_2$. Conversely, if $\gamma_1 \sim \gamma_2$, then by the homotopy lifting property, $F(\gamma_1)=F(\gamma_2)$. Thus, $F$ induces a bijection $(\Gamma/\sim) \leftrightarrow \tilde X$, where $\sim$ is homotopy relative to $\{0,1\}$. This hints that, to find our universal cover $\tilde X$, we should use the collection $\Gamma / \sim$.
     
     Indeed, define
     \[
@@ -989,25 +987,25 @@ If $X$ has a universal cover, then $X$ is semi-locally simply connected.
     \]
 and let $p:\tilde X \to X$ be the projection $p([\gamma])=\gamma(1)$, which is well-defined. Define a basis $B$ for $X$ by
 \[
-B := \brax{U \text{ path connected and } i_*(\pi _1(U,x_0)) \subset \pi_1(X,x_0) \text{ is trivial}}.
+B := \brax{U \text{ open, path connected, and } i_*(\pi _1(U,x)) \subset \pi_1(X,x) \text{ is trivial for all } x \in U}.
 \]
-Note that if $V \subset U\in B$ is path-connected, then $V \in B$. Thus, if $U_0 \cap U_1$ is non-trivial for $U_0,U_1\in B$, then for any $x \in U_0 \cap U_1$, there exists a path connected $V \ni x_0$, $V \subset U_0 \cap U_1$, because $X$ is locally path connected, and then $V \in B$. Moreover, $B$ covers $X$, hence $B$ indeed defines a basis for $X$.
+Note that if $V \subset U\in B$ is open and path-connected, then $V \in B$. Thus, if $U_0 \cap U_1$ is non-empty for $U_0,U_1\in B$, then for any $x \in U_0 \cap U_1$, there exists an open path connected $V \ni x$, $V \subset U_0 \cap U_1$, because $X$ is locally path connected, and then $V \in B$. Moreover, $B$ covers $X$ (by semi-local simple connectivity and local path connectivity), hence $B$ indeed defines a basis for $X$.
 
 Now, to obtain a topology for $\tilde X$: for every $[\gamma] \in \tilde X$ and $U \in B$ such that $\gamma(1) \in U$, take
 \[
-U_{[\gamma]}:= \brax{ [\mu\circ\gamma] \setbar \mu(0)=\gamma(1), \Img (\mu) \subset U }.
+U_{[\gamma]}:= \brax{ [\mu\star\gamma] \setbar \mu(0)=\gamma(1), \Img (\mu) \subset U }.
 \]
-Then, $p$ induces a bijection $U_{[\gamma]} \to U$ for similar reasons as before. Moreover, if $\gamma_2 \in U_{[\gamma]}$, then $U_{[\gamma_2]}=U_{[\gamma]}$. Thus
+Then, $p$ induces a bijection $U_{[\gamma]} \to U$ for similar reasons as before. Moreover, if $[\gamma_2] \in U_{[\gamma]}$, then $U_{[\gamma_2]}=U_{[\gamma]}$. Thus
 \[
 \tilde B := \brax{ U_{[\gamma]} \setbar U \in B, \gamma(1) \in U}
 \]
-defines a basis for $\tilde X$: if $U^1_{[\gamma_1]} \cap U^2_{[\gamma_2]}\neq \emptyset$, then we may take $\gamma_3$ in the intersection so that $U^1_{[\gamma_1]}=U^1_{[\gamma_3]}$ and $U^2_{[\gamma_2]}=U^2_{[\gamma_3]}$. Thus, since $B$ is a basis for $U$, we may take $V$ with $\gamma_3(1) \in V \subset U_1 \cap U_2$, and then $V_{[\gamma_3]} \subset U^1_{[\gamma_3]} \cap U^2_{[\gamma_3]} \in \tilde B$, proving $\tilde B$ is a basis.
+defines a basis for $\tilde X$: if $U^1_{[\gamma_1]} \cap U^2_{[\gamma_2]}\neq \emptyset$, then we may take $\gamma_3$ in the intersection so that $U^1_{[\gamma_1]}=U^1_{[\gamma_3]}$ and $U^2_{[\gamma_2]}=U^2_{[\gamma_3]}$. Thus, since $B$ is a basis for $X$, we may take $V \in B$ with $\gamma_3(1) \in V \subset U^1 \cap U^2$, and then $V_{[\gamma_3]} \in \tilde B$ with $[\gamma_3] \in V_{[\gamma_3]} \subset U^1_{[\gamma_3]} \cap U^2_{[\gamma_3]}$, proving $\tilde B$ is a basis.
 
-One now checks that $\tilde X$, with the topology induces by $\tilde B$, indeed defines a covering. Finally, to prove that it's simply connected: fix $[\gamma]$ a curve on $X$, and define
+One now checks that $\tilde X$, with the topology induced by $\tilde B$, indeed defines a covering. Finally, to prove that it's simply connected: fix $[\gamma]$ a curve on $X$, and define
 \[
 [\gamma]_t(s) := \case{ \gamma(s) & 0 \leq s \leq t \\ \gamma(t)  & t \leq s \leq 1},
 \]
-which demonstrates that $\tilde X$ is path-connected. Moreover, if $\gamma \in p_* \paren{\pi_1(X,x_0)}$, and $\tilde \gamma$ is the lift, then we know that $[\gamma] = [x_0]$, and so $\tilde \gamma$ is homotopically trivial, proving simply connectedness.
+which demonstrates that $\tilde X$ is path-connected. Moreover, if $[\gamma] \in p_* \paren{\pi_1(\tilde X,\tilde x_0)}$, and $\tilde \gamma$ is the lift, then we know that $[\gamma] = [x_0]$, and so $\tilde \gamma$ is homotopically trivial, proving simply connectedness.
 \end{proof}
 
 \begin{ex}[][label=ex:S1S2]
@@ -1054,7 +1052,7 @@ Given $\tilde x \in \tilde X$, take a curve $\tilde \mu$ from $\tilde{x_0}$ to $
 \end{proof}
 
 \begin{prop}
-    Let $H \leq \pi_1(X,x_0)$ be a subgroup, and denote $X_H:= \tilde X/H$, the space modded out by induced action of $H$. Then $X_H$ is a covering space of $X$, with projection $p_H:X_H \to X$, and
+    Let $\tilde X$ be the universal cover of $X$, let $H \leq \pi_1(X,x_0)$ be a subgroup, and denote $X_H:= \tilde X/H$, the space modded out by induced action of $H$. Then $X_H$ is a covering space of $X$, with projection $p_H:X_H \to X$, and
     \[
     p_{H*}\paren{ \pi_1(X_H,[\tilde{x_0}]) }=H
     \]
@@ -1068,26 +1066,26 @@ Given $\tilde x \in \tilde X$, take a curve $\tilde \mu$ from $\tilde{x_0}$ to $
     \begin{claim}
         For $g \in \pi_1(X,x_0)$, if $g(U_\alpha)\cap U_\beta \ne \emptyset$, then $g(U_\alpha)=U_\beta$.
     \end{claim}
-    Indeed, let $\tilde{z_0} \in U_\alpha$ be such that $g\tilde{z_0} \in U_\beta$. Since $U_\alpha$ and $U$ are path connected, we may take $z_0:= p(\tilde{z_0})$, and then for all $\tilde z \in U_\alpha$, we take a path $\tilde \gamma$ in $U_\alpha$ connection $\tilde{z_0}$ and $\tilde z$. Take $\gamma:=p \circ\tilde \gamma$, and lift $\gamma$ to a path starting at $g\tilde{z_0}$. We claim that $g \cdot \tilde \gamma$ is such a lift. Thus, $g \tilde z \in U_\beta$. Showing the reverse inclusion finishes the claim...
+    Indeed, let $\tilde{z_0} \in U_\alpha$ be such that $g\tilde{z_0} \in U_\beta$. Since $U_\alpha$ and $U$ are path connected, we may take $z_0:= p(\tilde{z_0})$, and then for all $\tilde z \in U_\alpha$, we take a path $\tilde \gamma$ in $U_\alpha$ connecting $\tilde{z_0}$ and $\tilde z$. Take $\gamma:=p \circ\tilde \gamma$, and lift $\gamma$ to a path starting at $g\tilde{z_0}$. We claim that $g \cdot \tilde \gamma$ is such a lift. Thus, $g \tilde z \in U_\beta$. Showing the reverse inclusion finishes the claim...
 \end{proof}
 
 \begin{defn}
-    Let $\tilde X \arr[p] X$ be a covering map, and let $T : \tilde X \to \tilde X$ be continuous such that $p \circ T = p$. Then, $T$ is called a \textbf{deck transformation}.
+    Let $\tilde X \arr[p] X$ be a covering map, and let $T : \tilde X \to \tilde X$ be a homeomorphism such that $p \circ T = p$. Then, $T$ is called a \textbf{deck transformation}.
 \end{defn}
 
 \begin{defn}
-    Let $\tilde X$ be a topological space, and $G$ act on $\tilde X$ on the right via continuous maps. The action of $G$ is called \textbf{properly discontinuous} if for all $\tilde x \in \tilde X$, there exists $\tilde U \ni \tilde x$ such that for all $g \in G$, $g(\tilde U)\cap \tilde U \neq \emptyset \implies g=e$.
+    Let $\tilde X$ be a topological space, and $G$ act on $\tilde X$ on the left via continuous maps. The action of $G$ is called \textbf{properly discontinuous} if for all $\tilde x \in \tilde X$, there exists $\tilde U \ni \tilde x$ such that for all $g \in G$, $g(\tilde U)\cap \tilde U \neq \emptyset \implies g=e$.
 \end{defn}
 
 \begin{thm}[][label=thm:quotientaction]
-    Let $\paren{\tilde X,\tilde{x_0}}$ be a simply connected, locally path connected, path connected space. Let $G$ act on $\tilde X$ properly discontinuously, and set $X:= \tilde X/G$ with the natural projection $p:\tilde X \to X$. Then, $\tilde X$ is the universal cover of $x$, and setting $x_0 = p(\tilde x_0)$ gives
+    Let $\paren{\tilde X,\tilde{x_0}}$ be a simply connected, locally path connected, path connected space. Let $G$ act on $\tilde X$ properly discontinuously, and set $X:= \tilde X/G$ with the natural projection $p:\tilde X \to X$. Then, $\tilde X$ is the universal cover of $X$, and setting $x_0 = p(\tilde x_0)$ gives
     \[
-    \pi_1(X , x_0)\simeq G
+    \pi_1(X , x_0)\cong G
     \]
 \end{thm}
 
 \begin{proof}
-Take $x \in X$, $\tilde x \in p^{-1}(x)$, and let $\tilde U$ be a neighborhood of $\tilde x$ as in the definition, and $U = p(\tilde U)$. Then, $p:\tilde U \to U$ is a homeomorphism, amd $p^{-1}(U)=\bigsqcup_{g \in G}g\tilde U.$ Thus, $\tilde X$ is the universal cover, and both $\pi_1(X,x_0)$ and $G$ act on $\tilde X$ by deck transformations. For all $\tilde x_0' \in p^{-1}(x_0)$, there exists a unique $g \in G$ such that $g(\tilde{x}_0) = \tilde x_0'$, and there exists a unique $\gamma \in \pi_1(X,x_0)$ such that $F_\gamma(\tilde x_0)=\tilde x_0'=F\gamma=g$.
+Take $x \in X$, $\tilde x \in p^{-1}(x)$, and let $\tilde U$ be a neighborhood of $\tilde x$ as in the definition, and $U = p(\tilde U)$. Then, $p:\tilde U \to U$ is a homeomorphism, and $p^{-1}(U)=\bigsqcup_{g \in G}g\tilde U.$ Thus, $\tilde X$ is the universal cover, and both $\pi_1(X,x_0)$ and $G$ act on $\tilde X$ by deck transformations. For all $\tilde x_0' \in p^{-1}(x_0)$, there exists a unique $g \in G$ such that $g(\tilde{x}_0) = \tilde x_0'$, and there exists a unique $\gamma \in \pi_1(X,x_0)$ such that $F_\gamma(\tilde x_0)=\tilde x_0'$. The map $\gamma \mapsto g$ is the desired isomorphism.
 \end{proof}
 
 \begin{ex}
@@ -1103,14 +1101,14 @@ Take $x \in X$, $\tilde x \in p^{-1}(x)$, and let $\tilde U$ be a neighborhood o
 \section{Simplicial Homology}
 
 \begin{defn}
-Let $v_0,\dots,v_n \in \R^n$ be ordered points such that no points $v_{i_1},\dots,v_{i_k}$ lie in any $k-1$ dimensional affine space. The $n$-\textbf{simplex} $[v_0,\dots,v_n]$ is the convex hull of $v_0,\dots,v_n$. That is,
+Let $v_0,\dots,v_n \in \R^m$ be ordered points such that no points $v_{i_1},\dots,v_{i_k}$ lie in any $k-2$ dimensional affine space. The $n$-\textbf{simplex} $[v_0,\dots,v_n]$ is the convex hull of $v_0,\dots,v_n$. That is,
 \[
 [v_0,\dots,v_n]= \brax{ \sum t_iv_i \setbar t_i\geq 0, \sum t_i=1 }
 \]
 \end{defn}
 
 \begin{ex}
-The \textbf{standard n-simplex} $\Delta^n \subset \R^{n+1}$ is the simplex $[e_1,\dots,e_{n+1}]$. For instance, the standard $1$-simplex is:
+The \textbf{standard $\bm n$-simplex} $\Delta^n \subset \R^{n+1}$ is the simplex $[e_0,\dots,e_{n}]$, where $e_0,\dots,e_n$ is the standard basis of $\R^{n+1}$. For instance, the standard $1$-simplex is:
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.2\textwidth]{figures/standard-simplex.png}
@@ -1120,7 +1118,7 @@ The \textbf{standard n-simplex} $\Delta^n \subset \R^{n+1}$ is the simplex $[e_1
 
 
 \begin{defn}
-Given an $n$-simplex $[v_0,\dots,v_n]$, the $i$-th \textbf{face} is the $(n-1)$-simplex $[v_0,\dots,v_{i-1},v_{i+1},\dots,v_n]$. The \textbf{boundary} $\partial[v_0,\dots,v_n]$ of a simplex is the union of its faces. The \textbf{interior}, is union of the simplex minus the boundary.
+Given an $n$-simplex $[v_0,\dots,v_n]$, the $i$-th \textbf{face} is the $(n-1)$-simplex $[v_0,\dots,v_{i-1},v_{i+1},\dots,v_n]$. The \textbf{boundary} $\partial[v_0,\dots,v_n]$ of a simplex is the union of its faces. The \textbf{interior} is the simplex minus its boundary.
 \end{defn}
 
 \begin{defn}
@@ -1128,7 +1126,7 @@ A topological space $X$ is called a \textbf{$\Delta$-complex} if there exists a 
 \begin{enumerate}[(i)]
     \item For every $\alpha \in I$, the restriction $\sigma_\alpha|_{\mathring \Delta^{n(\alpha)}}$ is injective, and for all $x \in X$, there exists a unique $\alpha$ such that $x \in \Img (\sigma_{\alpha}|_{\mathring \Delta^{n(\alpha)}})$.
     \item $U \subset X$ is open if and only if $\sigma_{\alpha}^{-1}(U)$ is open for all $\alpha \in I$
-    \item For all $\alpha \in I$, and every $0 \leq i \leq n(\alpha)$, the restriction of $\sigma_\alpha$ to the $i$-th face is in the collection of maps. That is, there exists $\beta\in I$ such that $\sigma_\beta =\sigma_\alpha|_{[e_0,\dots,\hat e_i,\dots,e_{n(\alpha)+1}]}.$ This is the case if and only if, denoting by $\iota_i:\Delta^{n(\alpha)-1}\to \Delta^{n(\alpha)}$  the map sending $(x_0,\dots,x_{n(\alpha)-1}) \mapsto (x_0,\dots,x_{i-1},0,x_{i+1},\dots,x_{n(\alpha)-1})$, we have $\sigma_\beta = \sigma _\alpha \circ \iota_i$.
+    \item For all $\alpha \in I$, and every $0 \leq i \leq n(\alpha)$, the restriction of $\sigma_\alpha$ to the $i$-th face is in the collection of maps. That is, there exists $\beta\in I$ such that $\sigma_\beta =\sigma_\alpha|_{[e_0,\dots,\hat e_i,\dots,e_{n(\alpha)}]}.$ This is the case if and only if, denoting by $\iota_i:\Delta^{n(\alpha)-1}\to \Delta^{n(\alpha)}$  the map sending $(x_0,\dots,x_{n(\alpha)-1}) \mapsto (x_0,\dots,x_{i-1},0,x_{i},\dots,x_{n(\alpha)-1})$, we have $\sigma_\beta = \sigma _\alpha \circ \iota_i$.
 \end{enumerate}
 \end{defn}
 
@@ -1139,7 +1137,7 @@ We attach two 2-simplices by their edges and vertices:
 \end{ex}
 
 \begin{ex}[$\Delta$-complex structure of $\mb T^2$]
-We have a single $0$-complex $x$ (the point representing the four corners of the rectangle), two $1$-simplices $a,b$ representing the attached sides of the rectangle. Note that the complex $\Delta^1$ is a triangle, but we're working with a rectangle. We fix this by taking another line $c$ attaching opposite corners...
+We have a single $0$-simplex $x$ (the point representing the four corners of the rectangle), two $1$-simplices $a,b$ representing the attached sides of the rectangle. Note that the simplex $\Delta^2$ is a triangle, but we're working with a rectangle. We fix this by taking another line $c$ attaching opposite corners...
 % https://q.uiver.app/#q=WzAsNixbMCwwLCJ4Il0sWzMsMCwieCJdLFszLDMsIngiXSxbMCwzLCJ4Il0sWzEsMSwiVSJdLFsyLDIsIkwiXSxbMCwxLCJiIl0sWzMsMiwiYiIsMl0sWzAsMywiYSIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6ImFycm93aGVhZCJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMiwiYSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6ImFycm93aGVhZCJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzMsMSwiYyJdXQ==
 \[\begin{tikzcd}[ampersand replacement=\&]
 	x \&\&\& x \\
@@ -1177,9 +1175,9 @@ Find a $\Delta$-complex structure on the Klein bottle.
 \begin{defn}
 Let $X$ be a $\Delta$-complex, with simplices $\{\sigma_\alpha : \Delta^{n(\alpha)} \to X\}_{\alpha \in I}$, let $I(n)=\{\alpha \mid n(\alpha)=n\}$, and $I = \bigcup I(n)$. The \textbf{group of simplicial $n$-chains} $\Delta_n(X)$ is the free abelian group on $\{\sigma_\alpha\}_{\alpha \in I(n)}$. That is,
 \[
-\Delta_n(x)= \brax{ \sum_{\alpha \in I(n)} m_\alpha \sigma_\alpha \setbar m_\alpha \in \Z, m_\alpha=0 \text{ for all but finitely many }\alpha}.
+\Delta_n(X)= \brax{ \sum_{\alpha \in I(n)} m_\alpha \sigma_\alpha \setbar m_\alpha \in \Z, m_\alpha=0 \text{ for all but finitely many }\alpha}.
 \]
-Such an expression $\sum m_\alpha \sigma(\alpha)$ is called a \textbf{simplicial chain}. 
+Such an expression $\sum m_\alpha \sigma_\alpha$ is called a \textbf{simplicial chain}. 
 \end{defn}
 
 \begin{defn}
@@ -1196,8 +1194,8 @@ $\partial_{n-1}\circ \partial _n\equiv 0$.
 \begin{proof}
 We break the sum up corresponding to when the second removed basis element comes before or after the first:
 \begin{align*}
-    \partial_{n-1}\circ \partial_n(\sigma_\alpha) &= \partial_{n-1}\paren{ \sum_{i=0}^{n} (-1)^i \sigma_\alpha|_{[e_0,\dots,\hat{e_i},\dots,e_n]} =}
-    \\ &=\sum_{j=0}^{i-1}(-1)^{i+j}\sigma_\alpha|_{[e_0,\dots,\hat{e_i},\dots,\hat{e_j},\dots,e_n]}+ \sum_{j=i+1}^n(-1)^{i+j+1} \sigma_\alpha|_{[e_0,\dots,\hat{e_j},\dots,\hat{e_i},\dots,e_n]}.
+    \partial_{n-1}\circ \partial_n(\sigma_\alpha) &= \partial_{n-1}\paren{ \sum_{i=0}^{n} (-1)^i \sigma_\alpha|_{[e_0,\dots,\hat{e_i},\dots,e_n]} }
+    \\ &=\sum_{i=0}^{n}\paren{\sum_{j=0}^{i-1}(-1)^{i+j}\sigma_\alpha|_{[e_0,\dots,\hat{e_j},\dots,\hat{e_i},\dots,e_n]}+ \sum_{j=i+1}^n(-1)^{i+j+1} \sigma_\alpha|_{[e_0,\dots,\hat{e_i},\dots,\hat{e_j},\dots,e_n]}}.
 \end{align*}
 Now, for every $k<\ell \in \{0,\dots,n\}$, the $(n-2)$-simplex
 \[
@@ -1233,7 +1231,7 @@ Let $X = S^1$, with the simplicial structure
 	\incfig{circle-simplex}
 	\label{fig:circle-simplex}
 \end{figure}
-Observe that $\Delta^1(X)\simeq \Z$ because we have a single $1$-simplex, and $\partial_1 \equiv 0$, so $H_1^\Delta(S^1)=\Z$. For $n \geq 2$, the homology group is $H_n^\Delta(S^1) \simeq 0$ since there are no $n$-simplices. It then follows that  $H_0^\Delta (S^1) \simeq \Z$ because the homology groups form a chain complex.
+Observe that $\Delta_1(X)\cong \Z$ because we have a single $1$-simplex, and $\partial_1 \equiv 0$, so $H_1^\Delta(S^1)=\Z$. For $n \geq 2$, the homology group is $H_n^\Delta(S^1) \cong 0$ since there are no $n$-simplices. Finally, $H_0^\Delta (S^1) \cong \Z$ because $\Delta_0(X) \cong \Z$ (a single vertex) and $\partial_1 \equiv 0$.
 \end{ex}
 
 \begin{ex}
@@ -1241,24 +1239,24 @@ Let $X = \T^2$. We have the $\Delta$-structure:
 
 \tikzfig{torus-delta-structure}
 
-Similar to before, we have $H_k^\Delta(\T^2)=0$ for $k \geq 3$ because that's the highest level of simplex we have.
+Similar to before, we have $H_k^\Delta(\T^2)=0$ for $k \geq 3$, since there are no simplices of dimension greater than $2$.
 
 Now, we observe that the two $2$-simplices $U$ and $L$ have the same image under the boundary map:
 \begin{align*}
     \partial _2U &= b-c+a, \\
     \partial _2L &= a-c+b,
 \end{align*}
-Since $U$ and $L$ generate $\Delta_2(X)$, it follows that $\ker (\partial_2)= \angles{U-L}\simeq \Z$, i.e. the free abelian group on one generator. Moreover, there are no $3$-simplices so $\Img(\partial_3)=0$, and we deduce that
+Since $U$ and $L$ generate $\Delta_2(X)$, it follows that $\ker (\partial_2)= \angles{U-L}\cong \Z$, i.e. the free abelian group on one generator. Moreover, there are no $3$-simplices so $\Img(\partial_3)=0$, and we deduce that
 \[
 H_2^\Delta(\T^2)=\ker (\partial _2)/\Img(\partial_3)=\Z.
 \]
-Next, we have three generators of $\Delta_1(X)$, namely $a,b,c$. Observe that they all satisfy $\partial_1a=\partial_1b=\partial_1c=x-x=0$, i.e. all three generators are in $\ker \partial _1$, so $\ker(\partial_1)\simeq \Z^3$. Moreover, we computed that $\partial_2U=\partial_2L$, so $\Img(\partial_2)=\Z$, thus
+Next, we have three generators of $\Delta_1(X)$, namely $a,b,c$. Observe that they all satisfy $\partial_1a=\partial_1b=\partial_1c=x-x=0$, i.e. all three generators are in $\ker \partial _1$, so $\ker(\partial_1)\cong \Z^3$. Moreover, we computed that $\partial_2U=\partial_2L$, so $\Img(\partial_2)=\angles{a+b-c}\cong\Z$, thus
 \[
-H_1^\Delta(\T^2)=\ker(\partial_1)/\Img(\partial_2)\simeq \Z^3/\Z \simeq \Z^2.
+H_1^\Delta(\T^2)=\ker(\partial_1)/\Img(\partial_2)\cong \Z^3/\angles{a+b-c} \cong \Z^2.
 \]
 Finally, $x$ is the only $0$-simplex, and is trivially in the kernel of $\partial_0$. Moreover, we saw everything was in the kernel of $\partial_1$, so $\Img (\partial_1)=0$, and we conclude that
 \[
-H_0^\Delta(\T^2)=\ker(\partial_0)/\Img(\partial_1) \simeq \Z
+H_0^\Delta(\T^2)=\ker(\partial_0)/\Img(\partial_1) \cong \Z
 \]
 \end{ex}
 
@@ -1302,7 +1300,7 @@ If $f:X \to Y$ is continuous, and $\sigma:\Delta^n \to X$ is a singular $n$-simp
 \end{rmk}
 
 \begin{defn}
-Let $\brax{C_n}_{n=0}^\infty,\brax{D_n}_{n=0}^\infty$ be chain complexes. A \term{chain map} $f_*: \brax{C_n} \to \brax{D_n}$ is a sequence of homomorphisms $h_n:C_n \to D_n$, $n \geq 0$ such that
+Let $\brax{C_n}_{n=0}^\infty,\brax{D_n}_{n=0}^\infty$ be chain complexes. A \term{chain map} $h: \brax{C_n} \to \brax{D_n}$ is a sequence of homomorphisms $h_n:C_n \to D_n$, $n \geq 0$ such that
 \[
 \partial _n h_n = h_{n-1}\partial _n,
 \]
@@ -1330,12 +1328,12 @@ X \arr[f]Y \arr[g]Z,
 \]
 we have $g_*f_*=(gf)_*$, and $\id_*=\id$.
 \begin{prop}
-Let $f_*:\{C_n\} \to \{D_n\}$ be a chain map. Then $h_n(\ker \partial _n) \subset \ker \partial_n$ and $h_n(\Img(\partial_{n+1}))\subset \Img(\partial_{n+1})$ in the following sense:
+Let $h:\{C_n\} \to \{D_n\}$ be a chain map. Then $h_n(\ker \partial _n) \subset \ker \partial_n$ and $h_n(\Img(\partial_{n+1}))\subset \Img(\partial_{n+1})$ in the following sense:
 % https://q.uiver.app/#q=WzAsNixbMCwxLCJDX24oWCkiXSxbMCwwLCJcXGtlcihcXHBhcnRpYWxfbikiXSxbMCwyLCJcXEltZyhcXHBhcnRpYWxfe24rMX0pIl0sWzEsMCwiXFxrZXIgKFxccGFydGlhbF9uKSJdLFsxLDEsIkRfbihYKSJdLFsxLDIsIlxcSW1nKFxccGFydGlhbF9uKSJdLFsxLDAsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoiYm90dG9tIn19fV0sWzIsMCwiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbMSwzLCJoX24iXSxbMCw0LCJoX24iXSxbMyw0LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFs1LDQsIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Imhvb2siLCJzaWRlIjoidG9wIn19fV0sWzIsNSwiaF9uIl1d
 \[\begin{tikzcd}[ampersand replacement=\&]
 	{\ker(\partial_n)} \& {\ker (\partial_n)} \\
 	{C_n(X)} \& {D_n(X)} \\
-	{\Img(\partial_{n+1})} \& {\Img(\partial_n)}
+	{\Img(\partial_{n+1})} \& {\Img(\partial_{n+1})}
 	\arrow["{h_n}", from=1-1, to=1-2]
 	\arrow[hook', from=1-1, to=2-1]
 	\arrow[hook, from=1-2, to=2-2]
@@ -1375,7 +1373,7 @@ For every $a \in C_1(X)$, $\veps(\partial a)=0$.
 \end{prop}
 
 \begin{proof}
-If $\partial a= \sum_{i=1}^m k_i\sigma_i$ with $\sigma:\Delta^1 \to X$, then
+If $a= \sum_{i=1}^m k_i\sigma_i$ with $\sigma_i:\Delta^1 \to X$, then
 \[
 \partial a = \sum_{i=1}^mk_i(\sigma_i(1)-\sigma_i(0)),
 \]
@@ -1396,11 +1394,11 @@ Consider a 0-chain $\sum_{i=1}^m k_i p_i$, where $p_i \in X$. Then for every $i 
 \[
 \sum_{i=1}^m k_ip_i - \partial \paren{ \sum_{i=2}^m k_i \gamma_i } = \paren{\sum_{i=1}^m k _i}p_1.
 \]
-Thus every element in $H_0(X)$ is represented by $kp$.  Choosing some $p_0$ for all $p \in X$, we have
+Thus every element in $H_0(X)$ is represented by $kp$.  Fixing some $p_0 \in X$, for all $p \in X$ we have
 \[
 mp - mp_0 = \partial(m\gamma),
 \]
-where $\gamma$ is a curve from $p_0$ to $p$. Thus for all $x \in C_0(X)$, $x \in \braks{\veps(X)p_0}$. Therefore if $x,y \in [\veps(x)p_0]$, then $[x]=[y]$, so $\veps$ is injective.
+where $\gamma$ is a curve from $p_0$ to $p$. Thus for all $x \in C_0(X)$, $x \in \braks{\veps(x)p_0}$. Therefore if $\veps(x)=\veps(y)$, then $[x]=[y]$, so $\veps$ is injective.
 
 Furthermore, $\veps\paren{[mp_0]}=m$.
 \end{proof}
@@ -1414,7 +1412,7 @@ We write this as
 \[
 \tilde H_n(X)= \case{ H_n(X) & n \geq 1 \\ \ker \veps /\Img \partial _1  & n=0.}
 \]
-So by \Cref{prop:path-connected-zero-reduced}, $\tilde H_0(X)=0$.
+So by \Cref{prop:path-connected-zero-reduced}, $\tilde H_0(X)=0$ if $X$ is path connected.
 \end{defn}
 
 \begin{thm}
@@ -1437,7 +1435,7 @@ Suppose $f,g:X \to Y$ are homotopic. Then $f_{*n},g_{*n}:H_n(X)\to H_n(Y)$ are e
 
 To prove this, we need a helpful algebraic notion first.
 \begin{defn}
-Let $\{C_n\},\{D_n\}$ be chain complexes, and $\brax{f_n:C_n \to D_n}_{n=0}^\infty,\brax{g_n:C_n \to D_n}_{n=0}^\infty$ chain maps. A sequence of homomorphisms $\brax{p_n:C_n \to D_{n+1}}_{n=0}^\infty$ is called a \term{chain homotopy} between $f$ and $g$ if $\partial_{n+1} p_n = g-f+p_{n-1}\partial _n$. In this case, we say that $f$ and $g$ are \term{chain homotopic}.
+Let $\{C_n\},\{D_n\}$ be chain complexes, and $\brax{f_n:C_n \to D_n}_{n=0}^\infty,\brax{g_n:C_n \to D_n}_{n=0}^\infty$ chain maps. A sequence of homomorphisms $\brax{p_n:C_n \to D_{n+1}}_{n=0}^\infty$ is called a \term{chain homotopy} between $f$ and $g$ if $\partial_{n+1} p_n + p_{n-1}\partial _n = g_n-f_n$. In this case, we say that $f$ and $g$ are \term{chain homotopic}.
 \end{defn}
 
 \begin{claim} \label{clm:chain-homo-gives-isom}
@@ -1447,15 +1445,15 @@ If $f,g : \brax{C_n} \to \brax{D_n}$ are chain homotopic maps, then the induced 
 \begin{proof}
 Let $[z] \in H_n(C)$, and we want to show $g_{*n}(z)-f_{*n}(z)=0$, i.e. that it's a boundary. Well if $p$ is a chain homotopy between $f$ and $g$, then
 \[
-g_{*n}(z)-f_{*n}(z) = \partial p_n(z)- p_{n-1}(\partial z)= \partial p_n(z),
+g_{*n}(z)-f_{*n}(z) = \partial p_n(z)+ p_{n-1}(\partial z)= \partial p_n(z),
 \]
 as desired.
 \end{proof}
 
-\begin{proof}[Proof of Homotopy Invarance of Homology]
+\begin{proof}[Proof of Homotopy Invariance of Homology]
 Let $f,g :X \to Y$ be homotopic, so we have a homotopy $F:X \times [0,1]\to Y$. By \Cref{clm:chain-homo-gives-isom}, it suffices to find a chain homotopy between $f_*$ and $g_*$.
 
-Let $\sigma : \Delta^n \to X$ be a singular $n$-simplex. Then $f_* \circ \sigma = f\circ \sigma$, and similarly for $g$. In fact, we may use the homotopy $F$ to have
+Let $\sigma : \Delta^n \to X$ be a singular $n$-simplex. Then $f_* (\sigma) = f\circ \sigma$, and similarly for $g$. In fact, we may use the homotopy $F$ to have
 \[
 \Delta^n \times I \arr[\sigma \times \id]X \times I \arr[F]Y.
 \]
@@ -1463,11 +1461,11 @@ This will be used to obtain a chain homotopy.
 \end{proof}
 
 \begin{defn}
-A sequence of abelian is groups
+A sequence of abelian groups is
 \[
 A_{n} \arr[f_n] A_{n-1} \arr[f_{n-1}] \cdots \arr A_1 \arr[f_1]0
 \]
-is said to be an \term[]{exact sequence} if $\Img(f_n)=\ker (f_{n+1})$ for all $n$. A \term[]{short exact sequence} is an exact sequence of the form
+is said to be an \term[]{exact sequence} if $\Img(f_{n+1})=\ker (f_{n})$ for all $n$. A \term[]{short exact sequence} is an exact sequence of the form
 \[
 0 \to A \arr[f] B \arr[g] C \to 0.
 \]
@@ -1529,7 +1527,7 @@ the associated homomorphisms $\brax{d_n}$ and $\brax{d_n'}$ make the following d
 	{H_n(C')} \&\& {H_{n-1}(A')}
 	\arrow["{d_n}", from=1-1, to=1-3]
 	\arrow["{\gamma_{n*}}"', from=1-1, to=3-1]
-	\arrow["{\veps_{n-1*}}", from=1-3, to=3-3]
+	\arrow["{\alpha_{n-1*}}", from=1-3, to=3-3]
 	\arrow["{d_n'}"', from=3-1, to=3-3]
 \end{tikzcd}\]
 \end{thm}
@@ -1539,29 +1537,29 @@ Diagram chasing.
 \end{proof}
 
 \begin{exercise}
-Suppose $X$ is contractable. Show that $\tilde{H}_n(X )=0$ for all $n$.
+Suppose $X$ is contractible. Show that $\tilde{H}_n(X )=0$ for all $n$.
 \end{exercise}
 
 \begin{defn} \label{def:collection-interior-cover}
-Suppose $X$ is a topological space, and suppose $\cA$ is a collection of sets in $X$ whose interior cover $X$. Denote by \term{$C^{\cA}(X)$} the free abelian group over simplices $\sigma :\Delta^n \to X$ such that $\Img(\sigma) \subset A$ for some $A \in \cA$.
+Suppose $X$ is a topological space, and suppose $\cA$ is a collection of sets in $X$ whose interiors cover $X$. Denote by \term{$C_n^{\cA}(X)$} the free abelian group over simplices $\sigma :\Delta^n \to X$ such that $\Img(\sigma) \subset A$ for some $A \in \cA$.
 \end{defn}
 
 \begin{prop}
 Let $A,B \subset X$ be open such that $A \cup B = X$. Then the following sequence of complexes is exact:
 \[
-0 \to C_n(A \cap B)\arr[(i_{1*},i_{2*})] C_n(A)\oplus C_n(B) \arr[(C_1,C_2)\mapsto C_1-C_2] C_n(X)\to 0
+0 \to C_n(A \cap B)\arr[(i_{1*},i_{2*})] C_n(A)\oplus C_n(B) \arr[(a,b)\mapsto a-b] C_n^{\{A,B\}}(X)\to 0
 \]
 \end{prop}
 
 \begin{thm} \label{thm:chain-homology-A-map}
-Let $X$ be a topological space, and $\cA$ be as \Cref{def:collection-interior-cover}. Then there exists a chain map
+Let $X$ be a topological space, and $\cA$ be as in \Cref{def:collection-interior-cover}. Then there exists a chain map
 \[
 \rho:\brax{C_n(X)} \to \brax{C_n^{\cA}(X)}
 \]
 such that, considering the inclusion $\iota : \brax{C_n^\cA (X)}\to \brax{C_n(X)},$
 we have that $\rho \circ \iota$ and $\iota \circ \rho$ are chain homotopic to the identity. In particular
 \[
-i_{x}:H_n(C_n^{\cA}(X)) \to H_n(X)
+\iota_*:H_n(C_n^{\cA}(X)) \to H_n(X)
 \]
 is an isomorphism.
 \end{thm}
@@ -1584,11 +1582,11 @@ Suppose $X = A \cup B$ for $A,B$ open. Then there exists a long exact sequence
 \[
 \cdots \arr H_{n+1}(X) \arr[d_{n+1}] H_n(A\cap B)\arr H_n(A)\oplus H_n(B) \arr H_n(X)\arr[d_n]H_{n-1}(A\cap B)\arr \cdots
 \]
-called the \term[]{Mayer-Vietoris sequence}.
+called the \term[]{Mayer–Vietoris sequence}.
 \end{cor}
 
 \begin{cor} \label{cor:hom-circle-zero}
-We have $\tilde H_0(S^n)=0$, $\tilde H_n(S^n)=\Z$, and $\tilde H_k(S^n)=0$ the rest of the time.
+For all $n \geq 0$, we have $\tilde H_n(S^n)=\Z$, and $\tilde H_k(S^n)=0$ for $k \neq n$.
 \end{cor}
 
 \begin{proof}
@@ -1603,29 +1601,29 @@ Hence we have the exact sequence
 \]
 thus for all $k$
 \[
-\tilde H_k(S^n) \simeq \tilde H_{k-1}(S^{n-1}).
+\tilde H_k(S^n) \cong \tilde H_{k-1}(S^{n-1}).
 \]
-The result then follows by induction on $n$, with the base case trivial.
+The result then follows by induction on $n$, with the base case $S^0$ trivial.
 \end{proof}
 
-\begin{thm}[Brauer's Fixed Point Theorem in All Dimensions]
+\begin{thm}[Brouwer's Fixed Point Theorem in All Dimensions]
 There does not exist a continuous $f:\bar D^n \to S^{n-1}$ such that $f(x)=x$ for all $x \in \partial \bar D^n$.
 \end{thm}
 
 \begin{proof}
 Suppose such an $f$ existed. Then the maps
 \[
-\tilde H_{n-1}(S^{n-1}) \arr[i_*] \tilde H^{n} (\bar D^n) \arr[f_*] \tilde H_{n-1}(S^{n-1})
+\tilde H_{n-1}(S^{n-1}) \arr[i_*] \tilde H_{n-1} (\bar D^n) \arr[f_*] \tilde H_{n-1}(S^{n-1})
 \]
 compose to the identity, but this is impossible by \Cref{cor:hom-circle-zero}.
 \end{proof}
 
 \begin{thm}
-$\R^n \simeq \R^m$ if and only if $m=n$.
+$\R^n \cong \R^m$ if and only if $m=n$.
 \end{thm}
 
 \begin{proof}
-Suppose $m\neq n$ and there exists a homeomorphism $\vphi :\R^m \to \R^n$. Then we have a homeomorphism $\varphi :\R^m \sm \{0\} \to \R^n \sm \{\varphi(0)\}$, but are homeomorphic to $S^{m-1}$ and $S^{n-1}$, respectively. But these two spaces or not homeomorphic, because they have different reduced homology groups.
+Suppose $m\neq n$ and there exists a homeomorphism $\vphi :\R^m \to \R^n$. Then we have a homeomorphism $\varphi :\R^m \sm \{0\} \to \R^n \sm \{\varphi(0)\}$, but these are homotopy equivalent to $S^{m-1}$ and $S^{n-1}$, respectively. But these two spaces are not homotopy equivalent, because they have different reduced homology groups.
 \end{proof}
 
 \begin{cor}
@@ -1641,22 +1639,22 @@ Exercise.
 \end{proof}
 
 \begin{defn}
-Let $\sigma:=[v_0,\dots,v_n]$ be a simplex. The \term[baricenter]{baricenter} of $\sigma$, denoted \term[]{$b_\sigma$} is the point
+Let $\sigma:=[v_0,\dots,v_n]$ be a simplex. The \term[barycenter]{barycenter} of $\sigma$, denoted \term[]{$b_\sigma$} is the point
 \[
 b_\sigma := \sum_{i=0}^n\frac{1}{n+1}v_i.
 \]
-Define the \term[]{baricentric subdivision} of $\sigma$ to be
+Define the \term[]{barycentric subdivision} of $\sigma$ to be
 \[
 \braks{b_\sigma, w_0,\dots,w_{n-1}}
 \]
-where $[w_0,\dots,w_{n-1}]$ is a simplex appearing in the baricentric subdivision of a face of $\sigma$.
+where $[w_0,\dots,w_{n-1}]$ is a simplex appearing in the barycentric subdivision of a face of $\sigma$.
 
 \tikzfig{baricentric-subdivision}
 
 \end{defn}
 
 \begin{prop}
-Let $\sigma = [v_0,\dots,v_n]$ be an $n$-simplex in $\R^m$. Let $[w_0,\dots,w_n]$ be a simplex appearing in its baricentric subdivision. Then
+Let $\sigma = [v_0,\dots,v_n]$ be an $n$-simplex in $\R^m$. Let $[w_0,\dots,w_n]$ be a simplex appearing in its barycentric subdivision. Then
 \[
 \diam \paren{[w_0,\dots,w_n]} \leq \frac{n}{n+1}\diam\paren{[v_0,\dots,v_n]},
 \]
@@ -1668,7 +1666,7 @@ Let $Y \subset \R^m$ be a convex set. The \term[linear chain,linear chains]{$n\t
 \[
 \LC_n(Y) := \brax{\sum m_i \sigma _i \setbar \sigma_i:\Delta^n \to Y \text{ is linear}}.
 \]
-Note that $\sigma_i$ being linear means that it's the restriction of a linear map $T_{\sigma_i}:\R^{n+1}\to \R^m$ such that $\sigma_i(\Delta^n)\subset Y$. We also set $\LC_{-1}(Y)=m[\emptyset]$.
+Note that $\sigma_i$ being linear means that it's the restriction of a linear map $T_{\sigma_i}:\R^{n+1}\to \R^m$ such that $\sigma_i(\Delta^n)\subset Y$. We also set $\LC_{-1}(Y)=\Z[\emptyset]$.
 
 % Identify $\sigma$ with $[\sigma(e)]$ 
 For any point $b \in Y$, define $b:\LC_n(Y) \to \LC_{n+1}(Y)$ by 
@@ -1678,10 +1676,10 @@ b\paren{[v_0,\dots,v_n]} := [b,v_0,\dots,v_n].
 \end{defn}
 
 \begin{rmk} \label{rmk:sigma-as-partials-and-bari}
-Let $b_\sigma$ be the baricenter of $\sigma$. Then
+Let $b_\sigma$ be the barycenter of $\sigma$. Then
 \begin{align*}
-\partial b_\sigma\paren{[v_0,\dots,v_n]} &= \partial [b_\sigma,w_0,\dots,w_n] \\
- &= [w_0,\dots,w_n]-b_\sigma\partial [w_2,\dots,w_n],
+\partial b_\sigma\paren{[v_0,\dots,v_n]} &= \partial [b_\sigma,v_0,\dots,v_n] \\
+ &= [v_0,\dots,v_n]-b_\sigma\partial [v_0,\dots,v_n],
 \end{align*}
 hence $\partial b_\sigma \sigma = \sigma - b_\sigma \partial \sigma$, so
 \begin{align*}
@@ -1690,7 +1688,7 @@ hence $\partial b_\sigma \sigma = \sigma - b_\sigma \partial \sigma$, so
 \end{rmk}
 
 \begin{defn}
-Define the \term[]{baricentric subdivision operator} $S:\LC_n(Y) \to \LC_n(Y)$ inductively by
+Define the \term[]{barycentric subdivision operator} $S:\LC_n(Y) \to \LC_n(Y)$ inductively by
 \begin{align*}
 S(\sigma) = b_\sigma (S(\partial \sigma)),
 \end{align*}
@@ -1702,7 +1700,7 @@ On $\LC_0(Y)$, $S(\sigma)= \sigma$.
 \end{ex}
 
 \begin{prop}
-The baricentric subdivision operator $S$ is a chain map: we have $\partial S = S\partial$, i.e. the following diagram commutes:
+The barycentric subdivision operator $S$ is a chain map: we have $\partial S = S\partial$, i.e. the following diagram commutes:
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXExDX24oWSkiXSxbMiwwLCJcXExDX24oWSkiXSxbMCwyLCJcXExDX3tuLTF9KFkpIl0sWzIsMiwiXFxMQ197bi0xfShZKSJdLFswLDEsIlMiXSxbMCwyLCJcXHBhcnRpYWwiLDJdLFsyLDMsIlMiLDJdLFsxLDMsIlxccGFydGlhbCJdXQ==
 \[\begin{tikzcd}[ampersand replacement=\&]
 	{\LC_n(Y)} \&\& {\LC_n(Y)} \\
@@ -1732,9 +1730,9 @@ $S$ is chain homotopic to the identity.
 
 \begin{proof}
 Define $T$ inductively by $T([\emptyset]):=0$ and $T(\sigma):=b_\sigma(\sigma - T(\partial \sigma))$. We claim
-\begin{align*}
-\partial T + T\partial = S-\id. \label{eq:chain-hom-identity-relation}
-\end{align*}
+\begin{equation} \label{eq:chain-hom-identity-relation}
+\partial T + T\partial = \id - S.
+\end{equation}
 Checking this for the base case is an exercise. Now inductively,
 \begin{align*}
 \partial T (\sigma) 
@@ -1764,7 +1762,7 @@ T(\sigma) &= \sigma_*(T[e_0,\dots,e_n]).
 \end{defn}
 
 \begin{prop}
-$S$ is a chain map, and $T$ is a chain homomorphism.
+$S$ is a chain map, and $T$ is a chain homotopy between $S$ and $\id$.
 \end{prop}
 
 \begin{proof}
@@ -1773,7 +1771,7 @@ We compute
 \partial S(\sigma) &= \partial \sigma_* \paren{S [e_0,\dots,e_n]} \\
 &= \sigma_*\paren{\partial S[e_0,\dots,e_n]} \\
 &= \sigma_*(S \partial [e_0,\dots,e_n]) \\
-&= \sigma_*\paren{S\paren{\sum (-1)^i\braks{e_2,\dots,\hat{e_i},\dots,e_n}}} \\
+&= \sigma_*\paren{S\paren{\sum (-1)^i\braks{e_0,\dots,\hat{e_i},\dots,e_n}}} \\
 &= \sum (-1)^i \sigma_*\paren{S\braks{e_0,\dots,\hat{e_i},\dots,e_n}} \\
 &= \sum (-1)^i S\sigma|_{[e_0,\dots,\hat{e_i},\dots,e_n]} \\
 &= S(\partial \sigma).
@@ -1783,9 +1781,9 @@ The proof for $T$ is similar.
 
 We are now equipped to prove \Cref{thm:chain-homology-A-map}.
 \begin{proof}[Proof of \Cref{thm:chain-homology-A-map}]
-Since $\brax{\Int(U)\setbar U \in A}$ is an open cover of $X$, for every $\sigma :\Delta^n\to X$, there exists $m=m(\sigma)$ such that $S^{m(\sigma)}(\sigma)\in C_n^{\cA}(X)$. Now choose $m$ to be minimal.
+Since $\brax{\Int(U)\setbar U \in \cA}$ is an open cover of $X$, for every $\sigma :\Delta^n\to X$, there exists $m=m(\sigma)$ such that $S^{m(\sigma)}(\sigma)\in C_n^{\cA}(X)$. Now choose $m$ to be minimal.
 
-Define $D:C_n(X)\to C_{n+1}(X)$ by $D(\sigma)=D_{m(\sigma)}(\sigma)$, so then we define $\rho:C_n(X) \to C_n(X)$ by the relation
+Define $D:C_n(X)\to C_{n+1}(X)$ by $D(\sigma)=D_{m(\sigma)}(\sigma)$, where $D_m:=\sum_{j=0}^{m-1}TS^j$ satisfies $\partial D_m + D_m \partial = \id - S^m$, so then we define $\rho:C_n(X) \to C_n(X)$ by the relation
 \begin{align*}
 \partial D + D\partial = \id - \rho.
 \end{align*}
@@ -1803,23 +1801,22 @@ We claim $\rho$ has all the desired properties. Namely,
     \end{align*}
     Clearly $S^{m(\sigma)}\sigma \in C_n^{\cA}(X)$. Moreover 
     \begin{align*}
-    D_{m(\sigma)}\partial \sigma - D\partial \sigma = \sum_{\tau }\sum_{j=m(\tau)}^{m(\sigma)}TS^j(\tau) \in C_n^{\cA}(X),
+    D_{m(\sigma)}\partial \sigma - D\partial \sigma = \sum_{i=0}^n(-1)^i\sum_{j=m(\tau_i)}^{m(\sigma)-1}TS^j(\tau_i) \in C_n^{\cA}(X),
     \end{align*}
+    where $\tau_i:=\sigma \circ \iota_i$ is the $i$-th face of $\sigma$,
     hence $\rho (\sigma) \in C_n^{\cA}(X)$.
-    \item $i\circ \rho$ is chain homotopic to the identity: $i\circ \rho - \id = \partial D + D\partial$
+    \item $i\circ \rho$ is chain homotopic to the identity: $\id - i\circ \rho = \partial D + D\partial$
     \item $\rho \circ i$ is chain homotopic to the identity: $\rho(i(\sigma))=\sigma$.
 \end{enumerate}
 This concludes the proof.
 \end{proof}
-
-Let $A \subset X$. Denote by $C_n(X,A):= C_n(X)/C_n(A)$
 
 \begin{defn}
 Let $A \subset X$. The \term[]{chains in $X$ relative to $A$}, denoted \term[]{$C_n(X,A)$}, is
 \begin{align*}
 C_n(X,A):= C_n(X)/C_n(A).
 \end{align*}
-Observe that $\partial _n:C_n(X) \to C_{n-1}(X)$ descends naturally to $\partial_n:C_n(X,A)\to C_{n-1}(X,A)$, so we denote by \term[]{$H_n(X,A)$} the homology groups of this complex. Namely, $[Z]\in C_n(X,A)$ is a \term[]{relative cycle} if $\partial Z \in C_{n-1}(A)$, and $\partial [Z]=0$ in $H_n(X,A)$ if and only if there exists $Z_{n+1}\in C_{n+1}(X)$ such that $\partial Z_{n+1}=Z-a$ for $a \in C_n(A)$.
+Observe that $\partial _n:C_n(X) \to C_{n-1}(X)$ descends naturally to $\partial_n:C_n(X,A)\to C_{n-1}(X,A)$, so we denote by \term[]{$H_n(X,A)$} the homology groups of this complex. Namely, $[Z]\in C_n(X,A)$ is a \term[]{relative cycle} if $\partial Z \in C_{n-1}(A)$, and $[Z]=0$ in $H_n(X,A)$ if and only if there exists $Z_{n+1}\in C_{n+1}(X)$ such that $\partial Z_{n+1}=Z-a$ for $a \in C_n(A)$.
 \end{defn}
 
 \begin{thm}
@@ -1851,9 +1848,9 @@ Moreover, for $A \subset B \subset X$ we have
 
 \begin{thm}
 Suppose \begin{align*}
-(X,p)= \bigvee_{i=1}^m(X,p_i),
+(X,p)= \bigvee_{i=1}^m(X_i,p_i),
 \end{align*}
-where each $X_i$ is locally contractable. Then
+where each $p_i$ has an open neighborhood in $X_i$ which deformation retracts to $p_i$. Then
 \begin{align*}
 \tilde H_n(X)= \bigoplus_{i=1}^m\tilde H_n(X_i).
 \end{align*}
@@ -1861,7 +1858,7 @@ where each $X_i$ is locally contractable. Then
 
 
 \begin{proof}
-It suffices to prove this for $m=2$. Let $U_1\subset X_2$ be a contractible neighborhood of $P_1$ and $U_2 \subset X_1$ similar. Let $A:= X_1 \cup U_1$ and $B := X_2 \cup U_2$. Then $A \cap B$ is contractible, so we have the Mayer-Vietoris sequence
+It suffices to prove this for $m=2$. Let $U_1\subset X_2$ be an open neighborhood of $p_2$ which deformation retracts to $p_2$, and $U_2 \subset X_1$ similar. Let $A:= X_1 \cup U_1$ and $B := X_2 \cup U_2$. Then $A \cap B$ is contractible, so we have the Mayer–Vietoris sequence
 % https://q.uiver.app/#q=WzAsOSxbMSwxLCJcXHRpbGRlIEhfbihBIFxcY2FwIEIpIl0sWzEsMCwiMCJdLFsyLDEsIlxcdGlsZGUgSF9uKEEpXFxvcGx1cyBcXHRpbGRlIEhfbihCKSJdLFsyLDAsIlxcdGlsZGUgSF9uKFhfMSlcXG9wbHVzIFxcdGlsZGUgSF9uKFhfMikiXSxbMywxLCJcXHRpbGRlIEhfbihYKSJdLFs0LDEsIlxcdGlsZGUgSF97bi0xfShBIFxcY2FwIEIpIl0sWzQsMCwiMCJdLFs1LDEsIlxcY2RvdHMiXSxbMCwxLCJcXGNkb3RzIl0sWzEsMCwiXFx2c2ltIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFswLDJdLFszLDIsIlxcdnNpbSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiw0XSxbNiw1LCJcXHZzaW0iLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsN10sWzgsMF0sWzQsNV1d
 \[\begin{tikzcd}[ampersand replacement=\&]
 	\& 0 \& {\tilde H_n(X_1)\oplus \tilde H_n(X_2)} \&\& 0 \& \\
@@ -1953,7 +1950,7 @@ H_n(U,U\sm p) = \Z.
 \begin{thm} \label{thm:quotient-homology-isom}
 Suppose $A \subset X$ is closed and $A$ is a deformation retract of $A \subset U \subset X$, with $U$ open. Then the quotient map
 \begin{align*}
-q_{n_*}: H_n(X,A) \to H_n(X/A, A/A) \simeq \tilde H_n (X/A)
+q_{n*}: H_n(X,A) \to H_n(X/A, A/A) \cong \tilde H_n (X/A)
 \end{align*}
 is an isomorphism.
 \end{thm}
@@ -2002,7 +1999,7 @@ hence $H_n(X,A)\arr[\sim] H_n(X,U)$.
 
 We're now prepared to prove \Cref{thm:quotient-homology-isom}.
 
-\begin{proof}[Proof that $H_n(X,A)\simeq \tilde H_n(X/A)$]
+\begin{proof}[Proof that $H_n(X,A)\cong \tilde H_n(X/A)$]
 By \Cref{cor:XA-XU-homology-isom} and \Cref{thm:excision}, we have isomorphisms
 \begin{align*}
 H_n(X,A)\underset{\ref{cor:XA-XU-homology-isom}}{\arr[\sim]}
@@ -2025,7 +2022,7 @@ What is a generator of $H_n(S^n)$? What is a generator of $H_n(\Delta^n,\partial
 \begin{rmk}
 Observe that there exists $U \subset \Delta^n$ which deformation retracts to $\partial \Delta^n$, hence
 \begin{align*}
-H_n(\Delta^n,\partial \Delta^n)\underset{\ref{thm:quotient-homology-isom}}{\arr[\sim]} \tilde H_n(\Delta^n/\partial \Delta^n) \simeq \tilde H_n(S^n).
+H_n(\Delta^n,\partial \Delta^n)\underset{\ref{thm:quotient-homology-isom}}{\arr[\sim]} \tilde H_n(\Delta^n/\partial \Delta^n) \cong \tilde H_n(S^n).
 \end{align*}
 \end{rmk}
 
@@ -2034,7 +2031,7 @@ The identity simplex $\id :\Delta^n \to \Delta ^n$ is a generator of $H_n(\Delta
 \end{prop}
 
 \begin{proof}
-We induct on $n$. Let $\Lambda^{n-1}\subset \partial \Delta^n$ be the union of all faces but one, and observe that $\Delta^n$ deformation retracts to $\Lambda^{n-1}$. For example in a 2-simplex, this deformation looks like:
+We induct on $n$. Let $\Lambda^{n-1}\subset \partial \Delta^n$ be the union of all faces but $[e_1,\dots,e_n]$, and observe that $\Delta^n$ deformation retracts to $\Lambda^{n-1}$. For example in a 2-simplex, this deformation looks like:
 
 \tikzfig{boundary-def-retract}
 
@@ -2042,11 +2039,11 @@ Now we have the long exact sequence
 \begin{align*}
 H_k(\partial \Delta^n, \Lambda^{n-1}) \arr H_k(\Delta^n,\Lambda^{n-1}) \to H_k(\Delta^n,\partial \Delta^n) \to H_{k-1}(\partial \Delta^n,\Lambda^{n-1}) \to H_{k-1}(\Delta^n,\Lambda^{n-1}).
 \end{align*}
-Now by \Cref{lem:HnUA-zero}, $H_j(\Delta^n,\Lambda^{n-1}) \simeq 0$ for all $j$, hence $d:H_n(\Delta^n,\partial \Delta^n) \to H_{n-1}(\partial \Delta^n,\Lambda^{n-1})$ is an isomorphism. Now one sees that
+Now by \Cref{lem:HnUA-zero}, $H_j(\Delta^n,\Lambda^{n-1}) \cong 0$ for all $j$, hence $d:H_n(\Delta^n,\partial \Delta^n) \to H_{n-1}(\partial \Delta^n,\Lambda^{n-1})$ is an isomorphism. Now one sees that
 \begin{align*}
-d(\sigma) = \braks{e_1,\dots,e_n},
+d(\id) = \braks{e_1,\dots,e_n},
 \end{align*}
-which we recall by the construction of the map $d$. So when $n=1$, $d(\sigma)= \pm e_1$ which is a generator of $H_0(\partial  \Delta^1,\Lambda^0)=$ ``$H_0(\cdot \: \cdot, \cdot)$''. Thus the base case holds, and we proceed by induction.
+which we recall by the construction of the map $d$. So when $n=1$, $d(\id)= \pm e_1$ which is a generator of $H_0(\partial  \Delta^1,\Lambda^0)=$ ``$H_0(\cdot \: \cdot, \cdot)$''. Thus the base case holds, and we proceed by induction.
 
 Consider the linear map $T:(\Delta^{n-1},\partial \Delta^{n-1}) \to (\partial \Delta^n,\Lambda^{n-1})$ sending $e_i\mapsto e_{i+1}$, sending the faces to the lone face of $\partial \Delta^n$ which is missed by $\Lambda^{n-1}$. Now clearly
 \begin{align*}
@@ -2067,26 +2064,26 @@ commutes. Now one sees that $i$ is an isomorphism, so we're done.
 \end{proof}
 
 \begin{thm} \label{thm:homology-isom}
-Let $X$ be a (finite) $\Delta$-complex. Then the natural map $i:C_{n}^\Delta(X) \to C_n(X)$ induces an isomorphism on homology.
+Let $X$ be a (finite) $\Delta$-complex. Then the natural map $i:\Delta_n(X) \to C_n(X)$ induces an isomorphism on homology.
 \end{thm}
 
 \begin{proof}
 Let $X^k$ be the $k$-skeleton of $X$. We'll prove the claim on every $k$-skeleton inductively on $k$.
 
-When $k=0$, $X^0=\{p_1,\dots,p_k\}$, and $i:C_0^\Delta(X) \to C_0(X)$ is an isomorphism, hence induces the identity map on the zeroth homology since \begin{align*}
-H_0^\Delta(X^0)&=H_0(X^n)=\brax{\sum_{i=1}^mk_ip_i \setbar k_i \in \Z} \\
+When $k=0$, $X^0=\{p_1,\dots,p_m\}$, and $i:\Delta_0(X^0) \to C_0(X^0)$ is an isomorphism, hence induces an isomorphism on the zeroth homology since \begin{align*}
+H_0^\Delta(X^0)&=H_0(X^0)=\brax{\sum_{i=1}^mk_ip_i \setbar k_i \in \Z} \\
 H_i^\Delta(X^0)&=H_i(X^0)=\{0\}, \quad i \ge 1.
 \end{align*}
 This completes the base case.
 
-Now assume that for $X^{k-1}$, the map $i:C_n^\Delta(X^{k-1}) \to C_n(X^{k-1})$ induces isomorphism on homology for all $n$. Denote \begin{align*}
-C_n^\Delta(X^k,X^{k-1}) := \frac{C_n^\Delta(X^k)}{C_n^\Delta(X^{k-1})}
+Now assume that for $X^{k-1}$, the map $i:\Delta_n(X^{k-1}) \to C_n(X^{k-1})$ induces isomorphism on homology for all $n$. Denote \begin{align*}
+\Delta_n(X^k,X^{k-1}) := \frac{\Delta_n(X^k)}{\Delta_n(X^{k-1})}
 \end{align*}
 similar to singular homology. Well in fact one sees that
 \begin{align*}
-C_n^\Delta(X^k,X^{k-1}) = \case{\w{Free}(k) & n = k, \\ 0 & n \ne k,}
+\Delta_n(X^k,X^{k-1}) = \case{\w{Free}(k) & n = k, \\ 0 & n \ne k,}
 \end{align*}
-and we have the short exact sequences
+where $\w{Free}(k)$ is the free abelian group on the $k$-simplices of $X$, and we have the long exact sequences
 % https://q.uiver.app/#q=WzAsMTAsWzAsMCwiSF97bisxfV5cXERlbHRhKFheayxYXntrLTF9KSJdLFsxLDAsIkhfe259XlxcRGVsdGEoWF57ay0xfSkiXSxbMiwwLCJIX25eXFxEZWx0YShYXmspIl0sWzMsMCwiSF9uXlxcRGVsdGEoWF5rLFhee2stMX0pIl0sWzQsMCwiSF97bi0xfV5cXERlbHRhKFhee2stMX0pIl0sWzAsMSwiSF97bisxfShYXmssWF57ay0xfSkiXSxbMSwxLCJIX3tufShYXntrLTF9KSJdLFsyLDEsIkhfbihYXmspIl0sWzMsMSwiSF9uKFheayxYXntrLTF9KSJdLFs0LDEsIkhfe24tMX0oWF57ay0xfSkiXSxbMCwxXSxbMSwyXSxbMiwzXSxbMyw0XSxbNSw2XSxbNiw3XSxbNyw4XSxbOCw5XSxbMCw1LCJcXGFscGhhIiwwLHsiY29sb3VyIjpbMTIwLDYwLDYwXX0sWzEyMCw2MCw2MCwxXV0sWzEsNiwiXFxiZXRhIiwwLHsiY29sb3VyIjpbMjcwLDYwLDYwXX0sWzI3MCw2MCw2MCwxXV0sWzIsNywiXFxnYW1tYSIsMCx7ImNvbG91ciI6WzAsNjAsNjBdfSxbMCw2MCw2MCwxXV0sWzQsOSwiXFxwc2kiLDAseyJjb2xvdXIiOlsyNzAsNjAsNjBdfSxbMjcwLDYwLDYwLDFdXSxbMyw4LCJcXGRlbHRhIiwwLHsiY29sb3VyIjpbMTIwLDYwLDYwXX0sWzEyMCw2MCw2MCwxXV1d
 \[\begin{tikzcd}[ampersand replacement=\&,cramped,column sep=small]
 	{H_{n+1}^\Delta(X^k,X^{k-1})} \& {H_{n}^\Delta(X^{k-1})} \& {H_n^\Delta(X^k)} \& {H_n^\Delta(X^k,X^{k-1})} \& {H_{n-1}^\Delta(X^{k-1})} \\
@@ -2106,10 +2103,10 @@ and we have the short exact sequences
 	\arrow[from=2-4, to=2-5]
 \end{tikzcd}\]
 We aim to prove the {\color{red} red arrow ($\gamma$)} is an isomorphism. By induction, we know the {\color{purple} purple arrows ($\beta,\psi$)} are isomorphisms. When $n \ne k$, we know $H_n^\Delta(X^k,X^{k-1})=0$ and \begin{align*}
-H_n(X^k,X^{k-1})\simeq H_n(X^k/X^{k-1},\{p\}),
+H_n(X^k,X^{k-1})\cong H_n(X^k/X^{k-1},\{p\}),
 \end{align*}
-but $X^k/X^{k-1}$ is a wedge of $k$ $S^k$'s, so the homology is 0 when $n\ne k$. Hence \begin{align*}
-H_n^\Delta(X^k,X^{k-1}) \simeq H_n (X^k,X^{k-1})
+but $X^k/X^{k-1}$ is a wedge of copies of $S^k$, one for each $k$-simplex, so the homology is 0 when $n\ne k$. Hence \begin{align*}
+H_n^\Delta(X^k,X^{k-1}) \cong H_n (X^k,X^{k-1})
 \end{align*}
 when $n \ne k$, and one also sees (exercise) that the isomorphism holds for $n=k$. Thus the {\color{green} green arrows ($\alpha,\delta$)} are isomorphisms. We conclude that the {\color{red} red arrow ($\gamma$)} is an isomorphism by the Five Lemma (\Cref{lem:five-lemma}).
 \end{proof}
@@ -2117,16 +2114,16 @@ when $n \ne k$, and one also sees (exercise) that the isomorphism holds for $n=k
 We now want to remove the finite assumption from \Cref{thm:homology-isom}. To do this, we need to generalize the following claim for infinite $\Delta$-complexes.
 
 \begin{claim}
-Let $(X_\alpha,x_\alpha)$ be pointed sets such that for all $\alpha$, there exists $U_\alpha \subset X_\alpha$ open which deformation retracts to $x_\alpha$. Then
+Let $(X_\alpha,x_\alpha)$ be pointed spaces such that for all $\alpha$, there exists $U_\alpha \subset X_\alpha$ open which deformation retracts to $x_\alpha$. Then
 \begin{align*}
-H_n\paren{\bigvee _{\alpha \in I} (X_\alpha,x_\alpha) }= \bigoplus \tilde H_n(X_\alpha).
+\tilde H_n\paren{\bigvee _{\alpha \in I} (X_\alpha,x_\alpha) }= \bigoplus \tilde H_n(X_\alpha).
 \end{align*}
 \end{claim}
 
 \begin{proof}
 Observe
 \begin{align*}
-H_n\paren{\coprod_{\alpha \in I} X_\alpha, \coprod_{\alpha \in I} \{x_\alpha\} } \underset{p_*}{\arr[\sim]} H_n\paren{\frac{\coprod_{\alpha \in I}X_\alpha}{\coprod_{\alpha \in I}\{x_\alpha\}}, \{\w{pt}\}} \simeq \tilde H_n\paren{\bigvee (X_\alpha,x_\alpha)}.
+\bigoplus_{\alpha \in I} \tilde H_n(X_\alpha) \cong \bigoplus_{\alpha \in I} H_n(X_\alpha,x_\alpha) \cong H_n\paren{\coprod_{\alpha \in I} X_\alpha, \coprod_{\alpha \in I} \{x_\alpha\} } \underset{p_*}{\arr[\sim]} H_n\paren{\frac{\coprod_{\alpha \in I}X_\alpha}{\coprod_{\alpha \in I}\{x_\alpha\}}, \{\w{pt}\}} \cong \tilde H_n\paren{\bigvee (X_\alpha,x_\alpha)}.
 \end{align*}
 \end{proof}
 
@@ -2140,22 +2137,22 @@ is an isomorphism.
 \begin{proof}
 We've seen that for every $k_2 \ge k$, the map $i_{k_2}:X^k \to X^{k_2}$ induces isomorphism on $H_n$ for $n \le k-1$. 
 
-To see that $i_*$ is injective: if not, then there exists a cycle $z \in C_n(X^k)$ such that $[z]\ne 0\in H_n(X^k)$, but $[z]=0$ in $H_n(X)$. Hence there exists $z_{n+1} \in C_{n+1}(X)$ such that $\partial z_{n+1}=z$. Now if $z_{n+1} = \sum_{i=1}^T \alpha_i\sigma_i$, then $\Img (\sigma_1)$ is compact, and so $\Img(\sigma_i) \subset X^{k_i}$. Thus there exists $K$ such that $z_{n-1} \in C_{n+1}(X^K)$, contradicting $i_{K^*}$ being injective.
+To see that $i_*$ is injective: if not, then there exists a cycle $z \in C_n(X^k)$ such that $[z]\ne 0\in H_n(X^k)$, but $[z]=0$ in $H_n(X)$. Hence there exists $z_{n+1} \in C_{n+1}(X)$ such that $\partial z_{n+1}=z$. Now if $z_{n+1} = \sum_{i=1}^T \alpha_i\sigma_i$, then $\Img (\sigma_i)$ is compact, and so $\Img(\sigma_i) \subset X^{k_i}$. Thus there exists $K$ such that $z_{n+1} \in C_{n+1}(X^K)$, contradicting $i_{K*}$ being injective.
 
 Surjectivity is similar.
 \end{proof}
 
 \begin{rmk}
-This claim is sufficient to prove the desired isomorphism $H_n^\Delta \simeq H_n$, since
+This claim is sufficient to prove the desired isomorphism $H_n^\Delta \cong H_n$, since
 \begin{align*}
-H_n^\Delta(X) \simeq H_n^\Delta(X^{n+1}) \simeq H_n(X^{n+1}) \simeq H_n(X)
+H_n^\Delta(X) \cong H_n^\Delta(X^{n+1}) \cong H_n(X^{n+1}) \cong H_n(X)
 \end{align*}
 \end{rmk}
 
 \section{Mapping Degrees}
 
 \begin{defn}
-Consider $f:S^n \to S^n$. Let $\alpha$ be a generator of $H_n(S^n) \simeq \Z$. Then $f_{n*}([\alpha]) = k[\alpha]$. The \term[]{degree} of $f$ is \term[]{$\deg (f)$} $:= k$.
+Consider $f:S^n \to S^n$. Let $\alpha$ be a generator of $H_n(S^n) \cong \Z$. Then $f_{n*}(\alpha) = k\alpha$. The \term[]{degree} of $f$ is \term[]{$\deg (f)$} $:= k$.
 \end{defn}
 
 \begin{prop}
@@ -2174,11 +2171,11 @@ The degree has some basic properties:
 \end{prop}
 
 \begin{proof}
-(1) and (2) are easy to show. (3) follows from (1) and (2). (4) follows from $S^n \sm \{p\}$ being contractible.
+(1) and (2) are easy to show. (3) follows from \Cref{thm:homo-invar-of-hom}. (4) follows from $S^n \sm \{p\}$ being contractible.
 
-For (5), assume WLOG that $i=n+1$. Let $U = S^n\cap \{x_{n+1}\ge 0\}$ and $L = S^n\cap \{x_{n+1}\le 0\}$. Let $\sigma_1 : \Delta^n \to U$ be a homeomorphism such that $\partial \Delta^n$ is mapped to $U \cap \{x_{n+1}=0\}$. Then take $\sigma_2 = A_{n+1}(\sigma)$, and observe $\sigma_2$ is a homeomorphism of $\Delta^2 \to L$.
+For (5), assume WLOG that $i=n+1$. Let $U = S^n\cap \{x_{n+1}\ge 0\}$ and $L = S^n\cap \{x_{n+1}\le 0\}$. Let $\sigma_1 : \Delta^n \to U$ be a homeomorphism such that $\partial \Delta^n$ is mapped to $U \cap \{x_{n+1}=0\}$. Then take $\sigma_2 = A_{n+1}\circ\sigma_1$, and observe $\sigma_2$ is a homeomorphism of $\Delta^n \to L$.
 
-We claim $\sigma_1 - \sigma_2$ is generator of $H_n(S^n)$. Clearly $\partial(\sigma_1-\sigma_2)=0$ because they agree on the boundary, thus $\sigma_1-\sigma_2 \in H_n(S^n)$. Moreover, we have
+We claim $\sigma_1 - \sigma_2$ is a generator of $H_n(S^n)$. Clearly $\partial(\sigma_1-\sigma_2)=0$ because they agree on the boundary, thus $[\sigma_1-\sigma_2] \in H_n(S^n)$. Moreover, we have
 \begin{align*}
 H_n(S^n) &\arr[\sim] H_n(S^n,L) \\ 
 \sigma_1 -\sigma_2 &\mapsto \sigma_1
@@ -2189,14 +2186,14 @@ H_n(\Delta^n,\partial\Delta^n) &\arr[\sigma_1] H_n(S^n,L) \\
 \id & \mapsto \sigma_1.
 \end{align*}
 Thus if we show that \begin{align*}
-\sigma_{1*}:H_n(\Delta^n,\partial \Delta^n) \to H_n(S^n,L),
+\sigma_{1*}:H_n(\Delta^n,\partial \Delta^n) \to H_n(S^n,L)
 \end{align*}
-then we're done, because $\id$ is a generator, so $\sigma_1$ is a generator, so $\sigma_1-\sigma_2$ is a generator. Indeed, by \Cref{thm:quotient-homology-isom}, we have the diagram
+is an isomorphism, then we're done, because $\id$ is a generator, so $\sigma_1$ is a generator, so $\sigma_1-\sigma_2$ is a generator. Indeed, by \Cref{thm:quotient-homology-isom}, we have the diagram
 % https://q.uiver.app/#q=WzAsNCxbMCwwLCJIX24oXFxEZWx0YV5uLFxccGFydGlhbCBcXERlbHRhXm4pIl0sWzIsMCwiSF9uKFNebixMKSJdLFswLDIsIkhfbihcXERlbHRhXm4vXFxwYXJ0aWFsIFxcRGVsdGFebikiXSxbMiwyLCJIX24oU15uL0wpIl0sWzIsMywiXFxzaW0iXSxbMSwzLCJcXHZzaW0iLDJdLFswLDIsIlxcdnNpbSIsMl0sWzAsMSwiXFxzaWdtYV97MSp9Il1d
 \[\begin{tikzcd}[ampersand replacement=\&,cramped]
 	{H_n(\Delta^n,\partial \Delta^n)} \&\& {H_n(S^n,L)} \\
 	\\
-	{H_n(\Delta^n/\partial \Delta^n)} \&\& {H_n(S^n/L)}
+	{\tilde H_n(\Delta^n/\partial \Delta^n)} \&\& {\tilde H_n(S^n/L)}
 	\arrow["{\sigma_{1*}}", from=1-1, to=1-3]
 	\arrow["\vsim"', from=1-1, to=3-1]
 	\arrow["\vsim"', from=1-3, to=3-3]
