@@ -75,7 +75,7 @@ Let's see some examples where the power of algebraic topology helps us prove imp
 \end{defn}
 
 \begin{defn}
-    A topological space $X$ is called \textbf{compact} if every open cover has a finite subcover.
+    A topological space $X$ is called \term{compact} if every open cover has a finite subcover.
 \end{defn}
 
 \begin{thm}
@@ -100,11 +100,11 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \end{proof}
 
 \begin{defn}
-    A topological space $X$ is called \textbf{connected} if $X = U_1 \sqcup U_2$ with $U_1,U_2$ open implies $U_1 = \emptyset$ or $U_2 =\emptyset$.
+    A topological space $X$ is called \term{connected} if $X = U_1 \sqcup U_2$ with $U_1,U_2$ open implies $U_1 = \emptyset$ or $U_2 =\emptyset$.
 \end{defn}
 
 \begin{defn}
-    $X$ is called \textbf{path connected} if for every $p,q \in X$, there exists a continuous map $\delta:[0,1] \to X$ such that $\delta(0)=p$ and $\delta(1) = q$.
+    $X$ is called \term{path connected} if for every $p,q \in X$, there exists a continuous map $\delta:[0,1] \to X$ such that $\delta(0)=p$ and $\delta(1) = q$.
 \end{defn}
 
 \begin{prop}
@@ -112,7 +112,7 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \end{prop}
 
 \begin{defn}
-    A topological space $X$ is called \textbf{Hausdorff} if for every distinct $p,q \in X$, there exist open sets $U \ni p$ and $V \ni q$ such that $U \cap V = \emptyset$.
+    A topological space $X$ is called \term{Hausdorff} if for every distinct $p,q \in X$, there exist open sets $U \ni p$ and $V \ni q$ such that $U \cap V = \emptyset$.
 \end{defn}
 
 \begin{thm}
@@ -132,7 +132,7 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \end{exercise}
 
 \begin{defn}
-    Let $X$ be a topological space, and $\sim$ be an equivalence relation on $X$. The \textbf{quotient-topology} is defined as follows: let $\pi: X \to X/\!\!\sim$ be the projection map. Then, $U \subset X/\!\!\sim$ is open whenever $\pi^{-1}(U)$ is open.
+    Let $X$ be a topological space, and $\sim$ be an equivalence relation on $X$. The \term{quotient-topology} is defined as follows: let $\pi: X \to X/\!\!\sim$ be the projection map. Then, $U \subset X/\!\!\sim$ is open whenever $\pi^{-1}(U)$ is open.
 \end{defn}
 
 \begin{prop}
@@ -144,7 +144,7 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \end{ex}
 
 \begin{defn}
-    Let $(X_\alpha,\mc U_\alpha)_{\alpha \in I}$ be topological spaces. The \textbf{product topology} on $\prod_{I}X_\alpha$ has a basis of sets of the form
+    Let $(X_\alpha,\mc U_\alpha)_{\alpha \in I}$ be topological spaces. The \term{product topology} on $\prod_{I}X_\alpha$ has a basis of sets of the form
     $$\prod_{\alpha \in I}U_\alpha,  \quad U_\alpha \in \mc U_\alpha,$$
     and $U_\alpha =X_\alpha$ for all but finitely many $\alpha \in I$.
 \end{defn}
@@ -156,7 +156,7 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \section{CW Complexes}
 
 \begin{defn}
-    A \textbf{CW complex} is a topological space $X$, together with a sequence of subspaces $X^0 \subset X^1 \subset \cdots $ such that
+    A \term{CW complex} is a topological space $X$, together with a sequence of subspaces $X^0 \subset X^1 \subset \cdots $ such that
     \begin{enumerate}
         \item $X = \bigcup X^n$
         \item $U\subset X$ is open if and only if $U \cap X^n$ is open for all $n \geq 0$
@@ -167,7 +167,7 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
          $$X^n = \bigsqcup_{\alpha \in I(n)}\bar D_\alpha^n\sqcup X^{n-1}  /\sim$$
          where $x \sim \varphi_\alpha^n(x)$ for all $\alpha \in I(n)$, $x \in \partial D_\alpha^n$.
     \end{enumerate}
-    We call $X^n$ the $n^{\text{th}}$ \textbf{skeleton} of $X$, and $\varphi_\alpha^n$ is called an \textbf{attaching map}. For a CW complex $X$, the sets $\{X^n\}$ and $\{ \varphi_\alpha^n\}$ are called a \textbf{CW structure} on $X$. The quotient maps $\Phi_\alpha^n:\bar D_\alpha^n \to X^n$ are called the \textbf{characteristic maps}. If $X^{n-1} \subsetneq X^n$, but $X^i=X^j$ for all $i, j\geq n$, we say that $X$ is $\bm n$\textbf{-dimensional}.
+    We call $X^n$ the $n^{\text{th}}$ \term{skeleton} of $X$, and $\varphi_\alpha^n$ is called an \term{attaching map}. For a CW complex $X$, the sets $\{X^n\}$ and $\{ \varphi_\alpha^n\}$ are called a \term{CW structure} on $X$. The quotient maps $\Phi_\alpha^n:\bar D_\alpha^n \to X^n$ are called the \term{characteristic maps}. If $X^{n-1} \subsetneq X^n$, but $X^i=X^j$ for all $i, j\geq n$, we say that $X$ is \term[]{$n$-dimensional}.
 \end{defn}
 
 
@@ -240,7 +240,7 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \end{proof}
 
 \begin{defn}
-    Let $A \subset X$ be a set, and fix $\veps :=\{\veps_\alpha^n \in \R^+\}$ for every $n$ and $\alpha \in I(n)$. Then, an $\bm \veps$\textbf{-neighborhood} of $A$ is the open set $N_\veps(A) \subset X$ defined as follows: let
+    Let $A \subset X$ be a set, and fix $\veps :=\{\veps_\alpha^n \in \R^+\}$ for every $n$ and $\alpha \in I(n)$. Then, an \term{$\veps$-neighborhood} of $A$ is the open set $N_\veps(A) \subset X$ defined as follows: let
     \begin{align*}
         N_\veps^0(A) := A \cap X^0
     \end{align*}
@@ -263,16 +263,16 @@ Since $X$ is bounded in $\R^n$, for every $\delta>0$ the number of disjoint ball
 \end{proof}
 
 \begin{defn}
-    Let $X,Y$ be topological spaces. Two (continuous) maps $f,g:X \to Y$ are \textbf{homotopic} if there exists $H:X \times [0,1] \to Y$ continuous such that $H(x,0)=f(x)$ and $H(x,1)=g(x)$ for every $x \in X$.
+    Let $X,Y$ be topological spaces. Two (continuous) maps $f,g:X \to Y$ are \term{homotopic} if there exists $H:X \times [0,1] \to Y$ continuous such that $H(x,0)=f(x)$ and $H(x,1)=g(x)$ for every $x \in X$.
 
-    For a subset $A \subset X$, two maps $f,g:X \to Y$ are called \textbf{homotopic relative to} $\bm A$ if $f|_A=g|_A$, and there exists a homotopy $H:X \times [0,1]\to Y$ between $f,g$ such that $H(x,t)=f(x)=g(x)$ for all $x \in A$, $t \in [0,1]$.
+    For a subset $A \subset X$, two maps $f,g:X \to Y$ are called \term{homotopic relative to} $\bm A$ if $f|_A=g|_A$, and there exists a homotopy $H:X \times [0,1]\to Y$ between $f,g$ such that $H(x,t)=f(x)=g(x)$ for all $x \in A$, $t \in [0,1]$.
 \end{defn}
 Homotopy is denoted $f \sim g$ or $f \overset{H}{\sim} g$.
 
 \begin{defn}
-    Two maps $f:X \to Y$ and $g:Y \to X$ are called \textbf{homotopy equivalent} if $g \circ f \sim \id_X$ and $f \circ g \sim \id_Y$. In this case, $X$ and $Y$ are said to be \textbf{homotopy equivalent.}
+    Two maps $f:X \to Y$ and $g:Y \to X$ are called \term[homotopy]{homotopy equivalent} if $g \circ f \sim \id_X$ and $f \circ g \sim \id_Y$. In this case, $X$ and $Y$ are said to be \termnt{homotopy equivalent}.
 
-    A subset $A \subset X$ is called a \textbf{retract} of $X$ if there exists $r:X \to A$ continuous such that $r(x)=x$ for every $x \in A$. Moreover, $A$ is called a \textbf{deformation retract} if $i \circ r \sim \id_X$ relative to $A$, where $i:A \hookrightarrow X$ is the inclusion. $X$ is called \textbf{contractible} if $\id_X \sim $ constant.
+    A subset $A \subset X$ is called a \term{retract} of $X$ if there exists $r:X \to A$ continuous such that $r(x)=x$ for every $x \in A$. Moreover, $A$ is called a \term{deformation retract} if $i \circ r \sim \id_X$ relative to $A$, where $i:A \hookrightarrow X$ is the inclusion. $X$ is called \term{contractible} if $\id_X \sim $ constant.
 \end{defn}
 
 \begin{exercise}
@@ -288,7 +288,7 @@ Homotopy is denoted $f \sim g$ or $f \overset{H}{\sim} g$.
 \end{exercise}
 
 \begin{defn}
-    $X$ is called \textbf{locally contractible} if for every $p \in X$ and $U \ni p$ open, there exists an open $V \subset U$ with $p \in V$ such that $V$ is contractible.
+    $X$ is called \term{locally contractible} if for every $p \in X$ and $U \ni p$ open, there exists an open $V \subset U$ with $p \in V$ such that $V$ is contractible.
 \end{defn}
 
 \begin{prop}
@@ -312,15 +312,15 @@ Homotopy is denoted $f \sim g$ or $f \overset{H}{\sim} g$.
 \section{Fundamental Group}
 
 \begin{defn}
-    Let $X$ be a topological space and $p \in X$. The \textbf{fundamental group} of $X$ at $p$ is
+    Let $X$ be a topological space and $p \in X$. The \term{fundamental group} of $X$ at $p$ is
     $$\pi_1(X,p):=\brax{ \gamma:[0,1]\to X \mid \gamma(0)=\gamma(1)=p } / \braks{ \gamma \overset{\text{rel}(\{0,1\})}{\sim}\mu }.$$
     Equivalently, let $q$ be a fixed point in $S^1$, and we have
     $$\pi_1(X,p) = \brax{\gamma :S^1 \to X \mid \gamma(q)=p}/\braks{\gamma \overset{\text{rel(q)}}{\sim} \mu}$$
-    This definition is in some ways better, since changing $S^1$ to $S^n$ gives a more generalized definition of the $\bm n$\textbf{-th homotopy group} $\pi_n(X,p)$.
+    This definition is in some ways better, since changing $S^1$ to $S^n$ gives a more generalized definition of the \term[homotopy group]{$n$-th homotopy group} $\pi_n(X,p)$.
 \end{defn}
 
 \begin{defn}
-    A path connected space $X$ is called \textbf{simply connected} if there exists $p \in X$ such that $\pi_1(X,p)=\{ [p]\}$.
+    A path connected space $X$ is called \term{simply connected} if there exists $p \in X$ such that $\pi_1(X,p)=\{ [p]\}$.
 \end{defn}
 
 \begin{prop}
@@ -389,7 +389,7 @@ is a covariant functor.
 \end{thm}
 
 \begin{defn}
-    $X$ is called \textbf{strongly contractible} if there exists $p \in X$ such that $X$ deformation retracts to $p$.
+    $X$ is called \term{strongly contractible} if there exists $p \in X$ such that $X$ deformation retracts to $p$.
 \end{defn}
 
 \begin{prop}
@@ -460,7 +460,7 @@ For any $p \in S^1$,
 
 \section{Amalgamated Products and Free Products}
 \begin{defn}
-    Let $H$, $G_1$, $G_2$ be groups, and let $\varphi_i:H \to G_i$ be homomorphisms. The \textbf{amalgamated product} of $G_1$ and $G_2$ along $H$, denoted $G_1*_HG_2$, is a group together with homomorphisms $\psi_i:G_i \to G_1 *_HG_2$ satisfying $\psi_1 \circ \varphi_1=\psi_2 \circ \varphi_2$. Moreover, it has the universal property that for every group $K$ and homomorphisms $f_i:G_i\to K$ with $f_1 \circ \varphi_1 = f_2 \circ \varphi_2$, there exists a unique homomorphism $T:G_1*_HG_2 \to K$ such that $T \circ \psi_i=f_i$. That is, the following diagram commutes:
+    Let $H$, $G_1$, $G_2$ be groups, and let $\varphi_i:H \to G_i$ be homomorphisms. The \term{amalgamated product} of $G_1$ and $G_2$ along $H$, denoted $G_1*_HG_2$, is a group together with homomorphisms $\psi_i:G_i \to G_1 *_HG_2$ satisfying $\psi_1 \circ \varphi_1=\psi_2 \circ \varphi_2$. Moreover, it has the universal property that for every group $K$ and homomorphisms $f_i:G_i\to K$ with $f_1 \circ \varphi_1 = f_2 \circ \varphi_2$, there exists a unique homomorphism $T:G_1*_HG_2 \to K$ such that $T \circ \psi_i=f_i$. That is, the following diagram commutes:
     % https://q.uiver.app/#q=WzAsNSxbMCwwLCJIIl0sWzIsMCwiR18xIl0sWzAsMiwiR18yIl0sWzIsMiwiR18xKl9IR18yIl0sWzMsMywiSyJdLFswLDEsIlxcdmFycGhpXzEiXSxbMCwyLCJcXHZhcnBoaV8yIiwyXSxbMSwzLCJcXHBzaV8xIiwyXSxbMiwzLCJcXHBzaV8yIl0sWzEsNCwiZl8xIl0sWzIsNCwiZl8yIiwyXSxbMyw0LCJcXGV4aXN0cyAhVCIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
 \[\begin{tikzcd}[ampersand replacement=\&,cramped]
 	H \&\& {G_1} \& \\
@@ -509,7 +509,7 @@ A good way to think about this is gluing $G_1$ and $G_2$ along $H$.
 \end{proof}
 
 \begin{defn}
-    Let $G_1,G_2$ be two groups. The \textbf{free product} $G_1*G_2$ is the group of words in $G_1\setminus \{e_1\}$, $G_2\setminus \{e_2\}$, and a new identity $\{e\}$, where elements from the same group multiply as expected, the product of elements is concatenation, and multiplying an element $g$ from $G_1$ or $G_2$ by its inverse in that group yields $e$.
+    Let $G_1,G_2$ be two groups. The \term{free product} $G_1*G_2$ is the group of words in $G_1\setminus \{e_1\}$, $G_2\setminus \{e_2\}$, and a new identity $\{e\}$, where elements from the same group multiply as expected, the product of elements is concatenation, and multiplying an element $g$ from $G_1$ or $G_2$ by its inverse in that group yields $e$.
 \end{defn}
 
 \begin{thm}
@@ -750,7 +750,7 @@ Now $\pi_{1}(X)=\pi_{1}(X^{2})$.
 \section{Covering Spaces}
 
 \begin{defn}
-    Let $X$ be path connected. A space $\tilde{X}$ with a continuous map $p:\tilde{X}\to X$ is called a \textbf{covering space} for $X$ if for all $x\in X$ there exists an open set $U\ni x$ such that $p^{-1}(U)=\coprod_{\alpha\in I_{x}}U_{\alpha}$ for some index set $I_{x}$, where $p:U_{\alpha}\to U$ is a homeomorphism for all $\alpha \in I_x$.
+    Let $X$ be path connected. A space $\tilde{X}$ with a continuous map $p:\tilde{X}\to X$ is called a \term{covering space} for $X$ if for all $x\in X$ there exists an open set $U\ni x$ such that $p^{-1}(U)=\coprod_{\alpha\in I_{x}}U_{\alpha}$ for some index set $I_{x}$, where $p:U_{\alpha}\to U$ is a homeomorphism for all $\alpha \in I_x$.
 \end{defn}
 
 \begin{ex}
@@ -947,7 +947,7 @@ Use \Cref{thm:lifting-criterion} to lift $p:\tilde X \to X$ to the cover $\tilde
 \section{Universal Covers}
 
 \begin{defn}
-    A \textbf{universal cover} of $X$ is a simply connected cover of $X$.
+    A \term{universal cover} of $X$ is a simply connected cover of $X$.
 \end{defn}
 
 \begin{que}
@@ -955,7 +955,7 @@ Use \Cref{thm:lifting-criterion} to lift $p:\tilde X \to X$ to the cover $\tilde
 \end{que}
 
 \begin{defn}
-A space $X$ is called \textbf{semi-locally simply connected} if for every point $x \in X$, there exists a neighborhood $U \ni x$ such that the image of the map $i_*:\pi_1(U,x)\to \pi_1(X,x)$ induced by the embedding $i:U \hookrightarrow X$ is trivial.
+A space $X$ is called \term{semi-locally simply connected} if for every point $x \in X$, there exists a neighborhood $U \ni x$ such that the image of the map $i_*:\pi_1(U,x)\to \pi_1(X,x)$ induced by the embedding $i:U \hookrightarrow X$ is trivial.
 \end{defn}
 
 \begin{rmk}
@@ -1070,11 +1070,11 @@ Given $\tilde x \in \tilde X$, take a curve $\tilde \mu$ from $\tilde{x_0}$ to $
 \end{proof}
 
 \begin{defn}
-    Let $\tilde X \arr[p] X$ be a covering map, and let $T : \tilde X \to \tilde X$ be a homeomorphism such that $p \circ T = p$. Then, $T$ is called a \textbf{deck transformation}.
+    Let $\tilde X \arr[p] X$ be a covering map, and let $T : \tilde X \to \tilde X$ be a homeomorphism such that $p \circ T = p$. Then, $T$ is called a \term{deck transformation}.
 \end{defn}
 
 \begin{defn}
-    Let $\tilde X$ be a topological space, and $G$ act on $\tilde X$ on the left via continuous maps. The action of $G$ is called \textbf{properly discontinuous} if for all $\tilde x \in \tilde X$, there exists $\tilde U \ni \tilde x$ such that for all $g \in G$, $g(\tilde U)\cap \tilde U \neq \emptyset \implies g=e$.
+    Let $\tilde X$ be a topological space, and $G$ act on $\tilde X$ on the left via continuous maps. The action of $G$ is called \term{properly discontinuous} if for all $\tilde x \in \tilde X$, there exists $\tilde U \ni \tilde x$ such that for all $g \in G$, $g(\tilde U)\cap \tilde U \neq \emptyset \implies g=e$.
 \end{defn}
 
 \begin{thm}[][label=thm:quotientaction]
@@ -1101,14 +1101,14 @@ Take $x \in X$, $\tilde x \in p^{-1}(x)$, and let $\tilde U$ be a neighborhood o
 \section{Simplicial Homology}
 
 \begin{defn}
-Let $v_0,\dots,v_n \in \R^m$ be ordered points such that no points $v_{i_1},\dots,v_{i_k}$ lie in any $k-2$ dimensional affine space. The $n$-\textbf{simplex} $[v_0,\dots,v_n]$ is the convex hull of $v_0,\dots,v_n$. That is,
+Let $v_0,\dots,v_n \in \R^m$ be ordered points such that no points $v_{i_1},\dots,v_{i_k}$ lie in any $k-2$ dimensional affine space. The $n$-\term{simplex} $[v_0,\dots,v_n]$ is the convex hull of $v_0,\dots,v_n$. That is,
 \[
 [v_0,\dots,v_n]= \brax{ \sum t_iv_i \setbar t_i\geq 0, \sum t_i=1 }
 \]
 \end{defn}
 
 \begin{ex}
-The \textbf{standard $\bm n$-simplex} $\Delta^n \subset \R^{n+1}$ is the simplex $[e_0,\dots,e_{n}]$, where $e_0,\dots,e_n$ is the standard basis of $\R^{n+1}$. For instance, the standard $1$-simplex is:
+The \term{standard $n$-simplex} $\Delta^n \subset \R^{n+1}$ is the simplex $[e_0,\dots,e_{n}]$, where $e_0,\dots,e_n$ is the standard basis of $\R^{n+1}$. For instance, the standard $1$-simplex is:
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.2\textwidth]{figures/standard-simplex.png}
@@ -1118,11 +1118,11 @@ The \textbf{standard $\bm n$-simplex} $\Delta^n \subset \R^{n+1}$ is the simplex
 
 
 \begin{defn}
-Given an $n$-simplex $[v_0,\dots,v_n]$, the $i$-th \textbf{face} is the $(n-1)$-simplex $[v_0,\dots,v_{i-1},v_{i+1},\dots,v_n]$. The \textbf{boundary} $\partial[v_0,\dots,v_n]$ of a simplex is the union of its faces. The \textbf{interior} is the simplex minus its boundary.
+Given an $n$-simplex $[v_0,\dots,v_n]$, the $i$-th \term{face} is the $(n-1)$-simplex $[v_0,\dots,v_{i-1},v_{i+1},\dots,v_n]$. The \term{boundary} $\partial[v_0,\dots,v_n]$ of a simplex is the union of its faces. The \term{interior} is the simplex minus its boundary.
 \end{defn}
 
 \begin{defn}
-A topological space $X$ is called a \textbf{$\Delta$-complex} if there exists a collection of continuous maps $\brax{\sigma_\alpha : \Delta^{n(\alpha)}\to X}_{\alpha \in I}$ with the following properties:
+A topological space $X$ is called a \term{$\Delta$-complex} if there exists a collection of continuous maps $\brax{\sigma_\alpha : \Delta^{n(\alpha)}\to X}_{\alpha \in I}$ with the following properties:
 \begin{enumerate}[(i)]
     \item For every $\alpha \in I$, the restriction $\sigma_\alpha|_{\mathring \Delta^{n(\alpha)}}$ is injective, and for all $x \in X$, there exists a unique $\alpha$ such that $x \in \Img (\sigma_{\alpha}|_{\mathring \Delta^{n(\alpha)}})$.
     \item $U \subset X$ is open if and only if $\sigma_{\alpha}^{-1}(U)$ is open for all $\alpha \in I$
@@ -1173,15 +1173,15 @@ Find a $\Delta$-complex structure on the Klein bottle.
 \end{exercise}
 
 \begin{defn}
-Let $X$ be a $\Delta$-complex, with simplices $\{\sigma_\alpha : \Delta^{n(\alpha)} \to X\}_{\alpha \in I}$, let $I(n)=\{\alpha \mid n(\alpha)=n\}$, and $I = \bigcup I(n)$. The \textbf{group of simplicial $n$-chains} $\Delta_n(X)$ is the free abelian group on $\{\sigma_\alpha\}_{\alpha \in I(n)}$. That is,
+Let $X$ be a $\Delta$-complex, with simplices $\{\sigma_\alpha : \Delta^{n(\alpha)} \to X\}_{\alpha \in I}$, let $I(n)=\{\alpha \mid n(\alpha)=n\}$, and $I = \bigcup I(n)$. The \term{group of simplicial $n$-chains} $\Delta_n(X)$ is the free abelian group on $\{\sigma_\alpha\}_{\alpha \in I(n)}$. That is,
 \[
 \Delta_n(X)= \brax{ \sum_{\alpha \in I(n)} m_\alpha \sigma_\alpha \setbar m_\alpha \in \Z, m_\alpha=0 \text{ for all but finitely many }\alpha}.
 \]
-Such an expression $\sum m_\alpha \sigma_\alpha$ is called a \textbf{simplicial chain}. 
+Such an expression $\sum m_\alpha \sigma_\alpha$ is called a \term{simplicial chain}. 
 \end{defn}
 
 \begin{defn}
-The $n\th$ \textbf{boundary map} $\partial_n :\Delta_n(X) \to \Delta_{n-1}(X)$ is the homomorphism defined on the basis by 
+The $n\th$ \term{boundary map} $\partial_n :\Delta_n(X) \to \Delta_{n-1}(X)$ is the homomorphism defined on the basis by 
 \[
 \partial_n(\sigma_\alpha)=\sum_{i=0}^{n}(-1)^{i}\sigma_\alpha\big |_{[e_0,\dots,\hat e_i,\dots,e_n]}
 \]
@@ -1206,15 +1206,15 @@ appears twice, for $(k,\ell)=(i,j)$ and $(k,\ell)=(j,i)$, but they appear with o
 
 
 \begin{defn}
-A \textbf{chain complex} is a sequence of abelian groups $\{C_n\}_{n=0}^\infty$ with homomorphisms $\partial_n : C_n \to C_{n-1}$ such that $\partial_{n-1} \circ \partial_n \equiv 0$. 
+A \term{chain complex} is a sequence of abelian groups $\{C_n\}_{n=0}^\infty$ with homomorphisms $\partial_n : C_n \to C_{n-1}$ such that $\partial_{n-1} \circ \partial_n \equiv 0$. 
 
-The elements of $\ker(\partial_n)\subset C_n$ are called $n$\textbf{-cycles}, and the elements of $\Img(\partial_{n+1})\subset C_n$ are called $n$\textbf{-boundaries}. 
+The elements of $\ker(\partial_n)\subset C_n$ are called \term[$n$-cycle]{$n$-cycles}, and the elements of $\Img(\partial_{n+1})\subset C_n$ are called \term{$n$-boundaries}. 
 
-Note that the condition $\partial_{n} \circ \partial_{n+1} \equiv 0$ means that every $n$-boundary is an $n$-cycle, since $\Img(\partial_{n+1})\subset \ker(\partial _n)$. The $n$-th \textbf{homology group} is the quotient $H_n(C):=\ker(\partial_n)/\Img(\partial_{n+1})$.
+Note that the condition $\partial_{n} \circ \partial_{n+1} \equiv 0$ means that every $n$-boundary is an $n$-cycle, since $\Img(\partial_{n+1})\subset \ker(\partial _n)$. The $n\th$ \term{homology group} is the quotient $H_n(C):=\ker(\partial_n)/\Img(\partial_{n+1})$.
 \end{defn}
 
 \begin{defn}
-By \Cref{prop:cycle-condition}, the simplicial $n$-chains $\{\Delta_n(X)\}_{n=0}^\infty$ along with the boundary maps $\partial_n:\Delta_n(X)\to \Delta_{n-1}(X)$ form a chain complex. The $n$-th \textbf{simplicial homology group} of $X$ is
+By \Cref{prop:cycle-condition}, the simplicial $n$-chains $\{\Delta_n(X)\}_{n=0}^\infty$ along with the boundary maps $\partial_n:\Delta_n(X)\to \Delta_{n-1}(X)$ form a chain complex. The $n$-th \term{simplicial homology group} of $X$ is
 \[
 H_n^\Delta (X):= \ker(\partial_{n}(X))/\Img \paren{\partial_{n+1}(X)}
 \]
@@ -1225,12 +1225,6 @@ Let $X = S^1$, with the simplicial structure
 
 \tikzfig{s1-delta-structure}
 
-
-\begin{figure}[H]
-	\centering
-	\incfig{circle-simplex}
-	\label{fig:circle-simplex}
-\end{figure}
 Observe that $\Delta_1(X)\cong \Z$ because we have a single $1$-simplex, and $\partial_1 \equiv 0$, so $H_1^\Delta(S^1)=\Z$. For $n \geq 2$, the homology group is $H_n^\Delta(S^1) \cong 0$ since there are no $n$-simplices. Finally, $H_0^\Delta (S^1) \cong \Z$ because $\Delta_0(X) \cong \Z$ (a single vertex) and $\partial_1 \equiv 0$.
 \end{ex}
 
@@ -2123,7 +2117,8 @@ Let $(X_\alpha,x_\alpha)$ be pointed spaces such that for all $\alpha$, there ex
 \begin{proof}
 Observe
 \begin{align*}
-\bigoplus_{\alpha \in I} \tilde H_n(X_\alpha) \cong \bigoplus_{\alpha \in I} H_n(X_\alpha,x_\alpha) \cong H_n\paren{\coprod_{\alpha \in I} X_\alpha, \coprod_{\alpha \in I} \{x_\alpha\} } \underset{p_*}{\arr[\sim]} H_n\paren{\frac{\coprod_{\alpha \in I}X_\alpha}{\coprod_{\alpha \in I}\{x_\alpha\}}, \{\w{pt}\}} \cong \tilde H_n\paren{\bigvee (X_\alpha,x_\alpha)}.
+\bigoplus_{\alpha \in I} \tilde H_n(X_\alpha) &\cong \bigoplus_{\alpha \in I} H_n(X_\alpha,x_\alpha) \cong H_n\paren{\coprod_{\alpha \in I} X_\alpha, \coprod_{\alpha \in I} \{x_\alpha\} } \underset{p_*}{\arr[\sim]} H_n\paren{\frac{\coprod_{\alpha \in I}X_\alpha}{\coprod_{\alpha \in I}\{x_\alpha\}}, \{\w{pt}\}} \\
+&\cong \tilde H_n\paren{\bigvee (X_\alpha,x_\alpha)}.
 \end{align*}
 \end{proof}
 
